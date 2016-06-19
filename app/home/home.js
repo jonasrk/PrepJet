@@ -6,6 +6,8 @@
     jQuery(document).ready(function(){
       app.initialize();
 
+      $(".ms-Dropdown").Dropdown();
+
       jQuery('#get-data-from-selection').click(getDataFromSelection);
     });
   };
