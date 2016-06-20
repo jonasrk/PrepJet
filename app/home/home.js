@@ -25,6 +25,10 @@
 
     function step2ButtonClicked() {
 
+        $('#step1').hide();
+        $('#step2').show();
+        $('#step3').hide();
+
         var selected_table2 = document.getElementById('table2_options').value; // TODO better reference by ID than name
 
         Excel.run(function (ctx) {
@@ -57,7 +61,7 @@
                     el.appendChild(el4);
 
                     document.getElementById("checkboxes_variables").appendChild(el);
-                    
+
                 }
             });
 
@@ -67,16 +71,73 @@
                 console.log("Debug info: " + JSON.stringify(error.debugInfo));
             }
         });
-
-        $('#step1').hide();
-        $('#step2').show();
-        $('#step3').hide();
     }
 
     function step3ButtonClicked() {
         $('#step1').hide();
         $('#step2').hide();
         $('#step3').show();
+
+        var selected_table1 = document.getElementById('table1_options').value; // TODO better reference by ID than name
+        var selected_table2 = document.getElementById('table2_options').value; // TODO better reference by ID than name
+
+        Excel.run(function (ctx) {
+            var worksheet = ctx.workbook.worksheets.getItem(selected_table1);
+
+            var rangeAddress = "A:Z"; // TODO Z is not the maximum
+            var range_all = worksheet.getRange(rangeAddress);
+            var range = range_all.getUsedRange();
+
+            range.load('address');
+            range.load('text');
+            return ctx.sync().then(function() {
+                for (var i = 0; i < range.text[0].length; i++) {
+
+                    var el = document.createElement("option");
+                    el.value = range.text[0][i];
+                    el.textContent = range.text[0][i];
+                    document.getElementById("reference_column_ckeckboxes_1").appendChild(el);
+
+                }
+
+                $(".reference_column_ckeckboxes_1").Dropdown();
+            });
+
+        }).catch(function(error) {
+            console.log("Error: " + error);
+            if (error instanceof OfficeExtension.Error) {
+                console.log("Debug info: " + JSON.stringify(error.debugInfo));
+            }
+        });
+
+        Excel.run(function (ctx) {
+            var worksheet = ctx.workbook.worksheets.getItem(selected_table2);
+
+            var rangeAddress = "A:Z"; // TODO Z is not the maximum
+            var range_all = worksheet.getRange(rangeAddress);
+            var range = range_all.getUsedRange();
+
+            range.load('address');
+            range.load('text');
+            return ctx.sync().then(function() {
+                for (var i = 0; i < range.text[0].length; i++) {
+
+                    var el = document.createElement("option");
+                    el.value = range.text[0][i];
+                    el.textContent = range.text[0][i];
+                    document.getElementById("reference_column_ckeckboxes_2").appendChild(el);
+
+                }
+
+                $(".reference_column_ckeckboxes_2").Dropdown();
+            });
+
+        }).catch(function(error) {
+            console.log("Error: " + error);
+            if (error instanceof OfficeExtension.Error) {
+                console.log("Debug info: " + JSON.stringify(error.debugInfo));
+            }
+        });
     }
 
     function applyButtonClicked() {
@@ -130,7 +191,7 @@
                                     document.getElementById("table2_options").appendChild(el);
                                 }
 
-                                $(".ms-Dropdown").Dropdown();
+                                $(".dropdown_table").Dropdown();
 
                             }
                         }
