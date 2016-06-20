@@ -144,6 +144,33 @@
         $('#step1').show();
         $('#step2').hide();
         $('#step3').hide();
+
+        var selected_table2 = document.getElementById('table2_options').value; // TODO better reference by ID than name
+
+        Excel.run(function (ctx) {
+            var worksheet = ctx.workbook.worksheets.getItem(selected_table2);
+
+            var range_all = worksheet.getRange();
+            var range = range_all.getUsedRange();
+
+            range.load('address');
+            range.load('text');
+            return ctx.sync().then(function() {
+
+                for (var i = 1; i < range.text.length; i++) {
+
+                    console.log(range.text[i][0]); // TODO do not hardcode column
+
+                }
+
+            });
+
+        }).catch(function(error) {
+            console.log("Error: " + error);
+            if (error instanceof OfficeExtension.Error) {
+                console.log("Debug info: " + JSON.stringify(error.debugInfo));
+            }
+        });
     }
 
     function populateDropdowns() {
