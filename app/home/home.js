@@ -27,20 +27,17 @@
 
         var selected_table2 = document.getElementById('table2_options').value; // TODO better reference by ID than name
 
-        console.log("Selected Worksheet to add: " + selected_table2);
-
         Excel.run(function (ctx) {
-            var rangeAddress = "A1:F1"; // TODO do not hardcode
             var worksheet = ctx.workbook.worksheets.getItem(selected_table2);
-            var range = worksheet.getRange(rangeAddress);
+
+            var rangeAddress = "A:Z"; // TODO Z is not the maximum
+            var range_all = worksheet.getRange(rangeAddress);
+            var range = range_all.getUsedRange();
+
             range.load('address');
             range.load('text');
             return ctx.sync().then(function() {
-                console.log(range.address);
-                console.log(range.text);
                 for (var i = 0; i < range.text[0].length; i++) {
-
-                    console.log(range.text[0][i]);
 
                     var el = document.createElement("div");
                     el.className = "ms-ChoiceField";
