@@ -49,8 +49,6 @@
 
                     document.getElementById("checkboxes_variables").appendChild(label).appendChild(document.createElement("br"));
                 }
-
-                console.log(getCheckedBoxes("column_name_checkboxes"));
             });
 
         }).catch(function(error) {
@@ -80,8 +78,6 @@
         $('#step1').hide();
         $('#step2').hide();
         $('#step3').show();
-
-        console.log(getCheckedBoxes("column_name_checkboxes"));
 
         var selected_table1 = document.getElementById('table1_options').value; // TODO better reference by ID than name
         var selected_table2 = document.getElementById('table2_options').value; // TODO better reference by ID than name
@@ -174,21 +170,13 @@
 
                 // iterate over columns
 
-                console.log("### A");
-
                 for (var k = 0; k < range.text[0].length; k++){
 
                     // iterate over checked checkboxes
 
-                    console.log("### B");
-
                     var checked_checkboxes = getCheckedBoxes("column_name_checkboxes");
 
-                    console.log("### C");
-
                     for (var l = 0; l < checked_checkboxes.length; l++){
-
-                        console.log("### D");
 
                         if (checked_checkboxes[l].id == range.text[0][k]){
 
@@ -196,9 +184,11 @@
 
                             var column_char ='J';
 
-                            if (k == 1) {
-                                column_char ='K'
+                            if (l == 1) {
+                                column_char ='K';
                             }
+
+                            console.log("Match! Column Char: " + column_char);
 
                             addContentToWorksheet(worksheet_adding_to, column_char + "1", range.text[0][k]);
 
