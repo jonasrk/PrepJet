@@ -1,14 +1,10 @@
 (function () {
     'use strict';
 
-    var worksheets = null;
-
     // The initialize function must be run each time a new page is loaded
     Office.initialize = function (reason) {
         jQuery(document).ready(function () {
             app.initialize();
-
-            $('#get-data-from-selection').click(getDataFromSelection);
 
             $('#step2').hide();
             $('#step3').hide();
@@ -43,28 +39,19 @@
             return ctx.sync().then(function() {
                 for (var i = 0; i < range.text[0].length; i++) {
 
-                    var el = document.createElement("div");
-                    el.className = "ms-ChoiceField";
-                    var el2 =  document.createElement("input");
-                    el2.className = "ms-ChoiceField-input";
-                    el2.id = "demo-checkbox-unselected";
-                    el2.setAttribute("type", "checkbox");
-                    var el3 = document.createElement("label");
-                    el3.setAttribute("for", "checkbox");
-                    el3.className = "ms-ChoiceField-field";
-                    var el4 = document.createElement("span");
-                    el4.className = "ms-Label";
-                    el4.textContent = range.text[0][i];
+                    var el =  document.createElement("input");
+                    el.name = "column_name_checkboxes";
+                    el.id = range.text[0][i];
+                    el.setAttribute("type", "checkbox");
 
-                    el.appendChild(el2);
-                    el.appendChild(el3);
-                    el.appendChild(el4);
+                    var label = document.createElement("label");
+                    label.appendChild(el);
+                    label.textContent = range.text[0][i];
 
-                    document.getElementById("checkboxes_variables").appendChild(el);
-
+                    document.getElementById("checkboxes_variables").appendChild(label).appendChild(document.createElement("br"));
                 }
 
-                // $(".ms-ChoiceField").ChoiceField();
+                console.log(getCheckedBoxes("column_name_checkboxes"));
             });
 
         }).catch(function(error) {
@@ -75,10 +62,27 @@
         });
     }
 
+    // Pass the checkbox name to the function
+    function getCheckedBoxes(chkboxName) {
+        var checkboxes = document.getElementsByName(chkboxName);
+        var checkboxesChecked = [];
+        // loop over them all
+        for (var i=0; i<checkboxes.length; i++) {
+            // And stick the checked ones onto an array...
+            if (checkboxes[i].checked) {
+                checkboxesChecked.push(checkboxes[i]);
+            }
+        }
+        // Return the array if it is non-empty, or null
+        return checkboxesChecked.length > 0 ? checkboxesChecked : null;
+    }
+
     function step3ButtonClicked() {
         $('#step1').hide();
         $('#step2').hide();
         $('#step3').show();
+
+        console.log(getCheckedBoxes("column_name_checkboxes"));
 
         var selected_table1 = document.getElementById('table1_options').value; // TODO better reference by ID than name
         var selected_table2 = document.getElementById('table2_options').value; // TODO better reference by ID than name
@@ -150,9 +154,6 @@
         var selected_table1 = document.getElementById('table1_options').value; // TODO better reference by ID than name
         var selected_table2 = document.getElementById('table2_options').value; // TODO better reference by ID than name
 
-        console.log(document.getElementById('reference_column_ckeckboxes_1').value);
-        console.log(document.getElementById('reference_column_ckeckboxes_2').value);
-
         Excel.run(function (ctx) {
             var worksheet = ctx.workbook.worksheets.getItem(selected_table2);
 
@@ -179,9 +180,7 @@
 
                 // copy rest
 
-                for (var i = 1; i < range.text.length; i++) {
-
-                    console.log(range.text[i][0]); // TODO do not hardcode column
+                for (var i = 1; i < range.text.length; i++) {// TODO do not hardcode column
 
                     for (var j = 1; j < range_adding_to.text.length; j++) {
 
@@ -218,7 +217,7 @@
         var allworksheets = [];
 
         Excel.run(function (ctx) {
-            worksheets = ctx.workbook.worksheets;
+            var worksheets = ctx.workbook.worksheets;
             worksheets.load('items');
             return ctx.sync().then(function () {
                 for (var i = 0; i < worksheets.items.length; i++) {
@@ -263,19 +262,6 @@
         });
 
 
-    }
-
-    // Reads data from current document selection and displays a notification
-    function getDataFromSelection() {
-        Office.context.document.getSelectedDataAsync(Office.CoercionType.Text,
-            function (result) {
-                if (result.status === Office.AsyncResultStatus.Succeeded) {
-                    app.showNotification('The selected text is:', '"' + result.value + '"');
-                } else {
-                    app.showNotification('Error:', result.error.message);
-                }
-            }
-        );
     }
 
 })();
