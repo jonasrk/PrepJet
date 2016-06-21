@@ -63,6 +63,8 @@
                     document.getElementById("checkboxes_variables").appendChild(el);
 
                 }
+
+                // $(".ms-ChoiceField").ChoiceField();
             });
 
         }).catch(function(error) {
@@ -145,7 +147,11 @@
         $('#step2').hide();
         $('#step3').hide();
 
+        var selected_table1 = document.getElementById('table1_options').value; // TODO better reference by ID than name
         var selected_table2 = document.getElementById('table2_options').value; // TODO better reference by ID than name
+
+        console.log(document.getElementById('reference_column_ckeckboxes_1').value);
+        console.log(document.getElementById('reference_column_ckeckboxes_2').value);
 
         Excel.run(function (ctx) {
             var worksheet = ctx.workbook.worksheets.getItem(selected_table2);
@@ -155,11 +161,35 @@
 
             range.load('address');
             range.load('text');
+
+            var worksheet_adding_to = ctx.workbook.worksheets.getItem(selected_table1);
+
+            var range_all_adding_to = worksheet_adding_to.getRange();
+            var range_adding_to = range_all_adding_to.getUsedRange();
+
+            range_adding_to.load('address');
+            range_adding_to.load('text');
+
+
             return ctx.sync().then(function() {
 
                 for (var i = 1; i < range.text.length; i++) {
 
                     console.log(range.text[i][0]); // TODO do not hardcode column
+
+                    for (var i = 1; i < range_adding_to.text.length; i++) {
+
+                        // TODO do not hardcode column
+
+                        if (range_adding_to.text[i][0] == range.text[i][0]) {
+
+                            console.log('found Match!');
+                            console.log(range_adding_to.text[i][1]);
+                            console.log(range.text[i][1]);
+                            addContentToWorksheet(worksheet_adding_to, "J"+i , range.text[i][1])
+
+                        }
+                    }
 
                 }
 
@@ -173,6 +203,18 @@
         });
     }
 
+    // Helper function to add and format content in the workbook
+    function addContentToWorksheet(sheetObject, rangeAddress, displayText) {
+
+        // Format differently by the type of content
+        var range = sheetObject.getRange(rangeAddress);
+        range.values = displayText;
+        // range.format.font.name = "Corbel";
+        // range.format.font.size = 30;
+        // range.format.font.color = "white";
+        range.merge();
+    }
+
     function populateDropdowns() {
 
         var allworksheets = [];
@@ -181,30 +223,17 @@
             worksheets = ctx.workbook.worksheets;
             worksheets.load('items');
             return ctx.sync().then(function () {
-                // console.log("### worksheets.items.length: " + worksheets.items.length);
                 for (var i = 0; i < worksheets.items.length; i++) {
-                    // console.log("### Loop iteration: " + i);
-                    // console.log(worksheets.items[i]);
                     worksheets.items[i].load('name');
                     worksheets.items[i].load('index');
                     ctx.sync().then(function (i) {
 
                         var this_i = i;
-                        // console.log("### this_i: " + this_i);
 
                         return function () {
-                            // console.log(worksheets);
-                            // console.log(worksheets.items);
-                            // console.log(this_i);
-                            // console.log(worksheets.items[this_i]);
-                            // console.log(worksheets.items[this_i].name);
                             allworksheets.push(worksheets.items[this_i].name);
-                            // console.log(worksheets.items[this_i].index);
-                            // console.log(allworksheets);
 
                             if (this_i == worksheets.items.length - 1) {
-
-                                // console.log(allworksheets);
 
                                 for (var i = 0; i < allworksheets.length; i++) {
                                     var opt = allworksheets[i];
