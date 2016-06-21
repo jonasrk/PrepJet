@@ -15,7 +15,6 @@
             $('#bt_step3').click(step3ButtonClicked);
             $('#bt_apply').click(applyButtonClicked);
 
-
         });
     };
 
@@ -45,8 +44,8 @@
                     el.setAttribute("type", "checkbox");
 
                     var label = document.createElement("label");
-                    label.appendChild(el);
                     label.textContent = range.text[0][i];
+                    label.appendChild(el);
 
                     document.getElementById("checkboxes_variables").appendChild(label).appendChild(document.createElement("br"));
                 }
@@ -171,26 +170,57 @@
             range_adding_to.load('address');
             range_adding_to.load('text');
 
-
             return ctx.sync().then(function() {
 
-                // copy title
+                // iterate over columns
 
-                addContentToWorksheet(worksheet_adding_to, "J1", range.text[0][1]);
+                console.log("### A");
 
-                // copy rest
+                for (var k = 0; k < range.text[0].length; k++){
 
-                for (var i = 1; i < range.text.length; i++) {// TODO do not hardcode column
+                    // iterate over checked checkboxes
 
-                    for (var j = 1; j < range_adding_to.text.length; j++) {
+                    console.log("### B");
 
-                        // TODO do not hardcode column
+                    var checked_checkboxes = getCheckedBoxes("column_name_checkboxes");
 
-                        if (range_adding_to.text[j][8] == range.text[i][1]) {
-                            var sheet_row = j + 1;
-                            addContentToWorksheet(worksheet_adding_to, "J"+ sheet_row, range.text[i][1])
+                    console.log("### C");
+
+                    for (var l = 0; l < checked_checkboxes.length; l++){
+
+                        console.log("### D");
+
+                        if (checked_checkboxes[l].id == range.text[0][k]){
+
+                            // copy title
+
+                            var column_char ='J';
+
+                            if (k == 1) {
+                                column_char ='K'
+                            }
+
+                            addContentToWorksheet(worksheet_adding_to, column_char + "1", range.text[0][k]);
+
+                            // copy rest
+
+                            for (var i = 1; i < range.text.length; i++) {// TODO do not hardcode column
+
+                                for (var j = 1; j < range_adding_to.text.length; j++) {
+
+                                    // TODO do not hardcode column
+
+                                    if (range_adding_to.text[j][8] == range.text[i][1]) {
+                                        var sheet_row = j + 1;
+                                        addContentToWorksheet(worksheet_adding_to, column_char + sheet_row, range.text[i][k])
+
+                                    }
+                                }
+
+                            }
 
                         }
+
                     }
 
                 }
