@@ -173,20 +173,23 @@
 
             return ctx.sync().then(function() {
 
+                // copy title
+
+                addContentToWorksheet(worksheet_adding_to, "J1", range.text[0][1]);
+
+                // copy rest
+
                 for (var i = 1; i < range.text.length; i++) {
 
                     console.log(range.text[i][0]); // TODO do not hardcode column
 
-                    for (var i = 1; i < range_adding_to.text.length; i++) {
+                    for (var j = 1; j < range_adding_to.text.length; j++) {
 
                         // TODO do not hardcode column
 
-                        if (range_adding_to.text[i][0] == range.text[i][0]) {
-
-                            console.log('found Match!');
-                            console.log(range_adding_to.text[i][1]);
-                            console.log(range.text[i][1]);
-                            addContentToWorksheet(worksheet_adding_to, "J"+i , range.text[i][1])
+                        if (range_adding_to.text[j][8] == range.text[i][1]) {
+                            var sheet_row = j + 1;
+                            addContentToWorksheet(worksheet_adding_to, "J"+ sheet_row, range.text[i][1])
 
                         }
                     }
@@ -205,13 +208,8 @@
 
     // Helper function to add and format content in the workbook
     function addContentToWorksheet(sheetObject, rangeAddress, displayText) {
-
-        // Format differently by the type of content
         var range = sheetObject.getRange(rangeAddress);
         range.values = displayText;
-        // range.format.font.name = "Corbel";
-        // range.format.font.size = 30;
-        // range.format.font.color = "white";
         range.merge();
     }
 
