@@ -146,6 +146,17 @@
         $('#step2').hide();
         $('#step3').hide();
 
+        // find columns to match
+
+        var selected_identifier1 = document.getElementById('reference_column_ckeckboxes_1').value; // TODO better reference by ID than name
+        var selected_identifier2 = document.getElementById('reference_column_ckeckboxes_1').value; // TODO better reference by ID than name
+
+        // find id of sheet1 and sheet2
+
+        var sheet1_id = 0;
+        var sheet2_id = 0;
+
+
         var selected_table1 = document.getElementById('table1_options').value; // TODO better reference by ID than name
         var selected_table2 = document.getElementById('table2_options').value; // TODO better reference by ID than name
 
@@ -171,6 +182,18 @@
                 // iterate over columns
 
                 for (var k = 0; k < range.text[0].length; k++){
+                    if (selected_identifier1 == range.text[0][k]){
+                        sheet1_id = k;
+                    }
+                }
+
+                for (var k = 0; k < range_adding_to.text[0].length; k++){
+                    if (selected_identifier2 == range_adding_to.text[0][k]){
+                        sheet2_id = k;
+                    }
+                }
+
+                for (var k = 0; k < range.text[0].length; k++){
 
                     // iterate over checked checkboxes
 
@@ -184,11 +207,15 @@
 
                             var column_char ='J';
 
-                            if (l == 1) {
+                            if (l == 1) { // TODO wrap into proper function
                                 column_char ='K';
+                            } else if (l == 2) {
+                                column_char ='L';
+                            } else if (l == 3) {
+                                column_char ='M';
+                            } else if (l == 4) {
+                                column_char ='N';
                             }
-
-                            console.log("Match! Column Char: " + column_char);
 
                             addContentToWorksheet(worksheet_adding_to, column_char + "1", range.text[0][k]);
 
@@ -200,7 +227,7 @@
 
                                     // TODO do not hardcode column
 
-                                    if (range_adding_to.text[j][8] == range.text[i][1]) {
+                                    if (range_adding_to.text[j][sheet2_id] == range.text[i][sheet1_id]) {
                                         var sheet_row = j + 1;
                                         addContentToWorksheet(worksheet_adding_to, column_char + sheet_row, range.text[i][k])
 
