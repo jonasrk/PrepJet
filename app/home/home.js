@@ -41,13 +41,24 @@
                     var el =  document.createElement("input");
                     el.name = "column_name_checkboxes";
                     el.id = range.text[0][i];
+                    el.className = "ms-ChoiceField-input";
                     el.setAttribute("type", "checkbox");
 
-                    var label = document.createElement("label");
-                    label.textContent = range.text[0][i];
-                    label.appendChild(el);
+                    var div = document.createElement("div");
 
-                    document.getElementById("checkboxes_variables").appendChild(label).appendChild(document.createElement("br"));
+                    var label =  document.createElement("label");
+                    label.className = "ms-ChoiceField-field";
+                    label.setAttribute("for", range.text[0][i]);
+
+                    var span =  document.createElement("span");
+                    span.className = "ms-Label";
+                    span.textContent = range.text[0][i];
+
+                    label.appendChild(span);
+                    div.appendChild(el);
+                    div.appendChild(label);
+
+                    document.getElementById("checkboxes_variables").appendChild(div);
                 }
             });
 
