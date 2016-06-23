@@ -103,3 +103,11 @@ function getCharFromNumber (number) {
     }
 
 }
+
+
+// Helper function to add and format content in the workbook
+function addContentToWorksheet(sheetObject, rangeAddress, displayText) {
+    var range = sheetObject.getRange(rangeAddress);
+    range.values = displayText;
+    range.merge();
+}

@@ -18,6 +18,58 @@
         });
     };
 
+
+    function populateDropdowns() {
+
+        var allworksheets = [];
+
+        Excel.run(function (ctx) {
+            var worksheets = ctx.workbook.worksheets;
+            worksheets.load('items');
+            return ctx.sync().then(function () {
+                for (var i = 0; i < worksheets.items.length; i++) {
+                    worksheets.items[i].load('name');
+                    worksheets.items[i].load('index');
+                    ctx.sync().then(function (i) {
+
+                        var this_i = i;
+
+                        return function () {
+                            allworksheets.push(worksheets.items[this_i].name);
+
+                            if (this_i == worksheets.items.length - 1) { //  TODO there must be a _much_ better way to check for everything being completed
+
+                                for (var i = 0; i < allworksheets.length; i++) {
+                                    var opt = allworksheets[i];
+                                    var el = document.createElement("option");
+                                    el.textContent = opt;
+                                    el.value = opt;
+                                    document.getElementById("table1_options").appendChild(el);
+                                    var el = document.createElement("option"); // TODO DRY
+                                    el.textContent = opt;
+                                    el.value = opt;
+                                    document.getElementById("table2_options").appendChild(el);
+                                }
+
+                                $(".dropdown_table").Dropdown();
+
+                            }
+                        }
+
+                    }(i));
+                }
+
+            });
+
+        }).catch(function (error) {
+            console.log("Error: " + error);
+            if (error instanceof OfficeExtension.Error) {
+                console.log("Debug info: " + JSON.stringify(error.debugInfo));
+            }
+        });
+    }
+
+
     function step2ButtonClicked() {
 
         $('#step1').hide();
@@ -162,91 +214,23 @@
 
                             // copy rest
                             for (var i = 1; i < range.text.length; i++) {
-
                                 for (var j = 1; j < range_adding_to.text.length; j++) {
-
                                     if (range_adding_to.text[j][sheet2_id] == range.text[i][sheet1_id]) {
                                         var sheet_row = j + 1;
                                         addContentToWorksheet(worksheet_adding_to, column_char + sheet_row, range.text[i][k])
-
                                     }
                                 }
-
                             }
-
                         }
-
                     }
-
                 }
-
             });
-
         }).catch(function(error) {
             console.log("Error: " + error);
             if (error instanceof OfficeExtension.Error) {
                 console.log("Debug info: " + JSON.stringify(error.debugInfo));
             }
         });
-    }
-
-    // Helper function to add and format content in the workbook
-    function addContentToWorksheet(sheetObject, rangeAddress, displayText) {
-        var range = sheetObject.getRange(rangeAddress);
-        range.values = displayText;
-        range.merge();
-    }
-
-    function populateDropdowns() {
-
-        var allworksheets = [];
-
-        Excel.run(function (ctx) {
-            var worksheets = ctx.workbook.worksheets;
-            worksheets.load('items');
-            return ctx.sync().then(function () {
-                for (var i = 0; i < worksheets.items.length; i++) {
-                    worksheets.items[i].load('name');
-                    worksheets.items[i].load('index');
-                    ctx.sync().then(function (i) {
-
-                        var this_i = i;
-
-                        return function () {
-                            allworksheets.push(worksheets.items[this_i].name);
-
-                            if (this_i == worksheets.items.length - 1) {
-
-                                for (var i = 0; i < allworksheets.length; i++) {
-                                    var opt = allworksheets[i];
-                                    var el = document.createElement("option");
-                                    el.textContent = opt;
-                                    el.value = opt;
-                                    document.getElementById("table1_options").appendChild(el);
-                                    var el = document.createElement("option");
-                                    el.textContent = opt;
-                                    el.value = opt;
-                                    document.getElementById("table2_options").appendChild(el);
-                                }
-
-                                $(".dropdown_table").Dropdown();
-
-                            }
-                        }
-
-                    }(i));
-                }
-
-            });
-
-        }).catch(function (error) {
-            console.log("Error: " + error);
-            if (error instanceof OfficeExtension.Error) {
-                console.log("Debug info: " + JSON.stringify(error.debugInfo));
-            }
-        });
-
-
     }
 
 })();
