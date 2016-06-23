@@ -9,6 +9,7 @@ function displayField(){
     Office.initialize = function (reason) {
         jQuery(document).ready(function () {
             app.initialize();
+            fillColumn();
 
             $('#delimiter').hide();
 
@@ -23,7 +24,37 @@ function displayField(){
     };
 
 
+    function fillColumn(){
 
+        Excel.run(function (ctx) {
+
+                    var worksheet = ctx.workbook.worksheets.getActiveWorksheet();
+                    var range_all = worksheet.getRange();
+                    var range = range_all.getUsedRange();
+
+                    //range.load('address');
+                    range.load('text');
+                    return ctx.sync().then(function() {
+                        for (var i = 0; i < range.text[0].length; i++) {
+
+                            var el = document.createElement("option");
+                            el.value = range.text[0][i];
+                            el.textContent = range.text[0][i];
+                            document.getElementById("column1_options").appendChild(el);
+                            console.log(range.text[0][i])
+                        }
+
+                        $(".dropdown_table_col").Dropdown();
+                    });
+
+                }).catch(function(error) {
+                    console.log("Error: " + error);
+                    if (error instanceof OfficeExtension.Error) {
+                        console.log("Debug info: " + JSON.stringify(error.debugInfo));
+                    }
+                });
+
+    }
     function populateDropdowns() {
 
         var allworksheets = [];
