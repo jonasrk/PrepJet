@@ -1,3 +1,7 @@
+function displayField(){
+    $('#delimiter').show();
+}
+
 (function () {
     'use strict';
 
@@ -6,17 +10,18 @@
         jQuery(document).ready(function () {
             app.initialize();
 
-            $('#step2').hide();
-            $('#step3').hide();
+            $('#delimiter').hide();
 
             $(".dropdown_table").Dropdown();
+            $(".ms-TextField").TextField();
 
-            $('#bt_step2').click(step2ButtonClicked);
-            $('#bt_step3').click(step3ButtonClicked);
-            $('#bt_apply').click(applyButtonClicked);
+            //$('#bt_step2').click(step2ButtonClicked);
+            //$('#bt_step3').click(step3ButtonClicked);
+            //$('#bt_apply').click(applyButtonClicked);
 
         });
     };
+
 
 
     function populateDropdowns() {
