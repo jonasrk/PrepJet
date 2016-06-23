@@ -9,7 +9,7 @@
             $('#step2').hide();
             $('#step3').hide();
 
-            populateDropdowns();
+            $(".dropdown_table").Dropdown();
 
             $('#bt_step2').click(step2ButtonClicked);
             $('#bt_step3').click(step3ButtonClicked);
@@ -44,12 +44,13 @@
                                     var el = document.createElement("option");
                                     el.textContent = opt;
                                     el.value = opt;
-                                    document.getElementById("table1_options").appendChild(el);
+                                    document.getElementById("column1_options").appendChild(el);
                                     var el = document.createElement("option"); // TODO DRY
                                     el.textContent = opt;
                                     el.value = opt;
                                     document.getElementById("table2_options").appendChild(el);
                                 }
+
 
                                 $(".dropdown_table").Dropdown();
 
@@ -84,7 +85,7 @@
             var range_all = worksheet.getRange();
             var range = range_all.getUsedRange();
 
-            range.load('address');
+            //range.load('address');
             range.load('text');
             return ctx.sync().then(function() {
                 for (var i = 0; i < range.text[0].length; i++) { // .text[0] is the first row of a range
@@ -100,6 +101,7 @@
             }
         });
     }
+
 
     function step3ButtonClicked() {
         $('#step1').hide();
@@ -117,7 +119,7 @@
                 var range_all = worksheet.getRange();
                 var range = range_all.getUsedRange();
 
-                range.load('address');
+                //range.load('address');
                 range.load('text');
                 return ctx.sync().then(function() {
                     for (var i = 0; i < range.text[0].length; i++) {
