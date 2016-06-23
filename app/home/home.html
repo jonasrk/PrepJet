@@ -27,6 +27,7 @@
     <script src="../App.js"></script>
 
     <link href="Home.css" rel="stylesheet" type="text/css"/>
+    <script src="helpers.js"></script>
     <script src="Home.js"></script>
 
     <!--PrepJet Fabric Components Imports-->
@@ -42,6 +43,8 @@
     </div>
 </div>
 <div id="content-main">
+
+
     <div id="step1">
         <div class="padding">
             <div class="ms-Dropdown dropdown_table" tabindex="1">
@@ -60,20 +63,17 @@
 
 
     <div id="step2">
-
         <label class="ms-Label"> Select columns to add to Sheet1 </label>
         <br />
         <button class="ms-Button" id="next-step">Select all</button>
         <div id="checkboxes_variables" class="ms-ChoiceField">
         </div>
-
         <button class="ms-Button" id="bt_step3">Continue</button>
     </div>
 
-    <div id="step3">
 
+    <div id="step3">
         <div class="ms-Dropdown reference_column_ckeckboxes_1" tabindex="0">
-            <!--TODO populate actual sheet name-->
             <label class="ms-Label">Select reference column in table Sheet1</label>
             <i class="ms-Dropdown-caretDown ms-Icon ms-Icon--caretDown"></i>
             <select id="reference_column_ckeckboxes_1" class="ms-Dropdown-select">
@@ -85,9 +85,9 @@
             <select id="reference_column_ckeckboxes_2" class="ms-Dropdown-select">
             </select>
         </div>
-
         <button class="ms-Button" id="bt_apply">Apply</button>
     </div>
+
 
 </div>
 </body>

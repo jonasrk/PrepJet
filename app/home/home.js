@@ -27,38 +27,17 @@
         var selected_table2 = document.getElementById('table2_options').value; // TODO better reference by ID than name
 
         Excel.run(function (ctx) {
-            var worksheet = ctx.workbook.worksheets.getItem(selected_table2);
 
-            var rangeAddress = "A:Z"; // TODO Z is not the maximum
-            var range_all = worksheet.getRange(rangeAddress);
+            var worksheet = ctx.workbook.worksheets.getItem(selected_table2);
+            var range_all = worksheet.getRange();
             var range = range_all.getUsedRange();
 
             range.load('address');
             range.load('text');
             return ctx.sync().then(function() {
-                for (var i = 0; i < range.text[0].length; i++) {
+                for (var i = 0; i < range.text[0].length; i++) { // .text[0] is the first row of a range
 
-                    var el =  document.createElement("input");
-                    el.name = "column_name_checkboxes";
-                    el.id = range.text[0][i];
-                    el.className = "ms-ChoiceField-input";
-                    el.setAttribute("type", "checkbox");
-
-                    var div = document.createElement("div");
-
-                    var label =  document.createElement("label");
-                    label.className = "ms-ChoiceField-field";
-                    label.setAttribute("for", range.text[0][i]);
-
-                    var span =  document.createElement("span");
-                    span.className = "ms-Label";
-                    span.textContent = range.text[0][i];
-
-                    label.appendChild(span);
-                    div.appendChild(el);
-                    div.appendChild(label);
-
-                    document.getElementById("checkboxes_variables").appendChild(div);
+                    addNewCheckboxToContainer (range.text[0][i], "reference_column_checkbox" ,"checkboxes_variables");
                 }
             });
 
@@ -68,21 +47,6 @@
                 console.log("Debug info: " + JSON.stringify(error.debugInfo));
             }
         });
-    }
-
-    // Pass the checkbox name to the function
-    function getCheckedBoxes(chkboxName) {
-        var checkboxes = document.getElementsByName(chkboxName);
-        var checkboxesChecked = [];
-        // loop over them all
-        for (var i=0; i<checkboxes.length; i++) {
-            // And stick the checked ones onto an array...
-            if (checkboxes[i].checked) {
-                checkboxesChecked.push(checkboxes[i]);
-            }
-        }
-        // Return the array if it is non-empty, or null
-        return checkboxesChecked.length > 0 ? checkboxesChecked : null;
     }
 
     function step3ButtonClicked() {
@@ -93,64 +57,42 @@
         var selected_table1 = document.getElementById('table1_options').value; // TODO better reference by ID than name
         var selected_table2 = document.getElementById('table2_options').value; // TODO better reference by ID than name
 
-        Excel.run(function (ctx) {
-            var worksheet = ctx.workbook.worksheets.getItem(selected_table1);
+        function populateReferenceColumnDropdown (table, container) {
 
-            var rangeAddress = "A:Z"; // TODO Z is not the maximum
-            var range_all = worksheet.getRange(rangeAddress);
-            var range = range_all.getUsedRange();
+            Excel.run(function (ctx) {
 
-            range.load('address');
-            range.load('text');
-            return ctx.sync().then(function() {
-                for (var i = 0; i < range.text[0].length; i++) {
+                var worksheet = ctx.workbook.worksheets.getItem(table);
+                var range_all = worksheet.getRange();
+                var range = range_all.getUsedRange();
 
-                    var el = document.createElement("option");
-                    el.value = range.text[0][i];
-                    el.textContent = range.text[0][i];
-                    document.getElementById("reference_column_ckeckboxes_1").appendChild(el);
+                range.load('address');
+                range.load('text');
+                return ctx.sync().then(function() {
+                    for (var i = 0; i < range.text[0].length; i++) {
 
+                        var el = document.createElement("option");
+                        el.value = range.text[0][i];
+                        el.textContent = range.text[0][i];
+                        document.getElementById(container).appendChild(el);
+
+                    }
+
+                    $("." + container).Dropdown();
+                });
+
+            }).catch(function(error) {
+                console.log("Error: " + error);
+                if (error instanceof OfficeExtension.Error) {
+                    console.log("Debug info: " + JSON.stringify(error.debugInfo));
                 }
-
-                $(".reference_column_ckeckboxes_1").Dropdown();
             });
 
-        }).catch(function(error) {
-            console.log("Error: " + error);
-            if (error instanceof OfficeExtension.Error) {
-                console.log("Debug info: " + JSON.stringify(error.debugInfo));
-            }
-        });
+        }
 
-        Excel.run(function (ctx) {
-            var worksheet = ctx.workbook.worksheets.getItem(selected_table2);
-
-            var rangeAddress = "A:Z"; // TODO Z is not the maximum
-            var range_all = worksheet.getRange(rangeAddress);
-            var range = range_all.getUsedRange();
-
-            range.load('address');
-            range.load('text');
-            return ctx.sync().then(function() {
-                for (var i = 0; i < range.text[0].length; i++) {
-
-                    var el = document.createElement("option");
-                    el.value = range.text[0][i];
-                    el.textContent = range.text[0][i];
-                    document.getElementById("reference_column_ckeckboxes_2").appendChild(el);
-
-                }
-
-                $(".reference_column_ckeckboxes_2").Dropdown();
-            });
-
-        }).catch(function(error) {
-            console.log("Error: " + error);
-            if (error instanceof OfficeExtension.Error) {
-                console.log("Debug info: " + JSON.stringify(error.debugInfo));
-            }
-        });
+        populateReferenceColumnDropdown(selected_table1, "reference_column_ckeckboxes_1");
+        populateReferenceColumnDropdown(selected_table2, "reference_column_ckeckboxes_2");
     }
+
 
     function applyButtonClicked() {
         $('#step1').show();
@@ -208,7 +150,7 @@
 
                     // iterate over checked checkboxes
 
-                    var checked_checkboxes = getCheckedBoxes("column_name_checkboxes");
+                    var checked_checkboxes = getCheckedBoxes("reference_column_checkbox");
 
                     for (var l = 0; l < checked_checkboxes.length; l++){
 
