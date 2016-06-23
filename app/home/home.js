@@ -100,15 +100,8 @@
         $('#step3').hide();
 
         // find columns to match
-
         var selected_identifier1 = document.getElementById('reference_column_ckeckboxes_1').value; // TODO better reference by ID than name
         var selected_identifier2 = document.getElementById('reference_column_ckeckboxes_1').value; // TODO better reference by ID than name
-
-        // find id of sheet1 and sheet2
-
-        var sheet1_id = 0;
-        var sheet2_id = 0;
-
 
         var selected_table1 = document.getElementById('table1_options').value; // TODO better reference by ID than name
         var selected_table2 = document.getElementById('table2_options').value; // TODO better reference by ID than name
@@ -122,6 +115,7 @@
             range.load('address');
             range.load('text');
 
+
             var worksheet_adding_to = ctx.workbook.worksheets.getItem(selected_table1);
 
             var range_all_adding_to = worksheet_adding_to.getRange();
@@ -130,7 +124,12 @@
             range_adding_to.load('address');
             range_adding_to.load('text');
 
+
             return ctx.sync().then(function() {
+
+                // initialize ids
+                var sheet1_id = 0;
+                var sheet2_id = 0;
 
                 // iterate over columns
 
@@ -152,33 +151,19 @@
 
                     var checked_checkboxes = getCheckedBoxes("reference_column_checkbox");
 
-                    for (var l = 0; l < checked_checkboxes.length; l++){
+                    for (var l = 0; l < checked_checkboxes.length; l++){ // TODO throws error if none are checked
 
                         if (checked_checkboxes[l].id == range.text[0][k]){
 
+                            var column_char = getCharFromNumber(1 + l + range_adding_to.text[0].length);
+
                             // copy title
-
-                            var column_char ='J';
-
-                            if (l == 1) { // TODO wrap into proper function
-                                column_char ='K';
-                            } else if (l == 2) {
-                                column_char ='L';
-                            } else if (l == 3) {
-                                column_char ='M';
-                            } else if (l == 4) {
-                                column_char ='N';
-                            }
-
                             addContentToWorksheet(worksheet_adding_to, column_char + "1", range.text[0][k]);
 
                             // copy rest
-
-                            for (var i = 1; i < range.text.length; i++) {// TODO do not hardcode column
+                            for (var i = 1; i < range.text.length; i++) {
 
                                 for (var j = 1; j < range_adding_to.text.length; j++) {
-
-                                    // TODO do not hardcode column
 
                                     if (range_adding_to.text[j][sheet2_id] == range.text[i][sheet1_id]) {
                                         var sheet_row = j + 1;
