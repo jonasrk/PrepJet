@@ -50,7 +50,7 @@
 
         <!--Pop Up headline-->
         <div>
-            <header>Split column</header>
+            <header>Extract Value</header>
         </div>
         <!--dropdown for column-->
         <div class="ms-Dropdown dropdown_table_col" tabindex="1">
@@ -64,29 +64,34 @@
         <div class="ms-Dropdown dropdown_table" tabindex="1">
             <label class="ms-Label">Select Beginning</label>
             <i class="ms-Dropdown-caretDown ms-Icon ms-Icon--caretDown"></i>
-            <select id="beginning_options" class="ms-Dropdown-select">
+            <select id="beginning_options" class="ms-Dropdown-select" onchange="displayFieldBegin()">
                 <option value="col_beginning">Beginning of column</option>
                 <option value="whitespace_b">Whitespace</option>
-                <option value="custom_b">custom</option>
+                <option value="custom_b">Custom</option>
             </select>
+        </div>
+        <!--evtl. text field for custom ending-->
+        <div id="delimiter_beginning" class="ms-TextField ms-TextField--placeholder">
+            <label class="ms-Label">Enter custom delimiter</label>
+            <input class="ms-TextField-field" type="text">
         </div>
         <!--dropdown for ending-->
         <div class="ms-Dropdown dropdown_table" tabindex="1">
             <label class="ms-Label">Select Ending</label>
             <i class="ms-Dropdown-caretDown ms-Icon ms-Icon--caretDown"></i>
-            <select id="ending_options" class="ms-Dropdown-select" onchange="displayField()">
-                <option value="col_end">End of col</option>
+            <select id="ending_options" class="ms-Dropdown-select" onchange="displayFieldEnd()">
+                <option value="col_end">End of column</option>
                 <option value="whitespace_e">Whitespace</option>
-                <option value="custom_e">custom</option>
+                <option value="custom_e">Custom</option>
             </select>
         </div>
         <!--evtl. text field for custom ending-->
-        <div id="delimiter" class="ms-TextField ms-TextField--placeholder">
+        <div id="delimiter_end" class="ms-TextField ms-TextField--placeholder">
             <label class="ms-Label">Enter custom delimiter</label>
-            <input class="ms-TextField-field" type="text">
+            <input id="delimiter_input" class="ms-TextField-field" type="text">
         </div>
         <!--split button-->
-        <button class="ms-Button" id="split_column">Split</button>
+        <button class="ms-Button" id="extract_Value">Split</button>
     </div>
 
 

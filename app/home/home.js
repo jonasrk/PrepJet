@@ -1,5 +1,8 @@
-function displayField(){
-    $('#delimiter').show();
+function displayFieldBegin(){
+    $('#delimiter_beginning').show();
+}
+function displayFieldEnd(){
+    $('#delimiter_end').show();
 }
 
 (function () {
@@ -11,12 +14,13 @@ function displayField(){
             app.initialize();
             fillColumn();
 
-            $('#delimiter').hide();
+            $('#delimiter_end').hide();
+            $('#delimiter_beginning').hide();
 
             $(".dropdown_table").Dropdown();
             $(".ms-TextField").TextField();
 
-            $('#split_column').click(splitValue);
+            $('#extract_Value').click(extractValue);
             //$('#bt_step3').click(step3ButtonClicked);
             //$('#bt_apply').click(applyButtonClicked);
 
@@ -41,7 +45,6 @@ function displayField(){
                             el.value = range.text[0][i];
                             el.textContent = range.text[0][i];
                             document.getElementById("column1_options").appendChild(el);
-                            console.log(range.text[0][i])
                         }
 
                         $(".dropdown_table_col").Dropdown();
@@ -56,7 +59,7 @@ function displayField(){
 
     }
 
-    function splitValue() {
+    function extractValue() {
     //iterate over all cells in column
     //take beginning
     //for each cell in selected column search for beginning value
@@ -69,7 +72,25 @@ function displayField(){
                     var range = range_all.getUsedRange();
                     var selected_identifier = document.getElementById('column1_options').value; // TODO better reference by ID than name
                     var split_beginning = document.getElementById('beginning_options').value;
-                    var split_end = document.getElementById('ending_options').value;
+                    if (document.getElementById('ending_options').value == "custom_b"){
+                        var split_beginning = document.getElementById('delimiter_beginning').value;
+                    }
+                    else {
+                        var split_beginning = document.getElementById('beginning_options').value;
+                    }
+                    if (split_beginning == "whitespace_b") {
+                        split_beginning = " ";
+                    }
+                    if (document.getElementById('ending_options').value == "custom_e"){
+                        var split_end = document.getElementById('delimiter_input').value;
+                    }
+                    else {
+                        var split_end = document.getElementById('ending_options').value;
+                    }
+                    if (split_end == "whitespace_e") {
+                        split_end = " ";
+                    }
+
 
                     //range.load('address');
                     range.load('text');
@@ -84,11 +105,23 @@ function displayField(){
 
                         for (var i = 1; i < range.text.length; i++) {
 
-                                console.log(range.text[i][header])
-                                var position1 = range.text[i][header].indexOf(split_beginning);
-                                var position2 = range.text[i][header].indexOf(split_end); //Todo ende der Zeile Unterscheidung
-                                
+                                if (split_beginning == "col_beginning"){
+                                    var position1 = 0;
+                                }
+                                else {
+                                    var position1 = range.text[i][header].indexOf(split_beginning);
+                                }
 
+                                if (split_end == "col_end") {
+                                    var position2 = range.text[i][header].length
+                                }
+                                else {
+                                    var position2 = range.text[i][header].indexOf(split_end);
+                                }
+                                var extractedValue = range.text[i][header].substring(position1, position2);
+                                //var sheet_row = j + 1;
+                                //addContentToWorksheet(worksheet_adding_to, column_char + sheet_row, range.text[i][k])
+                                console.log(extractedValue)
                         }
 
 
