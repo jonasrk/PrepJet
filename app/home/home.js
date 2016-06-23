@@ -16,7 +16,7 @@ function displayField(){
             $(".dropdown_table").Dropdown();
             $(".ms-TextField").TextField();
 
-            //$('#bt_step2').click(step2ButtonClicked);
+            $('#split_column').click(splitValue);
             //$('#bt_step3').click(step3ButtonClicked);
             //$('#bt_apply').click(applyButtonClicked);
 
@@ -55,6 +55,54 @@ function displayField(){
                 });
 
     }
+
+    function splitValue() {
+    //iterate over all cells in column
+    //take beginning
+    //for each cell in selected column search for beginning value
+    //save in variable, add characters until ending value is found
+    //print new value to new column at the end
+        Excel.run(function (ctx) {
+
+                    var worksheet = ctx.workbook.worksheets.getActiveWorksheet();
+                    var range_all = worksheet.getRange();
+                    var range = range_all.getUsedRange();
+                    var selected_identifier = document.getElementById('column1_options').value; // TODO better reference by ID than name
+                    var split_beginning = document.getElementById('beginning_options').value;
+                    var split_end = document.getElementById('ending_options').value;
+
+                    //range.load('address');
+                    range.load('text');
+                    return ctx.sync().then(function() {
+                        var header = 0;
+
+                        for (var k = 0; k < range.text[0].length; k++){
+                            if (selected_identifier == range.text[0][k]){
+                                header = k;
+                            }
+                        }
+
+                        for (var i = 1; i < range.text.length; i++) {
+
+                                console.log(range.text[i][header])
+                                var position1 = range.text[i][header].indexOf(split_beginning);
+                                var position2 = range.text[i][header].indexOf(split_end); //Todo ende der Zeile Unterscheidung
+                                
+
+                        }
+
+
+
+                    });
+
+                }).catch(function(error) {
+                    console.log("Error: " + error);
+                    if (error instanceof OfficeExtension.Error) {
+                        console.log("Debug info: " + JSON.stringify(error.debugInfo));
+                    }
+                });
+    }
+
     function populateDropdowns() {
 
         var allworksheets = [];
