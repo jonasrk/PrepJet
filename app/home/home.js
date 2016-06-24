@@ -77,7 +77,7 @@ function displayFieldEnd(){
                     var selected_identifier = document.getElementById('column1_options').value; // TODO better reference by ID than name
                     var split_beginning = document.getElementById('beginning_options').value;
                     if (document.getElementById('beginning_options').value == "custom_b"){
-                        var split_beginning = document.getElementById('delimiter_beginning').value;
+                        var split_beginning = document.getElementById('delimiter_input_b').value;
                     }
                     else {
                         var split_beginning = document.getElementById('beginning_options').value;
@@ -86,7 +86,7 @@ function displayFieldEnd(){
                         split_beginning = " ";
                     }
                     if (document.getElementById('ending_options').value == "custom_e"){
-                        var split_end = document.getElementById('delimiter_input').value;
+                        var split_end = document.getElementById('delimiter_input_e').value;
                     }
                     else {
                         var split_end = document.getElementById('ending_options').value;
