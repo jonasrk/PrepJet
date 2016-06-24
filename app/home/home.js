@@ -1,8 +1,12 @@
 function displayFieldBegin(){
-    $('#delimiter_beginning').show();
+    if (document.getElementById('beginning_options').value == "custom_b"){
+        $('#delimiter_beginning').show();
+    }
 }
 function displayFieldEnd(){
-    $('#delimiter_end').show();
+    if(document.getElementById('ending_options').value == "custom_e") {
+        $('#delimiter_end').show();
+    }
 }
 
 (function () {
@@ -72,7 +76,7 @@ function displayFieldEnd(){
                     var range = range_all.getUsedRange();
                     var selected_identifier = document.getElementById('column1_options').value; // TODO better reference by ID than name
                     var split_beginning = document.getElementById('beginning_options').value;
-                    if (document.getElementById('ending_options').value == "custom_b"){
+                    if (document.getElementById('beginning_options').value == "custom_b"){
                         var split_beginning = document.getElementById('delimiter_beginning').value;
                     }
                     else {
@@ -103,6 +107,7 @@ function displayFieldEnd(){
                             }
                         }
 
+                        var act_worksheet = ctx.workbook.worksheets.getActiveWorksheet();
                         for (var i = 1; i < range.text.length; i++) {
 
                                 if (split_beginning == "col_beginning"){
@@ -119,8 +124,8 @@ function displayFieldEnd(){
                                     var position2 = range.text[i][header].indexOf(split_end);
                                 }
                                 var extractedValue = range.text[i][header].substring(position1, position2);
-                                //var sheet_row = j + 1;
-                                //addContentToWorksheet(worksheet_adding_to, column_char + sheet_row, range.text[i][k])
+                                var sheet_row = i + 1;
+                                addContentToWorksheet(act_worksheet, "E" + sheet_row, extractedValue) //todo flexible column to add to
                                 console.log(extractedValue)
                         }
 
