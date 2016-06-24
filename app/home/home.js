@@ -96,8 +96,16 @@ function displayFieldEnd(){
                     }
 
 
-                    //range.load('address');
                     range.load('text');
+
+                    var range_all_adding_to = worksheet.getRange();
+                    var range_adding_to = range_all_adding_to.getUsedRange();
+
+                    range_adding_to.load('address');
+                    range_adding_to.load('text');
+
+                    //range.load('address');
+                    //range.load('text');
                     return ctx.sync().then(function() {
                         var header = 0;
 
@@ -123,10 +131,13 @@ function displayFieldEnd(){
                                 else {
                                     var position2 = range.text[i][header].indexOf(split_end);
                                 }
+
                                 var extractedValue = range.text[i][header].substring(position1, position2);
+                                var column_char = getCharFromNumber(1 + range_adding_to.text[0].length);
                                 var sheet_row = i + 1;
-                                addContentToWorksheet(act_worksheet, "E" + sheet_row, extractedValue) //todo flexible column to add to
-                                console.log(extractedValue)
+
+                                addContentToWorksheet(act_worksheet, column_char + sheet_row, extractedValue) //todo flexible column to add to
+                                console.log(column_char + sheet_row)
                         }
 
 
