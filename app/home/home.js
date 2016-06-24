@@ -25,8 +25,6 @@ function displayFieldEnd(){
             $(".ms-TextField").TextField();
 
             $('#extract_Value').click(extractValue);
-            //$('#bt_step3').click(step3ButtonClicked);
-            //$('#bt_apply').click(applyButtonClicked);
 
         });
     };
@@ -64,17 +62,13 @@ function displayFieldEnd(){
     }
 
     function extractValue() {
-    //iterate over all cells in column
-    //take beginning
-    //for each cell in selected column search for beginning value
-    //save in variable, add characters until ending value is found
-    //print new value to new column at the end
         Excel.run(function (ctx) {
 
                     var worksheet = ctx.workbook.worksheets.getActiveWorksheet();
                     var range_all = worksheet.getRange();
                     var range = range_all.getUsedRange();
-                    var selected_identifier = document.getElementById('column1_options').value; // TODO better reference by ID than name
+                    var selected_identifier = document.getElementById('column1_options').value;
+
                     var split_beginning = document.getElementById('beginning_options').value;
                     if (document.getElementById('beginning_options').value == "custom_b"){
                         var split_beginning = document.getElementById('delimiter_input_b').value;
@@ -85,6 +79,7 @@ function displayFieldEnd(){
                     if (split_beginning == "whitespace_b") {
                         split_beginning = " ";
                     }
+
                     if (document.getElementById('ending_options').value == "custom_e"){
                         var split_end = document.getElementById('delimiter_input_e').value;
                     }
@@ -95,7 +90,6 @@ function displayFieldEnd(){
                         split_end = " ";
                     }
 
-
                     range.load('text');
 
                     var range_all_adding_to = worksheet.getRange();
@@ -104,8 +98,6 @@ function displayFieldEnd(){
                     range_adding_to.load('address');
                     range_adding_to.load('text');
 
-                    //range.load('address');
-                    //range.load('text');
                     return ctx.sync().then(function() {
                         var header = 0;
 
@@ -126,7 +118,7 @@ function displayFieldEnd(){
                                 }
 
                                 if (split_end == "col_end") {
-                                    var position2 = range.text[i][header].length
+                                    var position2 = range.text[i][header].length;
                                 }
                                 else {
                                     var position2 = range.text[i][header].indexOf(split_end);
@@ -136,7 +128,7 @@ function displayFieldEnd(){
                                 var column_char = getCharFromNumber(1 + range_adding_to.text[0].length);
                                 var sheet_row = i + 1;
 
-                                addContentToWorksheet(act_worksheet, column_char + sheet_row, extractedValue) //todo flexible column to add to
+                                addContentToWorksheet(act_worksheet, column_char + sheet_row, extractedValue);
                                 console.log(column_char + sheet_row)
                         }
 
@@ -152,133 +144,8 @@ function displayFieldEnd(){
                 });
     }
 
-    function populateDropdowns() {
-
-        var allworksheets = [];
-
-        Excel.run(function (ctx) {
-            var worksheets = ctx.workbook.worksheets;
-            worksheets.load('items');
-            return ctx.sync().then(function () {
-                for (var i = 0; i < worksheets.items.length; i++) {
-                    worksheets.items[i].load('name');
-                    worksheets.items[i].load('index');
-                    ctx.sync().then(function (i) {
-
-                        var this_i = i;
-
-                        return function () {
-                            allworksheets.push(worksheets.items[this_i].name);
-
-                            if (this_i == worksheets.items.length - 1) { //  TODO there must be a _much_ better way to check for everything being completed
-
-                                for (var i = 0; i < allworksheets.length; i++) {
-                                    var opt = allworksheets[i];
-                                    var el = document.createElement("option");
-                                    el.textContent = opt;
-                                    el.value = opt;
-                                    document.getElementById("column1_options").appendChild(el);
-                                    var el = document.createElement("option"); // TODO DRY
-                                    el.textContent = opt;
-                                    el.value = opt;
-                                    document.getElementById("table2_options").appendChild(el);
-                                }
 
 
-                                $(".dropdown_table").Dropdown();
-
-                            }
-                        }
-
-                    }(i));
-                }
-
-            });
-
-        }).catch(function (error) {
-            console.log("Error: " + error);
-            if (error instanceof OfficeExtension.Error) {
-                console.log("Debug info: " + JSON.stringify(error.debugInfo));
-            }
-        });
-    }
-
-
-    function step2ButtonClicked() {
-
-        $('#step1').hide();
-        $('#step2').show();
-        $('#step3').hide();
-
-        var selected_table2 = document.getElementById('table2_options').value; // TODO better reference by ID than name
-
-        Excel.run(function (ctx) {
-
-            var worksheet = ctx.workbook.worksheets.getItem(selected_table2);
-            var range_all = worksheet.getRange();
-            var range = range_all.getUsedRange();
-
-            //range.load('address');
-            range.load('text');
-            return ctx.sync().then(function() {
-                for (var i = 0; i < range.text[0].length; i++) { // .text[0] is the first row of a range
-
-                    addNewCheckboxToContainer (range.text[0][i], "reference_column_checkbox" ,"checkboxes_variables");
-                }
-            });
-
-        }).catch(function(error) {
-            console.log("Error: " + error);
-            if (error instanceof OfficeExtension.Error) {
-                console.log("Debug info: " + JSON.stringify(error.debugInfo));
-            }
-        });
-    }
-
-
-    function step3ButtonClicked() {
-        $('#step1').hide();
-        $('#step2').hide();
-        $('#step3').show();
-
-        var selected_table1 = document.getElementById('table1_options').value; // TODO better reference by ID than name
-        var selected_table2 = document.getElementById('table2_options').value; // TODO better reference by ID than name
-
-        function populateReferenceColumnDropdown (table, container) {
-
-            Excel.run(function (ctx) {
-
-                var worksheet = ctx.workbook.worksheets.getItem(table);
-                var range_all = worksheet.getRange();
-                var range = range_all.getUsedRange();
-
-                //range.load('address');
-                range.load('text');
-                return ctx.sync().then(function() {
-                    for (var i = 0; i < range.text[0].length; i++) {
-
-                        var el = document.createElement("option");
-                        el.value = range.text[0][i];
-                        el.textContent = range.text[0][i];
-                        document.getElementById(container).appendChild(el);
-
-                    }
-
-                    $("." + container).Dropdown();
-                });
-
-            }).catch(function(error) {
-                console.log("Error: " + error);
-                if (error instanceof OfficeExtension.Error) {
-                    console.log("Debug info: " + JSON.stringify(error.debugInfo));
-                }
-            });
-
-        }
-
-        populateReferenceColumnDropdown(selected_table1, "reference_column_ckeckboxes_1");
-        populateReferenceColumnDropdown(selected_table2, "reference_column_ckeckboxes_2");
-    }
 
 
     function applyButtonClicked() {
