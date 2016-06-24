@@ -107,6 +107,11 @@ function displayFieldEnd(){
                             }
                         }
 
+                        //todo where to put this??
+                        var tables = ctx.workbook.tables;
+                        //var column = tables.getItem("Tabelle1").columns.add(null, extractedValue);
+                        //column.load('name');
+
                         var act_worksheet = ctx.workbook.worksheets.getActiveWorksheet();
                         for (var i = 1; i < range.text.length; i++) {
 
@@ -128,7 +133,10 @@ function displayFieldEnd(){
                                 var column_char = getCharFromNumber(1 + range_adding_to.text[0].length);
                                 var sheet_row = i + 1;
 
-                                addContentToWorksheet(act_worksheet, column_char + sheet_row, extractedValue);
+                                //addContentToWorksheet(act_worksheet, column_char + sheet_row, extractedValue);
+                                var column = tables.getItem("Tabelle1").columns.add(null, extractedValue);
+                                column.load('name');
+
                                 console.log(column_char + sheet_row)
                         }
 
