@@ -31,7 +31,6 @@
     <script src="Home.js"></script>
 
     <!--PrepJet Fabric Components Imports-->
-    <script src="../../bower_components/office-ui-fabric/src/components/TextField/Jquery.TextField.js"></script>
     <script src="../../bower_components/office-ui-fabric/src/components/Dropdown/Jquery.Dropdown.js"></script>
 
 
@@ -46,52 +45,47 @@
 <div id="content-main">
 
 
-    <div class="padding">
+    <div id="step1">
+        <div class="padding">
+            <div class="ms-Dropdown dropdown_table" tabindex="1">
+                <label class="ms-Label">Select table1</label>
+                <i class="ms-Dropdown-caretDown ms-Icon ms-Icon--caretDown"></i>
+                <select id="table1_options" class="ms-Dropdown-select"></select>
+            </div>
+            <div class="ms-Dropdown dropdown_table" tabindex="1">
+                <label class="ms-Label">Select table2</label>
+                <i class="ms-Dropdown-caretDown ms-Icon ms-Icon--caretDown"></i>
+                <select id="table2_options" class="ms-Dropdown-select"></select>
+            </div>
+            <button class="ms-Button" id="bt_step2">Continue</button>
+        </div>
+    </div>
 
-        <!--Pop Up headline-->
-        <div>
-            <header>Extract Value</header>
+
+    <div id="step2">
+        <label class="ms-Label"> Select columns to add to Sheet1 </label>
+        <br />
+        <button class="ms-Button" id="next-step">Select all</button>
+        <div id="checkboxes_variables" class="ms-ChoiceField">
         </div>
-        <!--dropdown for column-->
-        <div class="ms-Dropdown dropdown_table_col" tabindex="1">
-            <label class="ms-Label">Select column to extract value</label>
+        <button class="ms-Button" id="bt_step3">Continue</button>
+    </div>
+
+
+    <div id="step3">
+        <div class="ms-Dropdown reference_column_ckeckboxes_1" tabindex="0">
+            <label class="ms-Label">Select reference column in table Sheet1</label>
             <i class="ms-Dropdown-caretDown ms-Icon ms-Icon--caretDown"></i>
-            <select id="column1_options" class="ms-Dropdown-select">
-                <option value="empty"></option>
+            <select id="reference_column_ckeckboxes_1" class="ms-Dropdown-select">
             </select>
         </div>
-        <!--dropdown fpr beginning-->
-        <div class="ms-Dropdown dropdown_table" tabindex="1">
-            <label class="ms-Label">Select beginning of new value</label>
+        <div class="ms-Dropdown reference_column_ckeckboxes_2" tabindex="1">
+            <label class="ms-Label">Select reference column in table Sheet2</label>
             <i class="ms-Dropdown-caretDown ms-Icon ms-Icon--caretDown"></i>
-            <select id="beginning_options" class="ms-Dropdown-select" onchange="displayFieldBegin()">
-                <option value="col_beginning">Beginning of column</option>
-                <option value="whitespace_b">Whitespace</option>
-                <option value="custom_b">Custom</option>
+            <select id="reference_column_ckeckboxes_2" class="ms-Dropdown-select">
             </select>
         </div>
-        <!--evtl. text field for custom ending-->
-        <div id="delimiter_beginning" class="ms-TextField ms-TextField--placeholder">
-            <label class="ms-Label">Enter custom beginning</label>
-            <input id="delimiter_input_b" class="ms-TextField-field" type="text">
-        </div>
-        <!--dropdown for ending-->
-        <div class="ms-Dropdown dropdown_table" tabindex="1">
-            <label class="ms-Label">Select ending of new value</label>
-            <i class="ms-Dropdown-caretDown ms-Icon ms-Icon--caretDown"></i>
-            <select id="ending_options" class="ms-Dropdown-select" onchange="displayFieldEnd()">
-                <option value="col_end">End of column</option>
-                <option value="whitespace_e">Whitespace</option>
-                <option value="custom_e">Custom</option>
-            </select>
-        </div>
-        <!--evtl. text field for custom ending-->
-        <div id="delimiter_end" class="ms-TextField ms-TextField--placeholder">
-            <label class="ms-Label">Enter custom ending</label>
-            <input id="delimiter_input_e" class="ms-TextField-field" type="text">
-        </div>
-        <!--split button-->
-        <button class="ms-Button" id="extract_Value">Split</button>
+        <button class="ms-Button" id="bt_apply">Apply</button>
     </div>
 
 
