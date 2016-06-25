@@ -29,7 +29,7 @@
             return ctx.sync().then(function () {
                 for (var i = 0; i < worksheets.items.length; i++) {
                     worksheets.items[i].load('name');
-                    worksheets.items[i].load('index');
+                    // worksheets.items[i].load('index'); TODO use index for something or do not load it
                     ctx.sync().then(function (i) {
 
                         var this_i = i;

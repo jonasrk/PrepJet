@@ -23,7 +23,7 @@
     <Host Name="Workbook"/>
   </Hosts>
   <DefaultSettings>
-    <SourceLocation DefaultValue="https://localhost:8443/app/home/home.html" />
+    <SourceLocation DefaultValue="https://localhost:8443/app/home/merge_columns.html" />
   </DefaultSettings>
    <!--EndTaskpaneMode integration -->
 
@@ -182,7 +182,7 @@
       </bt:Images>
       <bt:Urls>
         <bt:Url id="Contoso.FunctionFile.Url" DefaultValue="https://commandsimple.azurewebsites.net/FunctionFile.html" />
-        <bt:Url id="Contoso.Taskpane1.Url" DefaultValue="https://localhost:8443/app/home/home.html" />
+        <bt:Url id="Contoso.Taskpane1.Url" DefaultValue="https://localhost:8443/app/home/merge_columns.html" />
         <bt:Url id="Contoso.Taskpane2.Url" DefaultValue="https://localhost:8443/app/home/split_values.html" />
          <!--LearnMore URL currently not used -->
         <bt:Url id="Contoso.GetStarted.LearnMoreUrl" DefaultValue="https://commandsimple.azurewebsites.net/GetStarted.html">
