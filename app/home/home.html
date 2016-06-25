@@ -44,48 +44,39 @@
 </div>
 <div id="content-main">
 
-
-    <div id="step1">
         <div class="padding">
-            <div class="ms-Dropdown dropdown_table" tabindex="1">
-                <label class="ms-Label">Select table1</label>
-                <i class="ms-Dropdown-caretDown ms-Icon ms-Icon--caretDown"></i>
-                <select id="table1_options" class="ms-Dropdown-select"></select>
-            </div>
-            <div class="ms-Dropdown dropdown_table" tabindex="1">
-                <label class="ms-Label">Select table2</label>
-                <i class="ms-Dropdown-caretDown ms-Icon ms-Icon--caretDown"></i>
-                <select id="table2_options" class="ms-Dropdown-select"></select>
-            </div>
-            <button class="ms-Button" id="bt_step2">Continue</button>
+
+
+            <!--Pop Up headline-->
+        <div>
+            <header>Split Value</header>
         </div>
-    </div>
-
-
-    <div id="step2">
-        <label class="ms-Label"> Select columns to add to Sheet1 </label>
-        <br />
-        <button class="ms-Button" id="next-step">Select all</button>
-        <div id="checkboxes_variables" class="ms-ChoiceField">
-        </div>
-        <button class="ms-Button" id="bt_step3">Continue</button>
-    </div>
-
-
-    <div id="step3">
-        <div class="ms-Dropdown reference_column_ckeckboxes_1" tabindex="0">
-            <label class="ms-Label">Select reference column in table Sheet1</label>
+        <!--dropdown for column-->
+        <div class="ms-Dropdown dropdown_table_col" tabindex="1">
+            <label class="ms-Label">Select column to split</label>
             <i class="ms-Dropdown-caretDown ms-Icon ms-Icon--caretDown"></i>
-            <select id="reference_column_ckeckboxes_1" class="ms-Dropdown-select">
+            <select id="column_options" class="ms-Dropdown-select">
+                <option value="empty"></option>
             </select>
         </div>
-        <div class="ms-Dropdown reference_column_ckeckboxes_2" tabindex="1">
-            <label class="ms-Label">Select reference column in table Sheet2</label>
+        <!--dropdown fpr beginning-->
+        <div class="ms-Dropdown dropdown_table" tabindex="1">
+            <label class="ms-Label">Select delimiter</label>
             <i class="ms-Dropdown-caretDown ms-Icon ms-Icon--caretDown"></i>
-            <select id="reference_column_ckeckboxes_2" class="ms-Dropdown-select">
+            <select id="delimiter_options" class="ms-Dropdown-select" onchange="displayFieldDelimiter()">
+                <option value="comma">Comma</option>
+                <option value="semikolon">Semikolon</option>
+                <option value="whitespace">Whitespace</option>
+                <option value="custom_delimiter">Custom</option>
             </select>
         </div>
-        <button class="ms-Button" id="bt_apply">Apply</button>
+        <!--evtl. text field for custom ending-->
+        <div id="delimiter_beginning" class="ms-TextField ms-TextField--placeholder">
+            <label class="ms-Label">Enter custom beginning</label>
+            <input id="delimiter_input" class="ms-TextField-field" type="text">
+        </div>
+        <!--split button-->
+        <button class="ms-Button" id="split_Value">Split</button>
     </div>
 
 
