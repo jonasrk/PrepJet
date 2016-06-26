@@ -8,6 +8,8 @@
 
             populateCheckboxes();
 
+            $('#bt_detect_duplicates').click(detectDuplicates);
+
         });
     };
 
@@ -35,6 +37,14 @@
                 console.log("Debug info: " + JSON.stringify(error.debugInfo));
             }
         });
+
+    }
+
+    function detectDuplicates() {
+
+        var checked_checkboxes = getCheckedBoxes("duplicates_column_checkbox");
+
+        console.log(checked_checkboxes);
 
     }
 
