@@ -52,19 +52,28 @@
             range.load('address');
             range.load('text');
             return ctx.sync().then(function() {
-                for (var k = 0; k < range.text[0].length; k++) { // .text[0] is the first row of a range
 
-                    for (var l = 0; l < checked_checkboxes.length; l++){ // TODO throws error if none are checked
+                for (var l = 0; l < checked_checkboxes.length; l++){ // TODO throws error if none are checked
+
+                    var strings_to_sort  = [];
+
+                    for (var k = 0; k < range.text[0].length; k++) { // .text[0] is the first row of a range
 
                         if (checked_checkboxes[l].id == range.text[0][k]){
 
                             for (var i = 1; i < range.text.length; i++) {
 
-                                console.log(range.text[i][k]);
+                                strings_to_sort.push(range.text[i][k]);
 
                             }
                         }
                     }
+
+                    console.log(strings_to_sort);   
+
+                    strings_to_sort.sort();
+
+                    console.log(strings_to_sort);
 
 
                 }
