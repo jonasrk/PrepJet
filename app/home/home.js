@@ -16,8 +16,7 @@ function displayFieldDelimiter(){
             $('#delimiter_beginning').hide();
 
             $(".dropdown_table").Dropdown();
-            //todo text field not working correctly, placeholder does not disappear on click
-            //$(".ms-TextField").TextField();
+            $(".ms-TextField").TextField();
 
             $('#split_Value').click(splitValue);
 
@@ -78,7 +77,6 @@ function displayFieldDelimiter(){
                 delimiter_type = ";";
             }
 
-
             range.load('text');
 
             var range_all_adding_to = worksheet.getRange();
@@ -88,8 +86,8 @@ function displayFieldDelimiter(){
             range_adding_to.load('text');
 
             return ctx.sync().then(function() {
-                var header = 0;
 
+                var header = 0;
                 for (var k = 0; k < range.text[0].length; k++){
                     if (selected_identifier == range.text[0][k]){
                         header = k;
@@ -97,11 +95,10 @@ function displayFieldDelimiter(){
                 }
 
                 var act_worksheet = ctx.workbook.worksheets.getActiveWorksheet();
-                //todo header verschieben
-                
                 var array_length = 0;
                 var max_array_length = 0;
                 var split_array = new Array(range.text.length);
+
                 for (var i = 1; i < range.text.length; i++) {
 
                     split_array[i] = range.text[i][header].split(delimiter_type);
@@ -109,10 +106,11 @@ function displayFieldDelimiter(){
                     if (max_array_length < array_length){
                         max_array_length = array_length
                     }
+
                 }
 
 
-                for (var i = 1; i < range.text.length; i++) {
+                for (var i = 0; i < range.text.length; i++) {
                     for (var j = 1; j < max_array_length; j++) {
                         var column_char = getCharFromNumber(header + 2);
                         var sheet_row = i + 1;
@@ -128,8 +126,6 @@ function displayFieldDelimiter(){
                         addContentToWorksheet(act_worksheet, getCharFromNumber(header + 1 + j) + sheet_row, split_array[i][j]);
                     }
                 }
-
-                    console.log(max_array_length)
 
             });
 
