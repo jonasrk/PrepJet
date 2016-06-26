@@ -76,37 +76,21 @@
                             for (var o = 1; o < strings_to_sort.length; o++){
 
                                 if (strings_to_sort[o] == strings_to_sort[o - 1]){
-
-                                    console.log("Found Duplicate: " + strings_to_sort[o]);
                                     duplicates.push(strings_to_sort[o]);
 
                                 }
 
                             }
 
-
-                            console.log(duplicates);
-                            console.log("D");
-
                             for (var m = 0; m < duplicates.length; m++){
-
-                                console.log("C");
 
                                 for (var n = 1; n < range.text.length; n++) {
 
-                                    console.log("B");
-
                                     var sheet_row = n + 1;
-
-                                    console.log("A");
-                                    console.log(duplicates[m]);
-                                    console.log(range.text[n][k]);
 
                                     if (duplicates[m] == range.text[n][k]){
 
-                                        console.log('highlighting dupe');
-
-                                        addContentToWorksheet(worksheet, column_char + sheet_row, 'foo')
+                                        highlightContentInWorksheet(worksheet, column_char + sheet_row)
 
                                     }
 

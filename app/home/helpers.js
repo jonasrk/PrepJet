@@ -111,3 +111,10 @@ function addContentToWorksheet(sheetObject, rangeAddress, displayText) {
     range.values = displayText;
     range.merge();
 }
+
+
+function highlightContentInWorksheet(sheetObject, rangeAddress) {
+    var range = sheetObject.getRange(rangeAddress);
+    range.format.font.color = "red";
+    range.merge();
+}
