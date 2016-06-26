@@ -111,3 +111,4 @@ function addContentToWorksheet(sheetObject, rangeAddress, displayText) {
     range.values = displayText;
     range.merge();
 }
+
