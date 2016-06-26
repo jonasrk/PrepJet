@@ -120,12 +120,19 @@
                     }
 
                 }
+                
+                var color = 'red';
 
                 for (var m = 0; m < duplicates.length; m++){
 
+                    if (m > 0 && !arraysEqual(duplicates[m], duplicates[m-1])){
+                        // generate new random color
+                        color = getRandomColor();
+                    }
+
                     for (var n = 0; n < duplicates[m].length; n++){
 
-                        highlightContentInWorksheet(worksheet, duplicates[m][n][1]);
+                        highlightContentInWorksheet(worksheet, duplicates[m][n][1], color);
 
                     }
 
