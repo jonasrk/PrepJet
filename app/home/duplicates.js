@@ -69,11 +69,20 @@
                         }
                     }
 
-                    console.log(strings_to_sort);   
-
                     strings_to_sort.sort();
 
-                    console.log(strings_to_sort);
+                    var duplicates = [];
+
+                    for (var k = 1; k < strings_to_sort.length; k++){
+
+                        if (strings_to_sort[k] == strings_to_sort[k - 1]){
+
+                            console.log("Found Duplicate: " + strings_to_sort[k]);
+                            duplicates.push(strings_to_sort[k]);
+
+                        }
+
+                    }
 
 
                 }
