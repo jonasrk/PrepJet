@@ -98,16 +98,12 @@ function displayFieldDelimiter(){
 
                 var act_worksheet = ctx.workbook.worksheets.getActiveWorksheet();
                 //todo header verschieben
-                //var rangeaddress = getCharFromNumber(header + 2) + 1;
-                //var range_insert = ctx.workbook.worksheets.getActiveWorksheet().getRange(rangeaddress);
-                //range_insert.insert("Right");
-
+                
                 var array_length = 0;
                 var max_array_length = 0;
                 var split_array = new Array(range.text.length);
                 for (var i = 1; i < range.text.length; i++) {
 
-                    //var split_array = new Array(range.text.length);
                     split_array[i] = range.text[i][header].split(delimiter_type);
                     array_length = split_array[i].length
                     if (max_array_length < array_length){
@@ -124,26 +120,16 @@ function displayFieldDelimiter(){
                         var range_insert = ctx.workbook.worksheets.getActiveWorksheet().getRange(rangeaddress);
                         range_insert.insert("Right");
                     }
+                }
 
-                for (var i = 1; i < range.text.length - 1; i++) {
+                for (var i = 1; i < range.text.length; i++) {
+                    var sheet_row = i + 1;
                     for(var j = 0; j < split_array[i].length; j++){
-                        addContentToWorksheet(act_worksheet, getCharFromNumber(header + 1 + j), split_array[i][j])
+                        addContentToWorksheet(act_worksheet, getCharFromNumber(header + 1 + j) + sheet_row, split_array[i][j]);
                     }
                 }
-                    //var position1 = range.text[i][header].indexOf(delimiter_type);
-                    //var splitValue1 = range.text[i][header].substring(0, position1);
-                    //var splitValue2 = range.text[i][header].substring(position1 + 1, range.text[i][header].length);
-
-                    //var column_char = getCharFromNumber(header + 2);
-                    //var sheet_row = i + 1;
-                    //var rangeaddress = column_char + sheet_row;
-                    //var range_insert = ctx.workbook.worksheets.getActiveWorksheet().getRange(rangeaddress);
-                    //range_insert.insert("Right");
-                    //addContentToWorksheet(act_worksheet, getCharFromNumber(header + 1) + sheet_row, splitValue1);
-                    //addContentToWorksheet(act_worksheet, getCharFromNumber(header + 2) + sheet_row, splitValue2);
 
                     console.log(max_array_length)
-                }
 
             });
 
