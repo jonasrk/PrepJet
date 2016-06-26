@@ -107,12 +107,11 @@ function displayFieldEnd(){
                     }
                 }
 
-                //todo where to put this??
-                var tables = ctx.workbook.tables;
-                //var column = tables.getItem("Tabelle1").columns.add(null, extractedValue);
-                //column.load('name');
-
                 var act_worksheet = ctx.workbook.worksheets.getActiveWorksheet();
+                var rangeaddress = getCharFromNumber(header + 2) + 1;
+                var range_insert = ctx.workbook.worksheets.getActiveWorksheet().getRange(rangeaddress);
+                range_insert.insert("Right");
+
                 for (var i = 1; i < range.text.length; i++) {
 
                     if (split_beginning == "col_beginning"){
@@ -130,17 +129,17 @@ function displayFieldEnd(){
                     }
 
                     var extractedValue = range.text[i][header].substring(position1, position2);
-                    var column_char = getCharFromNumber(1 + range_adding_to.text[0].length);
+                    var column_char = getCharFromNumber(header + 2);
                     var sheet_row = i + 1;
 
-                    //addContentToWorksheet(act_worksheet, column_char + sheet_row, extractedValue);
-                    var column = tables.getItem("Tabelle1").columns.add(null, extractedValue);
-                    column.load('name');
+                    var rangeaddress = column_char + sheet_row;
+                    var range_insert = ctx.workbook.worksheets.getActiveWorksheet().getRange(rangeaddress);
+                    range_insert.insert("Right");
+                    addContentToWorksheet(act_worksheet, column_char + sheet_row, extractedValue);
+
 
                     console.log(column_char + sheet_row)
                 }
-
-
 
             });
 
