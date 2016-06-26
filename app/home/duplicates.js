@@ -59,6 +59,8 @@
 
                     for (var k = 0; k < range.text[0].length; k++) { // .text[0] is the first row of a range
 
+                        var column_char = getCharFromNumber(1 + k);
+
                         if (checked_checkboxes[l].id == range.text[0][k]){
 
                             for (var i = 1; i < range.text.length; i++) {
@@ -66,24 +68,56 @@
                                 strings_to_sort.push(range.text[i][k]);
 
                             }
+
+                            strings_to_sort.sort();
+
+                            var duplicates = [];
+
+                            for (var o = 1; o < strings_to_sort.length; o++){
+
+                                if (strings_to_sort[o] == strings_to_sort[o - 1]){
+
+                                    console.log("Found Duplicate: " + strings_to_sort[o]);
+                                    duplicates.push(strings_to_sort[o]);
+
+                                }
+
+                            }
+
+
+                            console.log(duplicates);
+                            console.log("D");
+
+                            for (var m = 0; m < duplicates.length; m++){
+
+                                console.log("C");
+
+                                for (var n = 1; n < range.text.length; n++) {
+
+                                    console.log("B");
+
+                                    var sheet_row = n + 1;
+
+                                    console.log("A");
+                                    console.log(duplicates[m]);
+                                    console.log(range.text[n][k]);
+
+                                    if (duplicates[m] == range.text[n][k]){
+
+                                        console.log('highlighting dupe');
+
+                                        addContentToWorksheet(worksheet, column_char + sheet_row, 'foo')
+
+                                    }
+
+                                }
+
+
+
+                            }
+
                         }
                     }
-
-                    strings_to_sort.sort();
-
-                    var duplicates = [];
-
-                    for (var k = 1; k < strings_to_sort.length; k++){
-
-                        if (strings_to_sort[k] == strings_to_sort[k - 1]){
-
-                            console.log("Found Duplicate: " + strings_to_sort[k]);
-                            duplicates.push(strings_to_sort[k]);
-
-                        }
-
-                    }
-
 
                 }
             });
