@@ -165,6 +165,24 @@
                   </Action>
                 </Control>
 
+                <Control xsi:type="Button" id="Contoso.ExtractValuesButton">
+                  <Label resid="Contoso.ExtractValuesButton.Label" />
+                  <Supertip>
+                    <Title resid="Contoso.ExtractValuesButton.Label" />
+                    <Description resid="Contoso.TaskpaneButton.Tooltip" />
+                  </Supertip>
+                  <Icon>
+                    <bt:Image size="16" resid="Contoso.detectoutlier.Icon" />
+                    <bt:Image size="32" resid="Contoso.detectoutlier.Icon" />
+                    <bt:Image size="80" resid="Contoso.detectoutlier.Icon" />
+                  </Icon>
+                  <Action xsi:type="ShowTaskpane">
+                    <TaskpaneId>Button2Id1</TaskpaneId>
+                    <!--Provide a url resource id for the location that will be displayed on the task pane -->
+                    <SourceLocation resid="Contoso.ExtractValues.Url" />
+                  </Action>
+                </Control>
+
               </Group>
 
               <!-- Label of your tab -->
@@ -190,6 +208,7 @@
         <bt:Url id="Contoso.Taskpane2.Url" DefaultValue="https://localhost:8443/app/home/extract_values.html" />
         <bt:Url id="Contoso.FindDuplicates.Url" DefaultValue="https://localhost:8443/app/home/duplicates.html" />
         <bt:Url id="Contoso.DetectOutliers.Url" DefaultValue="https://localhost:8443/app/home/outlier.html" />
+        <bt:Url id="Contoso.ExtractValues.Url" DefaultValue="https://localhost:8443/app/home/extract_values.html" />
          <!--LearnMore URL currently not used -->
         <bt:Url id="Contoso.GetStarted.LearnMoreUrl" DefaultValue="https://commandsimple.azurewebsites.net/GetStarted.html">
         </bt:Url>
@@ -199,6 +218,7 @@
         <bt:String id="Contoso.TaskpaneButton.Label" DefaultValue="Extract Value" />
         <bt:String id="Contoso.FindDuplicatesButton.Label" DefaultValue="Find Duplicates" />
         <bt:String id="Contoso.DetectOutliersButton.Label" DefaultValue="Detect Outliers" />
+        <bt:String id="Contoso.ExtractValuesButton.Label" DefaultValue="Extract Values" />
         <bt:String id="Contoso.Dropdown.Label" DefaultValue="Dropdown" />
         <bt:String id="Contoso.Item1.Label" DefaultValue="Show Taskpane 1" />
         <bt:String id="Contoso.Item2.Label" DefaultValue="Show Taskpane 2" />
