@@ -70,11 +70,11 @@
                 <!-- Sample Todo: Each size needs its own icon resource or it will look distorted when resized -->
                 <!--Icons. Required sizes 16,31,80, optional 20, 24, 40, 48, 64. Strongly recommended to provide all sizes for great UX -->
                 <!--Use PNG icons and remember that all URLs on the resources section must use HTTPS -->
-                  <bt:Image size="16" resid="Contoso.TaskpaneButton.Icon" />
-                  <bt:Image size="32" resid="Contoso.TaskpaneButton.Icon" />
-                  <bt:Image size="80" resid="Contoso.TaskpaneButton.Icon" />
+                  <bt:Image size="16" resid="Contoso.addcolumn.Icon" />
+                  <bt:Image size="32" resid="Contoso.addcolumn.Icon" />
+                  <bt:Image size="80" resid="Contoso.addcolumn.Icon" />
                 </Icon>
-                
+
                 <!--Control. It can be of type "Button" or "Menu" -->
                 <Control xsi:type="Button" id="Contoso.FunctionButton">
                 <!--Label for your button. resid must point to a ShortString resource -->
@@ -105,9 +105,9 @@
                     <Description resid="Contoso.TaskpaneButton.Tooltip" />
                   </Supertip>
                   <Icon>
-                    <bt:Image size="16" resid="Contoso.TaskpaneButton.Icon" />
-                    <bt:Image size="32" resid="Contoso.TaskpaneButton.Icon" />
-                    <bt:Image size="80" resid="Contoso.TaskpaneButton.Icon" />
+                    <bt:Image size="16" resid="Contoso.splitvalues.Icon" />
+                    <bt:Image size="32" resid="Contoso.splitvalues.Icon" />
+                    <bt:Image size="80" resid="Contoso.splitvalues.Icon" />
                   </Icon>
                   <Action xsi:type="ShowTaskpane">
                     <TaskpaneId>Button2Id1</TaskpaneId>
@@ -124,9 +124,9 @@
                   <!-- Sample Todo: Each size needs its own icon resource or it will look distorted when resized -->
                   <!--Icons. Required sizes 16,31,80, optional 20, 24, 40, 48, 64. Strongly recommended to provide all sizes for great UX -->
                   <!--Use PNG icons and remember that all URLs on the resources section must use HTTPS -->
-                  <bt:Image size="16" resid="Contoso.TaskpaneButton.Icon" />
-                  <bt:Image size="32" resid="Contoso.TaskpaneButton.Icon" />
-                  <bt:Image size="80" resid="Contoso.TaskpaneButton.Icon" />
+                  <bt:Image size="16" resid="Contoso.addcolumn.Icon" />
+                  <bt:Image size="32" resid="Contoso.addcolumn.Icon" />
+                  <bt:Image size="80" resid="Contoso.addcolumn.Icon" />
                 </Icon>
 
                 <Control xsi:type="Button" id="Contoso.FindDuplicatesButton">
@@ -136,9 +136,9 @@
                     <Description resid="Contoso.TaskpaneButton.Tooltip" />
                   </Supertip>
                   <Icon>
-                    <bt:Image size="16" resid="Contoso.TaskpaneButton.Icon" />
-                    <bt:Image size="32" resid="Contoso.TaskpaneButton.Icon" />
-                    <bt:Image size="80" resid="Contoso.TaskpaneButton.Icon" />
+                    <bt:Image size="16" resid="Contoso.removeduplicates.Icon" />
+                    <bt:Image size="32" resid="Contoso.removeduplicates.Icon" />
+                    <bt:Image size="80" resid="Contoso.removeduplicates.Icon" />
                   </Icon>
                   <Action xsi:type="ShowTaskpane">
                     <TaskpaneId>Button2Id1</TaskpaneId>
@@ -154,9 +154,9 @@
                     <Description resid="Contoso.TaskpaneButton.Tooltip" />
                   </Supertip>
                   <Icon>
-                    <bt:Image size="16" resid="Contoso.TaskpaneButton.Icon" />
-                    <bt:Image size="32" resid="Contoso.TaskpaneButton.Icon" />
-                    <bt:Image size="80" resid="Contoso.TaskpaneButton.Icon" />
+                    <bt:Image size="16" resid="Contoso.detectoutlier.Icon" />
+                    <bt:Image size="32" resid="Contoso.detectoutlier.Icon" />
+                    <bt:Image size="80" resid="Contoso.detectoutlier.Icon" />
                   </Icon>
                   <Action xsi:type="ShowTaskpane">
                     <TaskpaneId>Button2Id1</TaskpaneId>
@@ -177,8 +177,12 @@
     </Hosts>
     <Resources>
       <bt:Images>
-		<bt:Image id="Contoso.TaskpaneButton.Icon" DefaultValue="https://i.imgur.com/FkSShX9.png" />
-		<bt:Image id="Contoso.FunctionButton.Icon" DefaultValue="https://i.imgur.com/qDujiX0.png" />
+        <bt:Image id="Contoso.FunctionButton.Icon" DefaultValue="https://localhost:8443/images/addcolumn.png" />
+        <bt:Image id="Contoso.addcolumn.Icon" DefaultValue="https://localhost:8443/images/addcolumn.png" />
+		<bt:Image id="Contoso.detectoutlier.Icon" DefaultValue="https://localhost:8443/images/detectoutlier.png" />
+        <bt:Image id="Contoso.removeduplicates.Icon" DefaultValue="https://localhost:8443/images/removeduplicates.png" />
+        <bt:Image id="Contoso.splitvalues.Icon" DefaultValue="https://localhost:8443/images/splitvalues.png" />
+
       </bt:Images>
       <bt:Urls>
         <bt:Url id="Contoso.FunctionFile.Url" DefaultValue="https://commandsimple.azurewebsites.net/FunctionFile.html" />
