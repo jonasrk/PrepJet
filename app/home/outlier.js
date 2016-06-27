@@ -8,7 +8,7 @@
 
             populateColumnDropdown();
 
-            // $('#bt_detect_duplicates').click(detectDuplicates);
+            $('#bt_detect_outliers').click(detectOutliers);
 
         });
     };
@@ -44,6 +44,48 @@
             }
         });
 
+    }
+
+    function detectOutliers() {
+
+        Excel.run(function (ctx) {
+
+            var worksheet = ctx.workbook.worksheets.getActiveWorksheet();
+            var range_all = worksheet.getRange();
+            var range = range_all.getUsedRange();
+
+            range.load('address');
+            range.load('text');
+            return ctx.sync().then(function() {
+
+                var selected_column = document.getElementById('outlier_column_dropdown').value; // TODO better reference by ID than name
+
+                // iterate over columns
+
+                for (var k = 0; k < range.text[0].length; k++){
+                    if (selected_column == range.text[0][k]){
+
+                        for (var j = 1; j < range.text.length; j++){
+
+
+                            console.log(range.text[j][k]);
+
+
+                        }
+
+                    }
+                }
+
+
+
+            });
+
+        }).catch(function(error) {
+            console.log("Error: " + error);
+            if (error instanceof OfficeExtension.Error) {
+                console.log("Debug info: " + JSON.stringify(error.debugInfo));
+            }
+        });
     }
 
 })();
