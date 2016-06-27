@@ -94,7 +94,7 @@
                   <!--Look at the FunctionFile.html page for reference on how to implement the function -->
                   <Action xsi:type="ShowTaskpane">
                     <!--Provide a url resource id for the location that will be displayed on the task pane -->
-                    <SourceLocation resid="Contoso.Taskpane1.Url" />
+                    <SourceLocation resid="Contoso.MergeColumns.Url" />
                   </Action>
                 </Control>
 
@@ -112,7 +112,7 @@
                   <Action xsi:type="ShowTaskpane">
                     <TaskpaneId>Button2Id1</TaskpaneId>
                     <!--Provide a url resource id for the location that will be displayed on the task pane -->
-                    <SourceLocation resid="Contoso.Taskpane2.Url" />
+                    <SourceLocation resid="Contoso.SplitValues.Url" />
                   </Action>
                 </Control>
 
@@ -204,8 +204,8 @@
       </bt:Images>
       <bt:Urls>
         <bt:Url id="Contoso.FunctionFile.Url" DefaultValue="https://commandsimple.azurewebsites.net/FunctionFile.html" />
-        <bt:Url id="Contoso.Taskpane1.Url" DefaultValue="https://localhost:8443/app/home/merge_columns.html" />
-        <bt:Url id="Contoso.Taskpane2.Url" DefaultValue="https://localhost:8443/app/home/extract_values.html" />
+        <bt:Url id="Contoso.MergeColumns.Url" DefaultValue="https://localhost:8443/app/home/merge_columns.html" />
+        <bt:Url id="Contoso.SplitValues.Url" DefaultValue="https://localhost:8443/app/home/split_values.html" />
         <bt:Url id="Contoso.FindDuplicates.Url" DefaultValue="https://localhost:8443/app/home/duplicates.html" />
         <bt:Url id="Contoso.DetectOutliers.Url" DefaultValue="https://localhost:8443/app/home/outlier.html" />
         <bt:Url id="Contoso.ExtractValues.Url" DefaultValue="https://localhost:8443/app/home/extract_values.html" />
