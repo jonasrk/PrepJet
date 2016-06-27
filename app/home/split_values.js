@@ -1,13 +1,17 @@
+//show textfield for beginning delimiter if custom is selected
 function displayFieldBegin(){
     if (document.getElementById('beginning_options').value == "custom_b"){
         $('#delimiter_beginning').show();
     }
 }
+
+//show textfield for ending delimiter if custom is selected
 function displayFieldEnd(){
     if(document.getElementById('ending_options').value == "custom_e") {
         $('#delimiter_end').show();
     }
 }
+
 
 (function () {
     'use strict';
@@ -38,7 +42,6 @@ function displayFieldEnd(){
             var range_all = worksheet.getRange();
             var range = range_all.getUsedRange();
 
-            //range.load('address');
             range.load('text');
             return ctx.sync().then(function() {
                 for (var i = 0; i < range.text[0].length; i++) {
@@ -61,6 +64,7 @@ function displayFieldEnd(){
 
     }
 
+
     function extractValue() {
         Excel.run(function (ctx) {
 
@@ -69,6 +73,7 @@ function displayFieldEnd(){
             var range = range_all.getUsedRange();
             var selected_identifier = document.getElementById('column1_options').value;
 
+            //get character where to start extracting and translate string into delimiter
             var split_beginning = document.getElementById('beginning_options').value;
             if (document.getElementById('beginning_options').value == "custom_b"){
                 var split_beginning = document.getElementById('delimiter_input_b').value;
@@ -80,6 +85,7 @@ function displayFieldEnd(){
                 split_beginning = " ";
             }
 
+            //get character where to end extracting and translate string into delimiter
             if (document.getElementById('ending_options').value == "custom_e"){
                 var split_end = document.getElementById('delimiter_input_e').value;
             }
@@ -90,30 +96,46 @@ function displayFieldEnd(){
                 split_end = " ";
             }
 
-            range.load('text');
+            //get (optional) column where to insert extracted value, default is to the right of original column
+            var target_column = document.getElementById('target_column_input').value
 
+
+            //get used range in active Sheet
+            range.load('text');
             var range_all_adding_to = worksheet.getRange();
             var range_adding_to = range_all_adding_to.getUsedRange();
-
             range_adding_to.load('address');
             range_adding_to.load('text');
+
 
             return ctx.sync().then(function() {
                 var header = 0;
 
+                //get column in header from which to extract value
                 for (var k = 0; k < range.text[0].length; k++){
                     if (selected_identifier == range.text[0][k]){
                         header = k;
                     }
                 }
 
+                //insert empty cell into header column
                 var act_worksheet = ctx.workbook.worksheets.getActiveWorksheet();
-                var rangeaddress = getCharFromNumber(header + 2) + 1;
-                var range_insert = ctx.workbook.worksheets.getActiveWorksheet().getRange(rangeaddress);
-                range_insert.insert("Right");
+                if (target_column != ""){
+                    var custom_range_address = target_column + 1;
+                    var range_insert = ctx.workbook.worksheets.getActiveWorksheet().getRange(custom_range_address);
+                    range_insert.insert("Right");
+                }
+                else {
+                    var rangeaddress = getCharFromNumber(header + 2) + 1;
+                    var range_insert = ctx.workbook.worksheets.getActiveWorksheet().getRange(rangeaddress);
+                    range_insert.insert("Right");
+                }
 
+
+                //loop through whole column to extract value from
                 for (var i = 1; i < range.text.length; i++) {
 
+                    //get index where to start extracting value
                     if (split_beginning == "col_beginning"){
                         var position1 = 0;
                     }
@@ -121,6 +143,7 @@ function displayFieldEnd(){
                         var position1 = range.text[i][header].indexOf(split_beginning);
                     }
 
+                    //get index where to end extracting value
                     if (split_end == "col_end") {
                         var position2 = range.text[i][header].length;
                     }
@@ -128,17 +151,24 @@ function displayFieldEnd(){
                         var position2 = range.text[i][header].indexOf(split_end);
                     }
 
-                    var extractedValue = range.text[i][header].substring(position1, position2);
-                    var column_char = getCharFromNumber(header + 2);
+                    //get position where to insert extracted value
                     var sheet_row = i + 1;
+                    if (target_column != "") {
+                        var column_char = target_column
+                    }
+                    else {
+                        var column_char = getCharFromNumber(header + 2);
+                    }
 
+                    //get value to extract
+                    var extractedValue = range.text[i][header].substring(position1, position2);
+
+                    //set position to insert extracted value
                     var rangeaddress = column_char + sheet_row;
                     var range_insert = ctx.workbook.worksheets.getActiveWorksheet().getRange(rangeaddress);
                     range_insert.insert("Right");
                     addContentToWorksheet(act_worksheet, column_char + sheet_row, extractedValue);
 
-
-                    console.log(column_char + sheet_row)
                 }
 
             });
@@ -151,95 +181,5 @@ function displayFieldEnd(){
         });
     }
 
-
-
-
-
-    function applyButtonClicked() {
-        $('#step1').show();
-        $('#step2').hide();
-        $('#step3').hide();
-
-        // find columns to match
-        var selected_identifier1 = document.getElementById('reference_column_ckeckboxes_1').value; // TODO better reference by ID than name
-        var selected_identifier2 = document.getElementById('reference_column_ckeckboxes_1').value; // TODO better reference by ID than name
-
-        var selected_table1 = document.getElementById('table1_options').value; // TODO better reference by ID than name
-        var selected_table2 = document.getElementById('table2_options').value; // TODO better reference by ID than name
-
-        Excel.run(function (ctx) {
-            var worksheet = ctx.workbook.worksheets.getItem(selected_table2);
-
-            var range_all = worksheet.getRange();
-            var range = range_all.getUsedRange();
-
-            range.load('address');
-            range.load('text');
-
-
-            var worksheet_adding_to = ctx.workbook.worksheets.getItem(selected_table1);
-
-            var range_all_adding_to = worksheet_adding_to.getRange();
-            var range_adding_to = range_all_adding_to.getUsedRange();
-
-            range_adding_to.load('address');
-            range_adding_to.load('text');
-
-
-            return ctx.sync().then(function() {
-
-                // initialize ids
-                var sheet1_id = 0;
-                var sheet2_id = 0;
-
-                // iterate over columns
-
-                for (var k = 0; k < range.text[0].length; k++){
-                    if (selected_identifier1 == range.text[0][k]){
-                        sheet1_id = k;
-                    }
-                }
-
-                for (var k = 0; k < range_adding_to.text[0].length; k++){
-                    if (selected_identifier2 == range_adding_to.text[0][k]){
-                        sheet2_id = k;
-                    }
-                }
-
-                for (var k = 0; k < range.text[0].length; k++){
-
-                    // iterate over checked checkboxes
-
-                    var checked_checkboxes = getCheckedBoxes("reference_column_checkbox");
-
-                    for (var l = 0; l < checked_checkboxes.length; l++){ // TODO throws error if none are checked
-
-                        if (checked_checkboxes[l].id == range.text[0][k]){
-
-                            var column_char = getCharFromNumber(1 + l + range_adding_to.text[0].length);
-
-                            // copy title
-                            addContentToWorksheet(worksheet_adding_to, column_char + "1", range.text[0][k]);
-
-                            // copy rest
-                            for (var i = 1; i < range.text.length; i++) {
-                                for (var j = 1; j < range_adding_to.text.length; j++) {
-                                    if (range_adding_to.text[j][sheet2_id] == range.text[i][sheet1_id]) {
-                                        var sheet_row = j + 1;
-                                        addContentToWorksheet(worksheet_adding_to, column_char + sheet_row, range.text[i][k])
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            });
-        }).catch(function(error) {
-            console.log("Error: " + error);
-            if (error instanceof OfficeExtension.Error) {
-                console.log("Debug info: " + JSON.stringify(error.debugInfo));
-            }
-        });
-    }
 
 })();
