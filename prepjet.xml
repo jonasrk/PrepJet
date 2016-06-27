@@ -219,7 +219,7 @@
       <bt:Urls>
         <bt:Url id="Contoso.FunctionFile.Url" DefaultValue="https://commandsimple.azurewebsites.net/FunctionFile.html" />
         <bt:Url id="Contoso.Taskpane1.Url" DefaultValue="https://localhost:8443/app/home/merge_columns.html" />
-        <bt:Url id="Contoso.Taskpane2.Url" DefaultValue="https://localhost:8443/app/home/split_values.html" />
+        <bt:Url id="Contoso.Taskpane2.Url" DefaultValue="https://localhost:8443/app/home/extract_values.html" />
         <bt:Url id="Contoso.FindDuplicates.Url" DefaultValue="https://localhost:8443/app/home/duplicates.html" />
         <bt:Url id="Contoso.DetectOutliers.Url" DefaultValue="https://localhost:8443/app/home/outlier.html" />
          <!--LearnMore URL currently not used -->
