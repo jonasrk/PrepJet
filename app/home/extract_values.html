@@ -5,7 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title></title>
 
-    <!--<script src="https://localhost:1337/vorlon.js"></script>-->
+    <script src="http://localhost:1337/vorlon.js"></script>
+
 
 
     <!--<script src="//ajax.aspnetcdn.com/ajax/jQuery/jquery-1.9.1.min.js"></script>-->
@@ -94,6 +95,13 @@
         <div id="target_column" class="ms-TextField ms-TextField--placeholder">
             <label class="ms-Label">Enter target column, i.e. B</label>
             <input id="target_column_input" class="ms-TextField-field" type="text">
+        </div>
+        <!--checkbox-->
+        <div class="ms-ChoiceField">
+            <input id="demo-checkbox-unselected" class="ms-ChoiceField-input" type="checkbox">
+            <label id="checkbox" for="demo-checkbox-unselected" class="ms-ChoiceField-field">
+                <span class="ms-Label">Include delimiter</span>
+            </label>
         </div>
         <!--split button-->
         <button class="ms-Button" id="extract_Value">Split</button>
