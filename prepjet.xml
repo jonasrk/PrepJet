@@ -177,11 +177,11 @@
     </Hosts>
     <Resources>
       <bt:Images>
-        <bt:Image id="Contoso.FunctionButton.Icon" DefaultValue="https://localhost:8443/app/home/addcolumn.png" />
-        <bt:Image id="Contoso.addcolumn.Icon" DefaultValue="https://localhost:8443/app/home/addcolumn.png" />
-		<bt:Image id="Contoso.detectoutlier.Icon" DefaultValue="https://localhost:8443/app/home/detectoutlier.png" />
-        <bt:Image id="Contoso.removeduplicates.Icon" DefaultValue="https://localhost:8443/app/home/removeduplicates.png" />
-        <bt:Image id="Contoso.splitvalues.Icon" DefaultValue="https://localhost:8443/app/home/splitvalues.png" />
+        <bt:Image id="Contoso.FunctionButton.Icon" DefaultValue="https://localhost:8443/images/addcolumn.png" />
+        <bt:Image id="Contoso.addcolumn.Icon" DefaultValue="https://localhost:8443/images/addcolumn.png" />
+		<bt:Image id="Contoso.detectoutlier.Icon" DefaultValue="https://localhost:8443/images/detectoutlier.png" />
+        <bt:Image id="Contoso.removeduplicates.Icon" DefaultValue="https://localhost:8443/images/removeduplicates.png" />
+        <bt:Image id="Contoso.splitvalues.Icon" DefaultValue="https://localhost:8443/images/splitvalues.png" />
 
       </bt:Images>
       <bt:Urls>
