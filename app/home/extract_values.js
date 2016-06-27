@@ -96,6 +96,7 @@ function displayFieldEnd(){
                 split_end = " ";
             }
 
+
             //get (optional) column where to insert extracted value, default is to the right of original column
             var target_column = document.getElementById('target_column_input').value
 
@@ -140,7 +141,12 @@ function displayFieldEnd(){
                         var position1 = 0;
                     }
                     else {
-                        var position1 = range.text[i][header].indexOf(split_beginning);
+                        if (document.getElementById('demo-checkbox-unselected').checked == true) {
+                            var position1 = range.text[i][header].indexOf(split_beginning);
+                        }
+                        else {
+                            var position1 = range.text[i][header].indexOf(split_beginning) + 1;
+                        }
                     }
 
                     //get index where to end extracting value
@@ -148,7 +154,12 @@ function displayFieldEnd(){
                         var position2 = range.text[i][header].length;
                     }
                     else {
-                        var position2 = range.text[i][header].indexOf(split_end);
+                        if (document.getElementById('demo-checkbox-unselected').checked == true) {
+                            var position2 = range.text[i][header].indexOf(split_end) + 1;
+                        }
+                        else {
+                            var position2 = range.text[i][header].indexOf(split_end);
+                        }
                     }
 
                     //get position where to insert extracted value
@@ -171,7 +182,12 @@ function displayFieldEnd(){
 
                 }
 
+
+                console.log(include_delimiter);
             });
+
+            console.log("Test")
+            window.open("extract_values.html","_self");
 
         }).catch(function(error) {
             console.log("Error: " + error);

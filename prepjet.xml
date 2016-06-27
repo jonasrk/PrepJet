@@ -228,7 +228,7 @@
       </bt:Urls>
       <bt:ShortStrings>
         <bt:String id="Contoso.FunctionButton.Label" DefaultValue="Add Column" />
-        <bt:String id="Contoso.TaskpaneButton.Label" DefaultValue="Split Values" />
+        <bt:String id="Contoso.TaskpaneButton.Label" DefaultValue="Extract Value" />
         <bt:String id="Contoso.FindDuplicatesButton.Label" DefaultValue="Find Duplicates" />
         <bt:String id="Contoso.DetectOutliersButton.Label" DefaultValue="Detect Outliers" />
         <bt:String id="Contoso.Dropdown.Label" DefaultValue="Dropdown" />
