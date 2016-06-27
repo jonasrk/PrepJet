@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+
+    <script src="http://localhost:1337/vorlon.js"></script>
+
+
+
+    <!--<script src="//ajax.aspnetcdn.com/ajax/jQuery/jquery-1.9.1.min.js"></script>-->
+    <link href="../../content/Office.css" rel="stylesheet" type="text/css"/>
+    <link href="../../bower_components/microsoft_office_js/content/officethemes.css" rel="stylesheet" type="text/css"/>
+    <!--<link href="//appsforoffice.microsoft.com/fabric/1.0/fabric.min.css" rel="stylesheet">-->
+    <!--<link href="//appsforoffice.microsoft.com/fabric/1.0/fabric.components.min.css" rel="stylesheet">-->
+    <script src="//appsforoffice.microsoft.com/lib/1/hosted/office.js"></script>
+
+    <!-- To enable offline debugging using a local reference to jQuery.js Office.js, use: -->
+    <!--<script src="../../bower_components/microsoft_office_js/scripts/Office/1/office.js"></script>-->
+    <script src="../../bower_components/jquery/jquery.min.js"></script>
+    <link href="../../content/fabric.min.css" rel="stylesheet">
+    <link href="../../content/fabric.components.min.css" rel="stylesheet">
+    <!--<script src="../../scripts/jquery.fabric.min.js"></script>-->
+    <script src="../../scripts/MicrosoftAjax.js"></script>
+
+    <link href="../App.css" rel="stylesheet" type="text/css"/>
+    <script src="../App.js"></script>
+
+    <link href="Home.css" rel="stylesheet" type="text/css"/>
+    <script src="helpers.js"></script>
+    <script src="extract_values.js"></script>
+
+    <!--PrepJet Fabric Components Imports-->
+    <script src="../../bower_components/office-ui-fabric/src/components/TextField/Jquery.TextField.js"></script>
+    <script src="../../bower_components/office-ui-fabric/src/components/Dropdown/Jquery.Dropdown.js"></script>
+
+
+</head>
+
+<body class="ms-font-m">
+<div id="content-header">
+    <div class="padding">
+        <h1>Extract Value</h1>
+    </div>
+</div>
+<div id="content-main">
+
+
+    <div class="padding">
+
+        <!--Pop Up headline-->
+        <div>
+            <header>Extract Value</header>
+        </div>
+        <!--dropdown for column-->
+        <div class="ms-Dropdown dropdown_table_col" tabindex="1">
+            <label class="ms-Label">Select column to extract value</label>
+            <i class="ms-Dropdown-caretDown ms-Icon ms-Icon--caretDown"></i>
+            <select id="column1_options" class="ms-Dropdown-select">
+                <option value="empty"></option>
+            </select>
+        </div>
+        <!--dropdown fpr beginning-->
+        <div class="ms-Dropdown dropdown_table" tabindex="1">
+            <label class="ms-Label">Select beginning of new value</label>
+            <i class="ms-Dropdown-caretDown ms-Icon ms-Icon--caretDown"></i>
+            <select id="beginning_options" class="ms-Dropdown-select" onchange="displayFieldBegin()">
+                <option value="col_beginning">Beginning of column</option>
+                <option value="whitespace_b">Whitespace</option>
+                <option value="custom_b">Custom</option>
+            </select>
+        </div>
+        <!--evtl. text field for custom ending-->
+        <div id="delimiter_beginning" class="ms-TextField ms-TextField--placeholder">
+            <label class="ms-Label">Enter custom beginning</label>
+            <input id="delimiter_input_b" class="ms-TextField-field" type="text">
+        </div>
+        <!--dropdown for ending-->
+        <div class="ms-Dropdown dropdown_table" tabindex="1">
+            <label class="ms-Label">Select ending of new value</label>
+            <i class="ms-Dropdown-caretDown ms-Icon ms-Icon--caretDown"></i>
+            <select id="ending_options" class="ms-Dropdown-select" onchange="displayFieldEnd()">
+                <option value="col_end">End of column</option>
+                <option value="whitespace_e">Whitespace</option>
+                <option value="custom_e">Custom</option>
+            </select>
+        </div>
+        <!--evtl. text field for custom ending-->
+        <div id="delimiter_end" class="ms-TextField ms-TextField--placeholder">
+            <label class="ms-Label">Enter custom ending</label>
+            <input id="delimiter_input_e" class="ms-TextField-field" type="text">
+        </div>
+        <!--Textfield to specify column to insert-->
+        <div id="target_column" class="ms-TextField ms-TextField--placeholder">
+            <label class="ms-Label">Enter target column, i.e. B</label>
+            <input id="target_column_input" class="ms-TextField-field" type="text">
+        </div>
+        <!--checkbox-->
+        <div class="ms-ChoiceField">
+            <input id="demo-checkbox-unselected" class="ms-ChoiceField-input" type="checkbox">
+            <label id="checkbox" for="demo-checkbox-unselected" class="ms-ChoiceField-field">
+                <span class="ms-Label">Include delimiter</span>
+            </label>
+        </div>
+        <!--split button-->
+        <button class="ms-Button" id="extract_Value">Split</button>
+    </div>
+
+
+</div>
+</body>
+
+</html>

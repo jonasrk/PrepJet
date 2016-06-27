@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+
+    <script src="https://localhost:1337/vorlon.js"></script>
+
+
+    <!--<script src="//ajax.aspnetcdn.com/ajax/jQuery/jquery-1.9.1.min.js"></script>-->
+    <link href="../../content/Office.css" rel="stylesheet" type="text/css"/>
+    <link href="../../bower_components/microsoft_office_js/content/officethemes.css" rel="stylesheet" type="text/css"/>
+    <!--<link href="//appsforoffice.microsoft.com/fabric/1.0/fabric.min.css" rel="stylesheet">-->
+    <!--<link href="//appsforoffice.microsoft.com/fabric/1.0/fabric.components.min.css" rel="stylesheet">-->
+    <script src="//appsforoffice.microsoft.com/lib/1/hosted/office.js"></script>
+
+    <!-- To enable offline debugging using a local reference to jQuery.js Office.js, use: -->
+    <!--<script src="../../bower_components/microsoft_office_js/scripts/Office/1/office.js"></script>-->
+    <script src="../../bower_components/jquery/jquery.min.js"></script>
+    <link href="../../content/fabric.min.css" rel="stylesheet">
+    <link href="../../content/fabric.components.min.css" rel="stylesheet">
+    <!--<script src="../../scripts/jquery.fabric.min.js"></script>-->
+    <script src="../../scripts/MicrosoftAjax.js"></script>
+
+    <link href="../App.css" rel="stylesheet" type="text/css"/>
+    <script src="../App.js"></script>
+
+    <link href="style.css" rel="stylesheet" type="text/css"/>
+    <script src="helpers.js"></script>
+    <script src="merge_columns.js"></script>
+
+    <!--PrepJet Fabric Components Imports-->
+    <script src="../../bower_components/office-ui-fabric/src/components/TextField/Jquery.TextField.js"></script>
+    <script src="../../bower_components/office-ui-fabric/src/components/Dropdown/Jquery.Dropdown.js"></script>
+
+
+</head>
+
+<body class="ms-font-m">
+<div id="content-header">
+    <div class="padding">
+        <h1>Merge columns</h1>
+    </div>
+</div>
+<div id="content-main">
+
+        <div class="padding">
+
+
+            <!--Pop Up headline-->
+        <div>
+            <header>Split Value</header>
+        </div>
+        <!--dropdown for column-->
+        <div class="ms-Dropdown dropdown_table_col" tabindex="1">
+            <label class="ms-Label">Select column to split</label>
+            <i class="ms-Dropdown-caretDown ms-Icon ms-Icon--caretDown"></i>
+            <select id="column_options" class="ms-Dropdown-select">
+                <option value="empty"></option>
+            </select>
+        </div>
+        <!--dropdown for delimiter-->
+        <div class="ms-Dropdown dropdown_table" tabindex="1">
+            <label class="ms-Label">Select delimiter</label>
+            <i class="ms-Dropdown-caretDown ms-Icon ms-Icon--caretDown"></i>
+            <select id="delimiter_options" class="ms-Dropdown-select" onchange="displayFieldDelimiter()">
+                <option value="empty"></option>
+                <option value="comma">Comma</option>
+                <option value="semikolon">Semikolon</option>
+                <option value="whitespace">Whitespace</option>
+                <option value="custom_delimiter">Custom</option>
+            </select>
+        </div>
+        <!--evtl. text field for custom delimiter-->
+        <div id="delimiter_beginning" class="ms-TextField ms-TextField--placeholder">
+            <label class="ms-Label">Enter custom beginning</label>
+            <input id="delimiter_input" class="ms-TextField-field" type="text">
+        </div>
+        <!--split button-->
+        <button class="ms-Button" id="split_Value">Split</button>
+    </div>
+
+
+</div>
+</body>
+
+</html>

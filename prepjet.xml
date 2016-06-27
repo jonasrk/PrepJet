@@ -1,0 +1,220 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<OfficeApp xmlns="http://schemas.microsoft.com/office/appforoffice/1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bt="http://schemas.microsoft.com/office/officeappbasictypes/1.0" xmlns:ov="http://schemas.microsoft.com/office/taskpaneappversionoverrides" xsi:type="TaskPaneApp">
+
+<!-- See https://github.com/OfficeDev/Office-Add-in-Commands-Samples for documentation-->
+
+<!-- BeginBasicSettings: Add-in metadata, used for all versions of Office unless override provided -->
+
+<!--IMPORTANT! Id must be unique for your add-in. If you clone this manifest ensure that you change this id to your own GUID ... Jonas: done -->
+  <Id>dface3bd-cfc2-423a-8131-598b3ed2beaa</Id>
+  <Version>1.0.0.0</Version>
+  <ProviderName>Contoso</ProviderName>
+  <!--Jonas: What is this?-->
+  <DefaultLocale>en-US</DefaultLocale>
+   <!-- The display name of your add-in. Used on the store and various placed of the Office UI such as the add-ins dialog -->
+  <DisplayName DefaultValue="PrepJet" />
+  <Description DefaultValue="Data preparation toolkit" />
+   <!-- TODO: Icon for your add-in. Used on installation screens and the add-ins dialog -->
+  <IconUrl DefaultValue="https://i.imgur.com/oZFS95h.png" />
+
+  <!--BeginTaskpaneMode integration. Office 2013 and any client that doesn't understand commands will use this section.
+    This section will also be used if there are no VersionOverrides -->
+  <Hosts>
+    <Host Name="Workbook"/>
+  </Hosts>
+  <DefaultSettings>
+    <SourceLocation DefaultValue="https://localhost:8443/app/home/merge_columns.html" />
+  </DefaultSettings>
+   <!--EndTaskpaneMode integration -->
+
+  <Permissions>ReadWriteDocument</Permissions>
+
+  <!--BeginAddinCommandsMode integration-->
+  <VersionOverrides xmlns="http://schemas.microsoft.com/office/taskpaneappversionoverrides" xsi:type="VersionOverridesV1_0">   
+    <Hosts>
+      <!--Each host can have a different set of commands. Cool huh!? -->
+      <!-- Workbook=Excel Document=Word Presentation=PowerPoint -->
+      <!-- Make sure the hosts you override match the hosts declared in the top section of the manifest -->
+      <Host xsi:type="Workbook">
+      	<!-- Form factor. Currenly only DesktopFormFactor is supported. We will add TabletFormFactor and PhoneFormFactor in the future-->
+        <DesktopFormFactor>
+          
+           <!--GetStarted information used on the callout that appears when installing the add-in. 
+            Ensure you have build 16.0.6769 or above for GetStarted section to work-->
+          <GetStarted>
+						<!--Title of the Getting Started callout. resid points to a ShortString resource -->
+						<Title resid="Contoso.GetStarted.Title"/>
+						
+						<!--Description of the Getting Started callout. resid points to a LongString resource -->
+						<Description resid="Contoso.GetStarted.Description"/>
+						
+						<!--Not used right now but you need to provide a valid resource. We will add code in the future to consume this URL. 
+							resid points to a Url resource -->
+						<LearnMoreUrl resid="Contoso.GetStarted.LearnMoreUrl"/>
+					</GetStarted>
+          
+        	<!--Function file is an html page that includes the javascript where functions for ExecuteAction will be called. 
+            Think of the FunctionFile as the "code behind" ExecuteFunction-->
+          <FunctionFile resid="Contoso.FunctionFile.Url" />
+
+          <!--PrimaryCommandSurface==Main Office Ribbon-->
+          <ExtensionPoint xsi:type="PrimaryCommandSurface">
+          	<!--Use OfficeTab to extend an existing Tab. Use CustomTab to create a new tab -->
+            <!-- Documentation includes all the IDs currently tested to work -->
+            <CustomTab id="Contoso.Tab1">
+				<!--Group. Ensure you provide a unique id. Recommendation for any IDs is to namespace using your company name-->
+              <Group id="Contoso.Tab1.Group1">
+              	 <!--Label for your group. resid must point to a ShortString resource -->
+                <Label resid="Contoso.Tab1.GroupLabel" />
+                <Icon>
+                <!-- Sample Todo: Each size needs its own icon resource or it will look distorted when resized -->
+                <!--Icons. Required sizes 16,31,80, optional 20, 24, 40, 48, 64. Strongly recommended to provide all sizes for great UX -->
+                <!--Use PNG icons and remember that all URLs on the resources section must use HTTPS -->
+                  <bt:Image size="16" resid="Contoso.TaskpaneButton.Icon" />
+                  <bt:Image size="32" resid="Contoso.TaskpaneButton.Icon" />
+                  <bt:Image size="80" resid="Contoso.TaskpaneButton.Icon" />
+                </Icon>
+                
+                <!--Control. It can be of type "Button" or "Menu" -->
+                <Control xsi:type="Button" id="Contoso.FunctionButton">
+                <!--Label for your button. resid must point to a ShortString resource -->
+                  <Label resid="Contoso.FunctionButton.Label" />
+                  <Supertip>
+                  	 <!--ToolTip title. resid must point to a ShortString resource -->
+                    <Title resid="Contoso.FunctionButton.Label" />
+                     <!--ToolTip description. resid must point to a LongString resource -->
+                    <Description resid="Contoso.FunctionButton.Tooltip" />
+                  </Supertip>
+                  <Icon>
+                    <bt:Image size="16" resid="Contoso.FunctionButton.Icon" />
+                    <bt:Image size="32" resid="Contoso.FunctionButton.Icon" />
+                    <bt:Image size="80" resid="Contoso.FunctionButton.Icon" />
+                  </Icon>
+                  <!--This is what happens when the command is triggered (E.g. click on the Ribbon). Supported actions are ExecuteFuncion or ShowTaskpane-->
+                  <!--Look at the FunctionFile.html page for reference on how to implement the function -->
+                  <Action xsi:type="ShowTaskpane">
+                    <!--Provide a url resource id for the location that will be displayed on the task pane -->
+                    <SourceLocation resid="Contoso.Taskpane1.Url" />
+                  </Action>
+                </Control>
+
+                <Control xsi:type="Button" id="Contoso.TaskpaneButton">
+                  <Label resid="Contoso.TaskpaneButton.Label" />
+                  <Supertip>
+                    <Title resid="Contoso.TaskpaneButton.Label" />
+                    <Description resid="Contoso.TaskpaneButton.Tooltip" />
+                  </Supertip>
+                  <Icon>
+                    <bt:Image size="16" resid="Contoso.TaskpaneButton.Icon" />
+                    <bt:Image size="32" resid="Contoso.TaskpaneButton.Icon" />
+                    <bt:Image size="80" resid="Contoso.TaskpaneButton.Icon" />
+                  </Icon>
+                  <Action xsi:type="ShowTaskpane">
+                    <TaskpaneId>Button2Id1</TaskpaneId>
+                     <!--Provide a url resource id for the location that will be displayed on the task pane -->
+                    <SourceLocation resid="Contoso.Taskpane2.Url" />
+                  </Action>
+                </Control>
+
+              </Group>
+              <Group id="Contoso.Tab1.Group2">
+                <!--Label for your group. resid must point to a ShortString resource -->
+                <Label resid="Contoso.Tab1.GroupLabel2" />
+                <Icon>
+                  <!-- Sample Todo: Each size needs its own icon resource or it will look distorted when resized -->
+                  <!--Icons. Required sizes 16,31,80, optional 20, 24, 40, 48, 64. Strongly recommended to provide all sizes for great UX -->
+                  <!--Use PNG icons and remember that all URLs on the resources section must use HTTPS -->
+                  <bt:Image size="16" resid="Contoso.TaskpaneButton.Icon" />
+                  <bt:Image size="32" resid="Contoso.TaskpaneButton.Icon" />
+                  <bt:Image size="80" resid="Contoso.TaskpaneButton.Icon" />
+                </Icon>
+
+                <Control xsi:type="Button" id="Contoso.FindDuplicatesButton">
+                  <Label resid="Contoso.FindDuplicatesButton.Label" />
+                  <Supertip>
+                    <Title resid="Contoso.FindDuplicatesButton.Label" />
+                    <Description resid="Contoso.TaskpaneButton.Tooltip" />
+                  </Supertip>
+                  <Icon>
+                    <bt:Image size="16" resid="Contoso.TaskpaneButton.Icon" />
+                    <bt:Image size="32" resid="Contoso.TaskpaneButton.Icon" />
+                    <bt:Image size="80" resid="Contoso.TaskpaneButton.Icon" />
+                  </Icon>
+                  <Action xsi:type="ShowTaskpane">
+                    <TaskpaneId>Button2Id1</TaskpaneId>
+                    <!--Provide a url resource id for the location that will be displayed on the task pane -->
+                    <SourceLocation resid="Contoso.FindDuplicates.Url" />
+                  </Action>
+                </Control>
+
+                <Control xsi:type="Button" id="Contoso.DetectOutliersButton">
+                  <Label resid="Contoso.DetectOutliersButton.Label" />
+                  <Supertip>
+                    <Title resid="Contoso.DetectOutliersButton.Label" />
+                    <Description resid="Contoso.TaskpaneButton.Tooltip" />
+                  </Supertip>
+                  <Icon>
+                    <bt:Image size="16" resid="Contoso.TaskpaneButton.Icon" />
+                    <bt:Image size="32" resid="Contoso.TaskpaneButton.Icon" />
+                    <bt:Image size="80" resid="Contoso.TaskpaneButton.Icon" />
+                  </Icon>
+                  <Action xsi:type="ShowTaskpane">
+                    <TaskpaneId>Button2Id1</TaskpaneId>
+                    <!--Provide a url resource id for the location that will be displayed on the task pane -->
+                    <SourceLocation resid="Contoso.DetectOutliers.Url" />
+                  </Action>
+                </Control>
+
+              </Group>
+
+              <!-- Label of your tab -->
+              <!-- If validating with XSD it needs to be at the end, we might change this before release -->
+              <Label resid="Contoso.Tab1.TabLabel" />
+            </CustomTab>
+          </ExtensionPoint>
+        </DesktopFormFactor>
+      </Host>
+    </Hosts>
+    <Resources>
+      <bt:Images>
+		<bt:Image id="Contoso.TaskpaneButton.Icon" DefaultValue="https://i.imgur.com/FkSShX9.png" />
+		<bt:Image id="Contoso.FunctionButton.Icon" DefaultValue="https://i.imgur.com/qDujiX0.png" />
+      </bt:Images>
+      <bt:Urls>
+        <bt:Url id="Contoso.FunctionFile.Url" DefaultValue="https://commandsimple.azurewebsites.net/FunctionFile.html" />
+        <bt:Url id="Contoso.Taskpane1.Url" DefaultValue="https://localhost:8443/app/home/merge_columns.html" />
+        <bt:Url id="Contoso.Taskpane2.Url" DefaultValue="https://localhost:8443/app/home/extract_values.html" />
+        <bt:Url id="Contoso.FindDuplicates.Url" DefaultValue="https://localhost:8443/app/home/duplicates.html" />
+        <bt:Url id="Contoso.DetectOutliers.Url" DefaultValue="https://localhost:8443/app/home/outlier.html" />
+         <!--LearnMore URL currently not used -->
+        <bt:Url id="Contoso.GetStarted.LearnMoreUrl" DefaultValue="https://commandsimple.azurewebsites.net/GetStarted.html">
+        </bt:Url>
+      </bt:Urls>
+      <bt:ShortStrings>
+        <bt:String id="Contoso.FunctionButton.Label" DefaultValue="Add Column" />
+        <bt:String id="Contoso.TaskpaneButton.Label" DefaultValue="Extract Value" />
+        <bt:String id="Contoso.FindDuplicatesButton.Label" DefaultValue="Find Duplicates" />
+        <bt:String id="Contoso.DetectOutliersButton.Label" DefaultValue="Detect Outliers" />
+        <bt:String id="Contoso.Dropdown.Label" DefaultValue="Dropdown" />
+        <bt:String id="Contoso.Item1.Label" DefaultValue="Show Taskpane 1" />
+        <bt:String id="Contoso.Item2.Label" DefaultValue="Show Taskpane 2" />
+        <bt:String id="Contoso.Tab1.GroupLabel" DefaultValue="Test Group" />
+        <bt:String id="Contoso.Tab1.GroupLabel2" DefaultValue="Test Group" />
+         <bt:String id="Contoso.Tab1.TabLabel" DefaultValue="PrepJet" />
+         <bt:String id="Contoso.GetStarted.Title" DefaultValue="Simple add-in was succesfully loaded">
+          <bt:Override Locale="ja-jp" Value="JA-JP Get Started Title" />
+        </bt:String>      
+      </bt:ShortStrings>
+      <bt:LongStrings>
+        <bt:String id="Contoso.FunctionButton.Tooltip" DefaultValue="Click to Execute Function" />
+        <bt:String id="Contoso.TaskpaneButton.Tooltip" DefaultValue="Click to Show a Taskpane" />
+        <bt:String id="Contoso.Dropdown.Tooltip" DefaultValue="Click to Show Options on this Menu" />
+        <bt:String id="Contoso.Item1.Tooltip" DefaultValue="Click to Show Taskpane1" />
+        <bt:String id="Contoso.Item2.Tooltip" DefaultValue="Click to Show Taskpane2" />
+          <bt:String id="Contoso.GetStarted.Description" DefaultValue="Get going by opening TEST TAB on the Ribbon">
+          <bt:Override Locale="ja-jp" Value="JA-JP Get Started Title" />
+        </bt:String>  
+      </bt:LongStrings>
+    </Resources>
+  </VersionOverrides>
+</OfficeApp>
