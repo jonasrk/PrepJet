@@ -151,55 +151,6 @@
                     <SourceLocation resid="Contoso.DetectOutliers.Url" />
                   </Action>
                 </Control>
-            <!-- Menu example -->
-            <Control xsi:type="Menu" id="Contoso.Menu">
-              <Label resid="Contoso.Dropdown.Label" />
-              <Supertip>
-                <Title resid="Contoso.Dropdown.Label" />
-                <Description resid="Contoso.Dropdown.Tooltip" />
-              </Supertip>
-              <Icon>
-                <bt:Image size="16" resid="Contoso.TaskpaneButton.Icon" />
-                <bt:Image size="32" resid="Contoso.TaskpaneButton.Icon" />
-                <bt:Image size="80" resid="Contoso.TaskpaneButton.Icon" />
-              </Icon>
-              <Items>
-                <Item id="Contoso.Menu.Item1">
-                  <Label resid="Contoso.Item1.Label"/>
-                  <Supertip>
-                    <Title resid="Contoso.Item1.Label" />
-                    <Description resid="Contoso.Item1.Tooltip" />
-                  </Supertip>
-                  <Icon>
-                    <bt:Image size="16" resid="Contoso.TaskpaneButton.Icon" />
-                    <bt:Image size="32" resid="Contoso.TaskpaneButton.Icon" />
-                    <bt:Image size="80" resid="Contoso.TaskpaneButton.Icon" />
-                  </Icon>
-                  <Action xsi:type="ShowTaskpane">
-                    <TaskpaneId>MyTaskPaneID1</TaskpaneId>
-                    <SourceLocation resid="Contoso.Taskpane1.Url" />
-                  </Action>
-                </Item>
-
-                <Item id="Contoso.Menu.Item2">
-                  <Label resid="Contoso.Item2.Label"/>
-                  <Supertip>
-                    <Title resid="Contoso.Item2.Label" />
-                    <Description resid="Contoso.Item2.Tooltip" />
-                  </Supertip>
-                  <Icon>
-                    <bt:Image size="16" resid="Contoso.TaskpaneButton.Icon" />
-                    <bt:Image size="32" resid="Contoso.TaskpaneButton.Icon" />
-                    <bt:Image size="80" resid="Contoso.TaskpaneButton.Icon" />
-                  </Icon>
-                  <Action xsi:type="ShowTaskpane">
-                    <TaskpaneId>MyTaskPaneID2</TaskpaneId>
-                    <SourceLocation resid="Contoso.Taskpane2.Url" />
-                  </Action>
-                </Item>
-              
-              </Items>
-            </Control>
 
               </Group>
 
