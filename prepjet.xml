@@ -99,9 +99,9 @@
                 </Control>
 
                 <Control xsi:type="Button" id="Contoso.TaskpaneButton">
-                  <Label resid="Contoso.TaskpaneButton.Label" />
+                  <Label resid="Contoso.SplitValuesButton.Label" />
                   <Supertip>
-                    <Title resid="Contoso.TaskpaneButton.Label" />
+                    <Title resid="Contoso.SplitValuesButton.Label" />
                     <Description resid="Contoso.TaskpaneButton.Tooltip" />
                   </Supertip>
                   <Icon>
@@ -111,8 +111,26 @@
                   </Icon>
                   <Action xsi:type="ShowTaskpane">
                     <TaskpaneId>Button2Id1</TaskpaneId>
-                     <!--Provide a url resource id for the location that will be displayed on the task pane -->
+                    <!--Provide a url resource id for the location that will be displayed on the task pane -->
                     <SourceLocation resid="Contoso.Taskpane2.Url" />
+                  </Action>
+                </Control>
+
+                <Control xsi:type="Button" id="Contoso.ExtractValuesButton">
+                  <Label resid="Contoso.ExtractValuesButton.Label" />
+                  <Supertip>
+                    <Title resid="Contoso.ExtractValuesButton.Label" />
+                    <Description resid="Contoso.TaskpaneButton.Tooltip" />
+                  </Supertip>
+                  <Icon>
+                    <bt:Image size="16" resid="Contoso.detectoutlier.Icon" />
+                    <bt:Image size="32" resid="Contoso.detectoutlier.Icon" />
+                    <bt:Image size="80" resid="Contoso.detectoutlier.Icon" />
+                  </Icon>
+                  <Action xsi:type="ShowTaskpane">
+                    <TaskpaneId>Button2Id1</TaskpaneId>
+                    <!--Provide a url resource id for the location that will be displayed on the task pane -->
+                    <SourceLocation resid="Contoso.ExtractValues.Url" />
                   </Action>
                 </Control>
 
@@ -165,24 +183,6 @@
                   </Action>
                 </Control>
 
-                <Control xsi:type="Button" id="Contoso.ExtractValuesButton">
-                  <Label resid="Contoso.ExtractValuesButton.Label" />
-                  <Supertip>
-                    <Title resid="Contoso.ExtractValuesButton.Label" />
-                    <Description resid="Contoso.TaskpaneButton.Tooltip" />
-                  </Supertip>
-                  <Icon>
-                    <bt:Image size="16" resid="Contoso.detectoutlier.Icon" />
-                    <bt:Image size="32" resid="Contoso.detectoutlier.Icon" />
-                    <bt:Image size="80" resid="Contoso.detectoutlier.Icon" />
-                  </Icon>
-                  <Action xsi:type="ShowTaskpane">
-                    <TaskpaneId>Button2Id1</TaskpaneId>
-                    <!--Provide a url resource id for the location that will be displayed on the task pane -->
-                    <SourceLocation resid="Contoso.ExtractValues.Url" />
-                  </Action>
-                </Control>
-
               </Group>
 
               <!-- Label of your tab -->
@@ -214,16 +214,16 @@
         </bt:Url>
       </bt:Urls>
       <bt:ShortStrings>
-        <bt:String id="Contoso.FunctionButton.Label" DefaultValue="Add Column" />
-        <bt:String id="Contoso.TaskpaneButton.Label" DefaultValue="Extract Value" />
-        <bt:String id="Contoso.FindDuplicatesButton.Label" DefaultValue="Find Duplicates" />
+        <bt:String id="Contoso.FunctionButton.Label" DefaultValue="Add Columns" />
+        <bt:String id="Contoso.SplitValuesButton.Label" DefaultValue="Split Values" />
+        <bt:String id="Contoso.FindDuplicatesButton.Label" DefaultValue="Detect Duplicates" />
         <bt:String id="Contoso.DetectOutliersButton.Label" DefaultValue="Detect Outliers" />
         <bt:String id="Contoso.ExtractValuesButton.Label" DefaultValue="Extract Values" />
         <bt:String id="Contoso.Dropdown.Label" DefaultValue="Dropdown" />
         <bt:String id="Contoso.Item1.Label" DefaultValue="Show Taskpane 1" />
         <bt:String id="Contoso.Item2.Label" DefaultValue="Show Taskpane 2" />
-        <bt:String id="Contoso.Tab1.GroupLabel" DefaultValue="Test Group" />
-        <bt:String id="Contoso.Tab1.GroupLabel2" DefaultValue="Test Group" />
+        <bt:String id="Contoso.Tab1.GroupLabel" DefaultValue=" " />
+        <bt:String id="Contoso.Tab1.GroupLabel2" DefaultValue=" " />
          <bt:String id="Contoso.Tab1.TabLabel" DefaultValue="PrepJet" />
          <bt:String id="Contoso.GetStarted.Title" DefaultValue="Simple add-in was succesfully loaded">
           <bt:Override Locale="ja-jp" Value="JA-JP Get Started Title" />
