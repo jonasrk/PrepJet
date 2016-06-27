@@ -1,3 +1,4 @@
+//display textfield for custom delimiter if selected by user
 function displayFieldDelimiter(){
     if (document.getElementById('delimiter_options').value == "custom_delimiter"){
         $('#delimiter_beginning').show();
@@ -54,7 +55,7 @@ function displayFieldDelimiter(){
 
     }
 
-
+    //function to split values in a column by a specified delimiter into different columns
     function splitValue() {
         Excel.run(function (ctx) {
 
@@ -63,6 +64,7 @@ function displayFieldDelimiter(){
             var range = range_all.getUsedRange();
             var selected_identifier = document.getElementById('column_options').value;
 
+            //get delimiter where to split and translate user input into delimiter character
             var delimiter_type = document.getElementById('delimiter_options').value;
             if (delimiter_type == "custom_delimiter"){
                 var delimiter_type = document.getElementById('delimiter_input').value;
@@ -78,15 +80,15 @@ function displayFieldDelimiter(){
             }
 
             range.load('text');
-
             var range_all_adding_to = worksheet.getRange();
             var range_adding_to = range_all_adding_to.getUsedRange();
-
             range_adding_to.load('address');
             range_adding_to.load('text');
 
+
             return ctx.sync().then(function() {
 
+                //get column number which to split
                 var header = 0;
                 for (var k = 0; k < range.text[0].length; k++){
                     if (selected_identifier == range.text[0][k]){
@@ -94,22 +96,23 @@ function displayFieldDelimiter(){
                     }
                 }
 
+                //define variables for array to hold splitted values and length measures
                 var act_worksheet = ctx.workbook.worksheets.getActiveWorksheet();
                 var array_length = 0;
                 var max_array_length = 0;
                 var split_array = new Array(range.text.length);
 
-                for (var i = 1; i < range.text.length; i++) {
 
+                //loop through whole column, create an array with splitted values and get maximum length
+                for (var i = 1; i < range.text.length; i++) {
                     split_array[i] = range.text[i][header].split(delimiter_type);
                     array_length = split_array[i].length
                     if (max_array_length < array_length){
                         max_array_length = array_length
                     }
-
                 }
 
-
+                //insert empty columns right to split column for splitted parts
                 for (var i = 0; i < range.text.length; i++) {
                     for (var j = 1; j < max_array_length; j++) {
                         var column_char = getCharFromNumber(header + 2);
@@ -120,6 +123,7 @@ function displayFieldDelimiter(){
                     }
                 }
 
+                //insert splitted parts into new empty columns
                 for (var i = 1; i < range.text.length; i++) {
                     var sheet_row = i + 1;
                     for(var j = 0; j < split_array[i].length; j++){
