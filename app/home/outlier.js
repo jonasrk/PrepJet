@@ -91,8 +91,24 @@
                             var median = (count % 2 == 0) ? (medianArr[(medianArr.length/2) - 1] + medianArr[(medianArr.length / 2)]) / 2:medianArr[Math.floor(medianArr.length / 2)];
                             return median;
                         }
-                        console.log(q1Arr, q2Arr, q3Arr);
-                        console.log(Q1,Q2,Q3);
+
+                        var iqr = Q3 - Q1;
+
+                        var thrsh_low = Q1 - (1.5 * iqr);
+                        var thrsh_high = Q3 + (1.5 * iqr); // TODO do not hardcode
+
+                        for (var j = 1; j < range.text.length; j++){
+
+                            var sheet_row = j + 1;
+                            var address = getCharFromNumber(k + 1) + sheet_row;
+
+                            if (range.text[j][k] < thrsh_low){
+                                highlightContentInWorksheet(worksheet, address, "red");
+                            } else if (range.text[j][k] > thrsh_high){
+                                highlightContentInWorksheet(worksheet, address, "red");
+                            }
+
+                        }
 
                     }
                 }
