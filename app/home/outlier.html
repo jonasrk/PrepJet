@@ -39,47 +39,25 @@
 <body class="ms-font-m">
 <div id="content-header">
     <div class="padding">
-        <h1>Remove Duplicates</h1>
+        <h1>Detect outliers</h1>
     </div>
 </div>
 <div id="content-main">
 
-    <!--Text: Select columns for duplicate search-->
 
-    <div>
-        <header>Select columns for duplicate search</header>
+    <!--Select Column Dropdown-->
+
+    <div class="ms-Dropdown outlier_column_dropdown_container" tabindex="0">
+        <label class="ms-Label">Select target column</label>
+        <i class="ms-Dropdown-caretDown ms-Icon ms-Icon--caretDown"></i>
+        <select id="outlier_column_dropdown" class="ms-Dropdown-select">
+        </select>
     </div>
 
-    <!--Checkboxes for Columns-->
-
-    <div id="checkboxes_duplicates" class="ms-ChoiceField"></div>
-
-    <!--Exact Match-->
-    <!--Checkbox-->
-
-    <div class="ms-ChoiceField">
-        <input id="demo-checkbox-unselected" class="ms-ChoiceField-input" type="checkbox">
-        <label for="demo-checkbox-unselected" class="ms-ChoiceField-field">
-            <span class="ms-Label">Exact Match</span>
-        </label>
-    </div>
-
-    <!--Fuzzy Match-->
-    <!--Checkbox-->
-
-    <div class="ms-ChoiceField">
-        <input id="demo-checkbox-unselected" class="ms-ChoiceField-input" type="checkbox">
-        <label for="demo-checkbox-unselected" class="ms-ChoiceField-field">
-            <span class="ms-Label">Fuzzy Match</span>
-        </label>
-    </div>
-
-    <!--Button Detect Duplicates-->
-
-    <button class="ms-Button" id="bt_detect_duplicates">Detect Duplicates</button>
+    <!--Checkbox Dependencies-->
 
 
-
+    <!--Button-->
 </div>
 </body>
 
