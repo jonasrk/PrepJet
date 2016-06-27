@@ -116,6 +116,19 @@
                   </Action>
                 </Control>
 
+              </Group>
+              <Group id="Contoso.Tab1.Group2">
+                <!--Label for your group. resid must point to a ShortString resource -->
+                <Label resid="Contoso.Tab1.GroupLabel2" />
+                <Icon>
+                  <!-- Sample Todo: Each size needs its own icon resource or it will look distorted when resized -->
+                  <!--Icons. Required sizes 16,31,80, optional 20, 24, 40, 48, 64. Strongly recommended to provide all sizes for great UX -->
+                  <!--Use PNG icons and remember that all URLs on the resources section must use HTTPS -->
+                  <bt:Image size="16" resid="Contoso.TaskpaneButton.Icon" />
+                  <bt:Image size="32" resid="Contoso.TaskpaneButton.Icon" />
+                  <bt:Image size="80" resid="Contoso.TaskpaneButton.Icon" />
+                </Icon>
+
                 <Control xsi:type="Button" id="Contoso.FindDuplicatesButton">
                   <Label resid="Contoso.FindDuplicatesButton.Label" />
                   <Supertip>
@@ -186,6 +199,7 @@
         <bt:String id="Contoso.Item1.Label" DefaultValue="Show Taskpane 1" />
         <bt:String id="Contoso.Item2.Label" DefaultValue="Show Taskpane 2" />
         <bt:String id="Contoso.Tab1.GroupLabel" DefaultValue="Test Group" />
+        <bt:String id="Contoso.Tab1.GroupLabel2" DefaultValue="Test Group" />
          <bt:String id="Contoso.Tab1.TabLabel" DefaultValue="PrepJet" />
          <bt:String id="Contoso.GetStarted.Title" DefaultValue="Simple add-in was succesfully loaded">
           <bt:Override Locale="ja-jp" Value="JA-JP Get Started Title" />
