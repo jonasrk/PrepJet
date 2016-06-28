@@ -23,7 +23,7 @@
     <Host Name="Workbook"/>
   </Hosts>
   <DefaultSettings>
-    <SourceLocation DefaultValue="https://localhost:8443/app/home/merge_columns.html" />
+    <SourceLocation DefaultValue="https://46.101.241.187:8443/app/home/merge_columns.html" />
   </DefaultSettings>
   <!--EndTaskpaneMode integration -->
 
@@ -212,30 +212,30 @@
     </Hosts>
     <Resources>
       <bt:Images>
-        <bt:Image id="PrepJet.addcolumn.Icon" DefaultValue="https://localhost:8443/images/addcolumn.png" />
-        <bt:Image id="PrepJet.detectoutlier.Icon" DefaultValue="https://localhost:8443/images/detectoutlier.png" />
-        <bt:Image id="PrepJet.removeduplicates.Icon" DefaultValue="https://localhost:8443/images/removeduplicates.png" />
-        <bt:Image id="PrepJet.splitvalues.Icon" DefaultValue="https://localhost:8443/images/splitvalues.png" />
-        <bt:Image id="PrepJet.extractvalues.Icon" DefaultValue="https://localhost:8443/images/extractvalues.png" />
-        <bt:Image id="PrepJet.addcolumn.Icon_sm" DefaultValue="https://localhost:8443/images/addcolumn_sm.png" />
-        <bt:Image id="PrepJet.detectoutlier.Icon_sm" DefaultValue="https://localhost:8443/images/detectoutlier_sm.png" />
-        <bt:Image id="PrepJet.removeduplicates.Icon_sm" DefaultValue="https://localhost:8443/images/removeduplicates_sm.png" />
-        <bt:Image id="PrepJet.splitvalues.Icon_sm" DefaultValue="https://localhost:8443/images/splitvalues_sm.png" />
-        <bt:Image id="PrepJet.extractvalues.Icon_sm" DefaultValue="https://localhost:8443/images/extractvalues_sm.png" />
-        <bt:Image id="PrepJet.addcolumn.Icon_lg" DefaultValue="https://localhost:8443/images/addcolumn_lg.png" />
-        <bt:Image id="PrepJet.detectoutlier.Icon_lg" DefaultValue="https://localhost:8443/images/detectoutlier_lg.png" />
-        <bt:Image id="PrepJet.removeduplicates.Icon_lg" DefaultValue="https://localhost:8443/images/removeduplicates_lg.png" />
-        <bt:Image id="PrepJet.splitvalues.Icon_lg" DefaultValue="https://localhost:8443/images/splitvalues_lg.png" />
-        <bt:Image id="PrepJet.extractvalues.Icon_lg" DefaultValue="https://localhost:8443/images/extractvalues_lg.png" />
+        <bt:Image id="PrepJet.addcolumn.Icon" DefaultValue="https://46.101.241.187:8443/images/addcolumn.png" />
+        <bt:Image id="PrepJet.detectoutlier.Icon" DefaultValue="https://46.101.241.187:8443/images/detectoutlier.png" />
+        <bt:Image id="PrepJet.removeduplicates.Icon" DefaultValue="https://46.101.241.187:8443/images/removeduplicates.png" />
+        <bt:Image id="PrepJet.splitvalues.Icon" DefaultValue="https://46.101.241.187:8443/images/splitvalues.png" />
+        <bt:Image id="PrepJet.extractvalues.Icon" DefaultValue="https://46.101.241.187:8443/images/extractvalues.png" />
+        <bt:Image id="PrepJet.addcolumn.Icon_sm" DefaultValue="https://46.101.241.187:8443/images/addcolumn_sm.png" />
+        <bt:Image id="PrepJet.detectoutlier.Icon_sm" DefaultValue="https://46.101.241.187:8443/images/detectoutlier_sm.png" />
+        <bt:Image id="PrepJet.removeduplicates.Icon_sm" DefaultValue="https://46.101.241.187:8443/images/removeduplicates_sm.png" />
+        <bt:Image id="PrepJet.splitvalues.Icon_sm" DefaultValue="https://46.101.241.187:8443/images/splitvalues_sm.png" />
+        <bt:Image id="PrepJet.extractvalues.Icon_sm" DefaultValue="https://46.101.241.187:8443/images/extractvalues_sm.png" />
+        <bt:Image id="PrepJet.addcolumn.Icon_lg" DefaultValue="https://46.101.241.187:8443/images/addcolumn_lg.png" />
+        <bt:Image id="PrepJet.detectoutlier.Icon_lg" DefaultValue="https://46.101.241.187:8443/images/detectoutlier_lg.png" />
+        <bt:Image id="PrepJet.removeduplicates.Icon_lg" DefaultValue="https://46.101.241.187:8443/images/removeduplicates_lg.png" />
+        <bt:Image id="PrepJet.splitvalues.Icon_lg" DefaultValue="https://46.101.241.187:8443/images/splitvalues_lg.png" />
+        <bt:Image id="PrepJet.extractvalues.Icon_lg" DefaultValue="https://46.101.241.187:8443/images/extractvalues_lg.png" />
 
       </bt:Images>
       <bt:Urls>
         <bt:Url id="PrepJet.FunctionFile.Url" DefaultValue="https://commandsimple.azurewebsites.net/FunctionFile.html" />
-        <bt:Url id="PrepJet.addcolumns.Url" DefaultValue="https://localhost:8443/app/home/merge_columns.html" />
-        <bt:Url id="PrepJet.SplitValues.Url" DefaultValue="https://localhost:8443/app/home/split_values.html" />
-        <bt:Url id="PrepJet.FindDuplicates.Url" DefaultValue="https://localhost:8443/app/home/duplicates.html" />
-        <bt:Url id="PrepJet.DetectOutliers.Url" DefaultValue="https://localhost:8443/app/home/outlier.html" />
-        <bt:Url id="PrepJet.ExtractValues.Url" DefaultValue="https://localhost:8443/app/home/extract_values.html" />
+        <bt:Url id="PrepJet.addcolumns.Url" DefaultValue="https://46.101.241.187:8443/app/home/merge_columns.html" />
+        <bt:Url id="PrepJet.SplitValues.Url" DefaultValue="https://46.101.241.187:8443/app/home/split_values.html" />
+        <bt:Url id="PrepJet.FindDuplicates.Url" DefaultValue="https://46.101.241.187:8443/app/home/duplicates.html" />
+        <bt:Url id="PrepJet.DetectOutliers.Url" DefaultValue="https://46.101.241.187:8443/app/home/outlier.html" />
+        <bt:Url id="PrepJet.ExtractValues.Url" DefaultValue="https://46.101.241.187:8443/app/home/extract_values.html" />
         <!--LearnMore URL currently not used -->
         <bt:Url id="PrepJet.GetStarted.LearnMoreUrl" DefaultValue="https://commandsimple.azurewebsites.net/GetStarted.html">
         </bt:Url>
