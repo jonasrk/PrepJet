@@ -235,7 +235,7 @@
         <bt:Url id="PrepJet.SplitValues.Url" DefaultValue="https://localhost:8443/app/home/split_values.html" />
         <bt:Url id="PrepJet.FindDuplicates.Url" DefaultValue="https://localhost:8443/app/home/duplicates.html" />
         <bt:Url id="PrepJet.DetectOutliers.Url" DefaultValue="https://localhost:8443/app/home/outlier.html" />
-        <bt:Url id="PrepJet.ExtractValues.Url" DefaultValue="https://localhost:8443/app/home/extract_values.html" />
+        <bt:Url id="PrepJet.ExtractValues.Url" DefaultValue="https://localhost:8443/app/home/trim_spaces.html" />
         <!--LearnMore URL currently not used -->
         <bt:Url id="PrepJet.GetStarted.LearnMoreUrl" DefaultValue="https://commandsimple.azurewebsites.net/GetStarted.html">
         </bt:Url>
