@@ -159,7 +159,7 @@
                   </Supertip>
                   <Icon>
                     <bt:Image size="16" resid="PrepJet.extractvalues.Icon_sm" />
-                    <bt:Image size="32" resid="PrepJet.extractvalues.Icon" />
+                    <bt:Image size="32" resid="PrepJet.trimspaces.Icon" />
                     <bt:Image size="80" resid="PrepJet.extractvalues.Icon_lg" />
                   </Icon>
                   <Action xsi:type="ShowTaskpane">
@@ -235,16 +235,19 @@
         <bt:Image id="PrepJet.removeduplicates.Icon" DefaultValue="https://localhost:8443/images/removeduplicates.png" />
         <bt:Image id="PrepJet.splitvalues.Icon" DefaultValue="https://localhost:8443/images/splitvalues.png" />
         <bt:Image id="PrepJet.extractvalues.Icon" DefaultValue="https://localhost:8443/images/extractvalues.png" />
+        <bt:Image id="PrepJet.trimspaces.Icon" DefaultValue="https://localhost:8443/images/trimspaces.png" />
         <bt:Image id="PrepJet.addcolumn.Icon_sm" DefaultValue="https://localhost:8443/images/addcolumn_sm.png" />
         <bt:Image id="PrepJet.detectoutlier.Icon_sm" DefaultValue="https://localhost:8443/images/detectoutlier_sm.png" />
         <bt:Image id="PrepJet.removeduplicates.Icon_sm" DefaultValue="https://localhost:8443/images/removeduplicates_sm.png" />
         <bt:Image id="PrepJet.splitvalues.Icon_sm" DefaultValue="https://localhost:8443/images/splitvalues_sm.png" />
         <bt:Image id="PrepJet.extractvalues.Icon_sm" DefaultValue="https://localhost:8443/images/extractvalues_sm.png" />
+        <!--bt:Image id="PrepJet.trimspaces.Icon_sm" DefaultValue="https://localhost:8443/images/trimspaces_sm.png" /-->
         <bt:Image id="PrepJet.addcolumn.Icon_lg" DefaultValue="https://localhost:8443/images/addcolumn_lg.png" />
         <bt:Image id="PrepJet.detectoutlier.Icon_lg" DefaultValue="https://localhost:8443/images/detectoutlier_lg.png" />
         <bt:Image id="PrepJet.removeduplicates.Icon_lg" DefaultValue="https://localhost:8443/images/removeduplicates_lg.png" />
         <bt:Image id="PrepJet.splitvalues.Icon_lg" DefaultValue="https://localhost:8443/images/splitvalues_lg.png" />
         <bt:Image id="PrepJet.extractvalues.Icon_lg" DefaultValue="https://localhost:8443/images/extractvalues_lg.png" />
+        <!--bt:Image id="PrepJet.trimspaces.Icon_lg" DefaultValue="https://localhost:8443/images/trimspaces_lg.png" /-->
 
       </bt:Images>
       <bt:Urls>
