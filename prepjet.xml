@@ -217,6 +217,19 @@
                     <SourceLocation resid="PrepJet.DetectOutliers.Url" />
                   </Action>
                 </Control>
+                </Group>
+
+                <Group id="PrepJet.Tab1.Group4">
+                <!--Label for your group. resid must point to a ShortString resource -->
+                <Label resid="PrepJet.Tab1.GroupLabel2" />
+                <Icon>
+                  <!-- Sample Todo: Each size needs its own icon resource or it will look distorted when resized -->
+                  <!--Icons. Required sizes 16,31,80, optional 20, 24, 40, 48, 64. Strongly recommended to provide all sizes for great UX -->
+                  <!--Use PNG icons and remember that all URLs on the resources section must use HTTPS -->
+                  <bt:Image size="16" resid="PrepJet.addcolumn.Icon_sm" />
+                  <bt:Image size="32" resid="PrepJet.addcolumn.Icon" />
+                  <bt:Image size="80" resid="PrepJet.addcolumn.Icon_lg" />
+                </Icon>
 
                 <Control xsi:type="Button" id="PrepJet.ValidationRuleButton">
                   <Label resid="PrepJet.ValidationRuleButton.Label" />
