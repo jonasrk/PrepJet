@@ -218,6 +218,24 @@
                   </Action>
                 </Control>
 
+                <Control xsi:type="Button" id="PrepJet.ValidationRuleButton">
+                  <Label resid="PrepJet.ValidationRuleButton.Label" />
+                  <Supertip>
+                    <Title resid="PrepJet.ValidationRuleButton.Label" />
+                    <Description resid="PrepJet.SplitValuesButton.Tooltip" />
+                  </Supertip>
+                  <Icon>
+                    <bt:Image size="16" resid="PrepJet.validationrule.Icon_sm" />
+                    <bt:Image size="32" resid="PrepJet.validationrule.Icon" />
+                    <bt:Image size="80" resid="PrepJet.validationrule.Icon_lg" />
+                  </Icon>
+                  <Action xsi:type="ShowTaskpane">
+                    <TaskpaneId>Button2Id1</TaskpaneId>
+                    <!--Provide a url resource id for the location that will be displayed on the task pane -->
+                    <SourceLocation resid="PrepJet.validation.Url" />
+                  </Action>
+                </Control>
+
               </Group>
 
               <!-- Label of your tab -->
@@ -236,18 +254,21 @@
         <bt:Image id="PrepJet.splitvalues.Icon" DefaultValue="https://localhost:8443/images/splitvalues.png" />
         <bt:Image id="PrepJet.extractvalues.Icon" DefaultValue="https://localhost:8443/images/extractvalues.png" />
         <bt:Image id="PrepJet.trimspaces.Icon" DefaultValue="https://localhost:8443/images/trimspaces.png" />
+        <bt:Image id="PrepJet.validationrule.Icon" DefaultValue="https://localhost:8443/images/validationrule.png" />
         <bt:Image id="PrepJet.addcolumn.Icon_sm" DefaultValue="https://localhost:8443/images/addcolumn_sm.png" />
         <bt:Image id="PrepJet.detectoutlier.Icon_sm" DefaultValue="https://localhost:8443/images/detectoutlier_sm.png" />
         <bt:Image id="PrepJet.removeduplicates.Icon_sm" DefaultValue="https://localhost:8443/images/removeduplicates_sm.png" />
         <bt:Image id="PrepJet.splitvalues.Icon_sm" DefaultValue="https://localhost:8443/images/splitvalues_sm.png" />
         <bt:Image id="PrepJet.extractvalues.Icon_sm" DefaultValue="https://localhost:8443/images/extractvalues_sm.png" />
         <bt:Image id="PrepJet.trimspaces.Icon_sm" DefaultValue="https://localhost:8443/images/trimspaces_sm.png" />
+        <bt:Image id="PrepJet.validationrule.Icon_sm" DefaultValue="https://localhost:8443/images/validationrule_sm.png" />
         <bt:Image id="PrepJet.addcolumn.Icon_lg" DefaultValue="https://localhost:8443/images/addcolumn_lg.png" />
         <bt:Image id="PrepJet.detectoutlier.Icon_lg" DefaultValue="https://localhost:8443/images/detectoutlier_lg.png" />
         <bt:Image id="PrepJet.removeduplicates.Icon_lg" DefaultValue="https://localhost:8443/images/removeduplicates_lg.png" />
         <bt:Image id="PrepJet.splitvalues.Icon_lg" DefaultValue="https://localhost:8443/images/splitvalues_lg.png" />
         <bt:Image id="PrepJet.extractvalues.Icon_lg" DefaultValue="https://localhost:8443/images/extractvalues_lg.png" />
         <bt:Image id="PrepJet.trimspaces.Icon_lg" DefaultValue="https://localhost:8443/images/trimspaces_lg.png" />
+        <bt:Image id="PrepJet.validationrule.Icon_lg" DefaultValue="https://localhost:8443/images/validationrule_lg.png" />
 
       </bt:Images>
       <bt:Urls>
@@ -257,7 +278,8 @@
         <bt:Url id="PrepJet.FindDuplicates.Url" DefaultValue="https://localhost:8443/app/home/duplicates.html" />
         <bt:Url id="PrepJet.DetectOutliers.Url" DefaultValue="https://localhost:8443/app/home/outlier.html" />
         <bt:Url id="PrepJet.ExtractValues.Url" DefaultValue="https://localhost:8443/app/home/extract_values.html" />
-        <bt:Url id="PrepJet.TrimSpaces.Url" DefaultValue="https://localhost:8443/app/home/validation.html" />
+        <bt:Url id="PrepJet.TrimSpaces.Url" DefaultValue="https://localhost:8443/app/home/trim_spaces.html" />
+        <bt:Url id="PrepJet.validation.Url" DefaultValue="https://localhost:8443/app/home/validation.html" />
         <!--LearnMore URL currently not used -->
         <bt:Url id="PrepJet.GetStarted.LearnMoreUrl" DefaultValue="https://commandsimple.azurewebsites.net/GetStarted.html">
         </bt:Url>
@@ -269,6 +291,7 @@
         <bt:String id="PrepJet.DetectOutliersButton.Label" DefaultValue="Detect Outliers" />
         <bt:String id="PrepJet.ExtractValuesButton.Label" DefaultValue="Extract Values" />
         <bt:String id="PrepJet.TrimSpacesButton.Label" DefaultValue="Trim Spaces" />
+        <bt:String id="PrepJet.ValidationRuleButton.Label" DefaultValue="Validation Rule" />
         <bt:String id="PrepJet.Dropdown.Label" DefaultValue="Dropdown" />
         <bt:String id="PrepJet.Item1.Label" DefaultValue="Show Taskpane 1" />
         <bt:String id="PrepJet.Item2.Label" DefaultValue="Show Taskpane 2" />
