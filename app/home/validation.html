@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+
+    <script src="http://localhost:1337/vorlon.js"></script>
+
+
+
+    <!--<script src="//ajax.aspnetcdn.com/ajax/jQuery/jquery-1.9.1.min.js"></script>-->
+    <link href="../../content/Office.css" rel="stylesheet" type="text/css"/>
+    <link href="../../bower_components/microsoft_office_js/content/officethemes.css" rel="stylesheet" type="text/css"/>
+    <!--<link href="//appsforoffice.microsoft.com/fabric/1.0/fabric.min.css" rel="stylesheet">-->
+    <!--<link href="//appsforoffice.microsoft.com/fabric/1.0/fabric.components.min.css" rel="stylesheet">-->
+    <script src="//appsforoffice.microsoft.com/lib/1/hosted/office.js"></script>
+
+    <!-- To enable offline debugging using a local reference to jQuery.js Office.js, use: -->
+    <!--<script src="../../bower_components/microsoft_office_js/scripts/Office/1/office.js"></script>-->
+    <script src="../../bower_components/jquery/jquery.min.js"></script>
+    <link href="../../content/fabric.min.css" rel="stylesheet">
+    <link href="../../content/fabric.components.min.css" rel="stylesheet">
+    <!--<script src="../../scripts/jquery.fabric.min.js"></script>-->
+    <script src="../../scripts/MicrosoftAjax.js"></script>
+
+    <link href="../App.css" rel="stylesheet" type="text/css"/>
+    <script src="../App.js"></script>
+
+    <link href="Home.css" rel="stylesheet" type="text/css"/>
+    <script src="helpers.js"></script>
+    <script src="validation.js"></script>
+
+    <!--PrepJet Fabric Components Imports-->
+    <script src="../../bower_components/office-ui-fabric/src/components/TextField/Jquery.TextField.js"></script>
+    <script src="../../bower_components/office-ui-fabric/src/components/Dropdown/Jquery.Dropdown.js"></script>
+
+
+</head>
+
+<body class="ms-font-m">
+<div id="content-header">
+    <div class="padding">
+        <h1>Validation Rule</h1>
+    </div>
+</div>
+<div id="content-main">
+
+
+    <div class="padding">
+
+        <!--Pop Up headline-->
+        <div>
+            <header>Validation Rule</header>
+        </div>
+        <!--dropdown for if condition-->
+        <div class="ms-Dropdown dropdown_table_col1" tabindex="1">
+            <label class="ms-Label">IF (Select conditional variable)</label>
+            <i class="ms-Dropdown-caretDown ms-Icon ms-Icon--caretDown"></i>
+            <select id="column1_options" class="ms-Dropdown-select">
+                <option value="empty"></option>
+            </select>
+        </div>
+        <!--dropdown for operator-->
+        <div class="ms-Dropdown dropdown_table" tabindex="1">
+            <label class="ms-Label">Select beginning of new value</label>
+            <i class="ms-Dropdown-caretDown ms-Icon ms-Icon--caretDown"></i>
+            <select id="if_operator" class="ms-Dropdown-select">
+                <option value="empty"></option>
+                <option value="equal">=</option>
+                <option value="smaller"><</option>
+                <option value="greater">></option>
+                <option value="inequal">!=</option>
+            </select>
+        </div>
+        <!--evtl. text field for condition-->
+        <div id="delimiter_beginning" class="ms-TextField ms-TextField--placeholder">
+            <label class="ms-Label">Enter condition to check</label>
+            <input id="if_condition" class="ms-TextField-field" type="text">
+        </div>
+        <!--dropdown for THEN-->
+        <div class="ms-Dropdown dropdown_table_col2" tabindex="1">
+            <label class="ms-Label">THEN (select dependend variable)</label>
+            <i class="ms-Dropdown-caretDown ms-Icon ms-Icon--caretDown"></i>
+            <select id="column2_options" class="ms-Dropdown-select">
+                <option value="empty"></option>
+            </select>
+        </div>
+        <!--dropdown for then operator-->
+        <div class="ms-Dropdown dropdown_table" tabindex="1">
+            <label class="ms-Label">Select beginning of new value</label>
+            <i class="ms-Dropdown-caretDown ms-Icon ms-Icon--caretDown"></i>
+            <select id="then_operator" class="ms-Dropdown-select" onchange="displayBetween()">
+                <option value="empty"></option>
+                <option value="equal">=</option>
+                <option value="smaller"><</option>
+                <option value="greater">></option>
+                <option value="inequal">!=</option>
+                <option value="between">between</option>
+            </select>
+        </div>
+        <!--evtl. text field for Then condition-->
+        <div id="delimiter_end" class="ms-TextField ms-TextField--placeholder">
+            <label class="ms-Label">Enter condition to check</label>
+            <input id="then_condition" class="ms-TextField-field" type="text">
+        </div>
+        <!--evtl. text field for Then between condition-->
+        <div id="between_and" class="ms-TextField ms-TextField--placeholder">
+            <label class="ms-Label">and</label>
+            <input id="between_and" class="ms-TextField-field" type="text">
+        </div>
+        <!--split button-->
+        <button class="ms-Button" id="apply">Apply</button>
+    </div>
+
+
+</div>
+</body>
+
+</html>
