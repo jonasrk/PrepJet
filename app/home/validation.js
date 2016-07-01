@@ -15,7 +15,6 @@ function displayBetween(){
             app.initialize();
             fillColumn();
 
-            //$('#delimiter_end').hide();
             $('#between_and').hide();
 
             $(".dropdown_table").Dropdown();
@@ -34,7 +33,6 @@ function displayBetween(){
             var worksheet = ctx.workbook.worksheets.getActiveWorksheet();
             var range_all = worksheet.getRange();
             var range = range_all.getUsedRange();
-
             range.load('text');
             return ctx.sync().then(function() {
                 for (var i = 0; i < range.text[0].length; i++) {
@@ -50,7 +48,6 @@ function displayBetween(){
                     el.textContent = range.text[0][i];
                     document.getElementById("column2_options").appendChild(el);
                 }
-
                 $(".dropdown_table_col1").Dropdown();
                 $(".dropdown_table_col2").Dropdown();
             });
@@ -74,24 +71,6 @@ function displayBetween(){
             var selected_identifier1 = document.getElementById('column1_options').value;
             var selected_identifier2 = document.getElementById('column2_options').value;
 
-            //get operator applicable for if condition
-            var ifoperator = document.getElementById('if_operator').value;
-            if (document.getElementById('if_operator').value == "equal"){
-                var ifoperator = "=";
-            }
-            else if (document.getElementById('if_operator').value == "smaller"){
-                var ifoperator = "<";
-            }
-            else if (document.getElementById('if_operator').value == "greater"){
-                var ifoperator = ">";
-            }
-            else if (document.getElementById('if_operator').value == "inequal"){
-                var ifoperator = "!=";
-            }
-            else { //todo useful return value if nothing is selected
-                var ifoperator = 1;
-            }
-
 
             //get operator applicable for then condition
             var thenoperator = document.getElementById('then_operator').value;
@@ -114,9 +93,15 @@ function displayBetween(){
                 var thenoperator = 1;
             }
 
+            // todo string and number not parsed correclty currently
+            var ifcondition = document.getElementById('if_condition').value;
+            var thencondition = Number(document.getElementById('then_condition').value);
+
 
             //get used range in active Sheet
             range.load('text');
+            range.load('valueTypes');
+            range.load('values');
             var range_all_adding_to = worksheet.getRange();
             var range_adding_to = range_all_adding_to.getUsedRange();
             range_adding_to.load('address');
@@ -141,25 +126,140 @@ function displayBetween(){
                     }
                 }
 
-                console.log(header_if);
-                console.log(header_then);
-
                 //loop through whole column to extract value from
+                var act_worksheet = ctx.workbook.worksheets.getActiveWorksheet();
                 for (var i = 1; i < range.text.length; i++) {
 
-                    //set position to insert extracted value
-                    //var rangeaddress = column_char + sheet_row;
-                    //var range_insert = ctx.workbook.worksheets.getActiveWorksheet().getRange(rangeaddress);
-                    //range_insert.insert("Right");
-                    //addContentToWorksheet(act_worksheet, column_char + sheet_row, extractedValue);
+                    var sheet_row = i + 1;
+                    var address = getCharFromNumber(header_then + 1) + sheet_row;
+
+                    if (document.getElementById('if_operator').value == "equal") {
+                        if (range.values[i][header_if] == document.getElementById('if_condition').value) {
+                            if (document.getElementById('then_operator').value == "equal") {
+                                if (range.values[i][header_then] != thencondition) {
+                                    highlightContentInWorksheet(act_worksheet, address, "red");
+                                }
+                            }
+                            else if (document.getElementById('then_operator').value == "smaller") {
+                                if (range.values[i][header_then] >= thencondition) {
+                                    highlightContentInWorksheet(act_worksheet, address, "red");
+                                }
+                            }
+                            else if (document.getElementById('then_operator').value == "greater") {
+                                if (range.values[i][header_then] <= thencondition) {
+                                    highlightContentInWorksheet(act_worksheet, address, "red");
+                                }
+                            }
+                            else if (document.getElementById('then_operator').value == "inequal") {
+                                if (range.values[i][header_then] == thencondition) {
+                                    highlightContentInWorksheet(act_worksheet, address, "red");
+                                }
+                            }
+                            else if (document.getElementById('then_operator').value == "between") {
+                                if (range.values[i][header_then] < thencondition || range.values[i][header_then] > document.getElementById('between_and')) {
+                                    highlightContentInWorksheet(act_worksheet, address, "red");
+                                }
+                            }
+                        }
+                    }
+
+                    if (document.getElementById('if_operator').value == "smaller") {
+                        var ifcondition = Number(document.getElementById('if_condition').value);
+                        if (range.values[i][header_if] < ifcondition) {
+                            if (document.getElementById('then_operator').value == "equal") {
+                                if (range.values[i][header_then] != thencondition) {
+                                    highlightContentInWorksheet(act_worksheet, address, "red");
+                                }
+                            }
+                            else if (document.getElementById('then_operator').value == "smaller") {
+                                if (range.values[i][header_then] >= thencondition) {
+                                    highlightContentInWorksheet(act_worksheet, address, "red");
+                                }
+                            }
+                            else if (document.getElementById('then_operator').value == "greater") {
+                                if (range.values[i][header_then] <= thencondition) {
+                                    highlightContentInWorksheet(act_worksheet, address, "red");
+                                }
+                            }
+                            else if (document.getElementById('then_operator').value == "inequal") {
+                                if (range.values[i][header_then] == thencondition) {
+                                    highlightContentInWorksheet(act_worksheet, address, "red");
+                                }
+                            }
+                            else if (document.getElementById('then_operator').value == "between") {
+                                if (range.values[i][header_then] < thencondition || range.values[i][header_then] > document.getElementById('between_and')) {
+                                    highlightContentInWorksheet(act_worksheet, address, "red");
+                                }
+                            }
+                        }
+                    }
+
+                    if (document.getElementById('if_operator').value == "greater") {
+                        var ifcondition = Number(document.getElementById('if_condition').value);
+                        if (range.values[i][header_if] > ifcondition) {
+                            if (document.getElementById('then_operator').value == "equal") {
+                                if (range.values[i][header_then] != thencondition) {
+                                    highlightContentInWorksheet(act_worksheet, address, "red");
+                                }
+                            }
+                            else if (document.getElementById('then_operator').value == "smaller") {
+                                if (range.values[i][header_then] >= thencondition) {
+                                    highlightContentInWorksheet(act_worksheet, address, "red");
+                                }
+                            }
+                            else if (document.getElementById('then_operator').value == "greater") {
+                                if (range.values[i][header_then] <= thencondition) {
+                                    highlightContentInWorksheet(act_worksheet, address, "red");
+                                }
+                            }
+                            else if (document.getElementById('then_operator').value == "inequal") {
+                                if (range.values[i][header_then] == thencondition) {
+                                    highlightContentInWorksheet(act_worksheet, address, "red");
+                                }
+                            }
+                            else if (document.getElementById('then_operator').value == "between") {
+                                if (range.values[i][header_then] < thencondition || range.values[i][header_then] > document.getElementById('between_and')) {
+                                    highlightContentInWorksheet(act_worksheet, address, "red");
+                                }
+                            }
+                        }
+                    }
+                    if (document.getElementById('if_operator').value == "inequal") {
+                        if (range.values[i][header_if] != document.getElementById('if_condition').value) {
+                            if (document.getElementById('then_operator').value == "equal") {
+                                if (range.values[i][header_then] != thencondition) {
+                                    highlightContentInWorksheet(act_worksheet, address, "red");
+                                }
+                            }
+                            else if (document.getElementById('then_operator').value == "smaller") {
+                                if (range.values[i][header_then] >= thencondition) {
+                                    highlightContentInWorksheet(act_worksheet, address, "red");
+                                }
+                            }
+                            else if (document.getElementById('then_operator').value == "greater") {
+                                if (range.values[i][header_then] <= thencondition) {
+                                    highlightContentInWorksheet(act_worksheet, address, "red");
+                                }
+                            }
+                            else if (document.getElementById('then_operator').value == "inequal") {
+                                if (range.values[i][header_then] == thencondition) {
+                                    highlightContentInWorksheet(act_worksheet, address, "red");
+                                }
+                            }
+                            else if (document.getElementById('then_operator').value == "between") {
+                                if (range.values[i][header_then] < thencondition || range.values[i][header_then] > document.getElementById('between_and')) {
+                                    highlightContentInWorksheet(act_worksheet, address, "red");
+                                }
+                            }
+                        }
+                    }
+
 
                 }
 
 
             });
 
-            console.log("Test")
-            window.open("extract_values.html","_self");
 
         }).catch(function(error) {
             console.log("Error: " + error);

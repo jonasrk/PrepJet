@@ -128,3 +128,4 @@ function getRandomColor() {
     }
     return color;
 }
+
