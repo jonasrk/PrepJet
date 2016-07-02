@@ -94,8 +94,20 @@ function displayBetween(){
             }
 
             // todo string and number not parsed correclty currently
-            var ifcondition = document.getElementById('if_condition').value;
-            var thencondition = Number(document.getElementById('then_condition').value);
+            if (isNaN(Number(document.getElementById('if_condition').value)) == true) {
+                var ifcondition = document.getElementById('if_condition').value;
+            }
+            else {
+                var ifcondition = Number(document.getElementById('if_condition').value);
+            }
+
+            if (isNaN(Number(document.getElementById('then_condition').value)) == true) {
+                var thencondition = document.getElementById('then_condition').value;
+            }
+            else {
+                var thencondition = Number(document.getElementById('then_condition').value);
+            }
+
 
 
             //get used range in active Sheet
@@ -126,6 +138,8 @@ function displayBetween(){
                     }
                 }
 
+                console.log(ifcondition);
+                console.log(thencondition);
                 //loop through whole column to extract value from
                 var act_worksheet = ctx.workbook.worksheets.getActiveWorksheet();
                 for (var i = 1; i < range.text.length; i++) {
@@ -134,7 +148,7 @@ function displayBetween(){
                     var address = getCharFromNumber(header_then + 1) + sheet_row;
 
                     if (document.getElementById('if_operator').value == "equal") {
-                        if (range.values[i][header_if] == document.getElementById('if_condition').value) {
+                        if (range.values[i][header_if] == ifcondition) {
                             if (document.getElementById('then_operator').value == "equal") {
                                 if (range.values[i][header_then] != thencondition) {
                                     highlightContentInWorksheet(act_worksheet, address, "red");
@@ -164,7 +178,6 @@ function displayBetween(){
                     }
 
                     if (document.getElementById('if_operator').value == "smaller") {
-                        var ifcondition = Number(document.getElementById('if_condition').value);
                         if (range.values[i][header_if] < ifcondition) {
                             if (document.getElementById('then_operator').value == "equal") {
                                 if (range.values[i][header_then] != thencondition) {
@@ -195,7 +208,6 @@ function displayBetween(){
                     }
 
                     if (document.getElementById('if_operator').value == "greater") {
-                        var ifcondition = Number(document.getElementById('if_condition').value);
                         if (range.values[i][header_if] > ifcondition) {
                             if (document.getElementById('then_operator').value == "equal") {
                                 if (range.values[i][header_then] != thencondition) {
@@ -225,7 +237,7 @@ function displayBetween(){
                         }
                     }
                     if (document.getElementById('if_operator').value == "inequal") {
-                        if (range.values[i][header_if] != document.getElementById('if_condition').value) {
+                        if (range.values[i][header_if] != ifcondition) {
                             if (document.getElementById('then_operator').value == "equal") {
                                 if (range.values[i][header_then] != thencondition) {
                                     highlightContentInWorksheet(act_worksheet, address, "red");
