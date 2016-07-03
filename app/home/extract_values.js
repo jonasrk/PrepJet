@@ -183,7 +183,6 @@ function displayFieldEnd(){
                 }
 
 
-                console.log(include_delimiter);
             });
 
             console.log("Test")
