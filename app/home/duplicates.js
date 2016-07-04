@@ -4,6 +4,14 @@
     // The initialize function must be run each time a new page is loaded
     Office.initialize = function (reason) {
         jQuery(document).ready(function () {
+
+            Office.context.document.settings.set('last_clicked_function', "duplicates.html");
+            if (Office.context.document.settings.get('prepjet_loaded_before') == null) {
+                Office.context.document.settings.set('prepjet_loaded_before', true);
+                Office.context.document.settings.saveAsync();
+                window.location = "intro.html";
+            }
+
             app.initialize();
 
             populateCheckboxes();
