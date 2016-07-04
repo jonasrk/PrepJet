@@ -53,17 +53,32 @@
         <div>
             <header>Validation Rule</header>
         </div>
-        <!--dropdown for if condition-->
-        <div class="ms-Dropdown dropdown_table_col1" tabindex="1">
+        <!--Advanced Rule-->
+        <button class="ms-Button" id="advanced_button">Advanced Rule</button>
+        <!--Simple Rule-->
+        <button class="ms-Button" id="simple_button">Simple Rule</button>
+
+        <!--dropdown for condition - simple -->
+        <div id="simple_dropdown" class="ms-Dropdown table_simple" tabindex="1">
+            <label class="ms-Label">Select conditional variable</label>
+            <i class="ms-Dropdown-caretDown ms-Icon ms-Icon--caretDown"></i>
+            <select id="column_simple" class="ms-Dropdown-select">
+                <option value="empty"></option>
+            </select>
+        </div>
+
+        <!--dropdown for if condition - advanced-->
+        <div id="advanced_dropdown" class="ms-Dropdown dropdown_table_col1" tabindex="1">
             <label class="ms-Label">IF (Select conditional variable)</label>
             <i class="ms-Dropdown-caretDown ms-Icon ms-Icon--caretDown"></i>
             <select id="column1_options" class="ms-Dropdown-select">
                 <option value="empty"></option>
             </select>
         </div>
+
         <!--dropdown for operator-->
         <div class="ms-Dropdown dropdown_table" tabindex="1">
-            <label class="ms-Label">Select beginning of new value</label>
+            <label class="ms-Label">Select operator</label>
             <i class="ms-Dropdown-caretDown ms-Icon ms-Icon--caretDown"></i>
             <select id="if_operator" class="ms-Dropdown-select">
                 <option value="empty"></option>
@@ -73,22 +88,25 @@
                 <option value="inequal">!=</option>
             </select>
         </div>
+
         <!--evtl. text field for condition-->
         <div id="delimiter_beginning" class="ms-TextField ms-TextField--placeholder">
             <label class="ms-Label">Enter condition to check</label>
             <input id="if_condition" class="ms-TextField-field" type="text">
         </div>
+
         <!--dropdown for THEN-->
-        <div class="ms-Dropdown dropdown_table_col2" tabindex="1">
+        <div id="advanced_dropdown2" class="ms-Dropdown dropdown_table_col2" tabindex="1">
             <label class="ms-Label">THEN (select dependend variable)</label>
             <i class="ms-Dropdown-caretDown ms-Icon ms-Icon--caretDown"></i>
             <select id="column2_options" class="ms-Dropdown-select">
                 <option value="empty"></option>
             </select>
         </div>
+
         <!--dropdown for then operator-->
-        <div class="ms-Dropdown dropdown_table" tabindex="1">
-            <label class="ms-Label">Select beginning of new value</label>
+        <div id="then_op_drop" class="ms-Dropdown dropdown_table" tabindex="1">
+            <label class="ms-Label">Select operator</label>
             <i class="ms-Dropdown-caretDown ms-Icon ms-Icon--caretDown"></i>
             <select id="then_operator" class="ms-Dropdown-select" onchange="displayBetween()">
                 <option value="empty"></option>
@@ -99,16 +117,19 @@
                 <option value="between">between</option>
             </select>
         </div>
+
         <!--evtl. text field for Then condition-->
         <div id="delimiter_end" class="ms-TextField ms-TextField--placeholder">
             <label class="ms-Label">Enter condition to check</label>
             <input id="then_condition" class="ms-TextField-field" type="text">
         </div>
+
         <!--evtl. text field for Then between condition-->
         <div id="between_and" class="ms-TextField ms-TextField--placeholder">
             <label class="ms-Label">and</label>
             <input id="between_and" class="ms-TextField-field" type="text">
         </div>
+
         <!--split button-->
         <button class="ms-Button" id="apply">Apply</button>
     </div>

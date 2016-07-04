@@ -1,3 +1,25 @@
+//display fields for advanced rule
+function displayAdvanced(){
+    $('#simple_button').show();
+    $('#simple_dropdown').hide();
+    $('#advanced_button').hide();
+    $('#advanced_dropdown').show();
+    $('#advanced_dropdown2').show();
+    $('#then_op_drop').show();
+    $('#delimiter_end').show();
+}
+
+//display fields for simple rule
+function displaySimple() {
+            $('#advanced_button').hide();
+            $('#simple_button').hide();
+            $('#simple_dropdown').show();
+            $('#advanced_dropdown').hide();
+            $('#advanced_dropdown2').hide();
+            $('#then_op_drop').hide();
+            $('#delimiter_end').hide();
+}
+
 //show textfield for ending delimiter if custom is selected
 function displayBetween(){
     if(document.getElementById('then_operator').value == "between") {
@@ -13,10 +35,19 @@ function displayBetween(){
     Office.initialize = function (reason) {
         jQuery(document).ready(function () {
             app.initialize();
+            fillSimpleColumn();
+
+            $('#simple_button').hide();
+            $('#advanced_dropdown').hide();
+            $('#advanced_dropdown2').hide();
+            $('#then_op_drop').hide();
+            $('#delimiter_end').hide();
+
             fillColumn();
+            $('#advanced_button').click(displayAdvanced);
+            $('#simple_button').click(displaySimple);
 
             $('#between_and').hide();
-
             $(".dropdown_table").Dropdown();
             $(".ms-TextField").TextField();
 
@@ -25,6 +56,33 @@ function displayBetween(){
         });
     };
 
+    function fillSimpleColumn(){
+
+        Excel.run(function (ctx) {
+
+            var worksheet = ctx.workbook.worksheets.getActiveWorksheet();
+            var range_all = worksheet.getRange();
+            var range = range_all.getUsedRange();
+            range.load('text');
+            return ctx.sync().then(function() {
+                for (var i = 0; i < range.text[0].length; i++) {
+                    var el = document.createElement("option");
+                    el.value = range.text[0][i];
+                    el.textContent = range.text[0][i];
+                    document.getElementById("column_simple").appendChild(el);
+                }
+
+                $(".table_simple").Dropdown();
+            });
+
+        }).catch(function(error) {
+            console.log("Error: " + error);
+            if (error instanceof OfficeExtension.Error) {
+                console.log("Debug info: " + JSON.stringify(error.debugInfo));
+            }
+        });
+
+    }
 
     function fillColumn(){
 
