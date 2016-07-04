@@ -9,6 +9,11 @@
 
     $(document).ready(function () {
 
+        function redirect_to_funct(){
+            console.log(Office.context.document.settings.get('last_clicked_function'));
+            window.location = Office.context.document.settings.get('last_clicked_function');
+        }
+
         app.firstrun.totalPages = $('#pageMarkers').get(0).childElementCount;
 
         // Navigates to a different stage
@@ -21,6 +26,7 @@
         };
 
         $('.change-stage').click(app.firstrun.newStage);
+        $('#goToHomeLabel').click(redirect_to_funct);
 
         // Navigates to the next stage of the First Run experience.
         app.firstrun.nextStage = function () {
