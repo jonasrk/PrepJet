@@ -1,3 +1,8 @@
+function backToOne() {
+    $('#step1').show();
+    $('#step2').hide();
+}
+
 (function () {
     'use strict';
 
@@ -13,7 +18,9 @@
 
             $('#bt_step2').click(step2ButtonClicked);
             $('#bt_step3').click(step3ButtonClicked);
+            $('#back_step1').click(backToOne);
             $('#bt_apply').click(applyButtonClicked);
+            $('#back_step2').click(step2ButtonClicked);
 
         });
     };
