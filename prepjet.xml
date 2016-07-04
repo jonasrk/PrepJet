@@ -16,6 +16,7 @@
   <Description DefaultValue="Data preparation toolkit" />
   <!-- TODO: Icon for your add-in. Used on installation screens and the add-ins dialog -->
   <IconUrl DefaultValue="https://i.imgur.com/oZFS95h.png" />
+  <SupportUrl DefaultValue="https://z8d.de/internal/support.txt" />
 
   <!--BeginTaskpaneMode integration. Office 2013 and any client that doesn't understand commands will use this section.
     This section will also be used if there are no VersionOverrides -->
