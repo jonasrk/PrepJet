@@ -36,13 +36,11 @@ function displayFieldDelimiter(){
             range.load('text');
             return ctx.sync().then(function() {
                 for (var i = 0; i < range.text[0].length; i++) {
-
                     var el = document.createElement("option");
                     el.value = range.text[0][i];
                     el.textContent = range.text[0][i];
                     document.getElementById("column_options").appendChild(el);
                 }
-
                 $(".dropdown_table_col").Dropdown();
             });
 

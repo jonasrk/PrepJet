@@ -151,6 +151,24 @@
                   </Action>
                 </Control>
 
+                    <Control xsi:type="Button" id="PrepJet.TrimSpacesButton">
+                  <Label resid="PrepJet.TrimSpacesButton.Label" />
+                  <Supertip>
+                    <Title resid="PrepJet.TrimSpacesButton.Label" />
+                    <Description resid="PrepJet.SplitValuesButton.Tooltip" />
+                  </Supertip>
+                  <Icon>
+                    <bt:Image size="16" resid="PrepJet.trimspaces.Icon_sm" />
+                    <bt:Image size="32" resid="PrepJet.trimspaces.Icon" />
+                    <bt:Image size="80" resid="PrepJet.trimspaces.Icon_lg" />
+                  </Icon>
+                  <Action xsi:type="ShowTaskpane">
+                    <TaskpaneId>Button2Id1</TaskpaneId>
+                    <!--Provide a url resource id for the location that will be displayed on the task pane -->
+                    <SourceLocation resid="PrepJet.TrimSpaces.Url" />
+                  </Action>
+                </Control>
+
               </Group>
               <Group id="PrepJet.Tab1.Group3">
                 <!--Label for your group. resid must point to a ShortString resource -->
@@ -199,6 +217,37 @@
                     <SourceLocation resid="PrepJet.DetectOutliers.Url" />
                   </Action>
                 </Control>
+                </Group>
+
+                <Group id="PrepJet.Tab1.Group4">
+                <!--Label for your group. resid must point to a ShortString resource -->
+                <Label resid="PrepJet.Tab1.GroupLabel2" />
+                <Icon>
+                  <!-- Sample Todo: Each size needs its own icon resource or it will look distorted when resized -->
+                  <!--Icons. Required sizes 16,31,80, optional 20, 24, 40, 48, 64. Strongly recommended to provide all sizes for great UX -->
+                  <!--Use PNG icons and remember that all URLs on the resources section must use HTTPS -->
+                  <bt:Image size="16" resid="PrepJet.addcolumn.Icon_sm" />
+                  <bt:Image size="32" resid="PrepJet.addcolumn.Icon" />
+                  <bt:Image size="80" resid="PrepJet.addcolumn.Icon_lg" />
+                </Icon>
+
+                <Control xsi:type="Button" id="PrepJet.ValidationRuleButton">
+                  <Label resid="PrepJet.ValidationRuleButton.Label" />
+                  <Supertip>
+                    <Title resid="PrepJet.ValidationRuleButton.Label" />
+                    <Description resid="PrepJet.SplitValuesButton.Tooltip" />
+                  </Supertip>
+                  <Icon>
+                    <bt:Image size="16" resid="PrepJet.validationrule.Icon_sm" />
+                    <bt:Image size="32" resid="PrepJet.validationrule.Icon" />
+                    <bt:Image size="80" resid="PrepJet.validationrule.Icon_lg" />
+                  </Icon>
+                  <Action xsi:type="ShowTaskpane">
+                    <TaskpaneId>Button2Id1</TaskpaneId>
+                    <!--Provide a url resource id for the location that will be displayed on the task pane -->
+                    <SourceLocation resid="PrepJet.validation.Url" />
+                  </Action>
+                </Control>
 
               </Group>
 
@@ -217,16 +266,22 @@
         <bt:Image id="PrepJet.removeduplicates.Icon" DefaultValue="https://localhost:8443/images/removeduplicates.png" />
         <bt:Image id="PrepJet.splitvalues.Icon" DefaultValue="https://localhost:8443/images/splitvalues.png" />
         <bt:Image id="PrepJet.extractvalues.Icon" DefaultValue="https://localhost:8443/images/extractvalues.png" />
+        <bt:Image id="PrepJet.trimspaces.Icon" DefaultValue="https://localhost:8443/images/trimspaces.png" />
+        <bt:Image id="PrepJet.validationrule.Icon" DefaultValue="https://localhost:8443/images/validationrule.png" />
         <bt:Image id="PrepJet.addcolumn.Icon_sm" DefaultValue="https://localhost:8443/images/addcolumn_sm.png" />
         <bt:Image id="PrepJet.detectoutlier.Icon_sm" DefaultValue="https://localhost:8443/images/detectoutlier_sm.png" />
         <bt:Image id="PrepJet.removeduplicates.Icon_sm" DefaultValue="https://localhost:8443/images/removeduplicates_sm.png" />
         <bt:Image id="PrepJet.splitvalues.Icon_sm" DefaultValue="https://localhost:8443/images/splitvalues_sm.png" />
         <bt:Image id="PrepJet.extractvalues.Icon_sm" DefaultValue="https://localhost:8443/images/extractvalues_sm.png" />
+        <bt:Image id="PrepJet.trimspaces.Icon_sm" DefaultValue="https://localhost:8443/images/trimspaces_sm.png" />
+        <bt:Image id="PrepJet.validationrule.Icon_sm" DefaultValue="https://localhost:8443/images/validationrule_sm.png" />
         <bt:Image id="PrepJet.addcolumn.Icon_lg" DefaultValue="https://localhost:8443/images/addcolumn_lg.png" />
         <bt:Image id="PrepJet.detectoutlier.Icon_lg" DefaultValue="https://localhost:8443/images/detectoutlier_lg.png" />
         <bt:Image id="PrepJet.removeduplicates.Icon_lg" DefaultValue="https://localhost:8443/images/removeduplicates_lg.png" />
         <bt:Image id="PrepJet.splitvalues.Icon_lg" DefaultValue="https://localhost:8443/images/splitvalues_lg.png" />
         <bt:Image id="PrepJet.extractvalues.Icon_lg" DefaultValue="https://localhost:8443/images/extractvalues_lg.png" />
+        <bt:Image id="PrepJet.trimspaces.Icon_lg" DefaultValue="https://localhost:8443/images/trimspaces_lg.png" />
+        <bt:Image id="PrepJet.validationrule.Icon_lg" DefaultValue="https://localhost:8443/images/validationrule_lg.png" />
 
       </bt:Images>
       <bt:Urls>
@@ -236,6 +291,8 @@
         <bt:Url id="PrepJet.FindDuplicates.Url" DefaultValue="https://localhost:8443/app/home/duplicates.html" />
         <bt:Url id="PrepJet.DetectOutliers.Url" DefaultValue="https://localhost:8443/app/home/outlier.html" />
         <bt:Url id="PrepJet.ExtractValues.Url" DefaultValue="https://localhost:8443/app/home/extract_values.html" />
+        <bt:Url id="PrepJet.TrimSpaces.Url" DefaultValue="https://localhost:8443/app/home/intro.html" />
+        <bt:Url id="PrepJet.validation.Url" DefaultValue="https://localhost:8443/app/home/validation.html" />
         <!--LearnMore URL currently not used -->
         <bt:Url id="PrepJet.GetStarted.LearnMoreUrl" DefaultValue="http://www.prepjet.de/about-1/">
         </bt:Url>
@@ -246,6 +303,8 @@
         <bt:String id="PrepJet.FindDuplicatesButton.Label" DefaultValue="Detect Duplicates" />
         <bt:String id="PrepJet.DetectOutliersButton.Label" DefaultValue="Detect Outliers" />
         <bt:String id="PrepJet.ExtractValuesButton.Label" DefaultValue="Extract Values" />
+        <bt:String id="PrepJet.TrimSpacesButton.Label" DefaultValue="Trim Spaces" />
+        <bt:String id="PrepJet.ValidationRuleButton.Label" DefaultValue="Validation Rule" />
         <bt:String id="PrepJet.Dropdown.Label" DefaultValue="Dropdown" />
         <bt:String id="PrepJet.Item1.Label" DefaultValue="Show Taskpane 1" />
         <bt:String id="PrepJet.Item2.Label" DefaultValue="Show Taskpane 2" />

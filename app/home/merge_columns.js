@@ -217,6 +217,7 @@
                                 for (var j = 1; j < range_adding_to.text.length; j++) {
                                     if (range_adding_to.text[j][sheet2_id] == range.text[i][sheet1_id]) {
                                         var sheet_row = j + 1;
+                                        console.log(range.text[i][k])
                                         addContentToWorksheet(worksheet_adding_to, column_char + sheet_row, range.text[i][k])
                                     }
                                 }

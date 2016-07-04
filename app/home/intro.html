@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <title>Welcome to PrepJet</title>
+
+    <!-- For the Office UI Fabric, go to http://aka.ms/office-ui-fabric to learn more. -->
+    <link rel="stylesheet" href="https://appsforoffice.microsoft.com/fabric/2.1.0/fabric.min.css">
+    <link rel="stylesheet" href="https://appsforoffice.microsoft.com/fabric/2.1.0/fabric.components.min.css">
+
+    <script src="../../bower_components/jquery/jquery.min.js"></script>
+    <link href="../../content/fabric.min.css" rel="stylesheet">
+    <link href="../../content/fabric.components.min.css" rel="stylesheet">
+    <script src="../../scripts/MicrosoftAjax.js"></script>
+
+    <!--link href="../App.css" rel="stylesheet" type="text/css"/-->
+    <script src="../App.js"></script>
+
+    <!-- Template styles -->
+    <link href="intro.css" rel="stylesheet" type="text/css" />
+    <!--script type="text/javascript" src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.2.1.min.js"></script-->
+    <script src="intro.js"></script>
+
+</head>
+<body>
+    <div class="ms-firstrun-pages ms-bgColor-themePrimary">
+        <div class="ms-firstrun-pages__header">
+            <div class="ms-firstrun-pages__header--skip ms-font-m ms-fontColor-white">
+                <span class="pointerCursor" id="goToHomeLabel">Skip </span>
+                <i class="pointerCursor ms-Icon ms-Icon--chevronThickRight"></i>
+            </div>
+            <div class="ms-firstrun-pages__welcome">
+                <div>
+                    <h1 id="welcomeHeadline" class="ms-font-xl ms-fontWeight-light ms-fontColor-white">Welcome to PrepJet</h1>
+                </div>
+                <div class="ms-fontWeight-light ms-fontColor-white">
+                    <h3 class="page2 undisplayed">Add column</h3>
+                    <h3 class="page3 undisplayed">Split values</h3>
+                    <h3 class="page4 undisplayed">Extract values</h3>
+                    <h3 class="page5 undisplayed">Trim Spaces</h3>
+                    <h3 class="page6 undisplayed">Detect Duplicates</h3>
+                    <h3 class="page7 undisplayed">Detect Outlier</h3>
+                    <h3 class="page8 undisplayed">Validation Rule</h3>
+            </div>
+            </div>
+        </div>
+        <div class="ms-firstrun-pages__pager">
+            <div class="ms-firstrun-pages__pager--pagercontrol">
+                <span id="previous" class="change-stage invisible ms-font-m ms-fontColor-white">
+                    <i class="ms-Icon ms-Icon--chevronThickLeft" title="Previous page"></i>
+                </span>
+                <div>
+                    <img class="page1" src="https://localhost:8443/images/logo.png" />
+                    <img class="page2 undisplayed" src="https://localhost:8443/images/addcolumn.png" />
+                    <img class="page3 undisplayed" src="https://localhost:8443/images/splitvalues.png" />
+                    <img class="page4 undisplayed" src="https://localhost:8443/images/extractvalues.png" />
+                    <img class="page5 undisplayed" src="https://localhost:8443/images/trimspaces.png" />
+                    <img class="page6 undisplayed" src="https://localhost:8443/images/removeduplicates.png" />
+                    <img class="page7 undisplayed" src="https://localhost:8443/images/detectoutlier.png" />
+                    <img class="page8 undisplayed" src="https://localhost:8443/images/validationrule.png" />
+                    <!--img class="page1" src="../../../assets/pager-1.png" />
+                    <img class="page2 undisplayed" src="../../../assets/pager-2.png" />
+                    <img class="page3 undisplayed" src="../../../assets/pager-3.png" />
+                    <!-- Add an element like the following for each addtional page. -->
+                    <!-- <img class="page4 undisplayed" src="../../../assets/pager-4.png" /-->
+                </div>
+                <span id="next" class="change-stage ms-font-m ms-fontColor-white">
+                    <i class="ms-Icon ms-Icon--chevronThickRight" title="Next page"></i>
+                </span>
+            </div>
+        </div>
+        <div class="ms-firstrun-pages__content">
+            <div class="ms-firstrun-pages__content--centered ms-font-m ms-fontColor-white">
+                <p class="page1">
+                    <span class="ms-fontWeight-light">PrepJet helps you to make more sense of your data.
+                        You have several options to shape it like you need it.<br>
+                        A table header is all you need.<br>
+                        Go through this quick intro guide and learn how PrepJet can make your life easier.</span>
+                    <!--span class="ms-fontWeight-semibold">focus on priorities</span-->
+                </p>
+                <p class="page2 undisplayed">
+                    <span class="ms-fontWeight-light">Add data from other worksheets to your table. Simply select<br>
+                        1. The tables to use<br>
+                        2. The column(s) to add to first table<br>
+                        3. The identifier to find matching data record </span>
+                    <!--span class="ms-fontWeight-semibold">measure productivity</span-->
+                </p>
+                <p class="page3 undisplayed">
+                    <span class="ms-fontWeight-light">Split entries of one column into separate ones <br>
+                        1. Select the column to split<br>
+                        2. Specify the delimiter at which to split<br>
+                        3. Advanced settings if you want to split the data only at one of the delimiters (e.g. 3rd whitespace) </span>
+                    <!--span class="ms-fontWeight-semibold">be very organized</span-->
+                </p>
+                <p class="page4 undisplayed">
+                    <span class="ms-fontWeight-light">Extract a part of the entry in a column, defined by certain delimiters. <br>
+                        1. Select the column to extract from<br>
+                        2. Specify start and end<br>
+                        3. Select whether the delimiter should be included or not </span>
+                    <!--span class="ms-fontWeight-semibold">be very organized</span-->
+                </p>
+                <p class="page5 undisplayed">
+                    <span class="ms-fontWeight-light">Delete leading and trailing spaces<br>
+                        Simply select the applicable columns.
+                    </span>
+                    <!--span class="ms-fontWeight-semibold">be very organized</span-->
+                </p>
+                <p class="page6 undisplayed">
+                    <span class="ms-fontWeight-light">Find and highlight duplicate data records.<br>
+                        1. Select the column(s) to include in comparison<br>
+                        2. Specify match type (exact or fuzzy)<br>
+                        Fuzzy means the data records can differ slightly (e.g. „John Smith“ vs „John S. Smith“) </span>
+                    <!--span class="ms-fontWeight-semibold">be very organized</span-->
+                </p>
+                <p class="page7 undisplayed">
+                    <span class="ms-fontWeight-light">Find and highlight values that do not comply with the variance of the overall column. <br>
+                        Simply select the column to detect outlier in.</span>
+                    <!--span class="ms-fontWeight-semibold">be very organized</span-->
+                </p>
+                <p class="page8 undisplayed">
+                    <span class="ms-fontWeight-light">Check if your data complies to certain rules.<br>
+                        1. Select conditional column<br>
+                        2. Select operator (e.g. <; >; =)<br>
+                        3. Enter threshold or condition<br>
+                        4. Select dependend column<br>
+                        5. Select operator.<br>
+                        6. Enter condition
+                    </span>
+                    <!--span class="ms-fontWeight-semibold">be very organized</span-->
+                </p>
+                <!-- Add an element like the following for each addtional page. -->
+                <!-- <p class="page4 undisplayed"><span class="ms-fontWeight-light">Text for 4th page </span><span class="ms-fontWeight-semibold">emphatic 4th page text</span></p> -->
+            </div>
+        </div>
+        <footer class="ms-firstrun-pages__footer">
+            <div class="ms-firstrun-pages__footer--centered">
+                <p class="ms-font-mi" id="pageMarkers">
+                    <span id="page1Marker" class="ms-fontColor-white">
+                        <i class="ms-Icon ms-Icon--circleFilled" aria-hidden="true"></i>
+                    </span>
+                    <span id="page2Marker" class="ms-fontColor-themeTertiary">
+                        <i class="ms-Icon ms-Icon--circleFilled" aria-hidden="true"></i>
+                    </span>
+                    <span id="page3Marker" class="ms-fontColor-themeTertiary">
+                        <i class="ms-Icon ms-Icon--circleFilled" aria-hidden="true"></i>
+                    </span>
+                    <span id="page4Marker" class="ms-fontColor-themeTertiary">
+                        <i class="ms-Icon ms-Icon--circleFilled" aria-hidden="true"></i>
+                    </span>
+                    <span id="page5Marker" class="ms-fontColor-themeTertiary">
+                        <i class="ms-Icon ms-Icon--circleFilled" aria-hidden="true"></i>
+                    </span>
+                    <span id="page6Marker" class="ms-fontColor-themeTertiary">
+                        <i class="ms-Icon ms-Icon--circleFilled" aria-hidden="true"></i>
+                    </span>
+                    <span id="page7Marker" class="ms-fontColor-themeTertiary">
+                        <i class="ms-Icon ms-Icon--circleFilled" aria-hidden="true"></i>
+                    </span>
+                    <span id="page8Marker" class="ms-fontColor-themeTertiary">
+                        <i class="ms-Icon ms-Icon--circleFilled" aria-hidden="true"></i>
+                    </span>
+                    <!-- Add an element like the following for each addtional page. -->
+                    <!-- <span id="page4Marker" class="ms-fontColor-themeTertiary"><i class="ms-Icon ms-Icon--circleFilled" aria-hidden="true"></i></span> -->
+                </p>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>

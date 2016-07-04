@@ -24,12 +24,12 @@
     <!--<script src="../../scripts/jquery.fabric.min.js"></script>-->
     <script src="../../scripts/MicrosoftAjax.js"></script>
 
-    <link href="../app.css" rel="stylesheet" type="text/css"/>
-    <script src="../app.js"></script>
+    <link href="../App.css" rel="stylesheet" type="text/css"/>
+    <script src="../App.js"></script>
 
-    <link href="Home.css" rel="stylesheet" type="text/css"/>
+    <link href="style.css" rel="stylesheet" type="text/css"/>
     <script src="helpers.js"></script>
-    <script src="extract_values.js"></script>
+    <script src="validation.js"></script>
 
     <!--PrepJet Fabric Components Imports-->
     <script src="../../bower_components/office-ui-fabric/src/components/TextField/Jquery.TextField.js"></script>
@@ -41,7 +41,7 @@
 <body class="ms-font-m">
 <div id="content-header">
     <div class="padding">
-        <h1>Extract Value</h1>
+        <h1>Validation Rule</h1>
     </div>
 </div>
 <div id="content-main">
@@ -51,60 +51,66 @@
 
         <!--Pop Up headline-->
         <div>
-            <header>Extract Value</header>
+            <header>Validation Rule</header>
         </div>
-        <!--dropdown for column-->
-        <div class="ms-Dropdown dropdown_table_col" tabindex="1">
-            <label class="ms-Label">Select column to extract value</label>
+        <!--dropdown for if condition-->
+        <div class="ms-Dropdown dropdown_table_col1" tabindex="1">
+            <label class="ms-Label">IF (Select conditional variable)</label>
             <i class="ms-Dropdown-caretDown ms-Icon ms-Icon--caretDown"></i>
             <select id="column1_options" class="ms-Dropdown-select">
                 <option value="empty"></option>
             </select>
         </div>
-        <!--dropdown fpr beginning-->
+        <!--dropdown for operator-->
         <div class="ms-Dropdown dropdown_table" tabindex="1">
             <label class="ms-Label">Select beginning of new value</label>
             <i class="ms-Dropdown-caretDown ms-Icon ms-Icon--caretDown"></i>
-            <select id="beginning_options" class="ms-Dropdown-select" onchange="displayFieldBegin()">
-                <option value="col_beginning">Beginning of column</option>
-                <option value="whitespace_b">Whitespace</option>
-                <option value="custom_b">Custom</option>
+            <select id="if_operator" class="ms-Dropdown-select">
+                <option value="empty"></option>
+                <option value="equal">=</option>
+                <option value="smaller"><</option>
+                <option value="greater">></option>
+                <option value="inequal">!=</option>
             </select>
         </div>
-        <!--evtl. text field for custom ending-->
+        <!--evtl. text field for condition-->
         <div id="delimiter_beginning" class="ms-TextField ms-TextField--placeholder">
-            <label class="ms-Label">Enter custom beginning</label>
-            <input id="delimiter_input_b" class="ms-TextField-field" type="text">
+            <label class="ms-Label">Enter condition to check</label>
+            <input id="if_condition" class="ms-TextField-field" type="text">
         </div>
-        <!--dropdown for ending-->
-        <div class="ms-Dropdown dropdown_table" tabindex="1">
-            <label class="ms-Label">Select ending of new value</label>
+        <!--dropdown for THEN-->
+        <div class="ms-Dropdown dropdown_table_col2" tabindex="1">
+            <label class="ms-Label">THEN (select dependend variable)</label>
             <i class="ms-Dropdown-caretDown ms-Icon ms-Icon--caretDown"></i>
-            <select id="ending_options" class="ms-Dropdown-select" onchange="displayFieldEnd()">
-                <option value="col_end">End of column</option>
-                <option value="whitespace_e">Whitespace</option>
-                <option value="custom_e">Custom</option>
+            <select id="column2_options" class="ms-Dropdown-select">
+                <option value="empty"></option>
             </select>
         </div>
-        <!--evtl. text field for custom ending-->
+        <!--dropdown for then operator-->
+        <div class="ms-Dropdown dropdown_table" tabindex="1">
+            <label class="ms-Label">Select beginning of new value</label>
+            <i class="ms-Dropdown-caretDown ms-Icon ms-Icon--caretDown"></i>
+            <select id="then_operator" class="ms-Dropdown-select" onchange="displayBetween()">
+                <option value="empty"></option>
+                <option value="equal">=</option>
+                <option value="smaller"><</option>
+                <option value="greater">></option>
+                <option value="inequal">!=</option>
+                <option value="between">between</option>
+            </select>
+        </div>
+        <!--evtl. text field for Then condition-->
         <div id="delimiter_end" class="ms-TextField ms-TextField--placeholder">
-            <label class="ms-Label">Enter custom ending</label>
-            <input id="delimiter_input_e" class="ms-TextField-field" type="text">
+            <label class="ms-Label">Enter condition to check</label>
+            <input id="then_condition" class="ms-TextField-field" type="text">
         </div>
-        <!--Textfield to specify column to insert-->
-        <div id="target_column" class="ms-TextField ms-TextField--placeholder">
-            <label class="ms-Label">Enter target column, e.g. B</label>
-            <input id="target_column_input" class="ms-TextField-field" type="text">
-        </div>
-        <!--checkbox-->
-        <div class="ms-ChoiceField">
-            <input id="demo-checkbox-unselected" class="ms-ChoiceField-input" type="checkbox">
-            <label id="checkbox" for="demo-checkbox-unselected" class="ms-ChoiceField-field">
-                <span class="ms-Label">Include delimiter</span>
-            </label>
+        <!--evtl. text field for Then between condition-->
+        <div id="between_and" class="ms-TextField ms-TextField--placeholder">
+            <label class="ms-Label">and</label>
+            <input id="between_and" class="ms-TextField-field" type="text">
         </div>
         <!--split button-->
-        <button class="ms-Button" id="extract_Value">Split</button>
+        <button class="ms-Button" id="apply">Apply</button>
     </div>
 
 
