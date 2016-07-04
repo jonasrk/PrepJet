@@ -16,6 +16,7 @@
   <Description DefaultValue="Data preparation toolkit" />
   <!-- TODO: Icon for your add-in. Used on installation screens and the add-ins dialog -->
   <IconUrl DefaultValue="https://i.imgur.com/oZFS95h.png" />
+  <SupportUrl DefaultValue="https://z8d.de/internal/support.txt" />
 
   <!--BeginTaskpaneMode integration. Office 2013 and any client that doesn't understand commands will use this section.
     This section will also be used if there are no VersionOverrides -->
@@ -43,227 +44,227 @@
            Ensure you have build 16.0.6769 or above for GetStarted section to work-->
           <GetStarted>
             <!--Title of the Getting Started callout. resid points to a ShortString resource -->
-            <Title resid="PrepJet.GetStarted.Title"/>
+            <Title resid="PJ.GetStarted.Title"/>
 
             <!--Description of the Getting Started callout. resid points to a LongString resource -->
-            <Description resid="PrepJet.GetStarted.Description"/>
+            <Description resid="PJ.GetStarted.Description"/>
 
             <!--Not used right now but you need to provide a valid resource. We will add code in the future to consume this URL.
                 resid points to a Url resource -->
-            <LearnMoreUrl resid="PrepJet.GetStarted.LearnMoreUrl"/>
+            <LearnMoreUrl resid="PJ.GetStarted.LearnMoreUrl"/>
           </GetStarted>
 
           <!--Function file is an html page that includes the javascript where functions for ExecuteAction will be called.
           Think of the FunctionFile as the "code behind" ExecuteFunction-->
-          <FunctionFile resid="PrepJet.FunctionFile.Url" />
+          <FunctionFile resid="PJ.FunctionFile.Url" />
 
           <!--PrimaryCommandSurface==Main Office Ribbon-->
           <ExtensionPoint xsi:type="PrimaryCommandSurface">
             <!--Use OfficeTab to extend an existing Tab. Use CustomTab to create a new tab -->
             <!-- Documentation includes all the IDs currently tested to work -->
-            <CustomTab id="PrepJet.Tab1">
+            <CustomTab id="PJ.Tab1">
               <!--Group. Ensure you provide a unique id. Recommendation for any IDs is to namespace using your company name-->
-              <Group id="PrepJet.Tab1.Group1">
+              <Group id="PJ.Tab1.Group1">
                 <!--Label for your group. resid must point to a ShortString resource -->
-                <Label resid="PrepJet.Tab1.GroupLabel" />
+                <Label resid="PJ.Tab1.GroupLabel" />
                 <Icon>
                   <!-- Sample Todo: Each size needs its own icon resource or it will look distorted when resized -->
                   <!--Icons. Required sizes 16,31,80, optional 20, 24, 40, 48, 64. Strongly recommended to provide all sizes for great UX -->
                   <!--Use PNG icons and remember that all URLs on the resources section must use HTTPS -->
-                  <bt:Image size="16" resid="PrepJet.addcolumn.Icon_sm" />
-                  <bt:Image size="32" resid="PrepJet.addcolumn.Icon" />
-                  <bt:Image size="80" resid="PrepJet.addcolumn.Icon_lg" />
+                  <bt:Image size="16" resid="PJ.addcolumn.Icon_sm" />
+                  <bt:Image size="32" resid="PJ.addcolumn.Icon" />
+                  <bt:Image size="80" resid="PJ.addcolumn.Icon_lg" />
                 </Icon>
 
                 <!--Control. It can be of type "Button" or "Menu" -->
-                <Control xsi:type="Button" id="PrepJet.addcolumnButton">
+                <Control xsi:type="Button" id="PJ.addcolumnButton">
                   <!--Label for your button. resid must point to a ShortString resource -->
-                  <Label resid="PrepJet.addcolumnButton.Label" />
+                  <Label resid="PJ.addcolumnButton.Label" />
                   <Supertip>
                     <!--ToolTip title. resid must point to a ShortString resource -->
-                    <Title resid="PrepJet.addcolumnButton.Label" />
+                    <Title resid="PJ.addcolumnButton.Label" />
                     <!--ToolTip description. resid must point to a LongString resource -->
-                    <Description resid="PrepJet.addcolumnButton.Tooltip" />
+                    <Description resid="PJ.addcolumnButton.Tooltip" />
                   </Supertip>
                   <Icon>
-                    <bt:Image size="16" resid="PrepJet.addcolumn.Icon_sm" />
-                    <bt:Image size="32" resid="PrepJet.addcolumn.Icon" />
-                    <bt:Image size="80" resid="PrepJet.addcolumn.Icon_lg" />
+                    <bt:Image size="16" resid="PJ.addcolumn.Icon_sm" />
+                    <bt:Image size="32" resid="PJ.addcolumn.Icon" />
+                    <bt:Image size="80" resid="PJ.addcolumn.Icon_lg" />
                   </Icon>
                   <!--This is what happens when the command is triggered (E.g. click on the Ribbon). Supported actions are ExecuteFuncion or ShowTaskpane-->
                   <!--Look at the FunctionFile.html page for reference on how to implement the function -->
                   <Action xsi:type="ShowTaskpane">
                     <!--Provide a url resource id for the location that will be displayed on the task pane -->
-                    <SourceLocation resid="PrepJet.addcolumns.Url" />
+                    <SourceLocation resid="PJ.addcolumns.Url" />
                   </Action>
                 </Control>
 
 
 
               </Group>
-              <Group id="PrepJet.Tab1.Group2">
+              <Group id="PJ.Tab1.Group2">
                 <!--Label for your group. resid must point to a ShortString resource -->
-                <Label resid="PrepJet.Tab1.GroupLabel2" />
+                <Label resid="PJ.Tab1.GroupLabel2" />
                 <Icon>
                   <!-- Sample Todo: Each size needs its own icon resource or it will look distorted when resized -->
                   <!--Icons. Required sizes 16,31,80, optional 20, 24, 40, 48, 64. Strongly recommended to provide all sizes for great UX -->
                   <!--Use PNG icons and remember that all URLs on the resources section must use HTTPS -->
-                  <bt:Image size="16" resid="PrepJet.addcolumn.Icon_sm" />
-                  <bt:Image size="32" resid="PrepJet.addcolumn.Icon" />
-                  <bt:Image size="80" resid="PrepJet.addcolumn.Icon_lg" />
+                  <bt:Image size="16" resid="PJ.addcolumn.Icon_sm" />
+                  <bt:Image size="32" resid="PJ.addcolumn.Icon" />
+                  <bt:Image size="80" resid="PJ.addcolumn.Icon_lg" />
                 </Icon>
 
 
 
-                <Control xsi:type="Button" id="PrepJet.SplitValuesButton">
-                  <Label resid="PrepJet.SplitValuesButton.Label" />
+                <Control xsi:type="Button" id="PJ.SplitValuesButton">
+                  <Label resid="PJ.SplitValuesButton.Label" />
                   <Supertip>
-                    <Title resid="PrepJet.SplitValuesButton.Label" />
-                    <Description resid="PrepJet.SplitValuesButton.Tooltip" />
+                    <Title resid="PJ.SplitValuesButton.Label" />
+                      <Description resid="PJ.PJ.SVBtn.Ttp" />
                   </Supertip>
                   <Icon>
-                    <bt:Image size="16" resid="PrepJet.splitvalues.Icon_sm" />
-                    <bt:Image size="32" resid="PrepJet.splitvalues.Icon" />
-                    <bt:Image size="80" resid="PrepJet.splitvalues.Icon_lg" />
+                    <bt:Image size="16" resid="PJ.splitvalues.Icon_sm" />
+                    <bt:Image size="32" resid="PJ.splitvalues.Icon" />
+                    <bt:Image size="80" resid="PJ.splitvalues.Icon_lg" />
                   </Icon>
                   <Action xsi:type="ShowTaskpane">
                     <TaskpaneId>Button2Id1</TaskpaneId>
                     <!--Provide a url resource id for the location that will be displayed on the task pane -->
-                    <SourceLocation resid="PrepJet.SplitValues.Url" />
+                    <SourceLocation resid="PJ.SplitValues.Url" />
                   </Action>
                 </Control>
 
-                <Control xsi:type="Button" id="PrepJet.ExtractValuesButton">
-                  <Label resid="PrepJet.ExtractValuesButton.Label" />
+                <Control xsi:type="Button" id="PJ.ExtractValuesButton">
+                  <Label resid="PJ.ExtractValuesButton.Label" />
                   <Supertip>
-                    <Title resid="PrepJet.ExtractValuesButton.Label" />
-                    <Description resid="PrepJet.SplitValuesButton.Tooltip" />
+                    <Title resid="PJ.ExtractValuesButton.Label" />
+                    <Description resid="PJ.PJ.SVBtn.Ttp" />
                   </Supertip>
                   <Icon>
-                    <bt:Image size="16" resid="PrepJet.extractvalues.Icon_sm" />
-                    <bt:Image size="32" resid="PrepJet.extractvalues.Icon" />
-                    <bt:Image size="80" resid="PrepJet.extractvalues.Icon_lg" />
+                    <bt:Image size="16" resid="PJ.extractvalues.Icon_sm" />
+                    <bt:Image size="32" resid="PJ.extractvalues.Icon" />
+                    <bt:Image size="80" resid="PJ.extractvalues.Icon_lg" />
                   </Icon>
                   <Action xsi:type="ShowTaskpane">
                     <TaskpaneId>Button2Id1</TaskpaneId>
                     <!--Provide a url resource id for the location that will be displayed on the task pane -->
-                    <SourceLocation resid="PrepJet.ExtractValues.Url" />
+                    <SourceLocation resid="PJ.ExtractValues.Url" />
                   </Action>
                 </Control>
 
-                    <Control xsi:type="Button" id="PrepJet.TrimSpacesButton">
-                  <Label resid="PrepJet.TrimSpacesButton.Label" />
+                    <Control xsi:type="Button" id="PJ.TrimSpacesButton">
+                  <Label resid="PJ.TrimSpacesButton.Label" />
                   <Supertip>
-                    <Title resid="PrepJet.TrimSpacesButton.Label" />
-                    <Description resid="PrepJet.SplitValuesButton.Tooltip" />
+                    <Title resid="PJ.TrimSpacesButton.Label" />
+                    <Description resid="PJ.PJ.SVBtn.Ttp" />
                   </Supertip>
                   <Icon>
-                    <bt:Image size="16" resid="PrepJet.trimspaces.Icon_sm" />
-                    <bt:Image size="32" resid="PrepJet.trimspaces.Icon" />
-                    <bt:Image size="80" resid="PrepJet.trimspaces.Icon_lg" />
+                    <bt:Image size="16" resid="PJ.trimspaces.Icon_sm" />
+                    <bt:Image size="32" resid="PJ.trimspaces.Icon" />
+                    <bt:Image size="80" resid="PJ.trimspaces.Icon_lg" />
                   </Icon>
                   <Action xsi:type="ShowTaskpane">
                     <TaskpaneId>Button2Id1</TaskpaneId>
                     <!--Provide a url resource id for the location that will be displayed on the task pane -->
-                    <SourceLocation resid="PrepJet.TrimSpaces.Url" />
+                    <SourceLocation resid="PJ.TrimSpaces.Url" />
                   </Action>
                 </Control>
 
               </Group>
-              <Group id="PrepJet.Tab1.Group3">
+              <Group id="PJ.Tab1.Group3">
                 <!--Label for your group. resid must point to a ShortString resource -->
-                <Label resid="PrepJet.Tab1.GroupLabel2" />
+                <Label resid="PJ.Tab1.GroupLabel2" />
                 <Icon>
                   <!-- Sample Todo: Each size needs its own icon resource or it will look distorted when resized -->
                   <!--Icons. Required sizes 16,31,80, optional 20, 24, 40, 48, 64. Strongly recommended to provide all sizes for great UX -->
                   <!--Use PNG icons and remember that all URLs on the resources section must use HTTPS -->
-                  <bt:Image size="16" resid="PrepJet.addcolumn.Icon_sm" />
-                  <bt:Image size="32" resid="PrepJet.addcolumn.Icon" />
-                  <bt:Image size="80" resid="PrepJet.addcolumn.Icon_lg" />
+                  <bt:Image size="16" resid="PJ.addcolumn.Icon_sm" />
+                  <bt:Image size="32" resid="PJ.addcolumn.Icon" />
+                  <bt:Image size="80" resid="PJ.addcolumn.Icon_lg" />
                 </Icon>
 
-                <Control xsi:type="Button" id="PrepJet.FindDuplicatesButton">
-                  <Label resid="PrepJet.FindDuplicatesButton.Label" />
+                <Control xsi:type="Button" id="PJ.FindDuplicatesButton">
+                  <Label resid="PJ.FindDuplicatesButton.Label" />
                   <Supertip>
-                    <Title resid="PrepJet.FindDuplicatesButton.Label" />
-                    <Description resid="PrepJet.SplitValuesButton.Tooltip" />
+                    <Title resid="PJ.FindDuplicatesButton.Label" />
+                    <Description resid="PJ.PJ.SVBtn.Ttp" />
                   </Supertip>
                   <Icon>
-                    <bt:Image size="16" resid="PrepJet.removeduplicates.Icon_sm" />
-                    <bt:Image size="32" resid="PrepJet.removeduplicates.Icon" />
-                    <bt:Image size="80" resid="PrepJet.removeduplicates.Icon_lg" />
+                    <bt:Image size="16" resid="PJ.removeduplicates.Icon_sm" />
+                    <bt:Image size="32" resid="PJ.removeduplicates.Icon" />
+                    <bt:Image size="80" resid="PJ.removeduplicates.Icon_lg" />
                   </Icon>
                   <Action xsi:type="ShowTaskpane">
                     <TaskpaneId>Button2Id1</TaskpaneId>
                     <!--Provide a url resource id for the location that will be displayed on the task pane -->
-                    <SourceLocation resid="PrepJet.FindDuplicates.Url" />
+                    <SourceLocation resid="PJ.FindDuplicates.Url" />
                   </Action>
                 </Control>
 
-                <Control xsi:type="Button" id="PrepJet.DetectOutliersButton">
-                  <Label resid="PrepJet.DetectOutliersButton.Label" />
+                <Control xsi:type="Button" id="PJ.DetectOutliersButton">
+                  <Label resid="PJ.DetectOutliersButton.Label" />
                   <Supertip>
-                    <Title resid="PrepJet.DetectOutliersButton.Label" />
-                    <Description resid="PrepJet.SplitValuesButton.Tooltip" />
+                    <Title resid="PJ.DetectOutliersButton.Label" />
+                    <Description resid="PJ.PJ.SVBtn.Ttp" />
                   </Supertip>
                   <Icon>
-                    <bt:Image size="16" resid="PrepJet.detectoutlier.Icon_sm" />
-                    <bt:Image size="32" resid="PrepJet.detectoutlier.Icon" />
-                    <bt:Image size="80" resid="PrepJet.detectoutlier.Icon_lg" />
+                    <bt:Image size="16" resid="PJ.detectoutlier.Icon_sm" />
+                    <bt:Image size="32" resid="PJ.detectoutlier.Icon" />
+                    <bt:Image size="80" resid="PJ.detectoutlier.Icon_lg" />
                   </Icon>
                   <Action xsi:type="ShowTaskpane">
                     <TaskpaneId>Button2Id1</TaskpaneId>
                     <!--Provide a url resource id for the location that will be displayed on the task pane -->
-                    <SourceLocation resid="PrepJet.DetectOutliers.Url" />
+                    <SourceLocation resid="PJ.DetectOutliers.Url" />
                   </Action>
                 </Control>
                 </Group>
 
-                <Group id="PrepJet.Tab1.Group4">
+                <Group id="PJ.Tab1.Group4">
                 <!--Label for your group. resid must point to a ShortString resource -->
-                <Label resid="PrepJet.Tab1.GroupLabel2" />
+                <Label resid="PJ.Tab1.GroupLabel2" />
                 <Icon>
                   <!-- Sample Todo: Each size needs its own icon resource or it will look distorted when resized -->
                   <!--Icons. Required sizes 16,31,80, optional 20, 24, 40, 48, 64. Strongly recommended to provide all sizes for great UX -->
                   <!--Use PNG icons and remember that all URLs on the resources section must use HTTPS -->
-                  <bt:Image size="16" resid="PrepJet.addcolumn.Icon_sm" />
-                  <bt:Image size="32" resid="PrepJet.addcolumn.Icon" />
-                  <bt:Image size="80" resid="PrepJet.addcolumn.Icon_lg" />
+                  <bt:Image size="16" resid="PJ.addcolumn.Icon_sm" />
+                  <bt:Image size="32" resid="PJ.addcolumn.Icon" />
+                  <bt:Image size="80" resid="PJ.addcolumn.Icon_lg" />
                 </Icon>
 
-                <Control xsi:type="Button" id="PrepJet.ValidationRuleButton">
-                  <Label resid="PrepJet.ValidationRuleButton.Label" />
+                <Control xsi:type="Button" id="PJ.ValidationRuleButton">
+                  <Label resid="PJ.ValidationRuleButton.Label" />
                   <Supertip>
-                    <Title resid="PrepJet.ValidationRuleButton.Label" />
-                    <Description resid="PrepJet.SplitValuesButton.Tooltip" />
+                    <Title resid="PJ.ValidationRuleButton.Label" />
+                    <Description resid="PJ.PJ.SVBtn.Ttp" />
                   </Supertip>
                   <Icon>
-                    <bt:Image size="16" resid="PrepJet.validationrule.Icon_sm" />
-                    <bt:Image size="32" resid="PrepJet.validationrule.Icon" />
-                    <bt:Image size="80" resid="PrepJet.validationrule.Icon_lg" />
+                    <bt:Image size="16" resid="PJ.validationrule.Icon_sm" />
+                    <bt:Image size="32" resid="PJ.validationrule.Icon" />
+                    <bt:Image size="80" resid="PJ.validationrule.Icon_lg" />
                   </Icon>
                   <Action xsi:type="ShowTaskpane">
                     <TaskpaneId>Button2Id1</TaskpaneId>
                     <!--Provide a url resource id for the location that will be displayed on the task pane -->
-                    <SourceLocation resid="PrepJet.validation.Url" />
+                    <SourceLocation resid="PJ.validation.Url" />
                   </Action>
                 </Control>
 
-                  <Control xsi:type="Button" id="PrepJet.IntroButton">
-                  <Label resid="PrepJet.IntroButton.Label" />
+                  <Control xsi:type="Button" id="PJ.IntroButton">
+                  <Label resid="PJ.IntroButton.Label" />
                   <Supertip>
-                    <Title resid="PrepJet.IntroButton.Label" />
-                    <Description resid="PrepJet.SplitValuesButton.Tooltip" />
+                    <Title resid="PJ.IntroButton.Label" />
+                    <Description resid="PJ.PJ.SVBtn.Ttp" />
                   </Supertip>
                   <Icon>
-                    <bt:Image size="16" resid="PrepJet.validationrule.Icon_sm" />
-                    <bt:Image size="32" resid="PrepJet.validationrule.Icon" />
-                    <bt:Image size="80" resid="PrepJet.validationrule.Icon_lg" />
+                    <bt:Image size="16" resid="PJ.validationrule.Icon_sm" />
+                    <bt:Image size="32" resid="PJ.validationrule.Icon" />
+                    <bt:Image size="80" resid="PJ.validationrule.Icon_lg" />
                   </Icon>
                   <Action xsi:type="ShowTaskpane">
                     <TaskpaneId>Button2Id1</TaskpaneId>
                     <!--Provide a url resource id for the location that will be displayed on the task pane -->
-                    <SourceLocation resid="PrepJet.intro.Url" />
+                    <SourceLocation resid="PJ.intro.Url" />
                   </Action>
                 </Control>
 
@@ -271,7 +272,7 @@
 
               <!-- Label of your tab -->
               <!-- If validating with XSD it needs to be at the end, we might change this before release -->
-              <Label resid="PrepJet.Tab1.TabLabel" />
+              <Label resid="PJ.Tab1.TabLabel" />
             </CustomTab>
           </ExtensionPoint>
         </DesktopFormFactor>
@@ -279,69 +280,69 @@
     </Hosts>
     <Resources>
       <bt:Images>
-        <bt:Image id="PrepJet.addcolumn.Icon" DefaultValue="https://localhost:8443/images/addcolumn.png" />
-        <bt:Image id="PrepJet.detectoutlier.Icon" DefaultValue="https://localhost:8443/images/detectoutlier.png" />
-        <bt:Image id="PrepJet.removeduplicates.Icon" DefaultValue="https://localhost:8443/images/removeduplicates.png" />
-        <bt:Image id="PrepJet.splitvalues.Icon" DefaultValue="https://localhost:8443/images/splitvalues.png" />
-        <bt:Image id="PrepJet.extractvalues.Icon" DefaultValue="https://localhost:8443/images/extractvalues.png" />
-        <bt:Image id="PrepJet.trimspaces.Icon" DefaultValue="https://localhost:8443/images/trimspaces.png" />
-        <bt:Image id="PrepJet.validationrule.Icon" DefaultValue="https://localhost:8443/images/validationrule.png" />
-        <bt:Image id="PrepJet.addcolumn.Icon_sm" DefaultValue="https://localhost:8443/images/addcolumn_sm.png" />
-        <bt:Image id="PrepJet.detectoutlier.Icon_sm" DefaultValue="https://localhost:8443/images/detectoutlier_sm.png" />
-        <bt:Image id="PrepJet.removeduplicates.Icon_sm" DefaultValue="https://localhost:8443/images/removeduplicates_sm.png" />
-        <bt:Image id="PrepJet.splitvalues.Icon_sm" DefaultValue="https://localhost:8443/images/splitvalues_sm.png" />
-        <bt:Image id="PrepJet.extractvalues.Icon_sm" DefaultValue="https://localhost:8443/images/extractvalues_sm.png" />
-        <bt:Image id="PrepJet.trimspaces.Icon_sm" DefaultValue="https://localhost:8443/images/trimspaces_sm.png" />
-        <bt:Image id="PrepJet.validationrule.Icon_sm" DefaultValue="https://localhost:8443/images/validationrule_sm.png" />
-        <bt:Image id="PrepJet.addcolumn.Icon_lg" DefaultValue="https://localhost:8443/images/addcolumn_lg.png" />
-        <bt:Image id="PrepJet.detectoutlier.Icon_lg" DefaultValue="https://localhost:8443/images/detectoutlier_lg.png" />
-        <bt:Image id="PrepJet.removeduplicates.Icon_lg" DefaultValue="https://localhost:8443/images/removeduplicates_lg.png" />
-        <bt:Image id="PrepJet.splitvalues.Icon_lg" DefaultValue="https://localhost:8443/images/splitvalues_lg.png" />
-        <bt:Image id="PrepJet.extractvalues.Icon_lg" DefaultValue="https://localhost:8443/images/extractvalues_lg.png" />
-        <bt:Image id="PrepJet.trimspaces.Icon_lg" DefaultValue="https://localhost:8443/images/trimspaces_lg.png" />
-        <bt:Image id="PrepJet.validationrule.Icon_lg" DefaultValue="https://localhost:8443/images/validationrule_lg.png" />
+        <bt:Image id="PJ.addcolumn.Icon" DefaultValue="https://localhost:8443/images/addcolumn.png" />
+        <bt:Image id="PJ.detectoutlier.Icon" DefaultValue="https://localhost:8443/images/detectoutlier.png" />
+        <bt:Image id="PJ.removeduplicates.Icon" DefaultValue="https://localhost:8443/images/removeduplicates.png" />
+        <bt:Image id="PJ.splitvalues.Icon" DefaultValue="https://localhost:8443/images/splitvalues.png" />
+        <bt:Image id="PJ.extractvalues.Icon" DefaultValue="https://localhost:8443/images/extractvalues.png" />
+        <bt:Image id="PJ.trimspaces.Icon" DefaultValue="https://localhost:8443/images/trimspaces.png" />
+        <bt:Image id="PJ.validationrule.Icon" DefaultValue="https://localhost:8443/images/validationrule.png" />
+        <bt:Image id="PJ.addcolumn.Icon_sm" DefaultValue="https://localhost:8443/images/addcolumn_sm.png" />
+        <bt:Image id="PJ.detectoutlier.Icon_sm" DefaultValue="https://localhost:8443/images/detectoutlier_sm.png" />
+        <bt:Image id="PJ.removeduplicates.Icon_sm" DefaultValue="https://localhost:8443/images/removeduplicates_sm.png" />
+        <bt:Image id="PJ.splitvalues.Icon_sm" DefaultValue="https://localhost:8443/images/splitvalues_sm.png" />
+        <bt:Image id="PJ.extractvalues.Icon_sm" DefaultValue="https://localhost:8443/images/extractvalues_sm.png" />
+        <bt:Image id="PJ.trimspaces.Icon_sm" DefaultValue="https://localhost:8443/images/trimspaces_sm.png" />
+        <bt:Image id="PJ.validationrule.Icon_sm" DefaultValue="https://localhost:8443/images/validationrule_sm.png" />
+        <bt:Image id="PJ.addcolumn.Icon_lg" DefaultValue="https://localhost:8443/images/addcolumn_lg.png" />
+        <bt:Image id="PJ.detectoutlier.Icon_lg" DefaultValue="https://localhost:8443/images/detectoutlier_lg.png" />
+        <bt:Image id="PJ.removeduplicates.Icon_lg" DefaultValue="https://localhost:8443/images/removeduplicates_lg.png" />
+        <bt:Image id="PJ.splitvalues.Icon_lg" DefaultValue="https://localhost:8443/images/splitvalues_lg.png" />
+        <bt:Image id="PJ.extractvalues.Icon_lg" DefaultValue="https://localhost:8443/images/extractvalues_lg.png" />
+        <bt:Image id="PJ.trimspaces.Icon_lg" DefaultValue="https://localhost:8443/images/trimspaces_lg.png" />
+        <bt:Image id="PJ.validationrule.Icon_lg" DefaultValue="https://localhost:8443/images/validationrule_lg.png" />
 
       </bt:Images>
       <bt:Urls>
-        <bt:Url id="PrepJet.FunctionFile.Url" DefaultValue="https://commandsimple.azurewebsites.net/FunctionFile.html" />
-        <bt:Url id="PrepJet.addcolumns.Url" DefaultValue="https://localhost:8443/app/home/merge_columns.html" />
-        <bt:Url id="PrepJet.SplitValues.Url" DefaultValue="https://localhost:8443/app/home/split_values.html" />
-        <bt:Url id="PrepJet.FindDuplicates.Url" DefaultValue="https://localhost:8443/app/home/duplicates.html" />
-        <bt:Url id="PrepJet.DetectOutliers.Url" DefaultValue="https://localhost:8443/app/home/outlier.html" />
-        <bt:Url id="PrepJet.ExtractValues.Url" DefaultValue="https://localhost:8443/app/home/extract_values.html" />
-        <bt:Url id="PrepJet.TrimSpaces.Url" DefaultValue="https://localhost:8443/app/home/trim_spaces.html" />
-        <bt:Url id="PrepJet.validation.Url" DefaultValue="https://localhost:8443/app/home/validation.html" />
-        <bt:Url id="PrepJet.intro.Url" DefaultValue="https://localhost:8443/app/home/intro.html" />
+        <bt:Url id="PJ.FunctionFile.Url" DefaultValue="https://commandsimple.azurewebsites.net/FunctionFile.html" />
+        <bt:Url id="PJ.addcolumns.Url" DefaultValue="https://localhost:8443/app/home/merge_columns.html" />
+        <bt:Url id="PJ.SplitValues.Url" DefaultValue="https://localhost:8443/app/home/split_values.html" />
+        <bt:Url id="PJ.FindDuplicates.Url" DefaultValue="https://localhost:8443/app/home/duplicates.html" />
+        <bt:Url id="PJ.DetectOutliers.Url" DefaultValue="https://localhost:8443/app/home/outlier.html" />
+        <bt:Url id="PJ.ExtractValues.Url" DefaultValue="https://localhost:8443/app/home/extract_values.html" />
+        <bt:Url id="PJ.TrimSpaces.Url" DefaultValue="https://localhost:8443/app/home/trim_spaces.html" />
+        <bt:Url id="PJ.validation.Url" DefaultValue="https://localhost:8443/app/home/validation.html" />
+        <bt:Url id="PJ.intro.Url" DefaultValue="https://localhost:8443/app/home/intro.html" />
         <!--LearnMore URL currently not used -->
-        <bt:Url id="PrepJet.GetStarted.LearnMoreUrl" DefaultValue="http://www.prepjet.de/about-1/">
+        <bt:Url id="PJ.GetStarted.LearnMoreUrl" DefaultValue="http://www.prepjet.de/about-1/">
         </bt:Url>
       </bt:Urls>
       <bt:ShortStrings>
-        <bt:String id="PrepJet.addcolumnButton.Label" DefaultValue="Add Columns" />
-        <bt:String id="PrepJet.SplitValuesButton.Label" DefaultValue="Split Values" />
-        <bt:String id="PrepJet.FindDuplicatesButton.Label" DefaultValue="Detect Duplicates" />
-        <bt:String id="PrepJet.DetectOutliersButton.Label" DefaultValue="Detect Outliers" />
-        <bt:String id="PrepJet.ExtractValuesButton.Label" DefaultValue="Extract Values" />
-        <bt:String id="PrepJet.TrimSpacesButton.Label" DefaultValue="Trim Spaces" />
-        <bt:String id="PrepJet.ValidationRuleButton.Label" DefaultValue="Validation Rule" />
-        <bt:String id="PrepJet.IntroButton.Label" DefaultValue="PrepJet Help" />
-        <bt:String id="PrepJet.Dropdown.Label" DefaultValue="Dropdown" />
-        <bt:String id="PrepJet.Item1.Label" DefaultValue="Show Taskpane 1" />
-        <bt:String id="PrepJet.Item2.Label" DefaultValue="Show Taskpane 2" />
-        <bt:String id="PrepJet.Tab1.GroupLabel" DefaultValue=" " />
-        <bt:String id="PrepJet.Tab1.GroupLabel2" DefaultValue=" " />
-        <bt:String id="PrepJet.Tab1.TabLabel" DefaultValue="PrepJet" />
-        <bt:String id="PrepJet.GetStarted.Title" DefaultValue="PrepJet was succesfully loaded">
+        <bt:String id="PJ.addcolumnButton.Label" DefaultValue="Add Columns" />
+        <bt:String id="PJ.SplitValuesButton.Label" DefaultValue="Split Values" />
+        <bt:String id="PJ.FindDuplicatesButton.Label" DefaultValue="Detect Duplicates" />
+        <bt:String id="PJ.DetectOutliersButton.Label" DefaultValue="Detect Outliers" />
+        <bt:String id="PJ.ExtractValuesButton.Label" DefaultValue="Extract Values" />
+        <bt:String id="PJ.TrimSpacesButton.Label" DefaultValue="Trim Spaces" />
+        <bt:String id="PJ.ValidationRuleButton.Label" DefaultValue="Validation Rule" />
+        <bt:String id="PJ.IntroButton.Label" DefaultValue="PrepJet Help" />
+        <bt:String id="PJ.Dropdown.Label" DefaultValue="Dropdown" />
+        <bt:String id="PJ.Item1.Label" DefaultValue="Show Taskpane 1" />
+        <bt:String id="PJ.Item2.Label" DefaultValue="Show Taskpane 2" />
+        <bt:String id="PJ.Tab1.GroupLabel" DefaultValue=" " />
+        <bt:String id="PJ.Tab1.GroupLabel2" DefaultValue=" " />
+        <bt:String id="PJ.Tab1.TabLabel" DefaultValue="PrepJet" />
+        <bt:String id="PJ.GetStarted.Title" DefaultValue="PrepJet was succesfully loaded">
           <bt:Override Locale="ja-jp" Value="JA-JP Get Started Title" />
         </bt:String>
       </bt:ShortStrings>
       <bt:LongStrings>
-        <bt:String id="PrepJet.addcolumnButton.Tooltip" DefaultValue="Click to Execute Function" />
-        <bt:String id="PrepJet.SplitValuesButton.Tooltip" DefaultValue="Click to Show a Taskpane" />
-        <bt:String id="PrepJet.Dropdown.Tooltip" DefaultValue="Click to Show Options on this Menu" />
-        <bt:String id="PrepJet.Item1.Tooltip" DefaultValue="Click to Show Taskpane1" />
-        <bt:String id="PrepJet.Item2.Tooltip" DefaultValue="Click to Show Taskpane2" />
-        <bt:String id="PrepJet.GetStarted.Description" DefaultValue="Welcome to PrepJet. Access your new Data Preparation functions through this tab.">
+        <bt:String id="PJ.addcolumnButton.Tooltip" DefaultValue="Click to Execute Function" />
+        <bt:String id="PJ.PJ.SVBtn.Ttp" DefaultValue="Click to Show a Taskpane" />
+        <bt:String id="PJ.Dropdown.Tooltip" DefaultValue="Click to Show Options on this Menu" />
+        <bt:String id="PJ.Item1.Tooltip" DefaultValue="Click to Show Taskpane1" />
+        <bt:String id="PJ.Item2.Tooltip" DefaultValue="Click to Show Taskpane2" />
+        <bt:String id="PJ.GetStarted.Description" DefaultValue="Welcome to PJ. Access your new Data Preparation functions through this tab.">
           <bt:Override Locale="ja-jp" Value="JA-JP Get Started Title" />
         </bt:String>
       </bt:LongStrings>
