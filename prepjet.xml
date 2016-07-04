@@ -313,7 +313,7 @@
         <bt:Url id="PJ.validation.Url" DefaultValue="https://localhost:8443/app/home/validation.html" />
         <bt:Url id="PJ.intro.Url" DefaultValue="https://localhost:8443/app/home/intro.html" />
         <!--LearnMore URL currently not used -->
-        <bt:Url id="PJ.GetStarted.LearnMoreUrl" DefaultValue="http://www.PJ.de/about-1/">
+        <bt:Url id="PJ.GetStarted.LearnMoreUrl" DefaultValue="http://www.prepjet.de/about-1/">
         </bt:Url>
       </bt:Urls>
       <bt:ShortStrings>
