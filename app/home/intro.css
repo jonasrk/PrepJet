@@ -55,8 +55,8 @@ ul {
   height: 100%; }
 
   .ms-firstrun-pages__header {
-    padding: 10px;
-    min-height: 80px;
+    padding: 5px;
+    min-height: 60px;
     max-height: 250px;
     display: -webkit-box;
     display: flex;
@@ -102,7 +102,7 @@ ul {
     flex-wrap. nowrap;
     -webkit-box-align: center;
             align-items: center;
-    padding: 20px; }
+    padding: 10px; }
 
     .ms-firstrun-pages__pager--pagercontrol {
       width: 100%;
@@ -136,6 +136,7 @@ ul {
     height: 100%;
     -webkit-box-flex: 1;
             flex: 1 1 0;
+    padding-top: 10px
     padding-bottom: 10px;
     padding-left: 20px;
     padding-right: 20px; }
@@ -162,7 +163,7 @@ ul {
     height: 100%;
     -webkit-box-flex: 1;
             flex: 1 1 0;
-    padding: 20px;
+    padding: 5px;
     -webkit-box-pack: end;
             justify-content: flex-end; }
 
