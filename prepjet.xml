@@ -249,6 +249,24 @@
                   </Action>
                 </Control>
 
+                  <Control xsi:type="Button" id="PrepJet.IntroButton">
+                  <Label resid="PrepJet.IntroButton.Label" />
+                  <Supertip>
+                    <Title resid="PrepJet.IntroButton.Label" />
+                    <Description resid="PrepJet.SplitValuesButton.Tooltip" />
+                  </Supertip>
+                  <Icon>
+                    <bt:Image size="16" resid="PrepJet.validationrule.Icon_sm" />
+                    <bt:Image size="32" resid="PrepJet.validationrule.Icon" />
+                    <bt:Image size="80" resid="PrepJet.validationrule.Icon_lg" />
+                  </Icon>
+                  <Action xsi:type="ShowTaskpane">
+                    <TaskpaneId>Button2Id1</TaskpaneId>
+                    <!--Provide a url resource id for the location that will be displayed on the task pane -->
+                    <SourceLocation resid="PrepJet.intro.Url" />
+                  </Action>
+                </Control>
+
               </Group>
 
               <!-- Label of your tab -->
@@ -291,8 +309,9 @@
         <bt:Url id="PrepJet.FindDuplicates.Url" DefaultValue="https://localhost:8443/app/home/duplicates.html" />
         <bt:Url id="PrepJet.DetectOutliers.Url" DefaultValue="https://localhost:8443/app/home/outlier.html" />
         <bt:Url id="PrepJet.ExtractValues.Url" DefaultValue="https://localhost:8443/app/home/extract_values.html" />
-        <bt:Url id="PrepJet.TrimSpaces.Url" DefaultValue="https://localhost:8443/app/home/intro.html" />
+        <bt:Url id="PrepJet.TrimSpaces.Url" DefaultValue="https://localhost:8443/app/home/trim_spaces.html" />
         <bt:Url id="PrepJet.validation.Url" DefaultValue="https://localhost:8443/app/home/validation.html" />
+        <bt:Url id="PrepJet.intro.Url" DefaultValue="https://localhost:8443/app/home/intro.html" />
         <!--LearnMore URL currently not used -->
         <bt:Url id="PrepJet.GetStarted.LearnMoreUrl" DefaultValue="http://www.prepjet.de/about-1/">
         </bt:Url>
@@ -305,6 +324,7 @@
         <bt:String id="PrepJet.ExtractValuesButton.Label" DefaultValue="Extract Values" />
         <bt:String id="PrepJet.TrimSpacesButton.Label" DefaultValue="Trim Spaces" />
         <bt:String id="PrepJet.ValidationRuleButton.Label" DefaultValue="Validation Rule" />
+        <bt:String id="PrepJet.IntroButton.Label" DefaultValue="PrepJet Help" />
         <bt:String id="PrepJet.Dropdown.Label" DefaultValue="Dropdown" />
         <bt:String id="PrepJet.Item1.Label" DefaultValue="Show Taskpane 1" />
         <bt:String id="PrepJet.Item2.Label" DefaultValue="Show Taskpane 2" />
