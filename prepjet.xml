@@ -237,7 +237,7 @@
         <bt:Url id="PrepJet.DetectOutliers.Url" DefaultValue="https://localhost:8443/app/home/outlier.html" />
         <bt:Url id="PrepJet.ExtractValues.Url" DefaultValue="https://localhost:8443/app/home/extract_values.html" />
         <!--LearnMore URL currently not used -->
-        <bt:Url id="PrepJet.GetStarted.LearnMoreUrl" DefaultValue="https://commandsimple.azurewebsites.net/GetStarted.html">
+        <bt:Url id="PrepJet.GetStarted.LearnMoreUrl" DefaultValue="http://www.prepjet.de/about-1/">
         </bt:Url>
       </bt:Urls>
       <bt:ShortStrings>
@@ -252,7 +252,7 @@
         <bt:String id="PrepJet.Tab1.GroupLabel" DefaultValue=" " />
         <bt:String id="PrepJet.Tab1.GroupLabel2" DefaultValue=" " />
         <bt:String id="PrepJet.Tab1.TabLabel" DefaultValue="PrepJet" />
-        <bt:String id="PrepJet.GetStarted.Title" DefaultValue="Simple add-in was succesfully loaded">
+        <bt:String id="PrepJet.GetStarted.Title" DefaultValue="PrepJet was succesfully loaded">
           <bt:Override Locale="ja-jp" Value="JA-JP Get Started Title" />
         </bt:String>
       </bt:ShortStrings>
@@ -262,7 +262,7 @@
         <bt:String id="PrepJet.Dropdown.Tooltip" DefaultValue="Click to Show Options on this Menu" />
         <bt:String id="PrepJet.Item1.Tooltip" DefaultValue="Click to Show Taskpane1" />
         <bt:String id="PrepJet.Item2.Tooltip" DefaultValue="Click to Show Taskpane2" />
-        <bt:String id="PrepJet.GetStarted.Description" DefaultValue="Get going by opening TEST TAB on the Ribbon">
+        <bt:String id="PrepJet.GetStarted.Description" DefaultValue="Welcome to PrepJet. Access your new Data Preparation functions through this tab.">
           <bt:Override Locale="ja-jp" Value="JA-JP Get Started Title" />
         </bt:String>
       </bt:LongStrings>
