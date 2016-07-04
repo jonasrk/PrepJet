@@ -7,6 +7,8 @@ function displayAdvanced(){
     $('#advanced_dropdown2').show();
     $('#then_op_drop').show();
     $('#delimiter_end').show();
+    $('#apply_advanced').show();
+    $('#apply_simple').hide();
 }
 
 //display fields for simple rule
@@ -18,6 +20,8 @@ function displaySimple() {
             $('#advanced_dropdown2').hide();
             $('#then_op_drop').hide();
             $('#delimiter_end').hide();
+            $('#apply_advanced').hide();
+            $('#apply_advanced').show();
 }
 
 //show textfield for ending delimiter if custom is selected
@@ -42,6 +46,7 @@ function displayBetween(){
             $('#advanced_dropdown2').hide();
             $('#then_op_drop').hide();
             $('#delimiter_end').hide();
+            $('#apply_advanced').hide();
 
             fillColumn();
             $('#advanced_button').click(displayAdvanced);
@@ -51,7 +56,8 @@ function displayBetween(){
             $(".dropdown_table").Dropdown();
             $(".ms-TextField").TextField();
 
-            $('#apply').click(validation);
+            $('#apply_advanced').click(validationAdvanced);
+            $('#apply_simple').click(validationSimple);
 
         });
     };
@@ -120,7 +126,89 @@ function displayBetween(){
     }
 
 
-    function validation() {
+    //validation when simple rule is created
+    function validationSimple() {
+        Excel.run(function (ctx) {
+
+            var worksheet = ctx.workbook.worksheets.getActiveWorksheet();
+            var range_all = worksheet.getRange();
+            var range = range_all.getUsedRange();
+            var selected_identifier = document.getElementById('column_simple').value;
+
+
+            if (isNaN(Number(document.getElementById('if_condition').value)) == true) {
+                var ifcondition = document.getElementById('if_condition').value;
+            }
+            else {
+                var ifcondition = Number(document.getElementById('if_condition').value);
+            }
+
+
+            //get used range in active Sheet
+            range.load('text');
+            range.load('valueTypes');
+            range.load('values');
+            var range_all_adding_to = worksheet.getRange();
+            var range_adding_to = range_all_adding_to.getUsedRange();
+            range_adding_to.load('address');
+            range_adding_to.load('text');
+
+
+            return ctx.sync().then(function() {
+                var header_if = 0;
+
+                //get column in header for which to check if condition
+                for (var k = 0; k < range.text[0].length; k++){
+                    if (selected_identifier == range.text[0][k]){
+                        header_if = k;
+                    }
+                }
+
+                //loop through whole column to extract value from
+                var act_worksheet = ctx.workbook.worksheets.getActiveWorksheet();
+                for (var i = 1; i < range.text.length; i++) {
+
+                    var sheet_row = i + 1;
+                    var address = getCharFromNumber(header_if + 1) + sheet_row;
+
+                    if (document.getElementById('if_operator').value == "equal") {
+                        if (range.values[i][header_if] != ifcondition) {
+                            highlightContentInWorksheet(act_worksheet, address, "red");
+                        }
+                    }
+
+                    if (document.getElementById('if_operator').value == "smaller") {
+                        if (range.values[i][header_if] >= ifcondition) {
+                            highlightContentInWorksheet(act_worksheet, address, "red");
+                        }
+                    }
+
+                    if (document.getElementById('if_operator').value == "greater") {
+                        if (range.values[i][header_if] <= ifcondition) {
+                            highlightContentInWorksheet(act_worksheet, address, "red");
+                        }
+                    }
+
+                    if (document.getElementById('if_operator').value == "inequal") {
+                        if (range.values[i][header_if] == ifcondition) {
+                             highlightContentInWorksheet(act_worksheet, address, "red");
+                        }
+                    }
+                }
+
+            });
+
+        }).catch(function(error) {
+            console.log("Error: " + error);
+            if (error instanceof OfficeExtension.Error) {
+                console.log("Debug info: " + JSON.stringify(error.debugInfo));
+            }
+        });
+    }
+
+
+    //validation when advanced rule is selected
+    function validationAdvanced() {
         Excel.run(function (ctx) {
 
             var worksheet = ctx.workbook.worksheets.getActiveWorksheet();
@@ -151,7 +239,6 @@ function displayBetween(){
                 var thenoperator = 1;
             }
 
-            // todo string and number not parsed correclty currently
             if (isNaN(Number(document.getElementById('if_condition').value)) == true) {
                 var ifcondition = document.getElementById('if_condition').value;
             }
