@@ -1,2 +1,5 @@
 /* Page-specific styling */
 
+.ms-Dropdown.is-open .ms-Dropdown-items, .ms-Dropdown.ms-Dropdown--open .ms-Dropdown-items {
+    overflow: scroll;
+}

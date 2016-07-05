@@ -171,7 +171,7 @@ function backToOne() {
 
         populateReferenceColumnDropdown(selected_table1, "reference_column_ckeckboxes_1");
         populateReferenceColumnDropdown(selected_table2, "reference_column_ckeckboxes_2");
-       
+
     }
 
 
