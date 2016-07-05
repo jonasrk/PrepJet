@@ -103,6 +103,11 @@ function backToOne() {
             range.load('address');
             range.load('text');
             return ctx.sync().then(function() {
+
+                while (document.getElementById('checkboxes_variables').firstChild) {
+                    document.getElementById('checkboxes_variables').removeChild(document.getElementById('checkboxes_variables').firstChild);
+                }
+
                 for (var i = 0; i < range.text[0].length; i++) { // .text[0] is the first row of a range
 
                     addNewCheckboxToContainer (range.text[0][i], "reference_column_checkbox" ,"checkboxes_variables");
@@ -136,6 +141,7 @@ function backToOne() {
                 range.load('address');
                 range.load('text');
                 return ctx.sync().then(function() {
+
                     for (var i = 0; i < range.text[0].length; i++) {
 
                         var el = document.createElement("option");
@@ -233,7 +239,6 @@ function backToOne() {
                                 for (var j = 1; j < range_adding_to.text.length; j++) {
                                     if (range_adding_to.text[j][sheet2_id] == range.text[i][sheet1_id]) {
                                         var sheet_row = j + 1;
-                                        console.log(range.text[i][k])
                                         addContentToWorksheet(worksheet_adding_to, column_char + sheet_row, range.text[i][k])
                                     }
                                 }
