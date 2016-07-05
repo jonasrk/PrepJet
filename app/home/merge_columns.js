@@ -156,7 +156,6 @@ function backToOne() {
                         document.getElementById(container).appendChild(el);
 
                     }
-                    //evtl if statement whether there is already a populated dropdown, must take latest tables
                     $("." + container).Dropdown();
                 });
 

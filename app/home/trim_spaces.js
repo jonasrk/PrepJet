@@ -32,14 +32,9 @@
             range.load('text');
             return ctx.sync().then(function() {
                 for (var i = 0; i < range.text[0].length; i++) {
-
-                    var el = document.createElement("option");
-                    el.value = range.text[0][i];
-                    el.textContent = range.text[0][i];
-                    document.getElementById("column1_options").appendChild(el);
+                    addNewCheckboxToContainer (range.text[0][i], "column_checkbox" ,"checkboxes_columns");
                 }
 
-                $(".dropdown_table_col").Dropdown();
             });
 
         }).catch(function(error) {
@@ -59,7 +54,6 @@
             var worksheet = ctx.workbook.worksheets.getActiveWorksheet();
             var range_all = worksheet.getRange();
             var range = range_all.getUsedRange();
-            var selected_identifier = document.getElementById('column1_options').value;
 
             //get used range in active Sheet
             range.load('text');
@@ -73,23 +67,25 @@
                 var header = 0;
                 var act_worksheet = ctx.workbook.worksheets.getActiveWorksheet();
 
-                //get column in header from which to extract value
-                for (var k = 0; k < range.text[0].length; k++){
-                    if (selected_identifier == range.text[0][k]){
-                        header = k;
+                var checked_checkboxes = getCheckedBoxes("column_checkbox");
+
+                for (var run = 0;run < checked_checkboxes.length; run++) {
+                    for (var k = 0; k < range.text[0].length; k++) {
+                        if (checked_checkboxes[run].id == range.text[0][k]){
+                            header = k;
+                            break;
+                        }
+
                     }
+
+                        for (var i = 1; i < range.text.length; i++) {
+                            var trim_string = range.text[i][header].trim();
+                            var column_char = getCharFromNumber(header + 1);
+                            var sheet_row = i + 1;
+                            addContentToWorksheet(act_worksheet, column_char + sheet_row, trim_string);
+                        }
                 }
 
-                //loop through whole column to extract value from
-                for (var i = 1; i < range.text.length; i++) {
-
-                    var trim_string = range.text[i][header].trim();
-                    var column_char = getCharFromNumber(header + 1);
-                    var sheet_row = i + 1;
-                    addContentToWorksheet(act_worksheet, column_char + sheet_row, trim_string);
-
-
-                }
 
             });
 
