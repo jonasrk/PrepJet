@@ -291,8 +291,6 @@ function displayBetween(){
                     }
                 }
 
-                console.log(ifcondition);
-                console.log(thencondition);
                 //loop through whole column to extract value from
                 var act_worksheet = ctx.workbook.worksheets.getActiveWorksheet();
                 for (var i = 1; i < range.text.length; i++) {

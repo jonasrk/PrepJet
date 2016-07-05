@@ -257,9 +257,9 @@
                     <Description resid="PJ.PJ.SVBtn.Ttp" />
                   </Supertip>
                   <Icon>
-                    <bt:Image size="16" resid="PJ.validationrule.Icon_sm" />
-                    <bt:Image size="32" resid="PJ.validationrule.Icon" />
-                    <bt:Image size="80" resid="PJ.validationrule.Icon_lg" />
+                    <bt:Image size="16" resid="PJ.help.Icon_sm" />
+                    <bt:Image size="32" resid="PJ.help.Icon" />
+                    <bt:Image size="80" resid="PJ.help.Icon_lg" />
                   </Icon>
                   <Action xsi:type="ShowTaskpane">
                     <TaskpaneId>Button2Id1</TaskpaneId>
@@ -287,6 +287,7 @@
         <bt:Image id="PJ.extractvalues.Icon" DefaultValue="https://localhost:8443/images/extractvalues.png" />
         <bt:Image id="PJ.trimspaces.Icon" DefaultValue="https://localhost:8443/images/trimspaces.png" />
         <bt:Image id="PJ.validationrule.Icon" DefaultValue="https://localhost:8443/images/validationrule.png" />
+        <bt:Image id="PJ.help.Icon" DefaultValue="https://localhost:8443/images/help.png" />
         <bt:Image id="PJ.addcolumn.Icon_sm" DefaultValue="https://localhost:8443/images/addcolumn_sm.png" />
         <bt:Image id="PJ.detectoutlier.Icon_sm" DefaultValue="https://localhost:8443/images/detectoutlier_sm.png" />
         <bt:Image id="PJ.removeduplicates.Icon_sm" DefaultValue="https://localhost:8443/images/removeduplicates_sm.png" />
@@ -294,6 +295,7 @@
         <bt:Image id="PJ.extractvalues.Icon_sm" DefaultValue="https://localhost:8443/images/extractvalues_sm.png" />
         <bt:Image id="PJ.trimspaces.Icon_sm" DefaultValue="https://localhost:8443/images/trimspaces_sm.png" />
         <bt:Image id="PJ.validationrule.Icon_sm" DefaultValue="https://localhost:8443/images/validationrule_sm.png" />
+        <bt:Image id="PJ.help.Icon_sm" DefaultValue="https://localhost:8443/images/help_sm.png" />
         <bt:Image id="PJ.addcolumn.Icon_lg" DefaultValue="https://localhost:8443/images/addcolumn_lg.png" />
         <bt:Image id="PJ.detectoutlier.Icon_lg" DefaultValue="https://localhost:8443/images/detectoutlier_lg.png" />
         <bt:Image id="PJ.removeduplicates.Icon_lg" DefaultValue="https://localhost:8443/images/removeduplicates_lg.png" />
@@ -301,6 +303,7 @@
         <bt:Image id="PJ.extractvalues.Icon_lg" DefaultValue="https://localhost:8443/images/extractvalues_lg.png" />
         <bt:Image id="PJ.trimspaces.Icon_lg" DefaultValue="https://localhost:8443/images/trimspaces_lg.png" />
         <bt:Image id="PJ.validationrule.Icon_lg" DefaultValue="https://localhost:8443/images/validationrule_lg.png" />
+        <bt:Image id="PJ.help.Icon_lg" DefaultValue="https://localhost:8443/images/help_lg.png" />
 
       </bt:Images>
       <bt:Urls>

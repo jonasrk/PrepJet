@@ -84,7 +84,6 @@
                 for (var i = 1; i < range.text.length; i++) {
 
                     var trim_string = range.text[i][header].trim();
-                    console.log(trim_string);
                     var column_char = getCharFromNumber(header + 1);
                     var sheet_row = i + 1;
                     addContentToWorksheet(act_worksheet, column_char + sheet_row, trim_string);

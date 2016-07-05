@@ -10,7 +10,6 @@
     $(document).ready(function () {
 
         function redirect_to_funct(){
-            console.log(Office.context.document.settings.get('last_clicked_function'));
             window.location = Office.context.document.settings.get('last_clicked_function');
         }
 

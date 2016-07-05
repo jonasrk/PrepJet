@@ -132,6 +132,12 @@ function backToOne() {
 
         function populateReferenceColumnDropdown (table, container) {
 
+        //remove potentially existing dropdown options
+            var child_target = document.getElementById(container).firstChild;
+            while (child_target != null) {
+                document.getElementById(container).removeChild(child_target);
+            }
+
             Excel.run(function (ctx) {
 
                 var worksheet = ctx.workbook.worksheets.getItem(table);
@@ -150,7 +156,7 @@ function backToOne() {
                         document.getElementById(container).appendChild(el);
 
                     }
-
+                    //evtl if statement whether there is already a populated dropdown, must take latest tables
                     $("." + container).Dropdown();
                 });
 
@@ -165,6 +171,7 @@ function backToOne() {
 
         populateReferenceColumnDropdown(selected_table1, "reference_column_ckeckboxes_1");
         populateReferenceColumnDropdown(selected_table2, "reference_column_ckeckboxes_2");
+       
     }
 
 
