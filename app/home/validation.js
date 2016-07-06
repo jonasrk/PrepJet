@@ -150,6 +150,11 @@ function displayBetween(){
                 for (var run = 0; run < splitted_list.length; run ++) {
                     splitted_list[run] = splitted_list[run].trim();
                 }
+                for (var run = 0; run < splitted_list.length; run++) {
+                    if (isNaN(Number(splitted_list[run])) != true) {
+                        splitted_list[run] = Number(splitted_list[run]);
+                    }
+                }
             }
             else {
                 if (isNaN(Number(document.getElementById('if_condition').value)) == true) {
