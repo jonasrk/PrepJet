@@ -270,6 +270,11 @@ function displayBetween(){
                 for (var run = 0; run < splitted_then_list.length; run ++) {
                     splitted_then_list[run] = splitted_then_list[run].trim();
                 }
+                for (var run = 0; run < splitted_then_list.length; run ++) {
+                    if (isNaN(Number(splitted_then_list[run])) != true) {
+                        splitted_then_list[run] = Number(splitted_then_list[run]);
+                    }
+                }
             }
             else { //todo useful return value if nothing is selected
                 var thenoperator = 1;
@@ -280,6 +285,11 @@ function displayBetween(){
                 var splitted_if_list = in_if_list.split(",");
                 for (var run = 0; run < splitted_if_list.length; run ++) {
                     splitted_if_list[run] = splitted_if_list[run].trim();
+                }
+                for (var run = 0; run < splitted_if_list.length; run++) {
+                    if (isNaN(Number(splitted_if_list[run])) != true) {
+                        splitted_if_list[run] = Number(splitted_if_list[run]);
+                    }
                 }
             }
             else {
@@ -540,7 +550,6 @@ function displayBetween(){
                                 }
                             }
                         }
-                        console.log(splitted_if_list);
                     }
 
                 }
