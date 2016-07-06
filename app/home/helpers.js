@@ -57,6 +57,7 @@ function addNewCheckboxToContainer (id, name, container) {
 }
 
 
+
 function getCharFromNumber (number) {
 
     if (number == 1) {

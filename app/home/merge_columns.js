@@ -30,6 +30,7 @@ function backToOne() {
             $('#back_step1').click(backToOne);
             $('#bt_apply').click(applyButtonClicked);
             $('#back_step2').click(step2ButtonClicked);
+            //$('#bt_more').click(addDropdown);
 
         });
     };
@@ -91,6 +92,7 @@ function backToOne() {
         $('#step1').hide();
         $('#step2').show();
         $('#step3').hide();
+
 
         var selected_table2 = document.getElementById('table2_options').value; // TODO better reference by ID than name
 
@@ -168,8 +170,34 @@ function backToOne() {
 
         }
 
-        populateReferenceColumnDropdown(selected_table1, "reference_column_ckeckboxes_1");
-        populateReferenceColumnDropdown(selected_table2, "reference_column_ckeckboxes_2");
+        function addDropdown(){
+            for (var j = 3; j < 5; j++) {
+                var div = document.createElement("div");
+                div.className = "ms-Dropdown reference_column_checkboxes_" + j;
+
+                var label = document.createElement("label");
+                label.className = "ms-label";
+                label.textContent = "Select reference column in table";
+
+                var i = document.createElement("i");
+                i.className = "ms-Dropdown-caretDown ms-Icon ms-Icon--caretDown";
+
+                var select = document.createElement("select");
+                select.className = "ms-Dropdown-select";
+                select.id = "reference_column_checkboxes_" + j;
+
+                div.appendChild(label);
+                div.appendChild(i);
+                div.appendChild(select);
+
+                document.getElementById("dropdowns_step3").appendChild(div);
+                populateReferenceColumnDropdown(selected_table1, "reference_column_checkboxes_" + j)
+            }
+        }
+
+        populateReferenceColumnDropdown(selected_table1, "reference_column_checkboxes_1");
+        populateReferenceColumnDropdown(selected_table2, "reference_column_checkboxes_2");
+        $('#bt_more').click(addDropdown);
 
     }
 
@@ -180,8 +208,8 @@ function backToOne() {
         $('#step3').hide();
 
         // find columns to match
-        var selected_identifier1 = document.getElementById('reference_column_ckeckboxes_1').value; // TODO better reference by ID than name
-        var selected_identifier2 = document.getElementById('reference_column_ckeckboxes_1').value; // TODO better reference by ID than name
+        var selected_identifier1 = document.getElementById('reference_column_checkboxes_1').value; // TODO better reference by ID than name
+        var selected_identifier2 = document.getElementById('reference_column_checkboxes_1').value; // TODO better reference by ID than name
 
         var selected_table1 = document.getElementById('table1_options').value; // TODO better reference by ID than name
         var selected_table2 = document.getElementById('table2_options').value; // TODO better reference by ID than name
