@@ -170,7 +170,7 @@ function backToOne() {
 
         }
 
-        function addDropdown(){
+        function addDropdown(count){
             for (var j = 3; j < 5; j++) {
                 var div = document.createElement("div");
                 div.className = "ms-Dropdown reference_column_checkboxes_" + j;
@@ -190,13 +190,22 @@ function backToOne() {
                 div.appendChild(i);
                 div.appendChild(select);
 
+                if (j % 2 == 0) {
+                    var tmp_table = selected_table2;
+                }
+                else {
+                    var tmp_table = selected_table1;
+                }
+
                 document.getElementById("dropdowns_step3").appendChild(div);
-                populateReferenceColumnDropdown(selected_table1, "reference_column_checkboxes_" + j)
+                populateReferenceColumnDropdown(tmp_table, "reference_column_checkboxes_" + j);
+
             }
         }
 
         populateReferenceColumnDropdown(selected_table1, "reference_column_checkboxes_1");
         populateReferenceColumnDropdown(selected_table2, "reference_column_checkboxes_2");
+
         $('#bt_more').click(addDropdown);
 
     }
