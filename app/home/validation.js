@@ -275,20 +275,30 @@ function displayBetween(){
                 var thenoperator = 1;
             }
 
-            if (isNaN(Number(document.getElementById('if_condition').value)) == true) {
-                var ifcondition = document.getElementById('if_condition').value;
+            if (document.getElementById('if_operator').value == "inlist") {
+                var in_if_list = document.getElementById('if_condition').value;
+                var splitted_if_list = in_if_list.split(",");
+                for (var run = 0; run < splitted_if_list.length; run ++) {
+                    splitted_if_list[run] = splitted_if_list[run].trim();
+                }
             }
             else {
-                var ifcondition = Number(document.getElementById('if_condition').value);
+                if (isNaN(Number(document.getElementById('if_condition').value)) == true) {
+                    var ifcondition = document.getElementById('if_condition').value;
+                }
+                else {
+                    var ifcondition = Number(document.getElementById('if_condition').value);
+                }
             }
 
-            if (isNaN(Number(document.getElementById('then_condition').value)) == true) {
-                var thencondition = document.getElementById('then_condition').value;
+            if (document.getElementById('then_operator').value != "inlist") {
+                if (isNaN(Number(document.getElementById('then_condition').value)) == true) {
+                    var thencondition = document.getElementById('then_condition').value;
+                }
+                else {
+                    var thencondition = Number(document.getElementById('then_condition').value);
+                }
             }
-            else {
-                var thencondition = Number(document.getElementById('then_condition').value);
-            }
-
 
 
             //get used range in active Sheet
@@ -489,6 +499,49 @@ function displayBetween(){
                         }
                     }
 
+                    if (document.getElementById('if_operator').value == "inlist") {
+                        for (var run = 0; run < splitted_if_list.length; run++) {
+                            if (range.values[i][header_if] == splitted_if_list[run]) {
+                                if (document.getElementById('then_operator').value == "equal") {
+                                    if (range.values[i][header_then] != thencondition) {
+                                        highlightContentInWorksheet(act_worksheet, address, "red");
+                                    }
+                                }
+                                else if (document.getElementById('then_operator').value == "smaller") {
+                                    if (range.values[i][header_then] >= thencondition) {
+                                        highlightContentInWorksheet(act_worksheet, address, "red");
+                                    }
+                                }
+                                else if (document.getElementById('then_operator').value == "greater") {
+                                    if (range.values[i][header_then] <= thencondition) {
+                                        highlightContentInWorksheet(act_worksheet, address, "red");
+                                    }
+                                }
+                                else if (document.getElementById('then_operator').value == "inequal") {
+                                    if (range.values[i][header_then] == thencondition) {
+                                        highlightContentInWorksheet(act_worksheet, address, "red");
+                                    }
+                                }
+                                else if (document.getElementById('then_operator').value == "between") {
+                                    if (range.values[i][header_then] < thencondition || range.values[i][header_then] > document.getElementById('between_and')) {
+                                        highlightContentInWorksheet(act_worksheet, address, "red");
+                                    }
+                                }
+                                else if (document.getElementById('then_operator').value == "inlist") {
+                                    var check = 0;
+                                    for (var runthen = 0; runthen < splitted_then_list.length; runthen++) {
+                                        if (range.values[i][header_then] == splitted_then_list[run]) {
+                                            check = 1;
+                                        }
+                                    }
+                                    if (check == 0){
+                                        highlightContentInWorksheet(act_worksheet, address, "red");
+                                    }
+                                }
+                            }
+                        }
+                        console.log(splitted_if_list);
+                    }
 
                 }
 
