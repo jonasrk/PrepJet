@@ -144,11 +144,20 @@ function displayBetween(){
             var selected_identifier = document.getElementById('column_simple').value;
 
 
-            if (isNaN(Number(document.getElementById('if_condition').value)) == true) {
-                var ifcondition = document.getElementById('if_condition').value;
+            if (document.getElementById('if_operator').value == "inlist") {
+                var in_list = document.getElementById('if_condition').value;
+                var splitted_list = in_list.split(",");
+                for (var run = 0; run < splitted_list.length; run ++) {
+                    splitted_list[run] = splitted_list[run].trim();
+                }
             }
             else {
-                var ifcondition = Number(document.getElementById('if_condition').value);
+                if (isNaN(Number(document.getElementById('if_condition').value)) == true) {
+                    var ifcondition = document.getElementById('if_condition').value;
+                }
+                else {
+                    var ifcondition = Number(document.getElementById('if_condition').value);
+                }
             }
 
 
@@ -200,6 +209,18 @@ function displayBetween(){
                     if (document.getElementById('if_operator').value == "inequal") {
                         if (range.values[i][header_if] == ifcondition) {
                              highlightContentInWorksheet(act_worksheet, address, "red");
+                        }
+                    }
+
+                    if (document.getElementById('if_operator').value == "inlist") {
+                        var check = 0;
+                        for (run = 0; run < splitted_list.length; run++) {
+                            if (range.values[i][header_if] == splitted_list[run]) {
+                                 check = 1;
+                            }
+                        }
+                        if (check != 1) {
+                            highlightContentInWorksheet(act_worksheet, address, "red");
                         }
                     }
                 }
