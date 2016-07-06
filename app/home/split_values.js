@@ -1,3 +1,10 @@
+function displayAdvancedCount() {
+    if (document.getElementById('advanced_settings').checked == true) {
+            $('#delimiter_count').show();
+            $('.delimiter_count_dropdown').show();
+        }
+}
+
 //display textfield for custom delimiter if selected by user
 function displayFieldDelimiter(){
     if (document.getElementById('delimiter_options').value == "custom_delimiter"){
@@ -22,6 +29,8 @@ function displayFieldDelimiter(){
             fillColumn();
 
             $('#delimiter_beginning').hide();
+            $('#delimiter_count').hide();
+            $(".delimiter_count_dropdown").Dropdown().hide()
 
             $(".dropdown_table").Dropdown();
             $(".ms-TextField").TextField();
@@ -84,6 +93,12 @@ function displayFieldDelimiter(){
                 delimiter_type = ";";
             }
 
+            //if advanced settings are selected, get values for delimiter count
+            if (document.getElementById('advanced_settings').checked == true) {
+                var count_delimiter = Number(document.getElementById('delimiter_count_i').value);
+                var count_direction = document.getElementById('delimiter_count_drop').value;
+            }
+
             range.load('text');
             var range_all_adding_to = worksheet.getRange();
             var range_adding_to = range_all_adding_to.getUsedRange();
@@ -106,16 +121,43 @@ function displayFieldDelimiter(){
                 var array_length = 0;
                 var max_array_length = 0;
                 var split_array = new Array(range.text.length);
+                var split_array_test = new Array(range.text.length);
 
 
                 //loop through whole column, create an array with splitted values and get maximum length
-                for (var i = 1; i < range.text.length; i++) {
-                    split_array[i] = range.text[i][header].split(delimiter_type);
-                    array_length = split_array[i].length
-                    if (max_array_length < array_length){
-                        max_array_length = array_length
+                if (document.getElementById('advanced_settings').checked == false) {
+                    for (var i = 1; i < range.text.length; i++) {
+                        split_array[i] = range.text[i][header].split(delimiter_type);
+                        array_length = split_array[i].length;
+                        if (max_array_length < array_length){
+                            max_array_length = array_length;
+                        }
                     }
                 }
+                else {
+                    for (var i = 1; i < range.text.length; i++) {
+                        split_array[i] = range.text[i][header].split(delimiter_type);
+                        array_length = split_array[i].length;
+
+                        if (count_direction == "right") {
+                            count_delimiter = array_length - count_delimiter;
+                        }
+
+                        var str1_tmp = split_array[i][0];
+                        var str2_tmp = split_array[i][count_delimiter];
+                        for (var j = 1; j < count_delimiter; j++) {
+                            str1_tmp = str1_tmp.concat(delimiter_type, split_array[i][j]);
+                        }
+                        for (var j = count_delimiter + 1; j < array_length; j++) {
+                            str2_tmp = str2_tmp.concat(delimiter_type, split_array[i][j]);
+                        }
+                        split_array[i] = [str1_tmp];
+                        split_array[i].push(str2_tmp);
+                        count_delimiter = Number(document.getElementById('delimiter_count_i').value);
+                    }
+                    max_array_length = 2;
+                }
+
 
                 //insert empty columns right to split column for splitted parts
                 for (var i = 0; i < range.text.length; i++) {
