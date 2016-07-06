@@ -53,14 +53,13 @@
         <div>
             <header>Trim Spaces</header>
         </div>
-        <!--dropdown for column-->
-        <!--div class="ms-Dropdown dropdown_table_col" tabindex="1">
-            <label class="ms-Label">Select column(s) to trim spaces</label>
-            <i class="ms-Dropdown-caretDown ms-Icon ms-Icon--caretDown"></i>
-            <select multiple id="column1_options" class="ms-Dropdown-select">
-                <option value="empty"></option>
-            </select>
-        </div-->
+        <div id="checkbox_select_all" class="ms-ChoiceField">
+            <input id="checkbox_all" class="ms-ChoiceField-input" type="checkbox">
+            <label id="checkbox_label" for="checkbox_all" class="ms-ChoiceField-field">
+                <span class="ms-Label">All columns</span>
+            </label>
+        </div>
+        <!--container for checkboxes-->
         <div id="checkboxes_columns" class="ms-ChoiceField">
         </div>
         <!--split button-->

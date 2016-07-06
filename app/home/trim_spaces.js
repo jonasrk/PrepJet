@@ -15,6 +15,7 @@
             app.initialize();
             fillColumn();
 
+
             $('#trim_space').click(trimSpace);
 
         });
@@ -67,7 +68,14 @@
                 var header = 0;
                 var act_worksheet = ctx.workbook.worksheets.getActiveWorksheet();
 
-                var checked_checkboxes = getCheckedBoxes("column_checkbox");
+
+                if (document.getElementById('checkbox_all').checked == true) {
+                 var checked_checkboxes = getAllCheckBoxes("column_checkbox");
+                }
+                else {
+                    var checked_checkboxes = getCheckedBoxes("column_checkbox");
+                }
+
 
                 for (var run = 0;run < checked_checkboxes.length; run++) {
                     for (var k = 0; k < range.text[0].length; k++) {
@@ -75,7 +83,6 @@
                             header = k;
                             break;
                         }
-
                     }
 
                         for (var i = 1; i < range.text.length; i++) {
@@ -85,7 +92,6 @@
                             addContentToWorksheet(act_worksheet, column_char + sheet_row, trim_string);
                         }
                 }
-
 
             });
 

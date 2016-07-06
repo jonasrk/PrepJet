@@ -17,6 +17,17 @@ function getCheckedBoxes(chkboxName) {
     return checkboxesChecked.length > 0 ? checkboxesChecked : null;
 }
 
+// Pass the checkbox name to the function
+function getAllCheckBoxes(chkboxName) {
+    var checkboxes = document.getElementsByName(chkboxName);
+    var checkboxesChecked = [];
+    // loop over them all
+    for (var i=0; i<checkboxes.length; i++) {
+        checkboxesChecked.push(checkboxes[i]);
+        }
+    // Return the array if it is non-empty, or null
+    return checkboxesChecked.length > 0 ? checkboxesChecked : null;
+}
 
 // create a ms-ChoiceField html element (input + div + label + span) for every column in the selected table
 function addNewCheckboxToContainer (id, name, container) {
