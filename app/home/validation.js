@@ -264,6 +264,13 @@ function displayBetween(){
             else if (document.getElementById('then_operator').value == "between"){
                 var thenoperator = "between";
             }
+            else if (document.getElementById('then_operator').value == "inlist") {
+                var in_then_list = document.getElementById('then_condition').value;
+                var splitted_then_list = in_then_list.split(",");
+                for (var run = 0; run < splitted_then_list.length; run ++) {
+                    splitted_then_list[run] = splitted_then_list[run].trim();
+                }
+            }
             else { //todo useful return value if nothing is selected
                 var thenoperator = 1;
             }
@@ -346,6 +353,17 @@ function displayBetween(){
                                     highlightContentInWorksheet(act_worksheet, address, "red");
                                 }
                             }
+                            else if (document.getElementById('then_operator').value == "inlist") {
+                                var check = 0;
+                                for (var run = 0; run < splitted_then_list.length; run++) {
+                                    if (range.values[i][header_then] == splitted_then_list[run]) {
+                                        check = 1;
+                                    }
+                                }
+                                if (check == 0){
+                                    highlightContentInWorksheet(act_worksheet, address, "red");
+                                }
+                            }
                         }
                     }
 
@@ -373,6 +391,17 @@ function displayBetween(){
                             }
                             else if (document.getElementById('then_operator').value == "between") {
                                 if (range.values[i][header_then] < thencondition || range.values[i][header_then] > document.getElementById('between_and')) {
+                                    highlightContentInWorksheet(act_worksheet, address, "red");
+                                }
+                            }
+                            else if (document.getElementById('then_operator').value == "inlist") {
+                                var check = 0;
+                                for (var run = 0; run < splitted_then_list.length; run++) {
+                                    if (range.values[i][header_then] == splitted_then_list[run]) {
+                                        check = 1;
+                                    }
+                                }
+                                if (check == 0){
                                     highlightContentInWorksheet(act_worksheet, address, "red");
                                 }
                             }
@@ -406,6 +435,17 @@ function displayBetween(){
                                     highlightContentInWorksheet(act_worksheet, address, "red");
                                 }
                             }
+                            else if (document.getElementById('then_operator').value == "inlist") {
+                                var check = 0;
+                                for (var run = 0; run < splitted_then_list.length; run++) {
+                                    if (range.values[i][header_then] == splitted_then_list[run]) {
+                                        check = 1;
+                                    }
+                                }
+                                if (check == 0){
+                                    highlightContentInWorksheet(act_worksheet, address, "red");
+                                }
+                            }
                         }
                     }
                     if (document.getElementById('if_operator').value == "inequal") {
@@ -432,6 +472,17 @@ function displayBetween(){
                             }
                             else if (document.getElementById('then_operator').value == "between") {
                                 if (range.values[i][header_then] < thencondition || range.values[i][header_then] > document.getElementById('between_and')) {
+                                    highlightContentInWorksheet(act_worksheet, address, "red");
+                                }
+                            }
+                            else if (document.getElementById('then_operator').value == "inlist") {
+                                var check = 0;
+                                for (var run = 0; run < splitted_then_list.length; run++) {
+                                    if (range.values[i][header_then] == splitted_then_list[run]) {
+                                        check = 1;
+                                    }
+                                }
+                                if (check == 0){
                                     highlightContentInWorksheet(act_worksheet, address, "red");
                                 }
                             }
