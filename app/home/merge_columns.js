@@ -5,7 +5,7 @@ function backToOne() {
 
 (function () {
     'use strict';
-
+    var count_drop = 2;
     // The initialize function must be run each time a new page is loaded
     Office.initialize = function (reason) {
         jQuery(document).ready(function () {
@@ -170,7 +170,7 @@ function backToOne() {
 
         }
 
-        function addDropdown(count){
+        function addDropdown(){
             for (var j = 3; j < 5; j++) {
                 var div = document.createElement("div");
                 div.className = "ms-Dropdown reference_column_checkboxes_" + j;
@@ -199,7 +199,7 @@ function backToOne() {
 
                 document.getElementById("dropdowns_step3").appendChild(div);
                 populateReferenceColumnDropdown(tmp_table, "reference_column_checkboxes_" + j);
-
+                count_drop = count_drop + 1;
             }
         }
 
@@ -217,8 +217,18 @@ function backToOne() {
         $('#step3').hide();
 
         // find columns to match
-        var selected_identifier1 = document.getElementById('reference_column_checkboxes_1').value; // TODO better reference by ID than name
-        var selected_identifier2 = document.getElementById('reference_column_checkboxes_1').value; // TODO better reference by ID than name
+        var identifier1 = new Array(count_drop / 2);
+        var identifier2 = new Array(count_drop / 2);
+
+        for (var run = 0; run < count_drop; run++) {
+            var countid = run + 1;
+            if (countid % 2 != 0) {
+                identifier1.push(document.getElementById("reference_column_checkboxes_" + countid).value); // TODO better reference by ID than name
+            }
+            else {
+                identifier2.push(document.getElementById("reference_column_checkboxes_" + countid).value); // TODO better reference by ID than name
+            }
+        }
 
         var selected_table1 = document.getElementById('table1_options').value; // TODO better reference by ID than name
         var selected_table2 = document.getElementById('table2_options').value; // TODO better reference by ID than name
@@ -232,7 +242,6 @@ function backToOne() {
             range.load('address');
             range.load('text');
 
-
             var worksheet_adding_to = ctx.workbook.worksheets.getItem(selected_table1);
 
             var range_all_adding_to = worksheet_adding_to.getRange();
@@ -244,51 +253,67 @@ function backToOne() {
 
             return ctx.sync().then(function() {
 
-                // initialize ids
-                var sheet1_id = 0;
-                var sheet2_id = 0;
+                var column1_ids = new Array(identifier1.length);
+                var column2_ids = new Array(identifier2.length);
 
-                // iterate over columns
+                //get vector with column indices of matcher for each table
+                var pos_col1 = 0;
+                var pos_col2 = 0;
 
-                for (var k = 0; k < range.text[0].length; k++){
-                    if (selected_identifier1 == range.text[0][k]){
-                        sheet1_id = k;
+                for (var runheader = 0; runheader < range_adding_to.text[0].length; runheader++){
+                    for (var runid1 = 0; runid1 < identifier1.length; runid1++) {
+                        if (identifier1[runid1] == range_adding_to.text[0][runheader]){
+                            column1_ids[pos_col1] = runheader;
+                            pos_col1 = pos_col1 + 1;
+                        }
                     }
                 }
-
-                for (var k = 0; k < range_adding_to.text[0].length; k++){
-                    if (selected_identifier2 == range_adding_to.text[0][k]){
-                        sheet2_id = k;
+                for (var runheader = 0; runheader < range.text[0].length; runheader++){
+                    for (var runid2 = 0; runid2 < identifier2.length; runid2++) {
+                        if (identifier2[runid2] == range.text[0][runheader]){
+                            column2_ids[pos_col2] = runheader;
+                            pos_col2 = pos_col2 + 1;
+                        }
                     }
                 }
 
                 for (var k = 0; k < range.text[0].length; k++){
 
                     // iterate over checked checkboxes
-
                     var checked_checkboxes = getCheckedBoxes("reference_column_checkbox");
 
                     for (var l = 0; l < checked_checkboxes.length; l++){ // TODO throws error if none are checked
-
                         if (checked_checkboxes[l].id == range.text[0][k]){
-
                             var column_char = getCharFromNumber(1 + l + range_adding_to.text[0].length);
 
                             // copy title
                             addContentToWorksheet(worksheet_adding_to, column_char + "1", range.text[0][k]);
 
                             // copy rest
-                            for (var i = 1; i < range.text.length; i++) {
-                                for (var j = 1; j < range_adding_to.text.length; j++) {
-                                    if (range_adding_to.text[j][sheet2_id] == range.text[i][sheet1_id]) {
-                                        var sheet_row = j + 1;
-                                        addContentToWorksheet(worksheet_adding_to, column_char + sheet_row, range.text[i][k])
+                            for (var i = 1; i < range_adding_to.text.length; i++) {
+                                for (var j = 1; j < range.text.length; j++) {
+                                    var check = 0;
+                                    for (var runid = 0; runid < column1_ids.length; runid ++) {
+
+                                        var col1 = column1_ids[runid];
+                                        var col2 = column2_ids[runid];
+
+                                        if (range_adding_to.text[i][col1] == range.text[j][col2]) {
+                                            check = check + 1;
+                                        }
+                                    }
+                                    if (check == column1_ids.length) {
+                                        var sheet_row = i + 1;
+                                        addContentToWorksheet(worksheet_adding_to, column_char + sheet_row, range.text[j][2])
                                     }
                                 }
                             }
                         }
                     }
                 }
+
+
+
             });
         }).catch(function(error) {
             console.log("Error: " + error);
