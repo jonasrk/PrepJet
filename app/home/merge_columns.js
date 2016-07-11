@@ -30,7 +30,6 @@ function backToOne() {
             $('#back_step1').click(backToOne);
             $('#bt_apply').click(applyButtonClicked);
             $('#back_step2').click(step2ButtonClicked);
-            //$('#bt_more').click(addDropdown);
 
         });
     };
@@ -128,6 +127,8 @@ function backToOne() {
         $('#step1').hide();
         $('#step2').hide();
         $('#step3').show();
+        $('#bt_remove').hide();
+
 
         var selected_table1 = document.getElementById('table1_options').value; // TODO better reference by ID than name
         var selected_table2 = document.getElementById('table2_options').value; // TODO better reference by ID than name
@@ -171,6 +172,7 @@ function backToOne() {
         }
 
         function addDropdown(){
+            $('#bt_remove').show();
             var loop_end = count_drop + 1;
             for (var j = loop_end; j < (loop_end + 2); j++) {
                 var div = document.createElement("div");
@@ -204,10 +206,20 @@ function backToOne() {
             }
         }
 
+        function removeCriteria() {
+            for (var run = 3; run < 4; run++) {
+                //var tmp = document.getElementById("reference_column_checkboxes_" + run);
+                //tmp.style.display = 'none';
+                $('#reference_column_checkboxes_' + run).hide();
+            }
+            count_drop = count_drop - 2;
+        }
+
         populateReferenceColumnDropdown(selected_table1, "reference_column_checkboxes_1");
         populateReferenceColumnDropdown(selected_table2, "reference_column_checkboxes_2");
 
         $('#bt_more').click(addDropdown);
+        $('#bt_remove').click(removeCriteria);
 
     }
 
@@ -309,6 +321,7 @@ function backToOne() {
                                     if (check == column1_ids.length) {
                                         var sheet_row = i + 1;
                                         addContentToWorksheet(worksheet_adding_to, column_char + sheet_row, range.text[j][k])
+                                        break; //todo correct position to ensure stops after one match found
                                     }
                                 }
                             }
