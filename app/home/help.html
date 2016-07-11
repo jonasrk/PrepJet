@@ -72,10 +72,17 @@
         <div id="addColumn" class="ms-firstrun-pages__content">
             <div class="ms-firstrun-pages__content--centered ms-font-m ms-fontColor-white">
                 <p class="page1">
-                    <span class="ms-fontWeight-light">Add Column.</span>
+                    <span class="ms-fontWeight-light">Add Column</span>
                 </p>
                 <p>
-                    <span class="ms-fontWeight-light">Add columns is VlookUp for stupid people.</span>
+                    <span class="ms-fontWeight-light">
+                        Add data from another worksheet to your table.<br>
+                        Example: You have a table with names, surnames and birth dates of your customers. You want to add the e-mail addresses from a delivery information table based on the name, surname, and birthdate.<br>
+                        Select<br>
+                        1. The tables to be used (customer table and the delivery information table)<br>
+                        2. The column(s) to be added to the first table (column that contains the e-mail adresses)<br>
+                        3. The match criteria for the data to be added in both tables (name, surname, and birthdates)<br>
+                    </span>
                 </p>
             </div>
         </div>
@@ -85,7 +92,12 @@
                     <span class="ms-fontWeight-light">Split Values</span>
                 </p>
                 <p>
-                    <span class="ms-fontWeight-light">Split column entries by delimiter.</span>
+                    <span class="ms-fontWeight-light">Split the entries in one column into separate columns.<br>
+                        Example: you have a column that contains name, surname and birthday, each separated by a space. You want to have the birthdate in a separate column.<br>
+                        1. Select the column to be split (e.g. the column containing name, surname, and birthday)<br>
+                        2. Specify the delimiter, i.e. the symbol at which the column entry shall be split (e.g. whitespace)<br>
+                        3. Open the advanced settings [delimitor position] only if you do not want the entry to be split at the first delimitor (e.g. second space)<br>
+                    </span>
                 </p>
             </div>
         </div>
@@ -95,7 +107,12 @@
                     <span class="ms-fontWeight-light">Extract Values.</span>
                 </p>
                 <p>
-                    <span class="ms-fontWeight-light">Get part of a column.</span>
+                    <span class="ms-fontWeight-light">Extract a part from a column entry based on specified delimiters<br>
+                        Example: you have a column that contains name, surname and birthday, each separated by a space. You want to extract the surname and write it to another column.<br>
+                        1. Select the column from which the part should be extracted (e.g. the column containing name, surname and birthday)<br>
+                        2. Specify the start and the end of the part to be extracted (e.g. first whitespace, second whitespace)<br>
+                        3.Select whether the delimitor (e.g. the whitespace in front of and after the surname) shall be included in your new column.
+                    </span>
                 </p>
             </div>
         </div>
@@ -115,7 +132,11 @@
                     <span class="ms-fontWeight-light">Detect Duplicates</span>
                 </p>
                 <p>
-                    <span class="ms-fontWeight-light">Find duplicates based on selected columns.</span>
+                    <span class="ms-fontWeight-light">Find and highlight duplicate data records<br>
+                        Example: You have a list of products with the features „category“ and „color“ and you want to find all duplicates based on product name and category.<br>
+                        1. Select the column(s) that shall be included in the duplicate comparison (e.g. product name and category)<br>
+                        2. Specify the match type: exact vs. Fuzzy. Fuzzy means that the data records can differ slightly (e.g. „T-Shirt“ vs. „Tshirt“)
+                    </span>
                 </p>
             </div>
         </div>
@@ -125,7 +146,10 @@
                     <span class="ms-fontWeight-light">Detect Outlier</span>
                 </p>
                 <p>
-                    <span class="ms-fontWeight-light">Detect outlier in columns wit numeric values</span>
+                    <span class="ms-fontWeight-light">Find and highlight that deviate from the overall pattern in the column (statistical outliers). This function only works with numeric values (i.e. columns with which you can do mathematical operations)<br>
+                        Example: You have a list of product prices and want to detect entries that could be flaws.<br>
+                        Select the column to detect the outlier and apply.
+                    </span>
                 </p>
             </div>
         </div>
@@ -135,7 +159,9 @@
                     <span class="ms-fontWeight-light">Validation Rule</span>
                 </p>
                 <p>
-                    <span class="ms-fontWeight-light">Create rules to validate your data.</span>
+                    <span class="ms-fontWeight-light">Create rules to validate your data and to detect inconsistencies based on domain specific conditions.<br>
+                        Example: You have a price information table and you know that there are certain price ranges for different product types.
+                    </span>
                 </p>
             </div>
         </div>
