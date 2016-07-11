@@ -171,7 +171,8 @@ function backToOne() {
         }
 
         function addDropdown(){
-            for (var j = 3; j < 5; j++) {
+            var loop_end = count_drop + 1;
+            for (var j = loop_end; j < (loop_end + 2); j++) {
                 var div = document.createElement("div");
                 div.className = "ms-Dropdown reference_column_checkboxes_" + j;
 
