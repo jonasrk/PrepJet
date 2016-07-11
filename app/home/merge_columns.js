@@ -207,7 +207,8 @@ function backToOne() {
         }
 
         function removeCriteria() {
-            for (var run = 3; run < 4; run++) {
+            var loop_end = count_drop - 1;
+            for (var run = loop_end; run < (loop_end + 2); run++) {
                 //var tmp = document.getElementById("reference_column_checkboxes_" + run);
                 //tmp.style.display = 'none';
                 $('#reference_column_checkboxes_' + run).hide();

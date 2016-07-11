@@ -45,6 +45,9 @@ ul {
   font-size: 20px;
   top: 4px; }
 
+.ms-Link_White {
+    color: #fff; }
+
 .ms-firstrun-pages {
   display: -webkit-box;
   display: flex;
