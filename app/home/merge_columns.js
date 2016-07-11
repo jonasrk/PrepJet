@@ -217,16 +217,22 @@ function backToOne() {
         $('#step3').hide();
 
         // find columns to match
+        var identifier_length = count_drop / 2;
         var identifier1 = new Array(count_drop / 2);
         var identifier2 = new Array(count_drop / 2);
+
+        var ident1_pos = 0;
+        var ident2_pos = 0;
 
         for (var run = 0; run < count_drop; run++) {
             var countid = run + 1;
             if (countid % 2 != 0) {
-                identifier1.push(document.getElementById("reference_column_checkboxes_" + countid).value); // TODO better reference by ID than name
+                identifier1[ident1_pos] = document.getElementById("reference_column_checkboxes_" + countid).value; // TODO better reference by ID than name
+                ident1_pos = ident1_pos + 1;
             }
             else {
-                identifier2.push(document.getElementById("reference_column_checkboxes_" + countid).value); // TODO better reference by ID than name
+                identifier2[ident2_pos] = document.getElementById("reference_column_checkboxes_" + countid).value; // TODO better reference by ID than name
+                ident2_pos = ident2_pos + 1;
             }
         }
 
@@ -250,29 +256,27 @@ function backToOne() {
             range_adding_to.load('address');
             range_adding_to.load('text');
 
-
             return ctx.sync().then(function() {
 
-                var column1_ids = new Array(identifier1.length);
-                var column2_ids = new Array(identifier2.length);
+                var column1_ids = []; //new Array(identifier_length);
+                var column2_ids = []; //new Array(identifier_length);
 
                 //get vector with column indices of matcher for each table
                 var pos_col1 = 0;
                 var pos_col2 = 0;
 
-                for (var runheader = 0; runheader < range_adding_to.text[0].length; runheader++){
-                    for (var runid1 = 0; runid1 < identifier1.length; runid1++) {
+                for (var runid1 = 0; runid1 < identifier1.length; runid1++) {
+                    for (var runheader = 0; runheader < range_adding_to.text[0].length; runheader++){
                         if (identifier1[runid1] == range_adding_to.text[0][runheader]){
-                            column1_ids[pos_col1] = runheader;
-                            pos_col1 = pos_col1 + 1;
+                            column1_ids[runid1] = runheader;
                         }
                     }
                 }
-                for (var runheader = 0; runheader < range.text[0].length; runheader++){
-                    for (var runid2 = 0; runid2 < identifier2.length; runid2++) {
+
+                for (var runid2 = 0; runid2 < identifier2.length; runid2++) {
+                    for (var runheader = 0; runheader < range.text[0].length; runheader++){
                         if (identifier2[runid2] == range.text[0][runheader]){
-                            column2_ids[pos_col2] = runheader;
-                            pos_col2 = pos_col2 + 1;
+                            column2_ids[runid2] = runheader;
                         }
                     }
                 }
@@ -294,7 +298,6 @@ function backToOne() {
                                 for (var j = 1; j < range.text.length; j++) {
                                     var check = 0;
                                     for (var runid = 0; runid < column1_ids.length; runid ++) {
-
                                         var col1 = column1_ids[runid];
                                         var col2 = column2_ids[runid];
 
@@ -304,7 +307,7 @@ function backToOne() {
                                     }
                                     if (check == column1_ids.length) {
                                         var sheet_row = i + 1;
-                                        addContentToWorksheet(worksheet_adding_to, column_char + sheet_row, range.text[j][2])
+                                        addContentToWorksheet(worksheet_adding_to, column_char + sheet_row, range.text[j][k])
                                     }
                                 }
                             }
