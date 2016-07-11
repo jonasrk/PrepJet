@@ -147,6 +147,7 @@ ul {
     .ms-firstrun-pages__content--centered {
       display: -webkit-box;
       display: flex;
+      padding-bottom: 10px;
       -webkit-box-orient: vertical;
       -webkit-box-direction: normal;
               flex-direction: column;
@@ -154,7 +155,7 @@ ul {
       -webkit-box-pack: center;
               justify-content: center;
       -webkit-box-align: center;
-              align-items: center; }
+              align-items: left; }
 
   .ms-firstrun-pages__footer {
     display: -webkit-box;
