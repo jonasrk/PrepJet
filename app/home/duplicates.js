@@ -177,6 +177,39 @@
                             }
 
 
+                            function deleteDuplicates(row_int) {
+
+                                Excel.run(function (ctx) {
+
+                                    var worksheet = ctx.workbook.worksheets.getActiveWorksheet();
+                                    var range_all = worksheet.getRange();
+                                    var range = range_all.getUsedRange();
+
+                                    var rangeadd = "A" + row_int;
+                                    var range_tmp = worksheet.getRange(rangeadd);
+                                    var total_row = range_tmp.getEntireRow();
+
+                                    range.load('text');
+                                    total_row.load('address');
+
+                                    return ctx.sync().then(function() {
+                                        //console.log(total_row.address);
+                                        total_row.delete();
+                                    });
+
+                                }).catch(function(error) {
+                                    console.log("Error: " + error);
+                                    if (error instanceof OfficeExtension.Error) {
+                                        console.log("Debug info: " + JSON.stringify(error.debugInfo));
+                                    }
+                                });
+
+                            }
+
+                            for (var run = 0; run < row_numbers.length; run++) {
+                                deleteDuplicates(row_numbers[run]);
+                            }
+
                         });
 
                     }).catch(function(error) {
