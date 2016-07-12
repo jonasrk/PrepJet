@@ -162,11 +162,25 @@ function displayFieldEnd(){
                         var position2 = range.text[i][header].length;
                     }
                     else {
-                        if (document.getElementById('demo-checkbox-unselected').checked == true) {
-                            var position2 = range.text[i][header].indexOf(split_end) + 1;
+                        //when delimiter to start and end is different
+                        if (split_beginning != split_end) {
+                            if (document.getElementById('demo-checkbox-unselected').checked == true) {
+                                var position2 = range.text[i][header].indexOf(split_end) + 1;
+                            }
+                            else {
+                                var position2 = range.text[i][header].indexOf(split_end);
+                            }
                         }
                         else {
-                            var position2 = range.text[i][header].indexOf(split_end);
+                        //when delimiter to start and end is the same
+                            if(document.getElementById('demo-checkbox-unselected').checked == true) {
+                                var tmp = range.text[i][header].substring(position1 + 1, range.text[i][header].length);
+                                var position2 = tmp.indexOf(split_end) + position1 + 2;
+                            }
+                            else {
+                                var tmp = range.text[i][header].substring(position1, range.text[i][header].length);
+                                var position2 = tmp.indexOf(split_end) + position1;
+                            }
                         }
                     }
 
