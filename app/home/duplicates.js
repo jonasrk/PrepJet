@@ -176,25 +176,26 @@
                                 row_numbers[run] = Number(row_array[run].substring(1)) + duplicate_list.length;
                             }
 
+                            var sorted_rows = row_numbers.sort(function(a, b){return b-a});
 
                             function deleteDuplicates(row_int) {
 
                                 Excel.run(function (ctx) {
 
                                     var worksheet = ctx.workbook.worksheets.getActiveWorksheet();
-                                    var range_all = worksheet.getRange();
-                                    var range = range_all.getUsedRange();
+                                    //var range_all = worksheet.getRange();
+                                    //var range = range_all.getUsedRange();
 
                                     var rangeadd = "A" + row_int;
                                     var range_tmp = worksheet.getRange(rangeadd);
                                     var total_row = range_tmp.getEntireRow();
 
-                                    range.load('text');
+                                    //range.load('text');
                                     total_row.load('address');
 
                                     return ctx.sync().then(function() {
-                                        //console.log(total_row.address);
-                                        total_row.delete();
+                                        //total_row.delete();
+                                        console.log(total_row.address);
                                     });
 
                                 }).catch(function(error) {
@@ -207,7 +208,7 @@
                             }
 
                             for (var run = 0; run < row_numbers.length; run++) {
-                                deleteDuplicates(row_numbers[run]);
+                                deleteDuplicates(sorted_rows[run]);
                             }
 
                         });
