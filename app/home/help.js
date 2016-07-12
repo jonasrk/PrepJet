@@ -14,7 +14,13 @@
             $('#detectOutlier').hide();
             $('#validationRule').hide();
 
-            $('#goToHomeLabel').click(home);
+            $('#splitValHome').click(home);
+            $('#addColHome').click(home);
+            $('#extractValHome').click(home);
+            $('#trimSpacesHome').click(home);
+            $('#detDupHome').click(home);
+            $('#detOutHome').click(home);
+            $('#valRuleHome').click(home);
             $('#linkAddColumn').click(addColumn);
             $('#linkSplitValues').click(splitValues);
             $('#linkExtractValues').click(extractValues);

@@ -39,25 +39,19 @@
 </head>
 
 <body class="ms-font-m">
-    <div class="ms-firstrun-pages ms-bgColor-themePrimary">
+    <div id="firstpage" class="ms-firstrun-pages ms-bgColor-themePrimary">
         <div class="ms-firstrun-pages__header">
             <div class="ms-firstrun-pages__header--skip ms-font-m ms-fontColor-white">
                 <span class="pointerCursor" id="goToHomeLabel">Home </span>
                 <i class="pointerCursor ms-Icon ms-Icon--chevronThickRight"></i>
             </div>
-            <!--div class="ms-firstrun-pages__welcome">
+            <div class="ms-firstrun-pages__welcome">
                 <div>
                     <h1 id="welcomeHeadline" class="ms-font-xl ms-fontWeight-light ms-fontColor-white">PrepJet Help</h1>
                 </div>
-            </div-->
+            </div>
         </div>
-
-        <div id="firstpage" class="ms-firstrun-pages__content">
-            <!--div class="ms-firstrun-pages__welcome"-->
-                <div>
-                    <h1 id="welcomeHeadline" class="ms-font-xl ms-fontWeight-light ms-fontColor-white">PrepJet Help</h1>
-                </div>
-            <!--/div-->
+        <div class="ms-firstrun-pages__content">
             <div class="ms-firstrun-pages__content--centered ms-font-m ms-fontColor-white">
                 <p class="ms-fontWeight-light">Here you get help on how to use PrepJet. Click on the function you want to learn more about.</p>
             </div>
@@ -73,17 +67,22 @@
                 </p>
             </div>
         </div>
+    </div>
 
-        <div id="addColumn" class="ms-firstrun-pages__content">
+    <div id="addColumn" class="ms-firstrun-pages ms-bgColor-themePrimary">
+        <div class="ms-firstrun-pages__header">
+            <div class="ms-firstrun-pages__header--skip ms-font-m ms-fontColor-white">
+                <span class="pointerCursor" id="addColHome">Home </span>
+                <i class="pointerCursor ms-Icon ms-Icon--chevronThickRight"></i>
+            </div>
+            <div class="ms-firstrun-pages__welcome">
+                <div>
+                    <h1 id="welcomeHeadline" class="ms-font-xl ms-fontWeight-light ms-fontColor-white">Add Column</h1>
+                </div>
+            </div>
+        </div>
+        <div class="ms-firstrun-pages__content">
             <div class="ms-firstrun-pages__content--centered ms-font-m ms-fontColor-white">
-                <!--div class="ms-firstrun-pages__welcome"-->
-                    <div>
-                        <h1 id="welcomeHeadline" class="ms-font-xl ms-fontWeight-light ms-fontColor-white">Add Column</h1>
-                    </div>
-                <!--/div-->
-                <!--div>
-                    <h3 id="addColumn_sub" class="ms-fontWeight-light ms-fontColor-white">Add Column</h3>
-                </div-->
                 <div class="ms-firstrun-pages__content--centered">
                     <p class="ms-fontWeight-light">Add data from another worksheet to your table.<br></p>
                 </div>
@@ -99,19 +98,27 @@
                 </div>
             </div>
         </div>
+    </div>
 
-        <div id="splitValues" class="ms-firstrun-pages__content">
-            <div class="ms-firstrun-pages__content--centered ms-font-m ms-fontColor-white">
+    <div id="splitValues" class="ms-firstrun-pages ms-bgColor-themePrimary">
+        <div class="ms-firstrun-pages__header">
+            <div class="ms-firstrun-pages__header--skip ms-font-m ms-fontColor-white">
+                <span class="pointerCursor" id="splitValHome">Home </span>
+                <i class="pointerCursor ms-Icon ms-Icon--chevronThickRight"></i>
+            </div>
+            <div class="ms-firstrun-pages__welcome">
                 <div>
-                    <h3 id="splitValue_sub" class="ms-fontWeight-light ms-fontColor-white">Split Values</h3>
+                    <h1 id="welcomeHeadline" class="ms-font-xl ms-fontWeight-light ms-fontColor-white">Split Values</h1>
                 </div>
+            </div>
+        </div>
+        <div class="ms-firstrun-pages__content">
+            <div class="ms-firstrun-pages__content--centered ms-font-m ms-fontColor-white">
                 <div class="ms-firstrun-pages__content--centered">
                     <p class="ms-fontWeight-light">Split the entries in one column into separate columns.<br></p>
-                </div>
-                <div class="ms-firstrun-pages__content--centered">
+                    <br>
                     <p class="ms-fontWeight-light">Example: you have a column that contains name, surname and birthday, each separated by a space. You want to have the birthdate in a separate column.</p>
-                </div>
-                <div class="ms-firstrun-pages__content--centered">
+                    <br>
                     <p class="ms-fontWeight-light">1. Select the column to be split (e.g. the column containing name, surname, and birthday)<br>
                         2. Specify the delimiter, i.e. the symbol at which the column entry shall be split (e.g. whitespace)<br>
                         3. Open the advanced settings [delimitor position] only if you do not want the entry to be split at the first delimitor (e.g. second space)<br>
@@ -119,19 +126,27 @@
                 </div>
             </div>
         </div>
+    </div>
 
-        <div id="extractValues" class="ms-firstrun-pages__content">
-            <div class="ms-firstrun-pages__content--centered ms-font-m ms-fontColor-white">
+    <div id="extractValues" class="ms-firstrun-pages ms-bgColor-themePrimary">
+        <div class="ms-firstrun-pages__header">
+            <div class="ms-firstrun-pages__header--skip ms-font-m ms-fontColor-white">
+                <span class="pointerCursor" id="extractValHome">Home </span>
+                <i class="pointerCursor ms-Icon ms-Icon--chevronThickRight"></i>
+            </div>
+            <div class="ms-firstrun-pages__welcome">
                 <div>
-                    <h3 id="splitValue_sub" class="ms-fontWeight-light ms-fontColor-white">Extract Values</h3>
+                    <h1 id="welcomeHeadline" class="ms-font-xl ms-fontWeight-light ms-fontColor-white">Extract Values</h1>
                 </div>
+            </div>
+        </div>
+        <div class="ms-firstrun-pages__content">
+            <div class="ms-firstrun-pages__content--centered ms-font-m ms-fontColor-white">
                 <div class="ms-firstrun-pages__content--centered">
                     <p class="ms-fontWeight-light">Extract a part from a column entry based on specified delimiters<br></p>
-                </div>
-                <div class="ms-firstrun-pages__content--centered">
+                    <br>
                     <p class="ms-fontWeight-light">Example: you have a column that contains name, surname and birthday, each separated by a space. You want to extract the surname and write it to another column.<br></p>
-                </div>
-                <div class="ms-firstrun-pages__content--centered">
+                    <br>
                     <p class="ms-fontWeight-light">1. Select the column from which the part should be extracted (e.g. the column containing name, surname and birthday)<br>
                         2. Specify the start and the end of the part to be extracted (e.g. first whitespace, second whitespace)<br>
                         3. Select whether the delimitor (e.g. the whitespace in front of and after the surname) shall be included in your new column.
@@ -139,45 +154,71 @@
                 </div>
             </div>
         </div>
+    </div>
 
-        <div id="trimSpaces" class="ms-firstrun-pages__content">
-            <div class="ms-firstrun-pages__content--centered ms-font-m ms-fontColor-white">
+    <div id="trimSpaces" class="ms-firstrun-pages ms-bgColor-themePrimary">
+        <div class="ms-firstrun-pages__header">
+            <div class="ms-firstrun-pages__header--skip ms-font-m ms-fontColor-white">
+                <span class="pointerCursor" id="trimSpacesHome">Home </span>
+                <i class="pointerCursor ms-Icon ms-Icon--chevronThickRight"></i>
+            </div>
+            <div class="ms-firstrun-pages__welcome">
                 <div>
-                    <h3 id="splitValue_sub" class="ms-fontWeight-light ms-fontColor-white">Trim Spaces</h3>
+                    <h1 id="welcomeHeadline" class="ms-font-xl ms-fontWeight-light ms-fontColor-white">Trim Spaces</h1>
                 </div>
+            </div>
+        </div>
+        <div class="ms-firstrun-pages__content">
+            <div class="ms-firstrun-pages__content--centered ms-font-m ms-fontColor-white">
                 <div class="ms-firstrun-pages__content--centered">
                     <p class="ms-fontWeight-light">Example: you have a column in which some or all entries have leading or trailing spaces (e.g. " John Smith"). Those might cause errors when trying to match cells.<br></p>
-                </div>
-                <div class="ms-firstrun-pages__content--centered">
+                    <br>
                     <p class="ms-fontWeight-light">Simply select one or more columns to remove all leading and trailing spaces.</p>
                 </div>
             </div>
         </div>
+    </div>
 
-        <div id="detectDuplicates" class="ms-firstrun-pages__content">
-            <div class="ms-firstrun-pages__content--centered ms-font-m ms-fontColor-white">
+    <div id="detectDuplicates" class="ms-firstrun-pages ms-bgColor-themePrimary">
+        <div class="ms-firstrun-pages__header">
+            <div class="ms-firstrun-pages__header--skip ms-font-m ms-fontColor-white">
+                <span class="pointerCursor" id="detDupHome">Home </span>
+                <i class="pointerCursor ms-Icon ms-Icon--chevronThickRight"></i>
+            </div>
+            <div class="ms-firstrun-pages__welcome">
                 <div>
-                    <h3 id="splitValue_sub" class="ms-fontWeight-light ms-fontColor-white">Detect Duplicates</h3>
+                    <h1 id="welcomeHeadline" class="ms-font-xl ms-fontWeight-light ms-fontColor-white">Detect Duplicates</h1>
                 </div>
+            </div>
+        </div>
+        <div class="ms-firstrun-pages__content">
+            <div class="ms-firstrun-pages__content--centered ms-font-m ms-fontColor-white">
                 <div class="ms-firstrun-pages__content--centered">
                     <p class="ms-fontWeight-light">Find and highlight duplicate data records<br></p>
-                </div>
-                <div class="ms-firstrun-pages__content--centered">
+                    <br>
                     <p class="ms-fontWeight-light">Example: You have a list of products with the features „category“ and „color“ and you want to find all duplicates based on product name and category.<br></p>
-                </div>
-                <div class="ms-firstrun-pages__content--centered">
+                    <br>
                     <p class="ms-fontWeight-light">1. Select the column(s) that shall be included in the duplicate comparison (e.g. product name and category)<br>
                         2. Specify the match type: exact vs. Fuzzy. Fuzzy means that the data records can differ slightly (e.g. „T-Shirt“ vs. „Tshirt“)<br></p>
                 </div>
             </div>
         </div>
+    </div>
 
-        <div id="detectOutlier" class="ms-firstrun-pages__content">
-            <div class="ms-firstrun-pages__content--centered ms-font-m ms-fontColor-white">
+    <div id="detectOutlier" class="ms-firstrun-pages ms-bgColor-themePrimary">
+        <div class="ms-firstrun-pages__header">
+            <div class="ms-firstrun-pages__header--skip ms-font-m ms-fontColor-white">
+                <span class="pointerCursor" id="detOutHome">Home </span>
+                <i class="pointerCursor ms-Icon ms-Icon--chevronThickRight"></i>
+            </div>
+            <div class="ms-firstrun-pages__welcome">
                 <div>
-                    <h3 id="splitValue_sub" class="ms-fontWeight-light ms-fontColor-white">Detect Outlier</h3>
+                    <h1 id="welcomeHeadline" class="ms-font-xl ms-fontWeight-light ms-fontColor-white">Detect Outlier</h1>
                 </div>
-                <br>
+            </div>
+        </div>
+        <div class="ms-firstrun-pages__content">
+            <div class="ms-firstrun-pages__content--centered ms-font-m ms-fontColor-white">
                 <div class="ms-firstrun-pages__content--centered">
                     <p class="ms-fontWeight-light">Find and highlight values that deviate from the overall pattern in the column (statistical outliers). This function only works with numeric values (i.e. columns with which you can do mathematical operations)<br></p>
                     <br>
@@ -187,19 +228,27 @@
                 </div>
             </div>
         </div>
+    </div>
 
-        <div id="validationRule" class="ms-firstrun-pages__content">
-            <div class="ms-firstrun-pages__content--centered ms-font-m ms-fontColor-white">
+    <div id="validationRule" class="ms-firstrun-pages ms-bgColor-themePrimary">
+        <div class="ms-firstrun-pages__header">
+            <div class="ms-firstrun-pages__header--skip ms-font-m ms-fontColor-white">
+                <span class="pointerCursor" id="valRuleHome">Home </span>
+                <i class="pointerCursor ms-Icon ms-Icon--chevronThickRight"></i>
+            </div>
+            <div class="ms-firstrun-pages__welcome">
                 <div>
-                    <h3 id="splitValue_sub" class="ms-fontWeight-light ms-fontColor-white">Validation Rule</h3>
+                    <h1 id="welcomeHeadline" class="ms-font-xl ms-fontWeight-light ms-fontColor-white">Validation Rule</h1>
                 </div>
+            </div>
+        </div>
+        <div class="ms-firstrun-pages__content">
+            <div class="ms-firstrun-pages__content--centered ms-font-m ms-fontColor-white">
                 <div class="ms-firstrun-pages__content--centered">
                     <p class="ms-fontWeight-light">Create rules to validate your data and to detect inconsistencies based on domain specific conditions. There is the option to create simple rules (includes only one column) and advanced rules (creates a relationship between two columns).<br></p>
-                </div>
-                <div class="ms-firstrun-pages__content--centered">
+                    <br>
                     <p class="ms-fontWeight-light">Example: You have a price information table and you know that there are certain price ranges for different product types.<br></p>
-                </div>
-                <div class="ms-firstrun-pages__content--centered">
+                    <br>
                     <p class="ms-fontWeight-light">1. Select the independent column (e.g. product category).<br>
                         2. Select an operator from the list (e.g. "=" for equal to).<br>
                         3. Enter the condition for your independent column (e.g. "Dress").<br>
