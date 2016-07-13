@@ -324,7 +324,7 @@ function backToOne() {
                                     if (check == column1_ids.length) {
                                         var sheet_row = i + 1;
                                         addContentToWorksheet(worksheet_adding_to, column_char + sheet_row, range.text[j][k])
-                                        break; //todo correct position to ensure stops after one match found
+                                        break;
                                     }
                                 }
                             }
