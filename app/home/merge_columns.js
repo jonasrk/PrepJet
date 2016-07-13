@@ -177,6 +177,7 @@ function backToOne() {
             for (var j = loop_end; j < (loop_end + 2); j++) {
                 var div = document.createElement("div");
                 div.className = "ms-Dropdown reference_column_checkboxes_" + j;
+                div.id = "addedDropdown" + j;
 
                 var label = document.createElement("label");
                 label.className = "ms-label";
@@ -209,12 +210,13 @@ function backToOne() {
         function removeCriteria() {
             var loop_end = count_drop - 1;
             for (var run = loop_end; run < (loop_end + 2); run++) {
-                //var tmp = document.getElementById("reference_column_checkboxes_" + run);
-                //tmp.style.display = 'none';
-                $('#reference_column_checkboxes_' + run).hide();
+                var parent = document.getElementById("dropdowns_step3");
+                var child = document.getElementById("addedDropdown" + run);
+                parent.removeChild(child);
             }
             count_drop = count_drop - 2;
         }
+
 
         populateReferenceColumnDropdown(selected_table1, "reference_column_checkboxes_1");
         populateReferenceColumnDropdown(selected_table2, "reference_column_checkboxes_2");
