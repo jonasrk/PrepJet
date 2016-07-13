@@ -3,21 +3,6 @@ function backToOne() {
     $('#step2').hide();
 }
 
-function checkCheckbox() {
-    var checked_checkboxes = getAllCheckBoxes("reference_column_checkbox");
-    if (document.getElementById('checkbox_select_all').checked == true) {
-        for (var i = 0; i < checked_checkboxes.length; i++) {
-            document.getElementById("tbl_header" + i).checked = true;
-        }
-    }
-    else {
-        for (var i = 0; i < checked_checkboxes.length; i++) {
-            document.getElementById("tbl_header" + i).checked = false;
-        }
-    }
-}
-
-
 
 (function () {
     'use strict';
@@ -52,6 +37,39 @@ function checkCheckbox() {
     };
 
 
+
+    function checkCheckbox() {
+        var selected_table2 = document.getElementById('table2_options').value;
+        Excel.run(function (ctx) {
+
+            var worksheet = ctx.workbook.worksheets.getItem(selected_table2);
+            var range_all = worksheet.getRange();
+            var range = range_all.getUsedRange();
+
+            range.load('address');
+            range.load('text');
+
+            return ctx.sync().then(function() {
+                if (document.getElementById('checkbox_all').checked == true) {
+                    for (var i = 0; i < range.text[0].length; i++) {
+                        document.getElementById(range.text[0][i]).checked = true;
+                    }
+                }
+                else {
+                    for (var i = 0; i < range.text[0].length.length; i++) {
+                        document.getElementById(range.text[0][i]).checked = false;
+                    }
+                }
+            });
+
+        }).catch(function(error) {
+            console.log("Error: " + error);
+            if (error instanceof OfficeExtension.Error) {
+                console.log("Debug info: " + JSON.stringify(error.debugInfo));
+            }
+        });
+
+    }
 
     function populateDropdowns() {
 
@@ -130,8 +148,10 @@ function checkCheckbox() {
                 for (var i = 0; i < range.text[0].length; i++) { // .text[0] is the first row of a range
 
                     addNewCheckboxToContainer (range.text[0][i], "reference_column_checkbox" ,"checkboxes_variables");
-                    //addNewCheckboxToContainer ("tbl_header" + i, "reference_column_checkbox" ,"checkboxes_variables");
+
                 }
+
+                $('#checkbox_all').click(checkCheckbox);
             });
 
         }).catch(function(error) {
@@ -327,7 +347,6 @@ function checkCheckbox() {
                     else {
                         var checked_checkboxes = getCheckedBoxes("reference_column_checkbox");
                     }
-
 
                     for (var l = 0; l < checked_checkboxes.length; l++){ // TODO throws error if none are checked
                         if (checked_checkboxes[l].id == range.text[0][k]){
