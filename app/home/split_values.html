@@ -89,7 +89,7 @@
             <label class="ms-Label">Enter delimiter count, e.g. 3</label>
             <input id="delimiter_count_i" class="ms-TextField-field" type="text">
         </div>
-              <!--dropdown for delimiter count-->
+        <!--dropdown for delimiter count-->
         <div class="ms-Dropdown delimiter_count_dropdown" tabindex="1">
             <label class="ms-Label">Select direction from which to count</label>
             <i class="ms-Dropdown-caretDown ms-Icon ms-Icon--caretDown"></i>
@@ -97,6 +97,24 @@
                 <option value="empty"></option>
                 <option value="left">From Left</option>
                 <option value="right">From Right</option>
+            </select>
+        </div>
+        <!--checkbox-->
+        <div id="checkbox_delimiter" class="ms-ChoiceField">
+            <input id="delimiter_checkbox" class="ms-ChoiceField-input" type="checkbox" onclick="openDelDrop()">
+            <label id="checkbox_del" for="delimiter_checkbox" class="ms-ChoiceField-field">
+                <span class="ms-Label">Keep delimiter</span>
+            </label>
+        </div>
+        <!--dropdown for delimiter count-->
+        <div class="ms-Dropdown keep_delimiter_dropdown" tabindex="1">
+            <label class="ms-Label">Part where to keep delimiter</label>
+            <i class="ms-Dropdown-caretDown ms-Icon ms-Icon--caretDown"></i>
+            <select id="keep_delimiter_drop" class="ms-Dropdown-select">
+                <option value="empty"></option>
+                <option value="left">In left part</option>
+                <option value="right">In right part</option>
+                <option value="both">In both parts</option>
             </select>
         </div>
         <!--split button-->

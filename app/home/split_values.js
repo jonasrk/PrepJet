@@ -1,8 +1,23 @@
 function displayAdvancedCount() {
     if (document.getElementById('advanced_settings').checked == true) {
-            $('#delimiter_count').show();
-            $('.delimiter_count_dropdown').show();
-        }
+        $('#delimiter_count').show();
+        $('.delimiter_count_dropdown').show();
+        $('#checkbox_delimiter').show();
+    }
+    else {
+        $('#delimiter_count').hide();
+        $('.delimiter_count_dropdown').hide();
+        $('#checkbox_delimiter').hide();
+    }
+}
+
+function openDelDrop() {
+    if(document.getElementById('delimiter_checkbox').checked == true) {
+        $('.keep_delimiter_dropdown').show();
+    }
+    else {
+        $('.keep_delimiter_dropdown').hide();
+    }
 }
 
 //display textfield for custom delimiter if selected by user
@@ -30,7 +45,9 @@ function displayFieldDelimiter(){
 
             $('#delimiter_beginning').hide();
             $('#delimiter_count').hide();
+            $('#checkbox_delimiter').hide();
             $(".delimiter_count_dropdown").Dropdown().hide()
+            $(".keep_delimiter_dropdown").Dropdown().hide()
 
             $(".dropdown_table").Dropdown();
             $(".ms-TextField").TextField();
