@@ -120,10 +120,26 @@
                         duplicates.push(strings_to_sort[o - 1]);
                     }
                 }
-                
-                var color = 'red';
 
-                for (var m = 0; m < duplicates.length; m++){
+                //var color = 'red';
+
+                function colorDup(duplicates_input, int) {
+                    var color = 'red';
+                    for (var m = 0; m < duplicates_input.length; m++){
+                        if (m > 0 && !arraysEqual(duplicates_input[m], duplicates_input[m-1])){
+                            // generate new random color
+                            color = getRandomColor();
+                        }
+
+                        for (var n = 0; n < duplicates_input[m].length; n++){
+                            highlightContentInWorksheet(worksheet, duplicates_input[m][n][int], color);
+                        }
+                    }
+                }
+
+                colorDup(duplicates, 1);
+
+                /*for (var m = 0; m < duplicates.length; m++){
                     if (m > 0 && !arraysEqual(duplicates[m], duplicates[m-1])){
                         // generate new random color
                         color = getRandomColor();
@@ -132,7 +148,7 @@
                     for (var n = 0; n < duplicates[m].length; n++){
                         highlightContentInWorksheet(worksheet, duplicates[m][n][1], color);
                     }
-                }
+                }*/
 
 
                 function sortDuplicates(duplicate_list) {
@@ -183,10 +199,13 @@
                                 for (var runcol = 0; runcol < duplicate_list[0].length; runcol++) {
                                     var columnchar = getCharFromNumber(runcol + 1);
                                     addContentToWorksheet(act_worksheet, columnchar + sheet_row, duplicate_list[run][runcol][0]);
+                                    duplicate_list[run][runcol].push(columnchar + sheet_row);
                                 }
+                                console.log(duplicate_list[run]);
                                 sheet_row = sheet_row + 1;
                             }
 
+                            colorDup(duplicate_list, 2);
 
                             function deleteDuplicates(row_int) {
                                 Excel.run(function (ctx) {
