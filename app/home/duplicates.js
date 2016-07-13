@@ -143,7 +143,7 @@
                         var range_total = worksheet.getRange();
                         var range = range_total.getUsedRange();
 
-                        var rangeaddress = "A2:EZ2"
+                        var rangeaddress = "A2"
                         var range_all = worksheet.getRange(rangeaddress);
                         var range_insert = range_all.getEntireRow();
 
@@ -162,8 +162,24 @@
                             var sheet_row = 2;
                             var row_array = [];
 
+
                             for (var run = 0; run < dup_length; run++) {
                                 row_array[run] = duplicate_list[run][0][1];
+                            }
+
+                            var row_numbers = [];
+                            for (var run = 0; run < row_array.length; run++) {
+                                row_numbers[run] = Number(row_array[run].substring(1));
+                            }
+
+                            var sorted_rows = row_numbers.sort(function(a, b){return b-a});
+
+                            for (var run = 0; run < row_numbers.length; run++) {
+                                deleteDuplicates(sorted_rows[run]);
+                            }
+
+
+                            for (var run = 0; run < dup_length; run++) {
                                 for (var runcol = 0; runcol < duplicate_list[0].length; runcol++) {
                                     var columnchar = getCharFromNumber(runcol + 1);
                                     addContentToWorksheet(act_worksheet, columnchar + sheet_row, duplicate_list[run][runcol][0]);
@@ -171,31 +187,20 @@
                                 sheet_row = sheet_row + 1;
                             }
 
-                            var row_numbers = [];
-                            for (var run = 0; run < row_array.length; run++) {
-                                row_numbers[run] = Number(row_array[run].substring(1)) + duplicate_list.length;
-                            }
-
-                            var sorted_rows = row_numbers.sort(function(a, b){return b-a});
 
                             function deleteDuplicates(row_int) {
-
                                 Excel.run(function (ctx) {
 
                                     var worksheet = ctx.workbook.worksheets.getActiveWorksheet();
-                                    //var range_all = worksheet.getRange();
-                                    //var range = range_all.getUsedRange();
 
                                     var rangeadd = "A" + row_int;
                                     var range_tmp = worksheet.getRange(rangeadd);
                                     var total_row = range_tmp.getEntireRow();
 
-                                    //range.load('text');
                                     total_row.load('address');
 
                                     return ctx.sync().then(function() {
-                                        //total_row.delete();
-                                        console.log(total_row.address);
+                                        total_row.delete();
                                     });
 
                                 }).catch(function(error) {
@@ -205,10 +210,6 @@
                                     }
                                 });
 
-                            }
-
-                            for (var run = 0; run < row_numbers.length; run++) {
-                                deleteDuplicates(sorted_rows[run]);
                             }
 
                         });
