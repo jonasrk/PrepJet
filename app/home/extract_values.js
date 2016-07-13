@@ -61,6 +61,26 @@ function getColumn() {
 
             $('#extract_Value').click(extractValue);
 
+
+            Office.context.document.addHandlerAsync("documentSelectionChanged", myHandler, function(result){}
+            );
+
+            // Event handler function.
+            function myHandler(eventArgs){
+                Excel.run(function (ctx) {
+                    var selectedRange = ctx.workbook.getSelectedRange();
+                    selectedRange.load('address');
+                    return ctx.sync().then(function () {
+                        write(selectedRange.address);
+                    });
+                });
+            }
+
+            // Function that writes to a div with id='message' on the page.
+            function write(message){
+                document.getElementById('target_column_input').value = message;
+            }
+
         });
     };
 
@@ -129,8 +149,13 @@ function getColumn() {
 
 
             //get (optional) column where to insert extracted value, default is to the right of original column
-            var target_column = document.getElementById('target_column_input').value
-
+            var target_tmp = document.getElementById('target_column_input').value
+            if (target_tmp.indexOf(":") != -1) {
+                var target_column = target_tmp.substring(target_tmp.indexOf("!") + 1, target_tmp.indexOf(":"));
+            }
+            else {
+                var target_column = target_tmp.substring(target_tmp.indexOf("!") + 1, target_tmp.indexOf("!") + 2);
+            }
 
             //get used range in active Sheet
             range.load('text');

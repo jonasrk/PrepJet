@@ -32,34 +32,6 @@ function backToOne() {
             $('#back_step2').click(step2ButtonClicked);
 
 
-
-            Office.context.document.addHandlerAsync("documentSelectionChanged", myHandler, function(result){}
-            );
-
-            // Event handler function.
-            function myHandler(eventArgs){
-                Office.context.document.getSelectedDataAsync(Office.CoercionType.Text, function (asyncResult) {
-                    if (asyncResult.status == Office.AsyncResultStatus.Failed) {
-                        write('Action failed. Error: ' + asyncResult.error.message);
-                    }
-                    else {
-                        // write('Selected data: ' + asyncResult.value);
-                        Excel.run(function (ctx) {
-                            var selectedRange = ctx.workbook.getSelectedRange();
-                            selectedRange.load('address');
-                            return ctx.sync().then(function () {
-                                write('Selected cell: ' + selectedRange.address);
-                            });
-                        });
-                    }
-                });
-            }
-
-            // Function that writes to a div with id='message' on the page.
-            function write(message){
-                document.getElementById('message').innerText = message;
-            }
-
         });
     };
 
