@@ -17,9 +17,44 @@
 
 
             $('#trim_space').click(trimSpace);
+            $('#checkbox_all').click(checkCheckbox);
 
         });
     };
+
+
+    function checkCheckbox() {
+
+        Excel.run(function (ctx) {
+
+            var worksheet = ctx.workbook.worksheets.getActiveWorksheet();
+            var range_all = worksheet.getRange();
+            var range = range_all.getUsedRange();
+
+            range.load('address');
+            range.load('text');
+
+            return ctx.sync().then(function() {
+                if (document.getElementById('checkbox_all').checked == true) {
+                    for (var i = 0; i < range.text[0].length; i++) {
+                        document.getElementById(range.text[0][i]).checked = true;
+                    }
+                }
+                else {
+                    for (var i = 0; i < range.text[0].length.length; i++) {
+                        document.getElementById(range.text[0][i]).checked = false;
+                    }
+                }
+            });
+
+        }).catch(function(error) {
+            console.log("Error: " + error);
+            if (error instanceof OfficeExtension.Error) {
+                console.log("Debug info: " + JSON.stringify(error.debugInfo));
+            }
+        });
+
+    }
 
 
     function fillColumn(){
@@ -68,14 +103,7 @@
                 var header = 0;
                 var act_worksheet = ctx.workbook.worksheets.getActiveWorksheet();
 
-
-                if (document.getElementById('checkbox_all').checked == true) {
-                    var checked_checkboxes = getAllCheckBoxes("column_checkbox");
-                }
-                else {
-                    var checked_checkboxes = getCheckedBoxes("column_checkbox");
-                }
-
+                var checked_checkboxes = getCheckedBoxes("column_checkbox");
 
                 for (var run = 0;run < checked_checkboxes.length; run++) {
                     for (var k = 0; k < range.text[0].length; k++) {
