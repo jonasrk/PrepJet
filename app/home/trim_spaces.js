@@ -70,7 +70,7 @@
 
 
                 if (document.getElementById('checkbox_all').checked == true) {
-                 var checked_checkboxes = getAllCheckBoxes("column_checkbox");
+                    var checked_checkboxes = getAllCheckBoxes("column_checkbox");
                 }
                 else {
                     var checked_checkboxes = getCheckedBoxes("column_checkbox");

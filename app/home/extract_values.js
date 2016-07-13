@@ -153,7 +153,7 @@ function getColumn() {
             if (target_tmp.indexOf(":") != -1) {
                 var target_column = target_tmp.substring(target_tmp.indexOf("!") + 1, target_tmp.indexOf(":"));
             }
-            else {
+            else { //todo not correct to extract until +2 - better solution if only one column is selected
                 var target_column = target_tmp.substring(target_tmp.indexOf("!") + 1, target_tmp.indexOf("!") + 2);
             }
 

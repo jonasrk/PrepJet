@@ -65,7 +65,12 @@
     <div id="step2">
         <label class="ms-Label"> Select columns to add to Sheet1 </label>
         <br />
-        <button class="ms-Button" id="next-step">Select all</button>
+        <div id="checkbox_select_all" class="ms-ChoiceField">
+            <input id="checkbox_all" class="ms-ChoiceField-input" type="checkbox">
+            <label id="checkbox_label" for="checkbox_all" class="ms-ChoiceField-field">
+                <span class="ms-Label">All columns</span>
+            </label>
+        </div>
         <div id="checkboxes_variables" class="ms-ChoiceField">
         </div>
         <button class="ms-Button" id="bt_step3">Continue</button>

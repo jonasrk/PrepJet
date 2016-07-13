@@ -3,6 +3,22 @@ function backToOne() {
     $('#step2').hide();
 }
 
+function checkCheckbox() {
+    var checked_checkboxes = getAllCheckBoxes("reference_column_checkbox");
+    if (document.getElementById('checkbox_select_all').checked == true) {
+        for (var i = 0; i < checked_checkboxes.length; i++) {
+            document.getElementById("tbl_header" + i).checked = true;
+        }
+    }
+    else {
+        for (var i = 0; i < checked_checkboxes.length; i++) {
+            document.getElementById("tbl_header" + i).checked = false;
+        }
+    }
+}
+
+
+
 (function () {
     'use strict';
     var count_drop = 2;
@@ -34,6 +50,7 @@ function backToOne() {
 
         });
     };
+
 
 
     function populateDropdowns() {
@@ -113,6 +130,7 @@ function backToOne() {
                 for (var i = 0; i < range.text[0].length; i++) { // .text[0] is the first row of a range
 
                     addNewCheckboxToContainer (range.text[0][i], "reference_column_checkbox" ,"checkboxes_variables");
+                    //addNewCheckboxToContainer ("tbl_header" + i, "reference_column_checkbox" ,"checkboxes_variables");
                 }
             });
 
@@ -301,7 +319,15 @@ function backToOne() {
                 for (var k = 0; k < range.text[0].length; k++){
 
                     // iterate over checked checkboxes
-                    var checked_checkboxes = getCheckedBoxes("reference_column_checkbox");
+                    //var checked_checkboxes = getCheckedBoxes("reference_column_checkbox");
+
+                    if (document.getElementById('checkbox_all').checked == true) {
+                        var checked_checkboxes = getAllCheckBoxes("reference_column_checkbox");
+                    }
+                    else {
+                        var checked_checkboxes = getCheckedBoxes("reference_column_checkbox");
+                    }
+
 
                     for (var l = 0; l < checked_checkboxes.length; l++){ // TODO throws error if none are checked
                         if (checked_checkboxes[l].id == range.text[0][k]){
