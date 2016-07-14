@@ -52,12 +52,22 @@ function backToOne() {
             return ctx.sync().then(function() {
                 if (document.getElementById('checkbox_all').checked == true) {
                     for (var i = 0; i < range.text[0].length; i++) {
-                        document.getElementById(range.text[0][i]).checked = true;
+                        if (range.text[0][i] != "") {
+                            document.getElementById(range.text[0][i]).checked = true;
+                        }
+                        else {
+                            document.getElementById("Column " + getCharFromNumber(i + 1)).checked = true;
+                        }
                     }
                 }
                 else {
                     for (var i = 0; i < range.text[0].length.length; i++) {
-                        document.getElementById(range.text[0][i]).checked = false;
+                        if (range.text[0][i] != "") {
+                            document.getElementById(range.text[0][i]).checked = false;
+                        }
+                        else {
+                            document.getElementById("Column " + getCharFromNumber(i + 1)).checked = false;
+                        }
                     }
                 }
             });
@@ -97,6 +107,7 @@ function backToOne() {
                                     el.textContent = opt;
                                     el.value = opt;
                                     document.getElementById("table1_options").appendChild(el);
+
                                     var el = document.createElement("option"); // TODO DRY
                                     el.textContent = opt;
                                     el.value = opt;
@@ -146,8 +157,14 @@ function backToOne() {
                 }
 
                 for (var i = 0; i < range.text[0].length; i++) { // .text[0] is the first row of a range
-
-                    addNewCheckboxToContainer (range.text[0][i], "reference_column_checkbox" ,"checkboxes_variables");
+                    if (range.text[0][i] != ""){
+                        addNewCheckboxToContainer (range.text[0][i], "reference_column_checkbox" ,"checkboxes_variables");
+                    }
+                    else {
+                        var colchar = getCharFromNumber(i + 1);
+                        addNewCheckboxToContainer ("Column " + colchar, "reference_column_checkbox" ,"checkboxes_variables");
+                    }
+                    //addNewCheckboxToContainer (range.text[0][i], "reference_column_checkbox" ,"checkboxes_variables");
 
                 }
 
@@ -193,8 +210,14 @@ function backToOne() {
                     for (var i = 0; i < range.text[0].length; i++) {
 
                         var el = document.createElement("option");
-                        el.value = range.text[0][i];
-                        el.textContent = range.text[0][i];
+                        if (range.text[0][i] != "") {
+                            el.value = range.text[0][i];
+                            el.textContent = range.text[0][i];
+                        }
+                        else {
+                            el.value = "Column " + getCharFromNumber(i + 1);
+                            el.textContent = "Column " + getCharFromNumber(i + 1);
+                        }
                         document.getElementById(container).appendChild(el);
 
                     }
@@ -322,7 +345,7 @@ function backToOne() {
 
                 for (var runid1 = 0; runid1 < identifier1.length; runid1++) {
                     for (var runheader = 0; runheader < range_adding_to.text[0].length; runheader++){
-                        if (identifier1[runid1] == range_adding_to.text[0][runheader]){
+                        if (identifier1[runid1] == range_adding_to.text[0][runheader] || identifier1[runid1] == "Column " + getCharFromNumber(runheader + 1)){
                             column1_ids[runid1] = runheader;
                         }
                     }
@@ -330,7 +353,7 @@ function backToOne() {
 
                 for (var runid2 = 0; runid2 < identifier2.length; runid2++) {
                     for (var runheader = 0; runheader < range.text[0].length; runheader++){
-                        if (identifier2[runid2] == range.text[0][runheader]){
+                        if (identifier2[runid2] == range.text[0][runheader] || identifier2[runid2] == "Column " + getCharFromNumber(runheader + 1)){
                             column2_ids[runid2] = runheader;
                         }
                     }
@@ -343,7 +366,7 @@ function backToOne() {
                     var checked_checkboxes = getCheckedBoxes("reference_column_checkbox");
 
                     for (var l = 0; l < checked_checkboxes.length; l++){ // TODO throws error if none are checked
-                        if (checked_checkboxes[l].id == range.text[0][k]){
+                        if (checked_checkboxes[l].id == range.text[0][k] || checked_checkboxes[l].id == "Column " + getCharFromNumber(k + 1)){
                             var column_char = getCharFromNumber(1 + l + range_adding_to.text[0].length);
 
                             // copy title
