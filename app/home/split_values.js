@@ -115,6 +115,7 @@ function displayFieldDelimiter(){
                 var count_delimiter = Number(document.getElementById('delimiter_count_i').value);
                 var count_direction = document.getElementById('delimiter_count_drop').value;
             }
+            var keep_delimiter = document.getElementById('delimiter_checkbox').checked;
 
             range.load('text');
             var range_all_adding_to = worksheet.getRange();
@@ -144,37 +145,61 @@ function displayFieldDelimiter(){
                 //loop through whole column, create an array with splitted values and get maximum length
                 if (document.getElementById('advanced_settings').checked == false) {
                     for (var i = 1; i < range.text.length; i++) {
-                        split_array[i] = range.text[i][header].split(delimiter_type);
-                        array_length = split_array[i].length;
-                        if (max_array_length < array_length){
-                            max_array_length = array_length;
+                        if (range.text[i][header] != "") {
+                            split_array[i] = range.text[i][header].split(delimiter_type);
+                            array_length = split_array[i].length;
+                            if (max_array_length < array_length){
+                                max_array_length = array_length;
+                            }
                         }
                     }
                 }
                 else {
                     for (var i = 1; i < range.text.length; i++) {
-                        split_array[i] = range.text[i][header].split(delimiter_type);
-                        array_length = split_array[i].length;
+                        if (range.text[i][header] != "") {
+                            if (keep_delimiter == false || (keep_delimiter == true && count_delimiter != 0)) {
+                                split_array[i] = range.text[i][header].split(delimiter_type);
+                                array_length = split_array[i].length;
+                            }
+                            else {
+                                split_array[i] = range.text[i][header].split(delimiter_type);
+                                for (var run = 1; run < split_array[i].length; run++) {
+                                    split_array[i][run - 1] = split_array[i][run - 1] + delimiter_type;
+                                    split_array[i][run] = delimiter_type + split_array[i][run];
+                                }
+                                array_length = split_array[i].length;
+                            }
 
-                        if (count_direction == "right") {
-                            count_delimiter = array_length - count_delimiter;
-                        }
+                            if (max_array_length < array_length){
+                                max_array_length = array_length;
+                            }
 
-                        var str1_tmp = split_array[i][0];
-                        var str2_tmp = split_array[i][count_delimiter];
-                        for (var j = 1; j < count_delimiter; j++) {
-                            str1_tmp = str1_tmp.concat(delimiter_type, split_array[i][j]);
+                            if (count_delimiter != 0) {
+                                if (count_direction == "right") {
+                                    count_delimiter = array_length - count_delimiter;
+                                }
+
+                                var str1_tmp = split_array[i][0];
+                                var str2_tmp = split_array[i][count_delimiter];
+
+                                for (var j = 1; j < count_delimiter; j++) {
+                                    str1_tmp = str1_tmp.concat(delimiter_type, split_array[i][j]);
+                                }
+                                str1_tmp = str1_tmp + delimiter_type;
+
+                                for (var j = count_delimiter + 1; j < array_length; j++) {
+                                    str2_tmp = str2_tmp.concat(delimiter_type, split_array[i][j]);
+                                }
+                                str2_tmp = delimiter_type + str2_tmp;
+
+                                split_array[i] = [str1_tmp];
+                                split_array[i].push(str2_tmp);
+                                count_delimiter = Number(document.getElementById('delimiter_count_i').value);
+                                max_array_length = 2;
+                            }
                         }
-                        for (var j = count_delimiter + 1; j < array_length; j++) {
-                            str2_tmp = str2_tmp.concat(delimiter_type, split_array[i][j]);
-                        }
-                        split_array[i] = [str1_tmp];
-                        split_array[i].push(str2_tmp);
-                        count_delimiter = Number(document.getElementById('delimiter_count_i').value);
                     }
-                    max_array_length = 2;
                 }
-
 
                 //insert empty columns right to split column for splitted parts
                 for (var i = 0; i < range.text.length; i++) {
@@ -190,8 +215,10 @@ function displayFieldDelimiter(){
                 //insert splitted parts into new empty columns
                 for (var i = 1; i < range.text.length; i++) {
                     var sheet_row = i + 1;
-                    for(var j = 0; j < split_array[i].length; j++){
-                        addContentToWorksheet(act_worksheet, getCharFromNumber(header + 1 + j) + sheet_row, split_array[i][j]);
+                    if (range.text[i][header] != "") {
+                        for(var j = 0; j < split_array[i].length; j++){
+                            addContentToWorksheet(act_worksheet, getCharFromNumber(header + 1 + j) + sheet_row, split_array[i][j]);
+                        }
                     }
                 }
 
