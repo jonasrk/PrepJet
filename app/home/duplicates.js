@@ -34,7 +34,14 @@
             range.load('text');
             return ctx.sync().then(function() {
                 for (var i = 0; i < range.text[0].length; i++) { // .text[0] is the first row of a range
-                    addNewCheckboxToContainer (range.text[0][i], "duplicates_column_checkbox" ,"checkboxes_duplicates");
+                    if (range.text[0][i] != ""){
+                        addNewCheckboxToContainer (range.text[0][i], "duplicates_column_checkbox" ,"checkboxes_duplicates");
+                    }
+                    else {
+                        var colchar = getCharFromNumber(i + 1);
+                        addNewCheckboxToContainer ("Column " + colchar, "duplicates_column_checkbox" ,"checkboxes_duplicates");
+                    }
+                    //addNewCheckboxToContainer (range.text[0][i], "duplicates_column_checkbox" ,"checkboxes_duplicates");
                 }
             });
 
@@ -67,7 +74,7 @@
 
                 for (var k = 0; k < range.text[0].length; k++) { // .text[0] is the first row of a range
                     for (var l = 0; l < checked_checkboxes.length; l++) { // TODO throws error if none are checked
-                        if (checked_checkboxes[l].id == range.text[0][k]) {
+                        if (checked_checkboxes[l].id == range.text[0][k] || checked_checkboxes[l].id == "Column " + getCharFromNumber(k + 1)) {
                             columns_to_check.push(k);
                         }
                     }
@@ -190,7 +197,6 @@
                                     addContentToWorksheet(act_worksheet, columnchar + sheet_row, duplicate_list[run][runcol][0]);
                                     duplicate_list[run][runcol].push(columnchar + sheet_row);
                                 }
-                                console.log(duplicate_list[run]);
                                 sheet_row = sheet_row + 1;
                             }
 
