@@ -37,12 +37,22 @@
             return ctx.sync().then(function() {
                 if (document.getElementById('checkbox_all').checked == true) {
                     for (var i = 0; i < range.text[0].length; i++) {
-                        document.getElementById(range.text[0][i]).checked = true;
+                        if (range.text[0][i] != "") {
+                            document.getElementById(range.text[0][i]).checked = true;
+                        }
+                        else {
+                            document.getElementById("Column " + getCharFromNumber(i + 1)).checked = true;
+                        }
                     }
                 }
                 else {
-                    for (var i = 0; i < range.text[0].length.length; i++) {
-                        document.getElementById(range.text[0][i]).checked = false;
+                    for (var i = 0; i < range.text[0].length; i++) {
+                        if (range.text[0][i] != "") {
+                            document.getElementById(range.text[0][i]).checked = false;
+                        }
+                        else {
+                            document.getElementById("Column " + getCharFromNumber(i + 1)).checked = false;
+                        }
                     }
                 }
             });
@@ -68,7 +78,13 @@
             range.load('text');
             return ctx.sync().then(function() {
                 for (var i = 0; i < range.text[0].length; i++) {
-                    addNewCheckboxToContainer (range.text[0][i], "column_checkbox" ,"checkboxes_columns");
+                    if (range.text[0][i] != ""){
+                        addNewCheckboxToContainer (range.text[0][i], "column_checkbox" ,"checkboxes_columns");
+                    }
+                    else {
+                        var colchar = getCharFromNumber(i + 1);
+                        addNewCheckboxToContainer ("Column " + colchar, "column_checkbox" ,"checkboxes_columns");
+                    }
                 }
 
             });
@@ -107,7 +123,7 @@
 
                 for (var run = 0;run < checked_checkboxes.length; run++) {
                     for (var k = 0; k < range.text[0].length; k++) {
-                        if (checked_checkboxes[run].id == range.text[0][k]){
+                        if (checked_checkboxes[run].id == range.text[0][k] || checked_checkboxes[run].id == "Column " + getCharFromNumber(k+1)){
                             header = k;
                             break;
                         }

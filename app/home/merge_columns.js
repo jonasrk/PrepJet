@@ -339,6 +339,7 @@ function backToOne() {
                 for (var k = 0; k < range.text[0].length; k++){
 
                     // iterate over checked checkboxes
+
                     var checked_checkboxes = getCheckedBoxes("reference_column_checkbox");
 
                     for (var l = 0; l < checked_checkboxes.length; l++){ // TODO throws error if none are checked
