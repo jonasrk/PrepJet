@@ -94,8 +94,14 @@ function displaySimpleBetween(){
             return ctx.sync().then(function() {
                 for (var i = 0; i < range.text[0].length; i++) {
                     var el = document.createElement("option");
-                    el.value = range.text[0][i];
-                    el.textContent = range.text[0][i];
+                    if (range.text[0][i] != "") {
+                            el.value = range.text[0][i];
+                            el.textContent = range.text[0][i];
+                        }
+                        else {
+                            el.value = "Column " + getCharFromNumber(i + 1);
+                            el.textContent = "Column " + getCharFromNumber(i + 1);
+                        }
                     document.getElementById("column_simple").appendChild(el);
                 }
 
@@ -122,15 +128,27 @@ function displaySimpleBetween(){
             return ctx.sync().then(function() {
                 for (var i = 0; i < range.text[0].length; i++) {
                     var el = document.createElement("option");
-                    el.value = range.text[0][i];
-                    el.textContent = range.text[0][i];
+                    if (range.text[0][i] != "") {
+                            el.value = range.text[0][i];
+                            el.textContent = range.text[0][i];
+                        }
+                        else {
+                            el.value = "Column " + getCharFromNumber(i + 1);
+                            el.textContent = "Column " + getCharFromNumber(i + 1);
+                        }
                     document.getElementById("column1_options").appendChild(el);
                 }
 
                 for (var i = 0; i < range.text[0].length; i++) {
                     var el = document.createElement("option");
-                    el.value = range.text[0][i];
-                    el.textContent = range.text[0][i];
+                    if (range.text[0][i] != "") {
+                            el.value = range.text[0][i];
+                            el.textContent = range.text[0][i];
+                        }
+                        else {
+                            el.value = "Column " + getCharFromNumber(i + 1);
+                            el.textContent = "Column " + getCharFromNumber(i + 1);
+                        }
                     document.getElementById("column2_options").appendChild(el);
                 }
                 $(".dropdown_table_col1").Dropdown();
@@ -203,7 +221,7 @@ function displaySimpleBetween(){
 
                 //get column in header for which to check if condition
                 for (var k = 0; k < range.text[0].length; k++){
-                    if (selected_identifier == range.text[0][k]){
+                    if (selected_identifier == range.text[0][k] || selected_identifier == "Column " + getCharFromNumber(k + 1)){
                         header_if = k;
                     }
                 }
@@ -392,14 +410,14 @@ function displaySimpleBetween(){
 
                 //get column in header for which to check if condition
                 for (var k = 0; k < range.text[0].length; k++){
-                    if (selected_identifier1 == range.text[0][k]){
+                    if (selected_identifier1 == range.text[0][k] || selected_identifier1 == "Column " + getCharFromNumber(k + 1)){
                         header_if = k;
                     }
                 }
 
                 //get column in header for which to check then condition
                 for (var k = 0; k < range.text[0].length; k++){
-                    if (selected_identifier2 == range.text[0][k]){
+                    if (selected_identifier2 == range.text[0][k] || selected_identifier2 == "Column " + getCharFromNumber(k + 1)){
                         header_then = k;
                     }
                 }
