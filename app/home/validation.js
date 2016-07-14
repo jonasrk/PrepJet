@@ -72,7 +72,7 @@ function displaySimpleBetween(){
             $('#advanced_button').click(displayAdvanced);
             $('#simple_button').click(displaySimple);
 
-            $('#between_and').hide();
+            $('#betweenand').hide();
             $('#between_beginning').hide();
             $(".dropdown_table").Dropdown();
             $(".ms-TextField").TextField();
@@ -178,6 +178,15 @@ function displaySimpleBetween(){
                 }
             }
 
+            if (document.getElementById('if_operator').value == "notbetween" || document.getElementById('if_operator').value == "between") {
+                if (isNaN(Number(document.getElementById('if_between_condition').value)) == true) {
+                    var ifbetweencondition = document.getElementById('if_between_condition').value;
+                }
+                else {
+                    var ifbetweencondition = Number(document.getElementById('if_between_condition').value);
+                }
+            }
+
 
             //get used range in active Sheet
             range.load('text');
@@ -226,6 +235,18 @@ function displaySimpleBetween(){
 
                     if (document.getElementById('if_operator').value == "inequal") {
                         if (range.values[i][header_if] == ifcondition) {
+                             highlightContentInWorksheet(act_worksheet, address, "red");
+                        }
+                    }
+
+                    if (document.getElementById('if_operator').value == "between") {
+                        if (range.values[i][header_if] < ifcondition || range.values[i][header_if] > ifbetweencondition) {
+                             highlightContentInWorksheet(act_worksheet, address, "red");
+                        }
+                    }
+
+                    if (document.getElementById('if_operator').value == "notbetween") {
+                        if (range.values[i][header_if] > ifcondition && range.values[i][header_if] < ifbetweencondition) {
                              highlightContentInWorksheet(act_worksheet, address, "red");
                         }
                     }
