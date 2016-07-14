@@ -80,12 +80,14 @@
         <div class="ms-Dropdown dropdown_table" tabindex="1">
             <label class="ms-Label">Select operator</label>
             <i class="ms-Dropdown-caretDown ms-Icon ms-Icon--caretDown"></i>
-            <select id="if_operator" class="ms-Dropdown-select">
+            <select id="if_operator" class="ms-Dropdown-select" onchange="displaySimpleBetween()">
                 <option value="empty"></option>
                 <option value="equal">=</option>
                 <option value="smaller"><</option>
                 <option value="greater">></option>
                 <option value="inequal">!=</option>
+                <option value="between">between</option>
+                <option value="notbetween">not between</option>
                 <option value="inlist">in (list)</option>
             </select>
         </div>
@@ -94,6 +96,12 @@
         <div id="delimiter_beginning" class="ms-TextField ms-TextField--placeholder">
             <label class="ms-Label">Enter condition (lists comma separated)</label>
             <input id="if_condition" class="ms-TextField-field" type="text">
+        </div>
+
+        <!--evtl. text field for between condition-->
+        <div id="between_beginning" class="ms-TextField ms-TextField--placeholder">
+            <label class="ms-Label">and</label>
+            <input id="if_between_condition" class="ms-TextField-field" type="text">
         </div>
 
         <!--dropdown for THEN-->

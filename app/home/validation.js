@@ -29,6 +29,18 @@ function displayBetween(){
     if(document.getElementById('then_operator').value == "between" || document.getElementById('then_operator').value == "notbetween") {
         $('#between_and').show();
     }
+    else {
+        $('#between_and').hide();
+    }
+}
+
+function displaySimpleBetween(){
+    if(document.getElementById('if_operator').value == "between" || document.getElementById('if_operator').value == "notbetween") {
+        $('#between_beginning').show();
+    }
+    else {
+        $('#between_beginning').hide();
+    }
 }
 
 
@@ -61,6 +73,7 @@ function displayBetween(){
             $('#simple_button').click(displaySimple);
 
             $('#between_and').hide();
+            $('#between_beginning').hide();
             $(".dropdown_table").Dropdown();
             $(".ms-TextField").TextField();
 
