@@ -74,6 +74,7 @@
                     if (selected_column == range.text[0][k]){
 
                         var values = [];
+                        var outlier_col = k;
 
                         for (var j = 1; j < range.text.length; j++){
                             values.push(Number(range.text[j][k]));
@@ -124,7 +125,7 @@
                     }
                 }
 
-                function sortOutlier(row_vector, data_vector) {
+                function sortOutlier(row_vector, data_vector, outliercolumn) {
 
                     Excel.run(function (ctx) {
 
@@ -156,6 +157,9 @@
                                 for (var runcol = 0; runcol < data_vector[run].length; runcol++) {
                                     var columnchar = getCharFromNumber(runcol + 1);
                                     addContentToWorksheet(worksheet, columnchar + sheet_row, data_vector[run][runcol]);
+                                    if (runcol == outliercolumn) {
+                                        highlightContentInWorksheet(worksheet, columnchar + sheet_row, "red");
+                                    }
                                 }
                                 sheet_row = sheet_row + 1;
                             }
@@ -195,7 +199,7 @@
                 }
 
                 if (document.getElementById('outliersort').checked == true) {
-                    sortOutlier(row_vector, data_vector);
+                    sortOutlier(row_vector, data_vector, outlier_col);
                 }
 
             });
