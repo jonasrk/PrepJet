@@ -36,8 +36,14 @@
                 for (var i = 0; i < range.text[0].length; i++) {
 
                     var el = document.createElement("option");
-                    el.value = range.text[0][i];
-                    el.textContent = range.text[0][i];
+                    if (range.text[0][i] != "") {
+                        el.value = range.text[0][i];
+                        el.textContent = range.text[0][i];
+                    }
+                    else {
+                        el.value = "Column " + getCharFromNumber(i + 1);
+                        el.textContent = "Column " + getCharFromNumber(i + 1);
+                    }
                     document.getElementById("outlier_column_dropdown").appendChild(el);
 
                 }
@@ -71,7 +77,7 @@
                 // iterate over columns
 
                 for (var k = 0; k < range.text[0].length; k++){
-                    if (selected_column == range.text[0][k]){
+                    if (selected_column == range.text[0][k] || selected_column == "Column " + getCharFromNumber(k + 1)){
 
                         var values = [];
                         var outlier_col = k;
