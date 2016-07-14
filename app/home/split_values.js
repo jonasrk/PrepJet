@@ -70,8 +70,14 @@ function displayFieldDelimiter(){
             return ctx.sync().then(function() {
                 for (var i = 0; i < range.text[0].length; i++) {
                     var el = document.createElement("option");
-                    el.value = range.text[0][i];
-                    el.textContent = range.text[0][i];
+                    if (range.text[0][i] != "") {
+                        el.value = range.text[0][i];
+                        el.textContent = range.text[0][i];
+                    }
+                    else {
+                        el.value = "Column " + getCharFromNumber(i + 1);
+                        el.textContent = "Column " + getCharFromNumber(i + 1);
+                    }
                     document.getElementById("column_options").appendChild(el);
                 }
                 $(".dropdown_table_col").Dropdown();
@@ -129,7 +135,7 @@ function displayFieldDelimiter(){
                 //get column number which to split
                 var header = 0;
                 for (var k = 0; k < range.text[0].length; k++){
-                    if (selected_identifier == range.text[0][k]){
+                    if (selected_identifier == range.text[0][k] || selected_identifier == "Column " + getCharFromNumber(k + 1)){
                         header = k;
                     }
                 }
