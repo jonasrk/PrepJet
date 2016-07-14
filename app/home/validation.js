@@ -80,6 +80,25 @@ function displaySimpleBetween(){
             $('#apply_advanced').click(validationAdvanced);
             $('#apply_simple').click(validationSimple);
 
+
+            Office.context.document.addHandlerAsync("documentSelectionChanged", myIfHandler, function(result){}
+            );
+            // Event handler function.
+            function myIfHandler(eventArgs){
+                Excel.run(function (ctx) {
+                    var selectedRange = ctx.workbook.getSelectedRange();
+                    selectedRange.load('text');
+                    return ctx.sync().then(function () {
+                        writeif(selectedRange.text);
+                    });
+                });
+            }
+            // Function that writes to a div with id='message' on the page.
+            function writeif(message){
+                document.getElementById('if_condition').value = message;
+            }
+
+
         });
     };
 
