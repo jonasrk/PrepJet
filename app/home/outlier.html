@@ -43,29 +43,26 @@
     </div>
 </div>
 <div id="content-main">
-
-
+    <div class="padding">
     <!--Select Column Dropdown-->
+        <div class="ms-Dropdown outlier_column_dropdown_container" tabindex="0">
+            <label class="ms-Label">Select target column</label>
+            <i class="ms-Dropdown-caretDown ms-Icon ms-Icon--caretDown"></i>
+            <select id="outlier_column_dropdown" class="ms-Dropdown-select">
+            </select>
+        </div>
 
-    <div class="ms-Dropdown outlier_column_dropdown_container" tabindex="0">
-        <label class="ms-Label">Select target column</label>
-        <i class="ms-Dropdown-caretDown ms-Icon ms-Icon--caretDown"></i>
-        <select id="outlier_column_dropdown" class="ms-Dropdown-select">
-        </select>
+        <!--Checkbox sorting-->
+        <div class="ms-ChoiceField">
+            <input id="outliersort" class="ms-ChoiceField-input" type="checkbox">
+            <label id="checkbox" for="outliersort" class="ms-ChoiceField-field">
+                <span class="ms-Label">Sort for outlier</span>
+            </label>
+        </div>
+
+        <!--Button-->
+        <button class="ms-Button" id="bt_detect_outliers">Apply</button>
     </div>
-
-    <!--Checkbox sorting-->
-    <div class="ms-ChoiceField">
-        <input id="outliersort" class="ms-ChoiceField-input" type="checkbox">
-        <label id="checkbox" for="outliersort" class="ms-ChoiceField-field">
-            <span class="ms-Label">Sort for outlier</span>
-        </label>
-    </div>
-
-    <!--Button-->
-
-    <button class="ms-Button" id="bt_detect_outliers">Apply</button>
-
 </div>
 </body>
 

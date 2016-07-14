@@ -3,3 +3,47 @@
 .ms-Dropdown.is-open .ms-Dropdown-items, .ms-Dropdown.ms-Dropdown--open .ms-Dropdown-items {
     overflow: scroll;
 }
+
+#content-header {
+    background: #333399;
+    color: #fff;
+    width: 100%;
+    height: 60px;
+    overflow: visible; }
+
+.padding {
+    padding: 10px; }
+
+h1 {
+    font-family: "Segoe WP Light", "Segoe UI", "Arial", sans-serif;
+    font-size: 18px;
+    line-height: 20px;
+    font-weight: 500; }
+
+#content-main {
+    background: #F2F2F2;
+    top: 60px;
+    overflow: auto; }
+
+.ms-Button {
+    color: #333;
+    font-family: 'Segoe UI Regular WestEuropean','Segoe UI','Segoe WP',Tahoma,Arial,sans-serif;
+    font-size: 12px;
+    font-weight: 400;
+    background-color: #FCFCFC;
+    border: 1px solid #F9F9F9;
+    height: 32px;
+    min-width: 40px;
+    padding: 4px 10px 6px; }
+
+.ms-Dialog.ms-Dialog--lgHeader .ms-Dialog-subText, .ms-Dropdown {
+    font-size: 12px; }
+
+.ms-ChoiceField .ms-Label {
+    font-size: 12px;
+    padding: 0 0 0 26px; }
+
+.ms-ChoiceField {
+    color: #fff;
+    font-family: 'Segoe UI Regular WestEuropean','Segoe UI','Segoe WP',Tahoma,Arial,sans-serif;
+    padding-bottom: 10px; }
