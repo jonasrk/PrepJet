@@ -76,9 +76,7 @@
                         var values = [];
 
                         for (var j = 1; j < range.text.length; j++){
-
-                            values.push(range.text[j][k]);
-
+                            values.push(Number(range.text[j][k]));
                         }
 
                         // High outliers are anything beyond the 3rd quartile + 1.5 * the inter-quartile range (IQR)
@@ -94,6 +92,7 @@
                         Q1 = medianX(q1Arr);
                         Q2 = medianX(q2Arr);
                         Q3 = medianX(q3Arr);
+
                         function medianX(medianArr) {
                             var count = medianArr.length;
                             var median = (count % 2 == 0) ? (medianArr[(medianArr.length/2) - 1] + medianArr[(medianArr.length / 2)]) / 2:medianArr[Math.floor(medianArr.length / 2)];
@@ -105,23 +104,99 @@
                         var thrsh_low = Q1 - (1.5 * iqr);
                         var thrsh_high = Q3 + (1.5 * iqr); // TODO do not hardcode
 
+                        var row_vector = [];
+                        var data_vector = [];
                         for (var j = 1; j < range.text.length; j++){
-
                             var sheet_row = j + 1;
                             var address = getCharFromNumber(k + 1) + sheet_row;
 
                             if (range.text[j][k] < thrsh_low){
                                 highlightContentInWorksheet(worksheet, address, "red");
+                                row_vector.push(sheet_row);
+                                data_vector.push(range.text[j]);
                             } else if (range.text[j][k] > thrsh_high){
                                 highlightContentInWorksheet(worksheet, address, "red");
+                                row_vector.push(sheet_row);
+                                data_vector.push(range.text[j]);
                             }
-
                         }
 
                     }
                 }
 
+                function sortOutlier(row_vector, data_vector) {
 
+                    Excel.run(function (ctx) {
+
+                        var worksheet = ctx.workbook.worksheets.getActiveWorksheet();
+                        var range_total = worksheet.getRange();
+                        var range = range_total.getUsedRange();
+
+                        var rangeaddress = "A2"
+                        var range_all = worksheet.getRange(rangeaddress);
+                        var range_insert = range_all.getEntireRow();
+
+                        range_insert.load('address');
+                        range.load('address');
+                        range.load('text');
+
+                        return ctx.sync().then(function() {
+                            var sorted_rows = row_vector.sort(function(a, b){return b-a});
+
+                            for (var run = 0; run < sorted_rows.length; run++) {
+                                deleteOutlier(sorted_rows[run]);
+                            }
+
+                            for (var run = 0; run < data_vector.length; run++) {
+                                range_insert.insert("Down");
+                            }
+
+                            var sheet_row = 2;
+                            for (var run = 0; run < data_vector.length; run++) {
+                                for (var runcol = 0; runcol < data_vector[run].length; runcol++) {
+                                    var columnchar = getCharFromNumber(runcol + 1);
+                                    addContentToWorksheet(worksheet, columnchar + sheet_row, data_vector[run][runcol]);
+                                }
+                                sheet_row = sheet_row + 1;
+                            }
+
+                            function deleteOutlier(row_int) {
+                                Excel.run(function (ctx) {
+
+                                    var worksheet = ctx.workbook.worksheets.getActiveWorksheet();
+                                    var rangeadd = "A" + row_int;
+                                    var range_tmp = worksheet.getRange(rangeadd);
+                                    var total_row = range_tmp.getEntireRow();
+
+                                    total_row.load('address');
+
+                                    return ctx.sync().then(function() {
+                                        total_row.delete();
+                                    });
+
+                                }).catch(function(error) {
+                                    console.log("Error: " + error);
+                                    if (error instanceof OfficeExtension.Error) {
+                                        console.log("Debug info: " + JSON.stringify(error.debugInfo));
+                                    }
+                                });
+
+                            }
+
+                        });
+
+                    }).catch(function(error) {
+                        console.log("Error: " + error);
+                        if (error instanceof OfficeExtension.Error) {
+                            console.log("Debug info: " + JSON.stringify(error.debugInfo));
+                        }
+                    });
+
+                }
+
+                if (document.getElementById('outliersort').checked == true) {
+                    sortOutlier(row_vector, data_vector);
+                }
 
             });
 
