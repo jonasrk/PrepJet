@@ -26,7 +26,7 @@ function displaySimple() {
 
 //show textfield for ending delimiter if custom is selected
 function displayBetween(){
-    if(document.getElementById('then_operator').value == "between") {
+    if(document.getElementById('then_operator').value == "between" || document.getElementById('then_operator').value == "notbetween") {
         $('#between_and').show();
     }
 }
@@ -269,6 +269,9 @@ function displayBetween(){
             else if (document.getElementById('then_operator').value == "between"){
                 var thenoperator = "between";
             }
+            else if (document.getElementById('then_operator').value == "notbetween") {
+                var thenoperator = "notbetween";
+            }
             else if (document.getElementById('then_operator').value == "inlist") {
                 var in_then_list = document.getElementById('then_condition').value;
                 var splitted_then_list = in_then_list.split(",");
@@ -312,6 +315,15 @@ function displayBetween(){
                 }
                 else {
                     var thencondition = Number(document.getElementById('then_condition').value);
+                }
+            }
+
+            if (document.getElementById('then_operator').value == "between" || document.getElementById('then_operator').value == "notbetween") {
+                if (isNaN(Number(document.getElementById('between_and').value)) == true) {
+                    var betweencondition = document.getElementById('between_and').value;
+                }
+                else {
+                    var betweencondition = Number(document.getElementById('between_and').value);
                 }
             }
 
@@ -374,7 +386,12 @@ function displayBetween(){
                                 }
                             }
                             else if (document.getElementById('then_operator').value == "between") {
-                                if (range.values[i][header_then] < thencondition || range.values[i][header_then] > document.getElementById('between_and')) {
+                                if (range.values[i][header_then] < thencondition || range.values[i][header_then] > betweencondition) {
+                                    highlightContentInWorksheet(act_worksheet, address, "red");
+                                }
+                            }
+                            else if (document.getElementById('then_operator').value == "notbetween") {
+                                if (range.values[i][header_then] > thencondition && range.values[i][header_then] < betweencondition) {
                                     highlightContentInWorksheet(act_worksheet, address, "red");
                                 }
                             }
@@ -415,7 +432,12 @@ function displayBetween(){
                                 }
                             }
                             else if (document.getElementById('then_operator').value == "between") {
-                                if (range.values[i][header_then] < thencondition || range.values[i][header_then] > document.getElementById('between_and')) {
+                                if (range.values[i][header_then] < thencondition || range.values[i][header_then] > betweencondition) {
+                                    highlightContentInWorksheet(act_worksheet, address, "red");
+                                }
+                            }
+                            else if (document.getElementById('then_operator').value == "notbetween") {
+                                if (range.values[i][header_then] > thencondition && range.values[i][header_then] < betweencondition) {
                                     highlightContentInWorksheet(act_worksheet, address, "red");
                                 }
                             }
@@ -456,7 +478,12 @@ function displayBetween(){
                                 }
                             }
                             else if (document.getElementById('then_operator').value == "between") {
-                                if (range.values[i][header_then] < thencondition || range.values[i][header_then] > document.getElementById('between_and')) {
+                                if (range.values[i][header_then] < thencondition || range.values[i][header_then] > betweencondition) {
+                                    highlightContentInWorksheet(act_worksheet, address, "red");
+                                }
+                            }
+                            else if (document.getElementById('then_operator').value == "notbetween") {
+                                if (range.values[i][header_then] > thencondition && range.values[i][header_then] < betweencondition) {
                                     highlightContentInWorksheet(act_worksheet, address, "red");
                                 }
                             }
@@ -496,7 +523,12 @@ function displayBetween(){
                                 }
                             }
                             else if (document.getElementById('then_operator').value == "between") {
-                                if (range.values[i][header_then] < thencondition || range.values[i][header_then] > document.getElementById('between_and')) {
+                                if (range.values[i][header_then] < thencondition || range.values[i][header_then] > betweencondition) {
+                                    highlightContentInWorksheet(act_worksheet, address, "red");
+                                }
+                            }
+                            else if (document.getElementById('then_operator').value == "notbetween") {
+                                if (range.values[i][header_then] > thencondition && range.values[i][header_then] < betweencondition) {
                                     highlightContentInWorksheet(act_worksheet, address, "red");
                                 }
                             }
@@ -538,7 +570,12 @@ function displayBetween(){
                                     }
                                 }
                                 else if (document.getElementById('then_operator').value == "between") {
-                                    if (range.values[i][header_then] < thencondition || range.values[i][header_then] > document.getElementById('between_and')) {
+                                    if (range.values[i][header_then] < thencondition || range.values[i][header_then] > betweencondition) {
+                                        highlightContentInWorksheet(act_worksheet, address, "red");
+                                    }
+                                }
+                                else if (document.getElementById('then_operator').value == "notbetween") {
+                                    if (range.values[i][header_then] > thencondition && range.values[i][header_then] < betweencondition) {
                                         highlightContentInWorksheet(act_worksheet, address, "red");
                                     }
                                 }
