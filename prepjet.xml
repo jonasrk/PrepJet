@@ -201,10 +201,10 @@
                   </Action>
                 </Control>
 
-                <Control xsi:type="Button" id="PJ.DetectOutliersButton">
-                  <Label resid="PJ.DetectOutliersButton.Label" />
+                <Control xsi:type="Button" id="PJ.InconsistencyButton">
+                  <Label resid="PJ.InconsistencyButton.Label" />
                   <Supertip>
-                    <Title resid="PJ.DetectOutliersButton.Label" />
+                    <Title resid="PJ.InconsistencyButton.Label" />
                     <Description resid="PJ.PJ.SVBtn.Ttp" />
                   </Supertip>
                   <Icon>
@@ -215,7 +215,7 @@
                   <Action xsi:type="ShowTaskpane">
                     <TaskpaneId>Button2Id1</TaskpaneId>
                     <!--Provide a url resource id for the location that will be displayed on the task pane -->
-                    <SourceLocation resid="PJ.DetectOutliers.Url" />
+                    <SourceLocation resid="PJ.Inconsistency.Url" />
                   </Action>
                 </Control>
                 </Group>
@@ -250,10 +250,10 @@
                   </Action>
                 </Control>
 
-                  <Control xsi:type="Button" id="PJ.IntroButton">
-                  <Label resid="PJ.IntroButton.Label" />
+                  <Control xsi:type="Button" id="PJ.HelpButton">
+                  <Label resid="PJ.HelpButton.Label" />
                   <Supertip>
-                    <Title resid="PJ.IntroButton.Label" />
+                    <Title resid="PJ.HelpButton.Label" />
                     <Description resid="PJ.PJ.SVBtn.Ttp" />
                   </Supertip>
                   <Icon>
@@ -264,7 +264,7 @@
                   <Action xsi:type="ShowTaskpane">
                     <TaskpaneId>Button2Id1</TaskpaneId>
                     <!--Provide a url resource id for the location that will be displayed on the task pane -->
-                    <SourceLocation resid="PJ.intro.Url" />
+                    <SourceLocation resid="PJ.help.Url" />
                   </Action>
                 </Control>
 
@@ -311,11 +311,11 @@
         <bt:Url id="PJ.addcolumns.Url" DefaultValue="https://localhost:8443/app/home/merge_columns.html" />
         <bt:Url id="PJ.SplitValues.Url" DefaultValue="https://localhost:8443/app/home/split_values.html" />
         <bt:Url id="PJ.FindDuplicates.Url" DefaultValue="https://localhost:8443/app/home/duplicates.html" />
-        <bt:Url id="PJ.DetectOutliers.Url" DefaultValue="https://localhost:8443/app/home/outlier.html" />
+        <bt:Url id="PJ.Inconsistency.Url" DefaultValue="https://localhost:8443/app/home/inconsistency.html" />
         <bt:Url id="PJ.ExtractValues.Url" DefaultValue="https://localhost:8443/app/home/extract_values.html" />
         <bt:Url id="PJ.TrimSpaces.Url" DefaultValue="https://localhost:8443/app/home/trim_spaces.html" />
         <bt:Url id="PJ.validation.Url" DefaultValue="https://localhost:8443/app/home/validation.html" />
-        <bt:Url id="PJ.intro.Url" DefaultValue="https://localhost:8443/app/home/help.html" />
+        <bt:Url id="PJ.help.Url" DefaultValue="https://localhost:8443/app/home/help.html" />
         <!--LearnMore URL currently not used -->
         <bt:Url id="PJ.GetStarted.LearnMoreUrl" DefaultValue="http://www.prepjet.de/about-1/">
         </bt:Url>
@@ -324,11 +324,11 @@
         <bt:String id="PJ.addcolumnButton.Label" DefaultValue="Add Columns" />
         <bt:String id="PJ.SplitValuesButton.Label" DefaultValue="Split Values" />
         <bt:String id="PJ.FindDuplicatesButton.Label" DefaultValue="Detect Duplicates" />
-        <bt:String id="PJ.DetectOutliersButton.Label" DefaultValue="Detect Outliers" />
+        <bt:String id="PJ.InconsistencyButton.Label" DefaultValue="Detect Inconsistencies" />
         <bt:String id="PJ.ExtractValuesButton.Label" DefaultValue="Extract Values" />
         <bt:String id="PJ.TrimSpacesButton.Label" DefaultValue="Trim Spaces" />
         <bt:String id="PJ.ValidationRuleButton.Label" DefaultValue="Validation Rule" />
-        <bt:String id="PJ.IntroButton.Label" DefaultValue="PrepJet Help" />
+        <bt:String id="PJ.HelpButton.Label" DefaultValue="PrepJet Help" />
         <bt:String id="PJ.Dropdown.Label" DefaultValue="Dropdown" />
         <bt:String id="PJ.Item1.Label" DefaultValue="Show Taskpane 1" />
         <bt:String id="PJ.Item2.Label" DefaultValue="Show Taskpane 2" />
