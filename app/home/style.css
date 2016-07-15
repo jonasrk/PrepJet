@@ -12,7 +12,8 @@
     overflow: visible; }
 
 .padding {
-    padding: 10px; }
+    padding: 10px;
+    overflow: visible; }
 
 h1 {
     font-family: "Segoe WP Light", "Segoe UI", "Arial", sans-serif;

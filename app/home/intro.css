@@ -46,7 +46,9 @@ ul {
   top: 4px; }
 
 .ms-Link_White {
-  color: #fff; }
+  color: #fff;
+  line-height: 25px;
+  cursor: pointer;}
 
 .ms-firstrun-pages {
   display: -webkit-box;
@@ -66,10 +68,11 @@ ul {
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
             flex-direction: column;
-    flex-wrap: nowrap; }
+    flex-wrap: nowrap;
+    background: #333399}
 
     .ms-firstrun-pages__header h1 {
-      letter-spacing: 5px; }
+      letter-spacing: 2px; }
 
     .ms-firstrun-pages__header p {
       margin-top: 15px; }
@@ -142,7 +145,8 @@ ul {
     padding-top: 10px
     padding-bottom: 10px;
     padding-left: 20px;
-    padding-right: 20px; }
+    padding-right: 20px;
+    background: #333399 }
 
     .ms-firstrun-pages__content--centered {
       display: -webkit-box;

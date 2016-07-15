@@ -88,13 +88,13 @@
         <!--evtl. text field for condition-->
         <div id="delimiter_beginning" class="ms-TextField ms-TextField--placeholder">
             <label class="ms-Label">Enter condition (lists comma separated)</label>
-            <input id="if_condition" class="ms-TextField-field" type="text">
+            <input id="if_condition" class="ms-TextField-field" type="text" onfocus="setFocus(0)">
         </div>
 
         <!--evtl. text field for between condition-->
         <div id="between_beginning" class="ms-TextField ms-TextField--placeholder">
             <label class="ms-Label">and</label>
-            <input id="if_between_condition" class="ms-TextField-field" type="text">
+            <input id="if_between_condition" class="ms-TextField-field" type="text" onfocus="setFocus(1)">
         </div>
 
         <!--dropdown for THEN-->
@@ -125,13 +125,13 @@
         <!--evtl. text field for Then condition-->
         <div id="delimiter_end" class="ms-TextField ms-TextField--placeholder">
             <label class="ms-Label">Enter condition to check</label>
-            <input id="then_condition" class="ms-TextField-field" type="text">
+            <input id="then_condition" class="ms-TextField-field" type="text" onfocus="setFocus(2)">
         </div>
 
         <!--evtl. text field for Then between condition-->
         <div id="betweenand" class="ms-TextField ms-TextField--placeholder">
             <label class="ms-Label">and</label>
-            <input id="between_and" class="ms-TextField-field" type="text">
+            <input id="between_and" class="ms-TextField-field" type="text" onfocus="setFocus(3)">
         </div>
 
         <!--Apply advanced business rule button-->

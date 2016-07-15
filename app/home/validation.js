@@ -34,6 +34,11 @@ function displayBetween(){
     }
 }
 
+var activeSelection = 0;
+function setFocus(activeID) {
+    activeSelection = activeID;
+}
+
 function displaySimpleBetween(){
     if(document.getElementById('if_operator').value == "between" || document.getElementById('if_operator').value == "notbetween") {
         $('#between_beginning').show();
@@ -89,7 +94,18 @@ function displaySimpleBetween(){
                     var selectedRange = ctx.workbook.getSelectedRange();
                     selectedRange.load('text');
                     return ctx.sync().then(function () {
-                        writeif(selectedRange.text);
+                        if (activeSelection == 0) {
+                            writeif(selectedRange.text);
+                        }
+                        else if (activeSelection == 1) {
+                            writeifand(selectedRange.text);
+                        }
+                        else if (activeSelection == 2) {
+                            writethen(selectedRange.text);
+                        }
+                        else if (activeSelection == 3) {
+                            writethenand(selectedRange.text);
+                        }
                     });
                 });
             }
@@ -98,6 +114,17 @@ function displaySimpleBetween(){
                 document.getElementById('if_condition').value = message;
             }
 
+            function writeifand(message){
+                document.getElementById('if_between_condition').value = message;
+            }
+
+            function writethen(message){
+                document.getElementById('then_condition').value = message;
+            }
+
+            function writethenand(message){
+                document.getElementById('between_and').value = message;
+            }
 
         });
     };
