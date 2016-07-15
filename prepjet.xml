@@ -345,7 +345,7 @@
         <bt:String id="PJ.Dropdown.Tooltip" DefaultValue="Click to Show Options on this Menu" />
         <bt:String id="PJ.Item1.Tooltip" DefaultValue="Click to Show Taskpane1" />
         <bt:String id="PJ.Item2.Tooltip" DefaultValue="Click to Show Taskpane2" />
-        <bt:String id="PJ.GetStarted.Description" DefaultValue="Welcome to PJ. Access your new Data Preparation functions through this tab.">
+        <bt:String id="PJ.GetStarted.Description" DefaultValue="Welcome to PrepJet. Access your new Data Preparation functions through this tab.">
           <bt:Override Locale="ja-jp" Value="JA-JP Get Started Title" />
         </bt:String>
       </bt:LongStrings>
