@@ -258,11 +258,9 @@ function getColumn() {
 
                 }
 
-
+                window.open("extract_values.html","_self");
             });
 
-            console.log("Test")
-            window.open("extract_values.html","_self");
 
         }).catch(function(error) {
             console.log("Error: " + error);
@@ -271,6 +269,7 @@ function getColumn() {
             }
         });
     }
+
 
 
 })();
