@@ -172,7 +172,7 @@
                             if (type_maximum < type_counter) {
                                 type_maximum = type_counter;
                             }
-
+                            //todo when 2 data types occure with them frequency none is highlighted
                             tmp1.push(tmpUniqueTypes[j]);
                             tmp1.push(type_counter);
                             tmp2.push(tmp1);
@@ -183,7 +183,7 @@
                             if (tmp2[i][1] < type_maximum) {
                                 for (var k = 0; k < tmp_type.length; k++) {
                                     if (tmp2[i][0] == tmp_type[k][0]) {
-                                        highlightContentInWorksheet(worksheet, tmp_type[k][1], color);
+                                        highlightCellInWorksheet(worksheet, tmp_type[k][1], color);
                                     }
                                 }
                             }

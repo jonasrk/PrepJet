@@ -132,6 +132,13 @@ function highlightContentInWorksheet(sheetObject, rangeAddress, color) {
 }
 
 
+function highlightCellInWorksheet(sheetObject, rangeAddress, color) {
+    var range = sheetObject.getRange(rangeAddress);
+    range.format.fill.color = color;
+    range.merge();
+}
+
+
 function getRandomColor() {
     var letters = '0123456789ABCDEF'.split('');
     var color = '#';
