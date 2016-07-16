@@ -327,7 +327,7 @@ function displaySimpleBetween(){
                         }
                     }
                 }
-                window.open("validation.html");
+                window.open("validation.html", "_self");
             });
 
         }).catch(function(error) {

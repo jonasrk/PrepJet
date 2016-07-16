@@ -109,11 +109,6 @@
 
             //get used range in active Sheet
             range.load('text');
-            var range_all_adding_to = worksheet.getRange();
-            var range_adding_to = range_all_adding_to.getUsedRange();
-            range_adding_to.load('address');
-            range_adding_to.load('text');
-
 
             return ctx.sync().then(function() {
                 var header = 0;
