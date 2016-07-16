@@ -131,9 +131,10 @@
                     var tmp_type = [];
                     for (var i = 1; i < range.text.length; i++) {
                         tmp_type.push(range.valueTypes[i][header]);
-                        console.log(range.valueTypes[i][header] == range.valueTypes[i-1][header]);
-                        if (i > 1 && tmp_type[i] != tmp_type[i - 1]) {
+                        console.log(range.valueTypes[i][header]);
+                        if (i > 1 && (tmp_type[i] != tmp_type[i - 1])) {
                             check[run] = 1;
+                            console.log("why");
                         }
                     }
                     val_type.push(tmp_type);
