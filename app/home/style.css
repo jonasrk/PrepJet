@@ -24,7 +24,7 @@ h1 {
 #content-main {
     background: #F2F2F2;
     top: 60px;
-    overflow: auto; }
+    overflow: visible; }
 
 .ms-Button {
     color: #333;
