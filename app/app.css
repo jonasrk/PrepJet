@@ -1,6 +1,8 @@
 /* Common app styling */
 
 #content-header {
+    z-index: 0;
+    zIndex: 0;
     background: #2a8dd4;
     color: #fff;
     position: absolute;
