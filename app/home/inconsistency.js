@@ -193,7 +193,7 @@
                     }
 
                 }
-
+                window.location = "inconsistency.html";
             });
 
         }).catch(function(error) {

@@ -395,7 +395,7 @@ function backToOne() {
                     }
                 }
 
-
+                window.location = "merge_columns.html";
 
             });
         }).catch(function(error) {

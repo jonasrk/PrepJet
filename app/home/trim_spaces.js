@@ -131,7 +131,7 @@
                             addContentToWorksheet(act_worksheet, column_char + sheet_row, trim_string);
                         }
                 }
-
+                window.location = "trim_spaces.html";
             });
 
         }).catch(function(error) {

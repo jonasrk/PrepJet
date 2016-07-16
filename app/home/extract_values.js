@@ -258,7 +258,7 @@ function getColumn() {
 
                 }
 
-                window.open("extract_values.html","_self");
+                window.location = "extract_values.html";
             });
 
 

@@ -240,7 +240,7 @@
                 if (document.getElementById('duplicatesort').checked == true) {
                     sortDuplicates(duplicates);
                 }
-
+                window.location = "duplicates.html";
             });
 
         }).catch(function(error) {

@@ -227,7 +227,7 @@ function displayFieldDelimiter(){
                         }
                     }
                 }
-
+                window.location = "split_values.html";
             });
 
         }).catch(function(error) {

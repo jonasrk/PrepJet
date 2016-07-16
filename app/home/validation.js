@@ -327,7 +327,7 @@ function displaySimpleBetween(){
                         }
                     }
                 }
-                window.open("validation.html", "_self");
+                window.location = "validation.html";
             });
 
         }).catch(function(error) {
@@ -800,7 +800,7 @@ function displaySimpleBetween(){
 
                 }
 
-
+                window.location = "validation.html";
             });
 
 
