@@ -12,6 +12,21 @@ function displayFieldEnd(){
     }
 }
 
+function displayAdvancedCount() {
+    if (document.getElementById('advanced_settings').checked == true) {
+        $('#del_count_start').show();
+        $('.del_count_dropdown_s').show();
+        $('#del_count_end').show();
+        $('.del_count_dropdown_e').show();
+    }
+    else {
+        $('#del_count_start').hide();
+        $('.del_count_dropdown_s').hide();
+        $('#del_count_end').hide();
+        $('.del_count_dropdown_e').hide();
+    }
+}
+
 
 function getColumn() {
 
@@ -55,6 +70,10 @@ function getColumn() {
 
             $('#delimiter_end').hide();
             $('#delimiter_beginning').hide();
+            $('#del_count_start').hide();
+            $('.del_count_dropdown_s').Dropdown().hide();
+            $('#del_count_end').hide();
+            $('.del_count_dropdown_e').Dropdown().hide();
 
             $(".dropdown_table").Dropdown();
             $(".ms-TextField").TextField();

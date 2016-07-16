@@ -89,13 +89,47 @@
             <label class="ms-Label">Optional: column to insert extracted values</label>
             <input id="target_column_input" class="ms-TextField-field" type="text">
         </div>
-        <!--checkbox-->
+        <!--checkbox include delimiter-->
         <div class="ms-ChoiceField">
             <input id="demo-checkbox-unselected" class="ms-ChoiceField-input" type="checkbox">
             <label id="checkbox" for="demo-checkbox-unselected" class="ms-ChoiceField-field">
                 <span class="ms-Label">Include delimiter</span>
             </label>
         </div>
+        <!--checkbox advanced settings-->
+            <div class="ms-ChoiceField">
+                <input id="advanced_settings" class="ms-ChoiceField-input" type="checkbox" onclick="displayAdvancedCount()">
+                <label id="checkbox_advanced" for="advanced_settings" class="ms-ChoiceField-field">
+                    <span class="ms-Label">Advanced Settings</span>
+                </label>
+            </div>
+            <!--evtl. text field for delimiter count-->
+            <div id="del_count_start" class="ms-TextField ms-TextField--placeholder">
+                <label class="ms-Label">Enter delimiter count at which to start, e.g. 3</label>
+                <input id="delimiter_count_start" class="ms-TextField-field" type="text">
+            </div>
+            <!--dropdown for delimiter count-->
+            <div class="ms-Dropdown del_count_dropdown_s" tabindex="1">
+                <label class="ms-Label">Select direction from which to count start delimiter</label>
+                <i class="ms-Dropdown-caretDown ms-Icon ms-Icon--caretDown"></i>
+                <select id="del_count_drop_start" class="ms-Dropdown-select">
+                    <option value="left">From Left</option>
+                    <option value="right">From Right</option>
+                </select>
+            </div>
+            <div id="del_count_end" class="ms-TextField ms-TextField--placeholder">
+                <label class="ms-Label">Enter delimiter count at which to end, e.g. 3</label>
+                <input id="delimiter_count_end" class="ms-TextField-field" type="text">
+            </div>
+            <!--dropdown for delimiter count-->
+            <div class="ms-Dropdown del_count_dropdown_e" tabindex="1">
+                <label class="ms-Label">Select direction from which to count start delimiter</label>
+                <i class="ms-Dropdown-caretDown ms-Icon ms-Icon--caretDown"></i>
+                <select id="del_count_drop_end" class="ms-Dropdown-select">
+                    <option value="left">From Left</option>
+                    <option value="right">From Right</option>
+                </select>
+            </div>
         <!--split button-->
         <button class="ms-Button" id="extract_Value">Extract</button>
     </div>
