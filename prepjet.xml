@@ -76,6 +76,73 @@
                   <bt:Image size="80" resid="PJ.addcolumn.Icon_lg" />
                 </Icon>
 
+                <Control xsi:type="Button" id="PJ.TrimSpacesButton">
+                  <Label resid="PJ.TrimSpacesButton.Label" />
+                  <Supertip>
+                    <Title resid="PJ.TrimSpacesButton.Label" />
+                    <Description resid="PJ.PJ.SVBtn.Ttp" />
+                  </Supertip>
+                  <Icon>
+                    <bt:Image size="16" resid="PJ.trimspaces.Icon_sm" />
+                    <bt:Image size="32" resid="PJ.trimspaces.Icon" />
+                    <bt:Image size="80" resid="PJ.trimspaces.Icon_lg" />
+                  </Icon>
+                  <Action xsi:type="ShowTaskpane">
+                    <TaskpaneId>Button2Id1</TaskpaneId>
+                    <!--Provide a url resource id for the location that will be displayed on the task pane -->
+                    <SourceLocation resid="PJ.TrimSpaces.Url" />
+                  </Action>
+                </Control>
+
+                <Control xsi:type="Button" id="PJ.ExtractValuesButton">
+                  <Label resid="PJ.ExtractValuesButton.Label" />
+                  <Supertip>
+                    <Title resid="PJ.ExtractValuesButton.Label" />
+                    <Description resid="PJ.PJ.SVBtn.Ttp" />
+                  </Supertip>
+                  <Icon>
+                    <bt:Image size="16" resid="PJ.extractvalues.Icon_sm" />
+                    <bt:Image size="32" resid="PJ.extractvalues.Icon" />
+                    <bt:Image size="80" resid="PJ.extractvalues.Icon_lg" />
+                  </Icon>
+                  <Action xsi:type="ShowTaskpane">
+                    <TaskpaneId>Button2Id1</TaskpaneId>
+                    <!--Provide a url resource id for the location that will be displayed on the task pane -->
+                    <SourceLocation resid="PJ.ExtractValues.Url" />
+                  </Action>
+                </Control>
+
+                <Control xsi:type="Button" id="PJ.SplitValuesButton">
+                  <Label resid="PJ.SplitValuesButton.Label" />
+                  <Supertip>
+                    <Title resid="PJ.SplitValuesButton.Label" />
+                      <Description resid="PJ.PJ.SVBtn.Ttp" />
+                  </Supertip>
+                  <Icon>
+                    <bt:Image size="16" resid="PJ.splitvalues.Icon_sm" />
+                    <bt:Image size="32" resid="PJ.splitvalues.Icon" />
+                    <bt:Image size="80" resid="PJ.splitvalues.Icon_lg" />
+                  </Icon>
+                  <Action xsi:type="ShowTaskpane">
+                    <TaskpaneId>Button2Id1</TaskpaneId>
+                    <!--Provide a url resource id for the location that will be displayed on the task pane -->
+                    <SourceLocation resid="PJ.SplitValues.Url" />
+                  </Action>
+                </Control>
+
+              </Group>
+              <Group id="PJ.Tab1.Group2">
+                <!--Label for your group. resid must point to a ShortString resource -->
+                <Label resid="PJ.Tab1.GroupLabel2" />
+                <Icon>
+                  <!-- Sample Todo: Each size needs its own icon resource or it will look distorted when resized -->
+                  <!--Icons. Required sizes 16,31,80, optional 20, 24, 40, 48, 64. Strongly recommended to provide all sizes for great UX -->
+                  <!--Use PNG icons and remember that all URLs on the resources section must use HTTPS -->
+                  <bt:Image size="16" resid="PJ.addcolumn.Icon_sm" />
+                  <bt:Image size="32" resid="PJ.addcolumn.Icon" />
+                  <bt:Image size="80" resid="PJ.addcolumn.Icon_lg" />
+                </Icon>
+
                 <!--Control. It can be of type "Button" or "Menu" -->
                 <Control xsi:type="Button" id="PJ.addcolumnButton">
                   <!--Label for your button. resid must point to a ShortString resource -->
@@ -100,76 +167,6 @@
                 </Control>
 
 
-
-              </Group>
-              <Group id="PJ.Tab1.Group2">
-                <!--Label for your group. resid must point to a ShortString resource -->
-                <Label resid="PJ.Tab1.GroupLabel2" />
-                <Icon>
-                  <!-- Sample Todo: Each size needs its own icon resource or it will look distorted when resized -->
-                  <!--Icons. Required sizes 16,31,80, optional 20, 24, 40, 48, 64. Strongly recommended to provide all sizes for great UX -->
-                  <!--Use PNG icons and remember that all URLs on the resources section must use HTTPS -->
-                  <bt:Image size="16" resid="PJ.addcolumn.Icon_sm" />
-                  <bt:Image size="32" resid="PJ.addcolumn.Icon" />
-                  <bt:Image size="80" resid="PJ.addcolumn.Icon_lg" />
-                </Icon>
-
-
-
-                <Control xsi:type="Button" id="PJ.SplitValuesButton">
-                  <Label resid="PJ.SplitValuesButton.Label" />
-                  <Supertip>
-                    <Title resid="PJ.SplitValuesButton.Label" />
-                      <Description resid="PJ.PJ.SVBtn.Ttp" />
-                  </Supertip>
-                  <Icon>
-                    <bt:Image size="16" resid="PJ.splitvalues.Icon_sm" />
-                    <bt:Image size="32" resid="PJ.splitvalues.Icon" />
-                    <bt:Image size="80" resid="PJ.splitvalues.Icon_lg" />
-                  </Icon>
-                  <Action xsi:type="ShowTaskpane">
-                    <TaskpaneId>Button2Id1</TaskpaneId>
-                    <!--Provide a url resource id for the location that will be displayed on the task pane -->
-                    <SourceLocation resid="PJ.SplitValues.Url" />
-                  </Action>
-                </Control>
-
-                <Control xsi:type="Button" id="PJ.ExtractValuesButton">
-                  <Label resid="PJ.ExtractValuesButton.Label" />
-                  <Supertip>
-                    <Title resid="PJ.ExtractValuesButton.Label" />
-                    <Description resid="PJ.PJ.SVBtn.Ttp" />
-                  </Supertip>
-                  <Icon>
-                    <bt:Image size="16" resid="PJ.extractvalues.Icon_sm" />
-                    <bt:Image size="32" resid="PJ.extractvalues.Icon" />
-                    <bt:Image size="80" resid="PJ.extractvalues.Icon_lg" />
-                  </Icon>
-                  <Action xsi:type="ShowTaskpane">
-                    <TaskpaneId>Button2Id1</TaskpaneId>
-                    <!--Provide a url resource id for the location that will be displayed on the task pane -->
-                    <SourceLocation resid="PJ.ExtractValues.Url" />
-                  </Action>
-                </Control>
-
-                    <Control xsi:type="Button" id="PJ.TrimSpacesButton">
-                  <Label resid="PJ.TrimSpacesButton.Label" />
-                  <Supertip>
-                    <Title resid="PJ.TrimSpacesButton.Label" />
-                    <Description resid="PJ.PJ.SVBtn.Ttp" />
-                  </Supertip>
-                  <Icon>
-                    <bt:Image size="16" resid="PJ.trimspaces.Icon_sm" />
-                    <bt:Image size="32" resid="PJ.trimspaces.Icon" />
-                    <bt:Image size="80" resid="PJ.trimspaces.Icon_lg" />
-                  </Icon>
-                  <Action xsi:type="ShowTaskpane">
-                    <TaskpaneId>Button2Id1</TaskpaneId>
-                    <!--Provide a url resource id for the location that will be displayed on the task pane -->
-                    <SourceLocation resid="PJ.TrimSpaces.Url" />
-                  </Action>
-                </Control>
-
               </Group>
               <Group id="PJ.Tab1.Group3">
                 <!--Label for your group. resid must point to a ShortString resource -->
@@ -183,7 +180,25 @@
                   <bt:Image size="80" resid="PJ.addcolumn.Icon_lg" />
                 </Icon>
 
-                <Control xsi:type="Button" id="PJ.FindDuplicatesButton">
+                <Control xsi:type="Button" id="PJ.InconsistencyButton">
+                    <Label resid="PJ.InconsistencyButton.Label" />
+                    <Supertip>
+                      <Title resid="PJ.InconsistencyButton.Label" />
+                      <Description resid="PJ.PJ.SVBtn.Ttp" />
+                    </Supertip>
+                    <Icon>
+                      <bt:Image size="16" resid="PJ.detectoutlier.Icon_sm" />
+                      <bt:Image size="32" resid="PJ.detectoutlier.Icon" />
+                      <bt:Image size="80" resid="PJ.detectoutlier.Icon_lg" />
+                    </Icon>
+                    <Action xsi:type="ShowTaskpane">
+                      <TaskpaneId>Button2Id1</TaskpaneId>
+                      <!--Provide a url resource id for the location that will be displayed on the task pane -->
+                      <SourceLocation resid="PJ.Inconsistency.Url" />
+                    </Action>
+                  </Control>
+
+                  <Control xsi:type="Button" id="PJ.FindDuplicatesButton">
                   <Label resid="PJ.FindDuplicatesButton.Label" />
                   <Supertip>
                     <Title resid="PJ.FindDuplicatesButton.Label" />
@@ -200,37 +215,6 @@
                     <SourceLocation resid="PJ.FindDuplicates.Url" />
                   </Action>
                 </Control>
-
-                <Control xsi:type="Button" id="PJ.InconsistencyButton">
-                  <Label resid="PJ.InconsistencyButton.Label" />
-                  <Supertip>
-                    <Title resid="PJ.InconsistencyButton.Label" />
-                    <Description resid="PJ.PJ.SVBtn.Ttp" />
-                  </Supertip>
-                  <Icon>
-                    <bt:Image size="16" resid="PJ.detectoutlier.Icon_sm" />
-                    <bt:Image size="32" resid="PJ.detectoutlier.Icon" />
-                    <bt:Image size="80" resid="PJ.detectoutlier.Icon_lg" />
-                  </Icon>
-                  <Action xsi:type="ShowTaskpane">
-                    <TaskpaneId>Button2Id1</TaskpaneId>
-                    <!--Provide a url resource id for the location that will be displayed on the task pane -->
-                    <SourceLocation resid="PJ.Inconsistency.Url" />
-                  </Action>
-                </Control>
-                </Group>
-
-                <Group id="PJ.Tab1.Group4">
-                <!--Label for your group. resid must point to a ShortString resource -->
-                <Label resid="PJ.Tab1.GroupLabel2" />
-                <Icon>
-                  <!-- Sample Todo: Each size needs its own icon resource or it will look distorted when resized -->
-                  <!--Icons. Required sizes 16,31,80, optional 20, 24, 40, 48, 64. Strongly recommended to provide all sizes for great UX -->
-                  <!--Use PNG icons and remember that all URLs on the resources section must use HTTPS -->
-                  <bt:Image size="16" resid="PJ.addcolumn.Icon_sm" />
-                  <bt:Image size="32" resid="PJ.addcolumn.Icon" />
-                  <bt:Image size="80" resid="PJ.addcolumn.Icon_lg" />
-                </Icon>
 
                 <Control xsi:type="Button" id="PJ.ValidationRuleButton">
                   <Label resid="PJ.ValidationRuleButton.Label" />
@@ -249,6 +233,20 @@
                     <SourceLocation resid="PJ.validation.Url" />
                   </Action>
                 </Control>
+
+                </Group>
+
+                <Group id="PJ.Tab1.Group4">
+                <!--Label for your group. resid must point to a ShortString resource -->
+                <Label resid="PJ.Tab1.GroupLabel2" />
+                <Icon>
+                  <!-- Sample Todo: Each size needs its own icon resource or it will look distorted when resized -->
+                  <!--Icons. Required sizes 16,31,80, optional 20, 24, 40, 48, 64. Strongly recommended to provide all sizes for great UX -->
+                  <!--Use PNG icons and remember that all URLs on the resources section must use HTTPS -->
+                  <bt:Image size="16" resid="PJ.addcolumn.Icon_sm" />
+                  <bt:Image size="32" resid="PJ.addcolumn.Icon" />
+                  <bt:Image size="80" resid="PJ.addcolumn.Icon_lg" />
+                </Icon>
 
                   <Control xsi:type="Button" id="PJ.HelpButton">
                   <Label resid="PJ.HelpButton.Label" />
