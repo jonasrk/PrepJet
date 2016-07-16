@@ -170,7 +170,7 @@
               </Group>
               <Group id="PJ.Tab1.Group3">
                 <!--Label for your group. resid must point to a ShortString resource -->
-                <Label resid="PJ.Tab1.GroupLabel2" />
+                <Label resid="PJ.Tab1.GroupLabel3" />
                 <Icon>
                   <!-- Sample Todo: Each size needs its own icon resource or it will look distorted when resized -->
                   <!--Icons. Required sizes 16,31,80, optional 20, 24, 40, 48, 64. Strongly recommended to provide all sizes for great UX -->
@@ -238,7 +238,7 @@
 
                 <Group id="PJ.Tab1.Group4">
                 <!--Label for your group. resid must point to a ShortString resource -->
-                <Label resid="PJ.Tab1.GroupLabel2" />
+                <Label resid="PJ.Tab1.GroupLabel4" />
                 <Icon>
                   <!-- Sample Todo: Each size needs its own icon resource or it will look distorted when resized -->
                   <!--Icons. Required sizes 16,31,80, optional 20, 24, 40, 48, 64. Strongly recommended to provide all sizes for great UX -->
@@ -330,8 +330,10 @@
         <bt:String id="PJ.Dropdown.Label" DefaultValue="Dropdown" />
         <bt:String id="PJ.Item1.Label" DefaultValue="Show Taskpane 1" />
         <bt:String id="PJ.Item2.Label" DefaultValue="Show Taskpane 2" />
-        <bt:String id="PJ.Tab1.GroupLabel" DefaultValue=" " />
-        <bt:String id="PJ.Tab1.GroupLabel2" DefaultValue=" " />
+        <bt:String id="PJ.Tab1.GroupLabel" DefaultValue="Transform" />
+        <bt:String id="PJ.Tab1.GroupLabel2" DefaultValue="Combine" />
+        <bt:String id="PJ.Tab1.GroupLabel3" DefaultValue="Screen Data" />
+        <bt:String id="PJ.Tab1.GroupLabel4" DefaultValue="Help" />
         <bt:String id="PJ.Tab1.TabLabel" DefaultValue="PrepJet" />
         <bt:String id="PJ.GetStarted.Title" DefaultValue="PrepJet was succesfully loaded">
           <bt:Override Locale="ja-jp" Value="JA-JP Get Started Title" />
