@@ -77,6 +77,7 @@
             var range = range_all.getUsedRange();
 
             range.load('text');
+
             return ctx.sync().then(function() {
                 for (var i = 0; i < range.text[0].length; i++) {
                     if (range.text[0][i] != ""){
@@ -111,13 +112,31 @@
             //get used range in active Sheet
             range.load('text');
 
+            var harmo = document.getElementById('harmonize_options').value;
+            console.log(harmo);
             return ctx.sync().then(function() {
+
                 var header = 0;
                 var act_worksheet = ctx.workbook.worksheets.getActiveWorksheet();
-
                 var checked_checkboxes = getCheckedBoxes("column_checkbox");
 
-                console.log("test");
+                for (var run = 0; run < checked_checkboxes.length; run++) {
+                    for (var k = 0; k < range.text[0].length; k++) {
+                        if (checked_checkboxes[run].id == range.text[0][k] || checked_checkboxes[run].id == "Column " + getCharFromNumber(k+1)){
+                            header = k;
+                            break;
+                        }
+                    }
+
+                    for (var k = 0; k < range.text.length; k++) {
+                        if (harmo == "allupper") {
+                            var harm_string = range.text[k][header].toUpperCase();
+                            var column_char = getCharFromNumber(header + 1);
+                            var sheet_row = k + 1;
+                            addContentToWorksheet(act_worksheet, column_char + sheet_row, harm_string);
+                        }
+                    }
+                }
                 window.location = "harmonize.html";
             });
 
