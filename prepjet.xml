@@ -166,6 +166,23 @@
                   </Action>
                 </Control>
 
+                <Control xsi:type="Button" id="PJ.HarmonizeButton">
+                  <Label resid="PJ.HarmonizeButton.Label" />
+                  <Supertip>
+                    <Title resid="PJ.HarmonizeButton.Label" />
+                      <Description resid="PJ.PJ.SVBtn.Ttp" />
+                  </Supertip>
+                  <Icon>
+                    <bt:Image size="16" resid="PJ.harmonize.Icon_sm" />
+                    <bt:Image size="32" resid="PJ.harmonize.Icon" />
+                    <bt:Image size="80" resid="PJ.harmonize.Icon_lg" />
+                  </Icon>
+                  <Action xsi:type="ShowTaskpane">
+                    <TaskpaneId>Button2Id1</TaskpaneId>
+                    <!--Provide a url resource id for the location that will be displayed on the task pane -->
+                    <SourceLocation resid="PJ.Harmonize.Url" />
+                  </Action>
+                </Control>
 
               </Group>
               <Group id="PJ.Tab1.Group3">
@@ -285,6 +302,7 @@
         <bt:Image id="PJ.extractvalues.Icon" DefaultValue="https://localhost:8443/images/extractvalues.png" />
         <bt:Image id="PJ.trimspaces.Icon" DefaultValue="https://localhost:8443/images/trimspaces.png" />
         <bt:Image id="PJ.validationrule.Icon" DefaultValue="https://localhost:8443/images/validationrule.png" />
+        <bt:Image id="PJ.harmonize.Icon" DefaultValue="https://localhost:8443/images/harmonize.png" />
         <bt:Image id="PJ.help.Icon" DefaultValue="https://localhost:8443/images/help.png" />
         <bt:Image id="PJ.addcolumn.Icon_sm" DefaultValue="https://localhost:8443/images/addcolumn_sm.png" />
         <bt:Image id="PJ.detectoutlier.Icon_sm" DefaultValue="https://localhost:8443/images/detectoutlier_sm.png" />
@@ -293,6 +311,7 @@
         <bt:Image id="PJ.extractvalues.Icon_sm" DefaultValue="https://localhost:8443/images/extractvalues_sm.png" />
         <bt:Image id="PJ.trimspaces.Icon_sm" DefaultValue="https://localhost:8443/images/trimspaces_sm.png" />
         <bt:Image id="PJ.validationrule.Icon_sm" DefaultValue="https://localhost:8443/images/validationrule_sm.png" />
+        <bt:Image id="PJ.harmonize.Icon_sm" DefaultValue="https://localhost:8443/images/harmonize_sm.png" />
         <bt:Image id="PJ.help.Icon_sm" DefaultValue="https://localhost:8443/images/help_sm.png" />
         <bt:Image id="PJ.addcolumn.Icon_lg" DefaultValue="https://localhost:8443/images/addcolumn_lg.png" />
         <bt:Image id="PJ.detectoutlier.Icon_lg" DefaultValue="https://localhost:8443/images/detectoutlier_lg.png" />
@@ -301,6 +320,7 @@
         <bt:Image id="PJ.extractvalues.Icon_lg" DefaultValue="https://localhost:8443/images/extractvalues_lg.png" />
         <bt:Image id="PJ.trimspaces.Icon_lg" DefaultValue="https://localhost:8443/images/trimspaces_lg.png" />
         <bt:Image id="PJ.validationrule.Icon_lg" DefaultValue="https://localhost:8443/images/validationrule_lg.png" />
+        <bt:Image id="PJ.harmonize.Icon_lg" DefaultValue="https://localhost:8443/images/harmonize_lg.png" />
         <bt:Image id="PJ.help.Icon_lg" DefaultValue="https://localhost:8443/images/help_lg.png" />
 
       </bt:Images>
@@ -313,6 +333,7 @@
         <bt:Url id="PJ.ExtractValues.Url" DefaultValue="https://localhost:8443/app/home/extract_values.html" />
         <bt:Url id="PJ.TrimSpaces.Url" DefaultValue="https://localhost:8443/app/home/trim_spaces.html" />
         <bt:Url id="PJ.validation.Url" DefaultValue="https://localhost:8443/app/home/validation.html" />
+        <bt:Url id="PJ.Harmonize.Url" DefaultValue="https://localhost:8443/app/home/harmonize.html" />
         <bt:Url id="PJ.help.Url" DefaultValue="https://localhost:8443/app/home/help.html" />
         <!--LearnMore URL currently not used -->
         <bt:Url id="PJ.GetStarted.LearnMoreUrl" DefaultValue="http://www.prepjet.de/about-1/">
@@ -326,6 +347,7 @@
         <bt:String id="PJ.ExtractValuesButton.Label" DefaultValue="Extract Values" />
         <bt:String id="PJ.TrimSpacesButton.Label" DefaultValue="Trim Spaces" />
         <bt:String id="PJ.ValidationRuleButton.Label" DefaultValue="Validation Rule" />
+        <bt:String id="PJ.HarmonizeButton.Label" DefaultValue="Harmonize Column" />
         <bt:String id="PJ.HelpButton.Label" DefaultValue="PrepJet Help" />
         <bt:String id="PJ.Dropdown.Label" DefaultValue="Dropdown" />
         <bt:String id="PJ.Item1.Label" DefaultValue="Show Taskpane 1" />
