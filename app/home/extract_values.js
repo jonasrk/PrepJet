@@ -182,6 +182,14 @@ function getColumn() {
                 var target_column = target_tmp.substring(target_tmp.indexOf("!") + 1, target_tmp.indexOf("!") + 2);
             }
 
+            //if advanced settings are selected, get values for delimiter count
+            if (document.getElementById('advanced_settings').checked == true) {
+                var count_delimiter_start = Number(document.getElementById('delimiter_count_start').value);
+                var count_direction_start = document.getElementById('del_count_drop_start').value;
+                var count_delimiter_end = Number(document.getElementById('delimiter_count_end').value);
+                var count_direction_end = document.getElementById('del_count_drop_end').value;
+            }
+
             //get used range in active Sheet
             range.load('text');
             var range_all_adding_to = worksheet.getRange();
@@ -222,11 +230,41 @@ function getColumn() {
                         var position1 = 0;
                     }
                     else {
-                        if (document.getElementById('demo-checkbox-unselected').checked == true) {
-                            var position1 = range.text[i][header].indexOf(split_beginning);
+                        if (count_delimiter_start != 0){
+                            var tmp_array = range.text[i][header].split(split_beginning);
+                            if (count_direction_start == "right") {
+                                var loop_end = tmp_array.length - count_delimiter_start;
+                                var str1_tmp = tmp_array[0];
+                                for (var k = 1; k < loop_end; k++) {
+                                    str1_tmp = str1_tmp.concat(split_beginning, tmp_array[k]);
+                                }
+                                if (document.getElementById('demo-checkbox-unselected').checked == true) {
+                                    var position1 = str1_tmp.length;
+                                }
+                                else {
+                                    var position1 = str1_tmp.length + 1;
+                                }
+                            }
+                            else {
+                                var str1_tmp = tmp_array[0];
+                                for (var k = 1; k < count_delimiter_start; k++) {
+                                    str1_tmp = str1_tmp.concat(split_beginning, tmp_array[k]);
+                                }
+                                if (document.getElementById('demo-checkbox-unselected').checked == true) {
+                                    var position1 = str1_tmp.length;
+                                }
+                                else {
+                                    var position1 = str1_tmp.length + 1;
+                                }
+                            }
                         }
                         else {
-                            var position1 = range.text[i][header].indexOf(split_beginning) + 1;
+                            if (document.getElementById('demo-checkbox-unselected').checked == true) {
+                                var position1 = range.text[i][header].indexOf(split_beginning);
+                            }
+                            else {
+                                var position1 = range.text[i][header].indexOf(split_beginning) + 1;
+                            }
                         }
                     }
 
