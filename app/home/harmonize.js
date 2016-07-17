@@ -135,8 +135,8 @@
                         if (harmo == "alllower") {
                             var harm_string = range.text[k][header].toLowerCase();
                         }
-                        if (harmo == "firstupper") {
-                            var tmp = range.text[k][header].split(" ");
+                        if (harmo == "firstupper") { //todo when leading space first real letter not transformed
+                            var tmp = range.text[k][header].toLowerCase().split(" ");
                             var tmp_upper = [];
                             for (var runtmp = 0; runtmp < tmp.length; runtmp++) {
                                 tmp_upper.push(tmp[runtmp].charAt(0).toUpperCase() + tmp[runtmp].slice(1));
@@ -147,8 +147,9 @@
                             }
                         }
                         if (harmo == "oneupper") {
+                            var tmp = range.text[k][header].toLowerCase();
                             var harm_string = [];
-                            harm_string = range.text[k][header].charAt(0).toUpperCase() + range.text[k][header].slice(1);
+                            harm_string = tmp.charAt(0).toUpperCase() + tmp.slice(1);
                         }
                             var column_char = getCharFromNumber(header + 1);
                             var sheet_row = k + 1;
