@@ -275,22 +275,66 @@ function getColumn() {
                     else {
                         //when delimiter to start and end is different
                         if (split_beginning != split_end) {
-                            if (document.getElementById('demo-checkbox-unselected').checked == true) {
+                            if (count_delimiter_end != 0){
+                                var tmp_array = range.text[i][header].split(split_end);
+                                if (count_direction_end == "right") {
+                                    var loop_end = tmp_array.length - count_delimiter_end;
+                                    var str1_tmp = tmp_array[0];
+                                    for (var k = 1; k < loop_end; k++) {
+                                        str1_tmp = str1_tmp.concat(split_end, tmp_array[k]);
+                                    }
+                                }
+                                else {
+                                    var str1_tmp = tmp_array[0];
+                                    for (var k = 1; k < count_delimiter_end; k++) {
+                                        str1_tmp = str1_tmp.concat(split_end, tmp_array[k]);
+                                    }
+                                }
+                                    if (document.getElementById('demo-checkbox-unselected').checked == true) {
+                                        var position2 = str1_tmp.length + 1;
+                                    }
+                                    else {
+                                        var position2 = str1_tmp.length;
+                                    }
+                            }
+
+                            if (count_delimiter_end == 0 && document.getElementById('demo-checkbox-unselected').checked == true) {
                                 var position2 = range.text[i][header].indexOf(split_end) + 1;
                             }
-                            else {
+                            if (count_delimiter_end == 0 && document.getElementById('demo-checkbox-unselected').checked == false) {
                                 var position2 = range.text[i][header].indexOf(split_end);
                             }
                         }
                         else {
                         //when delimiter to start and end is the same
-                            if(document.getElementById('demo-checkbox-unselected').checked == true) {
+                            if(count_delimiter_end == 0 && document.getElementById('demo-checkbox-unselected').checked == true) {
                                 var tmp = range.text[i][header].substring(position1 + 1, range.text[i][header].length);
                                 var position2 = tmp.indexOf(split_end) + position1 + 2;
                             }
-                            else {
+                            else if (count_delimiter_end == 0 && document.getElementById('demo-checkbox-unselected').checked == false){
                                 var tmp = range.text[i][header].substring(position1, range.text[i][header].length);
                                 var position2 = tmp.indexOf(split_end) + position1;
+                            }
+                            else {
+                                var tmp_array = range.text[i][header].split(split_end);
+                                var str2_tmp = tmp_array[0];
+                                if (count_direction_end == "left") {
+                                    for (var k = 1; k < count_delimiter_end; k++) {
+                                        str2_tmp = str2_tmp.concat(split_end, tmp_array[k]);
+                                    }
+                                }
+                                else {
+                                    var loop_end = tmp_array.length - count_delimiter_end;
+                                    for (var k = 1; k < loop_end; k++) {
+                                        str2_tmp = str2_tmp.concat(split_end, tmp_array[k]);
+                                    }
+                                }
+                                if (document.getElementById('demo-checkbox-unselected').checked == true) {
+                                    var position2 = str2_tmp.length + 1;
+                                }
+                                else {
+                                    var position2 = str2_tmp.length;
+                                }
                             }
                         }
                     }
