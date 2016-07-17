@@ -17,6 +17,7 @@
             populateCheckboxes();
 
             $('#bt_detect_duplicates').click(detectDuplicates);
+            $('#checkbox_all').click(checkCheckbox);
 
         });
     };
@@ -42,6 +43,50 @@
                         addNewCheckboxToContainer ("Column " + colchar, "duplicates_column_checkbox" ,"checkboxes_duplicates");
                     }
                     //addNewCheckboxToContainer (range.text[0][i], "duplicates_column_checkbox" ,"checkboxes_duplicates");
+                }
+            });
+
+        }).catch(function(error) {
+            console.log("Error: " + error);
+            if (error instanceof OfficeExtension.Error) {
+                console.log("Debug info: " + JSON.stringify(error.debugInfo));
+            }
+        });
+
+    }
+
+
+    function checkCheckbox() {
+
+        Excel.run(function (ctx) {
+
+            var worksheet = ctx.workbook.worksheets.getActiveWorksheet();
+            var range_all = worksheet.getRange();
+            var range = range_all.getUsedRange();
+
+            range.load('address');
+            range.load('text');
+
+            return ctx.sync().then(function() {
+                if (document.getElementById('checkbox_all').checked == true) {
+                    for (var i = 0; i < range.text[0].length; i++) {
+                        if (range.text[0][i] != "") {
+                            document.getElementById(range.text[0][i]).checked = true;
+                        }
+                        else {
+                            document.getElementById("Column " + getCharFromNumber(i + 1)).checked = true;
+                        }
+                    }
+                }
+                else {
+                    for (var i = 0; i < range.text[0].length; i++) {
+                        if (range.text[0][i] != "") {
+                            document.getElementById(range.text[0][i]).checked = false;
+                        }
+                        else {
+                            document.getElementById("Column " + getCharFromNumber(i + 1)).checked = false;
+                        }
+                    }
                 }
             });
 

@@ -43,15 +43,18 @@
     </div>
 </div>
 <div id="content-main">
-
     <!--Text: Select columns for duplicate search-->
 <div class="padding">
     <div>
         <header>Select columns for duplicate search</header>
     </div>
-
     <!--Checkboxes for Columns-->
-
+    <div id="checkbox_select_all" class="ms-ChoiceField">
+        <input id="checkbox_all" class="ms-ChoiceField-input" type="checkbox">
+        <label id="checkbox_label" for="checkbox_all" class="ms-ChoiceField-field">
+            <span class="ms-Label">All columns</span>
+        </label>
+    </div>
     <div id="checkboxes_duplicates" class="ms-ChoiceField"></div>
 
     <!--Exact Match-->
@@ -76,20 +79,6 @@
             </td>
         </tr>
     </table>
-    <!--div class="ms-ChoiceField">
-        <input id="demo-checkbox-unselected" class="ms-ChoiceField-input" type="checkbox">
-        <label for="demo-checkbox-unselected" class="ms-ChoiceField-field">
-            <span class="ms-Label">Exact Match</span>
-        </label>
-    </div-->
-    <!--Fuzzy Match-->
-    <!--Checkbox-->
-    <!--div class="ms-ChoiceField">
-        <input id="demo-checkbox-unselected" class="ms-ChoiceField-input" type="checkbox" disabled="disabled">
-        <label for="demo-checkbox-unselected" class="ms-ChoiceField-field">
-            <span class="ms-Label">Fuzzy Match</span>
-        </label>
-    </div-->
     <!--checkbox-->
     <div class="ms-ChoiceField">
         <input id="duplicatesort" class="ms-ChoiceField-input" type="checkbox">
