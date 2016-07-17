@@ -113,7 +113,7 @@
             range.load('text');
 
             var harmo = document.getElementById('harmonize_options').value;
-            console.log(harmo);
+
             return ctx.sync().then(function() {
 
                 var header = 0;
@@ -131,10 +131,29 @@
                     for (var k = 0; k < range.text.length; k++) {
                         if (harmo == "allupper") {
                             var harm_string = range.text[k][header].toUpperCase();
+                        }
+                        if (harmo == "alllower") {
+                            var harm_string = range.text[k][header].toLowerCase();
+                        }
+                        if (harmo == "firstupper") {
+                            var tmp = range.text[k][header].split(" ");
+                            var tmp_upper = [];
+                            for (var runtmp = 0; runtmp < tmp.length; runtmp++) {
+                                tmp_upper.push(tmp[runtmp].charAt(0).toUpperCase() + tmp[runtmp].slice(1));
+                            }
+                            var harm_string = tmp_upper[0];
+                            for (var runtmp = 1; runtmp < tmp.length; runtmp++) {
+                                harm_string = harm_string.concat(" ", tmp_upper[runtmp]);
+                            }
+                        }
+                        if (harmo == "oneupper") {
+                            var harm_string = [];
+                            harm_string = range.text[k][header].charAt(0).toUpperCase() + range.text[k][header].slice(1);
+                        }
                             var column_char = getCharFromNumber(header + 1);
                             var sheet_row = k + 1;
                             addContentToWorksheet(act_worksheet, column_char + sheet_row, harm_string);
-                        }
+
                     }
                 }
                 window.location = "harmonize.html";
