@@ -179,7 +179,9 @@ function getColumn() {
                 var target_column = target_tmp.substring(target_tmp.indexOf("!") + 1, target_tmp.indexOf(":"));
             }
             else { //todo not correct to extract until +2 - better solution if only one column is selected
+                //var column_range = worksheet.getRange(target_tmp.substring(target_tmp.indexOf("!") + 1));
                 var target_column = target_tmp.substring(target_tmp.indexOf("!") + 1, target_tmp.indexOf("!") + 2);
+                //var column_range_insert = column_range.getEntireRow();
             }
 
             //if advanced settings are selected, get values for delimiter count
@@ -197,13 +199,13 @@ function getColumn() {
             range.load('text');
             var range_all_adding_to = worksheet.getRange();
             var range_adding_to = range_all_adding_to.getUsedRange();
+
             range_adding_to.load('address');
             range_adding_to.load('text');
 
-
             return ctx.sync().then(function() {
                 var header = 0;
-
+                console.log(column_range_insert);
                 //get column in header from which to extract value
                 for (var k = 0; k < range.text[0].length; k++){
                     if (selected_identifier == range.text[0][k] || selected_identifier == "Column " + getCharFromNumber(k + 1)){
@@ -298,14 +300,13 @@ function getColumn() {
                                             str1_tmp = str1_tmp.concat(split_end, tmp_array[k]);
                                         }
                                     }
-                                        if (document.getElementById('demo-checkbox-unselected').checked == true) {
-                                            var position2 = str1_tmp.length + 1;
-                                        }
-                                        else {
-                                            var position2 = str1_tmp.length;
-                                        }
-                                        console.log(position2);
-                                        //todo: reset position2 when delimiter not in string and count is set
+
+                                    if (document.getElementById('demo-checkbox-unselected').checked == true) {
+                                        var position2 = str1_tmp.length + 1;
+                                    }
+                                    else {
+                                        var position2 = str1_tmp.length;
+                                    }
                                 }
 
                                 if (count_delimiter_end == 0) {
