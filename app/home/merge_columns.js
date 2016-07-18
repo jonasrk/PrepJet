@@ -46,9 +46,7 @@ function backToOne() {
             var range_all = worksheet.getRange();
             var range = range_all.getUsedRange();
 
-            range.load('address');
             range.load('text');
-
             return ctx.sync().then(function() {
                 if (document.getElementById('checkbox_all').checked == true) {
                     for (var i = 0; i < range.text[0].length; i++) {
@@ -61,7 +59,7 @@ function backToOne() {
                     }
                 }
                 else {
-                    for (var i = 0; i < range.text[0].length.length; i++) {
+                    for (var i = 0; i < range.text[0].length; i++) {
                         if (range.text[0][i] != "") {
                             document.getElementById(range.text[0][i]).checked = false;
                         }
@@ -148,10 +146,11 @@ function backToOne() {
             var range_all = worksheet.getRange();
             var range = range_all.getUsedRange();
 
-            range.load('address');
+            //range.load('address');
             range.load('text');
             return ctx.sync().then(function() {
 
+                //document.getElementById('checkbox_all').checked = false;
                 while (document.getElementById('checkboxes_variables').firstChild) {
                     document.getElementById('checkboxes_variables').removeChild(document.getElementById('checkboxes_variables').firstChild);
                 }
@@ -164,8 +163,6 @@ function backToOne() {
                         var colchar = getCharFromNumber(i + 1);
                         addNewCheckboxToContainer ("Column " + colchar, "reference_column_checkbox" ,"checkboxes_variables");
                     }
-                    //addNewCheckboxToContainer (range.text[0][i], "reference_column_checkbox" ,"checkboxes_variables");
-
                 }
 
                 $('#checkbox_all').click(checkCheckbox);
@@ -192,9 +189,9 @@ function backToOne() {
         function populateReferenceColumnDropdown (table, container) {
 
             //remove potentially existing dropdown options
-            var child_target = document.getElementById(container).firstChild;
-            while (child_target != null) {
-                document.getElementById(container).removeChild(child_target);
+            var parent = document.getElementById(container);
+            while (parent.firstChild) {
+                parent.removeChild(parent.firstChild);
             }
 
             Excel.run(function (ctx) {
@@ -205,6 +202,7 @@ function backToOne() {
 
                 range.load('address');
                 range.load('text');
+
                 return ctx.sync().then(function() {
 
                     for (var i = 0; i < range.text[0].length; i++) {
@@ -218,6 +216,7 @@ function backToOne() {
                             el.value = "Column " + getCharFromNumber(i + 1);
                             el.textContent = "Column " + getCharFromNumber(i + 1);
                         }
+
                         document.getElementById(container).appendChild(el);
 
                     }

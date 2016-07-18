@@ -13,7 +13,6 @@
             }
 
             app.initialize();
-
             populateCheckboxes();
 
             $('#bt_detect_duplicates').click(detectDuplicates);
@@ -42,7 +41,6 @@
                         var colchar = getCharFromNumber(i + 1);
                         addNewCheckboxToContainer ("Column " + colchar, "duplicates_column_checkbox" ,"checkboxes_duplicates");
                     }
-                    //addNewCheckboxToContainer (range.text[0][i], "duplicates_column_checkbox" ,"checkboxes_duplicates");
                 }
             });
 
@@ -64,7 +62,6 @@
             var range_all = worksheet.getRange();
             var range = range_all.getUsedRange();
 
-            range.load('address');
             range.load('text');
 
             return ctx.sync().then(function() {
@@ -172,8 +169,6 @@
                         duplicates.push(strings_to_sort[o - 1]);
                     }
                 }
-
-                //var color = 'red';
 
                 function colorDup(duplicates_input, int) {
                     var color = 'red';
