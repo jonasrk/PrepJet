@@ -257,9 +257,10 @@
                                     var total_row = range_tmp.getEntireRow();
 
                                     total_row.load('address');
+                                    total_row.delete();
 
                                     return ctx.sync().then(function() {
-                                        total_row.delete();
+                                        //total_row.delete();
                                     });
 
                                 }).catch(function(error) {
@@ -285,7 +286,7 @@
                 if (document.getElementById('duplicatesort').checked == true) {
                     sortDuplicates(duplicates);
                 }
-                window.location = "duplicates.html";
+                //window.location = "duplicates.html";
             });
 
         }).catch(function(error) {
