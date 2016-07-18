@@ -32,7 +32,6 @@
             var range_all = worksheet.getRange();
             var range = range_all.getUsedRange();
 
-            range.load('address');
             range.load('text');
 
             return ctx.sync().then(function() {
@@ -151,9 +150,10 @@
                             var harm_string = [];
                             harm_string = tmp.charAt(0).toUpperCase() + tmp.slice(1);
                         }
-                            var column_char = getCharFromNumber(header + 1);
-                            var sheet_row = k + 1;
-                            addContentToWorksheet(act_worksheet, column_char + sheet_row, harm_string);
+
+                        var column_char = getCharFromNumber(header + 1);
+                        var sheet_row = k + 1;
+                        addContentToWorksheet(act_worksheet, column_char + sheet_row, harm_string);
 
                     }
                 }

@@ -31,7 +31,6 @@
             var range_all = worksheet.getRange();
             var range = range_all.getUsedRange();
 
-            range.load('address');
             range.load('text');
 
             return ctx.sync().then(function() {
@@ -124,12 +123,12 @@
                         }
                     }
 
-                        for (var i = 1; i < range.text.length; i++) {
-                            var trim_string = range.text[i][header].trim();
-                            var column_char = getCharFromNumber(header + 1);
-                            var sheet_row = i + 1;
-                            addContentToWorksheet(act_worksheet, column_char + sheet_row, trim_string);
-                        }
+                    for (var i = 1; i < range.text.length; i++) {
+                        var trim_string = range.text[i][header].trim();
+                        var column_char = getCharFromNumber(header + 1);
+                        var sheet_row = i + 1;
+                        addContentToWorksheet(act_worksheet, column_char + sheet_row, trim_string);
+                    }
                 }
                 window.location = "trim_spaces.html";
             });
