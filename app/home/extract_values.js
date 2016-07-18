@@ -179,9 +179,7 @@ function getColumn() {
                 var target_column = target_tmp.substring(target_tmp.indexOf("!") + 1, target_tmp.indexOf(":"));
             }
             else { //todo not correct to extract until +2 - better solution if only one column is selected
-                //var column_range = worksheet.getRange(target_tmp.substring(target_tmp.indexOf("!") + 1));
                 var target_column = target_tmp.substring(target_tmp.indexOf("!") + 1, target_tmp.indexOf("!") + 2);
-                //var column_range_insert = column_range.getEntireRow();
             }
 
             //if advanced settings are selected, get values for delimiter count
@@ -205,7 +203,6 @@ function getColumn() {
 
             return ctx.sync().then(function() {
                 var header = 0;
-                console.log(column_range_insert);
                 //get column in header from which to extract value
                 for (var k = 0; k < range.text[0].length; k++){
                     if (selected_identifier == range.text[0][k] || selected_identifier == "Column " + getCharFromNumber(k + 1)){
