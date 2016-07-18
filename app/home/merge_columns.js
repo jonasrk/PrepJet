@@ -37,7 +37,6 @@ function backToOne() {
     };
 
 
-
     function checkCheckbox() {
         var selected_table2 = document.getElementById('table2_options').value;
         Excel.run(function (ctx) {
@@ -164,7 +163,6 @@ function backToOne() {
                         addNewCheckboxToContainer ("Column " + colchar, "reference_column_checkbox" ,"checkboxes_variables");
                     }
                 }
-
                 $('#checkbox_all').click(checkCheckbox);
             });
 
@@ -220,6 +218,7 @@ function backToOne() {
                         document.getElementById(container).appendChild(el);
 
                     }
+
                     $("." + container).Dropdown();
                 });
 
@@ -231,6 +230,12 @@ function backToOne() {
             });
 
         }
+
+        populateReferenceColumnDropdown(selected_table1, "reference_column_checkboxes_1");
+        populateReferenceColumnDropdown(selected_table2, "reference_column_checkboxes_2");
+
+        $('#bt_more').click(addDropdown);
+        $('#bt_remove').click(removeCriteria);
 
         function addDropdown(){
             $('#bt_remove').show();
@@ -279,11 +284,6 @@ function backToOne() {
         }
 
 
-        populateReferenceColumnDropdown(selected_table1, "reference_column_checkboxes_1");
-        populateReferenceColumnDropdown(selected_table2, "reference_column_checkboxes_2");
-
-        $('#bt_more').click(addDropdown);
-        $('#bt_remove').click(removeCriteria);
 
     }
 
