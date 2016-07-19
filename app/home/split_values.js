@@ -152,7 +152,7 @@ function displayFieldDelimiter(){
                 }
                 else {
                     for (var i = 0; i < range.text.length; i++) {
-                        if (range.text[i][header] != "") {
+                        if (range.text[i][header] != "" && range.text[i][header].indexOf(delimiter_type) != -1) {
                             split_array[i] = range.text[i][header].split(delimiter_type);
                             array_length = split_array[i].length;
 
@@ -166,12 +166,12 @@ function displayFieldDelimiter(){
                                 }
 
                                 var str1_tmp = split_array[i][0];
-                                var str2_tmp = split_array[i][count_delimiter];
 
                                 for (var j = 1; j < count_delimiter; j++) {
                                     str1_tmp = str1_tmp.concat(delimiter_type, split_array[i][j]);
                                 }
 
+                                var str2_tmp = split_array[i][count_delimiter];
                                 for (var j = count_delimiter + 1; j < array_length; j++) {
                                     str2_tmp = str2_tmp.concat(delimiter_type, split_array[i][j]);
                                 }
@@ -181,6 +181,9 @@ function displayFieldDelimiter(){
                                 count_delimiter = Number(document.getElementById('delimiter_count_i').value);
                                 max_array_length = 2;
                             }
+                        }
+                        else if (range.text[i][header].indexOf(delimiter_type) == -1) {
+                            split_array[i] = range.text[i][header];
                         }
                     }
                 }
@@ -199,7 +202,7 @@ function displayFieldDelimiter(){
                 //insert splitted parts into new empty columns
                 for (var i = 0; i < range.text.length; i++) {
                     var sheet_row = i + 1;
-                    if (range.text[i][header] != "") {
+                    if (range.text[i][header] != "" && range.text[i][header].indexOf(delimiter_type) != -1) {
                         for(var j = 0; j < split_array[i].length; j++){
                             addContentToWorksheet(act_worksheet, getCharFromNumber(header + 1 + j) + sheet_row, split_array[i][j]);
                         }
