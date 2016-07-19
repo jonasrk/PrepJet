@@ -191,12 +191,15 @@ function displayFieldDelimiter(){
                                 for (var j = 1; j < count_delimiter; j++) {
                                     str1_tmp = str1_tmp.concat(delimiter_type, split_array[i][j]);
                                 }
-                                str1_tmp = str1_tmp + delimiter_type;
 
                                 for (var j = count_delimiter + 1; j < array_length; j++) {
                                     str2_tmp = str2_tmp.concat(delimiter_type, split_array[i][j]);
                                 }
-                                str2_tmp = delimiter_type + str2_tmp;
+
+                                if (keep_delimiter == true) {
+                                    str1_tmp = str1_tmp + delimiter_type;
+                                    str2_tmp = delimiter_type + str2_tmp;
+                                }
 
                                 split_array[i] = [str1_tmp];
                                 split_array[i].push(str2_tmp);

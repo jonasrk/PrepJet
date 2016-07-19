@@ -55,18 +55,14 @@
         <div id="simple_dropdown" class="ms-Dropdown table_simple" tabindex="1">
             <label class="ms-Label">Select conditional variable</label>
             <i class="ms-Dropdown-caretDown ms-Icon ms-Icon--caretDown"></i>
-            <select id="column_simple" class="ms-Dropdown-select">
-                <option value="empty"></option>
-            </select>
+            <select id="column_simple" class="ms-Dropdown-select"></select>
         </div>
 
         <!--dropdown for if condition - advanced-->
         <div id="advanced_dropdown" class="ms-Dropdown dropdown_table_col1" tabindex="1">
             <label class="ms-Label">IF (Select conditional variable)</label>
             <i class="ms-Dropdown-caretDown ms-Icon ms-Icon--caretDown"></i>
-            <select id="column1_options" class="ms-Dropdown-select">
-                <option value="empty"></option>
-            </select>
+            <select id="column1_options" class="ms-Dropdown-select"></select>
         </div>
 
         <!--dropdown for operator-->
@@ -74,7 +70,6 @@
             <label class="ms-Label">Select operator</label>
             <i class="ms-Dropdown-caretDown ms-Icon ms-Icon--caretDown"></i>
             <select id="if_operator" class="ms-Dropdown-select" onchange="displaySimpleBetween()">
-                <option value="empty"></option>
                 <option value="equal">=</option>
                 <option value="smaller"><</option>
                 <option value="greater">></option>
@@ -85,21 +80,12 @@
             </select>
         </div>
 
-        <!--evtl. text field for condition-->
-        <!--div id="delimiter_beginning" class="ms-TextField ms-TextField--placeholder">
-            <label class="ms-Label">Enter condition (lists comma separated)</label>
-            <input id="if_condition" class="ms-TextField-field" type="text" onfocus="setFocus(0)">
-        </div-->
         <div id="delimiter_beginning" class="ms-TextField">
             <label class="ms-Label">Enter condition</label>
             <input id="if_condition" class="ms-TextField-field" type="text">
             <span class="ms-TextField-description">Enter the condition which your column must comply with (values not fitting the rule are marked in red)</span>
         </div>
-        <!--evtl. text field for between condition-->
-        <!--div id="between_beginning" class="ms-TextField ms-TextField--placeholder">
-            <label class="ms-Label">and</label>
-            <input id="if_between_condition" class="ms-TextField-field" type="text" onfocus="setFocus(1)">
-        </div-->
+
         <div id="between_beginning" class="ms-TextField">
             <label class="ms-Label">And</label>
             <input id="if_between_condition" class="ms-TextField-field" type="text">
@@ -110,9 +96,7 @@
         <div id="advanced_dropdown2" class="ms-Dropdown dropdown_table_col2" tabindex="1">
             <label class="ms-Label">THEN (select dependend variable)</label>
             <i class="ms-Dropdown-caretDown ms-Icon ms-Icon--caretDown"></i>
-            <select id="column2_options" class="ms-Dropdown-select">
-                <option value="empty"></option>
-            </select>
+            <select id="column2_options" class="ms-Dropdown-select"></select>
         </div>
 
         <!--dropdown for then operator-->
@@ -120,7 +104,6 @@
             <label class="ms-Label">Select operator</label>
             <i class="ms-Dropdown-caretDown ms-Icon ms-Icon--caretDown"></i>
             <select id="then_operator" class="ms-Dropdown-select" onchange="displayBetween()">
-                <option value="empty"></option>
                 <option value="equal">=</option>
                 <option value="smaller"><</option>
                 <option value="greater">></option>
@@ -131,21 +114,12 @@
             </select>
         </div>
 
-        <!--evtl. text field for Then condition-->
-        <!--div id="delimiter_end" class="ms-TextField ms-TextField--placeholder">
-            <label class="ms-Label">Enter condition to check</label>
-            <input id="then_condition" class="ms-TextField-field" type="text" onfocus="setFocus(2)">
-        </div-->
         <div id="delimiter_end" class="ms-TextField">
             <label class="ms-Label">Condition for "Then" variable</label>
             <input id="then_condition" class="ms-TextField-field" type="text">
             <span class="ms-TextField-description">Enter the condition which your variable in "Then" statement must comply to</span>
         </div>
-        <!--evtl. text field for Then between condition-->
-        <!--div id="betweenand" class="ms-TextField ms-TextField--placeholder">
-            <label class="ms-Label">and</label>
-            <input id="between_and" class="ms-TextField-field" type="text" onfocus="setFocus(3)">
-        </div-->
+
         <div id="betweenand" class="ms-TextField">
             <label class="ms-Label">And</label>
             <input id="between_and" class="ms-TextField-field" type="text">

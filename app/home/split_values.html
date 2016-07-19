@@ -49,27 +49,20 @@
             <div class="ms-Dropdown dropdown_table_col" tabindex="1">
                 <label class="ms-Label">Select column to split</label>
                 <i class="ms-Dropdown-caretDown ms-Icon ms-Icon--caretDown"></i>
-                <select id="column_options" class="ms-Dropdown-select">
-                    <option value="empty"></option>
-                </select>
+                <select id="column_options" class="ms-Dropdown-select"></select>
             </div>
             <!--dropdown for delimiter-->
             <div class="ms-Dropdown dropdown_table" tabindex="1">
                 <label class="ms-Label">Select delimiter</label>
                 <i class="ms-Dropdown-caretDown ms-Icon ms-Icon--caretDown"></i>
                 <select id="delimiter_options" class="ms-Dropdown-select" onchange="displayFieldDelimiter()">
-                    <option value="empty"></option>
                     <option value="comma">Comma</option>
                     <option value="semikolon">Semikolon</option>
                     <option value="whitespace">Whitespace</option>
                     <option value="custom_delimiter">Custom</option>
                 </select>
             </div>
-            <!--evtl. text field for custom delimiter-->
-            <!--div id="delimiter_beginning" class="ms-TextField ms-TextField--placeholder">
-                <label class="ms-Label">Enter custom beginning</label>
-                <input id="delimiter_input" class="ms-TextField-field" type="text">
-            </div-->
+
             <div id="delimiter_beginning" class="ms-TextField">
                 <label class="ms-Label">Custom delimiter</label>
                 <input id="delimiter_input" class="ms-TextField-field" type="text">
@@ -82,11 +75,7 @@
                     <span class="ms-Label">Advanced Settings</span>
                 </label>
             </div>
-            <!--evtl. text field for delimiter count-->
-            <!--div id="delimiter_count" class="ms-TextField ms-TextField--placeholder">
-                <label class="ms-Label">Enter delimiter count, e.g. 3</label>
-                <input id="delimiter_count_i" class="ms-TextField-field" type="text">
-            </div-->
+
             <div id="delimiter_count" class="ms-TextField">
                 <label class="ms-Label">Delimiter count</label>
                 <input id="delimiter_count_i" class="ms-TextField-field" type="text">
@@ -97,7 +86,6 @@
                 <label class="ms-Label">Select direction from which to count</label>
                 <i class="ms-Dropdown-caretDown ms-Icon ms-Icon--caretDown"></i>
                 <select id="delimiter_count_drop" class="ms-Dropdown-select">
-                    <option value="empty"></option>
                     <option value="left">From Left</option>
                     <option value="right">From Right</option>
                 </select>
@@ -114,7 +102,6 @@
                 <label class="ms-Label">Part where to keep delimiter</label>
                 <i class="ms-Dropdown-caretDown ms-Icon ms-Icon--caretDown"></i>
                 <select id="keep_delimiter_drop" class="ms-Dropdown-select">
-                    <option value="empty"></option>
                     <option value="left">In left part</option>
                     <option value="right">In right part</option>
                     <option value="both">In both parts</option>
