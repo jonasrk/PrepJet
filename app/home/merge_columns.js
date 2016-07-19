@@ -184,12 +184,16 @@ function backToOne() {
         var selected_table1 = document.getElementById('table1_options').value; // TODO better reference by ID than name
         var selected_table2 = document.getElementById('table2_options').value; // TODO better reference by ID than name
 
-        function populateReferenceColumnDropdown (table, container) {
+        function populateReferenceColumnDropdown (table, container, divcount) {
 
             //remove potentially existing dropdown options
             var parent = document.getElementById(container);
+            var parentdiv = document.getElementById('addedDropdown' + divcount);
             while (parent.firstChild) {
                 parent.removeChild(parent.firstChild);
+            }
+            while (parentdiv.firstChild) {
+                parentdiv.removeChild(parentdiv.firstChild);
             }
 
             Excel.run(function (ctx) {
@@ -202,6 +206,22 @@ function backToOne() {
                 range.load('text');
 
                 return ctx.sync().then(function() {
+
+                    var sel = document.createElement("select");
+                    sel.id = container;
+                    sel.className = "ms-Dropdown-select";
+
+                    var lab = document.createElement('label');
+                    lab.className = "ms-Label";
+                    lab.setAttribute("for", "addedDropdown" + divcount);
+                    lab.innerHTML = "Select reference column in table " + table;
+
+                    var elemi = document.createElement("i");
+                    elemi.className = "ms-Dropdown-caretDown ms-Icon ms-Icon--caretDown";
+
+                    document.getElementById("addedDropdown" + divcount).appendChild(lab);
+                    document.getElementById("addedDropdown" + divcount).appendChild(elemi);
+                    document.getElementById("addedDropdown" + divcount).appendChild(sel);
 
                     for (var i = 0; i < range.text[0].length; i++) {
 
@@ -231,8 +251,8 @@ function backToOne() {
 
         }
 
-        populateReferenceColumnDropdown(selected_table1, "reference_column_checkboxes_1");
-        populateReferenceColumnDropdown(selected_table2, "reference_column_checkboxes_2");
+        populateReferenceColumnDropdown(selected_table1, "reference_column_checkboxes_1", 1);
+        populateReferenceColumnDropdown(selected_table2, "reference_column_checkboxes_2", 2);
 
         $("#bt_more").unbind('click');
         $('#bt_more').click(addDropdown);
@@ -270,7 +290,7 @@ function backToOne() {
                 }
 
                 document.getElementById("dropdowns_step3").appendChild(div);
-                populateReferenceColumnDropdown(tmp_table, "reference_column_checkboxes_" + j);
+                populateReferenceColumnDropdown(tmp_table, "reference_column_checkboxes_" + j, j);
                 count_drop = count_drop + 1;
             }
         }
