@@ -303,6 +303,9 @@ function backToOne() {
                 parent.removeChild(child);
             }
             count_drop = count_drop - 2;
+            if (count_drop < 3) {
+                $('#bt_remove').hide();
+            }
         }
 
     }
