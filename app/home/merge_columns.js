@@ -234,10 +234,12 @@ function backToOne() {
         populateReferenceColumnDropdown(selected_table1, "reference_column_checkboxes_1");
         populateReferenceColumnDropdown(selected_table2, "reference_column_checkboxes_2");
 
+        $("#bt_more").unbind('click');
         $('#bt_more').click(addDropdown);
         $('#bt_remove').click(removeCriteria);
 
         function addDropdown(){
+            console.log("test");
             $('#bt_remove').show();
             var loop_end = count_drop + 1;
             for (var j = loop_end; j < (loop_end + 2); j++) {
