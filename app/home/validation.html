@@ -86,15 +86,24 @@
         </div>
 
         <!--evtl. text field for condition-->
-        <div id="delimiter_beginning" class="ms-TextField ms-TextField--placeholder">
+        <!--div id="delimiter_beginning" class="ms-TextField ms-TextField--placeholder">
             <label class="ms-Label">Enter condition (lists comma separated)</label>
             <input id="if_condition" class="ms-TextField-field" type="text" onfocus="setFocus(0)">
+        </div-->
+        <div id="delimiter_beginning" class="ms-TextField">
+            <label class="ms-Label">Enter condition</label>
+            <input id="if_condition" class="ms-TextField-field" type="text">
+            <span class="ms-TextField-description">Enter the condition which your column must comply with (values not fitting the rule are marked in red)</span>
         </div>
-
         <!--evtl. text field for between condition-->
-        <div id="between_beginning" class="ms-TextField ms-TextField--placeholder">
+        <!--div id="between_beginning" class="ms-TextField ms-TextField--placeholder">
             <label class="ms-Label">and</label>
             <input id="if_between_condition" class="ms-TextField-field" type="text" onfocus="setFocus(1)">
+        </div-->
+        <div id="between_beginning" class="ms-TextField">
+            <label class="ms-Label">And</label>
+            <input id="if_between_condition" class="ms-TextField-field" type="text">
+            <span class="ms-TextField-description">Enter the upper bound of your between / not between statement</span>
         </div>
 
         <!--dropdown for THEN-->
@@ -123,17 +132,25 @@
         </div>
 
         <!--evtl. text field for Then condition-->
-        <div id="delimiter_end" class="ms-TextField ms-TextField--placeholder">
+        <!--div id="delimiter_end" class="ms-TextField ms-TextField--placeholder">
             <label class="ms-Label">Enter condition to check</label>
             <input id="then_condition" class="ms-TextField-field" type="text" onfocus="setFocus(2)">
+        </div-->
+        <div id="delimiter_end" class="ms-TextField">
+            <label class="ms-Label">Condition for "Then" variable</label>
+            <input id="then_condition" class="ms-TextField-field" type="text">
+            <span class="ms-TextField-description">Enter the condition which your variable in "Then" statement must comply to</span>
         </div>
-
         <!--evtl. text field for Then between condition-->
-        <div id="betweenand" class="ms-TextField ms-TextField--placeholder">
+        <!--div id="betweenand" class="ms-TextField ms-TextField--placeholder">
             <label class="ms-Label">and</label>
             <input id="between_and" class="ms-TextField-field" type="text" onfocus="setFocus(3)">
+        </div-->
+        <div id="betweenand" class="ms-TextField">
+            <label class="ms-Label">And</label>
+            <input id="between_and" class="ms-TextField-field" type="text">
+            <span class="ms-TextField-description">Enter the upper bound of your between / not between statement for the "Then" variable</span>
         </div>
-
         <!--Apply advanced business rule button-->
         <button class="ms-Button" id="apply_advanced">Apply</button>
         <!--Apply simle business rule button-->

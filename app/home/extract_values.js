@@ -180,6 +180,9 @@ function getColumn() {
             }
             else { //todo not correct to extract until +2 - better solution if only one column is selected
                 var target_column = target_tmp.substring(target_tmp.indexOf("!") + 1, target_tmp.indexOf("!") + 2);
+                //var column_tmp = worksheet.getRange(target_tmp.substring(target_tmp.indexOf("!") + 1));
+                //var column_range_insert = column_tmp.getEntireRow();
+                //target column = 0;
             }
 
             //if advanced settings are selected, get values for delimiter count
@@ -200,6 +203,7 @@ function getColumn() {
 
             range_adding_to.load('address');
             range_adding_to.load('text');
+            //column_range_insert.load('address');
 
             return ctx.sync().then(function() {
                 var header = 0;
@@ -212,7 +216,7 @@ function getColumn() {
 
                 //insert empty cell into header column
                 var act_worksheet = ctx.workbook.worksheets.getActiveWorksheet();
-                if (target_column != ""){
+                if (target_column != ""){ //todo use target_tmp != "" and target column != 0
                     var custom_range_address = target_column + 1;
                     var range_insert = ctx.workbook.worksheets.getActiveWorksheet().getRange(custom_range_address);
                     range_insert.insert("Right");
@@ -353,7 +357,7 @@ function getColumn() {
 
                     //get position where to insert extracted value
                     var sheet_row = i + 1;
-                    if (target_column != "") {
+                    if (target_column != "") { //todo change to target_tmp
                         var column_char = target_column
                     }
                     else {
@@ -370,6 +374,7 @@ function getColumn() {
 
 
                     //set position to insert extracted value
+                    //todo difference for target_tmp != "" and else insert entire row or nothing
                     var rangeaddress = column_char + sheet_row;
                     var range_insert = ctx.workbook.worksheets.getActiveWorksheet().getRange(rangeaddress);
                     range_insert.insert("Right");
