@@ -187,11 +187,11 @@ function backToOne() {
         function populateReferenceColumnDropdown (table, container, divcount) {
 
             //remove potentially existing dropdown options
-            var parent = document.getElementById(container);
+            //var parent = document.getElementById(container);
             var parentdiv = document.getElementById('addedDropdown' + divcount);
-            while (parent.firstChild) {
+            /*while (parent.firstChild) {
                 parent.removeChild(parent.firstChild);
-            }
+            }*/
             while (parentdiv.firstChild) {
                 parentdiv.removeChild(parentdiv.firstChild);
             }
@@ -235,7 +235,8 @@ function backToOne() {
                             el.textContent = "Column " + getCharFromNumber(i + 1);
                         }
 
-                        document.getElementById(container).appendChild(el);
+                        //document.getElementById(container).appendChild(el);
+                        sel.appendChild(el);
 
                     }
 
