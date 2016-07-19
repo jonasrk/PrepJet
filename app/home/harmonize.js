@@ -146,7 +146,7 @@
                             }
                         }
                         if (harmo == "oneupper") {
-                            var tmp = range.text[k][header].toLowerCase();
+                            var tmp = range.text[k][header];
                             var harm_string = [];
                             harm_string = tmp.charAt(0).toUpperCase() + tmp.slice(1);
                         }
