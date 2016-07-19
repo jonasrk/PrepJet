@@ -47,7 +47,7 @@
 <div id="content-main">
     <div class="padding">
         <div>
-            <label class="ms-Label">Select the column(s) to screen for inconsistencies</label>
+            <label class="ms-Label">Select the column(s) to be screened for inconsistencies</label>
         </div>
         <div id="checkbox_select_all" class="ms-ChoiceField">
             <input id="checkbox_all" class="ms-ChoiceField-input" type="checkbox">
@@ -57,6 +57,9 @@
         </div>
         <!--container for checkboxes-->
         <div id="checkboxes_columns" class="ms-ChoiceField">
+        </div>
+        <div id="explanation">
+            <label class="ms-Label">PrepJet will highlight empty cells and all column entries that deviate from the data type which occurs most frequently in each column.</p>
         </div>
         <!--split button-->
         <button class="ms-Button" id="inconsistency">Screen</button>

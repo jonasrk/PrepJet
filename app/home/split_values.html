@@ -57,7 +57,7 @@
                 <i class="ms-Dropdown-caretDown ms-Icon ms-Icon--caretDown"></i>
                 <select id="delimiter_options" class="ms-Dropdown-select" onchange="displayFieldDelimiter()">
                     <option value="comma">Comma</option>
-                    <option value="semikolon">Semikolon</option>
+                    <option value="semikolon">Semicolon</option>
                     <option value="whitespace">Whitespace</option>
                     <option value="custom_delimiter">Custom</option>
                 </select>
@@ -77,9 +77,9 @@
             </div>
 
             <div id="delimiter_count" class="ms-TextField">
-                <label class="ms-Label">Delimiter count</label>
+                <label class="ms-Label">Delimiter position</label>
                 <input id="delimiter_count_i" class="ms-TextField-field" type="text">
-                <span class="ms-TextField-description">Enter the number of the delimiter at which to split the text (will result in 2 columns).</span>
+                <span class="ms-TextField-description">Enter the count of the delimiter at which to split the text.</span>
             </div>
             <!--dropdown for delimiter count-->
             <div class="ms-Dropdown delimiter_count_dropdown" tabindex="1">
