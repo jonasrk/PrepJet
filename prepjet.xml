@@ -24,7 +24,7 @@
     <Host Name="Workbook"/>
   </Hosts>
   <DefaultSettings>
-    <SourceLocation DefaultValue="https://localhost:8443/app/home/merge_columns.html" />
+    <SourceLocation DefaultValue="https://localhost:8443/app/home/intro.html" />
   </DefaultSettings>
   <!--EndTaskpaneMode integration -->
 
