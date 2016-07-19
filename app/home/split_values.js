@@ -2,23 +2,13 @@ function displayAdvancedCount() {
     if (document.getElementById('advanced_settings').checked == true) {
         $('#delimiter_count').show();
         $('.delimiter_count_dropdown').show();
-        $('#checkbox_delimiter').show();
     }
     else {
         $('#delimiter_count').hide();
         $('.delimiter_count_dropdown').hide();
-        $('#checkbox_delimiter').hide();
     }
 }
 
-function openDelDrop() {
-    if(document.getElementById('delimiter_checkbox').checked == true) {
-        $('.keep_delimiter_dropdown').show();
-    }
-    else {
-        $('.keep_delimiter_dropdown').hide();
-    }
-}
 
 //display textfield for custom delimiter if selected by user
 function displayFieldDelimiter(){
@@ -67,6 +57,7 @@ function displayFieldDelimiter(){
             var range = range_all.getUsedRange();
 
             range.load('text');
+
             return ctx.sync().then(function() {
                 for (var i = 0; i < range.text[0].length; i++) {
                     var el = document.createElement("option");
@@ -121,7 +112,6 @@ function displayFieldDelimiter(){
                 var count_delimiter = Number(document.getElementById('delimiter_count_i').value);
                 var count_direction = document.getElementById('delimiter_count_drop').value;
             }
-            var keep_delimiter = document.getElementById('delimiter_checkbox').checked;
 
             range.load('text');
             var range_all_adding_to = worksheet.getRange();
@@ -163,18 +153,8 @@ function displayFieldDelimiter(){
                 else {
                     for (var i = 0; i < range.text.length; i++) {
                         if (range.text[i][header] != "") {
-                            if (keep_delimiter == false || (keep_delimiter == true && count_delimiter != 0)) {
-                                split_array[i] = range.text[i][header].split(delimiter_type);
-                                array_length = split_array[i].length;
-                            }
-                            else {
-                                split_array[i] = range.text[i][header].split(delimiter_type);
-                                for (var run = 1; run < split_array[i].length; run++) {
-                                    split_array[i][run - 1] = split_array[i][run - 1] + delimiter_type;
-                                    split_array[i][run] = delimiter_type + split_array[i][run];
-                                }
-                                array_length = split_array[i].length;
-                            }
+                            split_array[i] = range.text[i][header].split(delimiter_type);
+                            array_length = split_array[i].length;
 
                             if (max_array_length < array_length){
                                 max_array_length = array_length;
@@ -194,11 +174,6 @@ function displayFieldDelimiter(){
 
                                 for (var j = count_delimiter + 1; j < array_length; j++) {
                                     str2_tmp = str2_tmp.concat(delimiter_type, split_array[i][j]);
-                                }
-
-                                if (keep_delimiter == true) {
-                                    str1_tmp = str1_tmp + delimiter_type;
-                                    str2_tmp = delimiter_type + str2_tmp;
                                 }
 
                                 split_array[i] = [str1_tmp];
