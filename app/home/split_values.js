@@ -150,7 +150,7 @@ function displayFieldDelimiter(){
 
                 //loop through whole column, create an array with splitted values and get maximum length
                 if (document.getElementById('advanced_settings').checked == false) {
-                    for (var i = 1; i < range.text.length; i++) {
+                    for (var i = 0; i < range.text.length; i++) {
                         if (range.text[i][header] != "") {
                             split_array[i] = range.text[i][header].split(delimiter_type);
                             array_length = split_array[i].length;
@@ -161,7 +161,7 @@ function displayFieldDelimiter(){
                     }
                 }
                 else {
-                    for (var i = 1; i < range.text.length; i++) {
+                    for (var i = 0; i < range.text.length; i++) {
                         if (range.text[i][header] != "") {
                             if (keep_delimiter == false || (keep_delimiter == true && count_delimiter != 0)) {
                                 split_array[i] = range.text[i][header].split(delimiter_type);
@@ -219,7 +219,7 @@ function displayFieldDelimiter(){
                 }
 
                 //insert splitted parts into new empty columns
-                for (var i = 1; i < range.text.length; i++) {
+                for (var i = 0; i < range.text.length; i++) {
                     var sheet_row = i + 1;
                     if (range.text[i][header] != "") {
                         for(var j = 0; j < split_array[i].length; j++){
