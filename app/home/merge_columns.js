@@ -184,63 +184,92 @@ function backToOne() {
         var selected_table1 = document.getElementById('table1_options').value; // TODO better reference by ID than name
         var selected_table2 = document.getElementById('table2_options').value; // TODO better reference by ID than name
 
-        function populateReferenceColumnDropdown (table, container, divcount) {
 
-            //remove potentially existing dropdown options
-            //var parent = document.getElementById(container);
-            var parentdiv = document.getElementById('addedDropdown' + divcount);
-            /*while (parent.firstChild) {
-                parent.removeChild(parent.firstChild);
-            }*/
+        function populateReferenceColumnDropdown (table1, table2, container_tmp) {
+
+            var parentdiv = document.getElementById('dropdowns_step3');
             while (parentdiv.firstChild) {
                 parentdiv.removeChild(parentdiv.firstChild);
             }
 
             Excel.run(function (ctx) {
 
-                var worksheet = ctx.workbook.worksheets.getItem(table);
-                var range_all = worksheet.getRange();
-                var range = range_all.getUsedRange();
+                var worksheet_t1 = ctx.workbook.worksheets.getItem(table1);
+                var range_all_t1 = worksheet_t1.getRange();
+                var range_t1 = range_all_t1.getUsedRange();
 
-                range.load('address');
-                range.load('text');
+                var worksheet_t2 = ctx.workbook.worksheets.getItem(table2);
+                var range_all_t2 = worksheet_t2.getRange();
+                var range_t2 = range_all_t2.getUsedRange();
+
+                range_t1.load('address');
+                range_t1.load('text');
+
+                range_t2.load('address');
+                range_t2.load('text');
 
                 return ctx.sync().then(function() {
 
-                    var sel = document.createElement("select");
-                    sel.id = container;
-                    sel.className = "ms-Dropdown-select";
+                    for (var k = 1; k < (count_drop + 1); k++) {
+                        var container = container_tmp + k;
+                        console.log(container);
+                        var div = document.createElement("div");
+                        div.className = "ms-Dropdown reference_column_checkboxes_" + k;
+                        div.id = "addedDropdown" + k;
 
-                    var lab = document.createElement('label');
-                    lab.className = "ms-Label";
-                    lab.setAttribute("for", "addedDropdown" + divcount);
-                    lab.innerHTML = "Select reference column in table " + table;
+                        var sel = document.createElement("select");
+                        sel.id = container;
+                        sel.className = "ms-Dropdown-select";
 
-                    var elemi = document.createElement("i");
-                    elemi.className = "ms-Dropdown-caretDown ms-Icon ms-Icon--caretDown";
+                        var lab = document.createElement('label');
+                        lab.className = "ms-Label";
+                        lab.setAttribute("for", "addedDropdown" + k);
 
-                    document.getElementById("addedDropdown" + divcount).appendChild(lab);
-                    document.getElementById("addedDropdown" + divcount).appendChild(elemi);
-                    document.getElementById("addedDropdown" + divcount).appendChild(sel);
+                        var elemi = document.createElement("i");
+                        elemi.className = "ms-Dropdown-caretDown ms-Icon ms-Icon--caretDown";
 
-                    for (var i = 0; i < range.text[0].length; i++) {
+                        document.getElementById("dropdowns_step3").appendChild(div);
+                        document.getElementById("addedDropdown" + k).appendChild(lab);
+                        document.getElementById("addedDropdown" + k).appendChild(elemi);
+                        document.getElementById("addedDropdown" + k).appendChild(sel);
 
-                        var el = document.createElement("option");
-                        if (range.text[0][i] != "") {
-                            el.value = range.text[0][i];
-                            el.textContent = range.text[0][i];
+                        if (k % 2 == 0) {
+                            lab.innerHTML = "Select reference column in table " + table2;
+                            for (var i = 0; i < range_t2.text[0].length; i++) {
+                                var el = document.createElement("option");
+                                if (range_t2.text[0][i] != "") {
+                                    el.value = range_t2.text[0][i];
+                                    el.textContent = range_t2.text[0][i];
+                                }
+                                else {
+                                    el.value = "Column " + getCharFromNumber(i + 1);
+                                    el.textContent = "Column " + getCharFromNumber(i + 1);
+                                }
+                                sel.appendChild(el);
+                            }
                         }
                         else {
-                            el.value = "Column " + getCharFromNumber(i + 1);
-                            el.textContent = "Column " + getCharFromNumber(i + 1);
+                            lab.innerHTML = "Select reference column in table " + table1;
+                            for (var i = 0; i < range_t1.text[0].length; i++) {
+                                var el = document.createElement("option");
+                                if (range_t1.text[0][i] != "") {
+                                    el.value = range_t1.text[0][i];
+                                    el.textContent = range_t1.text[0][i];
+                                }
+                                else {
+                                    el.value = "Column " + getCharFromNumber(i + 1);
+                                    el.textContent = "Column " + getCharFromNumber(i + 1);
+                                }
+
+                                sel.appendChild(el);
+                            }
                         }
 
-                        //document.getElementById(container).appendChild(el);
-                        sel.appendChild(el);
+                        document.getElementById("addedDropdown" + k).appendChild(lab);
+                        $("." + container).Dropdown();
 
                     }
 
-                    $("." + container).Dropdown();
                 });
 
             }).catch(function(error) {
@@ -252,49 +281,19 @@ function backToOne() {
 
         }
 
-        populateReferenceColumnDropdown(selected_table1, "reference_column_checkboxes_1", 1);
-        populateReferenceColumnDropdown(selected_table2, "reference_column_checkboxes_2", 2);
+        populateReferenceColumnDropdown(selected_table1, selected_table2, "reference_column_checkboxes_");
 
         $("#bt_more").unbind('click');
         $('#bt_more').click(addDropdown);
         $('#bt_remove').click(removeCriteria);
 
+
         function addDropdown(){
-            console.log("test");
             $('#bt_remove').show();
-            var loop_end = count_drop + 1;
-            for (var j = loop_end; j < (loop_end + 2); j++) {
-                var div = document.createElement("div");
-                div.className = "ms-Dropdown reference_column_checkboxes_" + j;
-                div.id = "addedDropdown" + j;
-
-                var label = document.createElement("label");
-                label.className = "ms-label";
-                label.textContent = "Select reference column in table";
-
-                var i = document.createElement("i");
-                i.className = "ms-Dropdown-caretDown ms-Icon ms-Icon--caretDown";
-
-                var select = document.createElement("select");
-                select.className = "ms-Dropdown-select";
-                select.id = "reference_column_checkboxes_" + j;
-
-                div.appendChild(label);
-                div.appendChild(i);
-                div.appendChild(select);
-
-                if (j % 2 == 0) {
-                    var tmp_table = selected_table2;
-                }
-                else {
-                    var tmp_table = selected_table1;
-                }
-
-                document.getElementById("dropdowns_step3").appendChild(div);
-                populateReferenceColumnDropdown(tmp_table, "reference_column_checkboxes_" + j, j);
-                count_drop = count_drop + 1;
-            }
+            count_drop = count_drop + 2;
+            populateReferenceColumnDropdown(selected_table1, selected_table2, "reference_column_checkboxes_");
         }
+
 
         function removeCriteria() {
             var loop_end = count_drop - 1;
@@ -305,8 +304,6 @@ function backToOne() {
             }
             count_drop = count_drop - 2;
         }
-
-
 
     }
 
