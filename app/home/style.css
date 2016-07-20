@@ -63,3 +63,7 @@ h1 {
 .ms-TextField-description {
     color: #767676;
     font-size: 10px; }
+
+.ms-Dropdown.is-open .ms-Dropdown-items, .ms-Dropdown.ms-Dropdown--open .ms-Dropdown-items {
+    overflow: scroll;
+    top: 60px; }
