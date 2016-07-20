@@ -114,6 +114,10 @@ function getCharFromNumber (number) {
         return 'Z';
     }
 
+    if (number > 26) {
+        return getCharFromNumber(Math.floor(number / 26)) + getCharFromNumber(number % 26);
+    }
+
 }
 
 
