@@ -52,6 +52,7 @@ function displaySimpleBetween(){
             $('#and_cond').click(addAndCondition);
             $('#or_cond').click(addORCondition);
             $('#then_cond').click(addThenCondition);
+            $('#remove_cond').click(removeCondition);
 
 
             Office.context.document.addHandlerAsync("documentSelectionChanged", myIfHandler, function(result){}
@@ -263,16 +264,17 @@ function displaySimpleBetween(){
 
     function addAndCondition (start_var) {
 
+        count_drop += 1;
         var div_head = document.createElement("div");
-        div_head.id = "header";
+        div_head.id = "subhead" + count_drop;
         document.getElementById("condition_holder").appendChild(div_head);
 
         var label = document.createElement("label");
+        label.id = "head" + count_drop;
         label.className = "ms-Label";
         label.innerHTML = "AND";
         div_head.appendChild(label);
 
-        count_drop += 1;
         addDropdown(count_drop);
         fillSimpleColumn();
         addOperator(count_drop);
@@ -286,16 +288,17 @@ function displaySimpleBetween(){
 
     function addORCondition (start_var) {
 
+        count_drop += 1;
         var div_head = document.createElement("div");
-        div_head.id = "header";
+        div_head.id = "subhead" + count_drop;
         document.getElementById("condition_holder").appendChild(div_head);
 
         var label = document.createElement("label");
+        label.id = "head" + count_drop;
         label.className = "ms-Label";
         label.innerHTML = "OR";
         div_head.appendChild(label);
 
-        count_drop += 1;
         addDropdown(count_drop);
         fillSimpleColumn();
         addOperator(count_drop);
@@ -339,6 +342,8 @@ function displaySimpleBetween(){
                 }
 
                 $(".dropdown_table_col2").Dropdown();
+                Office.context.document.settings.set('then_condition_pressed', true);
+
             });
 
         }).catch(function(error) {
@@ -347,6 +352,33 @@ function displaySimpleBetween(){
                 console.log("Debug info: " + JSON.stringify(error.debugInfo));
             }
         });
+
+    }
+
+    function removeCondition() {
+
+        if (Office.context.document.settings.get('then_condition_pressed') == true) {
+            $('#tmp_hide').hide();
+            $('#apply_simple').show();
+            $('#apply_advanced').hide();
+            Office.context.document.settings.set('then_condition_pressed', false);
+        }
+        else {
+            if (count_drop > 1) {
+                var parent = document.getElementById('condition_holder');
+                var child = document.getElementById('condition' + count_drop);
+                var child_head = document.getElementById('subhead' + count_drop);
+
+
+                parent.removeChild(child_head);
+                parent.removeChild(child);
+            }
+            count_drop -= 1;
+        }
+
+        if (count_drop == 1) {
+            $('#remove_cond').hide();
+        }
 
     }
 
