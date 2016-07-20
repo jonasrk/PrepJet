@@ -1,3 +1,7 @@
+function redirectRule() {
+    window.location = "validation.html";
+}
+
 (function () {
     'use strict';
 
@@ -18,6 +22,7 @@
 
             $('#inconsistency').click(inconsistencies);
             $('#checkbox_all').click(checkCheckbox);
+            $('#to_validation').click(redirectRule);
 
         });
     };
