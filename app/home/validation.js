@@ -43,12 +43,15 @@ function displaySimpleBetween(){
             $('#tmp_hide').hide();
             $('#between_beginning').hide();
             $('#remove_cond').hide();
+            $('#apply_advanced').hide();
 
             $(".dropdown_table").Dropdown();
             $(".ms-TextField").TextField();
 
             $('#apply_simple').click(validationSimple);
             $('#and_cond').click(addAndCondition);
+            $('#or_cond').click(addORCondition);
+            $('#then_cond').click(addThenCondition);
 
 
             Office.context.document.addHandlerAsync("documentSelectionChanged", myIfHandler, function(result){}
@@ -278,6 +281,73 @@ function displaySimpleBetween(){
         $("." + cont_tmp).Dropdown();
         addTextField(count_drop);
         $('#remove_cond').show();
+    }
+
+
+    function addORCondition (start_var) {
+
+        var div_head = document.createElement("div");
+        div_head.id = "header";
+        document.getElementById("condition_holder").appendChild(div_head);
+
+        var label = document.createElement("label");
+        label.className = "ms-Label";
+        label.innerHTML = "OR";
+        div_head.appendChild(label);
+
+        count_drop += 1;
+        addDropdown(count_drop);
+        fillSimpleColumn();
+        addOperator(count_drop);
+
+        var cont_tmp = "dropdown_table" + count_drop;
+        $("." + cont_tmp).Dropdown();
+        addTextField(count_drop);
+        $('#remove_cond').show();
+    }
+
+
+    function addThenCondition () {
+
+        $('#tmp_hide').show();
+        $('#remove_cond').show();
+        $('#apply_simple').hide();
+        $('#apply_advanced').show();
+        $('#betweenand').hide();
+
+        Excel.run(function (ctx) {
+
+            var worksheet = ctx.workbook.worksheets.getActiveWorksheet();
+            var range_all = worksheet.getRange();
+            var range = range_all.getUsedRange();
+            range.load('text');
+
+            return ctx.sync().then(function() {
+
+                for (var i = 0; i < range.text[0].length; i++) {
+                    var el = document.createElement("option");
+                    if (range.text[0][i] != "") {
+                            el.value = range.text[0][i];
+                            el.textContent = range.text[0][i];
+                        }
+                        else {
+                            el.value = "Column " + getCharFromNumber(i + 1);
+                            el.textContent = "Column " + getCharFromNumber(i + 1);
+                        }
+
+                    document.getElementById('column2_options').appendChild(el);
+                }
+
+                $(".dropdown_table_col2").Dropdown();
+            });
+
+        }).catch(function(error) {
+            console.log("Error: " + error);
+            if (error instanceof OfficeExtension.Error) {
+                console.log("Debug info: " + JSON.stringify(error.debugInfo));
+            }
+        });
+
     }
 
 
