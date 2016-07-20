@@ -138,6 +138,24 @@ function addOperator(k) {
 }
 
 
+function addTextField(k) {
+    var div_drop = document.createElement("div");
+    div_drop.className = "ms-TextField";
+    div_drop.id = "delimiter_beginning" + k;
+    document.getElementById('condition' + k).appendChild(div_drop);
+
+    var lab = document.createElement('label');
+    lab.className = "ms-Label";
+    lab.innerHTML = "Enter condition";
+    div_drop.appendChild(lab);
+
+    var input = document.createElement("input");
+    input.id = "if_condition" + k;
+    input.className = "ms-TextField-field";
+    input.type = "text";
+    div_drop.appendChild(input);
+}
+
 
 function getCharFromNumber (number) {
 

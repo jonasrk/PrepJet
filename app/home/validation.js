@@ -42,6 +42,7 @@ function displaySimpleBetween(){
 
             $('#tmp_hide').hide();
             $('#between_beginning').hide();
+            $('#remove_cond').hide();
 
             $(".dropdown_table").Dropdown();
             $(".ms-TextField").TextField();
@@ -258,12 +259,25 @@ function displaySimpleBetween(){
 
 
     function addAndCondition (start_var) {
+
+        var div_head = document.createElement("div");
+        div_head.id = "header";
+        document.getElementById("condition_holder").appendChild(div_head);
+
+        var label = document.createElement("label");
+        label.className = "ms-Label";
+        label.innerHTML = "AND";
+        div_head.appendChild(label);
+
         count_drop += 1;
         addDropdown(count_drop);
         fillSimpleColumn();
         addOperator(count_drop);
+
         var cont_tmp = "dropdown_table" + count_drop;
         $("." + cont_tmp).Dropdown();
+        addTextField(count_drop);
+        $('#remove_cond').show();
     }
 
 
