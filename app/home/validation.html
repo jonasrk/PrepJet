@@ -60,7 +60,7 @@
 
             <!--dropdown for operator-->
             <div class="ms-Dropdown dropdown_table" tabindex="1">
-                <label class="ms-Label">is (select operator)</label>
+                <label class="ms-Label">Select operator</label>
                 <i class="ms-Dropdown-caretDown ms-Icon ms-Icon--caretDown"></i>
                 <select id="if_operator" class="ms-Dropdown-select" onchange="displaySimpleBetween()">
                     <option value="equal">=</option>
@@ -85,13 +85,19 @@
                 <span class="ms-TextField-description">Enter the upper bound of your between / not between statement</span>
             </div>
             <!--button class="ms-Button" id="add_cond">Add condition</button-->
-            <button class="ms-Button" id="apply_simple">Apply</button>
-            <div id="explanation">
-                <label class="ms-Label">Optional: Select additional condition</label><br>
-                <button class="ms-Button" id="and_cond">AND</button>
-                <button class="ms-Button" id="or_cond">OR</button>
-                <button class="ms-Button" id="then_cond">THEN</button>
-            </div>
+            <label class="ms-Label">Optional: Select additional condition</label>
+            <table>
+                <tr>
+                    <td class="tablecol1">
+                        <button class="ms-Button_small" id="and_cond">AND</button>
+                        <button class="ms-Button_small" id="or_cond">OR</button>
+                        <button class="ms-Button_small" id="then_cond">THEN</button>
+                    </td>
+                    <td>
+                        <button class="ms-Button" id="apply_simple">Apply</button>
+                    </td>
+                </tr>
+            </table>
         </div>
 
         <div id="tmp_hide">

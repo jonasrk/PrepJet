@@ -38,6 +38,17 @@ h1 {
     min-width: 40px;
     padding: 4px 10px 6px; }
 
+.ms-Button_small {
+    color: #333;
+    font-family: 'Segoe UI Regular WestEuropean','Segoe UI','Segoe WP',Tahoma,Arial,sans-serif;
+    font-size: 12px;
+    font-weight: 400;
+    background-color: #CBCBCB;
+    border: 1px solid #767676;
+    height: 32px;
+    min-width: 30px;
+    padding: 4px 10px 6px; }
+
 .ms-Dialog.ms-Dialog--lgHeader .ms-Dialog-subText, .ms-Dropdown {
     font-size: 12px; }
 
@@ -68,3 +79,6 @@ h1 {
 .ms-Dropdown.is-open .ms-Dropdown-items, .ms-Dropdown.ms-Dropdown--open .ms-Dropdown-items {
     overflow: scroll;
     top: 60px; }
+
+.tablecol1 {
+    width: 85%; }
