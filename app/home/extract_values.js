@@ -122,8 +122,8 @@ function getColumn() {
                         el.textContent = range.text[0][i];
                     }
                     else {
-                        el.value = "Column " + getCharFromNumber(i + 1);
-                        el.textContent = "Column " + getCharFromNumber(i + 1);
+                        el.value = "Column " + getCharFromNumber(i);
+                        el.textContent = "Column " + getCharFromNumber(i - 1);
                     }
                     document.getElementById("column1_options").appendChild(el);
                 }
@@ -210,7 +210,7 @@ function getColumn() {
                 var header = 0;
                 //get column in header from which to extract value
                 for (var k = 0; k < range.text[0].length; k++){
-                    if (selected_identifier == range.text[0][k] || selected_identifier == "Column " + getCharFromNumber(k + 1)){
+                    if (selected_identifier == range.text[0][k] || selected_identifier == "Column " + getCharFromNumber(k)){
                         header = k;
                     }
                 }
@@ -223,7 +223,7 @@ function getColumn() {
                     range_insert.insert("Right");
                 }
                 else if (target_tmp == ""){
-                    var rangeaddress = getCharFromNumber(header + 2) + 1;
+                    var rangeaddress = getCharFromNumber(header + 1) + 1;
                     var range_insert = ctx.workbook.worksheets.getActiveWorksheet().getRange(rangeaddress);
                     range_insert.insert("Right");
                 }
@@ -366,7 +366,7 @@ function getColumn() {
                         var column_char = target_column;
                     }
                     else {
-                        var column_char = getCharFromNumber(header + 2);
+                        var column_char = getCharFromNumber(header + 1);
                     }
 
                     //get value to extract

@@ -41,7 +41,7 @@
                             document.getElementById(range.text[0][i]).checked = true;
                         }
                         else {
-                            document.getElementById("Column " + getCharFromNumber(i + 1)).checked = true;
+                            document.getElementById("Column " + getCharFromNumber(i)).checked = true;
                         }
                     }
                 }
@@ -51,7 +51,7 @@
                             document.getElementById(range.text[0][i]).checked = false;
                         }
                         else {
-                            document.getElementById("Column " + getCharFromNumber(i + 1)).checked = false;
+                            document.getElementById("Column " + getCharFromNumber(i)).checked = false;
                         }
                     }
                 }
@@ -83,7 +83,7 @@
                         addNewCheckboxToContainer (range.text[0][i], "column_checkbox" ,"checkboxes_columns");
                     }
                     else {
-                        var colchar = getCharFromNumber(i + 1);
+                        var colchar = getCharFromNumber(i);
                         addNewCheckboxToContainer ("Column " + colchar, "column_checkbox" ,"checkboxes_columns");
                     }
                 }
@@ -121,7 +121,7 @@
 
                 for (var run = 0; run < checked_checkboxes.length; run++) {
                     for (var k = 0; k < range.text[0].length; k++) {
-                        if (checked_checkboxes[run].id == range.text[0][k] || checked_checkboxes[run].id == "Column " + getCharFromNumber(k+1)){
+                        if (checked_checkboxes[run].id == range.text[0][k] || checked_checkboxes[run].id == "Column " + getCharFromNumber(k)){
                             header = k;
                             break;
                         }
@@ -151,7 +151,7 @@
                             harm_string = tmp.charAt(0).toUpperCase() + tmp.slice(1);
                         }
 
-                        var column_char = getCharFromNumber(header + 1);
+                        var column_char = getCharFromNumber(header);
                         var sheet_row = k + 1;
                         addContentToWorksheet(act_worksheet, column_char + sheet_row, harm_string);
 
