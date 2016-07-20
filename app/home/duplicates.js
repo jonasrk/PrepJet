@@ -244,7 +244,7 @@
 
                     for (var run = 0; run < dup_length; run++) {
                         for (var runcol = 0; runcol < duplicates[0].length; runcol++) {
-                            var columnchar = getCharFromNumber(runcol + 1);
+                            var columnchar = getCharFromNumber(runcol);
                             addContentToWorksheet(worksheet, columnchar + sheet_row, duplicates[run][runcol][0]);
                             duplicates[run][runcol].push(columnchar + sheet_row);
                         }
