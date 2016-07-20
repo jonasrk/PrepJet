@@ -46,45 +46,49 @@
 </div>
 <div id="content-main">
     <div class="padding">
-        <div id="explanation">
-            <label class="ms-Label">PrepJet will highlight data entries that do not fulfill this condition.</p>
+        <div id="condition_holder">
+            <div id="explanation">
+                <label class="ms-Label">PrepJet will highlight data entries that do not fulfill this condition.</p>
+            </div>
+
+            <div id="condition1">
+            <!--dropdown for condition - simple -->
+                <div id="simple_dropdown" class="ms-Dropdown table_simple1" tabindex="1">
+                    <label class="ms-Label">Select column</label>
+                    <i class="ms-Dropdown-caretDown ms-Icon ms-Icon--caretDown"></i>
+                    <select id="column_simple1" class="ms-Dropdown-select"></select>
+                </div>
+
+                <!--dropdown for operator-->
+                <div class="ms-Dropdown dropdown_table" tabindex="1">
+                    <label class="ms-Label">Select operator</label>
+                    <i class="ms-Dropdown-caretDown ms-Icon ms-Icon--caretDown"></i>
+                    <select id="if_operator" class="ms-Dropdown-select" onchange="displaySimpleBetween()">
+                        <option value="equal">=</option>
+                        <option value="smaller"><</option>
+                        <option value="greater">></option>
+                        <option value="inequal">!=</option>
+                        <option value="between">between</option>
+                        <option value="notbetween">not between</option>
+                        <option value="inlist">in (list)</option>
+                    </select>
+                </div>
+
+                <div id="delimiter_beginning" class="ms-TextField">
+                    <label class="ms-Label">Enter condition</label>
+                    <input id="if_condition" class="ms-TextField-field" type="text">
+                    <span class="ms-TextField-description">Enter the condition which your column must comply with (values not fitting the rule are marked in red)</span>
+                </div>
+
+                <div id="between_beginning" class="ms-TextField">
+                    <label class="ms-Label">And</label>
+                    <input id="if_between_condition" class="ms-TextField-field" type="text">
+                    <span class="ms-TextField-description">Enter the upper bound of your between / not between statement</span>
+                </div>
+                <!--button class="ms-Button" id="add_cond">Add condition</button-->
+            </div>
         </div>
-
-        <div id="condition1">
-        <!--dropdown for condition - simple -->
-            <div id="simple_dropdown" class="ms-Dropdown table_simple" tabindex="1">
-                <label class="ms-Label">Select column</label>
-                <i class="ms-Dropdown-caretDown ms-Icon ms-Icon--caretDown"></i>
-                <select id="column_simple" class="ms-Dropdown-select"></select>
-            </div>
-
-            <!--dropdown for operator-->
-            <div class="ms-Dropdown dropdown_table" tabindex="1">
-                <label class="ms-Label">Select operator</label>
-                <i class="ms-Dropdown-caretDown ms-Icon ms-Icon--caretDown"></i>
-                <select id="if_operator" class="ms-Dropdown-select" onchange="displaySimpleBetween()">
-                    <option value="equal">=</option>
-                    <option value="smaller"><</option>
-                    <option value="greater">></option>
-                    <option value="inequal">!=</option>
-                    <option value="between">between</option>
-                    <option value="notbetween">not between</option>
-                    <option value="inlist">in (list)</option>
-                </select>
-            </div>
-
-            <div id="delimiter_beginning" class="ms-TextField">
-                <label class="ms-Label">Enter condition</label>
-                <input id="if_condition" class="ms-TextField-field" type="text">
-                <span class="ms-TextField-description">Enter the condition which your column must comply with (values not fitting the rule are marked in red)</span>
-            </div>
-
-            <div id="between_beginning" class="ms-TextField">
-                <label class="ms-Label">And</label>
-                <input id="if_between_condition" class="ms-TextField-field" type="text">
-                <span class="ms-TextField-description">Enter the upper bound of your between / not between statement</span>
-            </div>
-            <!--button class="ms-Button" id="add_cond">Add condition</button-->
+        <div id="buttons">
             <label class="ms-Label">Optional: Select additional condition</label>
             <table>
                 <tr>

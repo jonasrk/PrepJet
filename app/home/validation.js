@@ -1,29 +1,3 @@
-//display fields for advanced rule
-function displayAdvanced(){
-    $('#simple_button').show();
-    $('#simple_dropdown').hide();
-    $('#advanced_button').hide();
-    $('#advanced_dropdown').show();
-    $('#advanced_dropdown2').show();
-    $('#then_op_drop').show();
-    $('#delimiter_end').show();
-    $('#apply_advanced').show();
-    $('#apply_simple').hide();
-}
-
-//display fields for simple rule
-function displaySimple() {
-            $('#advanced_button').hide();
-            $('#simple_button').hide();
-            $('#simple_dropdown').show();
-            $('#advanced_dropdown').hide();
-            $('#advanced_dropdown2').hide();
-            $('#then_op_drop').hide();
-            $('#delimiter_end').hide();
-            $('#apply_advanced').hide();
-            $('#apply_advanced').show();
-}
-
 //show textfield for ending delimiter if custom is selected
 function displayBetween(){
     if(document.getElementById('then_operator').value == "between" || document.getElementById('then_operator').value == "notbetween") {
@@ -51,7 +25,7 @@ function displaySimpleBetween(){
 
 (function () {
     'use strict';
-
+    var count_drop = 1;
     // The initialize function must be run each time a new page is loaded
     Office.initialize = function (reason) {
         jQuery(document).ready(function () {
@@ -67,25 +41,13 @@ function displaySimpleBetween(){
             fillSimpleColumn();
 
             $('#tmp_hide').hide();
-            //$('#simple_button').hide();
-            //$('#advanced_dropdown').hide();
-            //$('#advanced_dropdown2').hide();
-            //$('#then_op_drop').hide();
-            //$('#delimiter_end').hide();
-            //$('#apply_advanced').hide();
-
-            //fillColumn();
-            //$('#advanced_button').click(displayAdvanced);
-            //$('#simple_button').click(displaySimple);
-
-            //$('#betweenand').hide();
             $('#between_beginning').hide();
 
             $(".dropdown_table").Dropdown();
             $(".ms-TextField").TextField();
 
-            //$('#apply_advanced').click(validationAdvanced);
             $('#apply_simple').click(validationSimple);
+            $('#and_cond').click(addAndCondition);
 
 
             Office.context.document.addHandlerAsync("documentSelectionChanged", myIfHandler, function(result){}
@@ -139,7 +101,9 @@ function displaySimpleBetween(){
             var range_all = worksheet.getRange();
             var range = range_all.getUsedRange();
             range.load('text');
+
             return ctx.sync().then(function() {
+
                 for (var i = 0; i < range.text[0].length; i++) {
                     var el = document.createElement("option");
                     if (range.text[0][i] != "") {
@@ -150,10 +114,11 @@ function displaySimpleBetween(){
                             el.value = "Column " + getCharFromNumber(i + 1);
                             el.textContent = "Column " + getCharFromNumber(i + 1);
                         }
-                    document.getElementById("column_simple").appendChild(el);
-                }
 
-                $(".table_simple").Dropdown();
+                    document.getElementById("column_simple" + count_drop).appendChild(el);
+                }
+                var cont_tmp = "table_simple" + count_drop;
+                $("." + cont_tmp).Dropdown();
             });
 
         }).catch(function(error) {
@@ -164,54 +129,6 @@ function displaySimpleBetween(){
         });
 
     }
-
-    function fillColumn(){
-
-        Excel.run(function (ctx) {
-
-            var worksheet = ctx.workbook.worksheets.getActiveWorksheet();
-            var range_all = worksheet.getRange();
-            var range = range_all.getUsedRange();
-            range.load('text');
-            return ctx.sync().then(function() {
-                for (var i = 0; i < range.text[0].length; i++) {
-                    var el = document.createElement("option");
-                    if (range.text[0][i] != "") {
-                            el.value = range.text[0][i];
-                            el.textContent = range.text[0][i];
-                        }
-                        else {
-                            el.value = "Column " + getCharFromNumber(i + 1);
-                            el.textContent = "Column " + getCharFromNumber(i + 1);
-                        }
-                    document.getElementById("column1_options").appendChild(el);
-                }
-
-                for (var i = 0; i < range.text[0].length; i++) {
-                    var el = document.createElement("option");
-                    if (range.text[0][i] != "") {
-                            el.value = range.text[0][i];
-                            el.textContent = range.text[0][i];
-                        }
-                        else {
-                            el.value = "Column " + getCharFromNumber(i + 1);
-                            el.textContent = "Column " + getCharFromNumber(i + 1);
-                        }
-                    document.getElementById("column2_options").appendChild(el);
-                }
-                $(".dropdown_table_col1").Dropdown();
-                $(".dropdown_table_col2").Dropdown();
-            });
-
-        }).catch(function(error) {
-            console.log("Error: " + error);
-            if (error instanceof OfficeExtension.Error) {
-                console.log("Debug info: " + JSON.stringify(error.debugInfo));
-            }
-        });
-
-    }
-
 
     //validation when simple rule is created
     function validationSimple() {
@@ -220,7 +137,7 @@ function displaySimpleBetween(){
             var worksheet = ctx.workbook.worksheets.getActiveWorksheet();
             var range_all = worksheet.getRange();
             var range = range_all.getUsedRange();
-            var selected_identifier = document.getElementById('column_simple').value;
+            var selected_identifier = document.getElementById('column_simple1').value;
 
 
             if (document.getElementById('if_operator').value == "inlist") {
@@ -252,7 +169,6 @@ function displaySimpleBetween(){
                     var ifbetweencondition = Number(document.getElementById('if_between_condition').value);
                 }
             }
-
 
             //get used range in active Sheet
             range.load('text');
@@ -338,6 +254,16 @@ function displaySimpleBetween(){
                 console.log("Debug info: " + JSON.stringify(error.debugInfo));
             }
         });
+    }
+
+
+    function addAndCondition (start_var) {
+        count_drop += 1;
+        addDropdown(count_drop);
+        fillSimpleColumn();
+        addOperator(count_drop);
+        var cont_tmp = "dropdown_table" + count_drop;
+        $("." + cont_tmp).Dropdown();
     }
 
 
