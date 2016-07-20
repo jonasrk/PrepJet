@@ -66,23 +66,25 @@ function displaySimpleBetween(){
             app.initialize();
             fillSimpleColumn();
 
-            $('#simple_button').hide();
-            $('#advanced_dropdown').hide();
-            $('#advanced_dropdown2').hide();
-            $('#then_op_drop').hide();
-            $('#delimiter_end').hide();
-            $('#apply_advanced').hide();
+            $('#tmp_hide').hide();
+            //$('#simple_button').hide();
+            //$('#advanced_dropdown').hide();
+            //$('#advanced_dropdown2').hide();
+            //$('#then_op_drop').hide();
+            //$('#delimiter_end').hide();
+            //$('#apply_advanced').hide();
 
-            fillColumn();
-            $('#advanced_button').click(displayAdvanced);
-            $('#simple_button').click(displaySimple);
+            //fillColumn();
+            //$('#advanced_button').click(displayAdvanced);
+            //$('#simple_button').click(displaySimple);
 
-            $('#betweenand').hide();
+            //$('#betweenand').hide();
             $('#between_beginning').hide();
+
             $(".dropdown_table").Dropdown();
             $(".ms-TextField").TextField();
 
-            $('#apply_advanced').click(validationAdvanced);
+            //$('#apply_advanced').click(validationAdvanced);
             $('#apply_simple').click(validationSimple);
 
 
