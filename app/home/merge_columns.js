@@ -1,22 +1,34 @@
 function backToOne() {
     $('#step1').show();
     $('#step2').hide();
+    Office.context.document.settings.set('back_button_pressed', true);
+    Office.context.document.settings.set('populate_new', true);
 }
 
 
 (function () {
     'use strict';
-    var count_drop = 2;
+    var count_drop = 0;
+
     // The initialize function must be run each time a new page is loaded
     Office.initialize = function (reason) {
         jQuery(document).ready(function () {
 
+            //save function to redirect to correct screen after intro
             Office.context.document.settings.set('last_clicked_function', "merge_columns.html");
             if (Office.context.document.settings.get('prepjet_loaded_before') == null) {
                 Office.context.document.settings.set('prepjet_loaded_before', true);
                 Office.context.document.settings.saveAsync();
                 window.location = "intro.html";
             }
+
+
+            Office.context.document.settings.set('back_button_pressed', false);
+            /*if (Office.context.document.settings.get('prepjet_loaded_before') == null) {
+                Office.context.document.settings.set('prepjet_loaded_before', true);
+                Office.context.document.settings.saveAsync();
+                window.location = "intro.html";
+            }*/
 
 
             app.initialize();
@@ -187,9 +199,12 @@ function backToOne() {
 
         function populateReferenceColumnDropdown (table1, table2, container_tmp) {
 
-            var parentdiv = document.getElementById('dropdowns_step3');
-            while (parentdiv.firstChild) {
-                parentdiv.removeChild(parentdiv.firstChild);
+            if (Office.context.document.settings.get('back_button_pressed') == true) {
+                var parentdiv = document.getElementById('dropdowns_step3');
+                while (parentdiv.firstChild) {
+                    parentdiv.removeChild(parentdiv.firstChild);
+                }
+                count_drop = 0;
             }
 
             Excel.run(function (ctx) {
@@ -210,9 +225,14 @@ function backToOne() {
 
                 return ctx.sync().then(function() {
 
-                    for (var k = 1; k < (count_drop + 1); k++) {
+                    if (Office.context.document.settings.get('populate_new') == false) {
+                        var count_tmp = count_drop + 1;
+                    }
+                    else {
+                        var count_tmp = count_drop + 3;
+                    }
+                    for (var k = (count_drop + 1); k < count_tmp; k++) {
                         var container = container_tmp + k;
-                        console.log(container);
                         var div = document.createElement("div");
                         div.className = "ms-Dropdown reference_column_checkboxes_" + k;
                         div.id = "addedDropdown" + k;
@@ -267,9 +287,10 @@ function backToOne() {
 
                         document.getElementById("addedDropdown" + k).appendChild(lab);
                         $("." + container).Dropdown();
-
+                        count_drop = count_drop + 1;
                     }
-
+                    Office.context.document.settings.set('back_button_pressed', false);
+                    Office.context.document.settings.set('populate_new', false);
                 });
 
             }).catch(function(error) {
@@ -290,7 +311,7 @@ function backToOne() {
 
         function addDropdown(){
             $('#bt_remove').show();
-            count_drop = count_drop + 2;
+            Office.context.document.settings.set('populate_new', true);
             populateReferenceColumnDropdown(selected_table1, selected_table2, "reference_column_checkboxes_");
         }
 
@@ -355,6 +376,9 @@ function backToOne() {
 
             range_adding_to.load('address');
             range_adding_to.load('text');
+
+            Office.context.document.settings.set('populate_new', true);
+            Office.context.document.settings.set('back_button_pressed', false);
 
             return ctx.sync().then(function() {
 
