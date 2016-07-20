@@ -24,7 +24,7 @@ h1 {
 #content-main {
     background: #F2F2F2;
     top: 60px;
-    }
+    min-height: 300px; }
 
 .ms-Button {
     color: #333;

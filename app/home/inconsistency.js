@@ -178,9 +178,24 @@
                             tmp2.push(tmp1);
                         }
 
+                        var equal_type_check = 0;
+                        for (var i = 0; i < tmp2.length; i++) {
+                            if (tmp2[i][1] == type_maximum) {
+                                equal_type_check += 1;
+                            }
+                        }
+
                         var color = "red";
                         for (var i = 0; i < tmp2.length; i++) {
                             if (tmp2[i][1] < type_maximum) {
+                                for (var k = 0; k < tmp_type.length; k++) {
+                                    if (tmp2[i][0] == tmp_type[k][0]) {
+                                        highlightCellInWorksheet(worksheet, tmp_type[k][1], color);
+                                    }
+                                }
+                            }
+                            if (tmp2[i][1] == type_maximum && equal_type_check > 1) {
+                                color = getRandomColor();
                                 for (var k = 0; k < tmp_type.length; k++) {
                                     if (tmp2[i][0] == tmp_type[k][0]) {
                                         highlightCellInWorksheet(worksheet, tmp_type[k][1], color);
