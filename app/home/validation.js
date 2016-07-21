@@ -569,7 +569,7 @@ function displaySimpleBetween(){
             var worksheet = ctx.workbook.worksheets.getActiveWorksheet();
             var range_all = worksheet.getRange();
             var range = range_all.getUsedRange();
-            var selected_identifier1 = document.getElementById('column1_options').value;
+            var selected_identifier1 = document.getElementById('column_simple1').value;
             var selected_identifier2 = document.getElementById('column2_options').value;
 
 
@@ -610,8 +610,8 @@ function displaySimpleBetween(){
             }
 
             //get correct list with values entered by user
-            if (document.getElementById('if_operator').value == "inlist") {
-                var in_if_list = document.getElementById('if_condition').value;
+            if (document.getElementById('if_operator1').value == "inlist") {
+                var in_if_list = document.getElementById('if_condition1').value;
                 var splitted_if_list = in_if_list.split(",");
                 for (var run = 0; run < splitted_if_list.length; run ++) {
                     splitted_if_list[run] = splitted_if_list[run].trim();
@@ -624,21 +624,21 @@ function displaySimpleBetween(){
             }
             //get correct value for condition in if statement
             else {
-                if (isNaN(Number(document.getElementById('if_condition').value)) == true) {
-                    var ifcondition = document.getElementById('if_condition').value;
+                if (isNaN(Number(document.getElementById('if_condition1').value)) == true) {
+                    var ifcondition = document.getElementById('if_condition1').value;
                 }
                 else {
-                    var ifcondition = Number(document.getElementById('if_condition').value);
+                    var ifcondition = Number(document.getElementById('if_condition1').value);
                 }
             }
 
             //get correct value in if condition for between/not between 2nd value
-            if (document.getElementById('if_operator').value == "between" || document.getElementById('if_operator').value == "notbetween") {
-                if (isNaN(Number(document.getElementById('if_between_condition').value)) == true) {
-                    var ifbetweencondition = document.getElementById('if_between_condition').value;
+            if (document.getElementById('if_operator1').value == "between" || document.getElementById('if_operator1').value == "notbetween") {
+                if (isNaN(Number(document.getElementById('if_between_condition1').value)) == true) {
+                    var ifbetweencondition = document.getElementById('if_between_condition1').value;
                 }
                 else {
-                    var ifbetweencondition = Number(document.getElementById('if_between_condition').value);
+                    var ifbetweencondition = Number(document.getElementById('if_between_condition1').value);
                 }
             }
 
@@ -698,7 +698,7 @@ function displaySimpleBetween(){
                     var sheet_row = i + 1;
                     var address = getCharFromNumber(header_then + 1) + sheet_row;
 
-                    if (document.getElementById('if_operator').value == "equal") {
+                    if (document.getElementById('if_operator1').value == "equal") {
                         if (range.values[i][header_if] == ifcondition) {
                             if (document.getElementById('then_operator').value == "equal") {
                                 if (range.values[i][header_then] != thencondition) {
@@ -744,7 +744,7 @@ function displaySimpleBetween(){
                         }
                     }
 
-                    if (document.getElementById('if_operator').value == "smaller") {
+                    if (document.getElementById('if_operator1').value == "smaller") {
                         if (range.values[i][header_if] < ifcondition) {
                             if (document.getElementById('then_operator').value == "equal") {
                                 if (range.values[i][header_then] != thencondition) {
@@ -790,7 +790,7 @@ function displaySimpleBetween(){
                         }
                     }
 
-                    if (document.getElementById('if_operator').value == "greater") {
+                    if (document.getElementById('if_operator1').value == "greater") {
                         if (range.values[i][header_if] > ifcondition) {
                             if (document.getElementById('then_operator').value == "equal") {
                                 if (range.values[i][header_then] != thencondition) {
@@ -835,7 +835,7 @@ function displaySimpleBetween(){
                             }
                         }
                     }
-                    if (document.getElementById('if_operator').value == "inequal") {
+                    if (document.getElementById('if_operator1').value == "inequal") {
                         if (range.values[i][header_if] != ifcondition) {
                             if (document.getElementById('then_operator').value == "equal") {
                                 if (range.values[i][header_then] != thencondition) {
@@ -881,7 +881,7 @@ function displaySimpleBetween(){
                         }
                     }
 
-                    if (document.getElementById('if_operator').value == "between") {
+                    if (document.getElementById('if_operator1').value == "between") {
                         if (range.values[i][header_if] > ifcondition && range.values[i][header_if] < ifbetweencondition) {
                             if (document.getElementById('then_operator').value == "equal") {
                                 if (range.values[i][header_then] != thencondition) {
@@ -927,7 +927,7 @@ function displaySimpleBetween(){
                         }
                     }
 
-                    if (document.getElementById('if_operator').value == "notbetween") {
+                    if (document.getElementById('if_operator1').value == "notbetween") {
                         if (range.values[i][header_if] < ifcondition || range.values[i][header_if] > ifbetweencondition) {
                             if (document.getElementById('then_operator').value == "equal") {
                                 if (range.values[i][header_then] != thencondition) {
@@ -973,7 +973,7 @@ function displaySimpleBetween(){
                         }
                     }
 
-                    if (document.getElementById('if_operator').value == "inlist") {
+                    if (document.getElementById('if_operator1').value == "inlist") {
                         for (var run = 0; run < splitted_if_list.length; run++) {
                             if (range.values[i][header_if] == splitted_if_list[run]) {
                                 if (document.getElementById('then_operator').value == "equal") {
