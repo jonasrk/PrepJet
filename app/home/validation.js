@@ -14,11 +14,11 @@ function setFocus(activeID) {
 }
 
 function displaySimpleBetween(){
-    if(document.getElementById('if_operator').value == "between" || document.getElementById('if_operator').value == "notbetween") {
-        $('#between_beginning').show();
+    if(document.getElementById('if_operator1').value == "between" || document.getElementById('if_operator1').value == "notbetween") {
+        $('#between_beginning1').show();
     }
     else {
-        $('#between_beginning').hide();
+        $('#between_beginning1').hide();
     }
 }
 
@@ -207,66 +207,58 @@ function displaySimpleBetween(){
                     for (var i = 1; i < range.text.length; i++) {
 
                         var check_cond = 0;
-                        console.log(document.getElementById('if_operator' + (runcon + 1)).value);
                         if (document.getElementById('if_operator' + (runcon + 1)).value == "equal") {
                             if (range.values[i][col_index] != ifcondition) {
                                 check_cond += 1;
-                                //highlightContentInWorksheet(act_worksheet, address, "red");
                             }
                         }
 
                         if (document.getElementById('if_operator' + (runcon + 1)).value == "smaller") {
                             if (range.values[i][col_index] >= ifcondition) {
                                 check_cond += 1;
-                                //highlightContentInWorksheet(act_worksheet, address, "red");
                             }
                         }
 
                         if (document.getElementById('if_operator' + (runcon + 1)).value == "greater") {
                             if (range.values[i][col_index] <= ifcondition) {
                                 check_cond += 1;
-                                //highlightContentInWorksheet(act_worksheet, address, "red");
                             }
                         }
 
                         if (document.getElementById('if_operator' + (runcon + 1)).value == "inequal") {
                             if (range.values[i][col_index] == ifcondition) {
                                 check_cond += 1;
-                                //highlightContentInWorksheet(act_worksheet, address, "red");
                             }
                         }
 
                         if (document.getElementById('if_operator' + (runcon + 1)).value == "between") {
                             if (range.values[i][col_index] < ifcondition || range.values[i][col_index] > ifbetweencondition) {
                                  check_cond += 1;
-                                 //highlightContentInWorksheet(act_worksheet, address, "red");
                             }
                         }
 
                         if (document.getElementById('if_operator' + (runcon + 1)).value == "notbetween") {
                             if (range.values[i][col_index] > ifcondition && range.values[i][col_index] < ifbetweencondition) {
                                  check_cond += 1;
-                                 //highlightContentInWorksheet(act_worksheet, address, "red");
                             }
                         }
-                        console.log(check_cond);
+
+                        if (document.getElementById('if_operator' + (runcon + 1)).value == "inlist") {
+                            var check = 0;
+                            for (run = 0; run < splitted_list.length; run++) {
+                                if (range.values[i][col_index] == splitted_list[run]) {
+                                     check = 1;
+                                }
+                            }
+                            if (check != 1) {
+                                check_cond += 1;
+                            }
+                        }
 
                         var sheet_row = i + 1;
                         if (check_cond > 0) {
                             for (var k = 0; k < header_if.length; k++) {
                                 var address = getCharFromNumber(header_if[k] + 1) + sheet_row;
-                                highlightContentInWorksheet(act_worksheet, address, "red");
-                            }
-                        }
-                        //todo coorect if in list
-                        if (document.getElementById('if_operator' + (runcon + 1)).value == "inlist") {
-                            var check = 0;
-                            for (run = 0; run < splitted_list.length; run++) {
-                                if (range.values[i][header_if] == splitted_list[run]) {
-                                     check_cond = 1;
-                                }
-                            }
-                            if (check != 1) {
                                 highlightContentInWorksheet(act_worksheet, address, "red");
                             }
                         }
