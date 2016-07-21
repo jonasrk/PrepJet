@@ -13,12 +13,12 @@ function setFocus(activeID) {
     activeSelection = activeID;
 }
 
-function displaySimpleBetween(){
-    if(document.getElementById('if_operator1').value == "between" || document.getElementById('if_operator1').value == "notbetween") {
-        $('#between_beginning1').show();
+function displaySimpleBetween(k){
+    if(document.getElementById('if_operator' + k).value == "between" || document.getElementById('if_operator' + k).value == "notbetween") {
+        $('#between_beginning' + k).show();
     }
     else {
-        $('#between_beginning1').hide();
+        $('#between_beginning' + k).hide();
     }
 }
 
@@ -28,6 +28,7 @@ function displaySimpleBetween(){
     var count_drop = 1;
     var mixed_condition = [];
     mixed_condition.push(1);
+
     // The initialize function must be run each time a new page is loaded
     Office.initialize = function (reason) {
         jQuery(document).ready(function () {
@@ -443,10 +444,14 @@ function displaySimpleBetween(){
         addDropdown(count_drop);
         fillSimpleColumn();
         addOperator(count_drop);
+        addTextField(count_drop);
+        addBetweenField(count_drop);
+        document.getElementById('if_operator' + count_drop).setAttribute("onchange",  "displaySimpleBetween(" + count_drop + ")");
 
         var cont_tmp = "dropdown_table" + count_drop;
         $("." + cont_tmp).Dropdown();
-        addTextField(count_drop);
+
+        $('#between_beginning' + count_drop).hide();
         $('#remove_cond').show();
 
         mixed_condition.push(1);
@@ -499,10 +504,13 @@ function displaySimpleBetween(){
         addDropdown(count_drop);
         fillSimpleColumn();
         addOperator(count_drop);
+        addTextField(count_drop);
+        addBetweenField(count_drop);
+        $('#between_beginning' + count_drop).hide();
 
         var cont_tmp = "dropdown_table" + count_drop;
         $("." + cont_tmp).Dropdown();
-        addTextField(count_drop);
+        document.getElementById('if_operator' + count_drop).setAttribute("onchange",  "displaySimpleBetween(" + count_drop + ")");
         $('#remove_cond').show();
 
         mixed_condition.push(2);

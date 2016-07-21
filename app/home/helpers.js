@@ -99,6 +99,7 @@ function addOperator(k) {
     var sel = document.createElement("select");
     sel.id = "if_operator" + k;
     sel.className = "ms-Dropdown-select";
+    //sel.onchange = displaySimpleBetween(k);
     div_drop.appendChild(sel);
 
     var el1 = document.createElement("option");
@@ -151,6 +152,24 @@ function addTextField(k) {
 
     var input = document.createElement("input");
     input.id = "if_condition" + k;
+    input.className = "ms-TextField-field";
+    input.type = "text";
+    div_drop.appendChild(input);
+}
+
+function addBetweenField(k) {
+    var div_drop = document.createElement("div");
+    div_drop.className = "ms-TextField";
+    div_drop.id = "between_beginning" + k;
+    document.getElementById('condition' + k).appendChild(div_drop);
+
+    var lab = document.createElement('label');
+    lab.className = "ms-Label";
+    lab.innerHTML = "And";
+    div_drop.appendChild(lab);
+
+    var input = document.createElement("input");
+    input.id = "if_between_condition" + k;
     input.className = "ms-TextField-field";
     input.type = "text";
     div_drop.appendChild(input);
