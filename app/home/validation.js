@@ -145,8 +145,8 @@ function displaySimpleBetween(){
                             el.textContent = range.text[0][i];
                         }
                         else {
-                            el.value = "Column " + getCharFromNumber(i + 1);
-                            el.textContent = "Column " + getCharFromNumber(i + 1);
+                            el.value = "Column " + getCharFromNumber(i);
+                            el.textContent = "Column " + getCharFromNumber(i);
                         }
                     document.getElementById("column_simple").appendChild(el);
                 }
@@ -179,8 +179,8 @@ function displaySimpleBetween(){
                             el.textContent = range.text[0][i];
                         }
                         else {
-                            el.value = "Column " + getCharFromNumber(i + 1);
-                            el.textContent = "Column " + getCharFromNumber(i + 1);
+                            el.value = "Column " + getCharFromNumber(i);
+                            el.textContent = "Column " + getCharFromNumber(i);
                         }
                     document.getElementById("column1_options").appendChild(el);
                 }
@@ -192,8 +192,8 @@ function displaySimpleBetween(){
                             el.textContent = range.text[0][i];
                         }
                         else {
-                            el.value = "Column " + getCharFromNumber(i + 1);
-                            el.textContent = "Column " + getCharFromNumber(i + 1);
+                            el.value = "Column " + getCharFromNumber(i);
+                            el.textContent = "Column " + getCharFromNumber(i);
                         }
                     document.getElementById("column2_options").appendChild(el);
                 }
@@ -267,7 +267,7 @@ function displaySimpleBetween(){
 
                 //get column in header for which to check if condition
                 for (var k = 0; k < range.text[0].length; k++){
-                    if (selected_identifier == range.text[0][k] || selected_identifier == "Column " + getCharFromNumber(k + 1)){
+                    if (selected_identifier == range.text[0][k] || selected_identifier == "Column " + getCharFromNumber(k)){
                         header_if = k;
                     }
                 }
@@ -277,7 +277,7 @@ function displaySimpleBetween(){
                 for (var i = 1; i < range.text.length; i++) {
 
                     var sheet_row = i + 1;
-                    var address = getCharFromNumber(header_if + 1) + sheet_row;
+                    var address = getCharFromNumber(header_if) + sheet_row;
 
                     if (document.getElementById('if_operator').value == "equal") {
                         if (range.values[i][header_if] != ifcondition) {
@@ -456,14 +456,14 @@ function displaySimpleBetween(){
 
                 //get column in header for which to check if condition
                 for (var k = 0; k < range.text[0].length; k++){
-                    if (selected_identifier1 == range.text[0][k] || selected_identifier1 == "Column " + getCharFromNumber(k + 1)){
+                    if (selected_identifier1 == range.text[0][k] || selected_identifier1 == "Column " + getCharFromNumber(k)){
                         header_if = k;
                     }
                 }
 
                 //get column in header for which to check then condition
                 for (var k = 0; k < range.text[0].length; k++){
-                    if (selected_identifier2 == range.text[0][k] || selected_identifier2 == "Column " + getCharFromNumber(k + 1)){
+                    if (selected_identifier2 == range.text[0][k] || selected_identifier2 == "Column " + getCharFromNumber(k)){
                         header_then = k;
                     }
                 }
@@ -473,7 +473,7 @@ function displaySimpleBetween(){
                 for (var i = 1; i < range.text.length; i++) {
 
                     var sheet_row = i + 1;
-                    var address = getCharFromNumber(header_then + 1) + sheet_row;
+                    var address = getCharFromNumber(header_then) + sheet_row;
 
                     if (document.getElementById('if_operator').value == "equal") {
                         if (range.values[i][header_if] == ifcondition) {
