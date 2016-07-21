@@ -171,7 +171,7 @@
                 }
 
                 function colorDup(duplicates_input, int) {
-                    var color = 'red';
+                    var color = "#EA7F04";
                     for (var m = 0; m < duplicates_input.length; m++){
                         if (m > 0 && !arraysEqual(duplicates_input[m], duplicates_input[m-1])){
                             // generate new random color

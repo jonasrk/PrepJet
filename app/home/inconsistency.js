@@ -190,7 +190,7 @@ function redirectRule() {
                             }
                         }
 
-                        var color = "red";
+                        var color = "#EA7F04";
                         for (var i = 0; i < tmp2.length; i++) {
                             if (tmp2[i][1] < type_maximum) {
                                 for (var k = 0; k < tmp_type.length; k++) {

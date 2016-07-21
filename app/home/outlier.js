@@ -118,11 +118,11 @@
                             var address = getCharFromNumber(k + 1) + sheet_row;
 
                             if (range.text[j][k] < thrsh_low){
-                                highlightContentInWorksheet(worksheet, address, "red");
+                                highlightContentInWorksheet(worksheet, address, "#EA7F04");
                                 row_vector.push(sheet_row);
                                 data_vector.push(range.text[j]);
                             } else if (range.text[j][k] > thrsh_high){
-                                highlightContentInWorksheet(worksheet, address, "red");
+                                highlightContentInWorksheet(worksheet, address, '#EA7F04');
                                 row_vector.push(sheet_row);
                                 data_vector.push(range.text[j]);
                             }
@@ -164,7 +164,7 @@
                                     var columnchar = getCharFromNumber(runcol + 1);
                                     addContentToWorksheet(worksheet, columnchar + sheet_row, data_vector[run][runcol]);
                                     if (runcol == outliercolumn) {
-                                        highlightContentInWorksheet(worksheet, columnchar + sheet_row, "red");
+                                        highlightContentInWorksheet(worksheet, columnchar + sheet_row, '#EA7F04');
                                     }
                                 }
                                 sheet_row = sheet_row + 1;

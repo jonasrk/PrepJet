@@ -281,37 +281,37 @@ function displaySimpleBetween(){
 
                     if (document.getElementById('if_operator').value == "equal") {
                         if (range.values[i][header_if] != ifcondition) {
-                            highlightContentInWorksheet(act_worksheet, address, "red");
+                            highlightContentInWorksheet(act_worksheet, address, '#EA7F04');
                         }
                     }
 
                     if (document.getElementById('if_operator').value == "smaller") {
                         if (range.values[i][header_if] >= ifcondition) {
-                            highlightContentInWorksheet(act_worksheet, address, "red");
+                            highlightContentInWorksheet(act_worksheet, address, '#EA7F04');
                         }
                     }
 
                     if (document.getElementById('if_operator').value == "greater") {
                         if (range.values[i][header_if] <= ifcondition) {
-                            highlightContentInWorksheet(act_worksheet, address, "red");
+                            highlightContentInWorksheet(act_worksheet, address, '#EA7F04');
                         }
                     }
 
                     if (document.getElementById('if_operator').value == "inequal") {
                         if (range.values[i][header_if] == ifcondition) {
-                             highlightContentInWorksheet(act_worksheet, address, "red");
+                             highlightContentInWorksheet(act_worksheet, address, '#EA7F04');
                         }
                     }
 
                     if (document.getElementById('if_operator').value == "between") {
                         if (range.values[i][header_if] < ifcondition || range.values[i][header_if] > ifbetweencondition) {
-                             highlightContentInWorksheet(act_worksheet, address, "red");
+                             highlightContentInWorksheet(act_worksheet, address, '#EA7F04');
                         }
                     }
 
                     if (document.getElementById('if_operator').value == "notbetween") {
                         if (range.values[i][header_if] > ifcondition && range.values[i][header_if] < ifbetweencondition) {
-                             highlightContentInWorksheet(act_worksheet, address, "red");
+                             highlightContentInWorksheet(act_worksheet, address, '#EA7F04');
                         }
                     }
 
@@ -323,7 +323,7 @@ function displaySimpleBetween(){
                             }
                         }
                         if (check != 1) {
-                            highlightContentInWorksheet(act_worksheet, address, "red");
+                            highlightContentInWorksheet(act_worksheet, address, '#EA7F04');
                         }
                     }
                 }
@@ -479,32 +479,32 @@ function displaySimpleBetween(){
                         if (range.values[i][header_if] == ifcondition) {
                             if (document.getElementById('then_operator').value == "equal") {
                                 if (range.values[i][header_then] != thencondition) {
-                                    highlightContentInWorksheet(act_worksheet, address, "red");
+                                    highlightContentInWorksheet(act_worksheet, address, '#EA7F04');
                                 }
                             }
                             else if (document.getElementById('then_operator').value == "smaller") {
                                 if (range.values[i][header_then] >= thencondition) {
-                                    highlightContentInWorksheet(act_worksheet, address, "red");
+                                    highlightContentInWorksheet(act_worksheet, address, '#EA7F04');
                                 }
                             }
                             else if (document.getElementById('then_operator').value == "greater") {
                                 if (range.values[i][header_then] <= thencondition) {
-                                    highlightContentInWorksheet(act_worksheet, address, "red");
+                                    highlightContentInWorksheet(act_worksheet, address, '#EA7F04');
                                 }
                             }
                             else if (document.getElementById('then_operator').value == "inequal") {
                                 if (range.values[i][header_then] == thencondition) {
-                                    highlightContentInWorksheet(act_worksheet, address, "red");
+                                    highlightContentInWorksheet(act_worksheet, address, '#EA7F04');
                                 }
                             }
                             else if (document.getElementById('then_operator').value == "between") {
                                 if (range.values[i][header_then] < thencondition || range.values[i][header_then] > betweencondition) {
-                                    highlightContentInWorksheet(act_worksheet, address, "red");
+                                    highlightContentInWorksheet(act_worksheet, address, '#EA7F04');
                                 }
                             }
                             else if (document.getElementById('then_operator').value == "notbetween") {
                                 if (range.values[i][header_then] > thencondition && range.values[i][header_then] < betweencondition) {
-                                    highlightContentInWorksheet(act_worksheet, address, "red");
+                                    highlightContentInWorksheet(act_worksheet, address, '#EA7F04');
                                 }
                             }
                             else if (document.getElementById('then_operator').value == "inlist") {
@@ -515,7 +515,7 @@ function displaySimpleBetween(){
                                     }
                                 }
                                 if (check == 0){
-                                    highlightContentInWorksheet(act_worksheet, address, "red");
+                                    highlightContentInWorksheet(act_worksheet, address, '#EA7F04');
                                 }
                             }
                         }
@@ -525,32 +525,32 @@ function displaySimpleBetween(){
                         if (range.values[i][header_if] < ifcondition) {
                             if (document.getElementById('then_operator').value == "equal") {
                                 if (range.values[i][header_then] != thencondition) {
-                                    highlightContentInWorksheet(act_worksheet, address, "red");
+                                    highlightContentInWorksheet(act_worksheet, address, '#EA7F04');
                                 }
                             }
                             else if (document.getElementById('then_operator').value == "smaller") {
                                 if (range.values[i][header_then] >= thencondition) {
-                                    highlightContentInWorksheet(act_worksheet, address, "red");
+                                    highlightContentInWorksheet(act_worksheet, address, '#EA7F04');
                                 }
                             }
                             else if (document.getElementById('then_operator').value == "greater") {
                                 if (range.values[i][header_then] <= thencondition) {
-                                    highlightContentInWorksheet(act_worksheet, address, "red");
+                                    highlightContentInWorksheet(act_worksheet, address, '#EA7F04');
                                 }
                             }
                             else if (document.getElementById('then_operator').value == "inequal") {
                                 if (range.values[i][header_then] == thencondition) {
-                                    highlightContentInWorksheet(act_worksheet, address, "red");
+                                    highlightContentInWorksheet(act_worksheet, address, '#EA7F04');
                                 }
                             }
                             else if (document.getElementById('then_operator').value == "between") {
                                 if (range.values[i][header_then] < thencondition || range.values[i][header_then] > betweencondition) {
-                                    highlightContentInWorksheet(act_worksheet, address, "red");
+                                    highlightContentInWorksheet(act_worksheet, address, '#EA7F04');
                                 }
                             }
                             else if (document.getElementById('then_operator').value == "notbetween") {
                                 if (range.values[i][header_then] > thencondition && range.values[i][header_then] < betweencondition) {
-                                    highlightContentInWorksheet(act_worksheet, address, "red");
+                                    highlightContentInWorksheet(act_worksheet, address, '#EA7F04');
                                 }
                             }
                             else if (document.getElementById('then_operator').value == "inlist") {
@@ -561,7 +561,7 @@ function displaySimpleBetween(){
                                     }
                                 }
                                 if (check == 0){
-                                    highlightContentInWorksheet(act_worksheet, address, "red");
+                                    highlightContentInWorksheet(act_worksheet, address, '#EA7F04');
                                 }
                             }
                         }
@@ -571,32 +571,32 @@ function displaySimpleBetween(){
                         if (range.values[i][header_if] > ifcondition) {
                             if (document.getElementById('then_operator').value == "equal") {
                                 if (range.values[i][header_then] != thencondition) {
-                                    highlightContentInWorksheet(act_worksheet, address, "red");
+                                    highlightContentInWorksheet(act_worksheet, address, '#EA7F04');
                                 }
                             }
                             else if (document.getElementById('then_operator').value == "smaller") {
                                 if (range.values[i][header_then] >= thencondition) {
-                                    highlightContentInWorksheet(act_worksheet, address, "red");
+                                    highlightContentInWorksheet(act_worksheet, address, '#EA7F04');
                                 }
                             }
                             else if (document.getElementById('then_operator').value == "greater") {
                                 if (range.values[i][header_then] <= thencondition) {
-                                    highlightContentInWorksheet(act_worksheet, address, "red");
+                                    highlightContentInWorksheet(act_worksheet, address, '#EA7F04');
                                 }
                             }
                             else if (document.getElementById('then_operator').value == "inequal") {
                                 if (range.values[i][header_then] == thencondition) {
-                                    highlightContentInWorksheet(act_worksheet, address, "red");
+                                    highlightContentInWorksheet(act_worksheet, address, '#EA7F04');
                                 }
                             }
                             else if (document.getElementById('then_operator').value == "between") {
                                 if (range.values[i][header_then] < thencondition || range.values[i][header_then] > betweencondition) {
-                                    highlightContentInWorksheet(act_worksheet, address, "red");
+                                    highlightContentInWorksheet(act_worksheet, address, '#EA7F04');
                                 }
                             }
                             else if (document.getElementById('then_operator').value == "notbetween") {
                                 if (range.values[i][header_then] > thencondition && range.values[i][header_then] < betweencondition) {
-                                    highlightContentInWorksheet(act_worksheet, address, "red");
+                                    highlightContentInWorksheet(act_worksheet, address, '#EA7F04');
                                 }
                             }
                             else if (document.getElementById('then_operator').value == "inlist") {
@@ -607,7 +607,7 @@ function displaySimpleBetween(){
                                     }
                                 }
                                 if (check == 0){
-                                    highlightContentInWorksheet(act_worksheet, address, "red");
+                                    highlightContentInWorksheet(act_worksheet, address, '#EA7F04');
                                 }
                             }
                         }
@@ -616,32 +616,32 @@ function displaySimpleBetween(){
                         if (range.values[i][header_if] != ifcondition) {
                             if (document.getElementById('then_operator').value == "equal") {
                                 if (range.values[i][header_then] != thencondition) {
-                                    highlightContentInWorksheet(act_worksheet, address, "red");
+                                    highlightContentInWorksheet(act_worksheet, address, '#EA7F04');
                                 }
                             }
                             else if (document.getElementById('then_operator').value == "smaller") {
                                 if (range.values[i][header_then] >= thencondition) {
-                                    highlightContentInWorksheet(act_worksheet, address, "red");
+                                    highlightContentInWorksheet(act_worksheet, address, '#EA7F04');
                                 }
                             }
                             else if (document.getElementById('then_operator').value == "greater") {
                                 if (range.values[i][header_then] <= thencondition) {
-                                    highlightContentInWorksheet(act_worksheet, address, "red");
+                                    highlightContentInWorksheet(act_worksheet, address, '#EA7F04');
                                 }
                             }
                             else if (document.getElementById('then_operator').value == "inequal") {
                                 if (range.values[i][header_then] == thencondition) {
-                                    highlightContentInWorksheet(act_worksheet, address, "red");
+                                    highlightContentInWorksheet(act_worksheet, address, '#EA7F04');
                                 }
                             }
                             else if (document.getElementById('then_operator').value == "between") {
                                 if (range.values[i][header_then] < thencondition || range.values[i][header_then] > betweencondition) {
-                                    highlightContentInWorksheet(act_worksheet, address, "red");
+                                    highlightContentInWorksheet(act_worksheet, address, '#EA7F04');
                                 }
                             }
                             else if (document.getElementById('then_operator').value == "notbetween") {
                                 if (range.values[i][header_then] > thencondition && range.values[i][header_then] < betweencondition) {
-                                    highlightContentInWorksheet(act_worksheet, address, "red");
+                                    highlightContentInWorksheet(act_worksheet, address, '#EA7F04');
                                 }
                             }
                             else if (document.getElementById('then_operator').value == "inlist") {
@@ -652,7 +652,7 @@ function displaySimpleBetween(){
                                     }
                                 }
                                 if (check == 0){
-                                    highlightContentInWorksheet(act_worksheet, address, "red");
+                                    highlightContentInWorksheet(act_worksheet, address, '#EA7F04');
                                 }
                             }
                         }
@@ -662,32 +662,32 @@ function displaySimpleBetween(){
                         if (range.values[i][header_if] > ifcondition && range.values[i][header_if] < ifbetweencondition) {
                             if (document.getElementById('then_operator').value == "equal") {
                                 if (range.values[i][header_then] != thencondition) {
-                                    highlightContentInWorksheet(act_worksheet, address, "red");
+                                    highlightContentInWorksheet(act_worksheet, address, '#EA7F04');
                                 }
                             }
                             else if (document.getElementById('then_operator').value == "smaller") {
                                 if (range.values[i][header_then] >= thencondition) {
-                                    highlightContentInWorksheet(act_worksheet, address, "red");
+                                    highlightContentInWorksheet(act_worksheet, address, '#EA7F04');
                                 }
                             }
                             else if (document.getElementById('then_operator').value == "greater") {
                                 if (range.values[i][header_then] <= thencondition) {
-                                    highlightContentInWorksheet(act_worksheet, address, "red");
+                                    highlightContentInWorksheet(act_worksheet, address, '#EA7F04');
                                 }
                             }
                             else if (document.getElementById('then_operator').value == "inequal") {
                                 if (range.values[i][header_then] == thencondition) {
-                                    highlightContentInWorksheet(act_worksheet, address, "red");
+                                    highlightContentInWorksheet(act_worksheet, address, '#EA7F04');
                                 }
                             }
                             else if (document.getElementById('then_operator').value == "between") {
                                 if (range.values[i][header_then] < thencondition || range.values[i][header_then] > betweencondition) {
-                                    highlightContentInWorksheet(act_worksheet, address, "red");
+                                    highlightContentInWorksheet(act_worksheet, address, '#EA7F04');
                                 }
                             }
                             else if (document.getElementById('then_operator').value == "notbetween") {
                                 if (range.values[i][header_then] > thencondition && range.values[i][header_then] < betweencondition) {
-                                    highlightContentInWorksheet(act_worksheet, address, "red");
+                                    highlightContentInWorksheet(act_worksheet, address, '#EA7F04');
                                 }
                             }
                             else if (document.getElementById('then_operator').value == "inlist") {
@@ -698,7 +698,7 @@ function displaySimpleBetween(){
                                     }
                                 }
                                 if (check == 0){
-                                    highlightContentInWorksheet(act_worksheet, address, "red");
+                                    highlightContentInWorksheet(act_worksheet, address, '#EA7F04');
                                 }
                             }
                         }
@@ -708,32 +708,32 @@ function displaySimpleBetween(){
                         if (range.values[i][header_if] < ifcondition || range.values[i][header_if] > ifbetweencondition) {
                             if (document.getElementById('then_operator').value == "equal") {
                                 if (range.values[i][header_then] != thencondition) {
-                                    highlightContentInWorksheet(act_worksheet, address, "red");
+                                    highlightContentInWorksheet(act_worksheet, address, '#EA7F04');
                                 }
                             }
                             else if (document.getElementById('then_operator').value == "smaller") {
                                 if (range.values[i][header_then] >= thencondition) {
-                                    highlightContentInWorksheet(act_worksheet, address, "red");
+                                    highlightContentInWorksheet(act_worksheet, address, '#EA7F04');
                                 }
                             }
                             else if (document.getElementById('then_operator').value == "greater") {
                                 if (range.values[i][header_then] <= thencondition) {
-                                    highlightContentInWorksheet(act_worksheet, address, "red");
+                                    highlightContentInWorksheet(act_worksheet, address, '#EA7F04');
                                 }
                             }
                             else if (document.getElementById('then_operator').value == "inequal") {
                                 if (range.values[i][header_then] == thencondition) {
-                                    highlightContentInWorksheet(act_worksheet, address, "red");
+                                    highlightContentInWorksheet(act_worksheet, address, '#EA7F04');
                                 }
                             }
                             else if (document.getElementById('then_operator').value == "between") {
                                 if (range.values[i][header_then] < thencondition || range.values[i][header_then] > betweencondition) {
-                                    highlightContentInWorksheet(act_worksheet, address, "red");
+                                    highlightContentInWorksheet(act_worksheet, address, '#EA7F04');
                                 }
                             }
                             else if (document.getElementById('then_operator').value == "notbetween") {
                                 if (range.values[i][header_then] > thencondition && range.values[i][header_then] < betweencondition) {
-                                    highlightContentInWorksheet(act_worksheet, address, "red");
+                                    highlightContentInWorksheet(act_worksheet, address, '#EA7F04');
                                 }
                             }
                             else if (document.getElementById('then_operator').value == "inlist") {
@@ -744,7 +744,7 @@ function displaySimpleBetween(){
                                     }
                                 }
                                 if (check == 0){
-                                    highlightContentInWorksheet(act_worksheet, address, "red");
+                                    highlightContentInWorksheet(act_worksheet, address, '#EA7F04');
                                 }
                             }
                         }
@@ -755,32 +755,32 @@ function displaySimpleBetween(){
                             if (range.values[i][header_if] == splitted_if_list[run]) {
                                 if (document.getElementById('then_operator').value == "equal") {
                                     if (range.values[i][header_then] != thencondition) {
-                                        highlightContentInWorksheet(act_worksheet, address, "red");
+                                        highlightContentInWorksheet(act_worksheet, address, '#EA7F04');
                                     }
                                 }
                                 else if (document.getElementById('then_operator').value == "smaller") {
                                     if (range.values[i][header_then] >= thencondition) {
-                                        highlightContentInWorksheet(act_worksheet, address, "red");
+                                        highlightContentInWorksheet(act_worksheet, address, '#EA7F04');
                                     }
                                 }
                                 else if (document.getElementById('then_operator').value == "greater") {
                                     if (range.values[i][header_then] <= thencondition) {
-                                        highlightContentInWorksheet(act_worksheet, address, "red");
+                                        highlightContentInWorksheet(act_worksheet, address, '#EA7F04');
                                     }
                                 }
                                 else if (document.getElementById('then_operator').value == "inequal") {
                                     if (range.values[i][header_then] == thencondition) {
-                                        highlightContentInWorksheet(act_worksheet, address, "red");
+                                        highlightContentInWorksheet(act_worksheet, address, '#EA7F04');
                                     }
                                 }
                                 else if (document.getElementById('then_operator').value == "between") {
                                     if (range.values[i][header_then] < thencondition || range.values[i][header_then] > betweencondition) {
-                                        highlightContentInWorksheet(act_worksheet, address, "red");
+                                        highlightContentInWorksheet(act_worksheet, address, '#EA7F04');
                                     }
                                 }
                                 else if (document.getElementById('then_operator').value == "notbetween") {
                                     if (range.values[i][header_then] > thencondition && range.values[i][header_then] < betweencondition) {
-                                        highlightContentInWorksheet(act_worksheet, address, "red");
+                                        highlightContentInWorksheet(act_worksheet, address, '#EA7F04');
                                     }
                                 }
                                 else if (document.getElementById('then_operator').value == "inlist") {
@@ -791,7 +791,7 @@ function displaySimpleBetween(){
                                         }
                                     }
                                     if (check == 0){
-                                        highlightContentInWorksheet(act_worksheet, address, "red");
+                                        highlightContentInWorksheet(act_worksheet, address, '#EA7F04');
                                     }
                                 }
                             }
