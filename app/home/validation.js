@@ -51,6 +51,7 @@ function displaySimpleBetween(k){
             $('#apply_mixed_simple').hide();
             $('#apply_advanced').hide();
             $('#apply_or_advanced').hide();
+            $('#apply_mixed_advanced').hide();
             $('#apply_or_simple').hide();
 
             $(".dropdown_table").Dropdown();
@@ -65,6 +66,7 @@ function displaySimpleBetween(k){
             $('#remove_cond').click(removeCondition);
             $('#apply_advanced').click(validationAndAdvanced);
             $('#apply_or_advanced').click(validationOrAdvanced);
+            $('#apply_mixed_advanced').click(validationMixedAdvanced);
 
 
             Office.context.document.addHandlerAsync("documentSelectionChanged", myIfHandler, function(result){}
@@ -1588,6 +1590,287 @@ function displaySimpleBetween(k){
                         for (var k = 0; k < header_columns.length; k++) {
                             for (var j = 0; j < header_columns[k].length; j++){
                                 var address = getCharFromNumber(header_columns[k][j] + 1) + sheet_row;
+                                highlightContentInWorksheet(act_worksheet, address, '#EA7F04');
+                            }
+                        }
+                    }
+                }
+                window.location = "validation.html";
+            });
+
+        }).catch(function(error) {
+            console.log("Error: " + error);
+            if (error instanceof OfficeExtension.Error) {
+                console.log("Debug info: " + JSON.stringify(error.debugInfo));
+            }
+        });
+    }
+
+
+    function validationMixedAdvanced() {
+        Excel.run(function (ctx) {
+
+            var worksheet = ctx.workbook.worksheets.getActiveWorksheet();
+            var range_all = worksheet.getRange();
+            var range = range_all.getUsedRange();
+
+            var selected_identifier2 = document.getElementById('column2_options').value;
+
+
+            //get operator applicable for then condition
+            var thenoperator = document.getElementById('then_operator').value;
+            if (document.getElementById('then_operator').value == "equal"){
+                var thenoperator = "=";
+            }
+            else if (document.getElementById('then_operator').value == "smaller"){
+                var thenoperator = "<";
+            }
+            else if (document.getElementById('then_operator').value == "greater"){
+                var thenoperator = ">";
+            }
+            else if (document.getElementById('then_operator').value == "inequal"){
+                var thenoperator = "!=";
+            }
+            else if (document.getElementById('then_operator').value == "between"){
+                var thenoperator = "between";
+            }
+            else if (document.getElementById('then_operator').value == "notbetween") {
+                var thenoperator = "notbetween";
+            }
+            else if (document.getElementById('then_operator').value == "inlist") {
+                var in_then_list = document.getElementById('then_condition').value;
+                var splitted_then_list = in_then_list.split(",");
+                for (var run = 0; run < splitted_then_list.length; run ++) {
+                    splitted_then_list[run] = splitted_then_list[run].trim();
+                }
+                for (var run = 0; run < splitted_then_list.length; run ++) {
+                    if (isNaN(Number(splitted_then_list[run])) != true) {
+                        splitted_then_list[run] = Number(splitted_then_list[run]);
+                    }
+                }
+            }
+            else { //todo useful return value if nothing is selected
+                var thenoperator = 1;
+            }
+
+            //get correct value in then condition
+            if (document.getElementById('then_operator').value != "inlist") {
+                if (isNaN(Number(document.getElementById('then_condition').value)) == true) {
+                    var thencondition = document.getElementById('then_condition').value;
+                }
+                else {
+                    var thencondition = Number(document.getElementById('then_condition').value);
+                }
+            }
+
+            //get correct value in then condition for between/not between 2nd value
+            if (document.getElementById('then_operator').value == "between" || document.getElementById('then_operator').value == "notbetween") {
+                if (isNaN(Number(document.getElementById('between_and').value)) == true) {
+                    var betweencondition = document.getElementById('between_and').value;
+                }
+                else {
+                    var betweencondition = Number(document.getElementById('between_and').value);
+                }
+            }
+
+            //get used range in active Sheet
+            range.load('text');
+            range.load('valueTypes');
+            range.load('values');
+            var range_all_adding_to = worksheet.getRange();
+            var range_adding_to = range_all_adding_to.getUsedRange();
+            range_adding_to.load('address');
+            range_adding_to.load('text');
+
+
+            return ctx.sync().then(function() {
+
+                var act_worksheet = ctx.workbook.worksheets.getActiveWorksheet();
+                var or_index = [];
+                for (var k = 0; k < mixed_condition; k++) {
+                    if (mixed_condition[k] == 2) {
+                        or_index.push(k);
+                    }
+                }
+
+                var and_index = [];
+                var tmp = [0];
+                for (var k = 1; k < mixed_condition.length; k++) {
+                    if (mixed_condition[k] == 2) {
+                        and_index.push(tmp);
+                        tmp = [k];
+                    }
+                    else {
+                        tmp.push(k);
+                    }
+                }
+                and_index.push(tmp);
+
+                var selected_identifier = [];
+                for (var i = 0; i < and_index.length; i++) {
+                    var id_tmp = [];
+                    for (var k = 0; k < and_index[i].length; k++) {
+                        var col_ind = and_index[i][k];
+                        id_tmp.push(document.getElementById('column_simple' + (col_ind + 1)).value);
+                    }
+                    selected_identifier.push(id_tmp);
+                }
+
+                var header_columns = [];
+                for (var i = 0; i < selected_identifier.length;i++) {
+                    var head_tmp = [];
+                    for (var k = 0; k < selected_identifier[i].length; k++){
+                        for (var j = 0; j < range.text[0].length; j++) {
+                            if (selected_identifier[i][k] == range.text[0][j] || selected_identifier == "Column " + getCharFromNumber(j + 1)){
+                                head_tmp.push(j);
+                            }
+                        }
+                    }
+                    header_columns.push(head_tmp);
+                }
+
+                //get column in header for which to check then condition
+                var header_then = 0;
+                for (var k = 0; k < range.text[0].length; k++){
+                    if (selected_identifier2 == range.text[0][k] || selected_identifier2 == "Column " + getCharFromNumber(k + 1)){
+                        header_then = k;
+                    }
+                }
+
+
+                for (var i = 1; i < range.text.length; i++) {
+
+                    var sum_cond = 0;
+                    for (var runcon = 0; runcon < header_columns.length; runcon++){
+
+                        var check_cond = 0;
+                        for (var run = 0; run < header_columns[runcon].length; run++){
+
+                            if (document.getElementById('if_operator' + (and_index[runcon][run] + 1)).value == "inlist") {
+                                var in_list = document.getElementById('if_condition' + (and_index[runcon][run] + 1)).value;
+                                var splitted_list = in_list.split(",");
+                                for (var k = 0; k < splitted_list.length; k++) {
+                                    splitted_list[k] = splitted_list[k].trim();
+                                }
+                                for (var k = 0; k < splitted_list.length; k++) {
+                                    if (isNaN(Number(splitted_list[k])) != true) {
+                                        splitted_list[k] = Number(splitted_list[k]);
+                                    }
+                                }
+                            }
+                            else {
+                                if (isNaN(Number(document.getElementById('if_condition' + (and_index[runcon][run] + 1)).value)) == true) {
+                                    var ifcondition = document.getElementById('if_condition' + (and_index[runcon][run] + 1)).value;
+                                }
+                                else {
+                                    var ifcondition = Number(document.getElementById('if_condition' + (and_index[runcon][run] + 1)).value);
+                                }
+                            }
+
+                            if (document.getElementById('if_operator' + (and_index[runcon][run] + 1)).value == "notbetween" || document.getElementById('if_operator' + (and_index[runcon][run] + 1)).value == "between") {
+                                if (isNaN(Number(document.getElementById('if_between_condition' + (and_index[runcon][run] + 1)).value)) == true) {
+                                    var ifbetweencondition = document.getElementById('if_between_condition' + (and_index[runcon][run] + 1)).value;
+                                }
+                                else {
+                                    var ifbetweencondition = Number(document.getElementById('if_between_condition' + (and_index[runcon][run] + 1)).value);
+                                }
+                            }
+
+                            var col_index = header_columns[runcon][run];
+                            if (document.getElementById('if_operator' + (and_index[runcon][run] + 1)).value == "equal") {
+                                if (range.values[i][col_index] == ifcondition) {
+                                    check_cond += 1;
+                                }
+                            }
+
+                            if (document.getElementById('if_operator' + (and_index[runcon][run] + 1)).value == "smaller") {
+                                if (range.values[i][col_index] < ifcondition) {
+                                    check_cond += 1;
+                                }
+                            }
+
+                            if (document.getElementById('if_operator' + (and_index[runcon][run] + 1)).value == "greater") {
+                                if (range.values[i][col_index] > ifcondition) {
+                                    check_cond += 1;
+                                }
+                            }
+
+                            if (document.getElementById('if_operator' + (and_index[runcon][run] + 1)).value == "inequal") {
+                                if (range.values[i][col_index] != ifcondition) {
+                                    check_cond += 1;
+                                }
+                            }
+
+                            if (document.getElementById('if_operator' + (and_index[runcon][run] + 1)).value == "between") {
+                                if (range.values[i][col_index] > ifcondition && range.values[i][col_index] < ifbetweencondition) {
+                                     check_cond += 1;
+                                }
+                            }
+
+                            if (document.getElementById('if_operator' + (and_index[runcon][run] + 1)).value == "notbetween") {
+                                if (range.values[i][col_index] < ifcondition || range.values[i][col_index] > ifbetweencondition) {
+                                     check_cond += 1;
+                                }
+                            }
+
+                            if (document.getElementById('if_operator' + (and_index[runcon][run] + 1)).value == "inlist") {
+                                var check = 0;
+                                for (var k = 0; k < splitted_list.length; k++) {
+                                    if (range.values[i][col_index] == splitted_list[k]) {
+                                         check = 1;
+                                    }
+                                }
+                                if (check != 1) {
+                                    check_cond += 1;
+                                }
+                            }
+                        }
+
+                        if (check_cond >= header_columns[runcon].length) {
+                            sum_cond += 1;
+                        }
+                    }
+                    if (sum_cond > 0){
+                        var sheet_row = i + 1;
+                        var address = getCharFromNumber(header_then + 1) + sheet_row;
+                        if (document.getElementById('then_operator').value == "equal") {
+                            if (range.values[i][header_then] != thencondition) {
+                                highlightContentInWorksheet(act_worksheet, address, '#EA7F04');
+                            }
+                        }
+                        else if (document.getElementById('then_operator').value == "smaller") {
+                            if (range.values[i][header_then] >= thencondition) {
+                                highlightContentInWorksheet(act_worksheet, address, '#EA7F04');
+                            }
+                        }
+                        else if (document.getElementById('then_operator').value == "greater") {
+                            if (range.values[i][header_then] <= thencondition) {
+                                highlightContentInWorksheet(act_worksheet, address, '#EA7F04');
+                            }
+                        }
+                        else if (document.getElementById('then_operator').value == "inequal") {
+                            if (range.values[i][header_then] == thencondition) {
+                                highlightContentInWorksheet(act_worksheet, address, '#EA7F04');
+                            }
+                        }
+                        else if (document.getElementById('then_operator').value == "between") {
+                            if (range.values[i][header_then] < thencondition || range.values[i][header_then] > betweencondition) {
+                                highlightContentInWorksheet(act_worksheet, address, '#EA7F04');
+                            }
+                        }
+                        else if (document.getElementById('then_operator').value == "notbetween") {
+                            if (range.values[i][header_then] > thencondition && range.values[i][header_then] < betweencondition) {
+                                highlightContentInWorksheet(act_worksheet, address, '#EA7F04');
+                            }
+                        }
+                        else if (document.getElementById('then_operator').value == "inlist") {
+                            var check = 0;
+                            for (var run = 0; run < splitted_then_list.length; run++) {
+                                if (range.values[i][header_then] == splitted_then_list[run]) {
+                                    check = 1;
+                                }
+                            }
+                            if (check == 0){
                                 highlightContentInWorksheet(act_worksheet, address, '#EA7F04');
                             }
                         }
