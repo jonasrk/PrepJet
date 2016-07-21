@@ -66,8 +66,8 @@ function displayFieldDelimiter(){
                         el.textContent = range.text[0][i];
                     }
                     else {
-                        el.value = "Column " + getCharFromNumber(i + 1);
-                        el.textContent = "Column " + getCharFromNumber(i + 1);
+                        el.value = "Column " + getCharFromNumber(i);
+                        el.textContent = "Column " + getCharFromNumber(i);
                     }
                     document.getElementById("column_options").appendChild(el);
                 }
@@ -125,7 +125,7 @@ function displayFieldDelimiter(){
                 //get column number which to split
                 var header = 0;
                 for (var k = 0; k < range.text[0].length; k++){
-                    if (selected_identifier == range.text[0][k] || selected_identifier == "Column " + getCharFromNumber(k + 1)){
+                    if (selected_identifier == range.text[0][k] || selected_identifier == "Column " + getCharFromNumber(k)){
                         header = k;
                     }
                 }
@@ -191,7 +191,7 @@ function displayFieldDelimiter(){
                 //insert empty columns right to split column for splitted parts
                 for (var i = 0; i < range.text.length; i++) {
                     for (var j = 1; j < max_array_length; j++) {
-                        var column_char = getCharFromNumber(header + 2);
+                        var column_char = getCharFromNumber(header + 1);
                         var sheet_row = i + 1;
                         var rangeaddress = column_char + sheet_row;
                         var range_insert = ctx.workbook.worksheets.getActiveWorksheet().getRange(rangeaddress);
@@ -204,7 +204,7 @@ function displayFieldDelimiter(){
                     var sheet_row = i + 1;
                     if (range.text[i][header] != "" && range.text[i][header].indexOf(delimiter_type) != -1) {
                         for(var j = 0; j < split_array[i].length; j++){
-                            addContentToWorksheet(act_worksheet, getCharFromNumber(header + 1 + j) + sheet_row, split_array[i][j]);
+                            addContentToWorksheet(act_worksheet, getCharFromNumber(header + j) + sheet_row, split_array[i][j]);
                         }
                     }
                 }

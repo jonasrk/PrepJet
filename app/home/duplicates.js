@@ -38,7 +38,7 @@
                         addNewCheckboxToContainer (range.text[0][i], "duplicates_column_checkbox" ,"checkboxes_duplicates");
                     }
                     else {
-                        var colchar = getCharFromNumber(i + 1);
+                        var colchar = getCharFromNumber(i);
                         addNewCheckboxToContainer ("Column " + colchar, "duplicates_column_checkbox" ,"checkboxes_duplicates");
                     }
                 }
@@ -71,7 +71,7 @@
                             document.getElementById(range.text[0][i]).checked = true;
                         }
                         else {
-                            document.getElementById("Column " + getCharFromNumber(i + 1)).checked = true;
+                            document.getElementById("Column " + getCharFromNumber(i)).checked = true;
                         }
                     }
                 }
@@ -81,7 +81,7 @@
                             document.getElementById(range.text[0][i]).checked = false;
                         }
                         else {
-                            document.getElementById("Column " + getCharFromNumber(i + 1)).checked = false;
+                            document.getElementById("Column " + getCharFromNumber(i)).checked = false;
                         }
                     }
                 }
@@ -116,7 +116,7 @@
 
                 for (var k = 0; k < range.text[0].length; k++) { // .text[0] is the first row of a range
                     for (var l = 0; l < checked_checkboxes.length; l++) { // TODO throws error if none are checked
-                        if (checked_checkboxes[l].id == range.text[0][k] || checked_checkboxes[l].id == "Column " + getCharFromNumber(k + 1)) {
+                        if (checked_checkboxes[l].id == range.text[0][k] || checked_checkboxes[l].id == "Column " + getCharFromNumber(k)) {
                             columns_to_check.push(k);
                         }
                     }
@@ -129,7 +129,7 @@
                     var this_row = [];
                     for (var j = 0; j < columns_to_check.length; j++) {
                         var row_number = i + 1;
-                        this_row.push([range.text[i][columns_to_check[j]], getCharFromNumber(columns_to_check[j] + 1) + row_number]);
+                        this_row.push([range.text[i][columns_to_check[j]], getCharFromNumber(columns_to_check[j]) + row_number]);
                     }
 
                     strings_to_sort.push(this_row);
@@ -244,7 +244,7 @@
 
                     for (var run = 0; run < dup_length; run++) {
                         for (var runcol = 0; runcol < duplicates[0].length; runcol++) {
-                            var columnchar = getCharFromNumber(runcol + 1);
+                            var columnchar = getCharFromNumber(runcol);
                             addContentToWorksheet(worksheet, columnchar + sheet_row, duplicates[run][runcol][0]);
                             duplicates[run][runcol].push(columnchar + sheet_row);
                         }

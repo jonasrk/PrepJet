@@ -41,8 +41,8 @@
                         el.textContent = range.text[0][i];
                     }
                     else {
-                        el.value = "Column " + getCharFromNumber(i + 1);
-                        el.textContent = "Column " + getCharFromNumber(i + 1);
+                        el.value = "Column " + getCharFromNumber(i);
+                        el.textContent = "Column " + getCharFromNumber(i);
                     }
                     document.getElementById("outlier_column_dropdown").appendChild(el);
 
@@ -77,7 +77,7 @@
                 // iterate over columns
 
                 for (var k = 0; k < range.text[0].length; k++){
-                    if (selected_column == range.text[0][k] || selected_column == "Column " + getCharFromNumber(k + 1)){
+                    if (selected_column == range.text[0][k] || selected_column == "Column " + getCharFromNumber(k)){
 
                         var values = [];
                         var outlier_col = k;
@@ -115,7 +115,7 @@
                         var data_vector = [];
                         for (var j = 1; j < range.text.length; j++){
                             var sheet_row = j + 1;
-                            var address = getCharFromNumber(k + 1) + sheet_row;
+                            var address = getCharFromNumber(k) + sheet_row;
 
                             if (range.text[j][k] < thrsh_low){
                                 highlightContentInWorksheet(worksheet, address, "#EA7F04");
@@ -161,7 +161,7 @@
                             var sheet_row = 2;
                             for (var run = 0; run < data_vector.length; run++) {
                                 for (var runcol = 0; runcol < data_vector[run].length; runcol++) {
-                                    var columnchar = getCharFromNumber(runcol + 1);
+                                    var columnchar = getCharFromNumber(runcol);
                                     addContentToWorksheet(worksheet, columnchar + sheet_row, data_vector[run][runcol]);
                                     if (runcol == outliercolumn) {
                                         highlightContentInWorksheet(worksheet, columnchar + sheet_row, '#EA7F04');

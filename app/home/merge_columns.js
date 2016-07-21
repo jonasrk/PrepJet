@@ -65,7 +65,7 @@ function backToOne() {
                             document.getElementById(range.text[0][i]).checked = true;
                         }
                         else {
-                            document.getElementById("Column " + getCharFromNumber(i + 1)).checked = true;
+                            document.getElementById("Column " + getCharFromNumber(i)).checked = true;
                         }
                     }
                 }
@@ -75,7 +75,7 @@ function backToOne() {
                             document.getElementById(range.text[0][i]).checked = false;
                         }
                         else {
-                            document.getElementById("Column " + getCharFromNumber(i + 1)).checked = false;
+                            document.getElementById("Column " + getCharFromNumber(i)).checked = false;
                         }
                     }
                 }
@@ -171,7 +171,7 @@ function backToOne() {
                         addNewCheckboxToContainer (range.text[0][i], "reference_column_checkbox" ,"checkboxes_variables");
                     }
                     else {
-                        var colchar = getCharFromNumber(i + 1);
+                        var colchar = getCharFromNumber(i);
                         addNewCheckboxToContainer ("Column " + colchar, "reference_column_checkbox" ,"checkboxes_variables");
                     }
                 }
@@ -262,8 +262,8 @@ function backToOne() {
                                     el.textContent = range_t2.text[0][i];
                                 }
                                 else {
-                                    el.value = "Column " + getCharFromNumber(i + 1);
-                                    el.textContent = "Column " + getCharFromNumber(i + 1);
+                                    el.value = "Column " + getCharFromNumber(i);
+                                    el.textContent = "Column " + getCharFromNumber(i);
                                 }
                                 sel.appendChild(el);
                             }
@@ -277,8 +277,8 @@ function backToOne() {
                                     el.textContent = range_t1.text[0][i];
                                 }
                                 else {
-                                    el.value = "Column " + getCharFromNumber(i + 1);
-                                    el.textContent = "Column " + getCharFromNumber(i + 1);
+                                    el.value = "Column " + getCharFromNumber(i);
+                                    el.textContent = "Column " + getCharFromNumber(i);
                                 }
 
                                 sel.appendChild(el);
@@ -391,7 +391,7 @@ function backToOne() {
 
                 for (var runid1 = 0; runid1 < identifier1.length; runid1++) {
                     for (var runheader = 0; runheader < range_adding_to.text[0].length; runheader++){
-                        if (identifier1[runid1] == range_adding_to.text[0][runheader] || identifier1[runid1] == "Column " + getCharFromNumber(runheader + 1)){
+                        if (identifier1[runid1] == range_adding_to.text[0][runheader] || identifier1[runid1] == "Column " + getCharFromNumber(runheader)){
                             column1_ids[runid1] = runheader;
                         }
                     }
@@ -399,7 +399,7 @@ function backToOne() {
 
                 for (var runid2 = 0; runid2 < identifier2.length; runid2++) {
                     for (var runheader = 0; runheader < range.text[0].length; runheader++){
-                        if (identifier2[runid2] == range.text[0][runheader] || identifier2[runid2] == "Column " + getCharFromNumber(runheader + 1)){
+                        if (identifier2[runid2] == range.text[0][runheader] || identifier2[runid2] == "Column " + getCharFromNumber(runheader)){
                             column2_ids[runid2] = runheader;
                         }
                     }
@@ -412,8 +412,8 @@ function backToOne() {
                     var checked_checkboxes = getCheckedBoxes("reference_column_checkbox");
 
                     for (var l = 0; l < checked_checkboxes.length; l++){ // TODO throws error if none are checked
-                        if (checked_checkboxes[l].id == range.text[0][k] || checked_checkboxes[l].id == "Column " + getCharFromNumber(k + 1)){
-                            var column_char = getCharFromNumber(1 + l + range_adding_to.text[0].length);
+                        if (checked_checkboxes[l].id == range.text[0][k] || checked_checkboxes[l].id == "Column " + getCharFromNumber(k)){
+                            var column_char = getCharFromNumber(l + range_adding_to.text[0].length);
 
                             // copy title
                             addContentToWorksheet(worksheet_adding_to, column_char + "1", range.text[0][k]);

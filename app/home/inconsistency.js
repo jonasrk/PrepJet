@@ -46,7 +46,7 @@ function redirectRule() {
                             document.getElementById(range.text[0][i]).checked = true;
                         }
                         else {
-                            document.getElementById("Column " + getCharFromNumber(i + 1)).checked = true;
+                            document.getElementById("Column " + getCharFromNumber(i)).checked = true;
                         }
                     }
                 }
@@ -56,7 +56,7 @@ function redirectRule() {
                             document.getElementById(range.text[0][i]).checked = false;
                         }
                         else {
-                            document.getElementById("Column " + getCharFromNumber(i + 1)).checked = false;
+                            document.getElementById("Column " + getCharFromNumber(i)).checked = false;
                         }
                     }
                 }
@@ -88,7 +88,7 @@ function redirectRule() {
                         addNewCheckboxToContainer (range.text[0][i], "column_checkbox" ,"checkboxes_columns");
                     }
                     else {
-                        var colchar = getCharFromNumber(i + 1);
+                        var colchar = getCharFromNumber(i);
                         addNewCheckboxToContainer ("Column " + colchar, "column_checkbox" ,"checkboxes_columns");
                     }
                 }
@@ -129,7 +129,7 @@ function redirectRule() {
                     check[run] = 0;
                     var type_maximum = 0;
                     for (var k = 0; k < range.text[0].length; k++) {
-                        if (checked_checkboxes[run].id == range.text[0][k] || checked_checkboxes[run].id == "Column " + getCharFromNumber(k+1)){
+                        if (checked_checkboxes[run].id == range.text[0][k] || checked_checkboxes[run].id == "Column " + getCharFromNumber(k)){
                             header = k;
                             break;
                         }
@@ -141,7 +141,7 @@ function redirectRule() {
                     var tmpUniqueTypes = [];
                     for (var i = 1; i < range.text.length; i++) {
                         var rangeType = [];
-                        tmp_address = getCharFromNumber(header + 1) + (i + 1);
+                        tmp_address = getCharFromNumber(header) + (i + 1);
                         rangeType.push(range.valueTypes[i][header]);
                         if (i == 1) {
                             tmpUniqueTypes.push(range.valueTypes[i][header]);
