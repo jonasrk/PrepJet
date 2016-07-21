@@ -26,11 +26,14 @@ function displaySimpleBetween(){
 (function () {
     'use strict';
     var count_drop = 1;
+    var mixed_condition = [];
+    mixed_condition.push(1);
     // The initialize function must be run each time a new page is loaded
     Office.initialize = function (reason) {
         jQuery(document).ready(function () {
 
             Office.context.document.settings.set('last_condition_added', 'simple');
+            Office.context.document.settings.set('populated_then', false);
             Office.context.document.settings.set('last_clicked_function', "validation.html");
             if (Office.context.document.settings.get('prepjet_loaded_before') == null) {
                 Office.context.document.settings.set('prepjet_loaded_before', true);
@@ -44,6 +47,7 @@ function displaySimpleBetween(){
             $('#tmp_hide').hide();
             $('#between_beginning1').hide();
             $('#remove_cond').hide();
+            $('#apply_mixed_simple').hide();
             $('#apply_advanced').hide();
             $('#apply_or_advanced').hide();
             $('#apply_or_simple').hide();
@@ -53,6 +57,7 @@ function displaySimpleBetween(){
 
             $('#apply_and_simple').click(validationAndSimple);
             $('#apply_or_simple').click(validationOrSimple);
+            $('#apply_mixed_simple').click(validationMixedSimple);
             $('#and_cond').click(addAndCondition);
             $('#or_cond').click(addORCondition);
             $('#then_cond').click(addThenCondition);
@@ -443,6 +448,34 @@ function displaySimpleBetween(){
         $("." + cont_tmp).Dropdown();
         addTextField(count_drop);
         $('#remove_cond').show();
+
+        mixed_condition.push(1);
+        var check_mix = 0;
+            for (var k = 1; k < mixed_condition.length; k++) {
+                if (mixed_condition[k] != mixed_condition[k - 1]) {
+                    check_mix = 1;
+                }
+            }
+            if (check_mix == 1 && count_drop > 2){
+                $('#apply_mixed_simple').show();
+                $('#apply_and_simple').hide();
+                $('#apply_or_simple').hide();
+            }
+            else if (mixed_condition.length == 1) {
+                $('#apply_and_simple').show();
+                $('#apply_mixed_simple').hide();
+                $('#apply_or_simple').hide();
+            }
+            else if (mixed_condition[1] == 1) {
+                $('#apply_and_simple').show();
+                $('#apply_mixed_simple').hide();
+                $('#apply_or_simple').hide();
+            }
+            else if (mixed_condition[1] == 2) {
+                $('#apply_or_simple').show();
+                $('#apply_and_simple').hide();
+                $('#apply_mixed_simple').hide();
+            }
     }
 
 
@@ -471,6 +504,34 @@ function displaySimpleBetween(){
         $("." + cont_tmp).Dropdown();
         addTextField(count_drop);
         $('#remove_cond').show();
+
+        mixed_condition.push(2);
+        var check_mix = 0;
+            for (var k = 1; k < mixed_condition.length; k++) {
+                if (mixed_condition[k] != mixed_condition[k - 1]) {
+                    check_mix = 1;
+                }
+            }
+            if (check_mix == 1 && count_drop > 2){
+                $('#apply_mixed_simple').show();
+                $('#apply_and_simple').hide();
+                $('#apply_or_simple').hide();
+            }
+            else if (mixed_condition.length == 1) {
+                $('#apply_and_simple').show();
+                $('#apply_mixed_simple').hide();
+                $('#apply_or_simple').hide();
+            }
+            else if (mixed_condition[1] == 1) {
+                $('#apply_and_simple').show();
+                $('#apply_mixed_simple').hide();
+                $('#apply_or_simple').hide();
+            }
+            else if (mixed_condition[1] == 2) {
+                $('#apply_or_simple').show();
+                $('#apply_and_simple').hide();
+                $('#apply_mixed_simple').hide();
+            }
     }
 
 
@@ -480,12 +541,19 @@ function displaySimpleBetween(){
         $('#remove_cond').show();
         $('#apply_and_simple').hide();
         $('#apply_or_simple').hide();
+        $('#apply_mixed_simple').hide();
         $('#betweenand').hide();
         $('#and_cond').hide();
         $('#or_cond').hide();
         $('#then_cond').hide();
         
-        if (Office.context.document.settings.get('last_condition_added') == "or") {
+        var check_mix = 0;
+        for (var k = 1; k < mixed_condition.length; k++) {
+            if (mixed_condition[k] != mixed_condition[k - 1]) {
+                check_mix = 1;
+            }
+        }
+        if (check_mix == 1) {
             $('#apply_or_advanced').show();
         }
         else {
@@ -516,8 +584,12 @@ function displaySimpleBetween(){
                     document.getElementById('column2_options').appendChild(el);
                 }
 
-                $(".dropdown_table_col2").Dropdown();
+                if (Office.context.document.settings.get('populated_then') == false) {
+                    $(".dropdown_table_col2").Dropdown();
+                }
+
                 Office.context.document.settings.set('then_condition_pressed', true);
+                Office.context.document.settings.set('populated_then', true);
 
             });
 
@@ -536,22 +608,41 @@ function displaySimpleBetween(){
             $('#tmp_hide').hide();
             $('#apply_advanced').hide();
             $('#apply_or_advanced').hide();
+            $('#and_cond').show();
+            $('#or_cond').show();
+            $('#then_cond').show();
+
             Office.context.document.settings.set('then_condition_pressed', false);
-            if (Office.context.document.settings.get('last_condition_added') == "or") {
-                $('#apply_or_simple').show();
+            var check_mix = 0;
+            for (var k = 1; k < mixed_condition.length; k++) {
+                if (mixed_condition[k] != mixed_condition[k - 1]) {
+                    check_mix = 1;
+                }
             }
-            else {
+            if (check_mix == 1 && count_drop > 2){
+                $('#apply_mixed_simple').show();
+                $('#apply_and_simple').hide();
+                $('#apply_or_simple').hide();
+            }
+            else if (mixed_condition.length == 1) {
                 $('#apply_and_simple').show();
+                $('#apply_mixed_simple').hide();
+                $('#apply_or_simple').hide();
             }
+            else if (mixed_condition[1] == 1) {
+                $('#apply_and_simple').show();
+                $('#apply_mixed_simple').hide();
+                $('#apply_or_simple').hide();
+            }
+            else if (mixed_condition[1] == 2) {
+                $('#apply_or_simple').show();
+                $('#apply_and_simple').hide();
+                $('#apply_mixed_simple').hide();
+            }
+
         }
         else {
-
-            if (Office.context.document.settings.get('last_condition_added') == "or") {
-                $('#apply_or_simple').show();
-            }
-            else {
-                $('#apply_and_simple').show();
-            }
+            mixed_condition.pop();
 
             if (count_drop > 1) {
                 var parent = document.getElementById('condition_holder');
@@ -563,6 +654,33 @@ function displaySimpleBetween(){
 
             }
             count_drop -= 1;
+
+            var check_mix = 0;
+            for (var k = 1; k < mixed_condition.length; k++) {
+                if (mixed_condition[k] != mixed_condition[k - 1]) {
+                    check_mix = 1;
+                }
+            }
+            if (check_mix == 1 && count_drop > 2){
+                $('#apply_mixed_simple').show();
+                $('#apply_and_simple').hide();
+                $('#apply_or_simple').hide();
+            }
+            else if (mixed_condition.length == 1) {
+                $('#apply_and_simple').show();
+                $('#apply_mixed_simple').hide();
+                $('#apply_or_simple').hide();
+            }
+            else if (mixed_condition[1] == 1) {
+                $('#apply_and_simple').show();
+                $('#apply_mixed_simple').hide();
+                $('#apply_or_simple').hide();
+            }
+            else if (mixed_condition[1] == 2) {
+                $('#apply_or_simple').show();
+                $('#apply_and_simple').hide();
+                $('#apply_mixed_simple').hide();
+            }
         }
 
         if (count_drop == 1) {
@@ -1290,6 +1408,146 @@ function displaySimpleBetween(){
                 window.location = "validation.html";
             });
 
+
+        }).catch(function(error) {
+            console.log("Error: " + error);
+            if (error instanceof OfficeExtension.Error) {
+                console.log("Debug info: " + JSON.stringify(error.debugInfo));
+            }
+        });
+    }
+
+
+    function validationMixedSimple() {
+        Excel.run(function (ctx) {
+
+            var worksheet = ctx.workbook.worksheets.getActiveWorksheet();
+            var range_all = worksheet.getRange();
+            var range = range_all.getUsedRange();
+
+            //get used range in active Sheet
+            range.load('text');
+            range.load('valueTypes');
+            range.load('values');
+            var range_all_adding_to = worksheet.getRange();
+            var range_adding_to = range_all_adding_to.getUsedRange();
+            range_adding_to.load('address');
+            range_adding_to.load('text');
+
+
+            return ctx.sync().then(function() {
+
+                var header_if = [];
+                var selected_identifier = [];
+                for (var k = 0; k < count_drop; k++) {
+                    selected_identifier.push(document.getElementById('column_simple' + (k + 1)).value);
+                }
+
+                for (var runsel = 0; runsel < selected_identifier.length; runsel++) {
+                    for (var k = 0; k < range.text[0].length; k++){
+                        if (selected_identifier[runsel] == range.text[0][k] || selected_identifier == "Column " + getCharFromNumber(k + 1)){
+                            header_if.push(k);
+                        }
+                    }
+                }
+
+                for (var i = 1; i < range.text.length; i++) {
+                    var check_cond = 0;
+                    for (var runcon = 0; runcon < count_drop; runcon++){
+
+                        if (document.getElementById('if_operator' + (runcon + 1)).value == "inlist") {
+                            var in_list = document.getElementById('if_condition' + (runcon + 1)).value;
+                            var splitted_list = in_list.split(",");
+                            for (var run = 0; run < splitted_list.length; run ++) {
+                                splitted_list[run] = splitted_list[run].trim();
+                            }
+                            for (var run = 0; run < splitted_list.length; run++) {
+                                if (isNaN(Number(splitted_list[run])) != true) {
+                                    splitted_list[run] = Number(splitted_list[run]);
+                                }
+                            }
+                        }
+                        else {
+                            if (isNaN(Number(document.getElementById('if_condition' + (runcon + 1)).value)) == true) {
+                                var ifcondition = document.getElementById('if_condition' + (runcon + 1)).value;
+                            }
+                            else {
+                                var ifcondition = Number(document.getElementById('if_condition' + (runcon + 1)).value);
+                            }
+                        }
+
+                        if (document.getElementById('if_operator' + (runcon + 1)).value == "notbetween" || document.getElementById('if_operator' + (runcon + 1)).value == "between") {
+                            if (isNaN(Number(document.getElementById('if_between_condition' + (runcon + 1)).value)) == true) {
+                                var ifbetweencondition = document.getElementById('if_between_condition' + (runcon + 1)).value;
+                            }
+                            else {
+                                var ifbetweencondition = Number(document.getElementById('if_between_condition' + (runcon + 1)).value);
+                            }
+                        }
+
+                        //loop through whole column to extract value from
+                        var act_worksheet = ctx.workbook.worksheets.getActiveWorksheet();
+                        var col_index = header_if[runcon];
+
+                        if (document.getElementById('if_operator' + (runcon + 1)).value == "equal") {
+                            if (range.values[i][col_index] != ifcondition) {
+                                check_cond += 1;
+                            }
+                        }
+
+                        if (document.getElementById('if_operator' + (runcon + 1)).value == "smaller") {
+                            if (range.values[i][col_index] >= ifcondition) {
+                                check_cond += 1;
+                            }
+                        }
+
+                        if (document.getElementById('if_operator' + (runcon + 1)).value == "greater") {
+                            if (range.values[i][col_index] <= ifcondition) {
+                                check_cond += 1;
+                            }
+                        }
+
+                        if (document.getElementById('if_operator' + (runcon + 1)).value == "inequal") {
+                            if (range.values[i][col_index] == ifcondition) {
+                                check_cond += 1;
+                            }
+                        }
+
+                        if (document.getElementById('if_operator' + (runcon + 1)).value == "between") {
+                            if (range.values[i][col_index] < ifcondition || range.values[i][col_index] > ifbetweencondition) {
+                                 check_cond += 1;
+                            }
+                        }
+
+                        if (document.getElementById('if_operator' + (runcon + 1)).value == "notbetween") {
+                            if (range.values[i][col_index] > ifcondition && range.values[i][col_index] < ifbetweencondition) {
+                                 check_cond += 1;
+                            }
+                        }
+
+                        if (document.getElementById('if_operator' + (runcon + 1)).value == "inlist") {
+                            var check = 0;
+                            for (run = 0; run < splitted_list.length; run++) {
+                                if (range.values[i][col_index] == splitted_list[run]) {
+                                     check = 1;
+                                }
+                            }
+                            if (check != 1) {
+                                check_cond += 1;
+                            }
+                        }
+                    }
+
+                    var sheet_row = i + 1;
+                    if (check_cond == count_drop) {
+                        for (var k = 0; k < header_if.length; k++) {
+                            var address = getCharFromNumber(header_if[k] + 1) + sheet_row;
+                            highlightContentInWorksheet(act_worksheet, address, '#EA7F04');
+                        }
+                    }
+                }
+                window.location = "validation.html";
+            });
 
         }).catch(function(error) {
             console.log("Error: " + error);
