@@ -102,37 +102,37 @@ function addOperator(k) {
     div_drop.appendChild(sel);
 
     var el1 = document.createElement("option");
-    el1.value = "equal" + k;
+    el1.value = "equal";
     el1.textContent = "=";
     sel.appendChild(el1);
 
     var el2 = document.createElement("option");
-    el2.value = "smaller" + k;
+    el2.value = "smaller";
     el2.textContent = "<";
     sel.appendChild(el2);
 
     var el3 = document.createElement("option");
-    el3.value = "greater" + k;
+    el3.value = "greater";
     el3.textContent = ">";
     sel.appendChild(el3);
 
     var el4 = document.createElement("option");
-    el4.value = "inequal" + k;
+    el4.value = "inequal";
     el4.textContent = "!=";
     sel.appendChild(el4);
 
     var el5 = document.createElement("option");
-    el5.value = "between" + k;
+    el5.value = "between";
     el5.textContent = "between";
     sel.appendChild(el5);
 
     var el6 = document.createElement("option");
-    el6.value = "notbetween" + k;
+    el6.value = "notbetween";
     el6.textContent = "not between";
     sel.appendChild(el6);
 
     var el7 = document.createElement("option");
-    el7.value = "inlist" + k;
+    el7.value = "inlist";
     el7.textContent = "in (list)";
     sel.appendChild(el7);
 }

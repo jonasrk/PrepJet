@@ -41,7 +41,7 @@ function displaySimpleBetween(){
             fillSimpleColumn();
 
             $('#tmp_hide').hide();
-            $('#between_beginning').hide();
+            $('#between_beginning1').hide();
             $('#remove_cond').hide();
             $('#apply_advanced').hide();
 
@@ -80,11 +80,11 @@ function displaySimpleBetween(){
             }
             // Function that writes to a div with id='message' on the page.
             function writeif(message){
-                document.getElementById('if_condition').value = message;
+                document.getElementById('if_condition1').value = message;
             }
 
             function writeifand(message){
-                document.getElementById('if_between_condition').value = message;
+                document.getElementById('if_between_condition1').value = message;
             }
 
             function writethen(message){
@@ -142,38 +142,6 @@ function displaySimpleBetween(){
             var worksheet = ctx.workbook.worksheets.getActiveWorksheet();
             var range_all = worksheet.getRange();
             var range = range_all.getUsedRange();
-            var selected_identifier = document.getElementById('column_simple1').value;
-
-
-            if (document.getElementById('if_operator').value == "inlist") {
-                var in_list = document.getElementById('if_condition').value;
-                var splitted_list = in_list.split(",");
-                for (var run = 0; run < splitted_list.length; run ++) {
-                    splitted_list[run] = splitted_list[run].trim();
-                }
-                for (var run = 0; run < splitted_list.length; run++) {
-                    if (isNaN(Number(splitted_list[run])) != true) {
-                        splitted_list[run] = Number(splitted_list[run]);
-                    }
-                }
-            }
-            else {
-                if (isNaN(Number(document.getElementById('if_condition').value)) == true) {
-                    var ifcondition = document.getElementById('if_condition').value;
-                }
-                else {
-                    var ifcondition = Number(document.getElementById('if_condition').value);
-                }
-            }
-
-            if (document.getElementById('if_operator').value == "notbetween" || document.getElementById('if_operator').value == "between") {
-                if (isNaN(Number(document.getElementById('if_between_condition').value)) == true) {
-                    var ifbetweencondition = document.getElementById('if_between_condition').value;
-                }
-                else {
-                    var ifbetweencondition = Number(document.getElementById('if_between_condition').value);
-                }
-            }
 
             //get used range in active Sheet
             range.load('text');
@@ -186,67 +154,121 @@ function displaySimpleBetween(){
 
 
             return ctx.sync().then(function() {
-                var header_if = 0;
 
-                //get column in header for which to check if condition
-                for (var k = 0; k < range.text[0].length; k++){
-                    if (selected_identifier == range.text[0][k] || selected_identifier == "Column " + getCharFromNumber(k + 1)){
-                        header_if = k;
+                var header_if = [];
+                var selected_identifier = [];
+                for (var k = 0; k < count_drop; k++) {
+                    selected_identifier.push(document.getElementById('column_simple' + (k + 1)).value);
+                }
+
+                for (var runsel = 0; runsel < selected_identifier.length; runsel++) {
+                    for (var k = 0; k < range.text[0].length; k++){
+                        if (selected_identifier[runsel] == range.text[0][k] || selected_identifier == "Column " + getCharFromNumber(k + 1)){
+                            header_if.push(k);
+                        }
                     }
                 }
 
-                //loop through whole column to extract value from
-                var act_worksheet = ctx.workbook.worksheets.getActiveWorksheet();
-                for (var i = 1; i < range.text.length; i++) {
+                for (var runcon = 0; runcon < count_drop; runcon++){
 
-                    var sheet_row = i + 1;
-                    var address = getCharFromNumber(header_if + 1) + sheet_row;
-
-                    if (document.getElementById('if_operator').value == "equal") {
-                        if (range.values[i][header_if] != ifcondition) {
-                            highlightContentInWorksheet(act_worksheet, address, "red");
+                    if (document.getElementById('if_operator' + (runcon + 1)).value == "inlist") {
+                        var in_list = document.getElementById('if_condition' + (runcon + 1)).value;
+                        var splitted_list = in_list.split(",");
+                        for (var run = 0; run < splitted_list.length; run ++) {
+                            splitted_list[run] = splitted_list[run].trim();
                         }
-                    }
-
-                    if (document.getElementById('if_operator').value == "smaller") {
-                        if (range.values[i][header_if] >= ifcondition) {
-                            highlightContentInWorksheet(act_worksheet, address, "red");
-                        }
-                    }
-
-                    if (document.getElementById('if_operator').value == "greater") {
-                        if (range.values[i][header_if] <= ifcondition) {
-                            highlightContentInWorksheet(act_worksheet, address, "red");
-                        }
-                    }
-
-                    if (document.getElementById('if_operator').value == "inequal") {
-                        if (range.values[i][header_if] == ifcondition) {
-                             highlightContentInWorksheet(act_worksheet, address, "red");
-                        }
-                    }
-
-                    if (document.getElementById('if_operator').value == "between") {
-                        if (range.values[i][header_if] < ifcondition || range.values[i][header_if] > ifbetweencondition) {
-                             highlightContentInWorksheet(act_worksheet, address, "red");
-                        }
-                    }
-
-                    if (document.getElementById('if_operator').value == "notbetween") {
-                        if (range.values[i][header_if] > ifcondition && range.values[i][header_if] < ifbetweencondition) {
-                             highlightContentInWorksheet(act_worksheet, address, "red");
-                        }
-                    }
-
-                    if (document.getElementById('if_operator').value == "inlist") {
-                        var check = 0;
-                        for (run = 0; run < splitted_list.length; run++) {
-                            if (range.values[i][header_if] == splitted_list[run]) {
-                                 check = 1;
+                        for (var run = 0; run < splitted_list.length; run++) {
+                            if (isNaN(Number(splitted_list[run])) != true) {
+                                splitted_list[run] = Number(splitted_list[run]);
                             }
                         }
-                        if (check != 1) {
-                            highlightContentInWorksheet(act_worksheet, address, "red");
+                    }
+                    else {
+                        if (isNaN(Number(document.getElementById('if_condition' + (runcon + 1)).value)) == true) {
+                            var ifcondition = document.getElementById('if_condition' + (runcon + 1)).value;
+                        }
+                        else {
+                            var ifcondition = Number(document.getElementById('if_condition' + (runcon + 1)).value);
+                        }
+                    }
+
+                    if (document.getElementById('if_operator' + (runcon + 1)).value == "notbetween" || document.getElementById('if_operator' + (runcon + 1)).value == "between") {
+                        if (isNaN(Number(document.getElementById('if_between_condition' + (runcon + 1)).value)) == true) {
+                            var ifbetweencondition = document.getElementById('if_between_condition' + (runcon + 1)).value;
+                        }
+                        else {
+                            var ifbetweencondition = Number(document.getElementById('if_between_condition' + (runcon + 1)).value);
+                        }
+                    }
+
+                    //loop through whole column to extract value from
+                    var act_worksheet = ctx.workbook.worksheets.getActiveWorksheet();
+                    var col_index = header_if[runcon];
+                    for (var i = 1; i < range.text.length; i++) {
+
+                        var check_cond = 0;
+                        console.log(document.getElementById('if_operator' + (runcon + 1)).value);
+                        if (document.getElementById('if_operator' + (runcon + 1)).value == "equal") {
+                            if (range.values[i][col_index] != ifcondition) {
+                                check_cond += 1;
+                                //highlightContentInWorksheet(act_worksheet, address, "red");
+                            }
+                        }
+
+                        if (document.getElementById('if_operator' + (runcon + 1)).value == "smaller") {
+                            if (range.values[i][col_index] >= ifcondition) {
+                                check_cond += 1;
+                                //highlightContentInWorksheet(act_worksheet, address, "red");
+                            }
+                        }
+
+                        if (document.getElementById('if_operator' + (runcon + 1)).value == "greater") {
+                            if (range.values[i][col_index] <= ifcondition) {
+                                check_cond += 1;
+                                //highlightContentInWorksheet(act_worksheet, address, "red");
+                            }
+                        }
+
+                        if (document.getElementById('if_operator' + (runcon + 1)).value == "inequal") {
+                            if (range.values[i][col_index] == ifcondition) {
+                                check_cond += 1;
+                                //highlightContentInWorksheet(act_worksheet, address, "red");
+                            }
+                        }
+
+                        if (document.getElementById('if_operator' + (runcon + 1)).value == "between") {
+                            if (range.values[i][col_index] < ifcondition || range.values[i][col_index] > ifbetweencondition) {
+                                 check_cond += 1;
+                                 //highlightContentInWorksheet(act_worksheet, address, "red");
+                            }
+                        }
+
+                        if (document.getElementById('if_operator' + (runcon + 1)).value == "notbetween") {
+                            if (range.values[i][col_index] > ifcondition && range.values[i][col_index] < ifbetweencondition) {
+                                 check_cond += 1;
+                                 //highlightContentInWorksheet(act_worksheet, address, "red");
+                            }
+                        }
+                        console.log(check_cond);
+
+                        var sheet_row = i + 1;
+                        if (check_cond > 0) {
+                            for (var k = 0; k < header_if.length; k++) {
+                                var address = getCharFromNumber(header_if[k] + 1) + sheet_row;
+                                highlightContentInWorksheet(act_worksheet, address, "red");
+                            }
+                        }
+                        //todo coorect if in list
+                        if (document.getElementById('if_operator' + (runcon + 1)).value == "inlist") {
+                            var check = 0;
+                            for (run = 0; run < splitted_list.length; run++) {
+                                if (range.values[i][header_if] == splitted_list[run]) {
+                                     check_cond = 1;
+                                }
+                            }
+                            if (check != 1) {
+                                highlightContentInWorksheet(act_worksheet, address, "red");
+                            }
                         }
                     }
                 }
