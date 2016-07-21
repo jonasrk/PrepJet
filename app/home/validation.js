@@ -48,7 +48,7 @@ function displaySimpleBetween(){
             $(".dropdown_table").Dropdown();
             $(".ms-TextField").TextField();
 
-            $('#apply_simple').click(validationSimple);
+            $('#apply_simple').click(validationOrSimple);
             $('#and_cond').click(addAndCondition);
             $('#or_cond').click(addORCondition);
             $('#then_cond').click(addThenCondition);
@@ -136,7 +136,7 @@ function displaySimpleBetween(){
     }
 
     //validation when simple rule is created
-    function validationSimple() {
+    function validationAndSimple() {
         Excel.run(function (ctx) {
 
             var worksheet = ctx.workbook.worksheets.getActiveWorksheet();
@@ -275,9 +275,153 @@ function displaySimpleBetween(){
         });
     }
 
+    function validationOrSimple() {
+        Excel.run(function (ctx) {
+
+            var worksheet = ctx.workbook.worksheets.getActiveWorksheet();
+            var range_all = worksheet.getRange();
+            var range = range_all.getUsedRange();
+
+            //get used range in active Sheet
+            range.load('text');
+            range.load('valueTypes');
+            range.load('values');
+            var range_all_adding_to = worksheet.getRange();
+            var range_adding_to = range_all_adding_to.getUsedRange();
+            range_adding_to.load('address');
+            range_adding_to.load('text');
+
+
+            return ctx.sync().then(function() {
+
+                var header_if = [];
+                var selected_identifier = [];
+                for (var k = 0; k < count_drop; k++) {
+                    selected_identifier.push(document.getElementById('column_simple' + (k + 1)).value);
+                }
+
+                for (var runsel = 0; runsel < selected_identifier.length; runsel++) {
+                    for (var k = 0; k < range.text[0].length; k++){
+                        if (selected_identifier[runsel] == range.text[0][k] || selected_identifier == "Column " + getCharFromNumber(k + 1)){
+                            header_if.push(k);
+                        }
+                    }
+                }
+
+            for (var i = 1; i < range.text.length; i++) {
+                var check_cond = 0;
+                for (var runcon = 0; runcon < count_drop; runcon++){
+
+                    if (document.getElementById('if_operator' + (runcon + 1)).value == "inlist") {
+                        var in_list = document.getElementById('if_condition' + (runcon + 1)).value;
+                        var splitted_list = in_list.split(",");
+                        for (var run = 0; run < splitted_list.length; run ++) {
+                            splitted_list[run] = splitted_list[run].trim();
+                        }
+                        for (var run = 0; run < splitted_list.length; run++) {
+                            if (isNaN(Number(splitted_list[run])) != true) {
+                                splitted_list[run] = Number(splitted_list[run]);
+                            }
+                        }
+                    }
+                    else {
+                        if (isNaN(Number(document.getElementById('if_condition' + (runcon + 1)).value)) == true) {
+                            var ifcondition = document.getElementById('if_condition' + (runcon + 1)).value;
+                        }
+                        else {
+                            var ifcondition = Number(document.getElementById('if_condition' + (runcon + 1)).value);
+                        }
+                    }
+
+                    if (document.getElementById('if_operator' + (runcon + 1)).value == "notbetween" || document.getElementById('if_operator' + (runcon + 1)).value == "between") {
+                        if (isNaN(Number(document.getElementById('if_between_condition' + (runcon + 1)).value)) == true) {
+                            var ifbetweencondition = document.getElementById('if_between_condition' + (runcon + 1)).value;
+                        }
+                        else {
+                            var ifbetweencondition = Number(document.getElementById('if_between_condition' + (runcon + 1)).value);
+                        }
+                    }
+
+                    //loop through whole column to extract value from
+                    var act_worksheet = ctx.workbook.worksheets.getActiveWorksheet();
+                    var col_index = header_if[runcon];
+                    //for (var i = 1; i < range.text.length; i++) {
+
+                        if (document.getElementById('if_operator' + (runcon + 1)).value == "equal") {
+                            if (range.values[i][col_index] != ifcondition) {
+                                check_cond += 1;
+                            }
+                        }
+
+                        if (document.getElementById('if_operator' + (runcon + 1)).value == "smaller") {
+                            if (range.values[i][col_index] >= ifcondition) {
+                                check_cond += 1;
+                            }
+                        }
+
+                        if (document.getElementById('if_operator' + (runcon + 1)).value == "greater") {
+                            if (range.values[i][col_index] <= ifcondition) {
+                                check_cond += 1;
+                            }
+                        }
+
+                        if (document.getElementById('if_operator' + (runcon + 1)).value == "inequal") {
+                            if (range.values[i][col_index] == ifcondition) {
+                                check_cond += 1;
+                            }
+                        }
+
+                        if (document.getElementById('if_operator' + (runcon + 1)).value == "between") {
+                            if (range.values[i][col_index] < ifcondition || range.values[i][col_index] > ifbetweencondition) {
+                                 check_cond += 1;
+                            }
+                        }
+
+                        if (document.getElementById('if_operator' + (runcon + 1)).value == "notbetween") {
+                            if (range.values[i][col_index] > ifcondition && range.values[i][col_index] < ifbetweencondition) {
+                                 check_cond += 1;
+                            }
+                        }
+
+                        if (document.getElementById('if_operator' + (runcon + 1)).value == "inlist") {
+                            var check = 0;
+                            for (run = 0; run < splitted_list.length; run++) {
+                                if (range.values[i][col_index] == splitted_list[run]) {
+                                     check = 1;
+                                }
+                            }
+                            if (check != 1) {
+                                check_cond += 1;
+                            }
+                        }
+
+                    }
+                    console.log(check_cond);
+
+                        var sheet_row = i + 1;
+                        if (check_cond == count_drop) {
+                            for (var k = 0; k < header_if.length; k++) {
+                                var address = getCharFromNumber(header_if[k] + 1) + sheet_row;
+                                highlightContentInWorksheet(act_worksheet, address, "red");
+                            }
+                        }
+                    //}
+                }
+                window.location = "validation.html";
+            });
+
+        }).catch(function(error) {
+            console.log("Error: " + error);
+            if (error instanceof OfficeExtension.Error) {
+                console.log("Debug info: " + JSON.stringify(error.debugInfo));
+            }
+        });
+    }
+
 
     function addAndCondition (start_var) {
 
+        Office.context.document.settings.set('last_condition_added', 'and');
         count_drop += 1;
         var div_head = document.createElement("div");
         div_head.id = "subhead" + count_drop;
@@ -302,6 +446,7 @@ function displaySimpleBetween(){
 
     function addORCondition (start_var) {
 
+        Office.context.document.settings.set('last_condition_added', 'or');
         count_drop += 1;
         var div_head = document.createElement("div");
         div_head.id = "subhead" + count_drop;
@@ -331,6 +476,9 @@ function displaySimpleBetween(){
         $('#apply_simple').hide();
         $('#apply_advanced').show();
         $('#betweenand').hide();
+        $('#and_cond').hide();
+        $('#or_cond').hide();
+        $('#then_cond').hide();
 
         Excel.run(function (ctx) {
 
@@ -383,9 +531,11 @@ function displaySimpleBetween(){
                 var child = document.getElementById('condition' + count_drop);
                 var child_head = document.getElementById('subhead' + count_drop);
 
-
                 parent.removeChild(child_head);
                 parent.removeChild(child);
+
+                //todo smart way to reset last added condition
+                Office.context.document.settings.get('last_condition_added')
             }
             count_drop -= 1;
         }
