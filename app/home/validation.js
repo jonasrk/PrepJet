@@ -1437,112 +1437,151 @@ function displaySimpleBetween(){
 
             return ctx.sync().then(function() {
 
-                var header_if = [];
-                var selected_identifier = [];
-                for (var k = 0; k < count_drop; k++) {
-                    selected_identifier.push(document.getElementById('column_simple' + (k + 1)).value);
-                }
-
-                for (var runsel = 0; runsel < selected_identifier.length; runsel++) {
-                    for (var k = 0; k < range.text[0].length; k++){
-                        if (selected_identifier[runsel] == range.text[0][k] || selected_identifier == "Column " + getCharFromNumber(k + 1)){
-                            header_if.push(k);
-                        }
+                var act_worksheet = ctx.workbook.worksheets.getActiveWorksheet();
+                var or_index = [];
+                for (var k = 0; k < mixed_condition; k++) {
+                    if (mixed_condition[k] == 2) {
+                        or_index.push(k);
                     }
                 }
+
+                var and_index = [];
+                var tmp = [0];
+                for (var k = 1; k < mixed_condition.length; k++) {
+                    if (mixed_condition[k] == 2) {
+                        and_index.push(tmp);
+                        tmp = [k];
+                    }
+                    else {
+                        tmp.push(k);
+                    }
+                }
+                and_index.push(tmp);
+
+                var selected_identifier = [];
+                for (var i = 0; i < and_index.length; i++) {
+                    var id_tmp = [];
+                    for (var k = 0; k < and_index[i].length; k++) {
+                        var col_ind = and_index[i][k];
+                        id_tmp.push(document.getElementById('column_simple' + (col_ind + 1)).value);
+                    }
+                    selected_identifier.push(id_tmp);
+                }
+
+                var header_columns = [];
+                for (var i = 0; i < selected_identifier.length;i++) {
+                    var head_tmp = [];
+                    for (var k = 0; k < selected_identifier[i].length; k++){
+                        for (var j = 0; j < range.text[0].length; j++) {
+                            if (selected_identifier[i][k] == range.text[0][j] || selected_identifier == "Column " + getCharFromNumber(j + 1)){
+                                head_tmp.push(j);
+                            }
+                        }
+                    }
+                    header_columns.push(head_tmp);
+                }
+
 
                 for (var i = 1; i < range.text.length; i++) {
-                    var check_cond = 0;
-                    for (var runcon = 0; runcon < count_drop; runcon++){
 
-                        if (document.getElementById('if_operator' + (runcon + 1)).value == "inlist") {
-                            var in_list = document.getElementById('if_condition' + (runcon + 1)).value;
-                            var splitted_list = in_list.split(",");
-                            for (var run = 0; run < splitted_list.length; run ++) {
-                                splitted_list[run] = splitted_list[run].trim();
+                    var total_cond = 0;
+                    for (var runcon = 0; runcon < header_columns.length; runcon++){
+
+                        var check_cond = 0;
+                        for (var run = 0; run < header_columns[runcon].length; run++){
+
+                            if (document.getElementById('if_operator' + (and_index[runcon][run] + 1)).value == "inlist") {
+                                var in_list = document.getElementById('if_condition' + (and_index[runcon][run] + 1)).value;
+                                var splitted_list = in_list.split(",");
+                                for (var k = 0; k < splitted_list.length; k++) {
+                                    splitted_list[k] = splitted_list[k].trim();
+                                }
+                                for (var k = 0; k < splitted_list.length; k++) {
+                                    if (isNaN(Number(splitted_list[k])) != true) {
+                                        splitted_list[k] = Number(splitted_list[k]);
+                                    }
+                                }
                             }
-                            for (var run = 0; run < splitted_list.length; run++) {
-                                if (isNaN(Number(splitted_list[run])) != true) {
-                                    splitted_list[run] = Number(splitted_list[run]);
+                            else {
+                                if (isNaN(Number(document.getElementById('if_condition' + (and_index[runcon][run] + 1)).value)) == true) {
+                                    var ifcondition = document.getElementById('if_condition' + (and_index[runcon][run] + 1)).value;
+                                }
+                                else {
+                                    var ifcondition = Number(document.getElementById('if_condition' + (and_index[runcon][run] + 1)).value);
+                                }
+                            }
+
+                            if (document.getElementById('if_operator' + (and_index[runcon][run] + 1)).value == "notbetween" || document.getElementById('if_operator' + (and_index[runcon][run] + 1)).value == "between") {
+                                if (isNaN(Number(document.getElementById('if_between_condition' + (and_index[runcon][run] + 1)).value)) == true) {
+                                    var ifbetweencondition = document.getElementById('if_between_condition' + (and_index[runcon][run] + 1)).value;
+                                }
+                                else {
+                                    var ifbetweencondition = Number(document.getElementById('if_between_condition' + (and_index[runcon][run] + 1)).value);
+                                }
+                            }
+
+                            var col_index = header_columns[runcon][run];
+                            if (document.getElementById('if_operator' + (and_index[runcon][run] + 1)).value == "equal") {
+                                if (range.values[i][col_index] != ifcondition) {
+                                    check_cond += 1;
+                                }
+                            }
+
+                            if (document.getElementById('if_operator' + (and_index[runcon][run] + 1)).value == "smaller") {
+                                if (range.values[i][col_index] >= ifcondition) {
+                                    check_cond += 1;
+                                }
+                            }
+
+                            if (document.getElementById('if_operator' + (and_index[runcon][run] + 1)).value == "greater") {
+                                if (range.values[i][col_index] <= ifcondition) {
+                                    check_cond += 1;
+                                }
+                            }
+
+                            if (document.getElementById('if_operator' + (and_index[runcon][run] + 1)).value == "inequal") {
+                                if (range.values[i][col_index] == ifcondition) {
+                                    check_cond += 1;
+                                }
+                            }
+
+                            if (document.getElementById('if_operator' + (and_index[runcon][run] + 1)).value == "between") {
+                                if (range.values[i][col_index] < ifcondition || range.values[i][col_index] > ifbetweencondition) {
+                                     check_cond += 1;
+                                }
+                            }
+
+                            if (document.getElementById('if_operator' + (and_index[runcon][run] + 1)).value == "notbetween") {
+                                if (range.values[i][col_index] > ifcondition && range.values[i][col_index] < ifbetweencondition) {
+                                     check_cond += 1;
+                                }
+                            }
+
+                            if (document.getElementById('if_operator' + (and_index[runcon][run] + 1)).value == "inlist") {
+                                var check = 0;
+                                for (var k = 0; k < splitted_list.length; k++) {
+                                    if (range.values[i][col_index] == splitted_list[k]) {
+                                         check = 1;
+                                    }
+                                }
+                                if (check != 1) {
+                                    check_cond += 1;
                                 }
                             }
                         }
-                        else {
-                            if (isNaN(Number(document.getElementById('if_condition' + (runcon + 1)).value)) == true) {
-                                var ifcondition = document.getElementById('if_condition' + (runcon + 1)).value;
-                            }
-                            else {
-                                var ifcondition = Number(document.getElementById('if_condition' + (runcon + 1)).value);
-                            }
-                        }
 
-                        if (document.getElementById('if_operator' + (runcon + 1)).value == "notbetween" || document.getElementById('if_operator' + (runcon + 1)).value == "between") {
-                            if (isNaN(Number(document.getElementById('if_between_condition' + (runcon + 1)).value)) == true) {
-                                var ifbetweencondition = document.getElementById('if_between_condition' + (runcon + 1)).value;
-                            }
-                            else {
-                                var ifbetweencondition = Number(document.getElementById('if_between_condition' + (runcon + 1)).value);
-                            }
-                        }
-
-                        //loop through whole column to extract value from
-                        var act_worksheet = ctx.workbook.worksheets.getActiveWorksheet();
-                        var col_index = header_if[runcon];
-
-                        if (document.getElementById('if_operator' + (runcon + 1)).value == "equal") {
-                            if (range.values[i][col_index] != ifcondition) {
-                                check_cond += 1;
-                            }
-                        }
-
-                        if (document.getElementById('if_operator' + (runcon + 1)).value == "smaller") {
-                            if (range.values[i][col_index] >= ifcondition) {
-                                check_cond += 1;
-                            }
-                        }
-
-                        if (document.getElementById('if_operator' + (runcon + 1)).value == "greater") {
-                            if (range.values[i][col_index] <= ifcondition) {
-                                check_cond += 1;
-                            }
-                        }
-
-                        if (document.getElementById('if_operator' + (runcon + 1)).value == "inequal") {
-                            if (range.values[i][col_index] == ifcondition) {
-                                check_cond += 1;
-                            }
-                        }
-
-                        if (document.getElementById('if_operator' + (runcon + 1)).value == "between") {
-                            if (range.values[i][col_index] < ifcondition || range.values[i][col_index] > ifbetweencondition) {
-                                 check_cond += 1;
-                            }
-                        }
-
-                        if (document.getElementById('if_operator' + (runcon + 1)).value == "notbetween") {
-                            if (range.values[i][col_index] > ifcondition && range.values[i][col_index] < ifbetweencondition) {
-                                 check_cond += 1;
-                            }
-                        }
-
-                        if (document.getElementById('if_operator' + (runcon + 1)).value == "inlist") {
-                            var check = 0;
-                            for (run = 0; run < splitted_list.length; run++) {
-                                if (range.values[i][col_index] == splitted_list[run]) {
-                                     check = 1;
-                                }
-                            }
-                            if (check != 1) {
-                                check_cond += 1;
-                            }
+                        if (check_cond > 0) {
+                            total_cond += 1;
                         }
                     }
 
-                    var sheet_row = i + 1;
-                    if (check_cond == count_drop) {
-                        for (var k = 0; k < header_if.length; k++) {
-                            var address = getCharFromNumber(header_if[k] + 1) + sheet_row;
-                            highlightContentInWorksheet(act_worksheet, address, '#EA7F04');
+                    if (total_cond >= header_columns.length) {
+                        var sheet_row = i + 1;
+                        for (var k = 0; k < header_columns.length; k++) {
+                            for (var j = 0; j < header_columns[k].length; j++){
+                                var address = getCharFromNumber(header_columns[k][j] + 1) + sheet_row;
+                                highlightContentInWorksheet(act_worksheet, address, '#EA7F04');
+                            }
                         }
                     }
                 }
