@@ -30,6 +30,7 @@ function displaySimpleBetween(){
     Office.initialize = function (reason) {
         jQuery(document).ready(function () {
 
+            Office.context.document.settings.set('last_condition_added', 'simple');
             Office.context.document.settings.set('last_clicked_function', "validation.html");
             if (Office.context.document.settings.get('prepjet_loaded_before') == null) {
                 Office.context.document.settings.set('prepjet_loaded_before', true);
@@ -44,15 +45,18 @@ function displaySimpleBetween(){
             $('#between_beginning1').hide();
             $('#remove_cond').hide();
             $('#apply_advanced').hide();
+            $('#apply_or_simple').hide();
 
             $(".dropdown_table").Dropdown();
             $(".ms-TextField").TextField();
 
-            $('#apply_simple').click(validationOrSimple);
+            $('#apply_and_simple').click(validationAndSimple);
+            $('#apply_or_simple').click(validationOrSimple);
             $('#and_cond').click(addAndCondition);
             $('#or_cond').click(addORCondition);
             $('#then_cond').click(addThenCondition);
             $('#remove_cond').click(removeCondition);
+            $('#apply_advanced').click(validationAdvanced);
 
 
             Office.context.document.addHandlerAsync("documentSelectionChanged", myIfHandler, function(result){}
@@ -308,44 +312,43 @@ function displaySimpleBetween(){
                     }
                 }
 
-            for (var i = 1; i < range.text.length; i++) {
-                var check_cond = 0;
-                for (var runcon = 0; runcon < count_drop; runcon++){
+                for (var i = 1; i < range.text.length; i++) {
+                    var check_cond = 0;
+                    for (var runcon = 0; runcon < count_drop; runcon++){
 
-                    if (document.getElementById('if_operator' + (runcon + 1)).value == "inlist") {
-                        var in_list = document.getElementById('if_condition' + (runcon + 1)).value;
-                        var splitted_list = in_list.split(",");
-                        for (var run = 0; run < splitted_list.length; run ++) {
-                            splitted_list[run] = splitted_list[run].trim();
-                        }
-                        for (var run = 0; run < splitted_list.length; run++) {
-                            if (isNaN(Number(splitted_list[run])) != true) {
-                                splitted_list[run] = Number(splitted_list[run]);
+                        if (document.getElementById('if_operator' + (runcon + 1)).value == "inlist") {
+                            var in_list = document.getElementById('if_condition' + (runcon + 1)).value;
+                            var splitted_list = in_list.split(",");
+                            for (var run = 0; run < splitted_list.length; run ++) {
+                                splitted_list[run] = splitted_list[run].trim();
+                            }
+                            for (var run = 0; run < splitted_list.length; run++) {
+                                if (isNaN(Number(splitted_list[run])) != true) {
+                                    splitted_list[run] = Number(splitted_list[run]);
+                                }
                             }
                         }
-                    }
-                    else {
-                        if (isNaN(Number(document.getElementById('if_condition' + (runcon + 1)).value)) == true) {
-                            var ifcondition = document.getElementById('if_condition' + (runcon + 1)).value;
-                        }
                         else {
-                            var ifcondition = Number(document.getElementById('if_condition' + (runcon + 1)).value);
+                            if (isNaN(Number(document.getElementById('if_condition' + (runcon + 1)).value)) == true) {
+                                var ifcondition = document.getElementById('if_condition' + (runcon + 1)).value;
+                            }
+                            else {
+                                var ifcondition = Number(document.getElementById('if_condition' + (runcon + 1)).value);
+                            }
                         }
-                    }
 
-                    if (document.getElementById('if_operator' + (runcon + 1)).value == "notbetween" || document.getElementById('if_operator' + (runcon + 1)).value == "between") {
-                        if (isNaN(Number(document.getElementById('if_between_condition' + (runcon + 1)).value)) == true) {
-                            var ifbetweencondition = document.getElementById('if_between_condition' + (runcon + 1)).value;
+                        if (document.getElementById('if_operator' + (runcon + 1)).value == "notbetween" || document.getElementById('if_operator' + (runcon + 1)).value == "between") {
+                            if (isNaN(Number(document.getElementById('if_between_condition' + (runcon + 1)).value)) == true) {
+                                var ifbetweencondition = document.getElementById('if_between_condition' + (runcon + 1)).value;
+                            }
+                            else {
+                                var ifbetweencondition = Number(document.getElementById('if_between_condition' + (runcon + 1)).value);
+                            }
                         }
-                        else {
-                            var ifbetweencondition = Number(document.getElementById('if_between_condition' + (runcon + 1)).value);
-                        }
-                    }
 
-                    //loop through whole column to extract value from
-                    var act_worksheet = ctx.workbook.worksheets.getActiveWorksheet();
-                    var col_index = header_if[runcon];
-                    //for (var i = 1; i < range.text.length; i++) {
+                        //loop through whole column to extract value from
+                        var act_worksheet = ctx.workbook.worksheets.getActiveWorksheet();
+                        var col_index = header_if[runcon];
 
                         if (document.getElementById('if_operator' + (runcon + 1)).value == "equal") {
                             if (range.values[i][col_index] != ifcondition) {
@@ -394,18 +397,15 @@ function displaySimpleBetween(){
                                 check_cond += 1;
                             }
                         }
-
                     }
-                    console.log(check_cond);
 
-                        var sheet_row = i + 1;
-                        if (check_cond == count_drop) {
-                            for (var k = 0; k < header_if.length; k++) {
-                                var address = getCharFromNumber(header_if[k] + 1) + sheet_row;
-                                highlightContentInWorksheet(act_worksheet, address, "red");
-                            }
+                    var sheet_row = i + 1;
+                    if (check_cond == count_drop) {
+                        for (var k = 0; k < header_if.length; k++) {
+                            var address = getCharFromNumber(header_if[k] + 1) + sheet_row;
+                            highlightContentInWorksheet(act_worksheet, address, "red");
                         }
-                    //}
+                    }
                 }
                 window.location = "validation.html";
             });
@@ -447,6 +447,9 @@ function displaySimpleBetween(){
     function addORCondition (start_var) {
 
         Office.context.document.settings.set('last_condition_added', 'or');
+        $('#apply_or_simple').show();
+        $('#apply_and_simple').hide();
+
         count_drop += 1;
         var div_head = document.createElement("div");
         div_head.id = "subhead" + count_drop;
@@ -473,7 +476,8 @@ function displaySimpleBetween(){
 
         $('#tmp_hide').show();
         $('#remove_cond').show();
-        $('#apply_simple').hide();
+        $('#apply_and_simple').hide();
+        $('#apply_or_simple').hide();
         $('#apply_advanced').show();
         $('#betweenand').hide();
         $('#and_cond').hide();
@@ -521,11 +525,24 @@ function displaySimpleBetween(){
 
         if (Office.context.document.settings.get('then_condition_pressed') == true) {
             $('#tmp_hide').hide();
-            $('#apply_simple').show();
             $('#apply_advanced').hide();
             Office.context.document.settings.set('then_condition_pressed', false);
+            if (Office.context.document.settings.get('last_condition_added') == "or") {
+                $('#apply_or_simple').show();
+            }
+            else {
+                $('#apply_and_simple').show();
+            }
         }
         else {
+
+            if (Office.context.document.settings.get('last_condition_added') == "or") {
+                $('#apply_or_simple').show();
+            }
+            else {
+                $('#apply_and_simple').show();
+            }
+
             if (count_drop > 1) {
                 var parent = document.getElementById('condition_holder');
                 var child = document.getElementById('condition' + count_drop);
@@ -534,8 +551,6 @@ function displaySimpleBetween(){
                 parent.removeChild(child_head);
                 parent.removeChild(child);
 
-                //todo smart way to reset last added condition
-                Office.context.document.settings.get('last_condition_added')
             }
             count_drop -= 1;
         }
