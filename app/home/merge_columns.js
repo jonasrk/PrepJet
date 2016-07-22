@@ -384,6 +384,8 @@ function backToOne() {
 
             return ctx.sync().then(function() {
 
+                backupForUndo(range_adding_to);
+
                 var column1_ids = []; //new Array(identifier_length);
                 var column2_ids = []; //new Array(identifier_length);
 

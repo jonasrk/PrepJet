@@ -114,6 +114,8 @@
 
                 backupForUndo(range);
 
+                backupForUndo(range);
+
                 var header = 0;
                 var act_worksheet = ctx.workbook.worksheets.getActiveWorksheet();
 

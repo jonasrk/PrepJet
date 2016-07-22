@@ -122,6 +122,8 @@ function displayFieldDelimiter(){
 
             return ctx.sync().then(function() {
 
+                backupForUndo(range_adding_to);
+
                 //get column number which to split
                 var header = 0;
                 for (var k = 0; k < range.text[0].length; k++){
