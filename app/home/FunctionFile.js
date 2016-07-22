@@ -24,6 +24,15 @@ function undo() { // TODO only does text, not formulas and formatting
 
             var act_worksheet = ctx.workbook.worksheets.getActiveWorksheet();
 
+            for (var i = 0; i < range.text.length; i++) {
+                for (var j = 0; j < range.text[0].length; j++) {
+                    var sheet_row = i + 1;
+                    var column_char = getCharFromNumber(j);
+                    addContentToWorksheet(act_worksheet, column_char + sheet_row, "");
+                }
+            }
+
+
             for (var i = 0; i < backup_range_text.length; i++) {
                 for (var j = 0; j < backup_range_text[0].length; j++) {
                     var sheet_row = i + 1;
