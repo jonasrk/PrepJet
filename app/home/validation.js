@@ -226,37 +226,38 @@ function displaySimpleBetween(k){
 
                         var check_cond = 0;
                         if (document.getElementById('if_operator' + (runcon + 1)).value == "equal") {
-                            if (range.values[i][col_index] != ifcondition) {
+                            console.log(typeof(range.text[i][col_index]));
+                            if (range.text[i][col_index] != ifcondition) {
                                 check_cond += 1;
                             }
                         }
 
                         if (document.getElementById('if_operator' + (runcon + 1)).value == "smaller") {
-                            if (range.values[i][col_index] >= ifcondition) {
+                            if (range.text[i][col_index] >= ifcondition) {
                                 check_cond += 1;
                             }
                         }
 
                         if (document.getElementById('if_operator' + (runcon + 1)).value == "greater") {
-                            if (range.values[i][col_index] <= ifcondition) {
+                            if (range.text[i][col_index] <= ifcondition) {
                                 check_cond += 1;
                             }
                         }
 
                         if (document.getElementById('if_operator' + (runcon + 1)).value == "inequal") {
-                            if (range.values[i][col_index] == ifcondition) {
+                            if (range.text[i][col_index] == ifcondition) {
                                 check_cond += 1;
                             }
                         }
 
                         if (document.getElementById('if_operator' + (runcon + 1)).value == "between") {
-                            if (range.values[i][col_index] < ifcondition || range.values[i][col_index] > ifbetweencondition) {
+                            if (range.text[i][col_index] < ifcondition || range.text[i][col_index] > ifbetweencondition) {
                                  check_cond += 1;
                             }
                         }
 
                         if (document.getElementById('if_operator' + (runcon + 1)).value == "notbetween") {
-                            if (range.values[i][col_index] > ifcondition && range.values[i][col_index] < ifbetweencondition) {
+                            if (range.text[i][col_index] > ifcondition && range.text[i][col_index] < ifbetweencondition) {
                                  check_cond += 1;
                             }
                         }
@@ -264,7 +265,7 @@ function displaySimpleBetween(k){
                         if (document.getElementById('if_operator' + (runcon + 1)).value == "inlist") {
                             var check = 0;
                             for (run = 0; run < splitted_list.length; run++) {
-                                if (range.values[i][col_index] == splitted_list[run]) {
+                                if (range.text[i][col_index] == splitted_list[run]) {
                                      check = 1;
                                 }
                             }
@@ -366,37 +367,37 @@ function displaySimpleBetween(k){
                         var col_index = header_if[runcon];
 
                         if (document.getElementById('if_operator' + (runcon + 1)).value == "equal") {
-                            if (range.values[i][col_index] != ifcondition) {
+                            if (range.text[i][col_index] != ifcondition) {
                                 check_cond += 1;
                             }
                         }
 
                         if (document.getElementById('if_operator' + (runcon + 1)).value == "smaller") {
-                            if (range.values[i][col_index] >= ifcondition) {
+                            if (range.text[i][col_index] >= ifcondition) {
                                 check_cond += 1;
                             }
                         }
 
                         if (document.getElementById('if_operator' + (runcon + 1)).value == "greater") {
-                            if (range.values[i][col_index] <= ifcondition) {
+                            if (range.text[i][col_index] <= ifcondition) {
                                 check_cond += 1;
                             }
                         }
 
                         if (document.getElementById('if_operator' + (runcon + 1)).value == "inequal") {
-                            if (range.values[i][col_index] == ifcondition) {
+                            if (range.text[i][col_index] == ifcondition) {
                                 check_cond += 1;
                             }
                         }
 
                         if (document.getElementById('if_operator' + (runcon + 1)).value == "between") {
-                            if (range.values[i][col_index] < ifcondition || range.values[i][col_index] > ifbetweencondition) {
+                            if (range.text[i][col_index] < ifcondition || range.text[i][col_index] > ifbetweencondition) {
                                  check_cond += 1;
                             }
                         }
 
                         if (document.getElementById('if_operator' + (runcon + 1)).value == "notbetween") {
-                            if (range.values[i][col_index] > ifcondition && range.values[i][col_index] < ifbetweencondition) {
+                            if (range.text[i][col_index] > ifcondition && range.text[i][col_index] < ifbetweencondition) {
                                  check_cond += 1;
                             }
                         }
@@ -404,7 +405,7 @@ function displaySimpleBetween(k){
                         if (document.getElementById('if_operator' + (runcon + 1)).value == "inlist") {
                             var check = 0;
                             for (run = 0; run < splitted_list.length; run++) {
-                                if (range.values[i][col_index] == splitted_list[run]) {
+                                if (range.text[i][col_index] == splitted_list[run]) {
                                      check = 1;
                                 }
                             }
@@ -864,36 +865,36 @@ function displaySimpleBetween(k){
                         }
 
                         if (document.getElementById('if_operator' + (runcol + 1)).value == "equal") {
-                            if (range.values[i][col_index] == ifcondition) {
+                            if (range.text[i][col_index] == ifcondition) {
                                 check_cond += 1;
                             }
                         }
 
                         if (document.getElementById('if_operator' + (runcol + 1)).value == "smaller") {
-                            if (range.values[i][col_index] < ifcondition) {
+                            if (range.text[i][col_index] < ifcondition) {
                                 check_cond += 1;
                             }
                         }
 
                         if (document.getElementById('if_operator' + (runcol + 1)).value == "greater") {
-                            if (range.values[i][col_index] > ifcondition) {
+                            if (range.text[i][col_index] > ifcondition) {
                                 check_cond += 1;
                             }
                         }
                         if (document.getElementById('if_operator' + (runcol + 1)).value == "inequal") {
-                            if (range.values[i][col_index] != ifcondition) {
+                            if (range.text[i][col_index] != ifcondition) {
                                 check_cond += 1;
                             }
                         }
 
                         if (document.getElementById('if_operator' + (runcol + 1)).value == "between") {
-                            if (range.values[i][col_index] > ifcondition && range.values[i][col_index] < ifbetweencondition) {
+                            if (range.text[i][col_index] > ifcondition && range.text[i][col_index] < ifbetweencondition) {
                                 check_cond += 1;
                             }
                         }
 
                         if (document.getElementById('if_operator' + (runcol + 1)).value == "notbetween") {
-                            if (range.values[i][col_index] < ifcondition || range.values[i][col_index] > ifbetweencondition) {
+                            if (range.text[i][col_index] < ifcondition || range.text[i][col_index] > ifbetweencondition) {
                                 check_cond += 1;
                             }
                         }
@@ -901,7 +902,7 @@ function displaySimpleBetween(k){
                         if (document.getElementById('if_operator' + (runcol + 1)).value == "inlist") {
                             var check_list = 0;
                             for (var run = 0; run < splitted_if_list.length; run++) {
-                                if (range.values[i][col_index] == splitted_if_list[run]) {
+                                if (range.text[i][col_index] == splitted_if_list[run]) {
                                     check_list = 1;
                                 }
                             }
@@ -914,39 +915,39 @@ function displaySimpleBetween(k){
                     var address = getCharFromNumber(header_then) + sheet_row;
                     if (check_cond == count_drop) {
                         if (document.getElementById('then_operator').value == "equal") {
-                            if (range.values[i][header_then] != thencondition) {
+                            if (range.text[i][header_then] != thencondition) {
                                 highlightContentInWorksheet(act_worksheet, address, '#EA7F04');
                             }
                         }
                         else if (document.getElementById('then_operator').value == "smaller") {
-                             if (range.values[i][header_then] >= thencondition) {
+                             if (range.text[i][header_then] >= thencondition) {
                                 highlightContentInWorksheet(act_worksheet, address, '#EA7F04');
                              }
                         }
                         else if (document.getElementById('then_operator').value == "greater") {
-                            if (range.values[i][header_then] <= thencondition) {
+                            if (range.text[i][header_then] <= thencondition) {
                                 highlightContentInWorksheet(act_worksheet, address, '#EA7F04');
                             }
                         }
                         else if (document.getElementById('then_operator').value == "inequal") {
-                            if (range.values[i][header_then] == thencondition) {
+                            if (range.text[i][header_then] == thencondition) {
                                 highlightContentInWorksheet(act_worksheet, address, '#EA7F04');
                             }
                         }
                         else if (document.getElementById('then_operator').value == "between") {
-                            if (range.values[i][header_then] < thencondition || range.values[i][header_then] > betweencondition) {
+                            if (range.text[i][header_then] < thencondition || range.text[i][header_then] > betweencondition) {
                                 highlightContentInWorksheet(act_worksheet, address, '#EA7F04');
                             }
                         }
                         else if (document.getElementById('then_operator').value == "notbetween") {
-                            if (range.values[i][header_then] > thencondition && range.values[i][header_then] < betweencondition) {
+                            if (range.text[i][header_then] > thencondition && range.text[i][header_then] < betweencondition) {
                                 highlightContentInWorksheet(act_worksheet, address, '#EA7F04');
                             }
                         }
                         else if (document.getElementById('then_operator').value == "inlist") {
                             var check_then = 0;
                             for (var runthen = 0; runthen < splitted_then_list.length; runthen++) {
-                                if (range.values[i][header_then] == splitted_then_list[runthen]) {
+                                if (range.text[i][header_then] == splitted_then_list[runthen]) {
                                     check_then = 1;
                                 }
                             }
@@ -1114,41 +1115,41 @@ function displaySimpleBetween(k){
                         var address = getCharFromNumber(header_then) + sheet_row;
 
                         if (document.getElementById('if_operator' + (runcol + 1)).value == "equal") {
-                            if (range.values[i][col_index] == ifcondition) {
+                            if (range.text[i][col_index] == ifcondition) {
                                 if (document.getElementById('then_operator').value == "equal") {
-                                    if (range.values[i][header_then] != thencondition) {
+                                    if (range.text[i][header_then] != thencondition) {
                                         highlightContentInWorksheet(act_worksheet, address, '#EA7F04');
                                     }
                                 }
                                 else if (document.getElementById('then_operator').value == "smaller") {
-                                    if (range.values[i][header_then] >= thencondition) {
+                                    if (range.text[i][header_then] >= thencondition) {
                                         highlightContentInWorksheet(act_worksheet, address, '#EA7F04');
                                     }
                                 }
                                 else if (document.getElementById('then_operator').value == "greater") {
-                                    if (range.values[i][header_then] <= thencondition) {
+                                    if (range.text[i][header_then] <= thencondition) {
                                         highlightContentInWorksheet(act_worksheet, address, '#EA7F04');
                                     }
                                 }
                                 else if (document.getElementById('then_operator').value == "inequal") {
-                                    if (range.values[i][header_then] == thencondition) {
+                                    if (range.text[i][header_then] == thencondition) {
                                         highlightContentInWorksheet(act_worksheet, address, '#EA7F04');
                                     }
                                 }
                                 else if (document.getElementById('then_operator').value == "between") {
-                                    if (range.values[i][header_then] < thencondition || range.values[i][header_then] > betweencondition) {
+                                    if (range.text[i][header_then] < thencondition || range.text[i][header_then] > betweencondition) {
                                         highlightContentInWorksheet(act_worksheet, address, '#EA7F04');
                                     }
                                 }
                                 else if (document.getElementById('then_operator').value == "notbetween") {
-                                    if (range.values[i][header_then] > thencondition && range.values[i][header_then] < betweencondition) {
+                                    if (range.text[i][header_then] > thencondition && range.text[i][header_then] < betweencondition) {
                                         highlightContentInWorksheet(act_worksheet, address, '#EA7F04');
                                     }
                                 }
                                 else if (document.getElementById('then_operator').value == "inlist") {
                                     var check = 0;
                                     for (var run = 0; run < splitted_then_list.length; run++) {
-                                        if (range.values[i][header_then] == splitted_then_list[run]) {
+                                        if (range.text[i][header_then] == splitted_then_list[run]) {
                                             check = 1;
                                         }
                                     }
@@ -1160,41 +1161,41 @@ function displaySimpleBetween(k){
                         }
 
                         if (document.getElementById('if_operator' + (runcol + 1)).value == "smaller") {
-                            if (range.values[i][col_index] < ifcondition) {
+                            if (range.text[i][col_index] < ifcondition) {
                                 if (document.getElementById('then_operator').value == "equal") {
-                                    if (range.values[i][header_then] != thencondition) {
+                                    if (range.text[i][header_then] != thencondition) {
                                         highlightContentInWorksheet(act_worksheet, address, '#EA7F04');
                                     }
                                 }
                                 else if (document.getElementById('then_operator').value == "smaller") {
-                                    if (range.values[i][header_then] >= thencondition) {
+                                    if (range.text[i][header_then] >= thencondition) {
                                         highlightContentInWorksheet(act_worksheet, address, '#EA7F04');
                                     }
                                 }
                                 else if (document.getElementById('then_operator').value == "greater") {
-                                    if (range.values[i][header_then] <= thencondition) {
+                                    if (range.text[i][header_then] <= thencondition) {
                                         highlightContentInWorksheet(act_worksheet, address, '#EA7F04');
                                     }
                                 }
                                 else if (document.getElementById('then_operator').value == "inequal") {
-                                    if (range.values[i][header_then] == thencondition) {
+                                    if (range.text[i][header_then] == thencondition) {
                                         highlightContentInWorksheet(act_worksheet, address, '#EA7F04');
                                     }
                                 }
                                 else if (document.getElementById('then_operator').value == "between") {
-                                    if (range.values[i][header_then] < thencondition || range.values[i][header_then] > betweencondition) {
+                                    if (range.text[i][header_then] < thencondition || range.text[i][header_then] > betweencondition) {
                                         highlightContentInWorksheet(act_worksheet, address, '#EA7F04');
                                     }
                                 }
                                 else if (document.getElementById('then_operator').value == "notbetween") {
-                                    if (range.values[i][header_then] > thencondition && range.values[i][header_then] < betweencondition) {
+                                    if (range.text[i][header_then] > thencondition && range.text[i][header_then] < betweencondition) {
                                         highlightContentInWorksheet(act_worksheet, address, '#EA7F04');
                                     }
                                 }
                                 else if (document.getElementById('then_operator').value == "inlist") {
                                     var check = 0;
                                     for (var run = 0; run < splitted_then_list.length; run++) {
-                                        if (range.values[i][header_then] == splitted_then_list[run]) {
+                                        if (range.text[i][header_then] == splitted_then_list[run]) {
                                             check = 1;
                                         }
                                     }
@@ -1206,41 +1207,41 @@ function displaySimpleBetween(k){
                         }
 
                         if (document.getElementById('if_operator' + (runcol + 1)).value == "greater") {
-                            if (range.values[i][col_index] > ifcondition) {
+                            if (range.text[i][col_index] > ifcondition) {
                                 if (document.getElementById('then_operator').value == "equal") {
-                                    if (range.values[i][header_then] != thencondition) {
+                                    if (range.text[i][header_then] != thencondition) {
                                         highlightContentInWorksheet(act_worksheet, address, '#EA7F04');
                                     }
                                 }
                                 else if (document.getElementById('then_operator').value == "smaller") {
-                                    if (range.values[i][header_then] >= thencondition) {
+                                    if (range.text[i][header_then] >= thencondition) {
                                         highlightContentInWorksheet(act_worksheet, address, '#EA7F04');
                                     }
                                 }
                                 else if (document.getElementById('then_operator').value == "greater") {
-                                    if (range.values[i][header_then] <= thencondition) {
+                                    if (range.text[i][header_then] <= thencondition) {
                                         highlightContentInWorksheet(act_worksheet, address, '#EA7F04');
                                     }
                                 }
                                 else if (document.getElementById('then_operator').value == "inequal") {
-                                    if (range.values[i][header_then] == thencondition) {
+                                    if (range.text[i][header_then] == thencondition) {
                                         highlightContentInWorksheet(act_worksheet, address, '#EA7F04');
                                     }
                                 }
                                 else if (document.getElementById('then_operator').value == "between") {
-                                    if (range.values[i][header_then] < thencondition || range.values[i][header_then] > betweencondition) {
+                                    if (range.text[i][header_then] < thencondition || range.text[i][header_then] > betweencondition) {
                                         highlightContentInWorksheet(act_worksheet, address, '#EA7F04');
                                     }
                                 }
                                 else if (document.getElementById('then_operator').value == "notbetween") {
-                                    if (range.values[i][header_then] > thencondition && range.values[i][header_then] < betweencondition) {
+                                    if (range.text[i][header_then] > thencondition && range.text[i][header_then] < betweencondition) {
                                         highlightContentInWorksheet(act_worksheet, address, '#EA7F04');
                                     }
                                 }
                                 else if (document.getElementById('then_operator').value == "inlist") {
                                     var check = 0;
                                     for (var run = 0; run < splitted_then_list.length; run++) {
-                                        if (range.values[i][header_then] == splitted_then_list[run]) {
+                                        if (range.text[i][header_then] == splitted_then_list[run]) {
                                             check = 1;
                                         }
                                     }
@@ -1251,41 +1252,41 @@ function displaySimpleBetween(k){
                             }
                         }
                         if (document.getElementById('if_operator' + (runcol + 1)).value == "inequal") {
-                            if (range.values[i][col_index] != ifcondition) {
+                            if (range.text[i][col_index] != ifcondition) {
                                 if (document.getElementById('then_operator').value == "equal") {
-                                    if (range.values[i][header_then] != thencondition) {
+                                    if (range.text[i][header_then] != thencondition) {
                                         highlightContentInWorksheet(act_worksheet, address, '#EA7F04');
                                     }
                                 }
                                 else if (document.getElementById('then_operator').value == "smaller") {
-                                    if (range.values[i][header_then] >= thencondition) {
+                                    if (range.text[i][header_then] >= thencondition) {
                                         highlightContentInWorksheet(act_worksheet, address, '#EA7F04');
                                     }
                                 }
                                 else if (document.getElementById('then_operator').value == "greater") {
-                                    if (range.values[i][header_then] <= thencondition) {
+                                    if (range.text[i][header_then] <= thencondition) {
                                         highlightContentInWorksheet(act_worksheet, address, '#EA7F04');
                                     }
                                 }
                                 else if (document.getElementById('then_operator').value == "inequal") {
-                                    if (range.values[i][header_then] == thencondition) {
+                                    if (range.text[i][header_then] == thencondition) {
                                         highlightContentInWorksheet(act_worksheet, address, '#EA7F04');
                                     }
                                 }
                                 else if (document.getElementById('then_operator').value == "between") {
-                                    if (range.values[i][header_then] < thencondition || range.values[i][header_then] > betweencondition) {
+                                    if (range.text[i][header_then] < thencondition || range.text[i][header_then] > betweencondition) {
                                         highlightContentInWorksheet(act_worksheet, address, '#EA7F04');
                                     }
                                 }
                                 else if (document.getElementById('then_operator').value == "notbetween") {
-                                    if (range.values[i][header_then] > thencondition && range.values[i][header_then] < betweencondition) {
+                                    if (range.text[i][header_then] > thencondition && range.text[i][header_then] < betweencondition) {
                                         highlightContentInWorksheet(act_worksheet, address, '#EA7F04');
                                     }
                                 }
                                 else if (document.getElementById('then_operator').value == "inlist") {
                                     var check = 0;
                                     for (var run = 0; run < splitted_then_list.length; run++) {
-                                        if (range.values[i][header_then] == splitted_then_list[run]) {
+                                        if (range.text[i][header_then] == splitted_then_list[run]) {
                                             check = 1;
                                         }
                                     }
@@ -1297,41 +1298,41 @@ function displaySimpleBetween(k){
                         }
 
                         if (document.getElementById('if_operator' + (runcol + 1)).value == "between") {
-                            if (range.values[i][col_index] > ifcondition && range.values[i][header_if] < ifbetweencondition) {
+                            if (range.text[i][col_index] > ifcondition && range.text[i][header_if] < ifbetweencondition) {
                                 if (document.getElementById('then_operator').value == "equal") {
-                                    if (range.values[i][header_then] != thencondition) {
+                                    if (range.text[i][header_then] != thencondition) {
                                         highlightContentInWorksheet(act_worksheet, address, '#EA7F04');
                                     }
                                 }
                                 else if (document.getElementById('then_operator').value == "smaller") {
-                                    if (range.values[i][header_then] >= thencondition) {
+                                    if (range.text[i][header_then] >= thencondition) {
                                         highlightContentInWorksheet(act_worksheet, address, '#EA7F04');
                                     }
                                 }
                                 else if (document.getElementById('then_operator').value == "greater") {
-                                    if (range.values[i][header_then] <= thencondition) {
+                                    if (range.text[i][header_then] <= thencondition) {
                                         highlightContentInWorksheet(act_worksheet, address, '#EA7F04');
                                     }
                                 }
                                 else if (document.getElementById('then_operator').value == "inequal") {
-                                    if (range.values[i][header_then] == thencondition) {
+                                    if (range.text[i][header_then] == thencondition) {
                                         highlightContentInWorksheet(act_worksheet, address, '#EA7F04');
                                     }
                                 }
                                 else if (document.getElementById('then_operator').value == "between") {
-                                    if (range.values[i][header_then] < thencondition || range.values[i][header_then] > betweencondition) {
+                                    if (range.text[i][header_then] < thencondition || range.text[i][header_then] > betweencondition) {
                                         highlightContentInWorksheet(act_worksheet, address, '#EA7F04');
                                     }
                                 }
                                 else if (document.getElementById('then_operator').value == "notbetween") {
-                                    if (range.values[i][header_then] > thencondition && range.values[i][header_then] < betweencondition) {
+                                    if (range.text[i][header_then] > thencondition && range.text[i][header_then] < betweencondition) {
                                         highlightContentInWorksheet(act_worksheet, address, '#EA7F04');
                                     }
                                 }
                                 else if (document.getElementById('then_operator').value == "inlist") {
                                     var check = 0;
                                     for (var run = 0; run < splitted_then_list.length; run++) {
-                                        if (range.values[i][header_then] == splitted_then_list[run]) {
+                                        if (range.text[i][header_then] == splitted_then_list[run]) {
                                             check = 1;
                                         }
                                     }
@@ -1343,41 +1344,41 @@ function displaySimpleBetween(k){
                         }
 
                         if (document.getElementById('if_operator' + (runcol + 1)).value == "notbetween") {
-                            if (range.values[i][col_index] < ifcondition || range.values[i][header_if] > ifbetweencondition) {
+                            if (range.text[i][col_index] < ifcondition || range.text[i][header_if] > ifbetweencondition) {
                                 if (document.getElementById('then_operator').value == "equal") {
-                                    if (range.values[i][header_then] != thencondition) {
+                                    if (range.text[i][header_then] != thencondition) {
                                         highlightContentInWorksheet(act_worksheet, address, '#EA7F04');
                                     }
                                 }
                                 else if (document.getElementById('then_operator').value == "smaller") {
-                                    if (range.values[i][header_then] >= thencondition) {
+                                    if (range.text[i][header_then] >= thencondition) {
                                         highlightContentInWorksheet(act_worksheet, address, '#EA7F04');
                                     }
                                 }
                                 else if (document.getElementById('then_operator').value == "greater") {
-                                    if (range.values[i][header_then] <= thencondition) {
+                                    if (range.text[i][header_then] <= thencondition) {
                                         highlightContentInWorksheet(act_worksheet, address, '#EA7F04');
                                     }
                                 }
                                 else if (document.getElementById('then_operator').value == "inequal") {
-                                    if (range.values[i][header_then] == thencondition) {
+                                    if (range.text[i][header_then] == thencondition) {
                                         highlightContentInWorksheet(act_worksheet, address, '#EA7F04');
                                     }
                                 }
                                 else if (document.getElementById('then_operator').value == "between") {
-                                    if (range.values[i][header_then] < thencondition || range.values[i][header_then] > betweencondition) {
+                                    if (range.text[i][header_then] < thencondition || range.text[i][header_then] > betweencondition) {
                                         highlightContentInWorksheet(act_worksheet, address, '#EA7F04');
                                     }
                                 }
                                 else if (document.getElementById('then_operator').value == "notbetween") {
-                                    if (range.values[i][header_then] > thencondition && range.values[i][header_then] < betweencondition) {
+                                    if (range.text[i][header_then] > thencondition && range.text[i][header_then] < betweencondition) {
                                         highlightContentInWorksheet(act_worksheet, address, '#EA7F04');
                                     }
                                 }
                                 else if (document.getElementById('then_operator').value == "inlist") {
                                     var check = 0;
                                     for (var run = 0; run < splitted_then_list.length; run++) {
-                                        if (range.values[i][header_then] == splitted_then_list[run]) {
+                                        if (range.text[i][header_then] == splitted_then_list[run]) {
                                             check = 1;
                                         }
                                     }
@@ -1390,41 +1391,41 @@ function displaySimpleBetween(k){
 
                         if (document.getElementById('if_operator' + (runcol + 1)).value == "inlist") {
                             for (var run = 0; run < splitted_if_list.length; run++) {
-                                if (range.values[i][col_index] == splitted_if_list[run]) {
+                                if (range.text[i][col_index] == splitted_if_list[run]) {
                                     if (document.getElementById('then_operator').value == "equal") {
-                                        if (range.values[i][header_then] != thencondition) {
+                                        if (range.text[i][header_then] != thencondition) {
                                             highlightContentInWorksheet(act_worksheet, address, '#EA7F04');
                                         }
                                     }
                                     else if (document.getElementById('then_operator').value == "smaller") {
-                                        if (range.values[i][header_then] >= thencondition) {
+                                        if (range.text[i][header_then] >= thencondition) {
                                             highlightContentInWorksheet(act_worksheet, address, '#EA7F04');
                                         }
                                     }
                                     else if (document.getElementById('then_operator').value == "greater") {
-                                        if (range.values[i][header_then] <= thencondition) {
+                                        if (range.text[i][header_then] <= thencondition) {
                                             highlightContentInWorksheet(act_worksheet, address, '#EA7F04');
                                         }
                                     }
                                     else if (document.getElementById('then_operator').value == "inequal") {
-                                        if (range.values[i][header_then] == thencondition) {
+                                        if (range.text[i][header_then] == thencondition) {
                                             highlightContentInWorksheet(act_worksheet, address, '#EA7F04');
                                         }
                                     }
                                     else if (document.getElementById('then_operator').value == "between") {
-                                        if (range.values[i][header_then] < thencondition || range.values[i][header_then] > betweencondition) {
+                                        if (range.text[i][header_then] < thencondition || range.text[i][header_then] > betweencondition) {
                                             highlightContentInWorksheet(act_worksheet, address, '#EA7F04');
                                         }
                                     }
                                     else if (document.getElementById('then_operator').value == "notbetween") {
-                                        if (range.values[i][header_then] > thencondition && range.values[i][header_then] < betweencondition) {
+                                        if (range.text[i][header_then] > thencondition && range.text[i][header_then] < betweencondition) {
                                             highlightContentInWorksheet(act_worksheet, address, '#EA7F04');
                                         }
                                     }
                                     else if (document.getElementById('then_operator').value == "inlist") {
                                         var check = 0;
                                         for (var runthen = 0; runthen < splitted_then_list.length; runthen++) {
-                                            if (range.values[i][header_then] == splitted_then_list[run]) {
+                                            if (range.text[i][header_then] == splitted_then_list[run]) {
                                                 check = 1;
                                             }
                                         }
@@ -1555,37 +1556,37 @@ function displaySimpleBetween(k){
 
                             var col_index = header_columns[runcon][run];
                             if (document.getElementById('if_operator' + (and_index[runcon][run] + 1)).value == "equal") {
-                                if (range.values[i][col_index] != ifcondition) {
+                                if (range.text[i][col_index] != ifcondition) {
                                     check_cond += 1;
                                 }
                             }
 
                             if (document.getElementById('if_operator' + (and_index[runcon][run] + 1)).value == "smaller") {
-                                if (range.values[i][col_index] >= ifcondition) {
+                                if (range.text[i][col_index] >= ifcondition) {
                                     check_cond += 1;
                                 }
                             }
 
                             if (document.getElementById('if_operator' + (and_index[runcon][run] + 1)).value == "greater") {
-                                if (range.values[i][col_index] <= ifcondition) {
+                                if (range.text[i][col_index] <= ifcondition) {
                                     check_cond += 1;
                                 }
                             }
 
                             if (document.getElementById('if_operator' + (and_index[runcon][run] + 1)).value == "inequal") {
-                                if (range.values[i][col_index] == ifcondition) {
+                                if (range.text[i][col_index] == ifcondition) {
                                     check_cond += 1;
                                 }
                             }
 
                             if (document.getElementById('if_operator' + (and_index[runcon][run] + 1)).value == "between") {
-                                if (range.values[i][col_index] < ifcondition || range.values[i][col_index] > ifbetweencondition) {
+                                if (range.text[i][col_index] < ifcondition || range.text[i][col_index] > ifbetweencondition) {
                                      check_cond += 1;
                                 }
                             }
 
                             if (document.getElementById('if_operator' + (and_index[runcon][run] + 1)).value == "notbetween") {
-                                if (range.values[i][col_index] > ifcondition && range.values[i][col_index] < ifbetweencondition) {
+                                if (range.text[i][col_index] > ifcondition && range.text[i][col_index] < ifbetweencondition) {
                                      check_cond += 1;
                                 }
                             }
@@ -1593,7 +1594,7 @@ function displaySimpleBetween(k){
                             if (document.getElementById('if_operator' + (and_index[runcon][run] + 1)).value == "inlist") {
                                 var check = 0;
                                 for (var k = 0; k < splitted_list.length; k++) {
-                                    if (range.values[i][col_index] == splitted_list[k]) {
+                                    if (range.text[i][col_index] == splitted_list[k]) {
                                          check = 1;
                                     }
                                 }
@@ -1801,37 +1802,37 @@ function displaySimpleBetween(k){
 
                             var col_index = header_columns[runcon][run];
                             if (document.getElementById('if_operator' + (and_index[runcon][run] + 1)).value == "equal") {
-                                if (range.values[i][col_index] == ifcondition) {
+                                if (range.text[i][col_index] == ifcondition) {
                                     check_cond += 1;
                                 }
                             }
 
                             if (document.getElementById('if_operator' + (and_index[runcon][run] + 1)).value == "smaller") {
-                                if (range.values[i][col_index] < ifcondition) {
+                                if (range.text[i][col_index] < ifcondition) {
                                     check_cond += 1;
                                 }
                             }
 
                             if (document.getElementById('if_operator' + (and_index[runcon][run] + 1)).value == "greater") {
-                                if (range.values[i][col_index] > ifcondition) {
+                                if (range.text[i][col_index] > ifcondition) {
                                     check_cond += 1;
                                 }
                             }
 
                             if (document.getElementById('if_operator' + (and_index[runcon][run] + 1)).value == "inequal") {
-                                if (range.values[i][col_index] != ifcondition) {
+                                if (range.text[i][col_index] != ifcondition) {
                                     check_cond += 1;
                                 }
                             }
 
                             if (document.getElementById('if_operator' + (and_index[runcon][run] + 1)).value == "between") {
-                                if (range.values[i][col_index] > ifcondition && range.values[i][col_index] < ifbetweencondition) {
+                                if (range.text[i][col_index] > ifcondition && range.text[i][col_index] < ifbetweencondition) {
                                      check_cond += 1;
                                 }
                             }
 
                             if (document.getElementById('if_operator' + (and_index[runcon][run] + 1)).value == "notbetween") {
-                                if (range.values[i][col_index] < ifcondition || range.values[i][col_index] > ifbetweencondition) {
+                                if (range.text[i][col_index] < ifcondition || range.text[i][col_index] > ifbetweencondition) {
                                      check_cond += 1;
                                 }
                             }
@@ -1839,7 +1840,7 @@ function displaySimpleBetween(k){
                             if (document.getElementById('if_operator' + (and_index[runcon][run] + 1)).value == "inlist") {
                                 var check = 0;
                                 for (var k = 0; k < splitted_list.length; k++) {
-                                    if (range.values[i][col_index] == splitted_list[k]) {
+                                    if (range.text[i][col_index] == splitted_list[k]) {
                                          check = 1;
                                     }
                                 }
@@ -1857,39 +1858,39 @@ function displaySimpleBetween(k){
                         var sheet_row = i + 1;
                         var address = getCharFromNumber(header_then) + sheet_row;
                         if (document.getElementById('then_operator').value == "equal") {
-                            if (range.values[i][header_then] != thencondition) {
+                            if (range.text[i][header_then] != thencondition) {
                                 highlightContentInWorksheet(act_worksheet, address, '#EA7F04');
                             }
                         }
                         else if (document.getElementById('then_operator').value == "smaller") {
-                            if (range.values[i][header_then] >= thencondition) {
+                            if (range.text[i][header_then] >= thencondition) {
                                 highlightContentInWorksheet(act_worksheet, address, '#EA7F04');
                             }
                         }
                         else if (document.getElementById('then_operator').value == "greater") {
-                            if (range.values[i][header_then] <= thencondition) {
+                            if (range.text[i][header_then] <= thencondition) {
                                 highlightContentInWorksheet(act_worksheet, address, '#EA7F04');
                             }
                         }
                         else if (document.getElementById('then_operator').value == "inequal") {
-                            if (range.values[i][header_then] == thencondition) {
+                            if (range.text[i][header_then] == thencondition) {
                                 highlightContentInWorksheet(act_worksheet, address, '#EA7F04');
                             }
                         }
                         else if (document.getElementById('then_operator').value == "between") {
-                            if (range.values[i][header_then] < thencondition || range.values[i][header_then] > betweencondition) {
+                            if (range.text[i][header_then] < thencondition || range.text[i][header_then] > betweencondition) {
                                 highlightContentInWorksheet(act_worksheet, address, '#EA7F04');
                             }
                         }
                         else if (document.getElementById('then_operator').value == "notbetween") {
-                            if (range.values[i][header_then] > thencondition && range.values[i][header_then] < betweencondition) {
+                            if (range.text[i][header_then] > thencondition && range.text[i][header_then] < betweencondition) {
                                 highlightContentInWorksheet(act_worksheet, address, '#EA7F04');
                             }
                         }
                         else if (document.getElementById('then_operator').value == "inlist") {
                             var check = 0;
                             for (var run = 0; run < splitted_then_list.length; run++) {
-                                if (range.values[i][header_then] == splitted_then_list[run]) {
+                                if (range.text[i][header_then] == splitted_then_list[run]) {
                                     check = 1;
                                 }
                             }
