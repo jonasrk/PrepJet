@@ -1,6 +1,6 @@
 (function () {
     'use strict';
-
+    var sorted_rows = [];
     // The initialize function must be run each time a new page is loaded
     Office.initialize = function (reason) {
         jQuery(document).ready(function () {
@@ -38,7 +38,7 @@
                         addNewCheckboxToContainer (range.text[0][i], "duplicates_column_checkbox" ,"checkboxes_duplicates");
                     }
                     else {
-                        var colchar = getCharFromNumber(i + 1);
+                        var colchar = getCharFromNumber(i);
                         addNewCheckboxToContainer ("Column " + colchar, "duplicates_column_checkbox" ,"checkboxes_duplicates");
                     }
                 }
@@ -71,7 +71,7 @@
                             document.getElementById(range.text[0][i]).checked = true;
                         }
                         else {
-                            document.getElementById("Column " + getCharFromNumber(i + 1)).checked = true;
+                            document.getElementById("Column " + getCharFromNumber(i)).checked = true;
                         }
                     }
                 }
@@ -81,7 +81,7 @@
                             document.getElementById(range.text[0][i]).checked = false;
                         }
                         else {
-                            document.getElementById("Column " + getCharFromNumber(i + 1)).checked = false;
+                            document.getElementById("Column " + getCharFromNumber(i)).checked = false;
                         }
                     }
                 }
@@ -116,7 +116,7 @@
 
                 for (var k = 0; k < range.text[0].length; k++) { // .text[0] is the first row of a range
                     for (var l = 0; l < checked_checkboxes.length; l++) { // TODO throws error if none are checked
-                        if (checked_checkboxes[l].id == range.text[0][k] || checked_checkboxes[l].id == "Column " + getCharFromNumber(k + 1)) {
+                        if (checked_checkboxes[l].id == range.text[0][k] || checked_checkboxes[l].id == "Column " + getCharFromNumber(k)) {
                             columns_to_check.push(k);
                         }
                     }
@@ -129,7 +129,7 @@
                     var this_row = [];
                     for (var j = 0; j < columns_to_check.length; j++) {
                         var row_number = i + 1;
-                        this_row.push([range.text[i][columns_to_check[j]], getCharFromNumber(columns_to_check[j] + 1) + row_number]);
+                        this_row.push([range.text[i][columns_to_check[j]], getCharFromNumber(columns_to_check[j]) + row_number]);
                     }
 
                     strings_to_sort.push(this_row);
@@ -171,7 +171,7 @@
                 }
 
                 function colorDup(duplicates_input, int) {
-                    var color = 'red';
+                    var color = "#EA7F04";
                     for (var m = 0; m < duplicates_input.length; m++){
                         if (m > 0 && !arraysEqual(duplicates_input[m], duplicates_input[m-1])){
                             // generate new random color
@@ -184,107 +184,78 @@
                     }
                 }
 
-                colorDup(duplicates, 1);
 
-
-                function sortDuplicates(duplicate_list) {
+                function deleteDuplicates(row_int) {
 
                     Excel.run(function (ctx) {
 
                         var worksheet = ctx.workbook.worksheets.getActiveWorksheet();
-                        var range_total = worksheet.getRange();
-                        var range = range_total.getUsedRange();
+                        var rangeadd = "A" + row_int;
+                        var range_tmp = worksheet.getRange(rangeadd);
+                        var total_row = range_tmp.getEntireRow();
 
-                        var rangeaddress = "A2"
-                        var range_all = worksheet.getRange(rangeaddress);
-                        var range_insert = range_all.getEntireRow();
+                        total_row.load('address');
+                        total_row.delete();
+
+                        var rangeins = "A2";
+                        var range_instmp = worksheet.getRange(rangeins);
+                        var range_insert = range_instmp.getEntireRow();
 
                         range_insert.load('address');
-                        range.load('address');
-                        range.load('text');
+                        range_insert.insert("Down");
 
                         return ctx.sync().then(function() {
-                            var act_worksheet = ctx.workbook.worksheets.getActiveWorksheet();
-                            var dup_length = duplicate_list.length;
+                            window.location = "duplicates.html";
+                        });
 
-                            for (var run = 0; run < dup_length; run++) {
-                                range_insert.insert("Down");
-                            }
-
-                            var sheet_row = 2;
-                            var row_array = [];
-
-
-                            for (var run = 0; run < dup_length; run++) {
-                                row_array[run] = duplicate_list[run][0][1];
-                            }
-
-                            var row_numbers = [];
-                            for (var run = 0; run < row_array.length; run++) {
-                                row_numbers[run] = Number(row_array[run].substring(1));
-                            }
-
-                            var sorted_rows = row_numbers.sort(function(a, b){return b-a});
-
-                            for (var run = 0; run < row_numbers.length; run++) {
-                                deleteDuplicates(sorted_rows[run]);
-                            }
-
-
-                            for (var run = 0; run < dup_length; run++) {
-                                for (var runcol = 0; runcol < duplicate_list[0].length; runcol++) {
-                                    var columnchar = getCharFromNumber(runcol + 1);
-                                    addContentToWorksheet(act_worksheet, columnchar + sheet_row, duplicate_list[run][runcol][0]);
-                                    duplicate_list[run][runcol].push(columnchar + sheet_row);
-                                }
-                                sheet_row = sheet_row + 1;
-                            }
-
-                            colorDup(duplicate_list, 2);
-
-                            function deleteDuplicates(row_int) {
-                                Excel.run(function (ctx) {
-
-                                    var worksheet = ctx.workbook.worksheets.getActiveWorksheet();
-
-                                    var rangeadd = "A" + row_int;
-                                    var range_tmp = worksheet.getRange(rangeadd);
-                                    var total_row = range_tmp.getEntireRow();
-
-                                    total_row.load('address');
-                                    total_row.delete();
-
-                                    return ctx.sync().then(function() {
-                                        //total_row.delete();
-                                        window.location = "duplicates.html";
-                                    });
-
-                                }).catch(function(error) {
+                    }).catch(function(error) {
                                     console.log("Error: " + error);
                                     if (error instanceof OfficeExtension.Error) {
                                         console.log("Debug info: " + JSON.stringify(error.debugInfo));
                                     }
-                                });
-
-                            }
-
-                        });
-
-                    }).catch(function(error) {
-                        console.log("Error: " + error);
-                        if (error instanceof OfficeExtension.Error) {
-                            console.log("Debug info: " + JSON.stringify(error.debugInfo));
-                        }
                     });
                 }
 
 
-                if (document.getElementById('duplicatesort').checked == true) {
-                    sortDuplicates(duplicates);
-                }
-                else {
+                if(document.getElementById('duplicatesort').checked == false) {
+                    colorDup(duplicates, 1);
                     window.location = "duplicates.html";
                 }
+                else {
+
+                    var dup_length = duplicates.length;
+                    var sheet_row = 2;
+                    var row_array = [];
+
+                    for (var run = 0; run < dup_length; run++) {
+                        row_array[run] = duplicates[run][0][1];
+                    }
+
+                    var row_numbers = [];
+                    for (var run = 0; run < row_array.length; run++) {
+                        row_numbers[run] = Number(row_array[run].substring(1));
+                    }
+
+                    sorted_rows = row_numbers.sort(function(a, b){return b-a});
+
+                    for (var k = 0; k < sorted_rows.length; k ++) {
+                        deleteDuplicates(sorted_rows[k] + k);
+                    }
+
+                    for (var run = 0; run < dup_length; run++) {
+                        for (var runcol = 0; runcol < duplicates[0].length; runcol++) {
+                            var columnchar = getCharFromNumber(runcol);
+                            addContentToWorksheet(worksheet, columnchar + sheet_row, duplicates[run][runcol][0]);
+                            duplicates[run][runcol].push(columnchar + sheet_row);
+                        }
+                        sheet_row = sheet_row + 1;
+                    }
+
+                    colorDup(duplicates, 2);
+
+                }
+
+
             });
 
         }).catch(function(error) {

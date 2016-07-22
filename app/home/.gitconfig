@@ -1,0 +1,7 @@
+[alias]
+  st = status
+  ci = commit
+  br = branch
+  co = checkout
+  # log style von max
+  lg=log --graph --pretty=format:'%Cred%h%Creset %Cblue%aN%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --abbrev-commit --date=relative
