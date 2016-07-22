@@ -200,3 +200,6 @@ ul {
 
 .fontColor_orange {
     color: #EA7F04; }
+
+.ms-fontColor-themeTertiary, .ms-fontColor-themeTertiary--hover:hover {
+    color: #EA7F04; }
