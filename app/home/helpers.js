@@ -152,3 +152,17 @@ function getRandomColor() {
     return color;
 }
 
+
+function backupForUndo(this_range){
+
+    Office.context.document.settings.set('sheet_backup', this_range.text);
+    Office.context.document.settings.saveAsync(function (asyncResult) {
+        if (asyncResult.status == Office.AsyncResultStatus.Failed) {
+            console.log('Settings save failed. Error: ' + asyncResult.error.message);
+        } else {
+            console.log('Settings saved.');
+            console.log(Office.context.document.settings.get('sheet_backup'));
+        }
+    });
+
+}

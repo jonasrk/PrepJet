@@ -99,9 +99,6 @@
     }
 
 
-    var backup_range;
-
-
     function trimSpace() {
 
         Excel.run(function (ctx) {
@@ -115,18 +112,7 @@
 
             return ctx.sync().then(function() {
 
-                backup_range = range;
-
-                Office.context.document.settings.set('sheet_backup', backup_range.text);
-                Office.context.document.settings.saveAsync(function (asyncResult) {
-                    if (asyncResult.status == Office.AsyncResultStatus.Failed) {
-                        console.log('Settings save failed. Error: ' + asyncResult.error.message);
-                    } else {
-                        console.log('Settings saved.');
-                        console.log(Office.context.document.settings.get('sheet_backup'));
-                    }
-                });
-
+                backupForUndo(range);
 
                 var header = 0;
                 var act_worksheet = ctx.workbook.worksheets.getActiveWorksheet();
@@ -158,38 +144,5 @@
             }
         });
     }
-
-    function undo() {
-
-        Excel.run(function (ctx) {
-
-            var worksheet = ctx.workbook.worksheets.getActiveWorksheet();
-            var range_all = worksheet.getRange();
-            var range = range_all.getUsedRange();
-
-            //get used range in active Sheet
-            range.load('text');
-
-            return ctx.sync().then(function() {
-
-                var act_worksheet = ctx.workbook.worksheets.getActiveWorksheet();
-
-                for (var i = 0; i < backup_range.text.length; i++) {
-                    for (var j = 0; j < backup_range.text[0].length; j++) {
-                        var sheet_row = i + 1;
-                        var column_char = getCharFromNumber(j);
-                        addContentToWorksheet(act_worksheet, column_char + sheet_row, backup_range.text[i][j]);
-                    }
-                }
-            });
-
-        }).catch(function(error) {
-            console.log("Error: " + error);
-            if (error instanceof OfficeExtension.Error) {
-                console.log("Debug info: " + JSON.stringify(error.debugInfo));
-            }
-        });
-    }
-
 
 })();
