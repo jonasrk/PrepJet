@@ -144,8 +144,6 @@ function backToOne() {
 
     function step2ButtonClicked() {
 
-        console.log(Office.context.document.settings.get('sheet_backup'));
-
         $('#step1').hide();
         $('#step2').show();
         $('#step3').hide();
