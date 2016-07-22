@@ -7,7 +7,7 @@
 })();
 
 //Notice function needs to be in global namespace
-function undo() {
+function undo() { // TODO only does text, not formulas and formatting
     var backup_range_text = Office.context.document.settings.get('sheet_backup');
     console.log(backup_range_text);
 
