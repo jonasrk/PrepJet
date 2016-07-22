@@ -47,7 +47,7 @@
             </div>
             <div class="ms-firstrun-pages__welcome">
                 <div>
-                    <h1 id="welcomeHeadline" class="ms-font-xl ms-fontWeight-light ms-fontColor-white">PrepJet Help</h1>
+                    <h1 id="welcomeHeadline" class="ms-font-xl ms-fontWeight-light fontColor_orange">PrepJet Help</h1>
                 </div>
             </div>
         </div>
@@ -62,8 +62,8 @@
                     <a id="linkExtractValues" class="ms-Link_White">Extract Value</a><br>
                     <a id="linkTrimSpaces" class="ms-Link_White">Trim Spaces</a><br>
                     <a id="linkDetectDuplicates" class="ms-Link_White">Detect Duplicates</a><br>
-                    <a id="linkDetectOutlier" class="ms-Link_White">Detect Outlier</a><br>
-                    <a id="linkValidationRule" class="ms-Link_White">Validation Rule</a><br>
+                    <a id="linkDetectOutlier" class="ms-Link_White">Detect Inconsistencies</a><br>
+                    <a id="linkValidationRule" class="ms-Link_White">Customized Validation</a><br>
                 </p>
             </div>
         </div>
@@ -77,7 +77,7 @@
             </div>
             <div class="ms-firstrun-pages__welcome">
                 <div>
-                    <h1 id="welcomeHeadline" class="ms-font-xl ms-fontWeight-light ms-fontColor-white">Add Column</h1>
+                    <h1 id="welcomeHeadline" class="ms-font-xl ms-fontWeight-light fontColor_orange">Add Column</h1>
                 </div>
             </div>
         </div>
@@ -105,13 +105,13 @@
             </div>
             <div class="ms-firstrun-pages__welcome">
                 <div>
-                    <h1 id="welcomeHeadline" class="ms-font-xl ms-fontWeight-light ms-fontColor-white">Split Values</h1>
+                    <h1 id="welcomeHeadline" class="ms-font-xl ms-fontWeight-light fontColor_orange">Split Values</h1>
                 </div>
             </div>
         </div>
         <div class="ms-firstrun-pages__content">
             <div class="ms-firstrun-pages__content--centered ms-font-m ms-fontColor-white">
-                <br><br><br>
+                <br><br>
                 <p class="ms-fontWeight-light">Split the entries in one column into separate columns.<br></p>
                 <br>
                 <p class="ms-fontWeight-light">Example: you have a column that contains name, surname and birthday, each separated by a space. You want to have the birthdate in a separate column.</p>
@@ -132,13 +132,13 @@
             </div>
             <div class="ms-firstrun-pages__welcome">
                 <div>
-                    <h1 id="welcomeHeadline" class="ms-font-xl ms-fontWeight-light ms-fontColor-white">Extract Values</h1>
+                    <h1 id="welcomeHeadline" class="ms-font-xl ms-fontWeight-light fontColor_orange">Extract Values</h1>
                 </div>
             </div>
         </div>
         <div class="ms-firstrun-pages__content">
             <div class="ms-firstrun-pages__content--centered ms-font-m ms-fontColor-white">
-                <br><br><br><br>
+                <br><br><br>
                 <p class="ms-fontWeight-light">Extract a part from a column entry based on specified delimiters<br></p>
                 <br>
                 <p class="ms-fontWeight-light">Example: you have a column that contains name, surname and birthday, each separated by a space. You want to extract the surname and write it to another column.<br></p>
@@ -159,7 +159,7 @@
             </div>
             <div class="ms-firstrun-pages__welcome">
                 <div>
-                    <h1 id="welcomeHeadline" class="ms-font-xl ms-fontWeight-light ms-fontColor-white">Trim Spaces</h1>
+                    <h1 id="welcomeHeadline" class="ms-font-xl ms-fontWeight-light fontColor_orange">Trim Spaces</h1>
                 </div>
             </div>
         </div>
@@ -180,7 +180,7 @@
             </div>
             <div class="ms-firstrun-pages__welcome">
                 <div>
-                    <h1 id="welcomeHeadline" class="ms-font-xl ms-fontWeight-light ms-fontColor-white">Detect Duplicates</h1>
+                    <h1 id="welcomeHeadline" class="ms-font-xl ms-fontWeight-light fontColor_orange">Detect Duplicates</h1>
                 </div>
             </div>
         </div>
@@ -204,17 +204,17 @@
             </div>
             <div class="ms-firstrun-pages__welcome">
                 <div>
-                    <h1 id="welcomeHeadline" class="ms-font-xl ms-fontWeight-light ms-fontColor-white">Detect Outlier</h1>
+                    <h1 id="welcomeHeadline" class="ms-font-xl ms-fontWeight-light fontColor_orange">Detect Inconsistencies</h1>
                 </div>
             </div>
         </div>
         <div class="ms-firstrun-pages__content">
             <div class="ms-firstrun-pages__content--centered ms-font-m ms-fontColor-white">
-                <p class="ms-fontWeight-light">Find and highlight values that deviate from the overall pattern in the column (statistical outliers). This function only works with numeric values (i.e. columns with which you can do mathematical operations)<br></p>
+                <p class="ms-fontWeight-light">Find and highlight values that deviate from the data type pattern in the column. PrepJet assumes the most frequent data type in a column to be the correct oe and will highlight all entries that have a different data type.<br></p>
                 <br>
-                <p class="ms-fontWeight-light">Example: You have a list of product prices and want to detect entries that could be flaws.<br></p>
+                <p class="ms-fontWeight-light">Example: You have a product catalogue and the "size" and "color" columns got messed up, so that you have a mix of sizes (numeric values) and colors (text values) in one column.<br></p>
                 <br>
-                <p class="ms-fontWeight-light">Select the column to detect the outlier and apply.<br></p>
+                <p class="ms-fontWeight-light">Select the column to detect inconsistencies and apply.<br></p>
             </div>
         </div>
     </div>
@@ -227,13 +227,13 @@
             </div>
             <div class="ms-firstrun-pages__welcome">
                 <div>
-                    <h1 id="welcomeHeadline" class="ms-font-xl ms-fontWeight-light ms-fontColor-white">Validation Rule</h1>
+                    <h1 id="welcomeHeadline" class="ms-font-xl ms-fontWeight-light fontColor_orange">Customized Validation</h1>
                 </div>
             </div>
         </div>
         <div class="ms-firstrun-pages__content">
             <div class="ms-firstrun-pages__content--centered ms-font-m ms-fontColor-white">
-                <br><br><br><br><br><br><br><br><br>
+                <br><br><br><br><br><br><br><br>
                 <p class="ms-fontWeight-light">Create rules to validate your data and to detect inconsistencies based on domain specific conditions. There is the option to create simple rules (includes only one column) and advanced rules (creates a relationship between two columns).<br></p>
                 <br>
                 <p class="ms-fontWeight-light">Example: You have a price information table and you know that there are certain price ranges for different product types.<br></p>

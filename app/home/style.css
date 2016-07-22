@@ -28,14 +28,36 @@ h1 {
     top: 60px; }
 
 .ms-Button {
+    color: #fff;
+    font-family: 'Segoe UI Regular WestEuropean','Segoe UI','Segoe WP',Tahoma,Arial,sans-serif;
+    font-size: 12px;
+    font-weight: 400;
+    background-color: #EA7F04;
+    border: 1px solid #666666;
+    height: 32px;
+    min-width: 40px;
+    padding: 4px 10px 6px; }
+
+.ms-Button_grey {
+    color: #000;
+    font-family: 'Segoe UI Regular WestEuropean','Segoe UI','Segoe WP',Tahoma,Arial,sans-serif;
+    font-size: 12px;
+    font-weight: 400;
+    background-color: #cacaca;
+    border: 1px solid #666666;
+    height: 32px;
+    min-width: 40px;
+    padding: 4px 10px 6px; }
+
+.ms-Button_small {
     color: #333;
     font-family: 'Segoe UI Regular WestEuropean','Segoe UI','Segoe WP',Tahoma,Arial,sans-serif;
     font-size: 12px;
     font-weight: 400;
-    background-color: #FCFCFC;
+    background-color: #CBCBCB;
     border: 1px solid #767676;
     height: 32px;
-    min-width: 40px;
+    min-width: 30px;
     padding: 4px 10px 6px; }
 
 .ms-Dialog.ms-Dialog--lgHeader .ms-Dialog-subText, .ms-Dropdown {
@@ -70,4 +92,11 @@ h1 {
     top: 60px; }
 
 .tableheader {
-    width: 89%; }
+    width: 85%; }
+
+.tableborder {
+    border-top: 0.75px solid;
+    border-bottom: 0.75px solid;
+    width: 100%;
+    border-color: #e2e2e2; }
+

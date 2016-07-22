@@ -40,95 +40,125 @@
 
 <body class="ms-font-m">
 <div id="content-header">
-    <div class="padding">
-        <h1>Customized Validation</h1>
-    </div>
+    <table>
+        <tr>
+            <td class="tableheader">
+                <div class="padding">
+                    <h1>Customized Rules</h1>
+                </div>
+            </td>
+            <td>
+                <div>
+                    <img class="page1" src="../../images/logo_lg.png" />
+                </div>
+            </td>
+        </tr>
+    </table>
 </div>
 <div id="content-main">
     <div class="padding">
-        <!--Advanced Rule-->
-        <button class="ms-Button" id="advanced_button">Advanced Rule</button>
-        <!--Simple Rule-->
-        <button class="ms-Button" id="simple_button">Simple Rule</button>
+        <div id="condition_holder">
+            <div id="explanation">
+                <label class="ms-Label">PrepJet will highlight data entries that do not fulfill this condition.</p>
+            </div>
 
-        <!--dropdown for condition - simple -->
-        <div id="simple_dropdown" class="ms-Dropdown table_simple" tabindex="1">
-            <label class="ms-Label">Select conditional variable</label>
-            <i class="ms-Dropdown-caretDown ms-Icon ms-Icon--caretDown"></i>
-            <select id="column_simple" class="ms-Dropdown-select"></select>
+            <div id="condition1">
+            <!--dropdown for condition - simple -->
+                <div id="simple_dropdown" class="ms-Dropdown table_simple1" tabindex="1">
+                    <label class="ms-Label">Select column</label>
+                    <i class="ms-Dropdown-caretDown ms-Icon ms-Icon--caretDown"></i>
+                    <select id="column_simple1" class="ms-Dropdown-select"></select>
+                </div>
+
+                <!--dropdown for operator-->
+                <div class="ms-Dropdown dropdown_table" tabindex="1">
+                    <label class="ms-Label">Select operator</label>
+                    <i class="ms-Dropdown-caretDown ms-Icon ms-Icon--caretDown"></i>
+                    <select id="if_operator1" class="ms-Dropdown-select" onchange="displaySimpleBetween(1)">
+                        <option value="equal">=</option>
+                        <option value="smaller"><</option>
+                        <option value="greater">></option>
+                        <option value="inequal">!=</option>
+                        <option value="between">between</option>
+                        <option value="notbetween">not between</option>
+                        <option value="inlist">in (list)</option>
+                    </select>
+                </div>
+
+                <div id="delimiter_beginning1" class="ms-TextField">
+                    <label class="ms-Label">Enter condition</label>
+                    <input id="if_condition1" class="ms-TextField-field" type="text">
+                    <span class="ms-TextField-description">Enter the condition which your column must comply with (values not fitting the rule are marked in red)</span>
+                </div>
+
+                <div id="between_beginning1" class="ms-TextField">
+                    <label class="ms-Label">And</label>
+                    <input id="if_between_condition1" class="ms-TextField-field" type="text">
+                    <span class="ms-TextField-description">Enter the upper bound of your between / not between statement</span>
+                </div>
+                <!--button class="ms-Button" id="add_cond">Add condition</button-->
+            </div>
         </div>
 
-        <!--dropdown for if condition - advanced-->
-        <div id="advanced_dropdown" class="ms-Dropdown dropdown_table_col1" tabindex="1">
-            <label class="ms-Label">IF (Select conditional variable)</label>
-            <i class="ms-Dropdown-caretDown ms-Icon ms-Icon--caretDown"></i>
-            <select id="column1_options" class="ms-Dropdown-select"></select>
+        <div id="tmp_hide">
+            <div id="expl_then">
+                <label class="ms-Label">THEN</p>
+            </div>
+            <!--dropdown for THEN-->
+            <div id="advanced_dropdown2" class="ms-Dropdown dropdown_table_col2" tabindex="1">
+                <label class="ms-Label">Select column</label>
+                <i class="ms-Dropdown-caretDown ms-Icon ms-Icon--caretDown"></i>
+                <select id="column2_options" class="ms-Dropdown-select"></select>
+            </div>
+            <!--dropdown for then operator-->
+            <div id="then_op_drop" class="ms-Dropdown dropdown_table" tabindex="1">
+                <label class="ms-Label">Select operator</label>
+                <i class="ms-Dropdown-caretDown ms-Icon ms-Icon--caretDown"></i>
+                <select id="then_operator" class="ms-Dropdown-select" onchange="displayBetween()">
+                    <option value="equal">=</option>
+                    <option value="smaller"><</option>
+                    <option value="greater">></option>
+                    <option value="inequal">!=</option>
+                    <option value="between">between</option>
+                    <option value="notbetween">not between</option>
+                    <option value="inlist">in (list)</option>
+                </select>
+            </div>
+
+            <div id="delimiter_end" class="ms-TextField">
+                <label class="ms-Label">Condition for "Then" variable</label>
+                <input id="then_condition" class="ms-TextField-field" type="text">
+                <span class="ms-TextField-description">Enter the condition which your variable in "Then" statement must comply to</span>
+            </div>
+
+            <div id="betweenand" class="ms-TextField">
+                <label class="ms-Label">And</label>
+                <input id="between_and" class="ms-TextField-field" type="text">
+                <span class="ms-TextField-description">Enter the upper bound of your between / not between statement for the "Then" variable</span>
+            </div>
         </div>
 
-        <!--dropdown for operator-->
-        <div class="ms-Dropdown dropdown_table" tabindex="1">
-            <label class="ms-Label">Select operator</label>
-            <i class="ms-Dropdown-caretDown ms-Icon ms-Icon--caretDown"></i>
-            <select id="if_operator" class="ms-Dropdown-select" onchange="displaySimpleBetween()">
-                <option value="equal">=</option>
-                <option value="smaller"><</option>
-                <option value="greater">></option>
-                <option value="inequal">!=</option>
-                <option value="between">between</option>
-                <option value="notbetween">not between</option>
-                <option value="inlist">in (list)</option>
-            </select>
+        <div id="buttons">
+            <label class="ms-Label">Optional: Select additional condition</label>
+            <table>
+                <tr>
+                    <td class="tablecol1">
+                        <button class="ms-Button_small" id="and_cond">AND</button>
+                        <button class="ms-Button_small" id="or_cond">OR</button>
+                        <button class="ms-Button_small" id="then_cond">THEN</button>
+                        <button class="ms-Button_small" id="remove_cond">remove</button>
+                    </td>
+                    <td>
+                        <button class="ms-Button" id="apply_and_simple">Apply And</button>
+                        <button class="ms-Button" id="apply_or_simple">Apply Or</button>
+                        <button class="ms-Button" id="apply_mixed_simple">Apply Mix</button>
+                        <button class="ms-Button" id="apply_advanced">Apply Ad</button>
+                        <button class="ms-Button" id="apply_or_advanced">Apply AdOr</button>
+                        <button class="ms-Button" id="apply_mixed_advanced">Apply AdMi</button>
+                    </td>
+                </tr>
+            </table>
         </div>
-
-        <div id="delimiter_beginning" class="ms-TextField">
-            <label class="ms-Label">Enter condition</label>
-            <input id="if_condition" class="ms-TextField-field" type="text">
-            <span class="ms-TextField-description">Enter the condition which your column must comply with (values not fitting the rule are marked in red)</span>
-        </div>
-
-        <div id="between_beginning" class="ms-TextField">
-            <label class="ms-Label">And</label>
-            <input id="if_between_condition" class="ms-TextField-field" type="text">
-            <span class="ms-TextField-description">Enter the upper bound of your between / not between statement</span>
-        </div>
-
-        <!--dropdown for THEN-->
-        <div id="advanced_dropdown2" class="ms-Dropdown dropdown_table_col2" tabindex="1">
-            <label class="ms-Label">THEN (select dependend variable)</label>
-            <i class="ms-Dropdown-caretDown ms-Icon ms-Icon--caretDown"></i>
-            <select id="column2_options" class="ms-Dropdown-select"></select>
-        </div>
-
-        <!--dropdown for then operator-->
-        <div id="then_op_drop" class="ms-Dropdown dropdown_table" tabindex="1">
-            <label class="ms-Label">Select operator</label>
-            <i class="ms-Dropdown-caretDown ms-Icon ms-Icon--caretDown"></i>
-            <select id="then_operator" class="ms-Dropdown-select" onchange="displayBetween()">
-                <option value="equal">=</option>
-                <option value="smaller"><</option>
-                <option value="greater">></option>
-                <option value="inequal">!=</option>
-                <option value="between">between</option>
-                <option value="notbetween">not between</option>
-                <option value="inlist">in (list)</option>
-            </select>
-        </div>
-
-        <div id="delimiter_end" class="ms-TextField">
-            <label class="ms-Label">Condition for "Then" variable</label>
-            <input id="then_condition" class="ms-TextField-field" type="text">
-            <span class="ms-TextField-description">Enter the condition which your variable in "Then" statement must comply to</span>
-        </div>
-
-        <div id="betweenand" class="ms-TextField">
-            <label class="ms-Label">And</label>
-            <input id="between_and" class="ms-TextField-field" type="text">
-            <span class="ms-TextField-description">Enter the upper bound of your between / not between statement for the "Then" variable</span>
-        </div>
-        <!--Apply advanced business rule button-->
-        <button class="ms-Button" id="apply_advanced">Apply</button>
-        <!--Apply simle business rule button-->
-        <button class="ms-Button" id="apply_simple">Apply</button>
     </div>
 
 </div>

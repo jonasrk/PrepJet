@@ -57,6 +57,124 @@ function addNewCheckboxToContainer (id, name, container) {
 }
 
 
+function addDropdown (k) {
+    var div = document.createElement("div");
+    div.id = "condition" + k;
+    document.getElementById("condition_holder").appendChild(div);
+
+    var div_drop = document.createElement("div");
+    div_drop.className = "ms-Dropdown table_simple" + k;
+    div_drop.id = "simple_dropdown" + k;
+    div.appendChild(div_drop);
+
+    var lab = document.createElement('label');
+    lab.className = "ms-Label";
+    lab.innerHTML = "Select column";
+    div_drop.appendChild(lab);
+
+    var elemi = document.createElement("i");
+    elemi.className = "ms-Dropdown-caretDown ms-Icon ms-Icon--caretDown";
+    div_drop.appendChild(elemi);
+
+    var sel = document.createElement("select");
+    sel.id = "column_simple" + k;
+    sel.className = "ms-Dropdown-select";
+    div_drop.appendChild(sel);
+}
+
+function addOperator(k) {
+    var div_drop = document.createElement("div");
+    div_drop.className = "ms-Dropdown dropdown_table" + k;
+    document.getElementById('condition' + k).appendChild(div_drop);
+
+    var lab = document.createElement('label');
+    lab.className = "ms-Label";
+    lab.innerHTML = "Select operator";
+    div_drop.appendChild(lab);
+
+    var elemi = document.createElement("i");
+    elemi.className = "ms-Dropdown-caretDown ms-Icon ms-Icon--caretDown";
+    div_drop.appendChild(elemi);
+
+    var sel = document.createElement("select");
+    sel.id = "if_operator" + k;
+    sel.className = "ms-Dropdown-select";
+    //sel.onchange = displaySimpleBetween(k);
+    div_drop.appendChild(sel);
+
+    var el1 = document.createElement("option");
+    el1.value = "equal";
+    el1.textContent = "=";
+    sel.appendChild(el1);
+
+    var el2 = document.createElement("option");
+    el2.value = "smaller";
+    el2.textContent = "<";
+    sel.appendChild(el2);
+
+    var el3 = document.createElement("option");
+    el3.value = "greater";
+    el3.textContent = ">";
+    sel.appendChild(el3);
+
+    var el4 = document.createElement("option");
+    el4.value = "inequal";
+    el4.textContent = "!=";
+    sel.appendChild(el4);
+
+    var el5 = document.createElement("option");
+    el5.value = "between";
+    el5.textContent = "between";
+    sel.appendChild(el5);
+
+    var el6 = document.createElement("option");
+    el6.value = "notbetween";
+    el6.textContent = "not between";
+    sel.appendChild(el6);
+
+    var el7 = document.createElement("option");
+    el7.value = "inlist";
+    el7.textContent = "in (list)";
+    sel.appendChild(el7);
+}
+
+
+function addTextField(k) {
+    var div_drop = document.createElement("div");
+    div_drop.className = "ms-TextField";
+    div_drop.id = "delimiter_beginning" + k;
+    document.getElementById('condition' + k).appendChild(div_drop);
+
+    var lab = document.createElement('label');
+    lab.className = "ms-Label";
+    lab.innerHTML = "Enter condition";
+    div_drop.appendChild(lab);
+
+    var input = document.createElement("input");
+    input.id = "if_condition" + k;
+    input.className = "ms-TextField-field";
+    input.type = "text";
+    div_drop.appendChild(input);
+}
+
+function addBetweenField(k) {
+    var div_drop = document.createElement("div");
+    div_drop.className = "ms-TextField";
+    div_drop.id = "between_beginning" + k;
+    document.getElementById('condition' + k).appendChild(div_drop);
+
+    var lab = document.createElement('label');
+    lab.className = "ms-Label";
+    lab.innerHTML = "And";
+    div_drop.appendChild(lab);
+
+    var input = document.createElement("input");
+    input.id = "if_between_condition" + k;
+    input.className = "ms-TextField-field";
+    input.type = "text";
+    div_drop.appendChild(input);
+}
+
 
 function getCharFromNumber (number) {
 
