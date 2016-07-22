@@ -1,3 +1,8 @@
+//redirect to detect inconsistencies
+function redirectRule() {
+    window.location = "inconsistency.html";
+}
+
 //show textfield for ending delimiter if custom is selected
 function displayBetween(){
     if(document.getElementById('then_operator').value == "between" || document.getElementById('then_operator').value == "notbetween") {
@@ -69,6 +74,7 @@ function displaySimpleBetween(k){
             $('#apply_advanced').click(validationAndAdvanced);
             $('#apply_or_advanced').click(validationOrAdvanced);
             $('#apply_mixed_advanced').click(validationMixedAdvanced);
+            $('#to_inconsistency').click(redirectRule);
 
 
             Office.context.document.addHandlerAsync("documentSelectionChanged", myIfHandler, function(result){}
