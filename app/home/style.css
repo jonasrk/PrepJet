@@ -84,7 +84,7 @@ h1 {
     width: 85%; }
 
 .tableborder {
-    border-top: 1px solid;
-    border-bottom: 1px solid;
+    border-top: 0.75px solid;
+    border-bottom: 0.75px solid;
     width: 100%;
-    border-color: #666666; }
+    border-color: #e2e2e2; }
