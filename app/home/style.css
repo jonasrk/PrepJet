@@ -82,3 +82,9 @@ h1 {
 
 .tableheader {
     width: 85%; }
+
+.tableborder {
+    border-top: 1px solid;
+    border-bottom: 1px solid;
+    width: 100%;
+    border-color: #666666; }
