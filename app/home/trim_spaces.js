@@ -117,6 +117,17 @@
 
                 backup_range = range;
 
+                Office.context.document.settings.set('sheet_backup', backup_range.text);
+                Office.context.document.settings.saveAsync(function (asyncResult) {
+                    if (asyncResult.status == Office.AsyncResultStatus.Failed) {
+                        console.log('Settings save failed. Error: ' + asyncResult.error.message);
+                    } else {
+                        console.log('Settings saved.');
+                        console.log(Office.context.document.settings.get('sheet_backup'));
+                    }
+                });
+
+
                 var header = 0;
                 var act_worksheet = ctx.workbook.worksheets.getActiveWorksheet();
 
