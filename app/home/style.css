@@ -91,6 +91,11 @@ h1 {
     overflow: scroll;
     top: 60px; }
 
+.ms-Dropdown, .ms-Dropdown-items, .ms-Dropdown-title {
+    box-sizing: border-box;
+    box-shadow: none;
+    overflow: hidden; }
+
 .tableheader {
     width: 85%; }
 
