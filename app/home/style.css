@@ -38,6 +38,17 @@ h1 {
     min-width: 40px;
     padding: 4px 10px 6px; }
 
+.ms-Button_grey {
+    color: #000;
+    font-family: 'Segoe UI Regular WestEuropean','Segoe UI','Segoe WP',Tahoma,Arial,sans-serif;
+    font-size: 12px;
+    font-weight: 400;
+    background-color: #cacaca;
+    border: 1px solid #666666;
+    height: 32px;
+    min-width: 40px;
+    padding: 4px 10px 6px; }
+
 .ms-Dialog.ms-Dialog--lgHeader .ms-Dialog-subText, .ms-Dropdown {
     font-size: 12px; }
 
