@@ -457,32 +457,33 @@ function displaySimpleBetween(k){
         $('#remove_cond').show();
 
         mixed_condition.push(1);
+
         var check_mix = 0;
+        var test = 0;
+        for (var k = 0; k < mixed_condition.length; k++) {
+                test += mixed_condition[k];
+                check_mix = test % mixed_condition.length;
+        }
+        if (check_mix == 0 && test == mixed_condition.length) {
+            $('#apply_and_simple').show();
+            $('#apply_mixed_simple').hide();
+            $('#apply_or_simple').hide();
+        }
+        else {
             for (var k = 1; k < mixed_condition.length; k++) {
-                if (mixed_condition[k] != mixed_condition[k - 1]) {
-                    check_mix = 1;
+                if (mixed_condition[k] == 1) {
+                    $('#apply_mixed_simple').show();
+                    $('#apply_and_simple').hide();
+                    $('#apply_or_simple').hide();
+                    break;
+                }
+                else {
+                    $('#apply_or_simple').show();
+                    $('#apply_and_simple').hide();
+                    $('#apply_mixed_simple').hide();
                 }
             }
-            if (check_mix == 1 && count_drop > 2){
-                $('#apply_mixed_simple').show();
-                $('#apply_and_simple').hide();
-                $('#apply_or_simple').hide();
-            }
-            else if (mixed_condition.length == 1) {
-                $('#apply_and_simple').show();
-                $('#apply_mixed_simple').hide();
-                $('#apply_or_simple').hide();
-            }
-            else if (mixed_condition[1] == 1) {
-                $('#apply_and_simple').show();
-                $('#apply_mixed_simple').hide();
-                $('#apply_or_simple').hide();
-            }
-            else if (mixed_condition[1] == 2) {
-                $('#apply_or_simple').show();
-                $('#apply_and_simple').hide();
-                $('#apply_mixed_simple').hide();
-            }
+        }
     }
 
 
@@ -516,32 +517,33 @@ function displaySimpleBetween(k){
         $('#remove_cond').show();
 
         mixed_condition.push(2);
+
         var check_mix = 0;
+        var test = 0;
+        for (var k = 0; k < mixed_condition.length; k++) {
+                test += mixed_condition[k];
+                check_mix = test % mixed_condition.length;
+        }
+        if (check_mix == 0 && test == mixed_condition.length) {
+            $('#apply_and_simple').show();
+            $('#apply_mixed_simple').hide();
+            $('#apply_or_simple').hide();
+        }
+        else {
             for (var k = 1; k < mixed_condition.length; k++) {
-                if (mixed_condition[k] != mixed_condition[k - 1]) {
-                    check_mix = 1;
+                if (mixed_condition[k] == 1) {
+                    $('#apply_mixed_simple').show();
+                    $('#apply_and_simple').hide();
+                    $('#apply_or_simple').hide();
+                    break;
+                }
+                else {
+                        $('#apply_or_simple').show();
+                    $('#apply_and_simple').hide();
+                    $('#apply_mixed_simple').hide();
                 }
             }
-            if (check_mix == 1 && count_drop > 2){
-                $('#apply_mixed_simple').show();
-                $('#apply_and_simple').hide();
-                $('#apply_or_simple').hide();
-            }
-            else if (mixed_condition.length == 1) {
-                $('#apply_and_simple').show();
-                $('#apply_mixed_simple').hide();
-                $('#apply_or_simple').hide();
-            }
-            else if (mixed_condition[1] == 1) {
-                $('#apply_and_simple').show();
-                $('#apply_mixed_simple').hide();
-                $('#apply_or_simple').hide();
-            }
-            else if (mixed_condition[1] == 2) {
-                $('#apply_or_simple').show();
-                $('#apply_and_simple').hide();
-                $('#apply_mixed_simple').hide();
-            }
+        }
     }
 
 
@@ -623,33 +625,33 @@ function displaySimpleBetween(k){
             $('#then_cond').show();
 
             Office.context.document.settings.set('then_condition_pressed', false);
+
             var check_mix = 0;
-            for (var k = 1; k < mixed_condition.length; k++) {
-                if (mixed_condition[k] != mixed_condition[k - 1]) {
-                    check_mix = 1;
+            var test = 0;
+            for (var k = 0; k < mixed_condition.length; k++) {
+                    test += mixed_condition[k];
+                    check_mix = test % mixed_condition.length;
+            }
+            if (check_mix == 0 && test == mixed_condition.length) {
+                $('#apply_and_simple').show();
+                $('#apply_mixed_simple').hide();
+                $('#apply_or_simple').hide();
+            }
+            else {
+                for (var k = 1; k < mixed_condition.length; k++) {
+                    if (mixed_condition[k] == 1) {
+                        $('#apply_mixed_simple').show();
+                        $('#apply_and_simple').hide();
+                        $('#apply_or_simple').hide();
+                        break;
+                    }
+                    else {
+                        $('#apply_or_simple').show();
+                        $('#apply_and_simple').hide();
+                        $('#apply_mixed_simple').hide();
+                    }
                 }
             }
-            if (check_mix == 1 && count_drop > 2){
-                $('#apply_mixed_simple').show();
-                $('#apply_and_simple').hide();
-                $('#apply_or_simple').hide();
-            }
-            else if (mixed_condition.length == 1) {
-                $('#apply_and_simple').show();
-                $('#apply_mixed_simple').hide();
-                $('#apply_or_simple').hide();
-            }
-            else if (mixed_condition[1] == 1) {
-                $('#apply_and_simple').show();
-                $('#apply_mixed_simple').hide();
-                $('#apply_or_simple').hide();
-            }
-            else if (mixed_condition[1] == 2) {
-                $('#apply_or_simple').show();
-                $('#apply_and_simple').hide();
-                $('#apply_mixed_simple').hide();
-            }
-
         }
         else {
             mixed_condition.pop();
@@ -666,30 +668,30 @@ function displaySimpleBetween(k){
             count_drop -= 1;
 
             var check_mix = 0;
-            for (var k = 1; k < mixed_condition.length; k++) {
-                if (mixed_condition[k] != mixed_condition[k - 1]) {
-                    check_mix = 1;
+            var test = 0;
+            for (var k = 0; k < mixed_condition.length; k++) {
+                    test += mixed_condition[k];
+                    check_mix = test % mixed_condition.length;
+            }
+            if (check_mix == 0 && test == mixed_condition.length) {
+                $('#apply_and_simple').show();
+                $('#apply_mixed_simple').hide();
+                $('#apply_or_simple').hide();
+            }
+            else {
+                for (var k = 1; k < mixed_condition.length; k++) {
+                    if (mixed_condition[k] == 1) {
+                        $('#apply_mixed_simple').show();
+                        $('#apply_and_simple').hide();
+                        $('#apply_or_simple').hide();
+                        break;
+                    }
+                    else {
+                        $('#apply_or_simple').show();
+                        $('#apply_and_simple').hide();
+                        $('#apply_mixed_simple').hide();
+                    }
                 }
-            }
-            if (check_mix == 1 && count_drop > 2){
-                $('#apply_mixed_simple').show();
-                $('#apply_and_simple').hide();
-                $('#apply_or_simple').hide();
-            }
-            else if (mixed_condition.length == 1) {
-                $('#apply_and_simple').show();
-                $('#apply_mixed_simple').hide();
-                $('#apply_or_simple').hide();
-            }
-            else if (mixed_condition[1] == 1) {
-                $('#apply_and_simple').show();
-                $('#apply_mixed_simple').hide();
-                $('#apply_or_simple').hide();
-            }
-            else if (mixed_condition[1] == 2) {
-                $('#apply_or_simple').show();
-                $('#apply_and_simple').hide();
-                $('#apply_mixed_simple').hide();
             }
         }
 
