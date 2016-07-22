@@ -172,7 +172,6 @@ ul {
     -webkit-box-direction: normal;
             flex-direction: column;
     flex-wrap: nowrap;
-    height: 100%;
     -webkit-box-flex: 1;
             flex: 1 1 0;
     padding: 5px;
