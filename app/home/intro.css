@@ -162,8 +162,7 @@ ul {
       -webkit-box-pack: center;
               justify-content: center;
       -webkit-box-align: center;
-              align-items: left;
-      overflow-y: scroll; }
+              align-items: left; }
 
   .ms-firstrun-pages__footer {
     display: -webkit-box;
