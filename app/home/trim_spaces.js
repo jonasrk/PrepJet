@@ -18,7 +18,6 @@
 
             $('#trim_space').click(trimSpace);
             $('#checkbox_all').click(checkCheckbox);
-            $('#btn_undo').click(undo);
 
         });
     };
@@ -114,8 +113,6 @@
 
                 backupForUndo(range);
 
-                backupForUndo(range);
-
                 var header = 0;
                 var act_worksheet = ctx.workbook.worksheets.getActiveWorksheet();
 
@@ -136,7 +133,7 @@
                         addContentToWorksheet(act_worksheet, column_char + sheet_row, trim_string);
                     }
                 }
-//                window.location = "trim_spaces.html";
+               window.location = "trim_spaces.html";
             });
 
         }).catch(function(error) {
