@@ -1,5 +1,6 @@
 //redirect to detect inconsistencies
 function redirectRule() {
+    Office.context.document.settings.set('from_inconsistencies', false);
     window.location = "inconsistency.html";
 }
 
@@ -60,6 +61,11 @@ function displaySimpleBetween(k){
             $('#apply_or_advanced').hide();
             $('#apply_mixed_advanced').hide();
             $('#apply_or_simple').hide();
+            $('#to_inconsistency').hide();
+
+            if (Office.context.document.settings.get('from_inconsistencies') == true){
+                $('#to_inconsistency').show();
+            }
 
             $(".dropdown_table").Dropdown();
             $(".ms-TextField").TextField();
