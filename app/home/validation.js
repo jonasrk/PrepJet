@@ -8,11 +8,13 @@ function displayBetween(){
     }
 }
 
+//get active textfield where to enter the selection of the user
 var activeSelection = 0;
 function setFocus(activeID) {
     activeSelection = activeID;
 }
 
+//display additional text field when between or not between operator is selected
 function displaySimpleBetween(k){
     if(document.getElementById('if_operator' + k).value == "between" || document.getElementById('if_operator' + k).value == "notbetween") {
         $('#between_beginning' + k).show();
@@ -112,6 +114,8 @@ function displaySimpleBetween(k){
         });
     };
 
+
+    //function to populate dropdowns with column headers
     function fillSimpleColumn(){
 
         Excel.run(function (ctx) {
@@ -149,7 +153,8 @@ function displaySimpleBetween(k){
 
     }
 
-    //validation when simple rule is created
+
+    //function to check condition when only AND statements are used
     function validationAndSimple() {
         Excel.run(function (ctx) {
 
@@ -215,7 +220,6 @@ function displaySimpleBetween(k){
                         }
                     }
 
-                    //loop through whole column to extract value from
                     var act_worksheet = ctx.workbook.worksheets.getActiveWorksheet();
                     var col_index = header_if[runcon];
                     for (var i = 1; i < range.text.length; i++) {
@@ -289,6 +293,7 @@ function displaySimpleBetween(k){
         });
     }
 
+    //function to check condition  if only OR statements are used
     function validationOrSimple() {
         Excel.run(function (ctx) {
 
@@ -538,7 +543,7 @@ function displaySimpleBetween(k){
                     break;
                 }
                 else {
-                        $('#apply_or_simple').show();
+                    $('#apply_or_simple').show();
                     $('#apply_and_simple').hide();
                     $('#apply_mixed_simple').hide();
                 }
@@ -558,18 +563,33 @@ function displaySimpleBetween(k){
         $('#and_cond').hide();
         $('#or_cond').hide();
         $('#then_cond').hide();
-        
+
+
         var check_mix = 0;
-        for (var k = 1; k < mixed_condition.length; k++) {
-            if (mixed_condition[k] != mixed_condition[k - 1]) {
-                check_mix = 1;
-            }
+        var test = 0;
+        for (var k = 0; k < mixed_condition.length; k++) {
+                test += mixed_condition[k];
+                check_mix = test % mixed_condition.length;
         }
-        if (check_mix == 1) {
-            $('#apply_or_advanced').show();
+        if (check_mix == 0 && test == mixed_condition.length) {
+            $('#apply_advanced').show();
+            $('#apply_mixed_advanced').hide();
+            $('#apply_or_advanced').hide();
         }
         else {
-            $('#apply_advanced').show();
+            for (var k = 1; k < mixed_condition.length; k++) {
+                if (mixed_condition[k] == 1) {
+                    $('#apply_mixed_advanced').show();
+                    $('#apply_advanced').hide();
+                    $('#apply_or_advanced').hide();
+                    break;
+                }
+                else {
+                    $('#apply_or_advanced').show();
+                    $('#apply_advanced').hide();
+                    $('#apply_mixed_advanced').hide();
+                }
+            }
         }
         
 
@@ -620,6 +640,7 @@ function displaySimpleBetween(k){
             $('#tmp_hide').hide();
             $('#apply_advanced').hide();
             $('#apply_or_advanced').hide();
+            $('#apply_mixed_advanced').hide();
             $('#and_cond').show();
             $('#or_cond').show();
             $('#then_cond').show();
