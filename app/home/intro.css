@@ -58,7 +58,7 @@ ul {
           flex-direction: column;
   flex-wrap: nowrap;
   height: 100%;
-  background: #333399;}
+  background: #666666; }
 
   .ms-firstrun-pages__header {
     padding: 5px;
@@ -70,7 +70,7 @@ ul {
     -webkit-box-direction: normal;
             flex-direction: column;
     flex-wrap: nowrap;
-    background: #333399}
+    background: #666666; }
 
     .ms-firstrun-pages__header h1 {
       letter-spacing: 2px; }
@@ -110,7 +110,7 @@ ul {
     -webkit-box-align: center;
             align-items: center;
     padding: 10px;
-    background: #333399;}
+    background: #666666;}
 
     .ms-firstrun-pages__pager--pagercontrol {
       width: 100%;
@@ -127,7 +127,7 @@ ul {
               justify-content: center;
       -webkit-box-align: center;
               align-items: center;
-      background: #333399;}
+      background: #666666;}
 
       .ms-firstrun-pages__pager--pagercontrol img {
         width: 100%;
@@ -149,7 +149,7 @@ ul {
     padding-bottom: 10px;
     padding-left: 20px;
     padding-right: 20px;
-    background: #333399 }
+    background: #666666 }
 
     .ms-firstrun-pages__content--centered {
       display: -webkit-box;
@@ -178,7 +178,7 @@ ul {
     padding: 5px;
     -webkit-box-pack: end;
             justify-content: flex-end;
-    background: #333399;}
+    background: #666666;}
 
     .ms-firstrun-pages__footer--centered {
       display: -webkit-box;
@@ -197,3 +197,6 @@ ul {
 
 .change-stage {
   cursor: pointer; }
+
+.fontColor_orange {
+    color: #EA7F04; }
