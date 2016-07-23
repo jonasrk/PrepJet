@@ -60,7 +60,7 @@
     <div class="padding">
         <!--dropdown for column-->
         <div class="ms-Dropdown dropdown_table_col" tabindex="1">
-            <label class="ms-Label">Select column from which to extract a part</label>
+            <label class="ms-Label">Select column from which to extract text</label>
             <i class="ms-Dropdown-caretDown ms-Icon ms-Icon--caretDown"></i>
             <select id="column1_options" class="ms-Dropdown-select"></select>
         </div>
@@ -69,7 +69,7 @@
             <label class="ms-Label">Select beginning of new value</label>
             <i class="ms-Dropdown-caretDown ms-Icon ms-Icon--caretDown"></i>
             <select id="beginning_options" class="ms-Dropdown-select" onchange="displayFieldBegin()">
-                <option value="col_beginning">Beginning of column</option>
+                <option value="col_beginning">Beginning of cell</option>
                 <option value="whitespace_b">Whitespace</option>
                 <option value="custom_b">Custom</option>
             </select>
@@ -85,7 +85,7 @@
             <label class="ms-Label">Select ending of new value</label>
             <i class="ms-Dropdown-caretDown ms-Icon ms-Icon--caretDown"></i>
             <select id="ending_options" class="ms-Dropdown-select" onchange="displayFieldEnd()">
-                <option value="col_end">End of column</option>
+                <option value="col_end">End of cell</option>
                 <option value="whitespace_e">Whitespace</option>
                 <option value="custom_e">Custom</option>
             </select>

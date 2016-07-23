@@ -411,6 +411,13 @@ function backToOne() {
 
                     var checked_checkboxes = getCheckedBoxes("reference_column_checkbox");
 
+                    if (document.getElementById("case_sens").checked == true) {
+                        var case_sens = 1;
+                    }
+                    else {
+                        var case_sens = 0;
+                    }
+
                     for (var l = 0; l < checked_checkboxes.length; l++){ // TODO throws error if none are checked
                         if (checked_checkboxes[l].id == range.text[0][k] || checked_checkboxes[l].id == "Column " + getCharFromNumber(k)){
                             var column_char = getCharFromNumber(l + range_adding_to.text[0].length);
@@ -426,9 +433,17 @@ function backToOne() {
                                         var col1 = column1_ids[runid];
                                         var col2 = column2_ids[runid];
 
-                                        if (range_adding_to.text[i][col1] == range.text[j][col2]) {
-                                            check = check + 1;
+                                        if (case_sens == 1) {
+                                            if (range_adding_to.text[i][col1] == range.text[j][col2]) {
+                                                check = check + 1;
+                                            }
                                         }
+                                        else {
+                                            if (range_adding_to.text[i][col1].toLowerCase() == range.text[j][col2].toLowerCase()) {
+                                                check = check + 1;
+                                            }
+                                        }
+
                                     }
                                     if (check == column1_ids.length) {
                                         var sheet_row = i + 1;

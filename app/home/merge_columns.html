@@ -42,7 +42,7 @@
         <tr>
             <td class="tableheader">
                 <div class="padding">
-                    <h1>Add Columns</h1>
+                    <h1>Lookup Data</h1>
                 </div>
             </td>
             <td>
@@ -57,12 +57,12 @@
     <div id="step1">
         <div class="padding">
             <div class="ms-Dropdown dropdown_table" tabindex="1">
-                <label class="ms-Label">Select table1</label>
+                <label class="ms-Label">Select target sheet</label>
                 <i class="ms-Dropdown-caretDown ms-Icon ms-Icon--caretDown"></i>
                 <select id="table1_options" class="ms-Dropdown-select"></select>
             </div>
             <div class="ms-Dropdown dropdown_table" tabindex="1">
-                <label class="ms-Label">Select table2</label>
+                <label class="ms-Label">Select source sheet</label>
                 <i class="ms-Dropdown-caretDown ms-Icon ms-Icon--caretDown"></i>
                 <select id="table2_options" class="ms-Dropdown-select"></select>
             </div>
@@ -73,7 +73,7 @@
 
     <div id="step2">
         <div class="padding">
-            <label class="ms-Label"> Select columns to be added to Sheet 1 </label>
+            <label class="ms-Label"> Select columns to be added to target sheet</label>
             <br />
             <div id="checkbox_select_all" class="ms-ChoiceField">
                 <input id="checkbox_all" class="ms-ChoiceField-input" type="checkbox">
@@ -92,6 +92,13 @@
     <div id="step3">
         <div class="padding">
             <div id="dropdowns_step3">
+            </div>
+            <!--checkbox-->
+            <div class="ms-ChoiceField">
+                <input id="case_sens" class="ms-ChoiceField-input" type="checkbox">
+                <label id="checkbox" for="case_sens" class="ms-ChoiceField-field">
+                    <span class="ms-Label">Search case sensitiv ("s" and "S" are considerred as different values)</span>
+                </label>
             </div>
             <div id="buttons">
                 <button class="ms-Button_grey" id="bt_more">More match criteria</button>

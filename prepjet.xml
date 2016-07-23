@@ -341,7 +341,7 @@
         </bt:Url>
       </bt:Urls>
       <bt:ShortStrings>
-        <bt:String id="PJ.addcolumnButton.Label" DefaultValue="Add Columns" />
+        <bt:String id="PJ.addcolumnButton.Label" DefaultValue="Lookup Data" />
         <bt:String id="PJ.SplitValuesButton.Label" DefaultValue="Split Column" />
         <bt:String id="PJ.FindDuplicatesButton.Label" DefaultValue="Detect Duplicates" />
         <bt:String id="PJ.InconsistencyButton.Label" DefaultValue="Detect Inconsistencies" />
@@ -365,9 +365,9 @@
       <bt:LongStrings>
         <bt:String id="PJ.PJ.trimSpaces.Ttp" DefaultValue="Remove leading and trailing spaces" />
         <bt:String id="PJ.PJ.harmonize.Ttp" DefaultValue="Harmonize capitalization of characters" />
-        <bt:String id="PJ.PJ.extractValues.Ttp" DefaultValue="Extract a part of a column" />
+        <bt:String id="PJ.PJ.extractValues.Ttp" DefaultValue="Extract a part from a cell" />
         <bt:String id="PJ.PJ.splitValues.Ttp" DefaultValue="Split column by a delimiter" />
-        <bt:String id="PJ.PJ.addColumn.Ttp" DefaultValue="Add columns from a different table by matching criteria" />
+        <bt:String id="PJ.PJ.addColumn.Ttp" DefaultValue="Add data from a different sheet by matching criteria" />
         <bt:String id="PJ.PJ.inconsistency.Ttp" DefaultValue="Search for inconsistent data types" />
         <bt:String id="PJ.PJ.duplicates.Ttp" DefaultValue="Search for duplicate entries" />
         <bt:String id="PJ.PJ.validation.Ttp" DefaultValue="Create custom rules to validate data entries" />
