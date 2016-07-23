@@ -3,6 +3,7 @@ function displayAdvancedCount() {
         $('.delimiter_count_dropdown').show();
         $('#advanced_settings').hide();
         $('#advanced_hide').show();
+        Office.context.document.settings.set('more_option', true);
 }
 
 function hideAdvancedCount() {
@@ -10,6 +11,7 @@ function hideAdvancedCount() {
         $('.delimiter_count_dropdown').hide();
         $('#advanced_settings').show();
         $('#advanced_hide').hide();
+        Office.context.document.settings.set('more_option', false);
 }
 
 
@@ -27,6 +29,7 @@ function displayFieldDelimiter(){
     Office.initialize = function (reason) {
         jQuery(document).ready(function () {
 
+            Office.context.document.settings.set('more_option', false);
             Office.context.document.settings.set('last_clicked_function', "split_values.html");
             if (Office.context.document.settings.get('prepjet_loaded_before') == null) {
                 Office.context.document.settings.set('prepjet_loaded_before', true);
@@ -114,7 +117,7 @@ function displayFieldDelimiter(){
             }
 
             //if advanced settings are selected, get values for delimiter count
-            if (document.getElementById('advanced_settings').checked == true) {
+            if (Office.context.document.settings.get('more_option') == true) {
                 var count_delimiter = Number(document.getElementById('delimiter_count_i').value);
                 var count_direction = document.getElementById('delimiter_count_drop').value;
             }
@@ -147,7 +150,7 @@ function displayFieldDelimiter(){
 
 
                 //loop through whole column, create an array with splitted values and get maximum length
-                if (document.getElementById('advanced_settings').checked == false) {
+                if (Office.context.document.settings.get('more_option') == false) {
                     for (var i = 0; i < range.text.length; i++) {
                         if (range.text[i][header] != "") {
                             split_array[i] = range.text[i][header].split(delimiter_type);
