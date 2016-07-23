@@ -25,10 +25,10 @@ function backToOne() {
 
             Office.context.document.settings.set('back_button_pressed', false);
             /*if (Office.context.document.settings.get('prepjet_loaded_before') == null) {
-                Office.context.document.settings.set('prepjet_loaded_before', true);
-                Office.context.document.settings.saveAsync();
-                window.location = "intro.html";
-            }*/
+             Office.context.document.settings.set('prepjet_loaded_before', true);
+             Office.context.document.settings.saveAsync();
+             window.location = "intro.html";
+             }*/
 
 
             app.initialize();
@@ -381,6 +381,8 @@ function backToOne() {
             Office.context.document.settings.set('back_button_pressed', false);
 
             return ctx.sync().then(function() {
+
+                backupForUndo(range_adding_to);
 
                 var column1_ids = []; //new Array(identifier_length);
                 var column2_ids = []; //new Array(identifier_length);

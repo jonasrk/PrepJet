@@ -115,6 +115,8 @@
 
             return ctx.sync().then(function() {
 
+                backupForUndo(range);
+
                 var header = 0;
                 var act_worksheet = ctx.workbook.worksheets.getActiveWorksheet();
                 var checked_checkboxes = getCheckedBoxes("column_checkbox");

@@ -148,6 +148,9 @@
                         range.load('text');
 
                         return ctx.sync().then(function() {
+
+                            backupForUndo(range);
+
                             var sorted_rows = row_vector.sort(function(a, b){return b-a});
 
                             for (var run = 0; run < sorted_rows.length; run++) {

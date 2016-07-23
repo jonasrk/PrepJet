@@ -80,7 +80,7 @@
                   <Label resid="PJ.TrimSpacesButton.Label" />
                   <Supertip>
                     <Title resid="PJ.TrimSpacesButton.Label" />
-                    <Description resid="PJ.PJ.trimSpaces.Ttp" />
+                    <Description resid="PJ.trimSpaces.Ttp" />
                   </Supertip>
                   <Icon>
                     <bt:Image size="16" resid="PJ.trimspaces.Icon_sm" />
@@ -98,7 +98,7 @@
                   <Label resid="PJ.HarmonizeButton.Label" />
                   <Supertip>
                     <Title resid="PJ.HarmonizeButton.Label" />
-                      <Description resid="PJ.PJ.harmonize.Ttp" />
+                      <Description resid="PJ.harmonize.Ttp" />
                   </Supertip>
                   <Icon>
                     <bt:Image size="16" resid="PJ.harmonize.Icon_sm" />
@@ -129,7 +129,7 @@
                   <Label resid="PJ.ExtractValuesButton.Label" />
                   <Supertip>
                     <Title resid="PJ.ExtractValuesButton.Label" />
-                    <Description resid="PJ.PJ.extractValues.Ttp" />
+                    <Description resid="PJ.extractValues.Ttp" />
                   </Supertip>
                   <Icon>
                     <bt:Image size="16" resid="PJ.extractvalues.Icon_sm" />
@@ -147,7 +147,7 @@
                   <Label resid="PJ.SplitValuesButton.Label" />
                   <Supertip>
                     <Title resid="PJ.SplitValuesButton.Label" />
-                      <Description resid="PJ.PJ.splitValues.Ttp" />
+                      <Description resid="PJ.splitValues.Ttp" />
                   </Supertip>
                   <Icon>
                     <bt:Image size="16" resid="PJ.splitvalues.Icon_sm" />
@@ -169,7 +169,7 @@
                     <!--ToolTip title. resid must point to a ShortString resource -->
                     <Title resid="PJ.addcolumnButton.Label" />
                     <!--ToolTip description. resid must point to a LongString resource -->
-                    <Description resid="PJ.PJ.addColumn.Ttp" />
+                    <Description resid="PJ.addColumn.Ttp" />
                   </Supertip>
                   <Icon>
                     <bt:Image size="16" resid="PJ.addcolumn.Icon_sm" />
@@ -202,7 +202,7 @@
                     <Label resid="PJ.InconsistencyButton.Label" />
                     <Supertip>
                       <Title resid="PJ.InconsistencyButton.Label" />
-                      <Description resid="PJ.PJ.inconsistency.Ttp" />
+                      <Description resid="PJ.inconsistency.Ttp" />
                     </Supertip>
                     <Icon>
                       <bt:Image size="16" resid="PJ.detectoutlier.Icon_sm" />
@@ -270,7 +270,7 @@
                   <Label resid="PJ.HelpButton.Label" />
                   <Supertip>
                     <Title resid="PJ.HelpButton.Label" />
-                    <Description resid="PJ.PJ.help.Ttp" />
+                    <Description resid="PJ.help.Ttp" />
                   </Supertip>
                   <Icon>
                     <bt:Image size="16" resid="PJ.help.Icon_sm" />
@@ -281,6 +281,23 @@
                     <TaskpaneId>Button2Id1</TaskpaneId>
                     <!--Provide a url resource id for the location that will be displayed on the task pane -->
                     <SourceLocation resid="PJ.help.Url" />
+                  </Action>
+                </Control>
+
+                  <Control xsi:type="Button" id="PJ.UndoButton">
+                  <Label resid="PJ.UndoButton.Label" />
+                  <Supertip>
+                    <Title resid="PJ.UndoButton.Label" />
+                    <Description resid="PJ.undo.Ttp" />
+                  </Supertip>
+                  <Icon>
+                    <bt:Image size="16" resid="PJ.undo.Icon_sm" />
+                    <bt:Image size="32" resid="PJ.undo.Icon" />
+                    <bt:Image size="80" resid="PJ.undo.Icon_lg" />
+                  </Icon>
+                  <Action xsi:type="ExecuteFunction">
+                    <!--Provide a url resource id for the location that will be displayed on the task pane -->
+                    <FunctionName>undo</FunctionName>
                   </Action>
                 </Control>
 
@@ -305,6 +322,7 @@
         <bt:Image id="PJ.validationrule.Icon" DefaultValue="https://localhost:8443/images/validationrule.png" />
         <bt:Image id="PJ.harmonize.Icon" DefaultValue="https://localhost:8443/images/harmonize.png" />
         <bt:Image id="PJ.help.Icon" DefaultValue="https://localhost:8443/images/help.png" />
+        <bt:Image id="PJ.undo.Icon" DefaultValue="https://localhost:8443/images/undo.png" />
         <bt:Image id="PJ.addcolumn.Icon_sm" DefaultValue="https://localhost:8443/images/addcolumn_sm.png" />
         <bt:Image id="PJ.detectoutlier.Icon_sm" DefaultValue="https://localhost:8443/images/detectoutlier_sm.png" />
         <bt:Image id="PJ.removeduplicates.Icon_sm" DefaultValue="https://localhost:8443/images/removeduplicates_sm.png" />
@@ -314,6 +332,7 @@
         <bt:Image id="PJ.validationrule.Icon_sm" DefaultValue="https://localhost:8443/images/validationrule_sm.png" />
         <bt:Image id="PJ.harmonize.Icon_sm" DefaultValue="https://localhost:8443/images/harmonize_sm.png" />
         <bt:Image id="PJ.help.Icon_sm" DefaultValue="https://localhost:8443/images/help_sm.png" />
+        <bt:Image id="PJ.undo.Icon_sm" DefaultValue="https://localhost:8443/images/undo_sm.png" />
         <bt:Image id="PJ.addcolumn.Icon_lg" DefaultValue="https://localhost:8443/images/addcolumn_lg.png" />
         <bt:Image id="PJ.detectoutlier.Icon_lg" DefaultValue="https://localhost:8443/images/detectoutlier_lg.png" />
         <bt:Image id="PJ.removeduplicates.Icon_lg" DefaultValue="https://localhost:8443/images/removeduplicates_lg.png" />
@@ -323,10 +342,11 @@
         <bt:Image id="PJ.validationrule.Icon_lg" DefaultValue="https://localhost:8443/images/validationrule_lg.png" />
         <bt:Image id="PJ.harmonize.Icon_lg" DefaultValue="https://localhost:8443/images/harmonize_lg.png" />
         <bt:Image id="PJ.help.Icon_lg" DefaultValue="https://localhost:8443/images/help_lg.png" />
+        <bt:Image id="PJ.undo.Icon_lg" DefaultValue="https://localhost:8443/images/undo_lg.png" />
 
       </bt:Images>
       <bt:Urls>
-        <bt:Url id="PJ.FunctionFile.Url" DefaultValue="https://commandsimple.azurewebsites.net/FunctionFile.html" />
+        <bt:Url id="PJ.FunctionFile.Url" DefaultValue="https://localhost:8443/app/home/FunctionFile.html" />
         <bt:Url id="PJ.addcolumns.Url" DefaultValue="https://localhost:8443/app/home/merge_columns.html" />
         <bt:Url id="PJ.SplitValues.Url" DefaultValue="https://localhost:8443/app/home/split_values.html" />
         <bt:Url id="PJ.FindDuplicates.Url" DefaultValue="https://localhost:8443/app/home/duplicates.html" />
@@ -350,6 +370,7 @@
         <bt:String id="PJ.ValidationRuleButton.Label" DefaultValue="Validate Data" />
         <bt:String id="PJ.HarmonizeButton.Label" DefaultValue="Harmonize Column" />
         <bt:String id="PJ.HelpButton.Label" DefaultValue="PrepJet Help" />
+        <bt:String id="PJ.UndoButton.Label" DefaultValue="Undo" />
         <bt:String id="PJ.Dropdown.Label" DefaultValue="Dropdown" />
         <bt:String id="PJ.Item1.Label" DefaultValue="Show Taskpane 1" />
         <bt:String id="PJ.Item2.Label" DefaultValue="Show Taskpane 2" />
@@ -363,15 +384,16 @@
         </bt:String>
       </bt:ShortStrings>
       <bt:LongStrings>
-        <bt:String id="PJ.PJ.trimSpaces.Ttp" DefaultValue="Remove leading and trailing spaces" />
-        <bt:String id="PJ.PJ.harmonize.Ttp" DefaultValue="Harmonize capitalization of characters" />
-        <bt:String id="PJ.PJ.extractValues.Ttp" DefaultValue="Extract a part from a cell" />
-        <bt:String id="PJ.PJ.splitValues.Ttp" DefaultValue="Split column by a delimiter" />
-        <bt:String id="PJ.PJ.addColumn.Ttp" DefaultValue="Add data from a different sheet by matching criteria" />
-        <bt:String id="PJ.PJ.inconsistency.Ttp" DefaultValue="Search for inconsistent data types" />
-        <bt:String id="PJ.PJ.duplicates.Ttp" DefaultValue="Search for duplicate entries" />
-        <bt:String id="PJ.PJ.validation.Ttp" DefaultValue="Create custom rules to validate data entries" />
-        <bt:String id="PJ.PJ.help.Ttp" DefaultValue="Explanation and examples on how to use PrepJet" />
+        <bt:String id="PJ.trimSpaces.Ttp" DefaultValue="Remove leading and trailing spaces" />
+        <bt:String id="PJ.harmonize.Ttp" DefaultValue="Harmonize capitalization of characters" />
+        <bt:String id="PJ.extractValues.Ttp" DefaultValue="Extract a part of a column" />
+        <bt:String id="PJ.splitValues.Ttp" DefaultValue="Split column by a delimiter" />
+        <bt:String id="PJ.addColumn.Ttp" DefaultValue="Add columns from a different table by matching criteria" />
+        <bt:String id="PJ.inconsistency.Ttp" DefaultValue="Search for inconsistent data types" />
+        <bt:String id="PJ.duplicates.Ttp" DefaultValue="Search for duplicate entries" />
+        <bt:String id="PJ.validation.Ttp" DefaultValue="Create custom rules to validate data entries" />
+        <bt:String id="PJ.help.Ttp" DefaultValue="Explanation and examples on how to use PrepJet" />
+        <bt:String id="PJ.undo.Ttp" DefaultValue="Undo your last action" />
         <bt:String id="PJ.Dropdown.Tooltip" DefaultValue="Click to Show Options on this Menu" />
         <bt:String id="PJ.Item1.Tooltip" DefaultValue="Click to Show Taskpane1" />
         <bt:String id="PJ.Item2.Tooltip" DefaultValue="Click to Show Taskpane2" />

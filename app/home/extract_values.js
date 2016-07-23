@@ -207,6 +207,9 @@ function getColumn() {
             }
 
             return ctx.sync().then(function() {
+
+                backupForUndo(range_adding_to);
+
                 var header = 0;
                 //get column in header from which to extract value
                 for (var k = 0; k < range.text[0].length; k++){
