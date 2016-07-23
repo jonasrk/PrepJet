@@ -184,39 +184,6 @@
                     }
                 }
 
-
-                function deleteDuplicates(row_int) {
-
-                    Excel.run(function (ctx) {
-
-                        var worksheet = ctx.workbook.worksheets.getActiveWorksheet();
-                        var rangeadd = "A" + row_int;
-                        var range_tmp = worksheet.getRange(rangeadd);
-                        var total_row = range_tmp.getEntireRow();
-
-                        total_row.load('address');
-                        total_row.delete();
-
-                        var rangeins = "A2";
-                        var range_instmp = worksheet.getRange(rangeins);
-                        var range_insert = range_instmp.getEntireRow();
-
-                        range_insert.load('address');
-                        range_insert.insert("Down");
-
-                        return ctx.sync().then(function() {
-                            window.location = "duplicates.html";
-                        });
-
-                    }).catch(function(error) {
-                                    console.log("Error: " + error);
-                                    if (error instanceof OfficeExtension.Error) {
-                                        console.log("Debug info: " + JSON.stringify(error.debugInfo));
-                                    }
-                    });
-                }
-
-
                 if(document.getElementById('duplicatesort').checked == false) {
                     colorDup(duplicates, 1);
                     window.location = "duplicates.html";
@@ -236,23 +203,36 @@
                         row_numbers[run] = Number(row_array[run].substring(1));
                     }
 
-                    sorted_rows = row_numbers.sort(function(a, b){return b-a});
-
-                    for (var k = 0; k < sorted_rows.length; k ++) {
-                        deleteDuplicates(sorted_rows[k] + k);
+                    var text = [];
+                    var data_index = 0;
+                    for (var run = 0; run < row_numbers.length; run++) {
+                        data_index = row_numbers[run] - 1;
+                        text.push(range.text[data_index]);
                     }
 
-                    for (var run = 0; run < dup_length; run++) {
-                        for (var runcol = 0; runcol < duplicates[0].length; runcol++) {
-                            var columnchar = getCharFromNumber(runcol);
-                            addContentToWorksheet(worksheet, columnchar + sheet_row, duplicates[run][runcol][0]);
-                            duplicates[run][runcol].push(columnchar + sheet_row);
+                    for (var run = 1; run < range.text.length; run ++) {
+                        var check = 0;
+                        for (var k = 0; k < row_numbers.length; k++) {
+                            if((run + 1) == row_numbers[k]) {
+                                check = 1;
+                            }
                         }
-                        sheet_row = sheet_row + 1;
+                        if (check == 0) {
+                            text.push(range.text[run + 1]);
+                        }
                     }
 
-                    colorDup(duplicates, 2);
-
+                    var color = '#EA7F04';
+                    for (var row = 0; row < text.length; row++) {
+                        for(var col = 0; col < range.text[0].length; col++) {
+                            var columnchar = getCharFromNumber(col)
+                            addContentToWorksheet(worksheet, columnchar + sheet_row, text[row][col])
+                            if (sheet_row < (row_numbers.length + 2)) {
+                                highlightContentInWorksheet(worksheet, columnchar + sheet_row ,color)
+                            }
+                        }
+                        sheet_row += 1;
+                    }
                 }
 
 
