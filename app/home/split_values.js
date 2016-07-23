@@ -1,12 +1,15 @@
 function displayAdvancedCount() {
-    if (document.getElementById('advanced_settings').checked == true) {
         $('#delimiter_count').show();
         $('.delimiter_count_dropdown').show();
-    }
-    else {
+        $('#advanced_settings').hide();
+        $('#advanced_hide').show();
+}
+
+function hideAdvancedCount() {
         $('#delimiter_count').hide();
         $('.delimiter_count_dropdown').hide();
-    }
+        $('#advanced_settings').show();
+        $('#advanced_hide').hide();
 }
 
 
@@ -38,11 +41,14 @@ function displayFieldDelimiter(){
             $('#checkbox_delimiter').hide();
             $(".delimiter_count_dropdown").Dropdown().hide()
             $(".keep_delimiter_dropdown").Dropdown().hide()
+            $('#advanced_hide').hide();
 
             $(".dropdown_table").Dropdown();
             $(".ms-TextField").TextField();
 
             $('#split_Value').click(splitValue);
+            $('#advanced_settings').click(displayAdvancedCount);
+            $('#advanced_hide').click(hideAdvancedCount);
 
         });
     };
