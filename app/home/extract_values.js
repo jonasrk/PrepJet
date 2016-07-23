@@ -13,18 +13,23 @@ function displayFieldEnd(){
 }
 
 function displayAdvancedCount() {
-    if (document.getElementById('advanced_settings').checked == true) {
         $('#del_count_start').show();
         $('.del_count_dropdown_s').show();
         $('#del_count_end').show();
         $('.del_count_dropdown_e').show();
+        $('#advanced_settings').hide();
+        $('#advanced_hide').show();
+        Office.context.document.settings.set('more_option_extract', true);
     }
-    else {
+
+function hideAdvancedCount() {
         $('#del_count_start').hide();
         $('.del_count_dropdown_s').hide();
         $('#del_count_end').hide();
         $('.del_count_dropdown_e').hide();
-    }
+        $('#advanced_settings').show();
+        $('#advanced_hide').hide();
+        Office.context.document.settings.set('more_option', false);
 }
 
 
@@ -58,6 +63,7 @@ function getColumn() {
     Office.initialize = function (reason) {
         jQuery(document).ready(function () {
 
+            Office.context.document.settings.set('more_option', false);
             Office.context.document.settings.set('last_clicked_function', "extract_values.html");
             if (Office.context.document.settings.get('prepjet_loaded_before') == null) {
                 Office.context.document.settings.set('prepjet_loaded_before', true);
@@ -74,11 +80,15 @@ function getColumn() {
             $('.del_count_dropdown_s').Dropdown().hide();
             $('#del_count_end').hide();
             $('.del_count_dropdown_e').Dropdown().hide();
+            $('#advanced_settings').show();
+            $('#advanced_hide').hide();
 
             $(".dropdown_table").Dropdown();
             $(".ms-TextField").TextField();
 
             $('#extract_Value').click(extractValue);
+            $('#advanced_settings').click(displayAdvancedCount);
+            $('#advanced_hide').click(hideAdvancedCount);
 
 
             Office.context.document.addHandlerAsync("documentSelectionChanged", myHandler, function(result){}
@@ -185,7 +195,7 @@ function getColumn() {
             }
 
             //if advanced settings are selected, get values for delimiter count
-            if (document.getElementById('advanced_settings').checked == true) {
+            if (Office.context.document.settings.get('more_option_extract') == true) {
                 var count_delimiter_start = Number(document.getElementById('delimiter_count_start').value);
                 var count_direction_start = document.getElementById('del_count_drop_start').value;
                 var count_delimiter_end = Number(document.getElementById('delimiter_count_end').value);

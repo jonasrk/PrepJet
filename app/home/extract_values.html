@@ -111,12 +111,14 @@
             </label>
         </div>
         <!--checkbox advanced settings-->
-        <div class="ms-ChoiceField">
+        <!--div class="ms-ChoiceField">
             <input id="advanced_settings" class="ms-ChoiceField-input" type="checkbox" onclick="displayAdvancedCount()">
             <label id="checkbox_advanced" for="advanced_settings" class="ms-ChoiceField-field">
                 <span class="ms-Label">Advanced Settings</span>
             </label>
-        </div>
+        </div-->
+        <button class="ms-Button_grey" id="advanced_settings">More Options</button>
+        <button class="ms-Button_grey" id="advanced_hide">Less Options</button>
 
         <div id="del_count_start" class="ms-TextField">
             <label class="ms-Label">Start delimiter position</label>
@@ -147,6 +149,7 @@
                     <option value="right">From Right</option>
                 </select>
             </div>
+        <br>
         <!--split button-->
         <button class="ms-Button" id="extract_Value">Extract</button>
     </div>
