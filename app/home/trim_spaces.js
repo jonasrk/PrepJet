@@ -110,12 +110,15 @@
             range.load('text');
 
             return ctx.sync().then(function() {
+
+                backupForUndo(range);
+
                 var header = 0;
                 var act_worksheet = ctx.workbook.worksheets.getActiveWorksheet();
 
                 var checked_checkboxes = getCheckedBoxes("column_checkbox");
 
-                for (var run = 0;run < checked_checkboxes.length; run++) {
+                for (var run = 0; run < checked_checkboxes.length; run++) {
                     for (var k = 0; k < range.text[0].length; k++) {
                         if (checked_checkboxes[run].id == range.text[0][k] || checked_checkboxes[run].id == "Column " + getCharFromNumber(k)){
                             header = k;
@@ -130,7 +133,7 @@
                         addContentToWorksheet(act_worksheet, column_char + sheet_row, trim_string);
                     }
                 }
-                window.location = "trim_spaces.html";
+               window.location = "trim_spaces.html";
             });
 
         }).catch(function(error) {
@@ -140,6 +143,5 @@
             }
         });
     }
-
 
 })();
