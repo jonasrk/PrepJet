@@ -1,4 +1,5 @@
 function redirectRule() {
+    Office.context.document.settings.set('from_inconsistencies', true);
     window.location = "validation.html";
 }
 

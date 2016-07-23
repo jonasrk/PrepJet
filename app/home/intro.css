@@ -162,8 +162,7 @@ ul {
       -webkit-box-pack: center;
               justify-content: center;
       -webkit-box-align: center;
-              align-items: left;
-      overflow-y: scroll; }
+              align-items: left; }
 
   .ms-firstrun-pages__footer {
     display: -webkit-box;
@@ -172,7 +171,6 @@ ul {
     -webkit-box-direction: normal;
             flex-direction: column;
     flex-wrap: nowrap;
-    height: 100%;
     -webkit-box-flex: 1;
             flex: 1 1 0;
     padding: 5px;
@@ -199,4 +197,7 @@ ul {
   cursor: pointer; }
 
 .fontColor_orange {
+    color: #EA7F04; }
+
+.ms-fontColor-themeTertiary, .ms-fontColor-themeTertiary--hover:hover {
     color: #EA7F04; }

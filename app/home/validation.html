@@ -44,7 +44,7 @@
         <tr>
             <td class="tableheader">
                 <div class="padding">
-                    <h1>Customized Rules</h1>
+                    <h1>Validate Data</h1>
                 </div>
             </td>
             <td>
@@ -58,6 +58,7 @@
 <div id="content-main">
     <div class="padding">
         <div id="condition_holder">
+            <button class="ms-Button_grey" id="to_inconsistency">Back</button>
             <div id="explanation">
                 <label class="ms-Label">PrepJet will highlight data entries that do not fulfill this condition.</p>
             </div>
@@ -139,22 +140,22 @@
         </div>
 
         <div id="buttons">
-            <label class="ms-Label">Optional: Select additional condition</label>
+            <label id="add_label" class="ms-Label">Optional: Select additional condition</label>
             <table>
                 <tr>
                     <td class="tablecol1">
-                        <button class="ms-Button_small" id="and_cond">AND</button>
-                        <button class="ms-Button_small" id="or_cond">OR</button>
-                        <button class="ms-Button_small" id="then_cond">THEN</button>
-                        <button class="ms-Button_small" id="remove_cond">remove</button>
+                        <button class="ms-Button_grey" id="and_cond">AND</button>
+                        <button class="ms-Button_grey" id="or_cond">OR</button>
+                        <button class="ms-Button_grey" id="then_cond">THEN</button>
+                        <button class="ms-Button_grey" id="remove_cond">remove</button>
                     </td>
                     <td>
-                        <button class="ms-Button" id="apply_and_simple">Apply And</button>
-                        <button class="ms-Button" id="apply_or_simple">Apply Or</button>
-                        <button class="ms-Button" id="apply_mixed_simple">Apply Mix</button>
-                        <button class="ms-Button" id="apply_advanced">Apply Ad</button>
-                        <button class="ms-Button" id="apply_or_advanced">Apply AdOr</button>
-                        <button class="ms-Button" id="apply_mixed_advanced">Apply AdMi</button>
+                        <button class="ms-Button" id="apply_and_simple">Apply</button>
+                        <button class="ms-Button" id="apply_or_simple">Apply</button>
+                        <button class="ms-Button" id="apply_mixed_simple">Apply</button>
+                        <button class="ms-Button" id="apply_advanced">Apply</button>
+                        <button class="ms-Button" id="apply_or_advanced">Apply</button>
+                        <button class="ms-Button" id="apply_mixed_advanced">Apply</button>
                     </td>
                 </tr>
             </table>

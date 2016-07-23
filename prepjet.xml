@@ -216,29 +216,11 @@
                     </Action>
                   </Control>
 
-                  <Control xsi:type="Button" id="PJ.FindDuplicatesButton">
-                  <Label resid="PJ.FindDuplicatesButton.Label" />
-                  <Supertip>
-                    <Title resid="PJ.FindDuplicatesButton.Label" />
-                    <Description resid="PJ.duplicates.Ttp" />
-                  </Supertip>
-                  <Icon>
-                    <bt:Image size="16" resid="PJ.removeduplicates.Icon_sm" />
-                    <bt:Image size="32" resid="PJ.removeduplicates.Icon" />
-                    <bt:Image size="80" resid="PJ.removeduplicates.Icon_lg" />
-                  </Icon>
-                  <Action xsi:type="ShowTaskpane">
-                    <TaskpaneId>Button2Id1</TaskpaneId>
-                    <!--Provide a url resource id for the location that will be displayed on the task pane -->
-                    <SourceLocation resid="PJ.FindDuplicates.Url" />
-                  </Action>
-                </Control>
-
-                <Control xsi:type="Button" id="PJ.ValidationRuleButton">
+                  <Control xsi:type="Button" id="PJ.ValidationRuleButton">
                   <Label resid="PJ.ValidationRuleButton.Label" />
                   <Supertip>
                     <Title resid="PJ.ValidationRuleButton.Label" />
-                    <Description resid="PJ.validation.Ttp" />
+                    <Description resid="PJ.PJ.validation.Ttp" />
                   </Supertip>
                   <Icon>
                     <bt:Image size="16" resid="PJ.validationrule.Icon_sm" />
@@ -249,6 +231,24 @@
                     <TaskpaneId>Button2Id1</TaskpaneId>
                     <!--Provide a url resource id for the location that will be displayed on the task pane -->
                     <SourceLocation resid="PJ.validation.Url" />
+                  </Action>
+                </Control>
+
+                  <Control xsi:type="Button" id="PJ.FindDuplicatesButton">
+                  <Label resid="PJ.FindDuplicatesButton.Label" />
+                  <Supertip>
+                    <Title resid="PJ.FindDuplicatesButton.Label" />
+                    <Description resid="PJ.PJ.duplicates.Ttp" />
+                  </Supertip>
+                  <Icon>
+                    <bt:Image size="16" resid="PJ.removeduplicates.Icon_sm" />
+                    <bt:Image size="32" resid="PJ.removeduplicates.Icon" />
+                    <bt:Image size="80" resid="PJ.removeduplicates.Icon_lg" />
+                  </Icon>
+                  <Action xsi:type="ShowTaskpane">
+                    <TaskpaneId>Button2Id1</TaskpaneId>
+                    <!--Provide a url resource id for the location that will be displayed on the task pane -->
+                    <SourceLocation resid="PJ.FindDuplicates.Url" />
                   </Action>
                 </Control>
 
@@ -367,7 +367,7 @@
         <bt:String id="PJ.InconsistencyButton.Label" DefaultValue="Detect Inconsistencies" />
         <bt:String id="PJ.ExtractValuesButton.Label" DefaultValue="Extract Values" />
         <bt:String id="PJ.TrimSpacesButton.Label" DefaultValue="Trim Spaces" />
-        <bt:String id="PJ.ValidationRuleButton.Label" DefaultValue="Customized Validation" />
+        <bt:String id="PJ.ValidationRuleButton.Label" DefaultValue="Validate Data" />
         <bt:String id="PJ.HarmonizeButton.Label" DefaultValue="Harmonize Column" />
         <bt:String id="PJ.HelpButton.Label" DefaultValue="PrepJet Help" />
         <bt:String id="PJ.UndoButton.Label" DefaultValue="Undo" />
