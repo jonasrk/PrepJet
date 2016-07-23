@@ -218,7 +218,7 @@
                             }
                         }
                         if (check == 0) {
-                            text.push(range.text[run + 1]);
+                            text.push(range.text[run]);
                         }
                     }
 
