@@ -124,16 +124,13 @@
 
                 var strings_to_sort  = [];
 
-
                 for (var i = 1; i < range.text.length; i++) {
                     var this_row = [];
                     for (var j = 0; j < columns_to_check.length; j++) {
                         var row_number = i + 1;
-                        this_row.push([range.text[i][columns_to_check[j]], getCharFromNumber(columns_to_check[j]) + row_number]);
+                        this_row.push([range.text[i][columns_to_check[j]], getCharFromNumber(columns_to_check[j]) + row_number, row_number]);
                     }
-
                     strings_to_sort.push(this_row);
-
                 }
 
                 function Comparator(a, b) {
@@ -146,7 +143,6 @@
 
                 strings_to_sort.sort(Comparator);
                 var duplicates = [];
-
 
                 function arraysEqual(a, b) {
                     if (a === b) return true;
@@ -162,11 +158,22 @@
                     return true;
                 }
 
-
+                var dup_count = 1;
+                var dup_index = 1;
                 for (var o = 1; o < strings_to_sort.length; o++){
-                    if (arraysEqual(strings_to_sort[o] ,strings_to_sort[o - 1])){
-                        duplicates.push(strings_to_sort[o]);
-                        duplicates.push(strings_to_sort[o - 1]);
+                    if (arraysEqual(strings_to_sort[o], strings_to_sort[o - 1])){
+                        if (dup_count == 1) {
+                            duplicates.push([strings_to_sort[o], dup_index]);
+                            duplicates.push([strings_to_sort[o - 1], dup_index]);
+                            dup_count += 1;
+                        }
+                        else {
+                            duplicates.push([strings_to_sort[o], dup_index]);
+                        }
+                    }
+                    else {
+                        dup_count = 1;
+                        dup_index += 1;
                     }
                 }
 
@@ -186,28 +193,25 @@
 
                 if(document.getElementById('duplicatesort').checked == false) {
                     colorDup(duplicates, 1);
-                    window.location = "duplicates.html";
+                    //window.location = "duplicates.html";
                 }
                 else {
 
                     var dup_length = duplicates.length;
                     var sheet_row = 2;
-                    var row_array = [];
-
-                    for (var run = 0; run < dup_length; run++) {
-                        row_array[run] = duplicates[run][0][1];
-                    }
 
                     var row_numbers = [];
-                    for (var run = 0; run < row_array.length; run++) {
-                        row_numbers[run] = Number(row_array[run].substring(1));
+                    for (var run = 0; run < duplicates.length; run++) {
+                        row_numbers.push(duplicates[run][0][0][2]);
                     }
 
                     var text = [];
+                    var color_check = []
                     var data_index = 0;
                     for (var run = 0; run < row_numbers.length; run++) {
                         data_index = row_numbers[run] - 1;
                         text.push(range.text[data_index]);
+                        color_check.push(duplicates[run][1]);
                     }
 
                     for (var run = 1; run < range.text.length; run ++) {
@@ -228,13 +232,14 @@
                             var columnchar = getCharFromNumber(col)
                             addContentToWorksheet(worksheet, columnchar + sheet_row, text[row][col])
                             if (sheet_row < (row_numbers.length + 2)) {
+                                if (row > 0 && color_check[row] == color_check[row - 1])
                                 highlightContentInWorksheet(worksheet, columnchar + sheet_row ,color)
                             }
                         }
                         sheet_row += 1;
                     }
                 }
-
+                window.location = "duplicates.html";
 
             });
 
