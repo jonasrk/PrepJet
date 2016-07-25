@@ -203,6 +203,13 @@ function redirectRule() {
                                 if (type_maximum < tmp2[i][1]) {
                                     type_maximum = tmp2[i][1];
                                 }
+                            } //todo again check whether new most frequent type occurs twice
+                        }
+
+                        equal_type_check = 0;
+                        for (var i = 0; i < tmp2.length; i++) {
+                            if (tmp2[i][1] == type_maximum) {
+                                equal_type_check += 1;
                             }
                         }
 
