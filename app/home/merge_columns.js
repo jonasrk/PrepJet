@@ -123,6 +123,7 @@ function backToOne() {
                                     document.getElementById("table2_options").appendChild(el);
                                 }
 
+                                console.log($(".dropdown_table"));
                                 $(".dropdown_table").Dropdown();
 
                             }

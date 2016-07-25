@@ -77,9 +77,11 @@ function getColumn() {
             $('#delimiter_end').hide();
             $('#delimiter_beginning').hide();
             $('#del_count_start').hide();
-            $('.del_count_dropdown_s').Dropdown().hide();
+            $('.del_count_dropdown_s').Dropdown();
+            $('.del_count_dropdown_s').hide();
             $('#del_count_end').hide();
-            $('.del_count_dropdown_e').Dropdown().hide();
+            $('.del_count_dropdown_e').Dropdown();
+            $('.del_count_dropdown_e').hide();
             $('#advanced_settings').show();
             $('#advanced_hide').hide();
 
@@ -138,6 +140,7 @@ function getColumn() {
                     document.getElementById("column1_options").appendChild(el);
                 }
 
+                console.log($(".dropdown_table_col"));
                 $(".dropdown_table_col").Dropdown();
             });
 

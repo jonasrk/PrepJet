@@ -153,6 +153,7 @@ function displaySimpleBetween(k){
                     document.getElementById("column_simple" + count_drop).appendChild(el);
                 }
                 var cont_tmp = "table_simple" + count_drop;
+                console.log($("." + cont_tmp));
                 $("." + cont_tmp).Dropdown();
             });
 
@@ -468,6 +469,7 @@ function displaySimpleBetween(k){
         document.getElementById('if_operator' + count_drop).setAttribute("onchange",  "displaySimpleBetween(" + count_drop + ")");
 
         var cont_tmp = "dropdown_table" + count_drop;
+        console.log($("." + cont_tmp));
         $("." + cont_tmp).Dropdown();
 
         $('#between_beginning' + count_drop).hide();
@@ -529,6 +531,7 @@ function displaySimpleBetween(k){
         $('#between_beginning' + count_drop).hide();
 
         var cont_tmp = "dropdown_table" + count_drop;
+        console.log($("." + cont_tmp));
         $("." + cont_tmp).Dropdown();
         document.getElementById('if_operator' + count_drop).setAttribute("onchange",  "displaySimpleBetween(" + count_drop + ")");
         $('#remove_cond').show();
@@ -630,6 +633,7 @@ function displaySimpleBetween(k){
                 }
 
                 if (Office.context.document.settings.get('populated_then') == false) {
+                    console.log($(".dropdown_table_col2"));
                     $(".dropdown_table_col2").Dropdown();
                 }
 
