@@ -138,7 +138,7 @@ function getColumn() {
                     document.getElementById("column1_options").appendChild(el);
                 }
 
-                //$(".dropdown_table_col").Dropdown();
+                $(".dropdown_table_col").Dropdown();
             });
 
         }).catch(function(error) {
