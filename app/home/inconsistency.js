@@ -117,14 +117,13 @@ function redirectRule() {
             range.load('text');
             range.load('valueTypes'); //does not know date type
             range.load('values');
+            range.load('numberFormat');
 
             return ctx.sync().then(function() {
 
                 var header = 0;
                 var checked_checkboxes = getCheckedBoxes("column_checkbox");
-                //var val_type = [];
                 var check = [];
-                //var types = [];
 
                 for (var run = 0;run < checked_checkboxes.length; run++) {
                     check[run] = 0;
@@ -143,12 +142,24 @@ function redirectRule() {
                     for (var i = 1; i < range.text.length; i++) {
                         var rangeType = [];
                         tmp_address = getCharFromNumber(header) + (i + 1);
-                        rangeType.push(range.valueTypes[i][header]);
+                        if (range.valueTypes[i][header] == "Double") {
+                            if (range.numberFormat[i][header] != "General") {
+                                rangeType.push("Date");
+                            }
+                            else {
+                                rangeType.push(range.valueTypes[i][header]);
+                            }
+                        }
+                        else {
+                            rangeType.push(range.valueTypes[i][header]);
+                        }
+
                         if (i == 1) {
-                            tmpUniqueTypes.push(range.valueTypes[i][header]);
+                            tmpUniqueTypes.push(rangeType[0]);
                         }
                         rangeType.push(tmp_address);
                         tmp_type.push(rangeType);
+
                         if (i > 1 && (tmp_type[i - 1][0] != tmp_type[i - 2][0])) {
                             check[run] = 1;
                             var test_unique = 0
@@ -162,7 +173,6 @@ function redirectRule() {
                             }
                         }
                     }
-                    //val_type.push(tmp_type);
 
                     if (check[run] == 1) {
                         var tmp2 = [];
@@ -231,8 +241,6 @@ function redirectRule() {
                                 }
                             }
                         }
-
-                        //types.push(tmp2);
                     }
 
                 }
