@@ -122,9 +122,9 @@ function redirectRule() {
 
                 var header = 0;
                 var checked_checkboxes = getCheckedBoxes("column_checkbox");
-                var val_type = [];
+                //var val_type = [];
                 var check = [];
-                var types = [];
+                //var types = [];
 
                 for (var run = 0;run < checked_checkboxes.length; run++) {
                     check[run] = 0;
@@ -162,7 +162,7 @@ function redirectRule() {
                             }
                         }
                     }
-                    val_type.push(tmp_type);
+                    //val_type.push(tmp_type);
 
                     if (check[run] == 1) {
                         var tmp2 = [];
@@ -178,16 +178,31 @@ function redirectRule() {
                             if (type_maximum < type_counter) {
                                 type_maximum = type_counter;
                             }
-                            //todo when 2 data types occure with them frequency none is highlighted
                             tmp1.push(tmpUniqueTypes[j]);
                             tmp1.push(type_counter);
                             tmp2.push(tmp1);
                         }
 
                         var equal_type_check = 0;
+                        var empty_check = 0;
                         for (var i = 0; i < tmp2.length; i++) {
                             if (tmp2[i][1] == type_maximum) {
+                                if (tmp2[i][0] == "Empty") {
+                                    var t1 = tmp2.slice(0, i);
+                                    var t2 = tmp2.slice(i + 1);
+                                    tmp2 = t1.concat(t2);
+                                    empty_check = 1;
+                                }
                                 equal_type_check += 1;
+                            }
+                        }
+
+                        if (empty_check == 1) {
+                            type_maximum = 0;
+                            for (var i = 0; i < tmp2.length; i++) {
+                                if (type_maximum < tmp2[i][1]) {
+                                    type_maximum = tmp2[i][1];
+                                }
                             }
                         }
 
@@ -210,7 +225,7 @@ function redirectRule() {
                             }
                         }
 
-                        types.push(tmp2);
+                        //types.push(tmp2);
                     }
 
                 }

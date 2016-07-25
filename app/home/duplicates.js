@@ -193,7 +193,6 @@
 
                 if(document.getElementById('duplicatesort').checked == false) {
                     colorDup(duplicates, 1);
-                    //window.location = "duplicates.html";
                 }
                 else {
 
