@@ -2,10 +2,6 @@
 html {
     background: #F9F9F9; }
 
-.ms-Dropdown.is-open .ms-Dropdown-items, .ms-Dropdown.ms-Dropdown--open .ms-Dropdown-items {
-    overflow: scroll;
-}
-
 #content-header {
     background: #666666;
     color: #fff;
@@ -87,8 +83,11 @@ h1 {
     color: #767676;
     font-size: 10px; }
 
-.ms-Dropdown.is-open .ms-Dropdown-items, .ms-Dropdown.ms-Dropdown--open .ms-Dropdown-items {
+.ms-Dropdown.ms-Dropdown--open .ms-Dropdown-items {
     overflow: scroll;
+    top: 60px; }
+
+.ms-Dropdown.is-open .ms-Dropdown-items {
     top: 60px; }
 
 .ms-Dropdown, .ms-Dropdown-items, .ms-Dropdown-title {
