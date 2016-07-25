@@ -104,3 +104,6 @@ h1 {
 .tablecol1 {
     width: 82%; }
 
+.ms-Dialog-header {
+    box-sizing: border-box;
+    padding: 12px 20px 5px; }

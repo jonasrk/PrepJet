@@ -5,6 +5,7 @@
     Office.initialize = function (reason) {
         jQuery(document).ready(function () {
 
+            Office.context.document.settings.set('same_header_trim', false);
             Office.context.document.settings.set('last_clicked_function', "trim_spaces.html");
             if (Office.context.document.settings.get('prepjet_loaded_before') == null) {
                 Office.context.document.settings.set('prepjet_loaded_before', true);
@@ -15,9 +16,38 @@
             app.initialize();
             fillColumn();
 
+            if (Office.context.document.settings.get('same_header_trim') == false) {
+                $("#showEmbeddedDialog").hide();
+            }
+
 
             $('#trim_space').click(trimSpace);
             $('#checkbox_all').click(checkCheckbox);
+
+            // Hides the dialog.
+            document.getElementById("buttonClose").onclick = function () {
+                $("#showEmbeddedDialog").hide();
+            }
+
+            // Performs the action and closes the dialog.
+            document.getElementById("buttonOk").onclick = function () {
+                // Do action here.
+                $("#showEmbeddedDialog").hide();
+            }
+
+            Office.select("binding").addHandlerAsync("bindingDataChanged", myHandler, function(result){}
+            );
+            // Event handler function.
+            function myHandler(eventArgs){
+                Excel.run(function (ctx) {
+                    var binding = ctx.workbook.bindings.getItemAt(0);
+                    var text = binding.getText();
+                    ctx.load('text');
+                    return ctx.sync().then(function () {
+                        window.location = "trim_spaces.html";
+                    });
+                });
+            }
 
         });
     };
@@ -34,6 +64,7 @@
             range.load('text');
 
             return ctx.sync().then(function() {
+
                 if (document.getElementById('checkbox_all').checked == true) {
                     for (var i = 0; i < range.text[0].length; i++) {
                         if (range.text[0][i] != "") {
@@ -76,6 +107,17 @@
 
             range.load('text');
             return ctx.sync().then(function() {
+
+                for (var run = 0; run < range.text[0].length - 1; run++) {
+                    for (var run2 = run + 1; run2 < range.text[0].length; run2++) {
+                        if (range.text[0][run] == range.text[0][run2]) {
+                            $("#showEmbeddedDialog").show();
+                            Office.context.document.settings.set('same_header_trim', true);
+                            break;
+                        }
+                    }
+                }
+
                 for (var i = 0; i < range.text[0].length; i++) {
                     if (range.text[0][i] != ""){
                         addNewCheckboxToContainer (range.text[0][i], "column_checkbox" ,"checkboxes_columns");
