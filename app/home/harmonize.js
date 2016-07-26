@@ -143,14 +143,22 @@
                                 tmp_upper.push(tmp[runtmp].charAt(0).toUpperCase() + tmp[runtmp].slice(1));
                             }
                             var harm_string = tmp_upper[0];
-                            for (var runtmp = 1; runtmp < tmp.length; runtmp++) {
+                            for (var runtmp = 1; runtmp < tmp_upper.length; runtmp++) {
                                 harm_string = harm_string.concat(" ", tmp_upper[runtmp]);
                             }
                         }
                         if (harmo == "oneupper") {
-                            var tmp = range.text[k][header];
-                            var harm_string = [];
-                            harm_string = tmp.charAt(0).toUpperCase() + tmp.slice(1);
+                            var tmp = range.text[k][header].split(" ");
+                            var tmp_upper = [];
+                            tmp_upper.push(tmp[0].charAt(0).toUpperCase() + tmp[0].slice(1).toLowerCase());
+                            for (var runtmp = 1; runtmp < tmp.length; runtmp++) {
+                                tmp_upper.push(tmp[runtmp].charAt(0) + tmp[runtmp].slice(1).toLowerCase());
+                            }
+
+                            var harm_string = tmp_upper[0];
+                            for (var runtmp = 1; runtmp < tmp_upper.length; runtmp++) {
+                                harm_string = harm_string.concat(" ", tmp_upper[runtmp]);
+                            }
                         }
 
                         var column_char = getCharFromNumber(header);
