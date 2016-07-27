@@ -53,7 +53,11 @@
             Excel.run(function (ctx) {
 
                 function bindFromPrompt() {
-                    Office.context.document.bindings.addFromPromptAsync(Office.BindingType.Matrix, { id: 'myBinding' }, function (asyncResult) {
+
+                    var myBindings = Office.context.document.bindings;
+                    var myAddress = "Sheet1!1:1";
+
+                    myBindings.addFromNamedItemAsync(myAddress, "matrix", {id:'myBinding'}, function (asyncResult) {
                         if (asyncResult.status == Office.AsyncResultStatus.Failed) {
                             write('Action failed. Error: ' + asyncResult.error.message);
                         } else {
