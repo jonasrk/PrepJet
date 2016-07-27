@@ -39,29 +39,6 @@ function hideAdvancedCount() {
 }
 
 
-function getColumn() {
-
-    Excel.run(function (ctx) {
-
-        var selectedRange = ctx.workbook.getSelectedRange();
-        selectedRange.load('address');
-
-        return ctx.sync().then(function() {
-            document.getElementById('target_column_input').value = selectedRange.address;
-        });
-
-    }).catch(function(error) {
-            console.log("Error: " + error);
-            if (error instanceof OfficeExtension.Error) {
-                console.log("Debug info: " + JSON.stringify(error.debugInfo));
-            }
-    });
-}
-
-
-
-
-
 (function () {
     'use strict';
 
