@@ -3,12 +3,18 @@ function displayFieldBegin(){
     if (document.getElementById('beginning_options').value == "custom_b"){
         $('#delimiter_beginning').show();
     }
+    else {
+        $('#delimiter_beginning').hide();
+    }
 }
 
 //show textfield for ending delimiter if custom is selected
 function displayFieldEnd(){
     if(document.getElementById('ending_options').value == "custom_e") {
         $('#delimiter_end').show();
+    }
+    else {
+        $('#delimiter_end').hide();
     }
 }
 

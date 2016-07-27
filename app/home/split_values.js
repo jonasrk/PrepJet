@@ -20,6 +20,9 @@ function displayFieldDelimiter(){
     if (document.getElementById('delimiter_options').value == "custom_delimiter"){
         $('#delimiter_beginning').show();
     }
+    else {
+        $('#delimiter_beginning').hide();
+    }
 }
 
 (function () {

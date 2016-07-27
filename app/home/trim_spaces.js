@@ -35,7 +35,7 @@
                 $("#showEmbeddedDialog").hide();
             }
 
-            Office.select("binding").addHandlerAsync("bindingDataChanged", myHandler, function(result){}
+            /*Office.select("binding").addHandlerAsync("bindingDataChanged", myHandler, function(result){}
             );
             // Event handler function.
             function myHandler(eventArgs){
@@ -47,7 +47,7 @@
                         window.location = "trim_spaces.html";
                     });
                 });
-            }
+            }*/
 
         });
     };
