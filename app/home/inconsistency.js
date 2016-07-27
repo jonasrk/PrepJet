@@ -10,6 +10,7 @@ function redirectRule() {
     Office.initialize = function (reason) {
         jQuery(document).ready(function () {
 
+            Office.context.document.settings.set('same_header_inconsistency', false);
             Office.context.document.settings.set('last_clicked_function', "inconsistency.html");
             if (Office.context.document.settings.get('prepjet_loaded_before') == null) {
                 Office.context.document.settings.set('prepjet_loaded_before', true);
@@ -20,10 +21,84 @@ function redirectRule() {
             app.initialize();
             fillColumn();
 
+            if (Office.context.document.settings.get('same_header_inconsistency') == false) {
+                $("#showEmbeddedDialog").hide();
+            }
 
             $('#inconsistency').click(inconsistencies);
             $('#checkbox_all').click(checkCheckbox);
             $('#to_validation').click(redirectRule);
+
+            // Hides the dialog.
+            document.getElementById("buttonClose").onclick = function () {
+                $("#showEmbeddedDialog").hide();
+            }
+
+            // Performs the action and closes the dialog.
+            document.getElementById("buttonOk").onclick = function () {
+                $("#showEmbeddedDialog").hide();
+            }
+
+            Excel.run(function (ctx) {
+
+                var myBindings = Office.context.document.bindings;
+                var worksheetname = ctx.workbook.worksheets.getActiveWorksheet();
+
+                worksheetname.load('name')
+
+                return ctx.sync().then(function() {
+
+                    function bindFromPrompt() {
+
+                        var myBindings = Office.context.document.bindings;
+                        var name_worksheet = worksheetname.name;
+                        var myAddress = name_worksheet.concat("!1:1");
+
+                        myBindings.addFromNamedItemAsync(myAddress, "matrix", {id:'myBinding'}, function (asyncResult) {
+                            if (asyncResult.status == Office.AsyncResultStatus.Failed) {
+                                write('Action failed. Error: ' + asyncResult.error.message);
+                            } else {
+                                write('Added new binding with type: ' + asyncResult.value.type + ' and id: ' + asyncResult.value.id);
+
+                                function addHandler() {
+                                    Office.select("bindings#myBinding").addHandlerAsync(
+                                        Office.EventType.BindingDataChanged, dataChanged);
+                                }
+
+                                addHandler();
+                                displayAllBindings();
+
+                            }
+                        });
+                    }
+
+                bindFromPrompt();
+
+                function displayAllBindings() {
+                    Office.context.document.bindings.getAllAsync(function (asyncResult) {
+                        var bindingString = '';
+                        for (var i in asyncResult.value) {
+                            bindingString += asyncResult.value[i].id + '\n';
+                        }
+                    });
+                }
+
+                function dataChanged(eventArgs) {
+                    window.location = "inconsistency.html";
+                }
+
+                // Function that writes to a div with id='message' on the page.
+                function write(message){
+                    console.log(message);
+                }
+
+                });
+            }).catch(function(error) {
+                console.log("Error: " + error);
+                if (error instanceof OfficeExtension.Error) {
+                    console.log("Debug info: " + JSON.stringify(error.debugInfo));
+                }
+            });
 
         });
     };
@@ -84,6 +159,18 @@ function redirectRule() {
             range.load('text');
 
             return ctx.sync().then(function() {
+
+                for (var run = 0; run < range.text[0].length - 1; run++) {
+                    for (var run2 = run + 1; run2 < range.text[0].length; run2++) {
+                        if (range.text[0][run] == range.text[0][run2]) {
+                            $("#showEmbeddedDialog").show();
+                            highlightContentInWorksheet(worksheet, getCharFromNumber(run) + 1, '#EA7F04');
+                            highlightContentInWorksheet(worksheet, getCharFromNumber(run2) + 1, '#EA7F04');
+                            Office.context.document.settings.set('same_header_inconsistency', true);
+                        }
+                    }
+                }
+
                 for (var i = 0; i < range.text[0].length; i++) {
                     if (range.text[0][i] != ""){
                         addNewCheckboxToContainer (range.text[0][i], "column_checkbox" ,"checkboxes_columns");
