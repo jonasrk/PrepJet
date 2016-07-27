@@ -36,45 +36,38 @@
             }
 
 
-            // Office.select("binding").addHandlerAsync("bindingDataChanged", myHandler, function(result){}
-            // );
-            // // Event handler function.
-            // function myHandler(eventArgs){
-            //     Excel.run(function (ctx) {
-            //         var binding = ctx.workbook.bindings.getItemAt(0);
-            //         var text = binding.getText();
-            //         ctx.load('text');
-            //         return ctx.sync().then(function () {
-            //             window.location = "trim_spaces.html";
-            //         });
-            //     });
-            // }
-
-
             Excel.run(function (ctx) {
 
-                function bindFromPrompt() {
+                var myBindings = Office.context.document.bindings;
+                var worksheetname = ctx.workbook.worksheets.getActiveWorksheet();
 
-                    var myBindings = Office.context.document.bindings;
-                    var myAddress = "Sheet1!1:1";
+                worksheetname.load('name')
 
-                    myBindings.addFromNamedItemAsync(myAddress, "matrix", {id:'myBinding'}, function (asyncResult) {
-                        if (asyncResult.status == Office.AsyncResultStatus.Failed) {
-                            write('Action failed. Error: ' + asyncResult.error.message);
-                        } else {
-                            write('Added new binding with type: ' + asyncResult.value.type + ' and id: ' + asyncResult.value.id);
+                return ctx.sync().then(function() {
 
-                            function addHandler() {
-                                Office.select("bindings#myBinding").addHandlerAsync(
-                                    Office.EventType.BindingDataChanged, dataChanged);
+                    function bindFromPrompt() {
+
+                        var myBindings = Office.context.document.bindings;
+                        var name_worksheet = worksheetname.name;
+                        var myAddress = name_worksheet.concat("!1:1");
+
+                        myBindings.addFromNamedItemAsync(myAddress, "matrix", {id:'myBinding'}, function (asyncResult) {
+                            if (asyncResult.status == Office.AsyncResultStatus.Failed) {
+                                write('Action failed. Error: ' + asyncResult.error.message);
+                            } else {
+                                write('Added new binding with type: ' + asyncResult.value.type + ' and id: ' + asyncResult.value.id);
+
+                                function addHandler() {
+                                    Office.select("bindings#myBinding").addHandlerAsync(
+                                        Office.EventType.BindingDataChanged, dataChanged);
+                                }
+
+                                addHandler();
+                                displayAllBindings();
+
                             }
-
-                            addHandler();
-                            displayAllBindings();
-
-                        }
-                    });
-                }
+                        });
+                    }
 
                 bindFromPrompt();
 
@@ -84,20 +77,18 @@
                         for (var i in asyncResult.value) {
                             bindingString += asyncResult.value[i].id + '\n';
                         }
-                        write('Existing bindings: ' + bindingString);
                     });
                 }
 
                 function dataChanged(eventArgs) {
-                    write('Bound data changed in binding: ' + eventArgs.binding.id);
+                    window.location = "trim_spaces.html";
                 }
 
-// Function that writes to a div with id='message' on the page.
+                // Function that writes to a div with id='message' on the page.
                 function write(message){
                     console.log(message);
                 }
 
-                return ctx.sync().then(function() {
                 });
             }).catch(function(error) {
                 console.log("Error: " + error);
