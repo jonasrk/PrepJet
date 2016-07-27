@@ -31,7 +31,6 @@
 
             // Performs the action and closes the dialog.
             document.getElementById("buttonOk").onclick = function () {
-                // Do action here.
                 $("#showEmbeddedDialog").hide();
             }
 
