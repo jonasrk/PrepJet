@@ -284,3 +284,18 @@ function backupForUndo(this_range){
     });
 
 }
+
+function detectIE() {
+    var ua = window.navigator.userAgent;
+
+    var msie = ua.indexOf('MSIE ');
+    if (msie > 0) {
+        // IE 10 or older => return version number
+        window.location = 'error.html';
+    }
+}
+
+
+//run on import:
+
+detectIE();
