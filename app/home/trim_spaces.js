@@ -35,19 +35,71 @@
                 $("#showEmbeddedDialog").hide();
             }
 
-            Office.select("binding").addHandlerAsync("bindingDataChanged", myHandler, function(result){}
-            );
-            // Event handler function.
-            function myHandler(eventArgs){
-                Excel.run(function (ctx) {
-                    var binding = ctx.workbook.bindings.getItemAt(0);
-                    var text = binding.getText();
-                    ctx.load('text');
-                    return ctx.sync().then(function () {
-                        window.location = "trim_spaces.html";
+            // Office.select("binding").addHandlerAsync("bindingDataChanged", myHandler, function(result){}
+            // );
+            // // Event handler function.
+            // function myHandler(eventArgs){
+            //     Excel.run(function (ctx) {
+            //         var binding = ctx.workbook.bindings.getItemAt(0);
+            //         var text = binding.getText();
+            //         ctx.load('text');
+            //         return ctx.sync().then(function () {
+            //             window.location = "trim_spaces.html";
+            //         });
+            //     });
+            // }
+
+
+            Excel.run(function (ctx) {
+
+                function bindFromPrompt() {
+                    Office.context.document.bindings.addFromPromptAsync(Office.BindingType.Matrix, { id: 'myBinding' }, function (asyncResult) {
+                        if (asyncResult.status == Office.AsyncResultStatus.Failed) {
+                            write('Action failed. Error: ' + asyncResult.error.message);
+                        } else {
+                            write('Added new binding with type: ' + asyncResult.value.type + ' and id: ' + asyncResult.value.id);
+
+                            function addHandler() {
+                                Office.select("bindings#myBinding").addHandlerAsync(
+                                    Office.EventType.BindingDataChanged, dataChanged);
+                            }
+
+                            addHandler();
+                            displayAllBindings();
+
+                        }
                     });
+                }
+
+                bindFromPrompt();
+
+                function displayAllBindings() {
+                    Office.context.document.bindings.getAllAsync(function (asyncResult) {
+                        var bindingString = '';
+                        for (var i in asyncResult.value) {
+                            bindingString += asyncResult.value[i].id + '\n';
+                        }
+                        write('Existing bindings: ' + bindingString);
+                    });
+                }
+
+                function dataChanged(eventArgs) {
+                    write('Bound data changed in binding: ' + eventArgs.binding.id);
+                }
+
+// Function that writes to a div with id='message' on the page.
+                function write(message){
+                    console.log(message);
+                }
+
+                return ctx.sync().then(function() {
                 });
-            }
+            }).catch(function(error) {
+                console.log("Error: " + error);
+                if (error instanceof OfficeExtension.Error) {
+                    console.log("Debug info: " + JSON.stringify(error.debugInfo));
+                }
+            });
 
         });
     };
@@ -176,7 +228,7 @@
                         addContentToWorksheet(act_worksheet, column_char + sheet_row, trim_string);
                     }
                 }
-               window.location = "trim_spaces.html";
+                window.location = "trim_spaces.html";
             });
 
         }).catch(function(error) {
