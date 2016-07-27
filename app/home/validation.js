@@ -41,6 +41,7 @@ function displaySimpleBetween(k){
     Office.initialize = function (reason) {
         jQuery(document).ready(function () {
 
+            Office.context.document.settings.set('same_header_validation', false);
             Office.context.document.settings.set('last_condition_added', 'simple');
             Office.context.document.settings.set('populated_then', false);
             Office.context.document.settings.set('last_clicked_function', "validation.html");
@@ -52,6 +53,10 @@ function displaySimpleBetween(k){
 
             app.initialize();
             fillSimpleColumn();
+
+            if (Office.context.document.settings.get('same_header_validation') == false) {
+                $("#showEmbeddedDialog").hide();
+            }
 
             $('#tmp_hide').hide();
             $('#between_beginning1').hide();
@@ -123,6 +128,78 @@ function displaySimpleBetween(k){
                 document.getElementById('between_and').value = message;
             }
 
+
+            // Hides the dialog.
+            document.getElementById("buttonClose").onclick = function () {
+                $("#showEmbeddedDialog").hide();
+            }
+
+            // Performs the action and closes the dialog.
+            document.getElementById("buttonOk").onclick = function () {
+                $("#showEmbeddedDialog").hide();
+            }
+
+            Excel.run(function (ctx) {
+
+                var myBindings = Office.context.document.bindings;
+                var worksheetname = ctx.workbook.worksheets.getActiveWorksheet();
+
+                worksheetname.load('name')
+
+                return ctx.sync().then(function() {
+
+                    function bindFromPrompt() {
+
+                        var myBindings = Office.context.document.bindings;
+                        var name_worksheet = worksheetname.name;
+                        var myAddress = name_worksheet.concat("!1:1");
+
+                        myBindings.addFromNamedItemAsync(myAddress, "matrix", {id:'myBinding'}, function (asyncResult) {
+                            if (asyncResult.status == Office.AsyncResultStatus.Failed) {
+                                write('Action failed. Error: ' + asyncResult.error.message);
+                            } else {
+                                write('Added new binding with type: ' + asyncResult.value.type + ' and id: ' + asyncResult.value.id);
+
+                                function addHandler() {
+                                    Office.select("bindings#myBinding").addHandlerAsync(
+                                        Office.EventType.BindingDataChanged, dataChanged);
+                                }
+
+                                addHandler();
+                                displayAllBindings();
+
+                            }
+                        });
+                    }
+
+                bindFromPrompt();
+
+                function displayAllBindings() {
+                    Office.context.document.bindings.getAllAsync(function (asyncResult) {
+                        var bindingString = '';
+                        for (var i in asyncResult.value) {
+                            bindingString += asyncResult.value[i].id + '\n';
+                        }
+                    });
+                }
+
+                function dataChanged(eventArgs) {
+                    window.location = "validation.html";
+                }
+
+                // Function that writes to a div with id='message' on the page.
+                function write(message){
+                    console.log(message);
+                }
+
+                });
+            }).catch(function(error) {
+                console.log("Error: " + error);
+                if (error instanceof OfficeExtension.Error) {
+                    console.log("Debug info: " + JSON.stringify(error.debugInfo));
+                }
+            });
+
         });
     };
 
@@ -138,6 +215,17 @@ function displaySimpleBetween(k){
             range.load('text');
 
             return ctx.sync().then(function() {
+
+                for (var run = 0; run < range.text[0].length - 1; run++) {
+                    for (var run2 = run + 1; run2 < range.text[0].length; run2++) {
+                        if (range.text[0][run] == range.text[0][run2]) {
+                            $("#showEmbeddedDialog").show();
+                            highlightContentInWorksheet(worksheet, getCharFromNumber(run) + 1, '#EA7F04');
+                            highlightContentInWorksheet(worksheet, getCharFromNumber(run2) + 1, '#EA7F04');
+                            Office.context.document.settings.set('same_header_validation', true);
+                        }
+                    }
+                }
 
                 for (var i = 0; i < range.text[0].length; i++) {
                     var el = document.createElement("option");
