@@ -268,13 +268,16 @@
                 function colorDup(duplicates_input, int) {
                     var color = "#EA7F04";
                     for (var m = 0; m < duplicates_input.length; m++){
-                        if (m > 0 && !arraysEqual(duplicates_input[m], duplicates_input[m-1])){
+                        if (m > 0 && duplicates_input[m][1] != duplicates_input[m-1][1]){
                             // generate new random color
                             color = getRandomColor();
                         }
 
                         for (var n = 0; n < duplicates_input[m].length; n++){
-                            highlightContentInWorksheet(worksheet, duplicates_input[m][n][int], color);
+                            for (var o = 0; o < duplicates_input[m][n].length; o++) {
+                                highlightContentInWorksheet(worksheet, duplicates_input[m][n][o][int], color);
+                            }
+
                         }
                     }
                 }
