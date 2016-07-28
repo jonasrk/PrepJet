@@ -96,7 +96,6 @@
                 }
 
                 function dataChanged(eventArgs) {
-                    console.log("last");
                     window.location = "trim_spaces.html";
                 }
 
