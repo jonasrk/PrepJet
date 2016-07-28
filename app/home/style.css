@@ -13,6 +13,9 @@ html {
     padding: 10px;
     overflow: visible; }
 
+.step1 {
+    overflow: visible; }
+
 h1 {
     font-family: "Segoe WP Light", "Segoe UI", "Arial", sans-serif;
     font-size: 18px;
