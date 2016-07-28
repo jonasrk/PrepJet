@@ -1,7 +1,6 @@
 /* Page-specific styling */
 html {
-    background: #F9F9F9;
-    overflow: hidden; }
+    background: #F9F9F9; }
 
 
 #content-header {
@@ -108,5 +107,4 @@ h1 {
 .ms-Dropdown-items {
     display: block;
     position: fixed;
-    top: 60px;
-    overflow: scroll; }
+    top: 60px; }

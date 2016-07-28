@@ -43,7 +43,23 @@
                 worksheetname.load('name')
 
                 return ctx.sync().then(function() {
+                    Office.context.document.addHandlerAsync("documentSelectionChanged", myViewHandler, function(result){}
+                    );
 
+                    // Event handler function for changing the worksheet.
+                    function myViewHandler(eventArgs){
+                        Excel.run(function (ctx) {
+                            var selectedSheet = ctx.workbook.worksheets.getActiveWorksheet();
+                            selectedSheet.load('name');
+                            return ctx.sync().then(function () {
+                                if (selectedSheet.name != worksheetname.name) {
+                                    window.location = "trim_spaces.html"
+                                }
+                            });
+                        });
+                    }
+
+                    //function to check whether header entries are changed
                     function bindFromPrompt() {
 
                         var myBindings = Office.context.document.bindings;
