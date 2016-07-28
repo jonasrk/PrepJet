@@ -103,8 +103,3 @@ h1 {
 .ms-Dialog-header {
     box-sizing: border-box;
     padding: 12px 20px 5px; }
-
-.ms-Dropdown-items {
-    display: block;
-    position: fixed;
-    top: 60px; }
