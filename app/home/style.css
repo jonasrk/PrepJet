@@ -105,7 +105,7 @@ h1 {
     box-sizing: border-box;
     padding: 12px 20px 5px; }
 
-.ms-Dropdown.is-open .ms-Dropdown-items, .ms-Dropdown.ms-Dropdown--open .ms-Dropdown-items {
+.ms-Dropdown-items {
     display: block;
     position: fixed;
     top: 60px;
