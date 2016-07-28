@@ -1,7 +1,8 @@
 /* Page-specific styling */
 html {
     background: #F9F9F9;
-    overflow: visible; }
+    overflow: visible;
+    display: block; }
 
 #content-header {
     background: #666666;
