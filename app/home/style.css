@@ -1,6 +1,10 @@
 /* Page-specific styling */
 html {
-    background: #F9F9F9; }
+    background: #F9F9F9;
+    overflow: visible; }
+
+body {
+    overflow: visible; }
 
 #content-header {
     background: #666666;
