@@ -2,7 +2,7 @@
 html {
     background: #F9F9F9;
     overflow: visible;
-    display: block; }
+    white-space: nowrap;}
 
 #content-header {
     background: #666666;
