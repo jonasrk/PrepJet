@@ -1,10 +1,6 @@
 /* Page-specific styling */
 html {
-    background: #F9F9F9;
-    overflow: visible; }
-
-body {
-    overflow: visible; }
+    background: #F9F9F9; }
 
 #content-header {
     background: #666666;
@@ -16,9 +12,6 @@ body {
 .padding {
     padding: 10px;
     overflow: visible; }
-
-.step1 {
-    top: 60px; }
 
 h1 {
     font-family: "Segoe WP Light", "Segoe UI", "Arial", sans-serif;
