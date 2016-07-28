@@ -267,6 +267,12 @@ function displayFieldDelimiter(){
                             if (count_delimiter != 0) {
                                 if (count_direction == "right") {
                                     count_delimiter = array_length - count_delimiter;
+                                    if (count_delimiter < 1) {
+                                        count_delimiter = array_length;
+                                    }
+                                }
+                                if (count_direction == "left" && (array_length <= count_delimiter)) {
+                                    count_delimiter = array_length;
                                 }
 
                                 var str1_tmp = split_array[i][0];
