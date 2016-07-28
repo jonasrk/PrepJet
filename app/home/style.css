@@ -1,10 +1,8 @@
 /* Page-specific styling */
 html {
-    background: #F9F9F9; }
+    background: #F9F9F9;
+    overflow: hidden; }
 
-.ms-font-m {
-    font-size: 14px;
-    overflow: visible; }
 
 #content-header {
     background: #666666;
