@@ -380,7 +380,7 @@
         <bt:String id="PJ.Item1.Label" DefaultValue="Show Taskpane 1" />
         <bt:String id="PJ.Item2.Label" DefaultValue="Show Taskpane 2" />
         <bt:String id="PJ.Tab1.GroupLabel" DefaultValue="Transform" />
-        <bt:String id="PJ.Tab1.GroupLabel2" DefaultValue="Split/Combine" />
+        <bt:String id="PJ.Tab1.GroupLabel2" DefaultValue="Split/Lookup" />
         <bt:String id="PJ.Tab1.GroupLabel3" DefaultValue="Screen Data" />
         <bt:String id="PJ.Tab1.GroupLabel4" DefaultValue="Help" />
         <bt:String id="PJ.Tab1.TabLabel" DefaultValue="PrepJet" />
