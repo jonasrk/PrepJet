@@ -105,5 +105,4 @@ h1 {
 
 .ms-Dropdown.is-open .ms-Dropdown-items, .ms-Dropdown.ms-Dropdown--open .ms-Dropdown-items {
     display: block;
-    position: fixed;
-    overflow: scroll; }
+    position: fixed; }
