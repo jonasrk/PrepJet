@@ -110,4 +110,5 @@ h1 {
     position: fixed;
     top: 60px;
     overflow: scroll;
-    z-index: 2; }
+    z-index: 2;
+    background: #fff; }
