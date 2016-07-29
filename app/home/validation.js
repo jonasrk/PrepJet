@@ -259,6 +259,7 @@ function displaySimpleBetween(k){
                 var cont_tmp = "table_simple" + count_drop;
                 console.log($("." + cont_tmp));
                 $("." + cont_tmp).Dropdown();
+                $("span.ms-Dropdown-title:empty").text(range.text[0][0]);
             });
 
         }).catch(function(error) {
@@ -739,6 +740,7 @@ function displaySimpleBetween(k){
                 if (Office.context.document.settings.get('populated_then') == false) {
                     console.log($(".dropdown_table_col2"));
                     $(".dropdown_table_col2").Dropdown();
+                    $("span.ms-Dropdown-title:empty").text(range.text[0][0]);
                 }
 
                 Office.context.document.settings.set('then_condition_pressed', true);

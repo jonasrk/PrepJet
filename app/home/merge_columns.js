@@ -196,8 +196,9 @@ function backToOne() {
                                     document.getElementById("table2_options").appendChild(el);
                                 }
 
-                                console.log($(".dropdown_table"));
+                                //console.log($(".dropdown_table"));
                                 $(".dropdown_table").Dropdown();
+
 
                             }
                         }
@@ -372,6 +373,7 @@ function backToOne() {
 
                         document.getElementById("addedDropdown" + k).appendChild(lab);
                         $("." + container).Dropdown();
+                        $("span.ms-Dropdown-title:empty").text(range.text[0][0]);
                         count_drop = count_drop + 1;
                     }
                     Office.context.document.settings.set('back_button_pressed', false);
