@@ -1,7 +1,6 @@
 /* Page-specific styling */
 html {
-    background: #F9F9F9;
-    z-index: 0; }
+    background: #F9F9F9; }
 
 
 #content-header {
@@ -109,6 +108,9 @@ h1 {
     display: block;
     position: fixed;
     top: 60px;
-    overflow: scroll;
-    z-index: 2;
-    background: #fff; }
+    overflow: scroll; }
+
+.placeholder {
+    height: 100%;
+    overflow: visible;
+    background: #F9F9F9; }
