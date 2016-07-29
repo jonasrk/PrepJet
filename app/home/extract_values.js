@@ -233,7 +233,7 @@ function hideAdvancedCount() {
                 }
 
                 $(".dropdown_table_col").Dropdown();
-                $("span.ms-Dropdown-title:empty").text("lauf");
+                $("span.ms-Dropdown-title:empty").text(range.text[0][0]);
             });
 
         }).catch(function(error) {

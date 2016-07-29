@@ -188,8 +188,8 @@ function displayFieldDelimiter(){
                     }
                     document.getElementById("column_options").appendChild(el);
                 }
-                // console.log($(".dropdown_table_col"));
                 $(".dropdown_table_col").Dropdown();
+                $("span.ms-Dropdown-title:empty").text(range.text[0][0]);
             });
 
         }).catch(function(error) {
