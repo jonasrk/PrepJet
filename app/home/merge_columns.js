@@ -101,7 +101,7 @@ function backToOne() {
                 }
 
                 function dataChanged(eventArgs) {
-                    step2ButtonClicked();
+                    window.location = "merge_columns.html";
                 }
 
                 // Function that writes to a div with id='message' on the page.
