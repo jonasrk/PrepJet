@@ -373,7 +373,12 @@ function backToOne() {
 
                         document.getElementById("addedDropdown" + k).appendChild(lab);
                         $("." + container).Dropdown();
-                        $("span.ms-Dropdown-title:empty").text(range.text[0][0]);
+                        if (k % 2 == 0) {
+                            $("span.ms-Dropdown-title:empty").text(range_t2.text[0][0]);
+                        }
+                        else {
+                            $("span.ms-Dropdown-title:empty").text(range_t1.text[0][0]);
+                        }
                         count_drop = count_drop + 1;
                     }
                     Office.context.document.settings.set('back_button_pressed', false);
