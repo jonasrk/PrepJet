@@ -214,6 +214,11 @@ function hideAdvancedCount() {
                     }
                 }
 
+                var sp = document.createElement("span");
+                sp.innerHTML = range.text[0][0];
+                sp.className = "ms-Dropdown-title";
+                document.getElementById("column1_options").appendChild(sp);
+
                 for (var i = 0; i < range.text[0].length; i++) {
                     var el = document.createElement("option");
                     if (range.text[0][i] != "") {
