@@ -198,7 +198,7 @@ function backToOne() {
 
                                 //console.log($(".dropdown_table"));
                                 $(".dropdown_table").Dropdown();
-
+                                $("span.ms-Dropdown-title:empty").text(worksheet_names[0]);
 
                             }
                         }
@@ -373,7 +373,7 @@ function backToOne() {
 
                         document.getElementById("addedDropdown" + k).appendChild(lab);
                         $("." + container).Dropdown();
-                        $("span.ms-Dropdown-title:empty").text(range.text[0][0]);
+                        //$("span.ms-Dropdown-title:empty").text(range.text[0][0]);
                         count_drop = count_drop + 1;
                     }
                     Office.context.document.settings.set('back_button_pressed', false);
