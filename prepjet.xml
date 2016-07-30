@@ -367,7 +367,7 @@
       </bt:Urls>
       <bt:ShortStrings>
         <bt:String id="PJ.addcolumnButton.Label" DefaultValue="Lookup Data" />
-        <bt:String id="PJ.SplitValuesButton.Label" DefaultValue="Split Column" />
+        <bt:String id="PJ.SplitValuesButton.Label" DefaultValue="Split Cell Content" />
         <bt:String id="PJ.FindDuplicatesButton.Label" DefaultValue="Detect Duplicates" />
         <bt:String id="PJ.InconsistencyButton.Label" DefaultValue="Detect Inconsistencies" />
         <bt:String id="PJ.ExtractValuesButton.Label" DefaultValue="Extract Values" />
