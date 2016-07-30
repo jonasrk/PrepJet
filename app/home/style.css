@@ -114,3 +114,6 @@ h1 {
     height: 60px;
     overflow: visible;
     background: #F9F9F9; }
+
+#showEmbeddedDialog {
+    visibility: hidden;}
