@@ -24,9 +24,11 @@ function setFocus(activeID) {
 function displaySimpleBetween(k){
     if(document.getElementById('if_operator' + k).value == "between" || document.getElementById('if_operator' + k).value == "notbetween") {
         $('#between_beginning' + k).show();
+        $('#explanation_and').show();
     }
     else {
         $('#between_beginning' + k).hide();
+        $('#explanation_and').hide();
     }
 }
 
@@ -60,6 +62,7 @@ function showEnterpriseDialog() {
 
             //$('#tmp_hide').hide();
             $('#between_beginning1').hide();
+            $('#explanation_and').hide();
             $('#betweenand').hide();
             $('#delimiter_beginning1').show();
             //$('#remove_cond').hide();
