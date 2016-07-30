@@ -60,6 +60,7 @@ function displaySimpleBetween(k){
 
             $('#tmp_hide').hide();
             $('#between_beginning1').hide();
+            $('#delimiter_beginning1').hide();
             $('#remove_cond').hide();
             $('#apply_mixed_simple').hide();
             $('#apply_advanced').hide();
