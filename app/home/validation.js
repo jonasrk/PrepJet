@@ -30,6 +30,9 @@ function displaySimpleBetween(k){
     }
 }
 
+function showEnterpriseDialog() {
+    document.getElementById('showEnterprise').style.visibility = 'visible';
+}
 
 (function () {
     'use strict';
@@ -42,8 +45,8 @@ function displaySimpleBetween(k){
         jQuery(document).ready(function () {
 
             Office.context.document.settings.set('same_header_validation', false);
-            Office.context.document.settings.set('last_condition_added', 'simple');
-            Office.context.document.settings.set('populated_then', false);
+            //Office.context.document.settings.set('last_condition_added', 'simple');
+            //Office.context.document.settings.set('populated_then', false);
             Office.context.document.settings.set('last_clicked_function', "validation.html");
             if (Office.context.document.settings.get('prepjet_loaded_before') == null) {
                 Office.context.document.settings.set('prepjet_loaded_before', true);
@@ -52,21 +55,19 @@ function displaySimpleBetween(k){
             }
 
             app.initialize();
-            fillSimpleColumn();
+            fillIfColumn();
+            fillThenColumn();
 
-            if (Office.context.document.settings.get('same_header_validation') == false) {
-                $("#showEmbeddedDialog").hide();
-            }
-
-            $('#tmp_hide').hide();
+            //$('#tmp_hide').hide();
             $('#between_beginning1').hide();
-            $('#delimiter_beginning1').hide();
-            $('#remove_cond').hide();
-            $('#apply_mixed_simple').hide();
-            $('#apply_advanced').hide();
-            $('#apply_or_advanced').hide();
-            $('#apply_mixed_advanced').hide();
-            $('#apply_or_simple').hide();
+            $('#betweenand').hide();
+            $('#delimiter_beginning1').show();
+            //$('#remove_cond').hide();
+            //$('#apply_mixed_simple').hide();
+            $('#apply_advanced').show();
+            //$('#apply_or_advanced').hide();
+            //$('#apply_mixed_advanced').hide();
+            //$('#apply_or_simple').hide();
             $('#to_inconsistency').hide();
 
             if (Office.context.document.settings.get('from_inconsistencies') == true){
@@ -76,16 +77,16 @@ function displaySimpleBetween(k){
             $(".dropdown_table").Dropdown();
             $(".ms-TextField").TextField();
 
-            $('#apply_and_simple').click(validationAndSimple);
-            $('#apply_or_simple').click(validationOrSimple);
-            $('#apply_mixed_simple').click(validationMixedSimple);
-            $('#and_cond').click(addAndCondition);
-            $('#or_cond').click(addORCondition);
-            $('#then_cond').click(addThenCondition);
-            $('#remove_cond').click(removeCondition);
+            //$('#apply_and_simple').click(validationAndSimple);
+            //$('#apply_or_simple').click(validationOrSimple);
+            //$('#apply_mixed_simple').click(validationMixedSimple);
+            $('#and_cond').click(showEnterpriseDialog);
+            $('#or_cond').click(showEnterpriseDialog);
+            //$('#then_cond').click(addThenCondition);
+            //$('#remove_cond').click(removeCondition);
             $('#apply_advanced').click(validationAndAdvanced);
-            $('#apply_or_advanced').click(validationOrAdvanced);
-            $('#apply_mixed_advanced').click(validationMixedAdvanced);
+            //$('#apply_or_advanced').click(validationOrAdvanced);
+            //$('#apply_mixed_advanced').click(validationMixedAdvanced);
             $('#to_inconsistency').click(redirectRule);
 
 
@@ -138,6 +139,17 @@ function displaySimpleBetween(k){
             // Performs the action and closes the dialog.
             document.getElementById("buttonOk").onclick = function () {
                 $("#showEmbeddedDialog").hide();
+            }
+
+            // Hides the dialog.
+            document.getElementById("buttonCloseEnterprise").onclick = function () {
+                document.getElementById('showEnterprise').style.visibility = 'hidden';
+                //$("#showEnterprise").hide();
+            }
+
+            // Performs the action and closes the dialog.
+            document.getElementById("buttonOkEnterprise").onclick = function () {
+                $("#showEnterprise").hide();
             }
 
             Excel.run(function (ctx) {
@@ -221,8 +233,8 @@ function displaySimpleBetween(k){
     };
 
 
-    //function to populate dropdowns with column headers
-    function fillSimpleColumn(){
+    //function to populate dropdown for if condition with column headers
+    function fillIfColumn(){
 
         Excel.run(function (ctx) {
 
@@ -236,7 +248,7 @@ function displaySimpleBetween(k){
                 for (var run = 0; run < range.text[0].length - 1; run++) {
                     for (var run2 = run + 1; run2 < range.text[0].length; run2++) {
                         if (range.text[0][run] == range.text[0][run2]) {
-                            $("#showEmbeddedDialog").show();
+                            document.getElementById('showEmbeddedDialog').style.visibility = 'visible';
                             highlightContentInWorksheet(worksheet, getCharFromNumber(run) + 1, '#EA7F04');
                             highlightContentInWorksheet(worksheet, getCharFromNumber(run2) + 1, '#EA7F04');
                             Office.context.document.settings.set('same_header_validation', true);
@@ -272,9 +284,64 @@ function displaySimpleBetween(k){
 
     }
 
+    //function to populate dropdowns with column headers
+    function fillThenColumn(){
+
+        Excel.run(function (ctx) {
+
+            var worksheet = ctx.workbook.worksheets.getActiveWorksheet();
+            var range_all = worksheet.getRange();
+            var range = range_all.getUsedRange();
+            range.load('text');
+
+            return ctx.sync().then(function() {
+
+                for (var run = 0; run < range.text[0].length - 1; run++) {
+                    for (var run2 = run + 1; run2 < range.text[0].length; run2++) {
+                        if (range.text[0][run] == range.text[0][run2]) {
+                            document.getElementById('showEmbeddedDialog').style.visibility = 'visible';
+                            highlightContentInWorksheet(worksheet, getCharFromNumber(run) + 1, '#EA7F04');
+                            highlightContentInWorksheet(worksheet, getCharFromNumber(run2) + 1, '#EA7F04');
+                            Office.context.document.settings.set('same_header_validation', true);
+                        }
+                    }
+                }
+
+                for (var i = 0; i < range.text[0].length; i++) {
+                    var el = document.createElement("option");
+                    if (range.text[0][i] != "") {
+                            el.value = range.text[0][i];
+                            el.textContent = range.text[0][i];
+                        }
+                        else {
+                            el.value = "Column " + getCharFromNumber(i);
+                            el.textContent = "Column " + getCharFromNumber(i);
+                        }
+
+                    document.getElementById("column2_options").appendChild(el);
+                }
+
+                $(".dropdown_table_col2").Dropdown();
+                $("span.ms-Dropdown-title:empty").text(range.text[0][0]);
+
+                //var cont_tmp = "table_simple" + count_drop;
+                //console.log($("." + cont_tmp));
+                //$("." + cont_tmp).Dropdown();
+                //$("span.ms-Dropdown-title:empty").text(range.text[0][0]);
+            });
+
+        }).catch(function(error) {
+            console.log("Error: " + error);
+            if (error instanceof OfficeExtension.Error) {
+                console.log("Debug info: " + JSON.stringify(error.debugInfo));
+            }
+        });
+
+    }
+
 
     //function to check condition when only AND statements are used
-    function validationAndSimple() {
+    /*function validationAndSimple() {
         Excel.run(function (ctx) {
 
             var worksheet = ctx.workbook.worksheets.getActiveWorksheet();
@@ -410,10 +477,10 @@ function displaySimpleBetween(k){
                 console.log("Debug info: " + JSON.stringify(error.debugInfo));
             }
         });
-    }
+    }*/
 
     //function to check condition  if only OR statements are used
-    function validationOrSimple() {
+    /*function validationOrSimple() {
         Excel.run(function (ctx) {
 
             var worksheet = ctx.workbook.worksheets.getActiveWorksheet();
@@ -550,10 +617,10 @@ function displaySimpleBetween(k){
                 console.log("Debug info: " + JSON.stringify(error.debugInfo));
             }
         });
-    }
+    }*/
 
 
-    function addAndCondition (start_var) {
+    /*function addAndCondition (start_var) {
 
         Office.context.document.settings.set('last_condition_added', 'and');
         count_drop += 1;
@@ -609,10 +676,10 @@ function displaySimpleBetween(k){
                 }
             }
         }
-    }
+    }*/
 
 
-    function addORCondition (start_var) {
+    /*function addORCondition (start_var) {
 
         Office.context.document.settings.set('last_condition_added', 'or');
         $('#apply_or_simple').show();
@@ -670,10 +737,10 @@ function displaySimpleBetween(k){
                 }
             }
         }
-    }
+    }*/
 
 
-    function addThenCondition () {
+    /*function addThenCondition () {
 
         $('#tmp_hide').show();
         $('#remove_cond').show();
@@ -756,9 +823,9 @@ function displaySimpleBetween(k){
             }
         });
 
-    }
+    }*/
 
-    function removeCondition() {
+    /*function removeCondition() {
 
         if (Office.context.document.settings.get('then_condition_pressed') == true) {
             $('#tmp_hide').hide();
@@ -845,7 +912,7 @@ function displaySimpleBetween(k){
             $('#remove_cond').hide();
         }
 
-    }
+    }*/
 
 
     //validation when advanced rule is selected
