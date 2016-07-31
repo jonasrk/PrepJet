@@ -145,3 +145,5 @@ h1 {
     width: 130px;
 }
 
+#help_callout {
+    visibility: hidden;}
