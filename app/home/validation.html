@@ -144,7 +144,7 @@
                     </td>
                     <td>
                         <div id="delimiter_beginning1" class="ms-TextField ms-TextField--placeholder">
-                            <label class="ms-Label">Type condition</label>
+                            <label id="ifplaceholder" class="ms-Label">Type condition</label>
                             <input id="if_condition1" class="ms-TextField-field" type="text">
                         </div>
                     </td>
@@ -156,7 +156,8 @@
                         </div>
                     </td>
                     <td>
-                        <div id="between_beginning1" class="ms-TextField">
+                        <div id="between_beginning1" class="ms-TextField ms-TextField--placeholder">
+                            <label id="ifandplaceholder" class="ms-Label">Type range end (incl.)</label>
                             <input id="if_between_condition1" class="ms-TextField-field" type="text">
                         </div>
                     </td>
@@ -231,8 +232,12 @@
                     </div>
                     </td>
                 </tr>
+                <tr>
+                    <td class="tableval">
+                        <button class="ms-Button" id="apply_advanced">Apply</button>
+                    </td>
+                </tr>
             </table>
-            <button class="ms-Button" id="apply_advanced">Apply</button>
         </div>
 </div>
 <div class="placeholder"></div>

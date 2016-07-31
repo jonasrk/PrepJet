@@ -25,12 +25,16 @@ function setFocus(activeID) {
 //display additional text field when between or not between operator is selected
 function displaySimpleBetween(k){
     if(document.getElementById('if_operator' + k).value == "between" || document.getElementById('if_operator' + k).value == "notbetween") {
+        document.getElementById('ifplaceholder').innerHTML = "Type range start (incl)";
         $('#between_beginning' + k).show();
         $('#explanation_and').show();
     }
     else {
         $('#between_beginning' + k).hide();
         $('#explanation_and').hide();
+    }
+    if(document.getElementById('if_operator' + k).value == "inlist") {
+        document.getElementById('ifplaceholder').innerHTML = "Type list comma separated";
     }
 }
 

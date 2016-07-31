@@ -147,3 +147,12 @@ h1 {
 
 #help_callout {
     visibility: hidden;}
+
+.ms-Dialog.ms-Dialog--lgHeader .ms-Dialog-subText, .ms-Dropdown {
+    font-size: 11px; }
+
+.ms-TextField.ms-TextField--placeholder .ms-Label {
+    position: absolute;
+    font-size: 11px;
+    color: #666;
+    padding: 7px 0 7px 10px; }
