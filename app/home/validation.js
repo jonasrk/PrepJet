@@ -121,15 +121,19 @@ function showEnterpriseDialog() {
             // Function that writes to a div with id='message' on the page.
             function writeif(message){
                 document.getElementById('if_condition1').value = message;
+                document.getElementById('ifplaceholder').style.visibility = 'hidden';
             }
             function writeifand(message){
                 document.getElementById('if_between_condition1').value = message;
+                document.getElementById('ifandplaceholder').style.visibility = 'hidden';
             }
             function writethen(message){
                 document.getElementById('then_condition').value = message;
+                document.getElementById('thenplaceholder').style.visibility = 'hidden';
             }
             function writethenand(message){
                 document.getElementById('between_and').value = message;
+                document.getElementById('thenandplaceholder').style.visibility = 'hidden';
             }
 
 
@@ -147,6 +151,7 @@ function showEnterpriseDialog() {
             document.getElementById("buttonOkEnterprise").onclick = function () {
                 $("#showEnterprise").hide();
             }
+
 
 
             Excel.run(function (ctx) {
