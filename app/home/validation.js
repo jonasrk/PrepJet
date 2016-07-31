@@ -146,10 +146,9 @@ function showEnterpriseDialog() {
             }
             document.getElementById("buttonCloseEnterprise").onclick = function () {
                 document.getElementById('showEnterprise').style.visibility = 'hidden';
-                //$("#showEnterprise").hide();
             }
             document.getElementById("buttonOkEnterprise").onclick = function () {
-                $("#showEnterprise").hide();
+                document.getElementById('showEnterprise').style.visibility = 'hidden';
             }
 
 
