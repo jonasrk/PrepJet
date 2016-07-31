@@ -131,7 +131,7 @@
                          <!--dropdown for operator-->
                         <div id="small_drop" class="ms-Dropdown dropdown_table" tabindex="1">
                             <i class="ms-Dropdown-caretDown ms-Icon ms-Icon--caretDown"></i>
-                            <select id="if_operator1" class="ms-Dropdown-select" onchange="displaySimpleBetween(1)">
+                            <select id="if_operator1" class="ms-Dropdown-select" onchange="displaySimpleBetween()">
                                 <option value="equal">is equal to (=)</option>
                                 <option value="smaller">is smaller than(<)</option>
                                 <option value="greater">is greater than (>)</option>
@@ -157,7 +157,7 @@
                     </td>
                     <td>
                         <div id="between_beginning1" class="ms-TextField ms-TextField--placeholder">
-                            <label id="ifandplaceholder" class="ms-Label">Type range end (incl.)</label>
+                            <label id="ifandplaceholder" class="ms-Label">Range end (included)</label>
                             <input id="if_between_condition1" class="ms-TextField-field" type="text">
                         </div>
                     </td>
@@ -215,7 +215,7 @@
                 <tr>
                     <td class="tableval">
                         <div id="delimiter_end" class="ms-TextField ms-TextField--placeholder">
-                            <label class="ms-Label">Type condition</label>
+                            <label id="thenplaceholder" class="ms-Label">Type condition</label>
                             <input id="then_condition" class="ms-TextField-field" type="text">
                         </div>
                     </td>
@@ -227,7 +227,8 @@
                 </tr>
                 <tr>
                     <td>
-                        <div id="betweenand" class="ms-TextField">
+                        <div id="betweenand" class="ms-TextField ms-TextField--placeholder">
+                            <label id="thenplaceholder" class="ms-Label">Range end (included)</label>
                         <input id="between_and" class="ms-TextField-field" type="text">
                     </div>
                     </td>

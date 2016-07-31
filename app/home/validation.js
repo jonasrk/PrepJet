@@ -7,12 +7,19 @@ function redirectRule() {
 //show textfield for ending delimiter if custom is selected
 function displayBetween(){
     if(document.getElementById('then_operator').value == "between" || document.getElementById('then_operator').value == "notbetween") {
+        document.getElementById('thenplaceholder').innerHTML = "Range start (included)";
         $('#betweenand').show();
         $('#explanationand').show();
     }
     else {
         $('#betweenand').hide();
         $('#explanationand').hide();
+        if(document.getElementById('then_operator').value == "inlist") {
+            document.getElementById('thenplaceholder').innerHTML = "Option1, Option2,...";
+        }
+        else {
+            document.getElementById('thenplaceholder').innerHTML = "Type condition";
+        }
     }
 }
 
@@ -23,18 +30,18 @@ function setFocus(activeID) {
 }
 
 //display additional text field when between or not between operator is selected
-function displaySimpleBetween(k){
-    if(document.getElementById('if_operator' + k).value == "between" || document.getElementById('if_operator' + k).value == "notbetween") {
-        document.getElementById('ifplaceholder').innerHTML = "Type range start (incl)";
-        $('#between_beginning' + k).show();
+function displaySimpleBetween(){
+    if(document.getElementById('if_operator1').value == "between" || document.getElementById('if_operator1').value == "notbetween") {
+        document.getElementById('ifplaceholder').innerHTML = "Range start (included)";
+        $('#between_beginning1').show();
         $('#explanation_and').show();
     }
     else {
-        $('#between_beginning' + k).hide();
+        $('#between_beginning1').hide();
         $('#explanation_and').hide();
 
-        if(document.getElementById('if_operator' + k).value == "inlist") {
-            document.getElementById('ifplaceholder').innerHTML = "Type list comma separated";
+        if(document.getElementById('if_operator1').value == "inlist") {
+            document.getElementById('ifplaceholder').innerHTML = "Option1, Option2,...";
         }
         else {
             document.getElementById('ifplaceholder').innerHTML = "Type condition";
