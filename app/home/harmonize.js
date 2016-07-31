@@ -34,9 +34,6 @@
                 $("#showEmbeddedDialog").hide();
             }
 
-            document.getElementById('helpicon').onclick = function () {
-                $("#help_callout").show();
-            }
 
             Excel.run(function (ctx) {
 
