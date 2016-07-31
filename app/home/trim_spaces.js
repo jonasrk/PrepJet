@@ -16,7 +16,7 @@
             app.initialize();
             fillColumn();
 
-
+            $('#helpCallout').hide();
             $('#trim_space').click(trimSpace);
             $('#checkbox_all').click(checkCheckbox);
 
@@ -28,6 +28,14 @@
             // Performs the action and closes the dialog.
             document.getElementById("buttonOk").onclick = function () {
                 $("#showEmbeddedDialog").hide();
+            }
+
+            document.getElementById("help_icon").onclick = function () {
+                $('#helpCallout').show();
+            }
+
+            document.getElementById("closeCallout").onclick = function () {
+                $('#helpCallout').hide();
             }
 
 

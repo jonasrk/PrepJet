@@ -142,6 +142,17 @@ h1 {
     width: 53%; }
 
 #advanced_dropdown2 {
-    width: 130px;
-}
+    width: 130px; }
+
+.ms-Button_icon {
+    border: 0px;
+    background: #F9F9F9; }
+
+.ms-Callout-main {
+    position: absolute;
+    background-color: #fff;
+    box-sizing: border-box;
+    outline: transparent solid 1px;
+    z-index: 5;
+    box-shadow: 0 0 5px 0 rgba(0,0,0,.4); }
 
