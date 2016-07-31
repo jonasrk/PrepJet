@@ -11,8 +11,8 @@ function displayBetween(){
         $('#explanationand').show();
     }
     else {
-        $('#betweenand').show();
-        $('#explanationand').show();
+        $('#betweenand').hide();
+        $('#explanationand').hide();
     }
 }
 
@@ -41,8 +41,6 @@ function showEnterpriseDialog() {
 (function () {
     'use strict';
     var count_drop = 1;
-    //var mixed_condition = [];
-    //mixed_condition.push(1);
 
     // The initialize function must be run each time a new page is loaded
     Office.initialize = function (reason) {
@@ -319,6 +317,7 @@ function showEnterpriseDialog() {
     }
 
 
+
     //validation when advanced rule is selected
     function validationAndAdvanced() {
 
@@ -330,27 +329,7 @@ function showEnterpriseDialog() {
             var selected_identifier2 = document.getElementById('column2_options').value;
 
 
-            //get operator applicable for then condition
-            var thenoperator = document.getElementById('then_operator').value;
-            if (document.getElementById('then_operator').value == "equal"){
-                var thenoperator = "=";
-            }
-            else if (document.getElementById('then_operator').value == "smaller"){
-                var thenoperator = "<";
-            }
-            else if (document.getElementById('then_operator').value == "greater"){
-                var thenoperator = ">";
-            }
-            else if (document.getElementById('then_operator').value == "inequal"){
-                var thenoperator = "!=";
-            }
-            else if (document.getElementById('then_operator').value == "between"){
-                var thenoperator = "between";
-            }
-            else if (document.getElementById('then_operator').value == "notbetween") {
-                var thenoperator = "notbetween";
-            }
-            else if (document.getElementById('then_operator').value == "inlist") {
+            if (document.getElementById('then_operator').value == "inlist") {
                 var in_then_list = document.getElementById('then_condition').value;
                 var splitted_then_list = in_then_list.split(",");
                 for (var run = 0; run < splitted_then_list.length; run ++) {
@@ -361,9 +340,6 @@ function showEnterpriseDialog() {
                         splitted_then_list[run] = Number(splitted_then_list[run]);
                     }
                 }
-            }
-            else { //todo useful return value if nothing is selected
-                var thenoperator = 1;
             }
 
             //get correct value in then condition
@@ -386,174 +362,154 @@ function showEnterpriseDialog() {
                 }
             }
 
-
-            //get used range in active Sheet
             range.load('text');
-            range.load('valueTypes');
-            range.load('values');
-
-            var range_all_adding_to = worksheet.getRange();
-            var range_adding_to = range_all_adding_to.getUsedRange();
-            range_adding_to.load('address');
-            range_adding_to.load('text');
-
 
             return ctx.sync().then(function() {
 
                 var act_worksheet = ctx.workbook.worksheets.getActiveWorksheet();
+                var selected_identifier1 = document.getElementById('column_simple1').value;
 
-                var selected_identifier1 = [];
-                for (var k = 0; k < count_drop; k++) {
-                    selected_identifier1.push(document.getElementById('column_simple' + (k + 1)).value);
-                }
-
-                var header_if = [];
-                for (var runsel = 0; runsel < selected_identifier1.length; runsel++) {
-                    for (var k = 0; k < range.text[0].length; k++){
-                        if (selected_identifier1[runsel] == range.text[0][k] || selected_identifier1[runsel] == "Column " + getCharFromNumber(k)){
-                            header_if.push(k);
-                        }
+                for (var k = 0; k < range.text[0].length; k++){
+                    if (selected_identifier1 == range.text[0][k] || selected_identifier1 == "Column " + getCharFromNumber(k)){
+                        var header_if = k;
                     }
                 }
-
-                //get column in header for which to check then condition
-                var header_then = 0;
                 for (var k = 0; k < range.text[0].length; k++){
                     if (selected_identifier2 == range.text[0][k] || selected_identifier2 == "Column " + getCharFromNumber(k)){
-                        header_then = k;
+                        var header_then = k;
                     }
                 }
 
-                for (var i = 1; i < range.text.length; i++) {
-                    var check_cond = 0;
-                    var sheet_row = i + 1;
-                    for (var runcol = 0; runcol < count_drop; runcol++) {
-                        var col_index = header_if[runcol];
-                        if (document.getElementById('if_operator' + (runcol + 1)).value == "inlist") {
-                            var in_if_list = document.getElementById('if_condition' + (runcol + 1)).value;
-                            var splitted_if_list = in_if_list.split(",");
-                            for (var run = 0; run < splitted_if_list.length; run ++) {
-                                splitted_if_list[run] = splitted_if_list[run].trim();
-                            }
-                            for (var run = 0; run < splitted_if_list.length; run++) {
-                                if (isNaN(Number(splitted_if_list[run])) != true) {
-                                    splitted_if_list[run] = Number(splitted_if_list[run]);
-                                }
-                            }
-                        }
-                        //get correct value for condition in if statement
-                        else {
-                            if (isNaN(Number(document.getElementById('if_condition' + (runcol + 1)).value)) == true) {
-                                var ifcondition = document.getElementById('if_condition' + (runcol + 1)).value;
-                            }
-                            else {
-                                var ifcondition = Number(document.getElementById('if_condition' + (runcol + 1)).value);
-                            }
-                        }
 
-                        //get correct value in if condition for between/not between 2nd value
-                        if (document.getElementById('if_operator' + (runcol + 1)).value == "between" || document.getElementById('if_operator' + (runcol + 1)).value == "notbetween") {
-                            if (isNaN(Number(document.getElementById('if_between_condition' + (runcol + 1)).value)) == true) {
-                                var ifbetweencondition = document.getElementById('if_between_condition' + (runcol + 1)).value;
-                            }
-                            else {
-                                var ifbetweencondition = Number(document.getElementById('if_between_condition' + (runcol + 1)).value);
-                            }
-                        }
-
-                        if (document.getElementById('if_operator' + (runcol + 1)).value == "equal") {
-                            if (range.text[i][col_index] == ifcondition) {
-                                check_cond += 1;
-                            }
-                        }
-
-                        if (document.getElementById('if_operator' + (runcol + 1)).value == "smaller") {
-                            if (range.text[i][col_index] < ifcondition) {
-                                check_cond += 1;
-                            }
-                        }
-
-                        if (document.getElementById('if_operator' + (runcol + 1)).value == "greater") {
-                            if (range.text[i][col_index] > ifcondition) {
-                                check_cond += 1;
-                            }
-                        }
-                        if (document.getElementById('if_operator' + (runcol + 1)).value == "inequal") {
-                            if (range.text[i][col_index] != ifcondition) {
-                                check_cond += 1;
-                            }
-                        }
-
-                        if (document.getElementById('if_operator' + (runcol + 1)).value == "between") {
-                            if (range.text[i][col_index] > ifcondition && range.text[i][col_index] < ifbetweencondition) {
-                                check_cond += 1;
-                            }
-                        }
-
-                        if (document.getElementById('if_operator' + (runcol + 1)).value == "notbetween") {
-                            if (range.text[i][col_index] < ifcondition || range.text[i][col_index] > ifbetweencondition) {
-                                check_cond += 1;
-                            }
-                        }
-
-                        if (document.getElementById('if_operator' + (runcol + 1)).value == "inlist") {
-                            var check_list = 0;
-                            for (var run = 0; run < splitted_if_list.length; run++) {
-                                if (range.text[i][col_index] == splitted_if_list[run]) {
-                                    check_list = 1;
-                                }
-                            }
-                            if (check_list == 1) {
-                                check_cond += 1;
-                            }
-                        }
-                    }
-
+                function highlightThenCond() {
                     var address = getCharFromNumber(header_then) + sheet_row;
-                    if (check_cond == count_drop) {
-                        if (document.getElementById('then_operator').value == "equal") {
-                            if (range.text[i][header_then] != thencondition) {
-                                highlightContentInWorksheet(act_worksheet, address, '#EA7F04');
+                    if (document.getElementById('then_operator').value == "equal") {
+                        if (range.text[i][header_then] != thencondition) {
+                            highlightContentInWorksheet(act_worksheet, address, '#EA7F04');
+                        }
+                    }
+                    else if (document.getElementById('then_operator').value == "smaller") {
+                         if (range.text[i][header_then] >= thencondition) {
+                            highlightContentInWorksheet(act_worksheet, address, '#EA7F04');
+                         }
+                    }
+                    else if (document.getElementById('then_operator').value == "greater") {
+                        if (range.text[i][header_then] <= thencondition) {
+                            highlightContentInWorksheet(act_worksheet, address, '#EA7F04');
+                        }
+                    }
+                    else if (document.getElementById('then_operator').value == "inequal") {
+                        if (range.text[i][header_then] == thencondition) {
+                            highlightContentInWorksheet(act_worksheet, address, '#EA7F04');
+                        }
+                    }
+                    else if (document.getElementById('then_operator').value == "between") {
+                        if (range.text[i][header_then] < thencondition || range.text[i][header_then] > betweencondition) {
+                            highlightContentInWorksheet(act_worksheet, address, '#EA7F04');
+                        }
+                    }
+                    else if (document.getElementById('then_operator').value == "notbetween") {
+                        if (range.text[i][header_then] > thencondition && range.text[i][header_then] < betweencondition) {
+                            highlightContentInWorksheet(act_worksheet, address, '#EA7F04');
+                        }
+                    }
+                    else if (document.getElementById('then_operator').value == "inlist") {
+                        var check_then = 0;
+                        for (var runthen = 0; runthen < splitted_then_list.length; runthen++) {
+                            if (range.text[i][header_then] == splitted_then_list[runthen]) {
+                                check_then = 1;
                             }
                         }
-                        else if (document.getElementById('then_operator').value == "smaller") {
-                             if (range.text[i][header_then] >= thencondition) {
-                                highlightContentInWorksheet(act_worksheet, address, '#EA7F04');
-                             }
+                        if (check_then == 0){
+                            highlightContentInWorksheet(act_worksheet, address, '#EA7F04');
                         }
-                        else if (document.getElementById('then_operator').value == "greater") {
-                            if (range.text[i][header_then] <= thencondition) {
-                                highlightContentInWorksheet(act_worksheet, address, '#EA7F04');
-                            }
+                    }
+                }
+
+
+                //go through all rows and check if if condition is true
+                for (var i = 1; i < range.text.length; i++) {
+                    var sheet_row = i + 1;
+
+                    if (document.getElementById('if_operator1').value == "inlist") {
+                        var in_if_list = document.getElementById('if_condition1').value;
+                        var splitted_if_list = in_if_list.split(",");
+                        for (var run = 0; run < splitted_if_list.length; run ++) {
+                            splitted_if_list[run] = splitted_if_list[run].trim();
                         }
-                        else if (document.getElementById('then_operator').value == "inequal") {
-                            if (range.text[i][header_then] == thencondition) {
-                                highlightContentInWorksheet(act_worksheet, address, '#EA7F04');
-                            }
-                        }
-                        else if (document.getElementById('then_operator').value == "between") {
-                            if (range.text[i][header_then] < thencondition || range.text[i][header_then] > betweencondition) {
-                                highlightContentInWorksheet(act_worksheet, address, '#EA7F04');
-                            }
-                        }
-                        else if (document.getElementById('then_operator').value == "notbetween") {
-                            if (range.text[i][header_then] > thencondition && range.text[i][header_then] < betweencondition) {
-                                highlightContentInWorksheet(act_worksheet, address, '#EA7F04');
-                            }
-                        }
-                        else if (document.getElementById('then_operator').value == "inlist") {
-                            var check_then = 0;
-                            for (var runthen = 0; runthen < splitted_then_list.length; runthen++) {
-                                if (range.text[i][header_then] == splitted_then_list[runthen]) {
-                                    check_then = 1;
-                                }
-                            }
-                            if (check_then == 0){
-                                highlightContentInWorksheet(act_worksheet, address, '#EA7F04');
+                        for (var run = 0; run < splitted_if_list.length; run++) {
+                            if (isNaN(Number(splitted_if_list[run])) != true) {
+                                splitted_if_list[run] = Number(splitted_if_list[run]);
                             }
                         }
                     }
+                    //get correct value for condition in if statement
+                    else {
+                        if (isNaN(Number(document.getElementById('if_condition1').value)) == true) {
+                            var ifcondition = document.getElementById('if_condition1').value;
+                        }
+                        else {
+                            var ifcondition = Number(document.getElementById('if_condition1').value);
+                        }
+                    }
 
+                    //get correct value in if condition for between/not between 2nd value
+                    if (document.getElementById('if_operator1').value == "between" || document.getElementById('if_operator1').value == "notbetween") {
+                        if (isNaN(Number(document.getElementById('if_between_condition1').value)) == true) {
+                            var ifbetweencondition = document.getElementById('if_between_condition1').value;
+                        }
+                        else {
+                            var ifbetweencondition = Number(document.getElementById('if_between_condition1').value);
+                        }
+                    }
+
+                    if (document.getElementById('if_operator1').value == "equal") {
+                        if (range.text[i][header_if] == ifcondition) {
+                            highlightThenCond();
+                        }
+                    }
+
+                    if (document.getElementById('if_operator1').value == "smaller") {
+                        if (range.text[i][header_if] < ifcondition) {
+                            highlightThenCond();
+                        }
+                    }
+
+                    if (document.getElementById('if_operator1').value == "greater") {
+                        if (range.text[i][header_if] > ifcondition) {
+                            highlightThenCond();
+                        }
+                    }
+
+                    if (document.getElementById('if_operator1').value == "inequal") {
+                        if (range.text[i][header_if] != ifcondition) {
+                            highlightThenCond();
+                        }
+                    }
+
+                    if (document.getElementById('if_operator1').value == "between") {
+                        if (range.text[i][header_if] > ifcondition && range.text[i][header_if] < ifbetweencondition) {
+                            highlightThenCond();
+                        }
+                    }
+
+                    if (document.getElementById('if_operator1').value == "notbetween") {
+                        if (range.text[i][header_if] < ifcondition || range.text[i][header_if] > ifbetweencondition) {
+                            highlightThenCond();
+                        }
+                    }
+
+                    if (document.getElementById('if_operator1').value == "inlist") {
+                        var check_list = 0;
+                        for (var run = 0; run < splitted_if_list.length; run++) {
+                            if (range.text[i][header_if] == splitted_if_list[run]) {
+                                check_list = 1;
+                            }
+                        }
+                        if (check_list == 1) {
+                            highlightThenCond();
+                        }
+                    }
                 }
 
                 window.location = "validation.html";
