@@ -48,7 +48,7 @@ function displayFieldDelimiter(){
             }
 
             $('#delimiter_beginning').hide();
-            $('#delimiter_count').hide();
+            $('#delimiter_count').Dropdown().hide();
             $('#checkbox_delimiter').hide();
             $(".delimiter_count_dropdown").Dropdown().hide()
             $(".keep_delimiter_dropdown").Dropdown().hide()
@@ -168,7 +168,7 @@ function displayFieldDelimiter(){
                 for (var run = 0; run < range.text[0].length - 1; run++) {
                     for (var run2 = run + 1; run2 < range.text[0].length; run2++) {
                         if (range.text[0][run] == range.text[0][run2]) {
-                            $("#showEmbeddedDialog").show();
+                            document.getElementById('showEmbeddedDialog').style.visibility = 'visible';
                             highlightContentInWorksheet(worksheet, getCharFromNumber(run) + 1, '#EA7F04');
                             highlightContentInWorksheet(worksheet, getCharFromNumber(run2) + 1, '#EA7F04');
                             Office.context.document.settings.set('same_header_split', true);
@@ -226,10 +226,7 @@ function displayFieldDelimiter(){
             }
 
             //if advanced settings are selected, get values for delimiter count
-            if (Office.context.document.settings.get('more_option') == true) {
-                var count_delimiter = Number(document.getElementById('delimiter_count_i').value);
-                var count_direction = document.getElementById('delimiter_count_drop').value;
-            }
+
 
             range.load('text');
             var range_all_adding_to = worksheet.getRange();
@@ -237,10 +234,28 @@ function displayFieldDelimiter(){
             range_adding_to.load('address');
             range_adding_to.load('text');
 
-
             return ctx.sync().then(function() {
 
                 backupForUndo(range_adding_to);
+
+                function getCountDelimiter () {
+                    var count_delimiter = 0;
+                    if (document.getElementById('delimiter_count_i').value == "one") { count_delimiter = 1; }
+                    else if(document.getElementById('delimiter_count_i').value == "two") { count_delimiter = 2; }
+                    else if(document.getElementById('delimiter_count_i').value == "three") { count_delimiter = 3; }
+                    else if(document.getElementById('delimiter_count_i').value == "four") { count_delimiter = 4; }
+                    else if(document.getElementById('delimiter_count_i').value == "five") { count_delimiter = 5; }
+                    else if(document.getElementById('delimiter_count_i').value == "six") { count_delimiter = 6; }
+                    else if(document.getElementById('delimiter_count_i').value == "seven") { count_delimiter = 7; }
+                    else if(document.getElementById('delimiter_count_i').value == "eight") { count_delimiter = 8; }
+                    else if(document.getElementById('delimiter_count_i').value == "nine") { count_delimiter = 9; }
+                    return count_delimiter;
+                }
+
+                if (Office.context.document.settings.get('more_option') == true) {
+                    //var count_delimiter = getCountDelimiter();
+                    var count_direction = document.getElementById('delimiter_count_drop').value;
+                }
 
                 //get column number which to split
                 var header = 0;
@@ -257,7 +272,6 @@ function displayFieldDelimiter(){
                 var split_array = new Array(range.text.length);
                 var split_array_test = new Array(range.text.length);
 
-
                 //loop through whole column, create an array with splitted values and get maximum length
                 if (Office.context.document.settings.get('more_option') == false) {
                     for (var i = 0; i < range.text.length; i++) {
@@ -272,6 +286,7 @@ function displayFieldDelimiter(){
                 }
                 else {
                     for (var i = 0; i < range.text.length; i++) {
+                        var count_delimiter = getCountDelimiter();
                         if (range.text[i][header] != "" && range.text[i][header].indexOf(delimiter_type) != -1) {
                             split_array[i] = range.text[i][header].split(delimiter_type);
                             array_length = split_array[i].length;
@@ -304,7 +319,6 @@ function displayFieldDelimiter(){
 
                                 split_array[i] = [str1_tmp];
                                 split_array[i].push(str2_tmp);
-                                count_delimiter = Number(document.getElementById('delimiter_count_i').value);
                                 max_array_length = 2;
                             }
                         }

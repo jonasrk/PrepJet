@@ -16,10 +16,6 @@
             app.initialize();
             fillColumn();
 
-            if (Office.context.document.settings.get('same_header_trim') == false) {
-                $("#showEmbeddedDialog").hide();
-            }
-
 
             $('#trim_space').click(trimSpace);
             $('#checkbox_all').click(checkCheckbox);
@@ -174,7 +170,7 @@
                 for (var run = 0; run < range.text[0].length - 1; run++) {
                     for (var run2 = run + 1; run2 < range.text[0].length; run2++) {
                         if (range.text[0][run] == range.text[0][run2]) {
-                            $("#showEmbeddedDialog").show();
+                            document.getElementById('showEmbeddedDialog').style.visibility = 'visible';
                             highlightContentInWorksheet(worksheet, getCharFromNumber(run) + 1, '#EA7F04');
                             highlightContentInWorksheet(worksheet, getCharFromNumber(run2) + 1, '#EA7F04');
                             Office.context.document.settings.set('same_header_trim', true);

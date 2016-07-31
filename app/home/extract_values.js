@@ -206,7 +206,7 @@ function hideAdvancedCount() {
                 for (var run = 0; run < range.text[0].length - 1; run++) {
                     for (var run2 = run + 1; run2 < range.text[0].length; run2++) {
                         if (range.text[0][run] == range.text[0][run2]) {
-                            $("#showEmbeddedDialog").show();
+                            document.getElementById('showEmbeddedDialog').style.visibility = 'visible';
                             highlightContentInWorksheet(worksheet, getCharFromNumber(run) + 1, '#EA7F04');
                             highlightContentInWorksheet(worksheet, getCharFromNumber(run2) + 1, '#EA7F04');
                             Office.context.document.settings.set('same_header_extract', true);
@@ -291,9 +291,32 @@ function hideAdvancedCount() {
 
             //if advanced settings are selected, get values for delimiter count
             if (Office.context.document.settings.get('more_option_extract') == true) {
-                var count_delimiter_start = Number(document.getElementById('delimiter_count_start').value);
+                //var count_delimiter_start = Number(document.getElementById('delimiter_count_start').value);
+                var count_delimiter_start = 0;
+                if (document.getElementById('delimiter_count_start').value == "one") { count_delimiter_start = 1; }
+                else if (document.getElementById('delimiter_count_start').value == "two") { count_delimiter_start = 2; }
+                else if (document.getElementById('delimiter_count_start').value == "three") { count_delimiter_start = 3; }
+                else if (document.getElementById('delimiter_count_start').value == "four") { count_delimiter_start = 4; }
+                else if (document.getElementById('delimiter_count_start').value == "five") { count_delimiter_start = 5; }
+                else if (document.getElementById('delimiter_count_start').value == "six") { count_delimiter_start = 6; }
+                else if (document.getElementById('delimiter_count_start').value == "seven") { count_delimiter_start = 7; }
+                else if (document.getElementById('delimiter_count_start').value == "eight") { count_delimiter_start = 8; }
+                else if (document.getElementById('delimiter_count_start').value == "nine") { count_delimiter_start = 9; }
+
                 var count_direction_start = document.getElementById('del_count_drop_start').value;
-                var count_delimiter_end = Number(document.getElementById('delimiter_count_end').value);
+
+                var count_delimiter_end = 0;
+                if (document.getElementById('delimiter_count_end').value == "one") { count_delimiter_end = 1; }
+                else if(document.getElementById('delimiter_count_end').value == "two") { count_delimiter_end = 2; }
+                else if(document.getElementById('delimiter_count_end').value == "three") { count_delimiter_end = 3; }
+                else if(document.getElementById('delimiter_count_end').value == "four") { count_delimiter_end = 4; }
+                else if(document.getElementById('delimiter_count_end').value == "five") { count_delimiter_end = 5; }
+                else if(document.getElementById('delimiter_count_end').value == "six") { count_delimiter_end = 6; }
+                else if(document.getElementById('delimiter_count_end').value == "seven") { count_delimiter_end = 7; }
+                else if(document.getElementById('delimiter_count_end').value == "eight") { count_delimiter_end = 8; }
+                else if(document.getElementById('delimiter_count_end').value == "nine") { count_delimiter_end = 9; }
+
+                //var count_delimiter_end = Number(document.getElementById('delimiter_count_end').value);
                 var count_direction_end = document.getElementById('del_count_drop_end').value;
             }
             else {
@@ -383,7 +406,7 @@ function hideAdvancedCount() {
                             }
                         }
                     }
-
+                    console.log(count_delimiter_end);
                     //get index where to end extracting value
                     if (split_end == "col_end") {
                         var position2 = range.text[i][header].length;
