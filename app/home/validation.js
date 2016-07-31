@@ -32,9 +32,13 @@ function displaySimpleBetween(k){
     else {
         $('#between_beginning' + k).hide();
         $('#explanation_and').hide();
-    }
-    if(document.getElementById('if_operator' + k).value == "inlist") {
-        document.getElementById('ifplaceholder').innerHTML = "Type list comma separated";
+
+        if(document.getElementById('if_operator' + k).value == "inlist") {
+            document.getElementById('ifplaceholder').innerHTML = "Type list comma separated";
+        }
+        else {
+            document.getElementById('ifplaceholder').innerHTML = "Type condition";
+        }
     }
 }
 
