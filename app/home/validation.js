@@ -8,9 +8,11 @@ function redirectRule() {
 function displayBetween(){
     if(document.getElementById('then_operator').value == "between" || document.getElementById('then_operator').value == "notbetween") {
         $('#betweenand').show();
+        $('#explanationand').show();
     }
     else {
-        $('#betweenand').hide();
+        $('#betweenand').show();
+        $('#explanationand').show();
     }
 }
 
@@ -63,6 +65,7 @@ function showEnterpriseDialog() {
             //$('#tmp_hide').hide();
             $('#between_beginning1').hide();
             $('#explanation_and').hide();
+            $('#explanationand').hide();
             $('#betweenand').hide();
             $('#delimiter_beginning1').show();
             //$('#remove_cond').hide();
