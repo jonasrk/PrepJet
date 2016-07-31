@@ -85,12 +85,20 @@
         <div>
             <label class="ms-Label">Select the column from which to remove leading and trailing spaces (spaces inbetween will not be removed)</label>
         </div>
-        <div id="checkbox_select_all" class="ms-ChoiceField">
-            <input id="checkbox_all" class="ms-ChoiceField-input" type="checkbox">
-            <label id="checkbox_label" for="checkbox_all" class="ms-ChoiceField-field">
-                <span class="ms-Label">All columns</span>
-            </label>
-        </div>
+        <table>
+            <tr>
+                <td id="allColumns">
+                    <div id="checkbox_select_all" class="ms-ChoiceField">
+                        <input id="checkbox_all" class="ms-ChoiceField-input" type="checkbox">
+                        <label id="checkbox_label" for="checkbox_all" class="ms-ChoiceField-field">
+                            <span class="ms-Label">All columns</span>
+                        </label>
+                    </div>
+                </td>
+                <td></td>
+            </tr>
+        </table>
+
         <!--container for checkboxes-->
         <div id="checkboxes_columns" class="ms-ChoiceField">
         </div>

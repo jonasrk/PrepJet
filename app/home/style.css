@@ -156,3 +156,8 @@ h1 {
     font-size: 11px;
     color: #666;
     padding: 7px 0 7px 10px; }
+
+#allColumns {
+    width: 60%;
+    border-bottom: 0.75px solid;
+    border-color: #e2e2e2; }
