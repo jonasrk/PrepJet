@@ -86,11 +86,6 @@
                 <i class="ms-Dropdown-caretDown ms-Icon ms-Icon--caretDown"></i>
                 <select id="table1_options" class="ms-Dropdown-select"></select>
             </div>
-            <div class="ms-Dropdown dropdown_table" tabindex="1">
-                <label class="ms-Label">Select source sheet</label>
-                <i class="ms-Dropdown-caretDown ms-Icon ms-Icon--caretDown"></i>
-                <select id="table2_options" class="ms-Dropdown-select"></select>
-            </div>
             <div id="helpCalloutFirst" class="ms-Callout ms-Callout--close ms-Callout--arrowLeft">
                 <div class="ms-Callout-main">
                     <div class="ms-Callout-header">
@@ -101,13 +96,18 @@
                     </button>
                     <div class="ms-Callout-inner">
                         <div class="ms-Callout-content">
-                            <p class="ms-Callout-subText">Target Sheet is the worksheet at which your lookup data will be inserted. Source sheet is the worksheet from which the data (as defined in the next step) will be grabbed.</p>
+                            <p class="ms-Callout-subText">"Target Sheet" is the worksheet to which your lookup data will be inserted. "Source Sheet" is the worksheet from which the data (as defined in the next step) will be grabbed.</p>
                         </div>
                         <div class="ms-Callout-actions">
                             <a href="help.html" class="ms-Callout-link ms-Link">Learn more</a>
                         </div>
                     </div>
                 </div>
+            </div>
+            <div class="ms-Dropdown dropdown_table" tabindex="1">
+                <label class="ms-Label">Select source sheet</label>
+                <i class="ms-Dropdown-caretDown ms-Icon ms-Icon--caretDown"></i>
+                <select id="table2_options" class="ms-Dropdown-select"></select>
             </div>
             <button id="help_iconFirst" class="ms-Button_icon">
                 <i class="ms-Icon ms-Icon--infoCircle" aria-hidden="true"></i>
@@ -155,7 +155,7 @@
                 </button>
                 <div class="ms-Callout-inner">
                   <div class="ms-Callout-content">
-                    <p class="ms-Callout-subText">You should use as many match criteria to ensure an exact matching of data records from target and source table. If more rows in the source table fit the criteria in the target table, PrepJet will take the first match.</p>
+                    <p class="ms-Callout-subText">You should use as many match criteria as necessary to ensure an exact matching of data records from target and source sheet. If more rows in the source table fit the criteria in the target table, PrepJet will take the first match.</p>
                   </div>
                   <div class="ms-Callout-actions">
                     <a href="help.html" class="ms-Callout-link ms-Link">Learn more</a>

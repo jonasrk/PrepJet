@@ -28,9 +28,6 @@ function backToOne() {
 
             app.initialize();
 
-            if (Office.context.document.settings.get('same_header_addcolumn') == false) {
-                $("#showEmbeddedDialog").hide();
-            }
 
             $('#step2').hide();
             $('#step3').hide();
@@ -72,7 +69,7 @@ function backToOne() {
 
                 var myBindings = Office.context.document.bindings;
                 var worksheetname = ctx.workbook.worksheets.getActiveWorksheet();
-
+                
                 worksheetname.load('name')
 
                 return ctx.sync().then(function() {
@@ -114,7 +111,7 @@ function backToOne() {
                 }
 
                 function dataChanged(eventArgs) {
-                    window.location = "merge_columns.html";
+                    //window.location = "merge_columns.html";
                 }
 
                 // Function that writes to a div with id='message' on the page.
@@ -209,7 +206,6 @@ function backToOne() {
                                     document.getElementById("table2_options").appendChild(el);
                                 }
 
-                                //console.log($(".dropdown_table"));
                                 $(".dropdown_table").Dropdown();
                                 $("span.ms-Dropdown-title:empty").text(worksheet_names[0]);
 
@@ -275,6 +271,8 @@ function backToOne() {
                     }
                 }
                 $('#checkbox_all').click(checkCheckbox);
+
+
             });
 
         }).catch(function(error) {
