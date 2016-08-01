@@ -243,10 +243,21 @@
                     }
                 }
 
+                var strings_to_sort  = [];
+
+                for (var i = 1; i < range.text.length; i++) {
+                    var this_row = [];
+                    for (var j = 0; j < columns_to_check.length; j++) {
+                        var row_number = i + 1;
+                        this_row.push([range.text[i][columns_to_check[j]], getCharFromNumber(columns_to_check[j]) + row_number, row_number]);
+                    }
+                    strings_to_sort.push(this_row);
+                }
+
 
                 // call to API
 
-                $.post( "https://localhost:8100/", { data: columns_to_check })
+                $.post( "https://localhost:8100/", { data: strings_to_sort })
                     .done(function( data ) {
                         console.log("Data: " + data + "\nStatus: " + status);
                     });
