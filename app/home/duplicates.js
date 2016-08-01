@@ -261,8 +261,33 @@
                     .done(function( data ) {
                         // highlight dupes
                         console.log("Data: " + data + "\nStatus: " + status);
-                        window.location = "duplicates.html";
+
+                        Excel.run(function (ctx) {
+
+                            var dupe_worksheet = ctx.workbook.worksheets.getActiveWorksheet();
+                            var dupe_range_all = dupe_worksheet.getRange();
+                            var dupe_range = dupe_range_all.getUsedRange();
+
+                            dupe_range.load('address');
+                            dupe_range.load('text');
+                            return ctx.sync().then(function() {
+                                var color = "#EA7F04";
+                                for (var m = 0; m < data.length; m++){
+                                    if (m > 0 && m % 2 == 0){
+                                        // generate new random color
+                                        color = getRandomColor();
+                                    }
+
+
+                                    highlightCellInWorksheet(dupe_worksheet, data[m][0], color);
+                                    highlightCellInWorksheet(dupe_worksheet, data[m][1], color);
+                                }
+                            });
+
+                            // window.location = "duplicates.html";
+                        });
                     });
+
 
             });
 
