@@ -40,12 +40,10 @@ function displayFieldDelimiter(){
                 Office.context.document.settings.saveAsync();
                 window.location = "intro.html";
             }
+
             app.initialize();
             fillColumn();
 
-            if (Office.context.document.settings.get('same_header_split') == false) {
-                $("#showEmbeddedDialog").hide();
-            }
 
             $('#delimiter_beginning').hide();
             $('#delimiter_count').Dropdown().hide();
@@ -66,11 +64,18 @@ function displayFieldDelimiter(){
             document.getElementById("buttonClose").onclick = function () {
                 $("#showEmbeddedDialog").hide();
             }
-
-            // Performs the action and closes the dialog.
             document.getElementById("buttonOk").onclick = function () {
                 $("#showEmbeddedDialog").hide();
             }
+
+            //Show and hide error message if columns have same header name
+            document.getElementById("help_icon").onclick = function () {
+                document.getElementById('helpCallout').style.visibility = 'visible';
+            }
+            document.getElementById("closeCallout").onclick = function () {
+                document.getElementById('helpCallout').style.visibility = 'hidden';
+            }
+
 
             Excel.run(function (ctx) {
 

@@ -115,6 +115,7 @@ function hideAdvancedCount() {
                 document.getElementById('helpCallout').style.visibility = 'hidden';
             }
 
+
             Excel.run(function (ctx) {
 
                 var myBindings = Office.context.document.bindings;
