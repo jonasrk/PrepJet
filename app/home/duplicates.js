@@ -99,25 +99,25 @@
                         });
                     }
 
-                bindFromPrompt();
+                    bindFromPrompt();
 
-                function displayAllBindings() {
-                    Office.context.document.bindings.getAllAsync(function (asyncResult) {
-                        var bindingString = '';
-                        for (var i in asyncResult.value) {
-                            bindingString += asyncResult.value[i].id + '\n';
-                        }
-                    });
-                }
+                    function displayAllBindings() {
+                        Office.context.document.bindings.getAllAsync(function (asyncResult) {
+                            var bindingString = '';
+                            for (var i in asyncResult.value) {
+                                bindingString += asyncResult.value[i].id + '\n';
+                            }
+                        });
+                    }
 
-                function dataChanged(eventArgs) {
-                    window.location = "duplicates.html";
-                }
+                    function dataChanged(eventArgs) {
+                        window.location = "duplicates.html";
+                    }
 
-                // Function that writes to a div with id='message' on the page.
-                function write(message){
-                    console.log(message);
-                }
+                    // Function that writes to a div with id='message' on the page.
+                    function write(message){
+                        console.log(message);
+                    }
 
                 });
             }).catch(function(error) {
@@ -243,77 +243,14 @@
                     }
                 }
 
+
                 // call to API
 
-                $.get("https://localhost:8100/", function(data, status){
-                    console.log("Data: " + data + "\nStatus: " + status);
-                });
+                $.post( "https://localhost:8100/", { data: columns_to_check })
+                    .done(function( data ) {
+                        console.log("Data: " + data + "\nStatus: " + status);
+                    });
 
-                function colorDup(duplicates_input, int) {
-                    var color = "#EA7F04";
-                    for (var m = 0; m < duplicates_input.length; m++){
-                        if (m > 0 && duplicates_input[m][1] != duplicates_input[m-1][1]){
-                            // generate new random color
-                            color = getRandomColor();
-                        }
-
-                        for (var n = 0; n < duplicates_input[m].length; n++){
-                            for (var o = 0; o < duplicates_input[m][n].length; o++) {
-                                highlightContentInWorksheet(worksheet, duplicates_input[m][n][o][int], color);
-                            }
-
-                        }
-                    }
-                }
-
-                if(document.getElementById('duplicatesort').checked == false) {
-                    colorDup(duplicates, 1);
-                }
-                else {
-
-                    var dup_length = duplicates.length;
-                    var sheet_row = 2;
-
-                    var row_numbers = [];
-                    for (var run = 0; run < duplicates.length; run++) {
-                        row_numbers.push(duplicates[run][0][0][2]);
-                    }
-
-                    var text = [];
-                    var color_check = []
-                    var data_index = 0;
-                    for (var run = 0; run < row_numbers.length; run++) {
-                        data_index = row_numbers[run] - 1;
-                        text.push(range.text[data_index]);
-                        color_check.push(duplicates[run][1]);
-                    }
-
-                    for (var run = 1; run < range.text.length; run ++) {
-                        var check = 0;
-                        for (var k = 0; k < row_numbers.length; k++) {
-                            if((run + 1) == row_numbers[k]) {
-                                check = 1;
-                            }
-                        }
-                        if (check == 0) {
-                            text.push(range.text[run]);
-                        }
-                    }
-
-                    var color = '#EA7F04';
-                    for (var row = 0; row < text.length; row++) {
-                        for(var col = 0; col < range.text[0].length; col++) {
-                            var columnchar = getCharFromNumber(col)
-                            addContentToWorksheet(worksheet, columnchar + sheet_row, text[row][col])
-                            if (sheet_row < (row_numbers.length + 2)) {
-                                if (row > 0 && color_check[row] == color_check[row - 1])
-                                highlightContentInWorksheet(worksheet, columnchar + sheet_row ,color)
-                            }
-                        }
-                        sheet_row += 1;
-                    }
-                }
-                
                 window.location = "duplicates.html";
 
             });
