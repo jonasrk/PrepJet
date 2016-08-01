@@ -143,16 +143,43 @@
             </td>
         </tr>
     </table>
-    <!--checkbox-->
-    <div class="ms-ChoiceField">
-        <input id="duplicatesort" class="ms-ChoiceField-input" type="checkbox">
-        <label id="checkbox" for="duplicatesort" class="ms-ChoiceField-field">
-            <span class="ms-Label">Sort for duplicates (entries will be displayed below each other)</span><br>
-        </label>
+    <div id="helpCallout" class="ms-Callout ms-Callout--close ms-Callout--arrowLeft">
+        <div class="ms-Callout-main">
+            <div class="ms-Callout-header">
+                <p class="ms-Callout-title">Help: Detect Duplicates</p>
+            </div>
+            <button id="closeCallout" class="ms-Callout-close">
+                <i class="ms-Icon ms-Icon--x"></i>
+            </button>
+            <div class="ms-Callout-inner">
+                <div class="ms-Callout-content">
+                    <p class="ms-Callout-subText">Sort for duplicates will copy all duplicates to the top of your worksheet and place all duplicate pairs together. Otherwise PrepJet will only highlight duplicate entries.</p>
+                </div>
+                <div class="ms-Callout-actions">
+                    <a href="help.html" class="ms-Callout-link ms-Link">Learn more</a>
+                </div>
+            </div>
+        </div>
     </div>
-    <!--div>
-        <label class="ms-Label"> entries will be displayed below each other</span>
-    </div-->
+    <!--checkbox-->
+    <table>
+        <tr>
+            <td>
+                <div class="ms-ChoiceField">
+                    <input id="duplicatesort" class="ms-ChoiceField-input" type="checkbox">
+                    <label id="checkbox" for="duplicatesort" class="ms-ChoiceField-field">
+                        <span class="ms-Label">Sort for duplicates (entries will be displayed below each other)</span><br>
+                    </label>
+                </div>
+            </td>
+            <td>
+                <button id="help_icon" class="ms-Button_icon">
+                    <i class="ms-Icon ms-Icon--infoCircle" aria-hidden="true"></i>
+                </button>
+            </td>
+        </tr>
+    </table>
+
     <!--Button Detect Duplicates-->
     <button class="ms-Button" id="bt_detect_duplicates">Detect Duplicates</button>
 </div>

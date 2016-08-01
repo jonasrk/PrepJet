@@ -16,23 +16,20 @@
             app.initialize();
             populateCheckboxes();
 
-            if (Office.context.document.settings.get('same_header_duplicates') == false) {
-                $("#showEmbeddedDialog").hide();
-            }
 
             $('#bt_detect_duplicates').click(detectDuplicates);
             $('#checkbox_all').click(checkCheckbox);
 
-            // Hides the dialog.
+
+            //show and hide error message when columns have same header name
             document.getElementById("buttonClose").onclick = function () {
                 $("#showEmbeddedDialog").hide();
             }
-
-            // Performs the action and closes the dialog.
             document.getElementById("buttonOk").onclick = function () {
                 $("#showEmbeddedDialog").hide();
             }
 
+            //show and hide message about PrepJet Pro when hovering over fuzzy matching
             document.getElementById("fuzzy_match").onmouseover = function () {
                 document.getElementById('showEnterprise').style.visibility = 'visible';
             }
@@ -41,6 +38,14 @@
             }
             document.getElementById('buttonOkEnterprise').onclick = function () {
                 document.getElementById('showEnterprise').style.visibility = 'hidden';
+            }
+
+            //show and hide help callout
+            document.getElementById("help_icon").onclick = function () {
+                document.getElementById('helpCallout').style.visibility = 'visible';
+            }
+            document.getElementById("closeCallout").onclick = function () {
+                document.getElementById('helpCallout').style.visibility = 'hidden';
             }
 
 
