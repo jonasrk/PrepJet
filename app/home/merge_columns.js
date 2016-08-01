@@ -54,6 +54,14 @@ function backToOne() {
                 $("#showEmbeddedDialog").hide();
             }
 
+            document.getElementById("help_icon").onclick = function () {
+                document.getElementById('helpCallout').style.visibility = 'visible';
+            }
+
+            document.getElementById("closeCallout").onclick = function () {
+                document.getElementById('helpCallout').style.visibility = 'hidden';
+            }
+
 
             Excel.run(function (ctx) {
 

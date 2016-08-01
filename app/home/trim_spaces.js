@@ -16,7 +16,7 @@
             app.initialize();
             fillColumn();
 
-
+            $('#helpCallout').hide();
             $('#trim_space').click(trimSpace);
             $('#checkbox_all').click(checkCheckbox);
 

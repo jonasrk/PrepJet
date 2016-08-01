@@ -142,8 +142,55 @@ h1 {
     width: 53%; }
 
 #advanced_dropdown2 {
-    width: 135px;
-}
+    width: 135px; }
+
+.ms-Button_icon {
+    border: 0px;
+    background: #F9F9F9; }
+
+#helpCallout {
+    visibility: hidden; }
+
+.ms-Callout-main {
+    position: absolute;
+    background-color: #fff;
+    box-sizing: border-box;
+    outline: transparent solid 1px;
+    z-index: 5;
+    box-shadow: 0 0 5px 0 rgba(0,0,0,.4); }
+
+.ms-Callout-header {
+    z-index: 105;
+    padding: 10px 15px 10px; }
+
+.ms-Callout-inner {
+    height: 100%;
+    padding: 0 15px 15px; }
+
+.ms-Callout-actions {
+    position: relative;
+    margin-top: 10px;
+    width: 100%;
+    white-space: nowrap; }
+
+.ms-Callout-title {
+    margin: 0;
+    font-size: 16px; }
+
+.ms-Callout-close {
+    margin: 0;
+    border: 0;
+    background: 0 0;
+    cursor: pointer;
+    position: absolute;
+    top: 7px;
+    right: 12px;
+    padding: 8px;
+    width: 32px;
+    height: 32px;
+    font-size: 14px;
+    color: #666;
+    z-index: 110; }
 
 #help_callout {
     visibility: hidden;}
@@ -161,3 +208,4 @@ h1 {
     width: 60%;
     border-bottom: 0.75px solid;
     border-color: #e2e2e2; }
+

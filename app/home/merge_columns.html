@@ -124,6 +124,24 @@
         <div class="padding">
             <div id="dropdowns_step3">
             </div>
+            <div id="helpCallout" class="ms-Callout ms-Callout--close ms-Callout--arrowLeft">
+              <div class="ms-Callout-main">
+                <div class="ms-Callout-header">
+                  <p class="ms-Callout-title">Help: Lookup Data</p>
+                </div>
+                <button id="closeCallout" class="ms-Callout-close">
+                  <i class="ms-Icon ms-Icon--x"></i>
+                </button>
+                <div class="ms-Callout-inner">
+                  <div class="ms-Callout-content">
+                    <p class="ms-Callout-subText">You should use as many match criteria to ensure an exact matching of data records from target and source table. If more rows in the source table fit the criteria in the target table, PrepJet will take the first match.</p>
+                  </div>
+                  <div class="ms-Callout-actions">
+                    <a href="help.html" class="ms-Callout-link ms-Link">Learn more</a>
+                  </div>
+                </div>
+              </div>
+            </div>
             <!--checkbox-->
             <div class="ms-ChoiceField">
                 <input id="case_sens" class="ms-ChoiceField-input" type="checkbox">
@@ -132,10 +150,27 @@
                 </label>
             </div>
             <div id="buttons">
-                <button class="ms-Button_grey" id="bt_more">More match criteria</button>
-                <button class="ms-Button_grey" id="bt_remove">Remove Criteria</button><br>
-                <button class="ms-Button_grey" id="back_step2">Back</button>
-                <button class="ms-Button" id="bt_apply">Apply</button>
+                <table>
+                    <tr>
+                        <td>
+                            <button class="ms-Button_grey" id="bt_more">More match criteria</button>
+                        </td>
+                        <td>
+                            <button class="ms-Button_grey" id="bt_remove">Remove Criteria</button><br>
+                        </td>
+                        <td>
+                            <button id="help_icon" class="ms-Button_icon">
+                                <i class="ms-Icon ms-Icon--infoCircle" aria-hidden="true"></i>
+                            </button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <button class="ms-Button_grey" id="back_step2">Back</button>
+                            <button class="ms-Button" id="bt_apply">Apply</button>
+                        </td>
+                    </tr>
+                </table>
             </div>
         </div>
     </div>
