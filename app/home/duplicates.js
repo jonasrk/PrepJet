@@ -243,60 +243,11 @@
                     }
                 }
 
-                var strings_to_sort  = [];
+                // call to API
 
-                for (var i = 1; i < range.text.length; i++) {
-                    var this_row = [];
-                    for (var j = 0; j < columns_to_check.length; j++) {
-                        var row_number = i + 1;
-                        this_row.push([range.text[i][columns_to_check[j]], getCharFromNumber(columns_to_check[j]) + row_number, row_number]);
-                    }
-                    strings_to_sort.push(this_row);
-                }
-
-                function Comparator(a, b) {
-                    for (var i = 0; i < checked_checkboxes.length; i++){
-                        if (a[i][0] < b[i][0]) return -1;
-                        if (a[i][0] > b[i][0]) return 1;
-                    }
-                    return 0;
-                }
-
-                strings_to_sort.sort(Comparator);
-                var duplicates = [];
-
-                function arraysEqual(a, b) {
-                    if (a === b) return true;
-                    if (a == null || b == null) return false;
-                    if (a.length != b.length) return false;
-
-                    // If you don't care about the order of the elements inside
-                    // the array, you should sort both arrays here.
-
-                    for (var i = 0; i < a.length; ++i) {
-                        if (a[i][0] !== b[i][0]) return false;
-                    }
-                    return true;
-                }
-
-                var dup_count = 1;
-                var dup_index = 1;
-                for (var o = 1; o < strings_to_sort.length; o++){
-                    if (arraysEqual(strings_to_sort[o], strings_to_sort[o - 1])){
-                        if (dup_count == 1) {
-                            duplicates.push([strings_to_sort[o], dup_index]);
-                            duplicates.push([strings_to_sort[o - 1], dup_index]);
-                            dup_count += 1;
-                        }
-                        else {
-                            duplicates.push([strings_to_sort[o], dup_index]);
-                        }
-                    }
-                    else {
-                        dup_count = 1;
-                        dup_index += 1;
-                    }
-                }
+                $.get("https://localhost:8100/", function(data, status){
+                    console.log("Data: " + data + "\nStatus: " + status);
+                });
 
                 function colorDup(duplicates_input, int) {
                     var color = "#EA7F04";
@@ -362,6 +313,7 @@
                         sheet_row += 1;
                     }
                 }
+                
                 window.location = "duplicates.html";
 
             });
