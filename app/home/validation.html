@@ -108,8 +108,37 @@
     <div class="padding">
         <div id="condition_holder">
             <button class="ms-Button_grey" id="to_inconsistency">Back</button>
-            <div id="explanation">
-                <label class="ms-Label">PrepJet will highlight data entries that do not fulfill this condition.</p>
+            <table>
+                <tr>
+                    <td>
+                        <div id="explanation">
+                            <label class="ms-Label">PrepJet will highlight data entries that do not fulfill this condition.</p>
+                        </div>
+                    </td>
+                    <td>
+                        <button id="help_icon" class="ms-Button_icon">
+                            <i class="ms-Icon ms-Icon--infoCircle" aria-hidden="true"></i>
+                        </button>
+                    </td>
+                </tr>
+            </table>
+            <div id="helpCallout" class="ms-Callout ms-Callout--close ms-Callout--arrowLeft">
+                <div class="ms-Callout-main">
+                    <div class="ms-Callout-header">
+                        <p class="ms-Callout-title">Help: Customized Validation</p>
+                    </div>
+                    <button id="closeCallout" class="ms-Callout-close">
+                        <i class="ms-Icon ms-Icon--x"></i>
+                    </button>
+                    <div class="ms-Callout-inner">
+                        <div class="ms-Callout-content">
+                            <p class="ms-Callout-subText">You can define rules for data in one column based on a condition data in another column must meet. Example: If country = Germany then currency = EUR. PrepJet will highlight cells where currency is different from EUR but country is equal to Germany.</p>
+                        </div>
+                        <div class="ms-Callout-actions">
+                            <a href="help.html" class="ms-Callout-link ms-Link">Learn more</a>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div id="condition1">
             <table>

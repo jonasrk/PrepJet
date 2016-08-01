@@ -81,9 +81,6 @@ function showEnterpriseDialog() {
             $('#apply_advanced').show();
             $('#to_inconsistency').hide();
 
-            if (Office.context.document.settings.get('from_inconsistencies') == true){
-                $('#to_inconsistency').show();
-            }
 
             $(".dropdown_table").Dropdown();
             $(".ms-TextField").TextField();
@@ -151,6 +148,14 @@ function showEnterpriseDialog() {
                 document.getElementById('showEnterprise').style.visibility = 'hidden';
             }
 
+
+            //show and hide help callout
+            document.getElementById("help_icon").onclick = function () {
+                document.getElementById('helpCallout').style.visibility = 'visible';
+            }
+            document.getElementById("closeCallout").onclick = function () {
+                document.getElementById('helpCallout').style.visibility = 'hidden';
+            }
 
 
             Excel.run(function (ctx) {
