@@ -99,6 +99,29 @@
     <div id="checkboxes_duplicates" class="ms-ChoiceField"></div>
 
     <!--Exact Match-->
+    <div id="showEnterprise" class="ms-embedded-dialog__options" >
+        <div class="ms-Dialog ms-Dialog--close">
+            <div class="ms-Overlay js-DialogAction--close"></div>
+            <div class="ms-Dialog-main">
+                <button class="ms-Dialog-button ms-Dialog-button--close js-DialogAction--close" id="buttonCloseEnterprise">
+                    <i class="ms-Icon ms-Icon--x"></i>
+                </button>
+                <div class="ms-Dialog-header">
+                    <p class="ms-Dialog-title">Pro Function</p>
+                </div>
+                <div class="ms-Dialog-inner">
+                    <div class="ms-Dialog-content">
+                        <p class="ms-font-xs ms-embedded-dialog__content__text">To use fuzzy duplicate search subscribe to PrepJet Pro.</p>
+                    </div>
+                    <div class="ms-embedded-dialog__actioncenter">
+                        <button  class="ms-Dialog-action ms-Button_grey" id="buttonOkEnterprise">
+                            <span class="ms-Button-label">Ok</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <!--Checkbox-->
     <table class="tableborder">
         <tr>
@@ -111,8 +134,8 @@
                 </div>
             </td>
             <td>
-                <div class="ms-ChoiceField">
-                    <input id="demo-checkbox-unselected" class="ms-ChoiceField-input" type="checkbox" disabled="disabled">
+                <div id="fuzzy_match" class="ms-ChoiceField">
+                    <input id="fuzzymatch" class="ms-ChoiceField-input" type="checkbox" disabled="disabled">
                     <label for="demo-checkbox-unselected" class="ms-ChoiceField-field">
                         <span class="ms-Label">Fuzzy Match</span>
                     </label>

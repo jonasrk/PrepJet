@@ -33,6 +33,17 @@
                 $("#showEmbeddedDialog").hide();
             }
 
+            document.getElementById("fuzzy_match").onmouseover = function () {
+                document.getElementById('showEnterprise').style.visibility = 'visible';
+            }
+            document.getElementById('buttonCloseEnterprise').onclick = function () {
+                document.getElementById('showEnterprise').style.visibility = 'hidden';
+            }
+            document.getElementById('buttonOkEnterprise').onclick = function () {
+                document.getElementById('showEnterprise').style.visibility = 'hidden';
+            }
+
+
             Excel.run(function (ctx) {
 
                 var myBindings = Office.context.document.bindings;
