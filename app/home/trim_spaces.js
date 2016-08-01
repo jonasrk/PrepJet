@@ -30,14 +30,6 @@
                 $("#showEmbeddedDialog").hide();
             }
 
-            document.getElementById("help_icon").onclick = function () {
-                $('#helpCallout').show();
-            }
-
-            document.getElementById("closeCallout").onclick = function () {
-                $('#helpCallout').hide();
-            }
-
 
             Excel.run(function (ctx) {
 
