@@ -1,3 +1,8 @@
+function fuzzyPro() {
+    document.getElementById('showEnterprise').style.visibility = 'visible';
+    document.getElementById('fuzzymatch').checked = false;
+}
+
 (function () {
     // 'use strict';
     var sorted_rows = [];
@@ -29,9 +34,6 @@
 
 
             //show and hide message about PrepJet Pro when hovering over fuzzy matching
-            document.getElementById("fuzzy_match").onmouseover = function () {
-                document.getElementById('showEnterprise').style.visibility = 'visible';
-            }
             document.getElementById('buttonCloseEnterprise').onclick = function () {
                 document.getElementById('showEnterprise').style.visibility = 'hidden';
             }
