@@ -7,7 +7,7 @@ function backToOne() {
 
 
 (function () {
-    'use strict';
+    // 'use strict';
     var count_drop = 0;
 
     // The initialize function must be run each time a new page is loaded

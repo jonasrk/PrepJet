@@ -54,7 +54,7 @@ function showEnterpriseDialog() {
 }
 
 (function () {
-    'use strict';
+    // 'use strict';
     var count_drop = 1;
 
     // The initialize function must be run each time a new page is loaded
