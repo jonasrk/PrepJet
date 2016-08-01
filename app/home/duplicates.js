@@ -259,6 +259,7 @@
 
                 $.post( "https://localhost:8100/", { data: strings_to_sort })
                     .done(function( data ) {
+                        // highlight dupes
                         console.log("Data: " + data + "\nStatus: " + status);
                     });
 
