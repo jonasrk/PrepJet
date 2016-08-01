@@ -165,16 +165,11 @@
             var worksheet = ctx.workbook.worksheets.getActiveWorksheet();
             var range_all = worksheet.getRange();
             var range = range_all.getUsedRange();
-            var rangeFont = range.format.font;
 
             range.load('text');
-            rangeFont.load('color');
 
             return ctx.sync().then(function() {
-                console.log(range.text[0].rangeFont.color);
-                for (var run = 0; run < range.text[0].length; run++) {
-                    highlightContentInWorksheet(worksheet, getCharFromNumber(run) + 1, 'black');
-                }
+
 
                 for (var run = 0; run < range.text[0].length - 1; run++) {
                     for (var run2 = run + 1; run2 < range.text[0].length; run2++) {
