@@ -261,9 +261,8 @@
                     .done(function( data ) {
                         // highlight dupes
                         console.log("Data: " + data + "\nStatus: " + status);
+                        window.location = "duplicates.html";
                     });
-
-                window.location = "duplicates.html";
 
             });
 
