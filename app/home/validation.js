@@ -7,12 +7,19 @@ function redirectRule() {
 //show textfield for ending delimiter if custom is selected
 function displayBetween(){
     if(document.getElementById('then_operator').value == "between" || document.getElementById('then_operator').value == "notbetween") {
+        document.getElementById('thenplaceholder').innerHTML = "Range start (included)";
         $('#betweenand').show();
         $('#explanationand').show();
     }
     else {
         $('#betweenand').hide();
         $('#explanationand').hide();
+        if(document.getElementById('then_operator').value == "inlist") {
+            document.getElementById('thenplaceholder').innerHTML = "Option1, Option2,...";
+        }
+        else {
+            document.getElementById('thenplaceholder').innerHTML = "Type condition";
+        }
     }
 }
 
@@ -23,14 +30,22 @@ function setFocus(activeID) {
 }
 
 //display additional text field when between or not between operator is selected
-function displaySimpleBetween(k){
-    if(document.getElementById('if_operator' + k).value == "between" || document.getElementById('if_operator' + k).value == "notbetween") {
-        $('#between_beginning' + k).show();
+function displaySimpleBetween(){
+    if(document.getElementById('if_operator1').value == "between" || document.getElementById('if_operator1').value == "notbetween") {
+        document.getElementById('ifplaceholder').innerHTML = "Range start (included)";
+        $('#between_beginning1').show();
         $('#explanation_and').show();
     }
     else {
-        $('#between_beginning' + k).hide();
+        $('#between_beginning1').hide();
         $('#explanation_and').hide();
+
+        if(document.getElementById('if_operator1').value == "inlist") {
+            document.getElementById('ifplaceholder').innerHTML = "Option1, Option2,...";
+        }
+        else {
+            document.getElementById('ifplaceholder').innerHTML = "Type condition";
+        }
     }
 }
 
@@ -106,15 +121,19 @@ function showEnterpriseDialog() {
             // Function that writes to a div with id='message' on the page.
             function writeif(message){
                 document.getElementById('if_condition1').value = message;
+                document.getElementById('ifplaceholder').style.visibility = 'hidden';
             }
             function writeifand(message){
                 document.getElementById('if_between_condition1').value = message;
+                document.getElementById('ifandplaceholder').style.visibility = 'hidden';
             }
             function writethen(message){
                 document.getElementById('then_condition').value = message;
+                document.getElementById('thenplaceholder').style.visibility = 'hidden';
             }
             function writethenand(message){
                 document.getElementById('between_and').value = message;
+                document.getElementById('thenandplaceholder').style.visibility = 'hidden';
             }
 
 
@@ -127,11 +146,11 @@ function showEnterpriseDialog() {
             }
             document.getElementById("buttonCloseEnterprise").onclick = function () {
                 document.getElementById('showEnterprise').style.visibility = 'hidden';
-                //$("#showEnterprise").hide();
             }
             document.getElementById("buttonOkEnterprise").onclick = function () {
-                $("#showEnterprise").hide();
+                document.getElementById('showEnterprise').style.visibility = 'hidden';
             }
+
 
 
             Excel.run(function (ctx) {

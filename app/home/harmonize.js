@@ -34,6 +34,7 @@
                 $("#showEmbeddedDialog").hide();
             }
 
+
             Excel.run(function (ctx) {
 
                 var myBindings = Office.context.document.bindings;

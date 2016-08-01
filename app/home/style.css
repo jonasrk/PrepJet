@@ -127,22 +127,22 @@ h1 {
     padding: 10px; }
 
 #small_drop {
-    width: 130px ; }
+    width: 135px ; }
 
 #simple_dropdown {
-    width: 130px ; }
+    width: 135px ; }
 
 #delimiter_beginning1 {
-    width: 130px ; }
+    width: 135px ; }
 
 .ms-TextField-field {
-    min-width: 130px; }
+    min-width: 135px; }
 
 .tableval {
     width: 53%; }
 
 #advanced_dropdown2 {
-    width: 130px; }
+    width: 135px; }
 
 .ms-Button_icon {
     border: 0px;
@@ -191,3 +191,21 @@ h1 {
     font-size: 14px;
     color: #666;
     z-index: 110; }
+
+#help_callout {
+    visibility: hidden;}
+
+.ms-Dialog.ms-Dialog--lgHeader .ms-Dialog-subText, .ms-Dropdown {
+    font-size: 11px; }
+
+.ms-TextField.ms-TextField--placeholder .ms-Label {
+    position: absolute;
+    font-size: 11px;
+    color: #666;
+    padding: 7px 0 7px 10px; }
+
+#allColumns {
+    width: 60%;
+    border-bottom: 0.75px solid;
+    border-color: #e2e2e2; }
+

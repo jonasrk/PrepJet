@@ -100,14 +100,20 @@
         <div class="padding">
             <label class="ms-Label"> Select columns to be added to target sheet</label>
             <br />
-            <div id="checkbox_select_all" class="ms-ChoiceField">
-                <input id="checkbox_all" class="ms-ChoiceField-input" type="checkbox">
-                <label id="checkbox_label" for="checkbox_all" class="ms-ChoiceField-field">
-                    <span class="ms-Label">All columns</span>
-                </label>
-            </div>
-            <div id="checkboxes_variables" class="ms-ChoiceField">
-            </div>
+            <table>
+                <tr>
+                    <td id="allColumns">
+                        <div id="checkbox_select_all" class="ms-ChoiceField">
+                            <input id="checkbox_all" class="ms-ChoiceField-input" type="checkbox">
+                            <label id="checkbox_label" for="checkbox_all" class="ms-ChoiceField-field">
+                                <span class="ms-Label">All columns</span>
+                            </label>
+                        </div>
+                    </td>
+                    <td></td>
+                </tr>
+            </table>
+            <div id="checkboxes_variables" class="ms-ChoiceField"></div>
             <button class="ms-Button_grey" id="back_step1">Back</button>
             <button class="ms-Button_grey" id="bt_step3">Continue</button>
         </div>
