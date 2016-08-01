@@ -65,69 +65,6 @@ function backToOne() {
             }
 
 
-            Excel.run(function (ctx) {
-
-                var myBindings = Office.context.document.bindings;
-                var worksheetname = ctx.workbook.worksheets.getActiveWorksheet();
-                
-                worksheetname.load('name')
-
-                return ctx.sync().then(function() {
-
-                    //function to check whether header entries are changed
-                    function bindFromPrompt() {
-
-                        var myBindings = Office.context.document.bindings;
-                        var name_worksheet = worksheetname.name;
-                        var myAddress = name_worksheet.concat("!1:1");
-
-                        myBindings.addFromNamedItemAsync(myAddress, "matrix", {id:'myBinding'}, function (asyncResult) {
-                            if (asyncResult.status == Office.AsyncResultStatus.Failed) {
-                                write('Action failed. Error: ' + asyncResult.error.message);
-                            } else {
-                                write('Added new binding with type: ' + asyncResult.value.type + ' and id: ' + asyncResult.value.id);
-
-                                function addHandler() {
-                                    Office.select("bindings#myBinding").addHandlerAsync(
-                                        Office.EventType.BindingDataChanged, dataChanged);
-                                }
-
-                                addHandler();
-                                displayAllBindings();
-
-                            }
-                        });
-                    }
-
-                bindFromPrompt();
-
-                function displayAllBindings() {
-                    Office.context.document.bindings.getAllAsync(function (asyncResult) {
-                        var bindingString = '';
-                        for (var i in asyncResult.value) {
-                            bindingString += asyncResult.value[i].id + '\n';
-                        }
-                    });
-                }
-
-                function dataChanged(eventArgs) {
-                    //window.location = "merge_columns.html";
-                }
-
-                // Function that writes to a div with id='message' on the page.
-                function write(message){
-                    console.log(message);
-                }
-
-                });
-            }).catch(function(error) {
-                console.log("Error: " + error);
-                if (error instanceof OfficeExtension.Error) {
-                    console.log("Debug info: " + JSON.stringify(error.debugInfo));
-                }
-            });
-
-
         });
     };
 
@@ -237,12 +174,15 @@ function backToOne() {
 
         Excel.run(function (ctx) {
 
+            var myBindings = Office.context.document.bindings;
             var worksheet = ctx.workbook.worksheets.getItem(selected_table2);
+            var worksheetname = ctx.workbook.worksheets.getItem(selected_table2);
             var range_all = worksheet.getRange();
             var range = range_all.getUsedRange();
 
-            //range.load('address');
             range.load('text');
+            worksheetname.load('name');
+
             return ctx.sync().then(function() {
 
                 for (var run = 0; run < range.text[0].length - 1; run++) {
@@ -272,6 +212,51 @@ function backToOne() {
                 }
                 $('#checkbox_all').click(checkCheckbox);
 
+
+                //function to check whether header entries are changed
+                function bindFromPrompt() {
+
+                    var myBindings = Office.context.document.bindings;
+                    var name_worksheet = worksheetname.name;
+                    var myAddress = name_worksheet.concat("!1:1");
+
+                    myBindings.addFromNamedItemAsync(myAddress, "matrix", {id:'myBinding'}, function (asyncResult) {
+                        if (asyncResult.status == Office.AsyncResultStatus.Failed) {
+                            write('Action failed. Error: ' + asyncResult.error.message);
+                        } else {
+                            write('Added new binding with type: ' + asyncResult.value.type + ' and id: ' + asyncResult.value.id);
+
+                            function addHandler() {
+                                Office.select("bindings#myBinding").addHandlerAsync(
+                                 Office.EventType.BindingDataChanged, dataChanged);
+                            }
+
+                            addHandler();
+                            displayAllBindings();
+
+                        }
+                    });
+                }
+
+                bindFromPrompt();
+
+                function displayAllBindings() {
+                    Office.context.document.bindings.getAllAsync(function (asyncResult) {
+                        var bindingString = '';
+                        for (var i in asyncResult.value) {
+                            bindingString += asyncResult.value[i].id + '\n';
+                        }
+                    });
+                }
+
+                function dataChanged(eventArgs) {
+                    window.location = "merge_columns.html";
+                }
+
+                // Function that writes to a div with id='message' on the page.
+                function write(message){
+                    console.log(message);
+                }
 
             });
 
