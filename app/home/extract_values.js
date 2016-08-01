@@ -58,9 +58,6 @@ function hideAdvancedCount() {
             app.initialize();
             fillColumn();
 
-            if (Office.context.document.settings.get('same_header_extract') == false) {
-                $("#showEmbeddedDialog").hide();
-            }
 
             $('#delimiter_end').hide();
             $('#delimiter_beginning').hide();
@@ -101,15 +98,23 @@ function hideAdvancedCount() {
             }
 
 
-            // Hides the dialog.
+            //Show and hide error message if columns have same header name
             document.getElementById("buttonClose").onclick = function () {
                 $("#showEmbeddedDialog").hide();
             }
-
-            // Performs the action and closes the dialog.
             document.getElementById("buttonOk").onclick = function () {
                 $("#showEmbeddedDialog").hide();
             }
+
+
+            //show and hide help callout
+            document.getElementById("help_icon").onclick = function () {
+                document.getElementById('helpCallout').style.visibility = 'visible';
+            }
+            document.getElementById("closeCallout").onclick = function () {
+                document.getElementById('helpCallout').style.visibility = 'hidden';
+            }
+
 
             Excel.run(function (ctx) {
 

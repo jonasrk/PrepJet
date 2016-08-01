@@ -151,6 +151,9 @@ h1 {
 #helpCallout {
     visibility: hidden; }
 
+#helpCalloutFirst {
+    visibility: hidden; }
+
 .ms-Callout-main {
     position: absolute;
     background-color: #fff;

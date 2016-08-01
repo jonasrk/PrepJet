@@ -20,12 +20,10 @@
             $('#trim_space').click(trimSpace);
             $('#checkbox_all').click(checkCheckbox);
 
-            // Hides the dialog.
+            //Show and hide error message if columns have same header name
             document.getElementById("buttonClose").onclick = function () {
                 $("#showEmbeddedDialog").hide();
             }
-
-            // Performs the action and closes the dialog.
             document.getElementById("buttonOk").onclick = function () {
                 $("#showEmbeddedDialog").hide();
             }

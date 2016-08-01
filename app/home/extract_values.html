@@ -123,7 +123,7 @@
         </div>
         <!--Textfield to specify column to insert-->
         <div id="target_column" class="ms-TextField">
-            <label class="ms-Label">Target Column</label>
+            <label class="ms-Label">Target column to insert extracted text</label>
             <input id="target_column_input" class="ms-TextField-field" type="text">
             <span class="ms-TextField-description">Select the column in which the extracted part shall be inserted. Default is the column right to the original column.</span>
         </div>
@@ -134,17 +134,32 @@
                 <span class="ms-Label">Include delimiter in extracted value</span>
             </label>
         </div>
-        <div id="explanation">
-            <label class="ms-Label">Do you want to specify the position of the selected delimiter to start and end extracting?</p>
+        <div id="helpCallout" class="ms-Callout ms-Callout--close ms-Callout--arrowLeft">
+            <div class="ms-Callout-main">
+                <div class="ms-Callout-header">
+                    <p class="ms-Callout-title">Help: Extract Values</p>
+                </div>
+                <button id="closeCallout" class="ms-Callout-close">
+                    <i class="ms-Icon ms-Icon--x"></i>
+                </button>
+                <div class="ms-Callout-inner">
+                    <div class="ms-Callout-content">
+                        <p class="ms-Callout-subText">Per default PrepJet starts and ends extracting at the first position of the selected delimiter. You can specify the count of the delimiter (1, 2,...) as well as the direction from which to count if you want a different behaviour. The extracted content will be inserted in a separate column.</p>
+                    </div>
+                    <div class="ms-Callout-actions">
+                        <a href="help.html" class="ms-Callout-link ms-Link">Learn more</a>
+                    </div>
+                </div>
+            </div>
         </div>
-        <button class="ms-Button_grey" id="advanced_settings">Yes</button>
+        <div id="explanation">
+            <label class="ms-Label">Click More Options to specify the position of the selected delimiter to start and end extracting</p>
+        </div>
+        <button class="ms-Button_grey" id="advanced_settings">More Options</button>
         <button class="ms-Button_grey" id="advanced_hide">Less Options</button>
-
-        <!--div id="del_count_start" class="ms-TextField">
-            <label class="ms-Label">Start delimiter position</label>
-            <input id="delimiter_count_start" class="ms-TextField-field" type="text">
-            <span class="ms-TextField-description">Enter the count of your start delimiter (i.e. the delimiter at which to start extracting, if you do not want to start at the first delimiter).</span>
-        </div-->
+        <button id="help_icon" class="ms-Button_icon">
+            <i class="ms-Icon ms-Icon--infoCircle" aria-hidden="true"></i>
+        </button>
         <div id="del_count_start" class="ms-Dropdown del_count_dropdown_s" tabindex="1">
             <label class="ms-Label">Count of start delimiter</label>
             <i class="ms-Dropdown-caretDown ms-Icon ms-Icon--caretDown"></i>
@@ -169,12 +184,6 @@
                 <option value="right">From Right</option>
             </select>
         </div>
-
-            <!--div id="del_count_end" class="ms-TextField">
-                <label class="ms-Label">End delimiter position</label>
-                <input id="delimiter_count_end" class="ms-TextField-field" type="text">
-                <span class="ms-TextField-description">Enter the count of your end delimiter (i.e. the delimiter at which to end extracting, if you do not want to end at the first delimiter).</span>
-            </div-->
         <div id="del_count_end" class="ms-Dropdown del_count_dropdown_e" tabindex="1">
             <label class="ms-Label">Count of end delimiter</label>
             <i class="ms-Dropdown-caretDown ms-Icon ms-Icon--caretDown"></i>
