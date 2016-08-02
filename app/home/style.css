@@ -127,10 +127,12 @@ h1 {
     padding: 10px; }
 
 #small_drop {
-    width: 135px ; }
+    width: 135px ;
+    overflow: scroll;}
 
 #simple_dropdown {
-    width: 135px ; }
+    width: 135px ;
+    overflow: scroll; }
 
 #delimiter_beginning1 {
     width: 135px ; }
