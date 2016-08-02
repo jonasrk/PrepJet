@@ -383,7 +383,7 @@ function hideAdvancedCount() {
 
                 //insert empty cell into header column
                 var act_worksheet = ctx.workbook.worksheets.getActiveWorksheet();
-                if (target_column != 0 && target_tmp != ""){ //todo use target_tmp != "" and target column != 0
+                if (target_column != 0 && target_tmp != ""){
                     var custom_range_address = target_column + 1;
                     var range_insert = ctx.workbook.worksheets.getActiveWorksheet().getRange(custom_range_address);
                     range_insert.insert("Right");
@@ -396,7 +396,7 @@ function hideAdvancedCount() {
 
 
                 //loop through whole column to extract value from
-                for (var i = 1; i < range.text.length; i++) {
+                for (var i = 0; i < range.text.length; i++) {
 
                     //get index where to start extracting value
                     if (split_beginning == "col_beginning"){
@@ -441,7 +441,7 @@ function hideAdvancedCount() {
                             }
                         }
                     }
-                    console.log(count_delimiter_end);
+
                     //get index where to end extracting value
                     if (split_end == "col_end") {
                         var position2 = range.text[i][header].length;
