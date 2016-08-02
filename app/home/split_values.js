@@ -205,7 +205,7 @@ function displayFieldDelimiter(){
 
                 for (var run = 0; run < range.text[0].length - 1; run++) {
                     for (var run2 = run + 1; run2 < range.text[0].length; run2++) {
-                        if (range.text[0][run] == range.text[0][run2]) {
+                        if (range.text[0][run] == range.text[0][run2] && range.text[0][run] != "") {
                             document.getElementById('showEmbeddedDialog').style.visibility = 'visible';
                             Office.context.document.settings.set('same_header_split', true);
                         }
@@ -285,6 +285,9 @@ function displayFieldDelimiter(){
                     else if(document.getElementById('delimiter_count_i').value == "seven") { count_delimiter = 7; }
                     else if(document.getElementById('delimiter_count_i').value == "eight") { count_delimiter = 8; }
                     else if(document.getElementById('delimiter_count_i').value == "nine") { count_delimiter = 9; }
+                    else if(document.getElementById('delimiter_count_i').value == "all") {
+                        Office.context.document.settings.set('more_option', false);
+                    }
                     return count_delimiter;
                 }
 
