@@ -86,7 +86,8 @@ h1 {
 
 .ms-Dropdown, .ms-Dropdown-items, .ms-Dropdown-title {
     box-sizing: border-box;
-    box-shadow: none;}
+    box-shadow: none;
+    overflow-x: hidden; }
 
 .tableheader {
     width: 85%; }
@@ -127,12 +128,10 @@ h1 {
     padding: 10px; }
 
 #small_drop {
-    width: 135px ;
-    overflow: scroll;}
+    width: 135px ;}
 
 #simple_dropdown {
-    width: 135px ;
-    overflow: scroll; }
+    width: 135px ; }
 
 #delimiter_beginning1 {
     width: 135px ; }
