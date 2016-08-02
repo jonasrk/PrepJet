@@ -93,6 +93,11 @@ function showEnterpriseDialog() {
             $('#buttonOk').click(highlightHeader);
 
 
+            if (Office.context.document.settings.get('from_inconsistencies') == true){
+                $('#to_inconsistency').show();
+            }
+
+
             Office.context.document.addHandlerAsync("documentSelectionChanged", myIfHandler, function(result){}
             );
             // Event handler function.
