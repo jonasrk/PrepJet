@@ -345,6 +345,11 @@ function backToOne() {
                     else {
                         var count_tmp = count_drop + 3;
                     }
+
+                    var trow = document.createElement("tr");
+                    //trow.id = "lookuptable"
+                    document.getElementById('matchCriteria').appendChild(trow);
+
                     for (var k = (count_drop + 1); k < count_tmp; k++) {
                         var container = container_tmp + k;
                         var div = document.createElement("div");
@@ -362,13 +367,18 @@ function backToOne() {
                         var elemi = document.createElement("i");
                         elemi.className = "ms-Dropdown-caretDown ms-Icon ms-Icon--caretDown";
 
-                        document.getElementById("dropdowns_step3").appendChild(div);
+                        var tcol = document.createElement("td");
+                        tcol.id = "lookuptable";
+                        trow.appendChild(tcol);
+
+                        //document.getElementById("dropdowns_step3").appendChild(div);
+                        tcol.appendChild(div);
                         document.getElementById("addedDropdown" + k).appendChild(lab);
                         document.getElementById("addedDropdown" + k).appendChild(elemi);
                         document.getElementById("addedDropdown" + k).appendChild(sel);
 
                         if (k % 2 == 0) {
-                            lab.innerHTML = "Select reference column in table " + table2;
+                            lab.innerHTML = table2;
                             for (var i = 0; i < range_t2.text[0].length; i++) {
                                 var el = document.createElement("option");
                                 if (range_t2.text[0][i] != "") {
@@ -383,7 +393,7 @@ function backToOne() {
                             }
                         }
                         else {
-                            lab.innerHTML = "Select reference column in table " + table1;
+                            lab.innerHTML = table1;
                             for (var i = 0; i < range_t1.text[0].length; i++) {
                                 var el = document.createElement("option");
                                 if (range_t1.text[0][i] != "") {

@@ -81,11 +81,25 @@
 <div id="content-main">
     <div id="step1">
         <div class="padding">
-            <div class="ms-Dropdown dropdown_table" tabindex="1">
-                <label class="ms-Label">Select target sheet</label>
-                <i class="ms-Dropdown-caretDown ms-Icon ms-Icon--caretDown"></i>
-                <select id="table1_options" class="ms-Dropdown-select"></select>
-            </div>
+            <table>
+                <tr>
+                    <td id="lookuptable">
+                        <div class="ms-Dropdown dropdown_table" tabindex="1">
+                            <label class="ms-Label">Select target sheet</label>
+                            <i class="ms-Dropdown-caretDown ms-Icon ms-Icon--caretDown"></i>
+                            <select id="table1_options" class="ms-Dropdown-select"></select>
+                        </div>
+                    </td>
+                    <td id="lookuptable">
+                        <div class="ms-Dropdown dropdown_table" tabindex="1">
+                            <label class="ms-Label">Select source sheet</label>
+                            <i class="ms-Dropdown-caretDown ms-Icon ms-Icon--caretDown"></i>
+                            <select id="table2_options" class="ms-Dropdown-select"></select>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+
             <div id="helpCalloutFirst" class="ms-Callout ms-Callout--close ms-Callout--arrowLeft">
                 <div class="ms-Callout-main">
                     <div class="ms-Callout-header">
@@ -104,15 +118,18 @@
                     </div>
                 </div>
             </div>
-            <div class="ms-Dropdown dropdown_table" tabindex="1">
-                <label class="ms-Label">Select source sheet</label>
-                <i class="ms-Dropdown-caretDown ms-Icon ms-Icon--caretDown"></i>
-                <select id="table2_options" class="ms-Dropdown-select"></select>
-            </div>
-            <button id="help_iconFirst" class="ms-Button_icon">
-                <i class="ms-Icon ms-Icon--infoCircle" aria-hidden="true"></i>
-            </button><br>
-            <button class="ms-Button_grey" id="bt_step2">Continue</button>
+            <table>
+                <tr>
+                    <td>
+                        <button class="ms-Button_grey" id="bt_step2">Continue</button>
+                    </td>
+                    <td>
+                        <button id="help_iconFirst" class="ms-Button_icon">
+                            <i class="ms-Icon ms-Icon--infoCircle" aria-hidden="true"></i>
+                        </button>
+                    </td>
+                </tr>
+            </table>
         </div>
     </div>
 
@@ -143,7 +160,12 @@
 
     <div id="step3">
         <div class="padding">
+            <div id="explanation">
+                <label class="ms-Label">Select reference columns:</p>
+            </div>
             <div id="dropdowns_step3">
+                <table id="matchCriteria">
+                </table>
             </div>
             <div id="helpCallout" class="ms-Callout ms-Callout--close ms-Callout--arrowLeft">
               <div class="ms-Callout-main">
