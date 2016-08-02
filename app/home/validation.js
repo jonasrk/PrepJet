@@ -257,7 +257,7 @@ function showEnterpriseDialog() {
 
                 for (var run = 0; run < range.text[0].length - 1; run++) {
                     for (var run2 = run + 1; run2 < range.text[0].length; run2++) {
-                        if (range.text[0][run] == range.text[0][run2]) {
+                        if (range.text[0][run] == range.text[0][run2] && range.text[0][run] != "") {
                             document.getElementById('showEmbeddedDialog').style.visibility = 'hidden';
                             highlightContentInWorksheet(worksheet, getCharFromNumber(run) + 1, '#EA7F04');
                             highlightContentInWorksheet(worksheet, getCharFromNumber(run2) + 1, '#EA7F04');
@@ -290,7 +290,7 @@ function showEnterpriseDialog() {
 
                 for (var run = 0; run < range.text[0].length - 1; run++) {
                     for (var run2 = run + 1; run2 < range.text[0].length; run2++) {
-                        if (range.text[0][run] == range.text[0][run2]) {
+                        if (range.text[0][run] == range.text[0][run2] && range.text[0][run] != "") {
                             document.getElementById('showEmbeddedDialog').style.visibility = 'visible';
                             Office.context.document.settings.set('same_header_validation', true);
                         }
@@ -338,7 +338,7 @@ function showEnterpriseDialog() {
 
                 for (var run = 0; run < range.text[0].length - 1; run++) {
                     for (var run2 = run + 1; run2 < range.text[0].length; run2++) {
-                        if (range.text[0][run] == range.text[0][run2]) {
+                        if (range.text[0][run] == range.text[0][run2] && range.text[0][run] != "") {
                             document.getElementById('showEmbeddedDialog').style.visibility = 'visible';
                             Office.context.document.settings.set('same_header_validation', true);
                         }
