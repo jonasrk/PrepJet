@@ -300,6 +300,12 @@ function hideAdvancedCount() {
             if (split_beginning == "whitespace_b") {
                 split_beginning = " ";
             }
+            if (split_beginning == "semicolon_b") {
+                split_beginning = ";";
+            }
+            if (split_beginning == "comma_b") {
+                split_beginning = ",";
+            }
 
             //get character where to end extracting and translate string into delimiter
             if (document.getElementById('ending_options').value == "custom_e"){
@@ -310,6 +316,12 @@ function hideAdvancedCount() {
             }
             if (split_end == "whitespace_e") {
                 split_end = " ";
+            }
+            if (split_end == "semicolon_e") {
+                split_end = ";";
+            }
+            if (split_end == "comma_e") {
+                split_end = ",";
             }
 
 
