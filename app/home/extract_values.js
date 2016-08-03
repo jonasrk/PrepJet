@@ -350,6 +350,7 @@ function hideAdvancedCount() {
                 else if(document.getElementById('delimiter_count_end').value == "seven") { count_delimiter_end = 7; }
                 else if(document.getElementById('delimiter_count_end').value == "eight") { count_delimiter_end = 8; }
                 else if(document.getElementById('delimiter_count_end').value == "nine") { count_delimiter_end = 9; }
+                else if(document.getElementById('delimiter_count_end').value == "none") { count_delimiter_end = 0; }
 
                 var count_direction_end = document.getElementById('del_count_drop_end').value;
             }
@@ -426,6 +427,7 @@ function hideAdvancedCount() {
                             }
                         }
                     }
+                    console.log(count_delimiter_end);
 
                     //get index where to end extracting value
                     if (split_end == "col_end") {

@@ -112,7 +112,8 @@ h1 {
     display: block;
     position: fixed;
     top: 60px;
-    overflow: scroll; }
+    overflow-y: scroll;
+    overflow-x: hidden; }
 
 .placeholder {
     height: 60px;
@@ -214,7 +215,7 @@ h1 {
     padding: 0;
     position: relative;
     outline: 0;
-    overflow-z: hidden; }
+    overflow-x: hidden; }
 
 #lookuptable {
     border-bottom: 0.75px solid;
