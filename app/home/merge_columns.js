@@ -489,7 +489,7 @@ function backToOne() {
 
         var selected_table1 = document.getElementById('table1_options').value; // TODO better reference by ID than name
         var selected_table2 = document.getElementById('table2_options').value; // TODO better reference by ID than name
-
+        console.log(selected_table2);
         Excel.run(function (ctx) {
             var worksheet = ctx.workbook.worksheets.getItem(selected_table2);
 
@@ -540,7 +540,6 @@ function backToOne() {
                 for (var k = 0; k < range.text[0].length; k++){
 
                     // iterate over checked checkboxes
-
                     var checked_checkboxes = getCheckedBoxes("reference_column_checkbox");
 
                     if (document.getElementById("case_sens").checked == true) {
@@ -550,12 +549,14 @@ function backToOne() {
                         var case_sens = 0;
                     }
 
+                    var source_char = getCharFromNumber(k);
+
                     for (var l = 0; l < checked_checkboxes.length; l++){ // TODO throws error if none are checked
                         if (checked_checkboxes[l].id == range.text[0][k] || checked_checkboxes[l].id == "Column " + getCharFromNumber(k)){
                             var column_char = getCharFromNumber(l + range_adding_to.text[0].length);
 
                             // copy title
-                            addContentToWorksheet(worksheet_adding_to, column_char + "1", range.text[0][k]);
+                            addContentToWorksheet(worksheet_adding_to, column_char + "1", "=" + selected_table2 + "!" + source_char + "1");
 
                             // copy rest
                             for (var i = 1; i < range_adding_to.text.length; i++) {
@@ -579,7 +580,8 @@ function backToOne() {
                                     }
                                     if (check == column1_ids.length) {
                                         var sheet_row = i + 1;
-                                        addContentToWorksheet(worksheet_adding_to, column_char + sheet_row, range.text[j][k])
+                                        var row_ref = j + 1;
+                                        addContentToWorksheet(worksheet_adding_to, column_char + sheet_row, "=" + selected_table2 + "!" + source_char + row_ref);
                                         break;
                                     }
                                 }
