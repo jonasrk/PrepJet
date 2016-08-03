@@ -91,9 +91,9 @@
         <div id="explanation">
             <label class="ms-Label">Select delimiter to start and end extracting a text part:</p>
         </div>
-        <table>
+        <table id="tablesmall">
             <tr>
-                <td>
+                <td id="smalldrop_col">
                     <!--dropdown fpr beginning-->
                     <div class="ms-Dropdown dropdown_table" tabindex="1">
                         <label class="ms-Label">Beginning</label>
@@ -107,7 +107,7 @@
                         </select>
                     </div>
                 </td>
-                <td>
+                <td id="colright">
                     <!--dropdown for ending-->
                     <div class="ms-Dropdown dropdown_table" tabindex="1">
                         <label class="ms-Label">End</label>
@@ -123,7 +123,7 @@
                 </td>
             </tr>
             <tr>
-                <td>
+                <td id="smalldrop_col">
                     <!--evtl. text field for custom ending-->
                     <div id="delimiter_beginning" class="ms-TextField">
                         <label class="ms-Label">Custom delimiter - Start</label>
@@ -131,7 +131,7 @@
                         <span class="ms-TextField-description">Enter a delimiter at which to start extracting text</span>
                     </div>
                 </td>
-                <td>
+                <td id="colright">
                     <div id="delimiter_end" class="ms-TextField">
                         <label class="ms-Label">Custom delimiter - End</label>
                         <input id="delimiter_input_e" class="ms-TextField-field" type="text">
@@ -173,11 +173,11 @@
         <button id="help_icon" class="ms-Button_icon">
             <i class="ms-Icon ms-Icon--infoCircle" aria-hidden="true"></i>
         </button>
-        <table>
+        <table id="tablesmall">
             <tr>
-                <td>
+                <td id="smalldrop_col">
                     <div id="del_count_start" class="ms-Dropdown del_count_dropdown_s" tabindex="1">
-                        <label class="ms-Label">Position of start delimiter</label>
+                        <label class="ms-Label">Delimiter Position Start</label>
                         <i class="ms-Dropdown-caretDown ms-Icon ms-Icon--caretDown"></i>
                         <select id="delimiter_count_start" class="ms-Dropdown-select">
                             <option value="one">1</option>
@@ -192,7 +192,7 @@
                         </select>
                     </div>
                 </td>
-                <td>
+                <td id="colright">
                     <!--dropdown for delimiter count-->
                     <div class="ms-Dropdown del_count_dropdown_s" tabindex="1">
                         <label class="ms-Label">Count Direction</label>
@@ -205,9 +205,9 @@
                 </td>
             </tr>
             <tr>
-                <td>
+                <td id="smalldrop_col">
                     <div id="del_count_end" class="ms-Dropdown del_count_dropdown_e" tabindex="1">
-                        <label class="ms-Label">Position of end delimiter</label>
+                        <label class="ms-Label">Delimiter Position End</label>
                         <i class="ms-Dropdown-caretDown ms-Icon ms-Icon--caretDown"></i>
                         <select id="delimiter_count_end" class="ms-Dropdown-select">
                             <option value="none">None</option>
@@ -223,7 +223,7 @@
                         </select>
                     </div>
                 </td>
-                <td>
+                <td id="colright">
                     <!--dropdown for delimiter count-->
                     <div class="ms-Dropdown del_count_dropdown_e" tabindex="1">
                         <label class="ms-Label">Count Direction</label>

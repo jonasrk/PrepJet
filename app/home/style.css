@@ -227,3 +227,11 @@ h1 {
 #large_drop {
     width: 100%; }
 
+#smalldrop_col {
+    width: 50%; }
+
+#tablesmall {
+    width: 100%; }
+
+#colright {
+    float: right; }
