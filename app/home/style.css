@@ -35,6 +35,9 @@ h1 {
     min-width: 40px;
     padding: 4px 10px 6px; }
 
+.ms-Button:hover {
+    color: #000; }
+
 .ms-Button_grey {
     color: #000;
     font-family: 'Segoe UI Regular WestEuropean','Segoe UI','Segoe WP',Tahoma,Arial,sans-serif;
@@ -215,7 +218,7 @@ h1 {
 
 .ms-Dropdown {
     color: #333;
-    width: 140px;
+    width: 155px;
     margin: 0 0 10px;
     padding: 0;
     position: relative;
@@ -226,5 +229,8 @@ h1 {
     border-color: #e2e2e2;}
 
 #harm_drop {
+    width: 100%; }
+
+#extract_drop {
     width: 100%; }
 
