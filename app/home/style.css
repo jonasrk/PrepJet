@@ -131,10 +131,10 @@ h1 {
     padding: 10px; }
 
 #delimiter_beginning1 {
-    width: 155px ; }
+    width: 135px; }
 
 .ms-TextField-field {
-    min-width: 155px; }
+    min-width: 135px; }
 
 .tableval {
     width: 53%; }
@@ -209,7 +209,7 @@ h1 {
 
 .ms-Dropdown {
     color: #333;
-    width: 145px;
+    width: 135px;
     margin: 0 0 10px;
     padding: 0;
     position: relative;
