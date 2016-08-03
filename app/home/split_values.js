@@ -290,10 +290,6 @@ function displayFieldDelimiter(){
                     return count_delimiter;
                 }
 
-                if (Office.context.document.settings.get('more_option') == true) {
-                    var count_direction = document.getElementById('delimiter_count_drop').value;
-                }
-
                 //get column number which to split
                 var header = 0;
                 for (var k = 0; k < range.text[0].length; k++){
@@ -321,6 +317,7 @@ function displayFieldDelimiter(){
                     }
                 }
                 else {
+                    var count_direction = document.getElementById('delimiter_count_drop').value;
                     for (var i = 0; i < range.text.length; i++) {
                         var count_delimiter = getCountDelimiter();
                         if (range.text[i][header] != "" && range.text[i][header].indexOf(delimiter_type) != -1) {
