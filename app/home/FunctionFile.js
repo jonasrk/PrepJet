@@ -49,22 +49,3 @@ function undo() { // TODO only does text, not formulas and formatting
     });
 
 }
-
-
-function refreshTP()
-
-    Excel.run(function (ctx) {
-
-        return ctx.sync().then(function() {
-
-            window.location = "harmonize.html";
-
-        });
-
-    }).catch(function(error) {
-        console.log("Error: " + error);
-        if (error instanceof OfficeExtension.Error) {
-            console.log("Debug info: " + JSON.stringify(error.debugInfo));
-        }
-    });
-}

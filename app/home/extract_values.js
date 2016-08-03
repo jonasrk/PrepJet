@@ -325,20 +325,8 @@ function hideAdvancedCount() {
             }
 
 
-            //get (optional) column where to insert extracted value, default is to the right of original column
-            var target_tmp = document.getElementById('target_column_input').value
-            if (target_tmp.indexOf(":") != -1) {
-                var target_column = target_tmp.substring(target_tmp.indexOf("!") + 1, target_tmp.indexOf(":"));
-            }
-            else {
-                var column_tmp = worksheet.getRange(target_tmp.substring(target_tmp.indexOf("!") + 1));
-                var column_range_insert = column_tmp.getEntireColumn();
-                var target_column = 0;
-            }
-
             //if advanced settings are selected, get values for delimiter count
             if (Office.context.document.settings.get('more_option_extract') == true) {
-                //var count_delimiter_start = Number(document.getElementById('delimiter_count_start').value);
                 var count_delimiter_start = 0;
                 if (document.getElementById('delimiter_count_start').value == "one") { count_delimiter_start = 1; }
                 else if (document.getElementById('delimiter_count_start').value == "two") { count_delimiter_start = 2; }
@@ -363,7 +351,6 @@ function hideAdvancedCount() {
                 else if(document.getElementById('delimiter_count_end').value == "eight") { count_delimiter_end = 8; }
                 else if(document.getElementById('delimiter_count_end').value == "nine") { count_delimiter_end = 9; }
 
-                //var count_delimiter_end = Number(document.getElementById('delimiter_count_end').value);
                 var count_direction_end = document.getElementById('del_count_drop_end').value;
             }
             else {
@@ -377,9 +364,6 @@ function hideAdvancedCount() {
 
             range_adding_to.load('address');
             range_adding_to.load('text');
-            if (target_column == 0){
-                column_range_insert.load('address'); //todo rausnehmen
-            }
 
             return ctx.sync().then(function() {
 
@@ -395,17 +379,6 @@ function hideAdvancedCount() {
 
                 //insert empty cell into header column
                 var act_worksheet = ctx.workbook.worksheets.getActiveWorksheet();
-                if (target_column != 0 && target_tmp != ""){
-                    var custom_range_address = target_column + 1;
-                    var range_insert = ctx.workbook.worksheets.getActiveWorksheet().getRange(custom_range_address);
-                    range_insert.insert("Right");
-                }
-                else if (target_tmp == ""){
-                    var rangeaddress = getCharFromNumber(header + 1) + 1;
-                    var range_insert = ctx.workbook.worksheets.getActiveWorksheet().getRange(rangeaddress);
-                    range_insert.insert("Right");
-                }
-
 
                 //loop through whole column to extract value from
                 for (var i = 0; i < range.text.length; i++) {
@@ -536,16 +509,7 @@ function hideAdvancedCount() {
 
                     //get position where to insert extracted value
                     var sheet_row = i + 1;
-                    if (target_tmp != "" && target_column == 0) {
-                        var tmp_column = column_range_insert.address
-                        var column_char = tmp_column.substring(tmp_column.indexOf("!") + 1, tmp_column.indexOf(":"));
-                    }
-                    else if (target_tmp != "") {
-                        var column_char = target_column;
-                    }
-                    else {
-                        var column_char = getCharFromNumber(header + 1);
-                    }
+                    var column_char = getCharFromNumber(header + 1);
 
                     //get value to extract
                     if (position2 > position1) {
@@ -555,21 +519,11 @@ function hideAdvancedCount() {
                         var extractedValue = "";
                     }
 
+                    var rangeaddress = column_char + sheet_row;
+                    var range_insert = ctx.workbook.worksheets.getActiveWorksheet().getRange(rangeaddress);
+                    range_insert.insert("Right");
+                    addContentToWorksheet(act_worksheet, column_char + sheet_row, extractedValue);
 
-                    //set position to insert extracted value
-                    if (target_tmp == "" || (target_tmp != "" && target_column != 0)) {
-                        var rangeaddress = column_char + sheet_row;
-                        var range_insert = ctx.workbook.worksheets.getActiveWorksheet().getRange(rangeaddress);
-                        range_insert.insert("Right");
-                        addContentToWorksheet(act_worksheet, column_char + sheet_row, extractedValue);
-                    }
-                    else if ( target_column == 0 && i == 1) {
-                        column_range_insert.insert("Right");
-                        addContentToWorksheet(act_worksheet, column_char + sheet_row, extractedValue);
-                    }
-                    else {
-                        addContentToWorksheet(act_worksheet, column_char + sheet_row, extractedValue);
-                    }
                 }
 
                 window.location = "extract_values.html";
