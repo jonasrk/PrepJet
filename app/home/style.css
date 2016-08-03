@@ -35,6 +35,9 @@ h1 {
     min-width: 40px;
     padding: 4px 10px 6px; }
 
+.ms-Button:hover {
+    color: #000; }
+
 .ms-Button_grey {
     color: #000;
     font-family: 'Segoe UI Regular WestEuropean','Segoe UI','Segoe WP',Tahoma,Arial,sans-serif;
