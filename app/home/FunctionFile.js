@@ -12,14 +12,17 @@ function undo() { // TODO only does text, not formulas and formatting
         var values = Office.context.document.settings.get('sheet_backup');
         var end_address = getCharFromNumber(values[0].length - 1) + (values.length).toString();
         var rangeAddress = "A1:" + end_address;
-        console.log(rangeAddress);
-        var range = ctx.workbook.worksheets.getActiveWorksheet().getRange(rangeAddress);
-        console.log(range);
-        console.log(values);
+        var worksheet = ctx.workbook.worksheets.getActiveWorksheet();
+        var range = worksheet.getRange(rangeAddress);
+
+        var range_all = worksheet.getRange();
+        var used_range = range_all.getUsedRange();
+
+        used_range.clear();
         range.values = values;
         range.load('text');
         return ctx.sync().then(function() {
-            console.log(range.text);
+            // console.log(range.text);
         });
     }).catch(function(error) {
         console.log("Error: " + error);
