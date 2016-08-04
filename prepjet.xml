@@ -370,7 +370,7 @@
         <bt:String id="PJ.SplitValuesButton.Label" DefaultValue="Split Cell Content" />
         <bt:String id="PJ.FindDuplicatesButton.Label" DefaultValue="Detect Duplicates" />
         <bt:String id="PJ.InconsistencyButton.Label" DefaultValue="Detect Inconsistencies" />
-        <bt:String id="PJ.ExtractValuesButton.Label" DefaultValue="Extract Values" />
+        <bt:String id="PJ.ExtractValuesButton.Label" DefaultValue="Extract Text" />
         <bt:String id="PJ.TrimSpacesButton.Label" DefaultValue="Trim Spaces" />
         <bt:String id="PJ.ValidationRuleButton.Label" DefaultValue="Rule-based Validation" />
         <bt:String id="PJ.HarmonizeButton.Label" DefaultValue="Harmonize Column" />

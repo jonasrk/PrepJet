@@ -49,8 +49,22 @@ function fuzzyPro() {
                 document.getElementById('helpCallout').style.visibility = 'hidden';
             }
 
+            document.getElementById("refresh_icon").onclick = function () {
+                window.location = "duplicates.html";
+            }
 
-            Excel.run(function (ctx) {
+            //hide result message
+            document.getElementById("resultClose").onclick = function () {
+                document.getElementById('resultDialog').style.visibility = 'hidden';
+                window.location = "duplicates.html";
+            }
+            document.getElementById("resultOk").onclick = function () {
+                document.getElementById('resultDialog').style.visibility = 'hidden';
+                window.location = "duplicates.html";
+            }
+
+
+            /*Excel.run(function (ctx) {
 
                 var myBindings = Office.context.document.bindings;
                 var worksheetname = ctx.workbook.worksheets.getActiveWorksheet();
@@ -126,7 +140,7 @@ function fuzzyPro() {
                 if (error instanceof OfficeExtension.Error) {
                     console.log("Debug info: " + JSON.stringify(error.debugInfo));
                 }
-            });
+            });*/
 
         });
     };
@@ -394,7 +408,15 @@ function fuzzyPro() {
                         sheet_row += 1;
                     }
                 }
-                window.location = "duplicates.html";
+
+                var txt = document.createElement("p");
+                txt.className = "ms-font-xs ms-embedded-dialog__content__text";
+                txt.innerHTML = "PrepJet found " + duplicates.length + " duplicate rows."
+                document.getElementById('resultText').appendChild(txt);
+
+                document.getElementById('resultDialog').style.visibility = 'visible';
+
+                //window.location = "duplicates.html";
 
             });
 
