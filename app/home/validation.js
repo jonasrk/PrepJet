@@ -97,6 +97,9 @@ function showEnterpriseDialog() {
                 $('#to_inconsistency').show();
             }
 
+            document.getElementById("refresh_icon").onclick = function () {
+                window.location = "split_values.html";
+            }
 
             Office.context.document.addHandlerAsync("documentSelectionChanged", myIfHandler, function(result){}
             );
@@ -160,8 +163,11 @@ function showEnterpriseDialog() {
                 document.getElementById('helpCallout').style.visibility = 'hidden';
             }
 
+            document.getElementById("refresh_icon").onclick = function () {
+                window.location = "validation.html";
+            }
 
-            Excel.run(function (ctx) {
+            /*Excel.run(function (ctx) {
 
                 var myBindings = Office.context.document.bindings;
                 var worksheetname = ctx.workbook.worksheets.getActiveWorksheet();
@@ -236,7 +242,7 @@ function showEnterpriseDialog() {
                 if (error instanceof OfficeExtension.Error) {
                     console.log("Debug info: " + JSON.stringify(error.debugInfo));
                 }
-            });
+            });*/
 
         });
     };

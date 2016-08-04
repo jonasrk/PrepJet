@@ -26,9 +26,12 @@
                 document.getElementById('showEmbeddedDialog').style.visibility = 'hidden';
             }
 
+            document.getElementById("refresh_icon").onclick = function () {
+                window.location = "trim_spaces.html";
+            }
 
 
-            Excel.run(function (ctx) {
+            /*Excel.run(function (ctx) {
 
                 var myBindings = Office.context.document.bindings;
                 var worksheetname = ctx.workbook.worksheets.getActiveWorksheet();
@@ -107,7 +110,7 @@
                 if (error instanceof OfficeExtension.Error) {
                     console.log("Debug info: " + JSON.stringify(error.debugInfo));
                 }
-            });
+            });*/
 
         });
     };

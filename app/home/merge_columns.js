@@ -63,6 +63,10 @@ function backToOne() {
                 document.getElementById('helpCalloutFirst').style.visibility = 'hidden';
             }
 
+            document.getElementById("refresh_icon").onclick = function () {
+                window.location = "merge_columns.html";
+            }
+
 
         });
     };
