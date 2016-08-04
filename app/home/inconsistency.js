@@ -45,6 +45,17 @@ function redirectRule() {
                 window.location = "inconsistencies.html";
             }
 
+            document.getElementById("resultClose").onclick = function () {
+                document.getElementById('resultDialog').style.visibility = 'hidden';
+                window.location = "inconsistency.html";
+            }
+
+            document.getElementById("resultOk").onclick = function () {
+                document.getElementById('resultDialog').style.visibility = 'hidden';
+                window.location = "inconsistency.html";
+            }
+
+
             /*Excel.run(function (ctx) {
 
                 var myBindings = Office.context.document.bindings;
@@ -264,6 +275,7 @@ function redirectRule() {
                 var header = 0;
                 var checked_checkboxes = getCheckedBoxes("column_checkbox");
                 var check = [];
+                var incon_counter = 0;
 
                 for (var run = 0;run < checked_checkboxes.length; run++) {
                     check[run] = 0;
@@ -369,6 +381,7 @@ function redirectRule() {
                                 for (var k = 0; k < tmp_type.length; k++) {
                                     if (tmp2[i][0] == tmp_type[k][0]) {
                                         highlightCellInWorksheet(worksheet, tmp_type[k][1], color);
+                                        incon_counter += 1;
                                     }
                                 }
                             }
@@ -377,6 +390,7 @@ function redirectRule() {
                                 for (var k = 0; k < tmp_type.length; k++) {
                                     if (tmp2[i][0] == tmp_type[k][0]) {
                                         highlightCellInWorksheet(worksheet, tmp_type[k][1], color);
+                                        incon_counter += 1;
                                     }
                                 }
                             }
@@ -384,7 +398,16 @@ function redirectRule() {
                     }
 
                 }
-                window.location = "inconsistency.html";
+
+                //todo display information;
+                var txt = document.createElement("p");
+                txt.className = "ms-font-xs ms-embedded-dialog__content__text";
+                txt.innerHTML = "PrepJet found " + incon_counter + " inconsistencies in your data set."
+                document.getElementById('resultText').appendChild(txt);
+
+                document.getElementById('resultDialog').style.visibility = 'visible';
+
+                //window.location = "inconsistency.html";
             });
 
         }).catch(function(error) {
