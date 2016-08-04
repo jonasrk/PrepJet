@@ -80,7 +80,7 @@ function displayFieldDelimiter(){
             }
 
 
-            Excel.run(function (ctx) {
+            /*Excel.run(function (ctx) {
 
                 //var myBindings = Office.context.document.bindings;
                 var worksheetname = ctx.workbook.worksheets.getActiveWorksheet();
@@ -105,7 +105,7 @@ function displayFieldDelimiter(){
                         });
                     }
 
-                    /*function bindFromPrompt() {
+                    function bindFromPrompt() {
 
                         var myBindings = Office.context.document.bindings;
                         var name_worksheet = worksheetname.name;
@@ -147,7 +147,7 @@ function displayFieldDelimiter(){
                 // Function that writes to a div with id='message' on the page.
                 function write(message){
                     console.log(message);
-                }*/
+                }
 
                 });
             }).catch(function(error) {
@@ -155,7 +155,7 @@ function displayFieldDelimiter(){
                 if (error instanceof OfficeExtension.Error) {
                     console.log("Debug info: " + JSON.stringify(error.debugInfo));
                 }
-            });
+            });*/
 
         });
     };
