@@ -372,7 +372,7 @@
         <bt:String id="PJ.InconsistencyButton.Label" DefaultValue="Detect Inconsistencies" />
         <bt:String id="PJ.ExtractValuesButton.Label" DefaultValue="Extract Values" />
         <bt:String id="PJ.TrimSpacesButton.Label" DefaultValue="Trim Spaces" />
-        <bt:String id="PJ.ValidationRuleButton.Label" DefaultValue="Customized Validation" />
+        <bt:String id="PJ.ValidationRuleButton.Label" DefaultValue="Rule-based Validation" />
         <bt:String id="PJ.HarmonizeButton.Label" DefaultValue="Harmonize Column" />
         <bt:String id="PJ.HelpButton.Label" DefaultValue="PrepJet Help" />
         <bt:String id="PJ.UndoButton.Label" DefaultValue="Undo" />

@@ -54,7 +54,7 @@ function showEnterpriseDialog() {
 }
 
 (function () {
-    'use strict';
+    // 'use strict';
     var count_drop = 1;
 
     // The initialize function must be run each time a new page is loaded
@@ -87,9 +87,15 @@ function showEnterpriseDialog() {
 
 
             $('#and_cond').click(showEnterpriseDialog);
-            $('#or_cond').click(showEnterpriseDialog);
+            //$('#or_cond').click(showEnterpriseDialog);
             $('#apply_advanced').click(validationAndAdvanced);
             $('#to_inconsistency').click(redirectRule);
+            $('#buttonOk').click(highlightHeader);
+
+
+            if (Office.context.document.settings.get('from_inconsistencies') == true){
+                $('#to_inconsistency').show();
+            }
 
 
             Office.context.document.addHandlerAsync("documentSelectionChanged", myIfHandler, function(result){}
@@ -136,10 +142,7 @@ function showEnterpriseDialog() {
 
             // Hides error message dialogs when clicking on ok or close
             document.getElementById("buttonClose").onclick = function () {
-                $("#showEmbeddedDialog").hide();
-            }
-            document.getElementById("buttonOk").onclick = function () {
-                $("#showEmbeddedDialog").hide();
+                document.getElementById('showEmbeddedDialog').style.visibility = 'hidden';
             }
             document.getElementById("buttonCloseEnterprise").onclick = function () {
                 document.getElementById('showEnterprise').style.visibility = 'hidden';
@@ -239,6 +242,40 @@ function showEnterpriseDialog() {
     };
 
 
+
+    function highlightHeader() {
+
+        Excel.run(function (ctx) {
+
+            var worksheet = ctx.workbook.worksheets.getActiveWorksheet();
+            var range_all = worksheet.getRange();
+            var range = range_all.getUsedRange();
+
+            range.load('text');
+
+            return ctx.sync().then(function() {
+
+                for (var run = 0; run < range.text[0].length - 1; run++) {
+                    for (var run2 = run + 1; run2 < range.text[0].length; run2++) {
+                        if (range.text[0][run] == range.text[0][run2] && range.text[0][run] != "") {
+                            document.getElementById('showEmbeddedDialog').style.visibility = 'hidden';
+                            highlightContentInWorksheet(worksheet, getCharFromNumber(run) + 1, '#EA7F04');
+                            highlightContentInWorksheet(worksheet, getCharFromNumber(run2) + 1, '#EA7F04');
+                        }
+                    }
+                }
+
+            });
+
+        }).catch(function(error) {
+            console.log("Error: " + error);
+            if (error instanceof OfficeExtension.Error) {
+                console.log("Debug info: " + JSON.stringify(error.debugInfo));
+            }
+        });
+    }
+
+
     //function to populate dropdown for if condition with column headers
     function fillIfColumn(){
 
@@ -253,10 +290,8 @@ function showEnterpriseDialog() {
 
                 for (var run = 0; run < range.text[0].length - 1; run++) {
                     for (var run2 = run + 1; run2 < range.text[0].length; run2++) {
-                        if (range.text[0][run] == range.text[0][run2]) {
+                        if (range.text[0][run] == range.text[0][run2] && range.text[0][run] != "") {
                             document.getElementById('showEmbeddedDialog').style.visibility = 'visible';
-                            highlightContentInWorksheet(worksheet, getCharFromNumber(run) + 1, '#EA7F04');
-                            highlightContentInWorksheet(worksheet, getCharFromNumber(run2) + 1, '#EA7F04');
                             Office.context.document.settings.set('same_header_validation', true);
                         }
                     }
@@ -303,10 +338,8 @@ function showEnterpriseDialog() {
 
                 for (var run = 0; run < range.text[0].length - 1; run++) {
                     for (var run2 = run + 1; run2 < range.text[0].length; run2++) {
-                        if (range.text[0][run] == range.text[0][run2]) {
+                        if (range.text[0][run] == range.text[0][run2] && range.text[0][run] != "") {
                             document.getElementById('showEmbeddedDialog').style.visibility = 'visible';
-                            highlightContentInWorksheet(worksheet, getCharFromNumber(run) + 1, '#EA7F04');
-                            highlightContentInWorksheet(worksheet, getCharFromNumber(run2) + 1, '#EA7F04');
                             Office.context.document.settings.set('same_header_validation', true);
                         }
                     }

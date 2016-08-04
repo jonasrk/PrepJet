@@ -26,7 +26,7 @@ function displayFieldDelimiter(){
 }
 
 (function () {
-    'use strict';
+    // 'use strict';
 
     // The initialize function must be run each time a new page is loaded
     Office.initialize = function (reason) {
@@ -56,17 +56,16 @@ function displayFieldDelimiter(){
             $(".ms-TextField").TextField();
 
             $('#split_Value').click(splitValue);
+            $('#buttonOk').click(highlightHeader);
             $('#advanced_settings').click(displayAdvancedCount);
             $('#advanced_hide').click(hideAdvancedCount);
 
 
             // Hides the dialog.
             document.getElementById("buttonClose").onclick = function () {
-                $("#showEmbeddedDialog").hide();
+                document.getElementById('showEmbeddedDialog').style.visibility = 'hidden';
             }
-            document.getElementById("buttonOk").onclick = function () {
-                $("#showEmbeddedDialog").hide();
-            }
+
 
             //Show and hide error message if columns have same header name
             document.getElementById("help_icon").onclick = function () {
@@ -76,10 +75,14 @@ function displayFieldDelimiter(){
                 document.getElementById('helpCallout').style.visibility = 'hidden';
             }
 
+            document.getElementById("refresh_icon").onclick = function () {
+                window.location = "split_values.html";
+            }
 
-            Excel.run(function (ctx) {
 
-                var myBindings = Office.context.document.bindings;
+            /*Excel.run(function (ctx) {
+
+                //var myBindings = Office.context.document.bindings;
                 var worksheetname = ctx.workbook.worksheets.getActiveWorksheet();
 
                 worksheetname.load('name')
@@ -152,10 +155,44 @@ function displayFieldDelimiter(){
                 if (error instanceof OfficeExtension.Error) {
                     console.log("Debug info: " + JSON.stringify(error.debugInfo));
                 }
-            });
+            });*/
 
         });
     };
+
+
+
+    function highlightHeader() {
+
+        Excel.run(function (ctx) {
+
+            var worksheet = ctx.workbook.worksheets.getActiveWorksheet();
+            var range_all = worksheet.getRange();
+            var range = range_all.getUsedRange();
+
+            range.load('text');
+
+            return ctx.sync().then(function() {
+
+                for (var run = 0; run < range.text[0].length - 1; run++) {
+                    for (var run2 = run + 1; run2 < range.text[0].length; run2++) {
+                        if (range.text[0][run] == range.text[0][run2] && range.text[0][run] != "") {
+                            document.getElementById('showEmbeddedDialog').style.visibility = 'hidden';
+                            highlightContentInWorksheet(worksheet, getCharFromNumber(run) + 1, '#EA7F04');
+                            highlightContentInWorksheet(worksheet, getCharFromNumber(run2) + 1, '#EA7F04');
+                        }
+                    }
+                }
+
+            });
+
+        }).catch(function(error) {
+            console.log("Error: " + error);
+            if (error instanceof OfficeExtension.Error) {
+                console.log("Debug info: " + JSON.stringify(error.debugInfo));
+            }
+        });
+    }
 
 
     function fillColumn(){
@@ -172,10 +209,8 @@ function displayFieldDelimiter(){
 
                 for (var run = 0; run < range.text[0].length - 1; run++) {
                     for (var run2 = run + 1; run2 < range.text[0].length; run2++) {
-                        if (range.text[0][run] == range.text[0][run2]) {
+                        if (range.text[0][run] == range.text[0][run2] && range.text[0][run] != "") {
                             document.getElementById('showEmbeddedDialog').style.visibility = 'visible';
-                            highlightContentInWorksheet(worksheet, getCharFromNumber(run) + 1, '#EA7F04');
-                            highlightContentInWorksheet(worksheet, getCharFromNumber(run2) + 1, '#EA7F04');
                             Office.context.document.settings.set('same_header_split', true);
                         }
                     }
@@ -208,6 +243,7 @@ function displayFieldDelimiter(){
 
     //function to split values in a column by a specified delimiter into different columns
     function splitValue() {
+
         Excel.run(function (ctx) {
 
             var worksheet = ctx.workbook.worksheets.getActiveWorksheet();
@@ -226,11 +262,9 @@ function displayFieldDelimiter(){
             if (delimiter_type == "comma") {
                 delimiter_type = ",";
             }
-            if (delimiter_type == "semikolon") {
+            if (delimiter_type == "semicolon") {
                 delimiter_type = ";";
             }
-
-            //if advanced settings are selected, get values for delimiter count
 
 
             range.load('text');
@@ -254,12 +288,10 @@ function displayFieldDelimiter(){
                     else if(document.getElementById('delimiter_count_i').value == "seven") { count_delimiter = 7; }
                     else if(document.getElementById('delimiter_count_i').value == "eight") { count_delimiter = 8; }
                     else if(document.getElementById('delimiter_count_i').value == "nine") { count_delimiter = 9; }
+                    else if(document.getElementById('delimiter_count_i').value == "all") {
+                        Office.context.document.settings.set('more_option', false);
+                    }
                     return count_delimiter;
-                }
-
-                if (Office.context.document.settings.get('more_option') == true) {
-                    //var count_delimiter = getCountDelimiter();
-                    var count_direction = document.getElementById('delimiter_count_drop').value;
                 }
 
                 //get column number which to split
@@ -275,7 +307,6 @@ function displayFieldDelimiter(){
                 var array_length = 0;
                 var max_array_length = 0;
                 var split_array = new Array(range.text.length);
-                var split_array_test = new Array(range.text.length);
 
                 //loop through whole column, create an array with splitted values and get maximum length
                 if (Office.context.document.settings.get('more_option') == false) {
@@ -290,6 +321,7 @@ function displayFieldDelimiter(){
                     }
                 }
                 else {
+                    var count_direction = document.getElementById('delimiter_count_drop').value;
                     for (var i = 0; i < range.text.length; i++) {
                         var count_delimiter = getCountDelimiter();
                         if (range.text[i][header] != "" && range.text[i][header].indexOf(delimiter_type) != -1) {
@@ -334,14 +366,12 @@ function displayFieldDelimiter(){
                 }
 
                 //insert empty columns right to split column for splitted parts
-                for (var i = 0; i < range.text.length; i++) {
-                    for (var j = 1; j < max_array_length; j++) {
-                        var column_char = getCharFromNumber(header + 1);
-                        var sheet_row = i + 1;
-                        var rangeaddress = column_char + sheet_row;
-                        var range_insert = ctx.workbook.worksheets.getActiveWorksheet().getRange(rangeaddress);
-                        range_insert.insert("Right");
-                    }
+                for (var j = 1; j < max_array_length; j++) {
+                    var column_char = getCharFromNumber(header + 1);
+                    var sheet_row = i + 1;
+                    var rangeaddress = column_char + ":" + column_char;
+                    var range_insert = ctx.workbook.worksheets.getActiveWorksheet().getRange(rangeaddress);
+                    range_insert.insert("Right");
                 }
 
                 //insert splitted parts into new empty columns

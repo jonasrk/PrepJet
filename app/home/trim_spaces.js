@@ -1,5 +1,5 @@
 (function () {
-    'use strict';
+    // 'use strict';
 
     // The initialize function must be run each time a new page is loaded
     Office.initialize = function (reason) {
@@ -18,15 +18,14 @@
 
             $('#helpCallout').hide();
             $('#trim_space').click(trimSpace);
+            $('#buttonOk').click(highlightHeader);
             $('#checkbox_all').click(checkCheckbox);
 
             //Show and hide error message if columns have same header name
             document.getElementById("buttonClose").onclick = function () {
-                $("#showEmbeddedDialog").hide();
+                document.getElementById('showEmbeddedDialog').style.visibility = 'hidden';
             }
-            document.getElementById("buttonOk").onclick = function () {
-                $("#showEmbeddedDialog").hide();
-            }
+
 
 
             Excel.run(function (ctx) {
@@ -34,7 +33,11 @@
                 var myBindings = Office.context.document.bindings;
                 var worksheetname = ctx.workbook.worksheets.getActiveWorksheet();
 
+                var headRange_all = worksheetname.getRange();
+                var headRange = headRange_all.getUsedRange();
+
                 worksheetname.load('name')
+                headRange.load('text');
 
                 return ctx.sync().then(function() {
                     Office.context.document.addHandlerAsync("documentSelectionChanged", myViewHandler, function(result){}
@@ -110,6 +113,40 @@
     };
 
 
+
+    function highlightHeader() {
+
+        Excel.run(function (ctx) {
+
+            var worksheet = ctx.workbook.worksheets.getActiveWorksheet();
+            var range_all = worksheet.getRange();
+            var range = range_all.getUsedRange();
+
+            range.load('text');
+
+            return ctx.sync().then(function() {
+
+                for (var run = 0; run < range.text[0].length - 1; run++) {
+                    for (var run2 = run + 1; run2 < range.text[0].length; run2++) {
+                        if (range.text[0][run] == range.text[0][run2] && range.text[0][run] != "") {
+                            document.getElementById('showEmbeddedDialog').style.visibility = 'hidden';
+                            highlightContentInWorksheet(worksheet, getCharFromNumber(run) + 1, '#EA7F04');
+                            highlightContentInWorksheet(worksheet, getCharFromNumber(run2) + 1, '#EA7F04');
+                        }
+                    }
+                }
+
+            });
+
+        }).catch(function(error) {
+            console.log("Error: " + error);
+            if (error instanceof OfficeExtension.Error) {
+                console.log("Debug info: " + JSON.stringify(error.debugInfo));
+            }
+        });
+    }
+
+
     function checkCheckbox() {
 
         Excel.run(function (ctx) {
@@ -163,14 +200,14 @@
             var range = range_all.getUsedRange();
 
             range.load('text');
+
             return ctx.sync().then(function() {
+
 
                 for (var run = 0; run < range.text[0].length - 1; run++) {
                     for (var run2 = run + 1; run2 < range.text[0].length; run2++) {
-                        if (range.text[0][run] == range.text[0][run2]) {
+                        if (range.text[0][run] == range.text[0][run2] && range.text[0][run] != "") {
                             document.getElementById('showEmbeddedDialog').style.visibility = 'visible';
-                            highlightContentInWorksheet(worksheet, getCharFromNumber(run) + 1, '#EA7F04');
-                            highlightContentInWorksheet(worksheet, getCharFromNumber(run2) + 1, '#EA7F04');
                             Office.context.document.settings.set('same_header_trim', true);
                         }
                     }

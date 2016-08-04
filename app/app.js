@@ -1,5 +1,5 @@
 var app = (function(){  // jshint ignore:line
-  'use strict';
+  // 'use strict';
 
   var self = {};
 

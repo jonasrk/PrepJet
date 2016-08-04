@@ -67,11 +67,11 @@
             </div>
             <div class="ms-Dialog-inner">
                 <div class="ms-Dialog-content">
-                    <p class="ms-font-xs ms-embedded-dialog__content__text">Each column should have a unique header. Please rename those marked in orange.</p>
+                    <p class="ms-font-xs ms-embedded-dialog__content__text">Each column should have a unique header. Please rename equal column headers.</p>
                 </div>
                 <div class="ms-embedded-dialog__actioncenter">
                     <button  class="ms-Dialog-action ms-Button_grey" id="buttonOk">
-                        <span class="ms-Button-label">OK</span>
+                        <span class="ms-Button-label">Highlight</span>
                     </button>
                 </div>
             </div>
@@ -101,13 +101,13 @@
         <!--container for checkboxes-->
         <div id="checkboxes_columns" class="ms-ChoiceField">
         </div>
-        <div class="ms-Dropdown harmonize_drop" tabindex="1">
+        <div id="harm_drop" class="ms-Dropdown harmonize_drop" tabindex="1">
                 <label class="ms-Label">Select type of harmonization</label>
                 <i class="ms-Dropdown-caretDown ms-Icon ms-Icon--caretDown"></i>
                 <select id="harmonize_options" class="ms-Dropdown-select">
-                    <option value="allupper">ALL UPPER CASE</option>
-                    <option value="alllower">all lower case</option>
-                    <option value="oneupper">First column entry upper case</option>
+                    <option value="allupper">ALL LETTERS UPPER CASE</option>
+                    <option value="alllower">all letters lower case</option>
+                    <option value="oneupper">First letter of first word upper case</option>
                     <option value="firstupper">First Letter Of Each Word Upper Case</option>
                 </select>
             </div>

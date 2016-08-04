@@ -35,6 +35,9 @@ h1 {
     min-width: 40px;
     padding: 4px 10px 6px; }
 
+.ms-Button:hover {
+    color: #000; }
+
 .ms-Button_grey {
     color: #000;
     font-family: 'Segoe UI Regular WestEuropean','Segoe UI','Segoe WP',Tahoma,Arial,sans-serif;
@@ -86,7 +89,8 @@ h1 {
 
 .ms-Dropdown, .ms-Dropdown-items, .ms-Dropdown-title {
     box-sizing: border-box;
-    box-shadow: none;}
+    box-shadow: none;
+    overflow-x: hidden; }
 
 .tableheader {
     width: 85%; }
@@ -108,7 +112,8 @@ h1 {
     display: block;
     position: fixed;
     top: 60px;
-    overflow: scroll; }
+    overflow-y: scroll;
+    overflow-x: hidden; }
 
 .placeholder {
     height: 60px;
@@ -126,14 +131,8 @@ h1 {
     overflow: visible;
     padding: 10px; }
 
-#small_drop {
-    width: 135px ; }
-
-#simple_dropdown {
-    width: 135px ; }
-
 #delimiter_beginning1 {
-    width: 135px ; }
+    width: 135px; }
 
 .ms-TextField-field {
     min-width: 135px; }
@@ -141,12 +140,13 @@ h1 {
 .tableval {
     width: 53%; }
 
-#advanced_dropdown2 {
-    width: 135px; }
-
 .ms-Button_icon {
     border: 0px;
     background: #F9F9F9; }
+
+.ms-Button_headericon {
+    border: 0px;
+    background: #666666; }
 
 #helpCallout {
     visibility: hidden; }
@@ -212,3 +212,30 @@ h1 {
     border-bottom: 0.75px solid;
     border-color: #e2e2e2; }
 
+.ms-Dropdown {
+    color: #333;
+    width: 135px;
+    margin: 0 0 10px;
+    padding: 0;
+    position: relative;
+    outline: 0;
+    overflow-x: hidden; }
+
+#lookuptable {
+    border-bottom: 0.75px solid;
+    border-color: #e2e2e2;}
+
+#harm_drop {
+    width: 100%; }
+
+#large_drop {
+    width: 100%; }
+
+#smalldrop_col {
+    width: 50%; }
+
+#tablesmall {
+    width: 100%; }
+
+#colright {
+    float: right; }

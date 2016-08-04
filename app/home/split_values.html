@@ -47,6 +47,11 @@
                 </div>
             </td>
             <td>
+                <button id="refresh_icon" class="ms-Button_headericon">
+                    <i class="ms-Icon ms-Icon--refresh" aria-hidden="true"></i>
+                </button>
+            </td>
+            <td>
                 <div>
                     <img class="page1" src="../../images/logo_lg.png" />
                 </div>
@@ -67,11 +72,11 @@
             </div>
             <div class="ms-Dialog-inner">
                 <div class="ms-Dialog-content">
-                    <p class="ms-font-xs ms-embedded-dialog__content__text">Each column should have a unique header. Please rename those marked in orange.</p>
+                    <p class="ms-font-xs ms-embedded-dialog__content__text">Each column should have a unique header. Please rename equal column headers.</p>
                 </div>
                 <div class="ms-embedded-dialog__actioncenter">
                     <button  class="ms-Dialog-action ms-Button_grey" id="buttonOk">
-                        <span class="ms-Button-label">OK</span>
+                        <span class="ms-Button-label">Highlight</span>
                     </button>
                 </div>
             </div>
@@ -82,18 +87,18 @@
     <div id="content-main">
         <div class="padding">
             <!--dropdown for column-->
-            <div class="ms-Dropdown dropdown_table_col" tabindex="1">
+            <div id="large_drop" class="ms-Dropdown dropdown_table_col" tabindex="1">
                 <label class="ms-Label">Select column to be splitted</label>
                 <i class="ms-Dropdown-caretDown ms-Icon ms-Icon--caretDown"></i>
                 <select id="column_options" class="ms-Dropdown-select"></select>
             </div>
             <!--dropdown for delimiter-->
-            <div class="ms-Dropdown dropdown_table" tabindex="1">
+            <div id="large_drop" class="ms-Dropdown dropdown_table" tabindex="1">
                 <label class="ms-Label">Select delimiter</label>
                 <i class="ms-Dropdown-caretDown ms-Icon ms-Icon--caretDown"></i>
                 <select id="delimiter_options" class="ms-Dropdown-select" onchange="displayFieldDelimiter()">
                     <option value="comma">Comma</option>
-                    <option value="semikolon">Semicolon</option>
+                    <option value="semicolon">Semicolon</option>
                     <option value="whitespace">Whitespace</option>
                     <option value="custom_delimiter">Custom</option>
                 </select>
@@ -130,31 +135,39 @@
             <button id="help_icon" class="ms-Button_icon">
                 <i class="ms-Icon ms-Icon--infoCircle" aria-hidden="true"></i>
             </button>
-            <div id="delimiter_count" class="ms-Dropdown del_count_dropdown" tabindex="1">
-                <label class="ms-Label">Delimiter position</label>
-                <i class="ms-Dropdown-caretDown ms-Icon ms-Icon--caretDown"></i>
-                <select id="delimiter_count_i" class="ms-Dropdown-select">
-                    <option value="one">1</option>
-                    <option value="two">2</option>
-                    <option value="three">3</option>
-                    <option value="four">4</option>
-                    <option value="five">5</option>
-                    <option value="six">6</option>
-                    <option value="seven">7</option>
-                    <option value="eight">8</option>
-                    <option value="nine">9</option>
-                </select>
-            </div>
-            <!--dropdown for delimiter count-->
-            <div class="ms-Dropdown delimiter_count_dropdown" tabindex="1">
-                <label class="ms-Label">Select direction from which to count</label>
-                <i class="ms-Dropdown-caretDown ms-Icon ms-Icon--caretDown"></i>
-                <select id="delimiter_count_drop" class="ms-Dropdown-select">
-                    <option value="left">From Left</option>
-                    <option value="right">From Right</option>
-                </select>
-            </div>
-            <br>
+            <table>
+                <tr>
+                    <td id="smalldrop_col">
+                        <div id="delimiter_count" class="ms-Dropdown del_count_dropdown" tabindex="1">
+                            <label class="ms-Label">Position of Delimiter</label>
+                            <i class="ms-Dropdown-caretDown ms-Icon ms-Icon--caretDown"></i>
+                            <select id="delimiter_count_i" class="ms-Dropdown-select">
+                                <option value="all">All</option>
+                                <option value="one">1</option>
+                                <option value="two">2</option>
+                                <option value="three">3</option>
+                                <option value="four">4</option>
+                                <option value="five">5</option>
+                                <option value="six">6</option>
+                                <option value="seven">7</option>
+                                <option value="eight">8</option>
+                                <option value="nine">9</option>
+                            </select>
+                        </div>
+                    </td>
+                    <td id="colright">
+                        <!--dropdown for delimiter count-->
+                        <div class="ms-Dropdown delimiter_count_dropdown" tabindex="1">
+                            <label class="ms-Label">Count Direction</label>
+                            <i class="ms-Dropdown-caretDown ms-Icon ms-Icon--caretDown"></i>
+                            <select id="delimiter_count_drop" class="ms-Dropdown-select">
+                                <option value="left">From Left</option>
+                                <option value="right">From Right</option>
+                            </select>
+                        </div>
+                    </td>
+                </tr>
+            </table>
             <!--split button-->
             <button class="ms-Button" id="split_Value">Split</button>
         </div>

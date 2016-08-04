@@ -7,7 +7,7 @@ function backToOne() {
 
 
 (function () {
-    'use strict';
+    // 'use strict';
     var count_drop = 0;
 
     // The initialize function must be run each time a new page is loaded
@@ -28,9 +28,6 @@ function backToOne() {
 
             app.initialize();
 
-            if (Office.context.document.settings.get('same_header_addcolumn') == false) {
-                $("#showEmbeddedDialog").hide();
-            }
 
             $('#step2').hide();
             $('#step3').hide();
@@ -42,15 +39,14 @@ function backToOne() {
             $('#back_step1').click(backToOne);
             $('#bt_apply').click(applyButtonClicked);
             $('#back_step2').click(step2ButtonClicked);
+            $('#buttonOk').click(highlightHeader);
 
 
             //show and hide error message for columns that have same header name
             document.getElementById("buttonClose").onclick = function () {
-                $("#showEmbeddedDialog").hide();
+                document.getElementById('showEmbeddedDialog').style.visibility = 'hidden';
             }
-            document.getElementById("buttonOk").onclick = function () {
-                $("#showEmbeddedDialog").hide();
-            }
+
 
             //show and hide help callouts
             document.getElementById("help_icon").onclick = function () {
@@ -66,69 +62,6 @@ function backToOne() {
             document.getElementById("closeCalloutFirst").onclick = function () {
                 document.getElementById('helpCalloutFirst').style.visibility = 'hidden';
             }
-
-
-            Excel.run(function (ctx) {
-
-                var myBindings = Office.context.document.bindings;
-                var worksheetname = ctx.workbook.worksheets.getActiveWorksheet();
-
-                worksheetname.load('name')
-
-                return ctx.sync().then(function() {
-
-                    //function to check whether header entries are changed
-                    function bindFromPrompt() {
-
-                        var myBindings = Office.context.document.bindings;
-                        var name_worksheet = worksheetname.name;
-                        var myAddress = name_worksheet.concat("!1:1");
-
-                        myBindings.addFromNamedItemAsync(myAddress, "matrix", {id:'myBinding'}, function (asyncResult) {
-                            if (asyncResult.status == Office.AsyncResultStatus.Failed) {
-                                write('Action failed. Error: ' + asyncResult.error.message);
-                            } else {
-                                write('Added new binding with type: ' + asyncResult.value.type + ' and id: ' + asyncResult.value.id);
-
-                                function addHandler() {
-                                    Office.select("bindings#myBinding").addHandlerAsync(
-                                        Office.EventType.BindingDataChanged, dataChanged);
-                                }
-
-                                addHandler();
-                                displayAllBindings();
-
-                            }
-                        });
-                    }
-
-                bindFromPrompt();
-
-                function displayAllBindings() {
-                    Office.context.document.bindings.getAllAsync(function (asyncResult) {
-                        var bindingString = '';
-                        for (var i in asyncResult.value) {
-                            bindingString += asyncResult.value[i].id + '\n';
-                        }
-                    });
-                }
-
-                function dataChanged(eventArgs) {
-                    window.location = "merge_columns.html";
-                }
-
-                // Function that writes to a div with id='message' on the page.
-                function write(message){
-                    console.log(message);
-                }
-
-                });
-            }).catch(function(error) {
-                console.log("Error: " + error);
-                if (error instanceof OfficeExtension.Error) {
-                    console.log("Debug info: " + JSON.stringify(error.debugInfo));
-                }
-            });
 
 
         });
@@ -209,7 +142,6 @@ function backToOne() {
                                     document.getElementById("table2_options").appendChild(el);
                                 }
 
-                                //console.log($(".dropdown_table"));
                                 $(".dropdown_table").Dropdown();
                                 $("span.ms-Dropdown-title:empty").text(worksheet_names[0]);
 
@@ -230,6 +162,41 @@ function backToOne() {
     }
 
 
+
+    function highlightHeader() {
+
+        Excel.run(function (ctx) {
+
+            var worksheet = ctx.workbook.worksheets.getActiveWorksheet();
+            var range_all = worksheet.getRange();
+            var range = range_all.getUsedRange();
+
+            range.load('text');
+
+            return ctx.sync().then(function() {
+
+                for (var run = 0; run < range.text[0].length - 1; run++) {
+                    for (var run2 = run + 1; run2 < range.text[0].length; run2++) {
+                        if (range.text[0][run] == range.text[0][run2] && range.text[0][run] != "") {
+                            document.getElementById('showEmbeddedDialog').style.visibility = 'hidden';
+                            highlightContentInWorksheet(worksheet, getCharFromNumber(run) + 1, '#EA7F04');
+                            highlightContentInWorksheet(worksheet, getCharFromNumber(run2) + 1, '#EA7F04');
+                        }
+                    }
+                }
+
+            });
+
+        }).catch(function(error) {
+            console.log("Error: " + error);
+            if (error instanceof OfficeExtension.Error) {
+                console.log("Debug info: " + JSON.stringify(error.debugInfo));
+            }
+        });
+    }
+
+
+
     function step2ButtonClicked() {
 
         $('#step1').hide();
@@ -241,20 +208,21 @@ function backToOne() {
 
         Excel.run(function (ctx) {
 
+            var myBindings = Office.context.document.bindings;
             var worksheet = ctx.workbook.worksheets.getItem(selected_table2);
+            var worksheetname = ctx.workbook.worksheets.getItem(selected_table2);
             var range_all = worksheet.getRange();
             var range = range_all.getUsedRange();
 
-            //range.load('address');
             range.load('text');
+            worksheetname.load('name');
+
             return ctx.sync().then(function() {
 
                 for (var run = 0; run < range.text[0].length - 1; run++) {
                     for (var run2 = run + 1; run2 < range.text[0].length; run2++) {
-                        if (range.text[0][run] == range.text[0][run2]) {
+                        if (range.text[0][run] == range.text[0][run2] && range.text[0][run] != "") {
                             document.getElementById('showEmbeddedDialog').style.visibility = 'visible';
-                            highlightContentInWorksheet(worksheet, getCharFromNumber(run) + 1, '#EA7F04');
-                            highlightContentInWorksheet(worksheet, getCharFromNumber(run2) + 1, '#EA7F04');
                             Office.context.document.settings.set('same_header_addcolumn', true);
                         }
                     }
@@ -275,6 +243,53 @@ function backToOne() {
                     }
                 }
                 $('#checkbox_all').click(checkCheckbox);
+
+
+                //function to check whether header entries are changed
+                function bindFromPrompt() {
+
+                    var myBindings = Office.context.document.bindings;
+                    var name_worksheet = worksheetname.name;
+                    var myAddress = name_worksheet.concat("!1:1");
+
+                    myBindings.addFromNamedItemAsync(myAddress, "matrix", {id:'myBinding'}, function (asyncResult) {
+                        if (asyncResult.status == Office.AsyncResultStatus.Failed) {
+                            write('Action failed. Error: ' + asyncResult.error.message);
+                        } else {
+                            write('Added new binding with type: ' + asyncResult.value.type + ' and id: ' + asyncResult.value.id);
+
+                            function addHandler() {
+                                Office.select("bindings#myBinding").addHandlerAsync(
+                                 Office.EventType.BindingDataChanged, dataChanged);
+                            }
+
+                            addHandler();
+                            displayAllBindings();
+
+                        }
+                    });
+                }
+
+                bindFromPrompt();
+
+                function displayAllBindings() {
+                    Office.context.document.bindings.getAllAsync(function (asyncResult) {
+                        var bindingString = '';
+                        for (var i in asyncResult.value) {
+                            bindingString += asyncResult.value[i].id + '\n';
+                        }
+                    });
+                }
+
+                function dataChanged(eventArgs) {
+                    window.location = "merge_columns.html";
+                }
+
+                // Function that writes to a div with id='message' on the page.
+                function write(message){
+                    console.log(message);
+                }
+
             });
 
         }).catch(function(error) {
@@ -330,6 +345,11 @@ function backToOne() {
                     else {
                         var count_tmp = count_drop + 3;
                     }
+
+                    var trow = document.createElement("tr");
+                    //trow.id = "lookuptable"
+                    document.getElementById('matchCriteria').appendChild(trow);
+
                     for (var k = (count_drop + 1); k < count_tmp; k++) {
                         var container = container_tmp + k;
                         var div = document.createElement("div");
@@ -347,13 +367,18 @@ function backToOne() {
                         var elemi = document.createElement("i");
                         elemi.className = "ms-Dropdown-caretDown ms-Icon ms-Icon--caretDown";
 
-                        document.getElementById("dropdowns_step3").appendChild(div);
+                        var tcol = document.createElement("td");
+                        tcol.id = "lookuptable";
+                        trow.appendChild(tcol);
+
+                        //document.getElementById("dropdowns_step3").appendChild(div);
+                        tcol.appendChild(div);
                         document.getElementById("addedDropdown" + k).appendChild(lab);
                         document.getElementById("addedDropdown" + k).appendChild(elemi);
                         document.getElementById("addedDropdown" + k).appendChild(sel);
 
                         if (k % 2 == 0) {
-                            lab.innerHTML = "Select reference column in table " + table2;
+                            lab.innerHTML = table2;
                             for (var i = 0; i < range_t2.text[0].length; i++) {
                                 var el = document.createElement("option");
                                 if (range_t2.text[0][i] != "") {
@@ -368,7 +393,7 @@ function backToOne() {
                             }
                         }
                         else {
-                            lab.innerHTML = "Select reference column in table " + table1;
+                            lab.innerHTML = table1;
                             for (var i = 0; i < range_t1.text[0].length; i++) {
                                 var el = document.createElement("option");
                                 if (range_t1.text[0][i] != "") {
@@ -464,7 +489,7 @@ function backToOne() {
 
         var selected_table1 = document.getElementById('table1_options').value; // TODO better reference by ID than name
         var selected_table2 = document.getElementById('table2_options').value; // TODO better reference by ID than name
-
+        console.log(selected_table2);
         Excel.run(function (ctx) {
             var worksheet = ctx.workbook.worksheets.getItem(selected_table2);
 
@@ -515,7 +540,6 @@ function backToOne() {
                 for (var k = 0; k < range.text[0].length; k++){
 
                     // iterate over checked checkboxes
-
                     var checked_checkboxes = getCheckedBoxes("reference_column_checkbox");
 
                     if (document.getElementById("case_sens").checked == true) {
@@ -525,12 +549,14 @@ function backToOne() {
                         var case_sens = 0;
                     }
 
+                    var source_char = getCharFromNumber(k);
+
                     for (var l = 0; l < checked_checkboxes.length; l++){ // TODO throws error if none are checked
                         if (checked_checkboxes[l].id == range.text[0][k] || checked_checkboxes[l].id == "Column " + getCharFromNumber(k)){
                             var column_char = getCharFromNumber(l + range_adding_to.text[0].length);
 
                             // copy title
-                            addContentToWorksheet(worksheet_adding_to, column_char + "1", range.text[0][k]);
+                            addContentToWorksheet(worksheet_adding_to, column_char + "1", "=" + selected_table2 + "!" + source_char + "1");
 
                             // copy rest
                             for (var i = 1; i < range_adding_to.text.length; i++) {
@@ -554,7 +580,8 @@ function backToOne() {
                                     }
                                     if (check == column1_ids.length) {
                                         var sheet_row = i + 1;
-                                        addContentToWorksheet(worksheet_adding_to, column_char + sheet_row, range.text[j][k])
+                                        var row_ref = j + 1;
+                                        addContentToWorksheet(worksheet_adding_to, column_char + sheet_row, "=" + selected_table2 + "!" + source_char + row_ref);
                                         break;
                                     }
                                 }

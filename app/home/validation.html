@@ -44,7 +44,7 @@
         <tr>
             <td class="tableheader">
                 <div class="padding">
-                    <h1>Customized Validation</h1>
+                    <h1>Rule-based Validation</h1>
                 </div>
             </td>
             <td>
@@ -68,11 +68,11 @@
             </div>
             <div class="ms-Dialog-inner">
                 <div class="ms-Dialog-content">
-                    <p class="ms-font-xs ms-embedded-dialog__content__text">Each column should have a unique header. Please rename those marked in orange.</p>
+                    <p class="ms-font-xs ms-embedded-dialog__content__text">Each column should have a unique header. Please rename equal column headers.</p>
                 </div>
                 <div class="ms-embedded-dialog__actioncenter">
                     <button  class="ms-Dialog-action ms-Button_grey" id="buttonOk">
-                        <span class="ms-Button-label">OK</span>
+                        <span class="ms-Button-label">Highlight</span>
                     </button>
                 </div>
             </div>
@@ -158,7 +158,7 @@
                 <tr>
                     <td class="tableval">
                          <!--dropdown for operator-->
-                        <div id="small_drop" class="ms-Dropdown dropdown_table" tabindex="1">
+                        <div class="ms-Dropdown dropdown_table" tabindex="1">
                             <i class="ms-Dropdown-caretDown ms-Icon ms-Icon--caretDown"></i>
                             <select id="if_operator1" class="ms-Dropdown-select" onchange="displaySimpleBetween()">
                                 <option value="equal">is equal to (=)</option>
@@ -197,8 +197,9 @@
         <table>
                 <tr>
                     <td class="tablecol1">
-                        <button class="ms-Button_grey" id="and_cond">AND</button>
-                        <button class="ms-Button_grey" id="or_cond">OR</button>
+                        <button class="ms-Button_grey" id="and_cond">Add Condition</button>
+                        <!--button class="ms-Button_grey" id="and_cond">AND</button>
+                        <button class="ms-Button_grey" id="or_cond">OR</button-->
                     </td>
                 </tr>
             </table>
@@ -227,16 +228,16 @@
                     </td>
                     <td>
                         <!--dropdown for then operator-->
-                        <div id="small_drop" class="ms-Dropdown dropdown_table" tabindex="1">
+                        <div class="ms-Dropdown dropdown_table" tabindex="1">
                             <i class="ms-Dropdown-caretDown ms-Icon ms-Icon--caretDown"></i>
                             <select id="then_operator" class="ms-Dropdown-select" onchange="displayBetween()">
-                                <option value="equal">is equal to(=)</option>
-                                <option value="smaller">is smaller than (<)</option>
-                                <option value="greater">is greater than (>)</option>
-                                <option value="inequal">is unequal to (!=)</option>
-                                <option value="between">is between</option>
-                                <option value="notbetween">is not between</option>
-                                <option value="inlist">is in list</option>
+                                <option value="equal">equal to(=)</option>
+                                <option value="smaller">smaller than (<)</option>
+                                <option value="greater">greater than (>)</option>
+                                <option value="inequal">unequal to (!=)</option>
+                                <option value="between">between</option>
+                                <option value="notbetween">not between</option>
+                                <option value="inlist">in list</option>
                             </select>
                         </div>
                     </td>
