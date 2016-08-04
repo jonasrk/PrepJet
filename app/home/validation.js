@@ -167,6 +167,16 @@ function showEnterpriseDialog() {
                 window.location = "validation.html";
             }
 
+            //hide result checkbox
+            document.getElementById("resultClose").onclick = function () {
+                document.getElementById('resultDialog').style.visibility = 'hidden';
+                window.location = "validation.html";
+            }
+            document.getElementById("resultOk").onclick = function () {
+                document.getElementById('resultDialog').style.visibility = 'hidden';
+                window.location = "validation.html";
+            }
+
             /*Excel.run(function (ctx) {
 
                 var myBindings = Office.context.document.bindings;
@@ -449,31 +459,37 @@ function showEnterpriseDialog() {
                     if (document.getElementById('then_operator').value == "equal") {
                         if (range.text[i][header_then] != thencondition) {
                             highlightContentInWorksheet(act_worksheet, address, '#EA7F04');
+                            vali_counter += 1;
                         }
                     }
                     else if (document.getElementById('then_operator').value == "smaller") {
                          if (range.text[i][header_then] >= thencondition) {
                             highlightContentInWorksheet(act_worksheet, address, '#EA7F04');
+                            vali_counter += 1;
                          }
                     }
                     else if (document.getElementById('then_operator').value == "greater") {
                         if (range.text[i][header_then] <= thencondition) {
                             highlightContentInWorksheet(act_worksheet, address, '#EA7F04');
+                            vali_counter += 1;
                         }
                     }
                     else if (document.getElementById('then_operator').value == "inequal") {
                         if (range.text[i][header_then] == thencondition) {
                             highlightContentInWorksheet(act_worksheet, address, '#EA7F04');
+                            vali_counter += 1;
                         }
                     }
                     else if (document.getElementById('then_operator').value == "between") {
                         if (range.text[i][header_then] < thencondition || range.text[i][header_then] > betweencondition) {
                             highlightContentInWorksheet(act_worksheet, address, '#EA7F04');
+                            vali_counter += 1;
                         }
                     }
                     else if (document.getElementById('then_operator').value == "notbetween") {
                         if (range.text[i][header_then] > thencondition && range.text[i][header_then] < betweencondition) {
                             highlightContentInWorksheet(act_worksheet, address, '#EA7F04');
+                            vali_counter += 1;
                         }
                     }
                     else if (document.getElementById('then_operator').value == "inlist") {
@@ -485,11 +501,12 @@ function showEnterpriseDialog() {
                         }
                         if (check_then == 0){
                             highlightContentInWorksheet(act_worksheet, address, '#EA7F04');
+                            vali_counter += 1;
                         }
                     }
                 }
 
-
+                var vali_counter = 0;
                 //go through all rows and check if if condition is true
                 for (var i = 1; i < range.text.length; i++) {
                     var sheet_row = i + 1;
@@ -575,7 +592,14 @@ function showEnterpriseDialog() {
                     }
                 }
 
-                window.location = "validation.html";
+                var txt = document.createElement("p");
+                txt.className = "ms-font-xs ms-embedded-dialog__content__text";
+                txt.innerHTML = "PrepJet found " + vali_counter + " entries that do not comply with your rule."
+                document.getElementById('resultText').appendChild(txt);
+
+                document.getElementById('resultDialog').style.visibility = 'visible';
+
+                //window.location = "validation.html";
             });
 
 

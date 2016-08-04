@@ -45,11 +45,11 @@ function redirectRule() {
                 window.location = "inconsistencies.html";
             }
 
+            //hide result message
             document.getElementById("resultClose").onclick = function () {
                 document.getElementById('resultDialog').style.visibility = 'hidden';
                 window.location = "inconsistency.html";
             }
-
             document.getElementById("resultOk").onclick = function () {
                 document.getElementById('resultDialog').style.visibility = 'hidden';
                 window.location = "inconsistency.html";
@@ -399,7 +399,6 @@ function redirectRule() {
 
                 }
 
-                //todo display information;
                 var txt = document.createElement("p");
                 txt.className = "ms-font-xs ms-embedded-dialog__content__text";
                 txt.innerHTML = "PrepJet found " + incon_counter + " inconsistencies in your data set."
