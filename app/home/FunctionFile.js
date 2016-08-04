@@ -8,39 +8,19 @@
 
 //Notice function needs to be in global namespace
 function undo() { // TODO only does text, not formulas and formatting
-    var backup_range_text = Office.context.document.settings.get('sheet_backup');
-
     Excel.run(function (ctx) {
-
-        var worksheet = ctx.workbook.worksheets.getActiveWorksheet();
-        var range_all = worksheet.getRange();
-        var range = range_all.getUsedRange();
-
-        //get used range in active Sheet
+        var values = Office.context.document.settings.get('sheet_backup');
+        var end_address = getCharFromNumber(values[0].length - 1) + (values.length).toString();
+        var rangeAddress = "A1:" + end_address;
+        console.log(rangeAddress);
+        var range = ctx.workbook.worksheets.getActiveWorksheet().getRange(rangeAddress);
+        console.log(range);
+        console.log(values);
+        range.values = values;
         range.load('text');
-
         return ctx.sync().then(function() {
-
-            var act_worksheet = ctx.workbook.worksheets.getActiveWorksheet();
-
-            for (var i = 0; i < range.text.length; i++) {
-                for (var j = 0; j < range.text[0].length; j++) {
-                    var sheet_row = i + 1;
-                    var column_char = getCharFromNumber(j);
-                    addContentToWorksheet(act_worksheet, column_char + sheet_row, "");
-                }
-            }
-
-
-            for (var i = 0; i < backup_range_text.length; i++) {
-                for (var j = 0; j < backup_range_text[0].length; j++) {
-                    var sheet_row = i + 1;
-                    var column_char = getCharFromNumber(j);
-                    addContentToWorksheet(act_worksheet, column_char + sheet_row, backup_range_text[i][j]);
-                }
-            }
+            console.log(range.text);
         });
-
     }).catch(function(error) {
         console.log("Error: " + error);
         if (error instanceof OfficeExtension.Error) {
