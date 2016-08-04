@@ -67,6 +67,16 @@ function backToOne() {
                 window.location = "merge_columns.html";
             }
 
+            //hide result message
+            document.getElementById("resultClose").onclick = function () {
+                document.getElementById('resultDialog').style.visibility = 'hidden';
+                window.location = "merge_columns.html";
+            }
+            document.getElementById("resultOk").onclick = function () {
+                document.getElementById('resultDialog').style.visibility = 'hidden';
+                window.location = "merge_columns.html";
+            }
+
 
         });
     };
@@ -493,7 +503,7 @@ function backToOne() {
 
         var selected_table1 = document.getElementById('table1_options').value; // TODO better reference by ID than name
         var selected_table2 = document.getElementById('table2_options').value; // TODO better reference by ID than name
-        console.log(selected_table2);
+
         Excel.run(function (ctx) {
             var worksheet = ctx.workbook.worksheets.getItem(selected_table2);
 
@@ -541,6 +551,9 @@ function backToOne() {
                     }
                 }
 
+                var lookup_count = 0;
+                var empty_count = 0;
+
                 for (var k = 0; k < range.text[0].length; k++){
 
                     // iterate over checked checkboxes
@@ -586,6 +599,7 @@ function backToOne() {
                                         var sheet_row = i + 1;
                                         var row_ref = j + 1;
                                         addContentToWorksheet(worksheet_adding_to, column_char + sheet_row, "=" + selected_table2 + "!" + source_char + row_ref);
+                                        lookup_count += 1;
                                         break;
                                     }
                                 }
@@ -594,7 +608,16 @@ function backToOne() {
                     }
                 }
 
-                window.location = "merge_columns.html";
+                empty_count = range_adding_to.text.length - lookup_count - 1;
+
+                var txt = document.createElement("p");
+                txt.className = "ms-font-xs ms-embedded-dialog__content__text";
+                txt.innerHTML = "PrepJet found " + lookup_count + " matching data records. " + empty_count + " rows do not match with any data in your source table."
+                document.getElementById('resultText').appendChild(txt);
+
+                document.getElementById('resultDialog').style.visibility = 'visible';
+
+                //window.location = "merge_columns.html";
 
             });
         }).catch(function(error) {

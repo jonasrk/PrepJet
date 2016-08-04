@@ -79,7 +79,7 @@ function hideAdvancedCount() {
             $('#buttonOk').click(highlightHeader);
 
 
-            Office.context.document.addHandlerAsync("documentSelectionChanged", myHandler, function(result){}
+            /*Office.context.document.addHandlerAsync("documentSelectionChanged", myHandler, function(result){}
             );
 
             // Event handler function.
@@ -96,7 +96,7 @@ function hideAdvancedCount() {
             // Function that writes to a div with id='message' on the page.
             function write(message){
                 document.getElementById('target_column_input').value = message;
-            }
+            }*/
 
 
             //Show and hide error message if columns have same header name
@@ -296,6 +296,7 @@ function hideAdvancedCount() {
 
 
     function extractValue() {
+
         Excel.run(function (ctx) {
 
             var worksheet = ctx.workbook.worksheets.getActiveWorksheet();
