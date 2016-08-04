@@ -144,6 +144,10 @@ h1 {
     border: 0px;
     background: #F9F9F9; }
 
+.ms-Button_headericon {
+    border: 0px;
+    background: #666666; }
+
 #helpCallout {
     visibility: hidden; }
 

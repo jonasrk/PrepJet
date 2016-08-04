@@ -75,10 +75,14 @@ function displayFieldDelimiter(){
                 document.getElementById('helpCallout').style.visibility = 'hidden';
             }
 
+            document.getElementById("refresh_icon").onclick = function () {
+                window.location = "split_values.html";
+            }
+
 
             Excel.run(function (ctx) {
 
-                var myBindings = Office.context.document.bindings;
+                //var myBindings = Office.context.document.bindings;
                 var worksheetname = ctx.workbook.worksheets.getActiveWorksheet();
 
                 worksheetname.load('name')
@@ -101,7 +105,7 @@ function displayFieldDelimiter(){
                         });
                     }
 
-                    function bindFromPrompt() {
+                    /*function bindFromPrompt() {
 
                         var myBindings = Office.context.document.bindings;
                         var name_worksheet = worksheetname.name;
@@ -143,7 +147,7 @@ function displayFieldDelimiter(){
                 // Function that writes to a div with id='message' on the page.
                 function write(message){
                     console.log(message);
-                }
+                }*/
 
                 });
             }).catch(function(error) {
