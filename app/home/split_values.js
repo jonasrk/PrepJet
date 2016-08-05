@@ -376,20 +376,9 @@ function displayFieldDelimiter(){
                     range_insert.insert("Right");
                 }
 
-                //insert splitted parts into new empty columns
-                //for (var i = 0; i < range.text.length; i++) {
-                    var sheet_row = i + 1;
-                    //if (range.text[i][header] != "" && range.text[i][header].indexOf(delimiter_type) != -1) {
-                        //for(var j = 0; j < split_array[i].length; j++){
-                            //addContentToWorksheet(act_worksheet, getCharFromNumber(header + j) + sheet_row, split_array[i][j]);
-                            var insert_address = getCharFromNumber(header) + 1 + ":" + getCharFromNumber(header + max_array_length - 1) + range.text.length;
-                            //addContentNew(worksheet.name, insert_address, split_array);
-                            addSplitValue(split_array, insert_address);
-                            //addCont(worksheet.name, "B1:C3");
-                        //}
-                    //}
-                //}
-                //window.location = "split_values.html";
+                var insert_address = getCharFromNumber(header) + 1 + ":" + getCharFromNumber(header + max_array_length - 1) + range.text.length;
+                addSplitValue(split_array, insert_address);
+
             });
 
         }).catch(function(error) {
@@ -413,8 +402,8 @@ function displayFieldDelimiter(){
             worksheet.load('name');
 
             return ctx.sync().then(function() {
-                //var insert_address = getCharFromNumber(header) + 1 + ":" + getCharFromNumber(header + max_array_length - 1) + range.text.length;
                 addContentNew(worksheet.name, insert_address, split_array);
+                window.location = "split_values.html";
 
             });
 
