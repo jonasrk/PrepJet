@@ -268,6 +268,8 @@ function displayFieldDelimiter(){
 
 
             range.load('text');
+            worksheet.load('name');
+
             var range_all_adding_to = worksheet.getRange();
             var range_adding_to = range_all_adding_to.getUsedRange();
             range_adding_to.load('address');
@@ -303,7 +305,7 @@ function displayFieldDelimiter(){
                 }
 
                 //define variables for array to hold splitted values and length measures
-                var act_worksheet = ctx.workbook.worksheets.getActiveWorksheet();
+                //var act_worksheet = ctx.workbook.worksheets.getActiveWorksheet();
                 var array_length = 0;
                 var max_array_length = 0;
                 var split_array = new Array(range.text.length);
@@ -375,15 +377,19 @@ function displayFieldDelimiter(){
                 }
 
                 //insert splitted parts into new empty columns
-                for (var i = 0; i < range.text.length; i++) {
+                //for (var i = 0; i < range.text.length; i++) {
                     var sheet_row = i + 1;
-                    if (range.text[i][header] != "" && range.text[i][header].indexOf(delimiter_type) != -1) {
-                        for(var j = 0; j < split_array[i].length; j++){
-                            addContentToWorksheet(act_worksheet, getCharFromNumber(header + j) + sheet_row, split_array[i][j]);
-                        }
-                    }
-                }
-                window.location = "split_values.html";
+                    //if (range.text[i][header] != "" && range.text[i][header].indexOf(delimiter_type) != -1) {
+                        //for(var j = 0; j < split_array[i].length; j++){
+                            //addContentToWorksheet(act_worksheet, getCharFromNumber(header + j) + sheet_row, split_array[i][j]);
+                            var insert_address = getCharFromNumber(header) + 1 + ":" + getCharFromNumber(header + max_array_length - 1) + range.text.length;
+                            //addContentNew(worksheet.name, insert_address, split_array);
+                            addSplitValue(split_array, insert_address);
+                            //addCont(worksheet.name, "B1:C3");
+                        //}
+                    //}
+                //}
+                //window.location = "split_values.html";
             });
 
         }).catch(function(error) {
@@ -392,6 +398,33 @@ function displayFieldDelimiter(){
                 console.log("Debug info: " + JSON.stringify(error.debugInfo));
             }
         });
+    }
+
+
+    function addSplitValue(split_array, insert_address){
+
+        Excel.run(function (ctx) {
+
+            var worksheet = ctx.workbook.worksheets.getActiveWorksheet();
+            var range_all = worksheet.getRange();
+            var range = range_all.getUsedRange();
+
+            range.load('text');
+            worksheet.load('name');
+
+            return ctx.sync().then(function() {
+                //var insert_address = getCharFromNumber(header) + 1 + ":" + getCharFromNumber(header + max_array_length - 1) + range.text.length;
+                addContentNew(worksheet.name, insert_address, split_array);
+
+            });
+
+        }).catch(function(error) {
+            console.log("Error: " + error);
+            if (error instanceof OfficeExtension.Error) {
+                console.log("Debug info: " + JSON.stringify(error.debugInfo));
+            }
+        });
+
     }
 
 })();
