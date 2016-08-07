@@ -402,7 +402,13 @@ function fuzzyPro() {
                     }
 
                     var color = '#EA7F04';
-                    /*for (var row = 0; row < text.length; row++) {
+
+                    var start_col = firstCol.address.substring(firstCol.address.indexOf("!") + 1, firstCol.address.indexOf(":"));
+                    var end_col = lastCol.address.substring(lastCol.address.indexOf(":") + 1);
+
+                    addContentNew(worksheet.name, start_col + ":" + end_col, text);
+
+                    for (var row = 0; row < text.length; row++) {
                         for(var col = 0; col < range.text[0].length; col++) {
                             var columnchar = getCharFromNumber(col)
                             addContentToWorksheet(worksheet, columnchar + sheet_row, text[row][col])
@@ -412,13 +418,7 @@ function fuzzyPro() {
                             }
                         }
                         sheet_row += 1;
-                    }*/
-
-                    var start_col = firstCol.address.substring(firstCol.address.indexOf("!") + 1, firstCol.address.indexOf(":"));
-                    var end_col = lastCol.address.substring(lastCol.address.indexOf(":") + 1);
-
-                    console.log(end_col);
-                    addContentNew(worksheet.name, start_col + ":" + end_col, text);
+                    }
                 }
 
                 var txt = document.createElement("p");

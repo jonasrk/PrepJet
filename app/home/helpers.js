@@ -245,7 +245,6 @@ function addContentNew(sheetObject, rangeAddress, displayText) {
     range.values = displayText;
     range.load('text');
     return ctx.sync().then(function() {
-        console.log("test");
     });
 }).catch(function(error) {
         console.log("Error: " + error);
