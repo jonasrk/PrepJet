@@ -248,6 +248,7 @@
 
             //get used range in active Sheet
             range.load('text');
+            worksheet.load('name');
 
             return ctx.sync().then(function() {
 
@@ -259,6 +260,7 @@
                 var checked_checkboxes = getCheckedBoxes("column_checkbox");
 
                 for (var run = 0; run < checked_checkboxes.length; run++) {
+                    var trim_array = [];
                     for (var k = 0; k < range.text[0].length; k++) {
                         if (checked_checkboxes[run].id == range.text[0][k] || checked_checkboxes[run].id == "Column " + getCharFromNumber(k)){
                             header = k;
@@ -266,12 +268,16 @@
                         }
                     }
 
-                    for (var i = 1; i < range.text.length; i++) {
-                        var trim_string = range.text[i][header].trim();
-                        var column_char = getCharFromNumber(header);
-                        var sheet_row = i + 1;
-                        addContentToWorksheet(act_worksheet, column_char + sheet_row, trim_string);
+                    for (var i = 0; i < range.text.length; i++) {
+                        var trim_string = [];
+                        trim_string.push(range.text[i][header].trim());
+                        trim_array.push(trim_string);
                     }
+
+                    var column_char = getCharFromNumber(header);
+                    var insert_address = column_char + 1 + ":" + column_char + range.text.length;
+                    addContentNew(worksheet.name, insert_address, trim_array);
+
                 }
                 window.location = "trim_spaces.html";
             });
