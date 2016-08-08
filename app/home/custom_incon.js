@@ -37,7 +37,7 @@ function displayBetween(){
             $(".dropdown_table").Dropdown();
             $('#custom_incon').click(screenIncon);
             $('#buttonOk').click(highlightHeader);
-            $('#to_inconsistency').click(redirectRule);
+            //$('#to_inconsistency').click(redirectRule);
 
             //Show and hide error message if columns have same header name
             document.getElementById("buttonClose").onclick = function () {

@@ -24,7 +24,7 @@ function redirectRule() {
 
             $('#inconsistency').click(inconsistencies);
             $('#checkbox_all').click(checkCheckbox);
-            $('#to_validation').click(redirectRule);
+            //$('#to_validation').click(redirectRule);
             $('#buttonOk').click(highlightHeader);
 
             // Show and hide error message if columns have same header name
