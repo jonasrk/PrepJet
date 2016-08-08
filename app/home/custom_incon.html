@@ -89,33 +89,58 @@
     <div class="padding">
         <button class="ms-Button_grey" id="to_inconsistency">Back</button>
         <div>
-            <label class="ms-Label">Specify custom format rules your data must comply with.</label>
+            <label class="ms-Label">Specify the correct format of your data.</label>
         </div>
         <div id="large_drop" class="ms-Dropdown dropdown_table_col" tabindex="1">
                 <label class="ms-Label">Select column to be screened</label>
                 <i class="ms-Dropdown-caretDown ms-Icon ms-Icon--caretDown"></i>
                 <select id="column_options" class="ms-Dropdown-select"></select>
         </div>
-        <div id="charCountField" class="ms-TextField ms-TextField">
-            <label id="charCount" class="ms-Label">Type the count of characters your data must complay with</label>
-            <input id="charCountInput" class="ms-TextField-field" type="text">
+        <div id="explanation">
+            <label class="ms-Label">How many characters should each data entry consist of (optional)?</p>
         </div>
-        <table>
+        <table id="tablesmall">
             <tr>
-                <td>
-                    <div id="includeCharField" class="ms-TextField ms-TextField">
-                        <label id="includeCharLabel" class="ms-Label">Type a character each data entry must contain</label>
-                        <input id="includeChar" class="ms-TextField-field" type="text">
+                <td id="smalldrop_col">
+                    <div class="ms-Dropdown dropdown_table" tabindex="1">
+                            <i class="ms-Dropdown-caretDown ms-Icon ms-Icon--caretDown"></i>
+                            <select id="charOptions" class="ms-Dropdown-select" onchange="displayBetween()">
+                                <option value="equal">is equal to (=)</option>
+                                <option value="smaller">is smaller than(<)</option>
+                                <option value="greater">is greater than (>)</option>
+                                <option value="inequal">is unequal to (!=)</option>
+                                <option value="between">is between</option>
+                                <option value="notbetween"> is not between</option>
+                            </select>
                     </div>
                 </td>
+                <td id="colright">
+                    <div id="charCountField" class="ms-TextField ms-TextField">
+                        <!--label id="charCount" class="ms-Label">How many characters should each data entry consist of (optional)?</label-->
+                        <input id="charCountInput" class="ms-TextField-field" type="text">
+                    </div>
+                </td>
+            </tr>
+            <tr>
                 <td>
-                    <div id="notIncludeCharField" class="ms-TextField ms-TextField">
-                        <label id="notIncludeCharLabel" class="ms-Label">Type a character the data must NOT contain</label>
-                        <input id="notIncludeChar" class="ms-TextField-field" type="text">
+                    <div id="between" class="ms-TextField ms-TextField">
+                        <label id="betweenLabel" class="ms-Label">and</label>
+                        <input id="betweenInput" class="ms-TextField-field" type="text">
                     </div>
                 </td>
             </tr>
         </table>
+
+        <div id="includeCharField" class="ms-TextField ms-TextField">
+            <label id="includeCharLabel" class="ms-Label">Type a character each data entry must contain (optional)</label>
+            <input id="includeChar" class="ms-TextField-field" type="text">
+        </div>
+
+        <div id="notIncludeCharField" class="ms-TextField ms-TextField">
+            <label id="notIncludeCharLabel" class="ms-Label">Type a character the data must NOT contain (optional)</label>
+            <input id="notIncludeChar" class="ms-TextField-field" type="text">
+        </div>
+
         <!--container for checkboxes-->
         <div id="checkboxes_columns" class="ms-ChoiceField">
         </div>

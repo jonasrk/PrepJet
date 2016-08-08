@@ -4,6 +4,16 @@ function redirectRule() {
 }
 
 
+function displayBetween(){
+    if(document.getElementById('charOptions').value == "between" || document.getElementById('charOptions').value == "notbetween") {
+        $('#between').show();
+    }
+    else {
+        $('#between').hide();
+    }
+}
+
+
 (function () {
     // 'use strict';
 
@@ -23,6 +33,8 @@ function redirectRule() {
             fillColumn();
 
             $('#helpCallout').hide();
+            $('#between').hide();
+            $(".dropdown_table").Dropdown();
             $('#custom_incon').click(screenIncon);
             $('#buttonOk').click(highlightHeader);
             $('#to_inconsistency').click(redirectRule);
@@ -223,6 +235,7 @@ function redirectRule() {
                 var charCount = Number(document.getElementById('charCountInput').value);
                 var charIncluded = document.getElementById('includeChar').value;
                 var charNotIncluded = document.getElementById('notIncludeChar').value;
+                var charOperator = document.getElementById('charOptions').value;
 
                 //var header = 0;
 
@@ -236,10 +249,51 @@ function redirectRule() {
                 if (charCount != 0) {
                     for (var k = 1; k < range.text.length; k++) {
                         var string_length = range.text[k][header].length;
-                        if (string_length != charCount) {
+                        checkCharCount(string_length, range.text[k][header]);
+                        /*if (string_length != charCount) {
                             highlightContentInWorksheet(worksheet, getCharFromNumber(header) + (k + 1),'#EA7F04');
+                        }*/
+                    }
+                }
+
+                function checkCharCount(str_length, input_str) {
+                    var check_cond = 0;
+                    if (charOperator == "equal") {
+                        if (str_length != charCount) {
+                            check_cond = 1;
                         }
                     }
+                    if (charOperator == "smaller") {
+                        if (str_length >= charCount) {
+                            check_cond = 1;
+                        }
+                    }
+                    if (charOperator == "greater") {
+                        if (str_length <= charCount) {
+                            check_cond = 1;
+                        }
+                    }
+                    if (charOperator == "inequal") {
+                        if (str_length == charCount) {
+                            check_cond = 1;
+                        }
+                    }
+                    if (charOperator == "between") {
+                        var upperRange = Number(document.getElementById('between').value);
+                        if (str_length < charCount || str_length > upperRange) {
+                            check_cond = 1;
+                        }
+                    }
+                    if (charOperator == "notbetween") {
+                        var upperRange = Number(document.getElementById('between').value);
+                        if (str_length >= charCount && str_length <= upperRange) {
+                            check_cond = 1;
+                        }
+                    }
+                    if (check_cond == 1) {
+                        highlightContentInWorksheet(worksheet, getCharFromNumber(header) + (k + 1),'#EA7F04');
+                    }
+
                 }
 
                 if (charIncluded != "") {
@@ -250,7 +304,7 @@ function redirectRule() {
                         }
                     }
                 }
-                
+
 
                 if (charNotIncluded != "") {
                     for (var k = 1; k < range.text.length; k++) {
