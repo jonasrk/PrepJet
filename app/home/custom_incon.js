@@ -219,12 +219,48 @@ function redirectRule() {
 
                 backupForUndo(range);
 
+                var selected_identifier = document.getElementById('column_options').value;
                 var charCount = Number(document.getElementById('charCountInput').value);
                 var charIncluded = document.getElementById('includeChar').value;
                 var charNotIncluded = document.getElementById('notIncludeChar').value;
 
                 //var header = 0;
-                var act_worksheet = ctx.workbook.worksheets.getActiveWorksheet();
+
+                var header = 0;
+                for (var k = 0; k < range.text[0].length; k++){
+                    if (selected_identifier == range.text[0][k] || selected_identifier == "Column " + getCharFromNumber(k)){
+                        header = k;
+                    }
+                }
+
+                if (charCount != 0) {
+                    for (var k = 1; k < range.text.length; k++) {
+                        var string_length = range.text[k][header].length;
+                        if (string_length != charCount) {
+                            highlightContentInWorksheet(worksheet, getCharFromNumber(header) + (k + 1),'#EA7F04');
+                        }
+                    }
+                }
+
+                if (charIncluded != "") {
+                    for (var k = 1; k < range.text.length; k++) {
+                        var include_check = range.text[k][header].indexOf(charIncluded);
+                        if (include_check < 0) {
+                            highlightContentInWorksheet(worksheet, getCharFromNumber(header) + (k + 1), '#EA7F04');
+                        }
+                    }
+                }
+                
+
+                if (charNotIncluded != "") {
+                    for (var k = 1; k < range.text.length; k++) {
+                        var notInclude_check = range.text[k][header].indexOf(charNotIncluded);
+                        if (notInclude_check >= 0) {
+                            highlightContentInWorksheet(worksheet, getCharFromNumber(header) + (k + 1), '#EA7F04');
+                        }
+                    }
+                }
+
                 console.log(charCount);
                 console.log(charIncluded);
                 console.log(charNotIncluded);
