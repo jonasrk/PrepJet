@@ -250,9 +250,6 @@ function displayBetween(){
                     for (var k = 1; k < range.text.length; k++) {
                         var string_length = range.text[k][header].length;
                         checkCharCount(string_length, range.text[k][header]);
-                        /*if (string_length != charCount) {
-                            highlightContentInWorksheet(worksheet, getCharFromNumber(header) + (k + 1),'#EA7F04');
-                        }*/
                     }
                 }
 
@@ -279,13 +276,13 @@ function displayBetween(){
                         }
                     }
                     if (charOperator == "between") {
-                        var upperRange = Number(document.getElementById('between').value);
+                        var upperRange = Number(document.getElementById('betweenInput').value);
                         if (str_length < charCount || str_length > upperRange) {
                             check_cond = 1;
                         }
                     }
                     if (charOperator == "notbetween") {
-                        var upperRange = Number(document.getElementById('between').value);
+                        var upperRange = Number(document.getElementById('betweenInput').value);
                         if (str_length >= charCount && str_length <= upperRange) {
                             check_cond = 1;
                         }
