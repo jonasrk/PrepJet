@@ -397,6 +397,7 @@ function hideAdvancedCount() {
                 var act_worksheet = ctx.workbook.worksheets.getActiveWorksheet();
                 var extract_count = 0;
                 var empty_count = 0;
+                var extracted_array = [];
 
                 //loop through whole column to extract value from
                 for (var i = 0; i < range.text.length; i++) {
@@ -526,7 +527,6 @@ function hideAdvancedCount() {
                     }
 
                     //get position where to insert extracted value
-                    var sheet_row = i + 1;
                     var column_char = getCharFromNumber(header + 1);
 
                     //get value to extract
@@ -539,12 +539,19 @@ function hideAdvancedCount() {
                         empty_count += 1;
                     }
 
-                    var rangeaddress = column_char + sheet_row;
-                    var range_insert = ctx.workbook.worksheets.getActiveWorksheet().getRange(rangeaddress);
-                    range_insert.insert("Right");
-                    addContentToWorksheet(act_worksheet, column_char + sheet_row, extractedValue);
+                    var extract_tmp = [];
+                    extract_tmp.push(extractedValue);
+                    extracted_array.push(extract_tmp);
 
                 }
+
+                var column_char = getCharFromNumber(header + 1);
+                var rangeaddress = column_char + ":" + column_char;
+                var range_insert = ctx.workbook.worksheets.getActiveWorksheet().getRange(rangeaddress);
+                range_insert.insert("Right");
+
+                var insert_address = column_char + 1 + ":" + column_char + range.text.length;
+                addExtractedValue(extracted_array, insert_address);
 
                 var txt = document.createElement("p");
                 txt.className = "ms-font-xs ms-embedded-dialog__content__text";
@@ -563,6 +570,31 @@ function hideAdvancedCount() {
                 console.log("Debug info: " + JSON.stringify(error.debugInfo));
             }
         });
+    }
+
+
+    function addExtractedValue(split_array, insert_address){
+
+        Excel.run(function (ctx) {
+
+            var worksheet = ctx.workbook.worksheets.getActiveWorksheet();
+            var range_all = worksheet.getRange();
+            var range = range_all.getUsedRange();
+
+            range.load('text');
+            worksheet.load('name');
+
+            return ctx.sync().then(function() {
+                addContentNew(worksheet.name, insert_address, split_array);
+            });
+
+        }).catch(function(error) {
+            console.log("Error: " + error);
+            if (error instanceof OfficeExtension.Error) {
+                console.log("Debug info: " + JSON.stringify(error.debugInfo));
+            }
+        });
+
     }
 
 

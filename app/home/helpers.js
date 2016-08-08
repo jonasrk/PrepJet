@@ -239,25 +239,6 @@ function getCharFromNumber (number) {
 }
 
 
-function testInsert () {
-Excel.run(function (ctx) {
-    var sheetName = "Tabelle2";
-    var rangeAddress = "F5:F7";
-    var values = [["Today"], ["Tomorrow"], ["Difference in days"]];
-    var range = ctx.workbook.worksheets.getItem(sheetName).getRange(rangeAddress);
-    range.values = values;
-    range.load('text');
-    return ctx.sync().then(function() {
-    });
-}).catch(function(error) {
-        console.log("Error: " + error);
-        if (error instanceof OfficeExtension.Error) {
-            console.log("Debug info: " + JSON.stringify(error.debugInfo));
-        }
-});
-}
-
-
 function addContentNew(sheetObject, rangeAddress, displayText) {
     Excel.run(function (ctx) {
     var range = ctx.workbook.worksheets.getItem(sheetObject).getRange(rangeAddress);
