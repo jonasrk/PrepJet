@@ -1,6 +1,6 @@
 function redirectRule() {
     Office.context.document.settings.set('from_inconsistencies', true);
-    window.location = "validation.html";
+    window.location = "custom_incon.html";
 }
 
 (function () {
