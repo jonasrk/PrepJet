@@ -239,6 +239,22 @@ function getCharFromNumber (number) {
 }
 
 
+function addContentNew(sheetObject, rangeAddress, displayText) {
+    Excel.run(function (ctx) {
+    var range = ctx.workbook.worksheets.getItem(sheetObject).getRange(rangeAddress);
+    range.values = displayText;
+    range.load('text');
+    return ctx.sync().then(function() {
+    });
+}).catch(function(error) {
+        console.log("Error: " + error);
+        if (error instanceof OfficeExtension.Error) {
+            console.log("Debug info: " + JSON.stringify(error.debugInfo));
+        }
+});
+}
+
+
 // Helper function to add and format content in the workbook
 function addContentToWorksheet(sheetObject, rangeAddress, displayText) {
     var range = sheetObject.getRange(rangeAddress);

@@ -79,7 +79,7 @@ function hideAdvancedCount() {
             $('#buttonOk').click(highlightHeader);
 
 
-            Office.context.document.addHandlerAsync("documentSelectionChanged", myHandler, function(result){}
+            /*Office.context.document.addHandlerAsync("documentSelectionChanged", myHandler, function(result){}
             );
 
             // Event handler function.
@@ -96,7 +96,7 @@ function hideAdvancedCount() {
             // Function that writes to a div with id='message' on the page.
             function write(message){
                 document.getElementById('target_column_input').value = message;
-            }
+            }*/
 
 
             //Show and hide error message if columns have same header name
@@ -114,8 +114,22 @@ function hideAdvancedCount() {
                 document.getElementById('helpCallout').style.visibility = 'hidden';
             }
 
+            document.getElementById("refresh_icon").onclick = function () {
+                window.location = "extract_values.html";
+            }
 
-            Excel.run(function (ctx) {
+            //hide result message
+            document.getElementById("resultClose").onclick = function () {
+                document.getElementById('resultDialog').style.visibility = 'hidden';
+                window.location = "extract_values.html";
+            }
+            document.getElementById("resultOk").onclick = function () {
+                document.getElementById('resultDialog').style.visibility = 'hidden';
+                window.location = "extract_values.html";
+            }
+
+
+            /*Excel.run(function (ctx) {
 
                 var myBindings = Office.context.document.bindings;
                 var worksheetname = ctx.workbook.worksheets.getActiveWorksheet();
@@ -191,7 +205,7 @@ function hideAdvancedCount() {
                     console.log("Debug info: " + JSON.stringify(error.debugInfo));
                 }
             });
-
+*/
         });
     };
 
@@ -282,6 +296,7 @@ function hideAdvancedCount() {
 
 
     function extractValue() {
+
         Excel.run(function (ctx) {
 
             var worksheet = ctx.workbook.worksheets.getActiveWorksheet();
@@ -380,6 +395,9 @@ function hideAdvancedCount() {
 
                 //insert empty cell into header column
                 var act_worksheet = ctx.workbook.worksheets.getActiveWorksheet();
+                var extract_count = 0;
+                var empty_count = 0;
+                var extracted_array = [];
 
                 //loop through whole column to extract value from
                 for (var i = 0; i < range.text.length; i++) {
@@ -427,7 +445,6 @@ function hideAdvancedCount() {
                             }
                         }
                     }
-                    console.log(count_delimiter_end);
 
                     //get index where to end extracting value
                     if (split_end == "col_end") {
@@ -510,25 +527,40 @@ function hideAdvancedCount() {
                     }
 
                     //get position where to insert extracted value
-                    var sheet_row = i + 1;
                     var column_char = getCharFromNumber(header + 1);
 
                     //get value to extract
                     if (position2 > position1) {
                         var extractedValue = range.text[i][header].substring(position1, position2);
+                        extract_count += 1;
                     }
                     else {
                         var extractedValue = "";
+                        empty_count += 1;
                     }
 
-                    var rangeaddress = column_char + sheet_row;
-                    var range_insert = ctx.workbook.worksheets.getActiveWorksheet().getRange(rangeaddress);
-                    range_insert.insert("Right");
-                    addContentToWorksheet(act_worksheet, column_char + sheet_row, extractedValue);
+                    var extract_tmp = [];
+                    extract_tmp.push(extractedValue);
+                    extracted_array.push(extract_tmp);
 
                 }
 
-                window.location = "extract_values.html";
+                var column_char = getCharFromNumber(header + 1);
+                var rangeaddress = column_char + ":" + column_char;
+                var range_insert = ctx.workbook.worksheets.getActiveWorksheet().getRange(rangeaddress);
+                range_insert.insert("Right");
+
+                var insert_address = column_char + 1 + ":" + column_char + range.text.length;
+                addExtractedValue(extracted_array, insert_address);
+
+                var txt = document.createElement("p");
+                txt.className = "ms-font-xs ms-embedded-dialog__content__text";
+                txt.innerHTML = "PrepJet extracted " + extract_count + " values. " + empty_count + " data entries did not match."
+                document.getElementById('resultText').appendChild(txt);
+
+                document.getElementById('resultDialog').style.visibility = 'visible';
+
+                //window.location = "extract_values.html";
             });
 
 
@@ -538,6 +570,31 @@ function hideAdvancedCount() {
                 console.log("Debug info: " + JSON.stringify(error.debugInfo));
             }
         });
+    }
+
+
+    function addExtractedValue(split_array, insert_address){
+
+        Excel.run(function (ctx) {
+
+            var worksheet = ctx.workbook.worksheets.getActiveWorksheet();
+            var range_all = worksheet.getRange();
+            var range = range_all.getUsedRange();
+
+            range.load('text');
+            worksheet.load('name');
+
+            return ctx.sync().then(function() {
+                addContentNew(worksheet.name, insert_address, split_array);
+            });
+
+        }).catch(function(error) {
+            console.log("Error: " + error);
+            if (error instanceof OfficeExtension.Error) {
+                console.log("Debug info: " + JSON.stringify(error.debugInfo));
+            }
+        });
+
     }
 
 

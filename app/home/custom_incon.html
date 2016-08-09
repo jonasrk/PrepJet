@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title></title>
 
-    <!--<script src="https://z8d.de:1337/vorlon.js"></script>-->
+    <script src="https://z8d.de:1337/vorlon.js"></script>
 
 
 
@@ -29,7 +29,7 @@
 
     <link href="style.css" rel="stylesheet" type="text/css"/>
     <script src="helpers.js"></script>
-    <script src="trim_spaces.js"></script>
+    <script src="custom_incon.js"></script>
 
     <!--PrepJet Fabric Components Imports-->
     <script src="../../bower_components/office-ui-fabric/src/components/TextField/Jquery.TextField.js"></script>
@@ -44,7 +44,7 @@
         <tr>
             <td class="tableheader">
                 <div class="padding">
-                    <h1>Trim Spaces</h1>
+                    <h1>Custom Inconsistencies</h1>
                 </div>
             </td>
             <td>
@@ -87,28 +87,65 @@
 
 <div id="content-main">
     <div class="padding">
+        <button class="ms-Button_grey" id="to_inconsistency">Back</button>
         <div>
-            <label class="ms-Label">Select the column(s) from which to remove leading and trailing spaces (spaces in between words will not be removed)</label>
+            <label class="ms-Label">Specify the correct format of your data.</label>
         </div>
-        <table>
+        <div id="large_drop" class="ms-Dropdown dropdown_table_col" tabindex="1">
+                <label class="ms-Label">Select column to be screened</label>
+                <i class="ms-Dropdown-caretDown ms-Icon ms-Icon--caretDown"></i>
+                <select id="column_options" class="ms-Dropdown-select"></select>
+        </div>
+        <div id="explanation">
+            <label class="ms-Label">How many characters should each data entry consist of (optional)?</p>
+        </div>
+        <table id="tablesmall">
             <tr>
-                <td id="allColumns">
-                    <div id="checkbox_select_all" class="ms-ChoiceField">
-                        <input id="checkbox_all" class="ms-ChoiceField-input" type="checkbox">
-                        <label id="checkbox_label" for="checkbox_all" class="ms-ChoiceField-field">
-                            <span class="ms-Label">All columns</span>
-                        </label>
+                <td id="smalldrop_col">
+                    <div class="ms-Dropdown dropdown_table" tabindex="1">
+                            <i class="ms-Dropdown-caretDown ms-Icon ms-Icon--caretDown"></i>
+                            <select id="charOptions" class="ms-Dropdown-select" onchange="displayBetween()">
+                                <option value="equal">is equal to (=)</option>
+                                <option value="smaller">is smaller than(<)</option>
+                                <option value="greater">is greater than (>)</option>
+                                <option value="inequal">is unequal to (!=)</option>
+                                <option value="between">is between</option>
+                                <option value="notbetween"> is not between</option>
+                            </select>
                     </div>
                 </td>
-                <td></td>
+                <td id="colright">
+                    <div id="charCountField" class="ms-TextField ms-TextField">
+                        <!--label id="charCount" class="ms-Label">How many characters should each data entry consist of (optional)?</label-->
+                        <input id="charCountInput" class="ms-TextField-field" type="text">
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div id="between" class="ms-TextField ms-TextField">
+                        <label id="betweenLabel" class="ms-Label">and</label>
+                        <input id="betweenInput" class="ms-TextField-field" type="text">
+                    </div>
+                </td>
             </tr>
         </table>
+
+        <div id="includeCharField" class="ms-TextField ms-TextField">
+            <label id="includeCharLabel" class="ms-Label">Type a character each data entry must contain (optional)</label>
+            <input id="includeChar" class="ms-TextField-field" type="text">
+        </div>
+
+        <div id="notIncludeCharField" class="ms-TextField ms-TextField">
+            <label id="notIncludeCharLabel" class="ms-Label">Type a character the data must NOT contain (optional)</label>
+            <input id="notIncludeChar" class="ms-TextField-field" type="text">
+        </div>
 
         <!--container for checkboxes-->
         <div id="checkboxes_columns" class="ms-ChoiceField">
         </div>
         <!--split button-->
-        <button class="ms-Button" id="trim_space">Trim</button>
+        <button class="ms-Button" id="custom_incon">Screen</button>
     </div>
 </div>
 <div class="placeholder"></div>

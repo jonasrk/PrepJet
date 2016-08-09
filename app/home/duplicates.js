@@ -49,8 +49,22 @@ function fuzzyPro() {
                 document.getElementById('helpCallout').style.visibility = 'hidden';
             }
 
+            document.getElementById("refresh_icon").onclick = function () {
+                window.location = "duplicates.html";
+            }
 
-            Excel.run(function (ctx) {
+            //hide result message
+            document.getElementById("resultClose").onclick = function () {
+                document.getElementById('resultDialog').style.visibility = 'hidden';
+                window.location = "duplicates.html";
+            }
+            document.getElementById("resultOk").onclick = function () {
+                document.getElementById('resultDialog').style.visibility = 'hidden';
+                window.location = "duplicates.html";
+            }
+
+
+            /*Excel.run(function (ctx) {
 
                 var myBindings = Office.context.document.bindings;
                 var worksheetname = ctx.workbook.worksheets.getActiveWorksheet();
@@ -126,7 +140,7 @@ function fuzzyPro() {
                 if (error instanceof OfficeExtension.Error) {
                     console.log("Debug info: " + JSON.stringify(error.debugInfo));
                 }
-            });
+            });*/
 
         });
     };
@@ -260,9 +274,15 @@ function fuzzyPro() {
             var worksheet = ctx.workbook.worksheets.getActiveWorksheet();
             var range_all = worksheet.getRange();
             var range = range_all.getUsedRange();
+            var firstCol = range.getRow(1);
+            var lastCol = range.getLastColumn();
 
             range.load('address');
             range.load('text');
+            worksheet.load('name');
+            firstCol.load('address');
+            lastCol.load('address');
+
             return ctx.sync().then(function() {
 
                 var columns_to_check = [];
@@ -320,6 +340,34 @@ function fuzzyPro() {
                         });
                     });
 
+                    var color = '#EA7F04';
+
+                    var start_col = firstCol.address.substring(firstCol.address.indexOf("!") + 1, firstCol.address.indexOf(":"));
+                    var end_col = lastCol.address.substring(lastCol.address.indexOf(":") + 1);
+
+                    addContentNew(worksheet.name, start_col + ":" + end_col, text);
+
+                    for (var row = 0; row < text.length; row++) {
+                        for(var col = 0; col < range.text[0].length; col++) {
+                            var columnchar = getCharFromNumber(col)
+                            addContentToWorksheet(worksheet, columnchar + sheet_row, text[row][col])
+                            if (sheet_row < (row_numbers.length + 2)) {
+                                if (row > 0 && color_check[row] == color_check[row - 1])
+                                highlightContentInWorksheet(worksheet, columnchar + sheet_row ,color)
+                            }
+                        }
+                        sheet_row += 1;
+                    }
+                }
+
+                var txt = document.createElement("p");
+                txt.className = "ms-font-xs ms-embedded-dialog__content__text";
+                txt.innerHTML = "PrepJet found " + duplicates.length + " duplicate rows."
+                document.getElementById('resultText').appendChild(txt);
+
+                document.getElementById('resultDialog').style.visibility = 'visible';
+
+                //window.location = "duplicates.html";
 
             });
 
