@@ -8,6 +8,7 @@
             Office.context.document.settings.set('same_header_trim', false);
             Office.context.document.settings.set('last_clicked_function', "trim_spaces.html");
             if (Office.context.document.settings.get('prepjet_loaded_before') == null) {
+                Office.context.document.settings.set('trim_sheet_count', 2);
                 Office.context.document.settings.set('prepjet_loaded_before', true);
                 Office.context.document.settings.saveAsync();
                 window.location = "intro.html";
@@ -253,6 +254,13 @@
             return ctx.sync().then(function() {
 
                 backupForUndo(range);
+                if (document.getElementById('createBackup').checked == true) {
+                    var newName = worksheet.name + "(" + trim_sheet_count + ")";
+                    addBackupSheet(newName);
+                    var trim_sheet_count = Office.context.document.settings.get('trim_sheet_count') + 1;
+                    Office.context.document.settings.set('trim_sheet_count', trim_sheet_count);
+                }
+
 
                 var header = 0;
                 var act_worksheet = ctx.workbook.worksheets.getActiveWorksheet();

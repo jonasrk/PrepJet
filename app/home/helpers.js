@@ -239,6 +239,47 @@ function getCharFromNumber (number) {
 }
 
 
+function addBackupSheet(sheetName) {
+    Excel.run(function (ctx) {
+        var wSheetName = sheetName;
+        var worksheet = ctx.workbook.worksheets.add(wSheetName);
+        worksheet.load('name');
+        return ctx.sync().then(function() {
+            console.log(worksheet.name);
+            addBackupContent(worksheet.name);
+        });
+    }).catch(function(error) {
+            console.log("Error: " + error);
+            if (error instanceof OfficeExtension.Error) {
+                console.log("Debug info: " + JSON.stringify(error.debugInfo));
+            }
+    });
+}
+
+function addBackupContent(sheetName) {
+    console.log("second");
+    Excel.run(function (ctx) {
+        console.log("test");
+        var values = Office.context.document.settings.get('sheet_backup');
+        var end_address = getCharFromNumber(values[0].length - 1) + (values.length).toString();
+        var rangeAddress = "A1:" + end_address;
+        var worksheet = ctx.workbook.worksheets.getItem(sheetName);
+        var range = worksheet.getRange(rangeAddress);
+
+        range.values = values;
+        range.load('text');
+
+        return ctx.sync().then(function() {
+            // console.log(range.text);
+        });
+    }).catch(function(error) {
+        console.log("Error: " + error);
+        if (error instanceof OfficeExtension.Error) {
+            console.log("Debug info: " + JSON.stringify(error.debugInfo));
+        }
+    });
+}
+
 function addContentNew(sheetObject, rangeAddress, displayText) {
     Excel.run(function (ctx) {
     var range = ctx.workbook.worksheets.getItem(sheetObject).getRange(rangeAddress);
