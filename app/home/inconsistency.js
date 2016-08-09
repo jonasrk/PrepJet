@@ -1,8 +1,3 @@
-function redirectRule() {
-    Office.context.document.settings.set('from_inconsistencies', true);
-    window.location = "custom_incon.html";
-}
-
 (function () {
     // 'use strict';
 
@@ -24,7 +19,6 @@ function redirectRule() {
 
             $('#inconsistency').click(inconsistencies);
             $('#checkbox_all').click(checkCheckbox);
-            $('#to_validation').click(redirectRule);
             $('#buttonOk').click(highlightHeader);
 
             // Show and hide error message if columns have same header name

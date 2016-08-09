@@ -1,9 +1,3 @@
-function redirectRule() {
-    Office.context.document.settings.set('from_inconsistencies', false);
-    window.location = "inconsistency.html";
-}
-
-
 function displayBetween(){
     if(document.getElementById('charOptions').value == "between" || document.getElementById('charOptions').value == "notbetween") {
         $('#between').show();
@@ -37,7 +31,6 @@ function displayBetween(){
             $(".dropdown_table").Dropdown();
             $('#custom_incon').click(screenIncon);
             $('#buttonOk').click(highlightHeader);
-            $('#to_inconsistency').click(redirectRule);
 
             //Show and hide error message if columns have same header name
             document.getElementById("buttonClose").onclick = function () {
