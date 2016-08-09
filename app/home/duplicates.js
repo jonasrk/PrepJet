@@ -66,81 +66,81 @@ function fuzzyPro() {
 
             /*Excel.run(function (ctx) {
 
-                var myBindings = Office.context.document.bindings;
-                var worksheetname = ctx.workbook.worksheets.getActiveWorksheet();
+             var myBindings = Office.context.document.bindings;
+             var worksheetname = ctx.workbook.worksheets.getActiveWorksheet();
 
-                worksheetname.load('name')
+             worksheetname.load('name')
 
-                return ctx.sync().then(function() {
+             return ctx.sync().then(function() {
 
-                    Office.context.document.addHandlerAsync("documentSelectionChanged", myViewHandler, function(result){}
-                    );
+             Office.context.document.addHandlerAsync("documentSelectionChanged", myViewHandler, function(result){}
+             );
 
-                    // Event handler function for changing the worksheet.
-                    function myViewHandler(eventArgs){
-                        Excel.run(function (ctx) {
-                            var selectedSheet = ctx.workbook.worksheets.getActiveWorksheet();
-                            selectedSheet.load('name');
-                            return ctx.sync().then(function () {
-                                if (selectedSheet.name != worksheetname.name) {
-                                    window.location = "duplicates.html"
-                                }
-                            });
-                        });
-                    }
+             // Event handler function for changing the worksheet.
+             function myViewHandler(eventArgs){
+             Excel.run(function (ctx) {
+             var selectedSheet = ctx.workbook.worksheets.getActiveWorksheet();
+             selectedSheet.load('name');
+             return ctx.sync().then(function () {
+             if (selectedSheet.name != worksheetname.name) {
+             window.location = "duplicates.html"
+             }
+             });
+             });
+             }
 
 
-                    function bindFromPrompt() {
+             function bindFromPrompt() {
 
-                        var myBindings = Office.context.document.bindings;
-                        var name_worksheet = worksheetname.name;
-                        var myAddress = name_worksheet.concat("!1:1");
+             var myBindings = Office.context.document.bindings;
+             var name_worksheet = worksheetname.name;
+             var myAddress = name_worksheet.concat("!1:1");
 
-                        myBindings.addFromNamedItemAsync(myAddress, "matrix", {id:'myBinding'}, function (asyncResult) {
-                            if (asyncResult.status == Office.AsyncResultStatus.Failed) {
-                                write('Action failed. Error: ' + asyncResult.error.message);
-                            } else {
-                                write('Added new binding with type: ' + asyncResult.value.type + ' and id: ' + asyncResult.value.id);
+             myBindings.addFromNamedItemAsync(myAddress, "matrix", {id:'myBinding'}, function (asyncResult) {
+             if (asyncResult.status == Office.AsyncResultStatus.Failed) {
+             write('Action failed. Error: ' + asyncResult.error.message);
+             } else {
+             write('Added new binding with type: ' + asyncResult.value.type + ' and id: ' + asyncResult.value.id);
 
-                                function addHandler() {
-                                    Office.select("bindings#myBinding").addHandlerAsync(
-                                        Office.EventType.BindingDataChanged, dataChanged);
-                                }
+             function addHandler() {
+             Office.select("bindings#myBinding").addHandlerAsync(
+             Office.EventType.BindingDataChanged, dataChanged);
+             }
 
-                                addHandler();
-                                displayAllBindings();
+             addHandler();
+             displayAllBindings();
 
-                            }
-                        });
-                    }
+             }
+             });
+             }
 
-                    bindFromPrompt();
+             bindFromPrompt();
 
-                    function displayAllBindings() {
-                        Office.context.document.bindings.getAllAsync(function (asyncResult) {
-                            var bindingString = '';
-                            for (var i in asyncResult.value) {
-                                bindingString += asyncResult.value[i].id + '\n';
-                            }
-                        });
-                    }
+             function displayAllBindings() {
+             Office.context.document.bindings.getAllAsync(function (asyncResult) {
+             var bindingString = '';
+             for (var i in asyncResult.value) {
+             bindingString += asyncResult.value[i].id + '\n';
+             }
+             });
+             }
 
-                    function dataChanged(eventArgs) {
-                        window.location = "duplicates.html";
-                    }
+             function dataChanged(eventArgs) {
+             window.location = "duplicates.html";
+             }
 
-                    // Function that writes to a div with id='message' on the page.
-                    function write(message){
-                        console.log(message);
-                    }
+             // Function that writes to a div with id='message' on the page.
+             function write(message){
+             console.log(message);
+             }
 
-                });
-            }).catch(function(error) {
-                console.log("Error: " + error);
-                if (error instanceof OfficeExtension.Error) {
-                    console.log("Debug info: " + JSON.stringify(error.debugInfo));
-                }
-            });*/
+             });
+             }).catch(function(error) {
+             console.log("Error: " + error);
+             if (error instanceof OfficeExtension.Error) {
+             console.log("Debug info: " + JSON.stringify(error.debugInfo));
+             }
+             });*/
 
         });
     };
@@ -306,39 +306,100 @@ function fuzzyPro() {
                     strings_to_sort.push(this_row);
                 }
 
+                function Comparator(a, b) {
+                    for (var i = 0; i < checked_checkboxes.length; i++){
+                        if (a[i][0] < b[i][0]) return -1;
+                        if (a[i][0] > b[i][0]) return 1;
+                    }
+                    return 0;
+                }
 
-                // call to API
+                strings_to_sort.sort(Comparator);
+                var duplicates = [];
 
-                $.post( "https://localhost:8100/", { data: strings_to_sort })
-                    .done(function( data ) {
-                        // highlight dupes
-                        console.log("Data: " + data + "\nStatus: " + status);
+                function arraysEqual(a, b) {
+                    if (a === b) return true;
+                    if (a == null || b == null) return false;
+                    if (a.length != b.length) return false;
 
-                        Excel.run(function (ctx) {
+                    // If you don't care about the order of the elements inside
+                    // the array, you should sort both arrays here.
 
-                            var dupe_worksheet = ctx.workbook.worksheets.getActiveWorksheet();
-                            var dupe_range_all = dupe_worksheet.getRange();
-                            var dupe_range = dupe_range_all.getUsedRange();
+                    for (var i = 0; i < a.length; ++i) {
+                        if (a[i][0] !== b[i][0]) return false;
+                    }
+                    return true;
+                }
 
-                            dupe_range.load('address');
-                            dupe_range.load('text');
-                            return ctx.sync().then(function() {
-                                var color = "#EA7F04";
-                                for (var m = 0; m < data.length; m++){
-                                    if (m > 0 && m % 2 == 0){
-                                        // generate new random color
-                                        color = getRandomColor();
-                                    }
+                var dup_count = 1;
+                var dup_index = 1;
+                for (var o = 1; o < strings_to_sort.length; o++){
+                    if (arraysEqual(strings_to_sort[o], strings_to_sort[o - 1])){
+                        if (dup_count == 1) {
+                            duplicates.push([strings_to_sort[o], dup_index]);
+                            duplicates.push([strings_to_sort[o - 1], dup_index]);
+                            dup_count += 1;
+                        }
+                        else {
+                            duplicates.push([strings_to_sort[o], dup_index]);
+                        }
+                    }
+                    else {
+                        dup_count = 1;
+                        dup_index += 1;
+                    }
+                }
 
+                function colorDup(duplicates_input, int) {
+                    var color = "#EA7F04";
+                    for (var m = 0; m < duplicates_input.length; m++){
+                        if (m > 0 && duplicates_input[m][1] != duplicates_input[m-1][1]){
+                            // generate new random color
+                            color = getRandomColor();
+                        }
 
-                                    highlightCellInWorksheet(dupe_worksheet, data[m][0], color);
-                                    highlightCellInWorksheet(dupe_worksheet, data[m][1], color);
-                                }
-                            });
+                        for (var n = 0; n < duplicates_input[m].length; n++){
+                            for (var o = 0; o < duplicates_input[m][n].length; o++) {
+                                highlightContentInWorksheet(worksheet, duplicates_input[m][n][o][int], color);
+                            }
 
-                            // window.location = "duplicates.html";
-                        });
-                    });
+                        }
+                    }
+                }
+
+                if(document.getElementById('duplicatesort').checked == false) {
+                    colorDup(duplicates, 1);
+                }
+                else {
+
+                    var dup_length = duplicates.length;
+                    var sheet_row = 2;
+
+                    var row_numbers = [];
+                    for (var run = 0; run < duplicates.length; run++) {
+                        row_numbers.push(duplicates[run][0][0][2]);
+                    }
+
+                    var text = [];
+                    var color_check = []
+                    var data_index = 0;
+                    for (var run = 0; run < row_numbers.length; run++) {
+                        data_index = row_numbers[run] - 1;
+                        text.push(range.text[data_index]);
+                        color_check.push(duplicates[run][1]);
+                    }
+
+                    for (var run = 1; run < range.text.length; run ++) {
+                        var check = 0;
+                        for (var k = 0; k < row_numbers.length; k++) {
+                            if((run + 1) == row_numbers[k]) {
+                                check = 1;
+                            }
+                        }
+                        if (check == 0) {
+                            text.push(range.text[run]);
+                        }
+                    }
 
                     var color = '#EA7F04';
 
@@ -353,7 +414,7 @@ function fuzzyPro() {
                             addContentToWorksheet(worksheet, columnchar + sheet_row, text[row][col])
                             if (sheet_row < (row_numbers.length + 2)) {
                                 if (row > 0 && color_check[row] == color_check[row - 1])
-                                highlightContentInWorksheet(worksheet, columnchar + sheet_row ,color)
+                                    highlightContentInWorksheet(worksheet, columnchar + sheet_row ,color)
                             }
                         }
                         sheet_row += 1;
