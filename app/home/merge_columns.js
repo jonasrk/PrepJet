@@ -650,14 +650,14 @@ function backToOne() {
                 }
 
 
-                empty_count = range_adding_to.text.length - lookup_count - 1;
+                /*empty_count = range_adding_to.text.length - lookup_count - 1;
 
                 var txt = document.createElement("p");
                 txt.className = "ms-font-xs ms-embedded-dialog__content__text";
                 txt.innerHTML = "PrepJet found " + lookup_count + " matching data records. " + empty_count + " rows did not meet the specified match criteria."
                 document.getElementById('resultText').appendChild(txt);
 
-                document.getElementById('resultDialog').style.visibility = 'visible';
+                document.getElementById('resultDialog').style.visibility = 'visible';*/
 
                 //window.location = "merge_columns.html";
 
