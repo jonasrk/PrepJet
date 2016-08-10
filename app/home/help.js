@@ -15,6 +15,7 @@
             $('#validationRule').hide();
             $('#harmonize').hide();
             $('#undoHelp').hide();
+            $('#tableHeader').hide();
 
             $('#splitValHome').click(home);
             $('#addColHome').click(home);
@@ -25,6 +26,8 @@
             $('#valRuleHome').click(home);
             $('#harmonizeHome').click(home);
             $('#undoHelpHome').click(home);
+            $('#tableHeaderHome').click(home);
+
             $('#linkAddColumn').click(addColumn);
             $('#linkSplitValues').click(splitValues);
             $('#linkExtractValues').click(extractValues);
@@ -34,6 +37,7 @@
             $('#linkValidationRule').click(validationRule);
             $('#linkharmonize').click(harmonizeColumn);
             $('#linkUndoHelp').click(undoHelp);
+            $('#linkTableHeaderHelp').click(tableHeaderHelp);
 
         });
     };
@@ -51,6 +55,7 @@
         $('#validationRule').hide();
         $('#harmonize').hide();
         $('#undoHelp').hide();
+        $('#tableHeaderHelp').hide();
 
         Excel.run(function (ctx) {
 
@@ -79,6 +84,7 @@
         $('#validationRule').hide();
         $('#harmonize').hide();
         $('#undoHelp').hide();
+        $('#tableHeaderHelp').hide();
 
         Excel.run(function (ctx) {
 
@@ -107,6 +113,7 @@
         $('#validationRule').hide();
         $('#harmonize').hide();
         $('#undoHelp').hide();
+        $('#tableHeaderHelp').hide();
 
         Excel.run(function (ctx) {
 
@@ -136,6 +143,7 @@
         $('#validationRule').hide();
         $('#harmonize').hide();
         $('#undoHelp').hide();
+        $('#tableHeaderHelp').hide();
 
         Excel.run(function (ctx) {
 
@@ -166,6 +174,7 @@
         $('#validationRule').hide();
         $('#harmonize').hide();
         $('#undoHelp').hide();
+        $('#tableHeaderHelp').hide();
 
         Excel.run(function (ctx) {
 
@@ -196,6 +205,7 @@
         $('#validationRule').hide();
         $('#harmonize').hide();
         $('#undoHelp').hide();
+        $('#tableHeaderHelp').hide();
 
         Excel.run(function (ctx) {
 
@@ -226,6 +236,7 @@
         $('#validationRule').hide();
         $('#harmonize').hide();
         $('#undoHelp').hide();
+        $('#tableHeaderHelp').hide();
 
         Excel.run(function (ctx) {
 
@@ -256,6 +267,7 @@
         $('#validationRule').show();
         $('#harmonize').hide();
         $('#undoHelp').hide();
+        $('#tableHeaderHelp').hide();
 
         Excel.run(function (ctx) {
 
@@ -284,6 +296,7 @@
         $('#validationRule').hide();
         $('#harmonize').show();
         $('#undoHelp').hide();
+        $('#tableHeaderHelp').hide();
 
         Excel.run(function (ctx) {
 
@@ -312,6 +325,7 @@
         $('#validationRule').hide();
         $('#harmonize').hide();
         $('#undoHelp').show();
+        $('#tableHeaderHelp').hide();
 
         Excel.run(function (ctx) {
 
@@ -327,5 +341,34 @@
         });
     }
 
+
+
+    function tableHeaderHelp() {
+
+        $('#firstpage').hide();
+        $('#addColumn').hide();
+        $('#splitValues').hide();
+        $('#extractValues').hide();
+        $('#trimSpaces').hide();
+        $('#detectDuplicates').hide();
+        $('#detectOutlier').hide();
+        $('#validationRule').hide();
+        $('#harmonize').hide();
+        $('#undoHelp').hide();
+        $('#tableHeaderHelp').show();
+
+        Excel.run(function (ctx) {
+
+            return ctx.sync().then(function() {
+
+            });
+
+        }).catch(function(error) {
+            console.log("Error: " + error);
+            if (error instanceof OfficeExtension.Error) {
+                console.log("Debug info: " + JSON.stringify(error.debugInfo));
+            }
+        });
+    }
 
 })();

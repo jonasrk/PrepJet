@@ -49,14 +49,15 @@
         </div>
         <div class="ms-firstrun-pages__content">
             <div class="ms-firstrun-pages__content--centered ms-font-m ms-fontColor-white">
-                <p class="ms-fontWeight-light">Click on the function you want to learn more about.</p>
+                <p class="ms-fontWeight-light">Click on the function about which you want to learn more.</p>
             </div>
             <div>
                 <p class="ms-fontWeight-light">
+                    <a id="linkTableHeaderHelp" class="ms-Link_White">Table Headers</a><br>
                     <a id="linkUndoHelp" class="ms-Link_White">Undo Help</a><br>
                     <a id="linkTrimSpaces" class="ms-Link_White">Trim Spaces</a><br>
                     <a id="linkharmonize" class="ms-Link_White">Harmonize Column</a><br>
-                    <a id="linkExtractValues" class="ms-Link_White">Extract Values</a><br>
+                    <a id="linkExtractValues" class="ms-Link_White">Extract Text</a><br>
                     <a id="linkSplitValues" class="ms-Link_White">Split Cell Content</a><br>
                     <a id="linkAddColumn" class="ms-Link_White">Lookup Data</a><br>
                     <a id="linkDetectOutlier" class="ms-Link_White">Detect Inconsistencies</a><br>
@@ -85,7 +86,26 @@
                 <br>
                 <p class="ms-fontWeight-light">The regular Excel Undo function is allows you to undo operations up to the last interaction with a plug in. Once you use a plug in functionality undo is resetted.</p>
                 <br>
-                <p class="ms-fontWeight-light">PrepJet offers its own "undo" function so that you can go back to a previous state in case the result is not what you expected. However font and background colors will not be resetted.</p>
+                <p class="ms-fontWeight-light">PrepJet offers its own "undo" function so that you can go back to a previous state in case the result of a PrepJet function is not what you expected. However font and background colors will not be resetted.</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="tableHeaderHelp" class="ms-firstrun-pages ms-bgColor-themePrimary">
+        <div class="ms-firstrun-pages__header">
+            <div class="ms-firstrun-pages__header--skip ms-font-m ms-fontColor-white">
+                <span class="pointerCursor" id="tableHeaderHome">Home </span>
+                <i class="pointerCursor ms-Icon ms-Icon--chevronThickRight"></i>
+            </div>
+            <div class="ms-firstrun-pages__welcome">
+                <div>
+                    <h1 id="welcomeHeadline" class="ms-font-xl ms-fontWeight-light fontColor_orange">Table Headers</h1>
+                </div>
+            </div>
+        </div>
+        <div class="ms-firstrun-pages__content">
+            <div class="ms-firstrun-pages__content--centered ms-font-m ms-fontColor-white">
+                <p class="ms-fontWeight-light">The only condition to use PrepJet is that your table contains headers (e.g. if you have a list with names, the table header might be “name”). Tables shall be unique, i.e. within one sheet, each column has to have a different header.</p>
             </div>
         </div>
     </div>
@@ -104,14 +124,15 @@
         </div>
         <div class="ms-firstrun-pages__content">
             <div class="ms-firstrun-pages__content--centered ms-font-m ms-fontColor-white">
-                <p class="ms-fontWeight-light">Add data from another worksheet to your table.</p>
+                <p class="ms-fontWeight-light">Add data from another worksheet to your table using match criteria.</p>
                 <br>
-                <p class="ms-fontWeight-light">Example: You have a table with names, surnames and birth dates of your customers. You want to add the e-mail addresses from a delivery information table based on the name, surname, and birthdate.</p>
+                <p class="ms-fontWeight-light">Example: You have a customer list with names, surnames and dates of birth of your customers. You want to add the e-mail addresses from a delivery information table. To assign the correct e-mail address to each customer, you use the name, surname, and date of birth as criteria to match the data.</p>
                 <br>
                 <p class="ms-fontWeight-light">Select:<br>
-                    1. The tables to be used (customer table and the delivery information table)<br>
-                    2. The column(s) to be added to the first table (column that contains the e-mail adresses)<br>
-                    3. The match criteria for the data to be added in both tables (name, surname, and birthdates)<br>
+                    1. The target sheet (here: customer list) and the source sheet (here: delivery information table)<br>
+                    2. The column(s) from your source sheet to be added to your target sheet the first table (here: column that contains the e-mail addresses)<br>
+                    3. The first match criteriaon for the data to be added in both tables (here: name)<br>
+                    4. Click “More match criteria” and add the second match criterion (here: surname); repeat for the third match criterion (here:, and birthdates date of birth)
                 </p>
                 <br>
             </div>
@@ -132,13 +153,13 @@
         </div>
         <div class="ms-firstrun-pages__content">
             <div class="ms-firstrun-pages__content--centered ms-font-m ms-fontColor-white">
-                <p class="ms-fontWeight-light">Harmonize the content of each cell in a column.<br></p>
+                <p class="ms-fontWeight-light">Harmonize the character representation of each cell in a column.<br></p>
                 <br>
                 <p class="ms-fontWeight-light">Example: You have a column with customer names derived from a registration form. To use the names in marketing emails you want to ensure correct capitalization.<br></p>
                 <br>
                 <p class="ms-fontWeight-light">Select:<br>
-                    1. The column(s) to harmonize data<br>
-                    2. Select the type of capitalization the data should comply with.<br>
+                    1. The column(s) in which to harmonize data entries.<br>
+                    2. Select the character representation the data entries should have.<br>
                 </p>
             </div>
         </div>
@@ -158,13 +179,19 @@
         </div>
         <div class="ms-firstrun-pages__content">
             <div class="ms-firstrun-pages__content--centered ms-font-m ms-fontColor-white">
-                <p class="ms-fontWeight-light">Split the entries in one column into separate columns.<br></p>
+                <p class="ms-fontWeight-light">Split the data entries in one column and insert them into separate columns.<br></p>
                 <br>
-                <p class="ms-fontWeight-light">Example: you have a column that contains name, surname and birthday, each separated by a space. You want to have the birthdate in a separate column.</p>
+                <p class="ms-fontWeight-light">Example: You have a column that contains different information in the following pattern: Product Name;Product Category;Price;Availability. You want to distribute this information over four columns without harming the data in the columns to the right (which might happen if you use Excel’s Text to columns function).</p>
                 <br>
-                <p class="ms-fontWeight-light">1. Select the column to be split (e.g. the column containing name, surname, and birthday)<br>
-                    2. Specify the delimiter, i.e. the symbol at which the column entry shall be split (e.g. whitespace)<br>
-                    3. Open the advanced settings [delimitor position] only if you do not want the entry to be split at the first delimitor (e.g. second space)<br>
+                <p class="ms-fontWeight-light">1. Select the column to be splitted (here: the column with the four attributes)<br>
+                    2. Select the delimiter (i.e. the character that separates your data entries; here: Semicolon)<br>
+                </p>
+                <br>
+                <p class="ms-fontWeight-light">More Options: In case you only want to split at a certain position of your delimiter, you can specify the position here.</p>
+                <br>
+                <p class="ms-fontWeight-light">Example: You want the Product Name and the Product Category to be displayed in one column while you want to separate Price and Availability.<p>
+                <br>
+                <p class="ms-fontWeight-light">Under More Options, select “2” in the Position of Delimiter dropdown, and “From Left” in the Count Direction Dropdown. Now you will get a new column that contains Price;Availability. Now you can repeat the normal split operation with the Semicolon Delimiter.
                 </p>
                 <br>
             </div>
@@ -179,20 +206,26 @@
             </div>
             <div class="ms-firstrun-pages__welcome">
                 <div>
-                    <h1 id="welcomeHeadline" class="ms-font-xl ms-fontWeight-light fontColor_orange">Extract Values</h1>
+                    <h1 id="welcomeHeadline" class="ms-font-xl ms-fontWeight-light fontColor_orange">Extract Text</h1>
                 </div>
             </div>
         </div>
         <div class="ms-firstrun-pages__content">
             <div class="ms-firstrun-pages__content--centered ms-font-m ms-fontColor-white">
-                <p class="ms-fontWeight-light">Extract a part from a column entry based on specified delimiters<br></p>
+                <p class="ms-fontWeight-light">Extract a part from a column entry based on specified delimiters (delimiter = character that marks the boundaries of the part to be extracted).<br></p>
                 <br>
-                <p class="ms-fontWeight-light">Example: you have a column that contains name, surname and birthday, each separated by a space. You want to extract the surname and write it to another column.<br></p>
+                <p class="ms-fontWeight-light">Example: You have a column that contains name, surname and date of birth, each separated by a space according to the following pattern: Anthony Miller 12/12/1969. You want to extract the surname and insert it into another column.<br></p>
                 <br>
-                <p class="ms-fontWeight-light">1. Select the column from which the part should be extracted (e.g. the column containing name, surname and birthday)<br>
+                <p class="ms-fontWeight-light">1. Select the column from which the part should be extracted (e.g. here the column containing name, surname and date of birth).<br>
                     2. Specify the start and the end of the part to be extracted (e.g. first whitespace, second whitespace)<br>
-                    3. Select whether the delimitor (e.g. the whitespace in front of and after the surname) shall be included in your new column.
+                    3. Select whether the delimiter (e.g. her the whitespace in front of and after the surname) shall be included in your new column.
                 </p>
+                <br>
+                <p class="ms-fontWeight-light">More Options: Here you can specify the positions of your start and end delimiters. Assuming that some of the persons in your list have more than one first name (e.g. Anthony Stuart Miller), in those cases the second first name would be extracted instead of the surname if you do not specify the delimiter position.</p>
+                <br>
+                <p class="ms-fontWeight-light">1. Select the count of your start delimiter and the direction from which to count (here: second whitespace from the right, i.e. Dropdown Selections: “2”, “From Right”)</p>
+                <br>
+                <p class="ms-fontWeight-light">2. Select the count of your end delimiter and the direction from which to count (here: first whitespace from the right, i.e. Dropdown Selections: “1”, “From Right”)</p>
                 <br>
             </div>
         </div>
@@ -212,7 +245,11 @@
         </div>
         <div class="ms-firstrun-pages__content">
             <div class="ms-firstrun-pages__content--centered ms-font-m ms-fontColor-white">
+                <p class="ms-fontWeight-light">Select one or more columns from which to remove all leading and trailing spaces.</p>
+                <br>
                 <p class="ms-fontWeight-light">Example: you have a column in which some or all entries have leading or trailing spaces (e.g. " John Smith"). Those might cause errors when trying to match cells.<br></p>
+                <br>
+                <p>PrepJet’s Trim Spaces function will NOT remove spaces between words in a column (e.g. “ John Smith “ will become “John Smith”).</p>
                 <br>
                 <p class="ms-fontWeight-light">Simply select one or more columns to remove all leading and trailing spaces.</p>
             </div>
@@ -235,10 +272,13 @@
             <div class="ms-firstrun-pages__content--centered ms-font-m ms-fontColor-white">
                 <p class="ms-fontWeight-light">Find and highlight duplicate data records<br></p>
                 <br>
-                <p class="ms-fontWeight-light">Example: You have a list of products with the features „category“ and „color“ and you want to find all duplicates based on product name and category.<br></p>
+                <p class="ms-fontWeight-light">Example: You have a list of products with the features “category“ and “color“ and you want to find all duplicates based on product name and category.<br></p>
                 <br>
-                <p class="ms-fontWeight-light">1. Select the column(s) that shall be included in the duplicate comparison (e.g. product name and category)<br>
-                    2. Specify the match type: exact vs. fuzzy. Fuzzy means that the data records can differ slightly (e.g. „T-Shirt“ vs. „Tshirt“)<br></p>
+                <p class="ms-fontWeight-light">1. Select the column(s) that shall be included in the duplicate comparison (here e.g. product name and category)<br>
+                    2. Specify the match type: exact vs. fuzzy. “Fuzzy“ means that the data records can differ slightly (e.g. “T-Shirt“ vs. “Tshirt“)</p>
+                <br>
+                <p class="ms-fontWeight-light">If you select the option “Sort for duplicates”, PrepJet will display all duplicates at the top of your worksheet and place all duplicate pairs below each other. If you do not select this option, PrepJet will only highlight duplicate entries.</p>
+                <br>
             </div>
         </div>
     </div>
@@ -257,11 +297,11 @@
         </div>
         <div class="ms-firstrun-pages__content">
             <div class="ms-firstrun-pages__content--centered ms-font-m ms-fontColor-white">
-                <p class="ms-fontWeight-light">Find and highlight values that deviate from the data type pattern in the column. PrepJet assumes the most frequent data type in a column to be the correct oe and will highlight all entries that have a different data type.<br></p>
+                <p class="ms-fontWeight-light">Find and highlight values that deviate from the data type that occurs most frequently pattern in the column. Data type can be either text, numeric, date or an empty cell. PrepJet assumes the most frequent data type in a column to be the correct one and will highlight all entries that have a different data type. PrepJet will also highlight empty cells. If the majority of cells in a column is empty, PrepJet will ignore the empty cells and screen all populated cells for inconsistent data types.<br></p>
                 <br>
-                <p class="ms-fontWeight-light">Example: You have a product catalogue and the "size" and "color" columns got messed up, so that you have a mix of sizes (numeric values) and colors (text values) in one column.<br></p>
+                <p class="ms-fontWeight-light">Example: You have a product catalogue and in some rows, the "size" and "color" columns got confused messed up, so that you have a mix of sizes (numeric data values) and colors (text data values) in one column.<br></p>
                 <br>
-                <p class="ms-fontWeight-light">Select the column to detect inconsistencies and apply.<br></p>
+                <p class="ms-fontWeight-light">Select the column to detect inconsistencies and apply. If you select the columns and click apply, PrepJet will highlight all numeric entries in the column “colors” and all text entries in the column “size”.<br></p>
                 <br>
             </div>
         </div>
@@ -281,16 +321,21 @@
         </div>
         <div class="ms-firstrun-pages__content">
             <div class="ms-firstrun-pages__content--centered ms-font-m ms-fontColor-white">
-                <p class="ms-fontWeight-light">Create rules to validate your data and to detect inconsistencies based on domain specific conditions. There is the option to create simple rules (includes only one column) and advanced rules (creates a relationship between two columns).<br></p>
+                <p class="ms-fontWeight-light">Define rules to validate your data and to detect inconsistent entries based on domain specific conditions. PrepJet will highlight all entries that do not fulfil the condition you defined.<br></p>
                 <br>
-                <p class="ms-fontWeight-light">Example: You have a price information table and you know that there are certain price ranges for different product types.<br></p>
+                <p class="ms-fontWeight-light">Example: You have a price information table and you know that there are certain price ranges for different product types. You want to find all prices that are not within these ranges. Dresses, for example, are always between 5 and 500 Euro.<br></p>
                 <br>
-                <p class="ms-fontWeight-light">1. Select the independent column (e.g. product category).<br>
+                <p class="ms-fontWeight-light">In PrepJet, you can define this rule as follows:<br>
+                    If the content in column “Product Type” is equal to (=) “Dress”<br>
+                    then the content in column “Price” has to be between “5” and “500”<br>
+                    If you click the Validate button, PrepJet will highlight all entries in the price column that are smaller than 5 or larger than 500 and where at the same time the product type is “Dress”.<br>
+                    <!--p>1. Select the independent column (e.g. product category).<br>
                     2. Select an operator from the list (e.g. "=" for equal to).<br>
                     3. Enter the condition for your independent column (e.g. "Dress").<br>
                     4. Select the dependent column (e.g. price)<br>
                     5. Select the operator for your dependent column (e.g. "<" for smaller than).<br>
                     6. Enter the condition for which to check all entries in your dependent column that fulfill the condition in the independent column (e.g. 120 Euro).
+                    </p-->
                 </p>
                 <br>
             </div>
