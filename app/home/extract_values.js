@@ -50,6 +50,7 @@ function hideAdvancedCount() {
             Office.context.document.settings.set('more_option', false);
             Office.context.document.settings.set('last_clicked_function', "extract_values.html");
             if (Office.context.document.settings.get('prepjet_loaded_before') == null) {
+                Office.context.document.settings.set('backup_sheet_count', 1);
                 Office.context.document.settings.set('prepjet_loaded_before', true);
                 Office.context.document.settings.saveAsync();
                 window.location = "intro.html";
@@ -380,6 +381,7 @@ function hideAdvancedCount() {
 
             range_adding_to.load('address');
             range_adding_to.load('text');
+            worksheet.load('name');
 
             return ctx.sync().then(function() {
 
@@ -545,6 +547,8 @@ function hideAdvancedCount() {
 
                 }
 
+
+
                 var column_char = getCharFromNumber(header + 1);
                 var rangeaddress = column_char + ":" + column_char;
                 var range_insert = ctx.workbook.worksheets.getActiveWorksheet().getRange(rangeaddress);
@@ -553,12 +557,48 @@ function hideAdvancedCount() {
                 var insert_address = column_char + 1 + ":" + column_char + range.text.length;
                 addExtractedValue(extracted_array, insert_address);
 
-                var txt = document.createElement("p");
+                if (document.getElementById('createBackup').checked == true) {
+                    var sheet_count = Office.context.document.settings.get('backup_sheet_count') + 1;
+                    Office.context.document.settings.set('backup_sheet_count', sheet_count);
+                    Office.context.document.settings.saveAsync();
+                    var newName = worksheet.name + "(" + sheet_count + ")";
+                    var backup_promise = new Promise(
+                        function(resolve, reject) {
+                                addBackupSheet(newName);
+                        }
+                    );
+
+                    backup_promise.then(
+                        function() {
+                            var txt = document.createElement("p");
+                            txt.className = "ms-font-xs ms-embedded-dialog__content__text";
+                            txt.innerHTML = "PrepJet extracted " + extract_count + " values. " + empty_count + " data entries did not contain the specified delimiter or delimiter position."
+                            document.getElementById('resultText').appendChild(txt);
+
+                            document.getElementById('resultDialog').style.visibility = 'visible';
+                            //window.location = "trim_spaces.html";
+                        })
+                    .catch(
+                        function(reason) {
+                            console.log('Handle rejected promise ('+reason+') here.');
+                        });
+                }
+                else {
+                    var txt = document.createElement("p");
+                    txt.className = "ms-font-xs ms-embedded-dialog__content__text";
+                    txt.innerHTML = "PrepJet extracted " + extract_count + " values. " + empty_count + " data entries did not contain the specified delimiter or delimiter position."
+                    document.getElementById('resultText').appendChild(txt);
+
+                    document.getElementById('resultDialog').style.visibility = 'visible';
+                    //window.location = "trim_spaces.html";
+                }
+
+                /*var txt = document.createElement("p");
                 txt.className = "ms-font-xs ms-embedded-dialog__content__text";
                 txt.innerHTML = "PrepJet extracted " + extract_count + " values. " + empty_count + " data entries did not contain the specified delimiter or delimiter position."
                 document.getElementById('resultText').appendChild(txt);
 
-                document.getElementById('resultDialog').style.visibility = 'visible';
+                document.getElementById('resultDialog').style.visibility = 'visible';*/
 
                 //window.location = "extract_values.html";
             });

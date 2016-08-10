@@ -245,3 +245,8 @@ h1 {
 
 #proHeader {
     color: #EA7F04;}
+
+.tableupperborder {
+    border-top: 0.75px solid;
+    width: 100%;
+    border-color: #e2e2e2;}
