@@ -8,6 +8,7 @@
             Office.context.document.settings.set('same_header_harmonize', false);
             Office.context.document.settings.set('last_clicked_function', "trim_spaces.html");
             if (Office.context.document.settings.get('prepjet_loaded_before') == null) {
+                Office.context.document.settings.set('backup_sheet_count', 1);
                 Office.context.document.settings.set('prepjet_loaded_before', true);
                 Office.context.document.settings.saveAsync();
                 window.location = "intro.html";
@@ -243,6 +244,7 @@
 
             //get used range in active Sheet
             range.load('text');
+            worksheet.load('name');
 
             var harmo = document.getElementById('harmonize_options').value;
 
@@ -300,7 +302,34 @@
 
                     }
                 }
-                window.location = "harmonize.html";
+
+                if (document.getElementById('createBackup').checked == true) {
+                    console.log(Office.context.document.settings.get('backup_sheet_count'));
+                    var sheet_count = Office.context.document.settings.get('backup_sheet_count') + 1;
+                    console.log(sheet_count);
+                    Office.context.document.settings.set('backup_sheet_count', sheet_count);
+                    Office.context.document.settings.saveAsync();
+                    var newName = worksheet.name + "(" + sheet_count + ")";
+                    var backup_promise = new Promise(
+                        function(resolve, reject) {
+                                addBackupSheet(newName);
+                        }
+                    );
+
+                    backup_promise.then(
+                        function() {
+                            window.location = "harmonize.html";
+                        })
+                    .catch(
+                        function(reason) {
+                            console.log('Handle rejected promise ('+reason+') here.');
+                        });
+                }
+                else {
+                    window.location = "harmonize.html";
+                }
+
+                //window.location = "harmonize.html";
             });
 
         }).catch(function(error) {

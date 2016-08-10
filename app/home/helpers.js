@@ -244,9 +244,7 @@ function addBackupSheet(sheetName) {
         var wSheetName = sheetName;
         var worksheet = ctx.workbook.worksheets.add(wSheetName);
         worksheet.load('name');
-        console.log("before");
         return ctx.sync().then(function() {
-            console.log("string");
             addBackupContent(worksheet.name);
         });
     }).catch(function(error) {
@@ -258,9 +256,7 @@ function addBackupSheet(sheetName) {
 }
 
 function addBackupContent(sheetName) {
-    console.log("second");
     Excel.run(function (ctx) {
-        console.log("test");
         var values = Office.context.document.settings.get('sheet_backup');
         var end_address = getCharFromNumber(values[0].length - 1) + (values.length).toString();
         var rangeAddress = "A1:" + end_address;
@@ -271,8 +267,6 @@ function addBackupContent(sheetName) {
         range.load('text');
 
         return ctx.sync().then(function() {
-            // console.log(range.text);
-            window.location = "trim_spaces.html";
         });
     }).catch(function(error) {
         console.log("Error: " + error);
