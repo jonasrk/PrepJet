@@ -369,6 +369,13 @@ function fuzzyPro() {
 
                 if(document.getElementById('duplicatesort').checked == false) {
                     colorDup(duplicates, 1);
+
+                    var txt = document.createElement("p");
+                    txt.className = "ms-font-xs ms-embedded-dialog__content__text";
+                    txt.innerHTML = "PrepJet found " + duplicates.length + " duplicate rows."
+                    document.getElementById('resultText').appendChild(txt);
+
+                    document.getElementById('resultDialog').style.visibility = 'visible';
                 }
                 else {
 
@@ -419,14 +426,17 @@ function fuzzyPro() {
                         }
                         sheet_row += 1;
                     }
+
+                    var txt = document.createElement("p");
+                    txt.className = "ms-font-xs ms-embedded-dialog__content__text";
+                    txt.innerHTML = "PrepJet found " + duplicates.length + " duplicate rows."
+                    document.getElementById('resultText').appendChild(txt);
+
+                    document.getElementById('resultDialog').style.visibility = 'visible';
+
                 }
 
-                var txt = document.createElement("p");
-                txt.className = "ms-font-xs ms-embedded-dialog__content__text";
-                txt.innerHTML = "PrepJet found " + duplicates.length + " duplicate rows."
-                document.getElementById('resultText').appendChild(txt);
 
-                document.getElementById('resultDialog').style.visibility = 'visible';
 
                 //window.location = "duplicates.html";
 

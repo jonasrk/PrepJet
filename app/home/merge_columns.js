@@ -610,7 +610,7 @@ function backToOne() {
 
                 var txt = document.createElement("p");
                 txt.className = "ms-font-xs ms-embedded-dialog__content__text";
-                txt.innerHTML = "PrepJet found " + lookup_count + " matching data records. " + empty_count + " rows do not match with any data in your source table."
+                txt.innerHTML = "PrepJet found " + lookup_count + " matching data records. " + empty_count + " rows did not meet the specified match criteria."
                 document.getElementById('resultText').appendChild(txt);
 
                 document.getElementById('resultDialog').style.visibility = 'visible';

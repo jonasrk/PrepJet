@@ -87,6 +87,7 @@ function showEnterpriseDialog() {
 
 
             $('#and_cond').click(showEnterpriseDialog);
+            $('#and_cond2').click(showEnterpriseDialog);
             //$('#or_cond').click(showEnterpriseDialog);
             $('#apply_advanced').click(validationAndAdvanced);
             $('#to_inconsistency').click(redirectRule);

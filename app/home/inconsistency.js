@@ -395,7 +395,7 @@
 
                 var txt = document.createElement("p");
                 txt.className = "ms-font-xs ms-embedded-dialog__content__text";
-                txt.innerHTML = "PrepJet found " + incon_counter + " inconsistencies in your data set."
+                txt.innerHTML = "PrepJet found " + incon_counter + " inconsistent data entries in your worksheet."
                 document.getElementById('resultText').appendChild(txt);
 
                 document.getElementById('resultDialog').style.visibility = 'visible';
