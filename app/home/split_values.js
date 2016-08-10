@@ -384,7 +384,7 @@ function displayFieldDelimiter(){
                             }
                         }
                         else if (range.text[i][header].indexOf(delimiter_type) == -1) {
-                            split_array[i] = range.text[i][header];
+                            split_array[i] = [range.text[i][header]];
                             split_array[i].push("");
                         }
                     }
