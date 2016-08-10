@@ -18,6 +18,7 @@ function backToOne() {
             //save function to redirect to correct screen after intro
             Office.context.document.settings.set('last_clicked_function', "merge_columns.html");
             if (Office.context.document.settings.get('prepjet_loaded_before') == null) {
+                Office.context.document.settings.set('backup_sheet_count', 1);
                 Office.context.document.settings.set('prepjet_loaded_before', true);
                 Office.context.document.settings.saveAsync();
                 window.location = "intro.html";
@@ -518,6 +519,7 @@ function backToOne() {
 
             range_adding_to.load('address');
             range_adding_to.load('text');
+            worksheet_adding_to.load('name');
 
             Office.context.document.settings.set('populate_new', true);
             Office.context.document.settings.set('back_button_pressed', false);
@@ -605,6 +607,48 @@ function backToOne() {
                         }
                     }
                 }
+
+
+                if (document.getElementById('createBackup').checked == true) {
+                    var sheet_count = Office.context.document.settings.get('backup_sheet_count') + 1;
+                    Office.context.document.settings.set('backup_sheet_count', sheet_count);
+                    Office.context.document.settings.saveAsync();
+                    var newName = worksheet_adding_to.name + "(" + sheet_count + ")";
+                    var backup_promise = new Promise(
+                        function(resolve, reject) {
+                                addBackupSheet(newName);
+                        }
+                    );
+
+                    backup_promise.then(
+                        function() {
+                            empty_count = range_adding_to.text.length - lookup_count - 1;
+
+                            var txt = document.createElement("p");
+                            txt.className = "ms-font-xs ms-embedded-dialog__content__text";
+                            txt.innerHTML = "PrepJet found " + lookup_count + " matching data records. " + empty_count + " rows did not meet the specified match criteria."
+                            document.getElementById('resultText').appendChild(txt);
+
+                            document.getElementById('resultDialog').style.visibility = 'visible';
+                            //window.location = "trim_spaces.html";
+                        })
+                    .catch(
+                        function(reason) {
+                            console.log('Handle rejected promise ('+reason+') here.');
+                        });
+                }
+                else {
+                    empty_count = range_adding_to.text.length - lookup_count - 1;
+
+                    var txt = document.createElement("p");
+                    txt.className = "ms-font-xs ms-embedded-dialog__content__text";
+                    txt.innerHTML = "PrepJet found " + lookup_count + " matching data records. " + empty_count + " rows did not meet the specified match criteria."
+                    document.getElementById('resultText').appendChild(txt);
+
+                    document.getElementById('resultDialog').style.visibility = 'visible';
+                    //window.location = "trim_spaces.html";
+                }
+
 
                 empty_count = range_adding_to.text.length - lookup_count - 1;
 

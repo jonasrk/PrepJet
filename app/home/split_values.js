@@ -330,6 +330,9 @@ function displayFieldDelimiter(){
                                 max_array_length = array_length;
                             }
                         }
+                        else {
+                            split_array[i] = "";
+                        }
                     }
                 }
                 else {
