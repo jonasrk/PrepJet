@@ -334,7 +334,16 @@ function displayFieldDelimiter(){
                             split_array[i] = "";
                         }
                     }
+
+                    for (var j = 0; j < range.text.length; j++) {
+                        if (split_array[j].length < max_array_length) {
+                            for (var i = split_array[j].length; i < max_array_length; i++) {
+                                split_array[j].push("");
+                            }
+                        }
+                    }
                 }
+
                 else {
                     var count_direction = document.getElementById('delimiter_count_drop').value;
                     for (var i = 0; i < range.text.length; i++) {
@@ -376,6 +385,7 @@ function displayFieldDelimiter(){
                         }
                         else if (range.text[i][header].indexOf(delimiter_type) == -1) {
                             split_array[i] = range.text[i][header];
+                            split_array[i].push("");
                         }
                     }
                 }
