@@ -61,6 +61,7 @@
                     <a id="linkSplitValues" class="ms-Link_White">Split Cell Content</a><br>
                     <a id="linkAddColumn" class="ms-Link_White">Lookup Data</a><br>
                     <a id="linkDetectOutlier" class="ms-Link_White">Detect Inconsistencies</a><br>
+                    <a id="linkCustomInconHelp" class="ms-Link_White">Custom Inconsistencies</a><br>
                     <a id="linkDetectDuplicates" class="ms-Link_White">Detect Duplicates</a><br>
                     <a id="linkValidationRule" class="ms-Link_White">Rule-based Validation</a><br>
                 </p>
@@ -249,9 +250,37 @@
                 <br>
                 <p class="ms-fontWeight-light">Example: you have a column in which some or all entries have leading or trailing spaces (e.g. " John Smith"). Those might cause errors when trying to match cells.<br></p>
                 <br>
-                <p>PrepJet’s Trim Spaces function will NOT remove spaces between words in a column (e.g. “ John Smith “ will become “John Smith”).</p>
+                <p class="ms-fontWeight-light">PrepJet’s Trim Spaces function will NOT remove spaces between words in a column (e.g. “ John Smith “ will become “John Smith”).</p>
                 <br>
                 <p class="ms-fontWeight-light">Simply select one or more columns to remove all leading and trailing spaces.</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="customIncon" class="ms-firstrun-pages ms-bgColor-themePrimary">
+        <div class="ms-firstrun-pages__header">
+            <div class="ms-firstrun-pages__header--skip ms-font-m ms-fontColor-white">
+                <span class="pointerCursor" id="customInconHome">Home </span>
+                <i class="pointerCursor ms-Icon ms-Icon--chevronThickRight"></i>
+            </div>
+            <div class="ms-firstrun-pages__welcome">
+                <div>
+                    <h1 id="welcomeHeadline" class="ms-font-xl ms-fontWeight-light fontColor_orange">Custom Inconsistencies</h1>
+                </div>
+            </div>
+        </div>
+        <div class="ms-firstrun-pages__content">
+            <div class="ms-firstrun-pages__content--centered ms-font-m ms-fontColor-white">
+                <p class="ms-fontWeight-light">Specify the length of your data entries or certain characters or character sequences the data entries in one column must or must not contain.</p>
+                <br>
+                <p class="ms-fontWeight-light">Example: you have a "currency" column that indicates the currency in which the price of a product is indicated using abbreviations according to ISO 4217. You want to verify that each data entry consists of exactly three characters.</p>
+                <br>
+                <p class="ms-fontWeight-light">1. Select the column check (here e.g. the "currency" column).<br>
+                2. Select "equal to" as operator.<br>
+                3. Enter the number of characters the entries in your currency column must have (in this case 3) and click apply.</p>
+                <br>
+                <p class="ms-fontWeight-light">If you leave the text fields for characters your data must or must not contain blank, PrepJet will ignore those fields.</p>
+                <br>
             </div>
         </div>
     </div>
