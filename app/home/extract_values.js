@@ -555,7 +555,7 @@ function hideAdvancedCount() {
 
                 var txt = document.createElement("p");
                 txt.className = "ms-font-xs ms-embedded-dialog__content__text";
-                txt.innerHTML = "PrepJet extracted " + extract_count + " values. " + empty_count + " data entries did not match."
+                txt.innerHTML = "PrepJet extracted " + extract_count + " values. " + empty_count + " data entries did not contain the specified delimiter or delimiter position."
                 document.getElementById('resultText').appendChild(txt);
 
                 document.getElementById('resultDialog').style.visibility = 'visible';

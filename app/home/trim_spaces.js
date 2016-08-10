@@ -254,12 +254,7 @@
             return ctx.sync().then(function() {
 
                 backupForUndo(range);
-                if (document.getElementById('createBackup').checked == true) {
-                    var newName = worksheet.name + "(" + trim_sheet_count + ")";
-                    addBackupSheet(newName);
-                    var trim_sheet_count = Office.context.document.settings.get('trim_sheet_count') + 1;
-                    Office.context.document.settings.set('trim_sheet_count', trim_sheet_count);
-                }
+
 
 
                 var header = 0;
@@ -287,7 +282,14 @@
                     addContentNew(worksheet.name, insert_address, trim_array);
 
                 }
-                window.location = "trim_spaces.html";
+
+                if (document.getElementById('createBackup').checked == true) {
+                    var newName = worksheet.name + "(" + trim_sheet_count + ")";
+                    addBackupSheet(newName);
+                    var trim_sheet_count = 2;//Office.context.document.settings.get('trim_sheet_count') + 1;
+                    Office.context.document.settings.set('trim_sheet_count', trim_sheet_count);
+                }
+                //window.location = "trim_spaces.html";
             });
 
         }).catch(function(error) {

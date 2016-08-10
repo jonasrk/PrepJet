@@ -244,8 +244,9 @@ function addBackupSheet(sheetName) {
         var wSheetName = sheetName;
         var worksheet = ctx.workbook.worksheets.add(wSheetName);
         worksheet.load('name');
+        console.log("before");
         return ctx.sync().then(function() {
-            console.log(worksheet.name);
+            console.log("string");
             addBackupContent(worksheet.name);
         });
     }).catch(function(error) {
@@ -271,6 +272,7 @@ function addBackupContent(sheetName) {
 
         return ctx.sync().then(function() {
             // console.log(range.text);
+            window.location = "trim_spaces.html";
         });
     }).catch(function(error) {
         console.log("Error: " + error);

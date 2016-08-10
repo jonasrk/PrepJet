@@ -361,7 +361,7 @@ function backToOne() {
                     }
 
                     var trow = document.createElement("tr");
-                    //trow.id = "lookuptable"
+                    trow.id = "lookuprow" + (count_drop + 1)
                     document.getElementById('matchCriteria').appendChild(trow);
 
                     for (var k = (count_drop + 1); k < count_tmp; k++) {
@@ -462,11 +462,9 @@ function backToOne() {
 
         function removeCriteria() {
             var loop_end = count_drop - 1;
-            for (var run = loop_end; run < (loop_end + 2); run++) {
-                var parent = document.getElementById("dropdowns_step3");
-                var child = document.getElementById("addedDropdown" + run);
-                parent.removeChild(child);
-            }
+            var parent = document.getElementById("matchCriteria");
+            var child = document.getElementById("lookuprow" + loop_end);
+            parent.removeChild(child);
             count_drop = count_drop - 2;
             if (count_drop < 3) {
                 $('#bt_remove').hide();
