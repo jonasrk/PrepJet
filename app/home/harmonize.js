@@ -269,12 +269,14 @@ function redirectHome() {
                         }
                     }
 
+                    var harm_array = [];
+
                     for (var k = 0; k < range.text.length; k++) {
                         if (harmo == "allupper") {
-                            var harm_string = range.text[k][header].toUpperCase();
+                            var harm_string = [range.text[k][header].toUpperCase()];
                         }
                         if (harmo == "alllower") {
-                            var harm_string = range.text[k][header].toLowerCase();
+                            var harm_string = [range.text[k][header].toLowerCase()];
                         }
                         if (harmo == "firstupper") { //todo when leading space first real letter not transformed
                             var tmp = range.text[k][header].toLowerCase().split(" ");
@@ -282,9 +284,9 @@ function redirectHome() {
                             for (var runtmp = 0; runtmp < tmp.length; runtmp++) {
                                 tmp_upper.push(tmp[runtmp].charAt(0).toUpperCase() + tmp[runtmp].slice(1));
                             }
-                            var harm_string = tmp_upper[0];
+                            var harm_string = [tmp_upper[0]];
                             for (var runtmp = 1; runtmp < tmp_upper.length; runtmp++) {
-                                harm_string = harm_string.concat(" ", tmp_upper[runtmp]);
+                                harm_string = [harm_string.concat(" ", tmp_upper[runtmp])];
                             }
                         }
                         if (harmo == "oneupper") {
@@ -295,16 +297,30 @@ function redirectHome() {
                                 tmp_upper.push(tmp[runtmp].charAt(0) + tmp[runtmp].slice(1).toLowerCase());
                             }
 
-                            var harm_string = tmp_upper[0];
+                            var harm_string = [tmp_upper[0]];
                             for (var runtmp = 1; runtmp < tmp_upper.length; runtmp++) {
-                                harm_string = harm_string.concat(" ", tmp_upper[runtmp]);
+                                harm_string = [harm_string.concat(" ", tmp_upper[runtmp])];
                             }
                         }
 
-                        var column_char = getCharFromNumber(header);
-                        var sheet_row = k + 1;
-                        addContentToWorksheet(act_worksheet, column_char + sheet_row, harm_string);
+                        harm_array.push(harm_string);
 
+                    }
+
+                    var insert_address = getCharFromNumber(header) + 1 + ":" + getCharFromNumber(header) + range.text.length;
+                    addContentNew(worksheet.name, insert_address, harm_array, function () {});
+
+                    var i = 0;
+
+                    if (document.getElementById('createBackup').checked != true) {
+                        addContentNew(worksheet.name, insert_address, harm_array, function () {
+                            i++;
+                            if (i >= checked_checkboxes.length){
+                                window.location = "harmonize.html";
+                            }
+                        });
+                    } else {
+                        addContentNew(worksheet.name, insert_address, harm_array, function () {});
                     }
                 }
 
@@ -317,9 +333,6 @@ function redirectHome() {
                         window.location = "harmonize.html"
                     });
 
-                }
-                else {
-                    //window.location = "harmonize.html";
                 }
 
             });
