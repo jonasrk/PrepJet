@@ -302,13 +302,12 @@ function redirectHome() {
 
                 else {
 
-                ctx.sync().then(function() {
-                        window.location = "trim_spaces.html";
-                    });
+                    ctx.sync().then(function() {
+                            window.location = "trim_spaces.html";
+                        });
 
                 }
 
-                };
             });
 
         }).catch(function(error) {
