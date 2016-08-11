@@ -278,12 +278,13 @@ function addBackupContent(sheetName, callback) {
 }
 
 
-function addContentNew(sheetObject, rangeAddress, displayText) {
+function addContentNew(sheetObject, rangeAddress, displayText, callback) {
     Excel.run(function (ctx) {
     var range = ctx.workbook.worksheets.getItem(sheetObject).getRange(rangeAddress);
     range.values = displayText;
     range.load('text');
     return ctx.sync().then(function() {
+        callback();
     });
 }).catch(function(error) {
         console.log("Error: " + error);
