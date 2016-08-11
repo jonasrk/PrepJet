@@ -35,84 +35,84 @@
 
             /*Excel.run(function (ctx) {
 
-                var myBindings = Office.context.document.bindings;
-                var worksheetname = ctx.workbook.worksheets.getActiveWorksheet();
+             var myBindings = Office.context.document.bindings;
+             var worksheetname = ctx.workbook.worksheets.getActiveWorksheet();
 
-                var headRange_all = worksheetname.getRange();
-                var headRange = headRange_all.getUsedRange();
+             var headRange_all = worksheetname.getRange();
+             var headRange = headRange_all.getUsedRange();
 
-                worksheetname.load('name')
-                headRange.load('text');
+             worksheetname.load('name')
+             headRange.load('text');
 
-                return ctx.sync().then(function() {
-                    Office.context.document.addHandlerAsync("documentSelectionChanged", myViewHandler, function(result){}
-                    );
+             return ctx.sync().then(function() {
+             Office.context.document.addHandlerAsync("documentSelectionChanged", myViewHandler, function(result){}
+             );
 
-                    // Event handler function for changing the worksheet.
-                    function myViewHandler(eventArgs){
-                        Excel.run(function (ctx) {
-                            var selectedSheet = ctx.workbook.worksheets.getActiveWorksheet();
-                            selectedSheet.load('name');
-                            return ctx.sync().then(function () {
-                                if (selectedSheet.name != worksheetname.name) {
-                                    window.location = "trim_spaces.html"
-                                }
-                            });
-                        });
-                    }
+             // Event handler function for changing the worksheet.
+             function myViewHandler(eventArgs){
+             Excel.run(function (ctx) {
+             var selectedSheet = ctx.workbook.worksheets.getActiveWorksheet();
+             selectedSheet.load('name');
+             return ctx.sync().then(function () {
+             if (selectedSheet.name != worksheetname.name) {
+             window.location = "trim_spaces.html"
+             }
+             });
+             });
+             }
 
-                    //function to check whether header entries are changed
-                    function bindFromPrompt() {
+             //function to check whether header entries are changed
+             function bindFromPrompt() {
 
-                        var myBindings = Office.context.document.bindings;
-                        var name_worksheet = worksheetname.name;
-                        var myAddress = name_worksheet.concat("!1:1");
+             var myBindings = Office.context.document.bindings;
+             var name_worksheet = worksheetname.name;
+             var myAddress = name_worksheet.concat("!1:1");
 
-                        myBindings.addFromNamedItemAsync(myAddress, "matrix", {id:'myBinding'}, function (asyncResult) {
-                            if (asyncResult.status == Office.AsyncResultStatus.Failed) {
-                                write('Action failed. Error: ' + asyncResult.error.message);
-                            } else {
-                                write('Added new binding with type: ' + asyncResult.value.type + ' and id: ' + asyncResult.value.id);
+             myBindings.addFromNamedItemAsync(myAddress, "matrix", {id:'myBinding'}, function (asyncResult) {
+             if (asyncResult.status == Office.AsyncResultStatus.Failed) {
+             write('Action failed. Error: ' + asyncResult.error.message);
+             } else {
+             write('Added new binding with type: ' + asyncResult.value.type + ' and id: ' + asyncResult.value.id);
 
-                                function addHandler() {
-                                    Office.select("bindings#myBinding").addHandlerAsync(
-                                        Office.EventType.BindingDataChanged, dataChanged);
-                                }
+             function addHandler() {
+             Office.select("bindings#myBinding").addHandlerAsync(
+             Office.EventType.BindingDataChanged, dataChanged);
+             }
 
-                                addHandler();
-                                displayAllBindings();
+             addHandler();
+             displayAllBindings();
 
-                            }
-                        });
-                    }
+             }
+             });
+             }
 
-                bindFromPrompt();
+             bindFromPrompt();
 
-                function displayAllBindings() {
-                    Office.context.document.bindings.getAllAsync(function (asyncResult) {
-                        var bindingString = '';
-                        for (var i in asyncResult.value) {
-                            bindingString += asyncResult.value[i].id + '\n';
-                        }
-                    });
-                }
+             function displayAllBindings() {
+             Office.context.document.bindings.getAllAsync(function (asyncResult) {
+             var bindingString = '';
+             for (var i in asyncResult.value) {
+             bindingString += asyncResult.value[i].id + '\n';
+             }
+             });
+             }
 
-                function dataChanged(eventArgs) {
-                    window.location = "trim_spaces.html";
-                }
+             function dataChanged(eventArgs) {
+             window.location = "trim_spaces.html";
+             }
 
-                // Function that writes to a div with id='message' on the page.
-                function write(message){
-                    console.log(message);
-                }
+             // Function that writes to a div with id='message' on the page.
+             function write(message){
+             console.log(message);
+             }
 
-                });
-            }).catch(function(error) {
-                console.log("Error: " + error);
-                if (error instanceof OfficeExtension.Error) {
-                    console.log("Debug info: " + JSON.stringify(error.debugInfo));
-                }
-            });*/
+             });
+             }).catch(function(error) {
+             console.log("Error: " + error);
+             if (error instanceof OfficeExtension.Error) {
+             console.log("Debug info: " + JSON.stringify(error.debugInfo));
+             }
+             });*/
 
         });
     };
@@ -289,25 +289,12 @@
                     Office.context.document.settings.set('backup_sheet_count', sheet_count);
                     Office.context.document.settings.saveAsync();
                     var newName = worksheet.name + "(" + sheet_count + ")";
-                    var backup_promise = new Promise(
-                        function(resolve, reject) {
-                                resolve(addBackupSheet(newName));
-                        }
-                    );
+                    addBackupSheet(newName, function() {
+                        window.location = "trim_spaces.html";
+                    });
 
-                    backup_promise.then(
-                        function() {
-                            window.location = "trim_spaces.html";
-                        })
-                    .catch(
-                        function(reason) {
-                            console.log('Handle rejected promise ('+reason+') here.');
-                        });
-                }
-                else {
-                    window.location = "trim_spaces.html";
-                }
 
+                };
             });
 
         }).catch(function(error) {

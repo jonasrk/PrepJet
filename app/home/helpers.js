@@ -239,27 +239,13 @@ function getCharFromNumber (number) {
 }
 
 
-function addBackupSheet(sheetName) {
+function addBackupSheet(sheetName, callback) {
     Excel.run(function (ctx) {
         var wSheetName = sheetName;
         var worksheet = ctx.workbook.worksheets.add(wSheetName);
         worksheet.load('name');
         return ctx.sync().then(function() {
-            var content_promise = new Promise(
-                        function(resolve, reject) {
-                                resolve(addBackupContent(worksheet.name));
-                        }
-                    );
-
-                    content_promise.then(
-                        function() {
-                            return true;
-                        })
-                    .catch(
-                        function(reason) {
-                            console.log('Handle rejected promise ('+reason+') here.');
-                        });
-            //addBackupContent(worksheet.name);
+            addBackupContent(worksheet.name, callback);
         });
     }).catch(function(error) {
             console.log("Error: " + error);
@@ -269,7 +255,7 @@ function addBackupSheet(sheetName) {
     });
 }
 
-function addBackupContent(sheetName) {
+function addBackupContent(sheetName, callback) {
     Excel.run(function (ctx) {
         var values = Office.context.document.settings.get('sheet_backup');
         var end_address = getCharFromNumber(values[0].length - 1) + (values.length).toString();
@@ -281,6 +267,7 @@ function addBackupContent(sheetName) {
         range.load('text');
 
         return ctx.sync().then(function() {
+            callback();
         });
     }).catch(function(error) {
         console.log("Error: " + error);
