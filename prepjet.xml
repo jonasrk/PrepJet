@@ -29,7 +29,7 @@
     </Sets>
   </Requirements>
   <DefaultSettings>
-    <SourceLocation DefaultValue="https://localhost:8443/app/home/intro.html" />
+    <SourceLocation DefaultValue="https://localhost:8443/app/home/mac_start.html" />
   </DefaultSettings>
   <!--EndTaskpaneMode integration -->
 
