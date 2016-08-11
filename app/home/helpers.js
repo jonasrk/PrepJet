@@ -245,21 +245,7 @@ function addBackupSheet(sheetName) {
         var worksheet = ctx.workbook.worksheets.add(wSheetName);
         worksheet.load('name');
         return ctx.sync().then(function() {
-            var content_promise = new Promise(
-                        function(resolve, reject) {
-                                resolve(addBackupContent(worksheet.name));
-                        }
-                    );
-
-                    content_promise.then(
-                        function() {
-                            return true;
-                        })
-                    .catch(
-                        function(reason) {
-                            console.log('Handle rejected promise ('+reason+') here.');
-                        });
-            //addBackupContent(worksheet.name);
+            addBackupContent(worksheet.name, callback);
         });
     }).catch(function(error) {
             console.log("Error: " + error);
@@ -281,6 +267,7 @@ function addBackupContent(sheetName) {
         range.load('text');
 
         return ctx.sync().then(function() {
+            callback();
         });
     }).catch(function(error) {
         console.log("Error: " + error);
