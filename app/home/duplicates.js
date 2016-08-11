@@ -3,6 +3,10 @@ function fuzzyPro() {
     document.getElementById('fuzzymatch').checked = false;
 }
 
+function redirectHome() {
+    window.location = "mac_start.html";
+}
+
 (function () {
     // 'use strict';
     var sorted_rows = [];
@@ -25,6 +29,7 @@ function fuzzyPro() {
             $('#bt_detect_duplicates').click(detectDuplicates);
             $('#checkbox_all').click(checkCheckbox);
             $('#buttonOk').click(highlightHeader);
+            $('#homeButton').click(redirectHome);
 
 
             //show and hide error message when columns have same header name

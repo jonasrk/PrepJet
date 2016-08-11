@@ -8,6 +8,10 @@ function displayFieldBegin(){
     }
 }
 
+function redirectHome() {
+    window.location = "mac_start.html";
+}
+
 //show textfield for ending delimiter if custom is selected
 function displayFieldEnd(){
     if(document.getElementById('ending_options').value == "custom_e") {
@@ -78,6 +82,7 @@ function hideAdvancedCount() {
             $('#advanced_settings').click(displayAdvancedCount);
             $('#advanced_hide').click(hideAdvancedCount);
             $('#buttonOk').click(highlightHeader);
+            $('#homeButton').click(redirectHome);
 
 
             /*Office.context.document.addHandlerAsync("documentSelectionChanged", myHandler, function(result){}
@@ -562,25 +567,15 @@ function hideAdvancedCount() {
                     Office.context.document.settings.set('backup_sheet_count', sheet_count);
                     Office.context.document.settings.saveAsync();
                     var newName = worksheet.name + "(" + sheet_count + ")";
-                    var backup_promise = new Promise(
-                        function(resolve, reject) {
-                                resolve(addBackupSheet(newName));
-                        }
-                    );
+                    addBackupSheet(newName, function() {
+                        var txt = document.createElement("p");
+                        txt.className = "ms-font-xs ms-embedded-dialog__content__text";
+                        txt.innerHTML = "PrepJet extracted " + extract_count + " values. " + empty_count + " data entries did not contain the specified delimiter or delimiter position."
+                        document.getElementById('resultText').appendChild(txt);
 
-                    backup_promise.then(
-                        function() {
-                            var txt = document.createElement("p");
-                            txt.className = "ms-font-xs ms-embedded-dialog__content__text";
-                            txt.innerHTML = "PrepJet extracted " + extract_count + " values. " + empty_count + " data entries did not contain the specified delimiter or delimiter position."
-                            document.getElementById('resultText').appendChild(txt);
+                        document.getElementById('resultDialog').style.visibility = 'visible';
+                    });
 
-                            document.getElementById('resultDialog').style.visibility = 'visible';
-                        })
-                    .catch(
-                        function(reason) {
-                            console.log('Handle rejected promise ('+reason+') here.');
-                        });
                 }
                 else {
                     var txt = document.createElement("p");
@@ -591,14 +586,6 @@ function hideAdvancedCount() {
                     document.getElementById('resultDialog').style.visibility = 'visible';
                 }
 
-                /*var txt = document.createElement("p");
-                txt.className = "ms-font-xs ms-embedded-dialog__content__text";
-                txt.innerHTML = "PrepJet extracted " + extract_count + " values. " + empty_count + " data entries did not contain the specified delimiter or delimiter position."
-                document.getElementById('resultText').appendChild(txt);
-
-                document.getElementById('resultDialog').style.visibility = 'visible';*/
-
-                //window.location = "extract_values.html";
             });
 
 

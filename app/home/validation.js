@@ -29,6 +29,12 @@ function setFocus(activeID) {
     activeSelection = activeID;
 }
 
+
+function redirectHome() {
+    window.location = "mac_start.html";
+}
+
+
 //display additional text field when between or not between operator is selected
 function displaySimpleBetween(){
     if(document.getElementById('if_operator1').value == "between" || document.getElementById('if_operator1').value == "notbetween") {
@@ -92,6 +98,7 @@ function showEnterpriseDialog() {
             $('#apply_advanced').click(validationAndAdvanced);
             $('#to_inconsistency').click(redirectRule);
             $('#buttonOk').click(highlightHeader);
+            $('#homeButton').click(redirectHome);
 
 
             if (Office.context.document.settings.get('from_inconsistencies') == true){

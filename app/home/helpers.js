@@ -277,6 +277,7 @@ function addBackupContent(sheetName, callback) {
     });
 }
 
+
 function addContentNew(sheetObject, rangeAddress, displayText) {
     Excel.run(function (ctx) {
     var range = ctx.workbook.worksheets.getItem(sheetObject).getRange(rangeAddress);

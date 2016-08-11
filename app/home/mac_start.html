@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+
+    <script src="https://z8d.de:1337/vorlon.js"></script>
+
+
+
+    <!--<script src="//ajax.aspnetcdn.com/ajax/jQuery/jquery-1.9.1.min.js"></script>-->
+    <link href="../../content/Office.css" rel="stylesheet" type="text/css"/>
+    <link href="../../bower_components/microsoft_office_js/content/officethemes.css" rel="stylesheet" type="text/css"/>
+    <!--<link href="//appsforoffice.microsoft.com/fabric/1.0/fabric.min.css" rel="stylesheet">-->
+    <!--<link href="//appsforoffice.microsoft.com/fabric/1.0/fabric.components.min.css" rel="stylesheet">-->
+    <script src="//appsforoffice.microsoft.com/lib/1/hosted/office.js"></script>
+
+    <!-- To enable offline debugging using a local reference to jQuery.js Office.js, use: -->
+    <!--<script src="../../bower_components/microsoft_office_js/scripts/Office/1/office.js"></script>-->
+    <script src="../../bower_components/jquery/jquery.min.js"></script>
+    <link href="../../content/fabric.min.css" rel="stylesheet">
+    <link href="../../content/fabric.components.min.css" rel="stylesheet">
+    <!--<script src="../../scripts/jquery.fabric.min.js"></script>-->
+    <script src="../../scripts/MicrosoftAjax.js"></script>
+
+    <link href="../app.css" rel="stylesheet" type="text/css"/>
+    <script src="../app.js"></script>
+
+    <link href="intro.css" rel="stylesheet" type="text/css"/>
+    <script src="helpers.js"></script>
+    <script src="help.js"></script>
+
+    <!--PrepJet Fabric Components Imports-->
+    <script src="../../bower_components/office-ui-fabric/src/components/TextField/Jquery.TextField.js"></script>
+    <script src="../../bower_components/office-ui-fabric/src/components/Dropdown/Jquery.Dropdown.js"></script>
+
+
+</head>
+
+<body class="ms-font-m">
+    <div id="firstpage" class="ms-firstrun-pages ms-bgColor-themePrimary">
+        <div class="ms-firstrun-pages__header">
+            <div class="ms-firstrun-pages__welcome">
+                <div>
+                    <h1 id="welcomeHeadline" class="ms-font-xl ms-fontWeight-light fontColor_orange">PrepJet Data Preparation</h1>
+                </div>
+            </div>
+        </div>
+        <div class="ms-firstrun-pages__content">
+            <div class="ms-firstrun-pages__content--centered ms-font-m ms-fontColor-white">
+                <p class="ms-fontWeight-light">PrepJet offers several functions to speed up and simplify working with data in Excel. Click on a function below to start preparing your data sets.</p>
+            </div>
+            <div>
+                <p class="ms-fontWeight-light">
+                    <table>
+                        <tr>
+                            <td>
+                                <img class="page1" src="../../images/trimspaces.png" />
+                            </td>
+                            <td>
+                                <a href="https://localhost:8443/app/home/trim_spaces.html" class="ms-Link_White">Trim Spaces</a><br>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <img class="page1" src="../../images/harmonize.png" />
+                            </td>
+                            <td>
+                                <a href="https://localhost:8443/app/home/harmonize.html" class="ms-Link_White">Harmonize Column</a><br>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <img class="page1" src="../../images/extractvalues.png" />
+                            </td>
+                            <td>
+                                <a href="https://localhost:8443/app/home/extract_values.html" class="ms-Link_White">Extract Text</a><br>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <img class="page1" src="../../images/splitvalues.png" />
+                            </td>
+                            <td>
+                                <a href="https://localhost:8443/app/home/split_values.html" class="ms-Link_White">Split Cell Content</a><br>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <img class="page1" src="../../images/addcolumn.png" />
+                            </td>
+                            <td>
+                                <a href="https://localhost:8443/app/home/merge_columns.html" class="ms-Link_White">Lookup Data</a><br>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <img class="page1" src="../../images/detectoutlier.png" />
+                            </td>
+                            <td>
+                                <a href="https://localhost:8443/app/home/inconsistency.html" class="ms-Link_White">Detect Inconsistencies</a><br>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <img class="page1" src="../../images/customIncon.png" />
+                            </td>
+                            <td>
+                                <a href="https://localhost:8443/app/home/custom_incon.html" class="ms-Link_White">Custom Inconsistencies</a><br>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <img class="page1" src="../../images/removeduplicates.png" />
+                            </td>
+                            <td>
+                                <a href="https://localhost:8443/app/home/duplicates.html" class="ms-Link_White">Detect Duplicates</a><br>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <img class="page1" src="../../images/validationrule.png" />
+                            </td>
+                            <td>
+                                <a href="https://localhost:8443/app/home/validation.html" class="ms-Link_White">Rule-based Validation</a><br>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <img class="page1" src="../../images/help.png" />
+                            </td>
+                            <td>
+                                <a href="https://localhost:8443/app/home/help.html" class="ms-Link_White">Help</a><br>
+                            </td>
+                        </tr>
+                    </table>
+                </p>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

@@ -1,3 +1,7 @@
+function redirectHome() {
+    window.location = "mac_start.html";
+}
+
 (function () {
     // 'use strict';
 
@@ -22,6 +26,7 @@
             $('#harmonize').click(harmonize);
             $('#checkbox_all').click(checkCheckbox);
             $('#buttonOk').click(highlightHeader);
+            $('#homeButton').click(redirectHome);
 
             //Show and hide error message if column have same header name
             document.getElementById("buttonClose").onclick = function () {
@@ -311,12 +316,12 @@
                     addBackupSheet(newName, function () {
                         window.location = "harmonize.html"
                     });
+
                 }
                 else {
-                    window.location = "harmonize.html";
+                    //window.location = "harmonize.html";
                 }
 
-                //window.location = "harmonize.html";
             });
 
         }).catch(function(error) {

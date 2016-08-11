@@ -1,3 +1,7 @@
+function redirectHome() {
+    window.location = "mac_start.html";
+}
+
 (function () {
     // 'use strict';
 
@@ -21,6 +25,7 @@
             $('#inconsistency').click(inconsistencies);
             $('#checkbox_all').click(checkCheckbox);
             $('#buttonOk').click(highlightHeader);
+            $('#homeButton').click(redirectHome);
 
             // Show and hide error message if columns have same header name
             document.getElementById("buttonClose").onclick = function () {
