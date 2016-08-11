@@ -288,17 +288,18 @@ function redirectHome() {
 
                     var i = 0;
 
-                    addContentNew(worksheet.name, insert_address, trim_array, function () {
+                    if (document.getElementById('createBackup').checked != true) {
+                        addContentNew(worksheet.name, insert_address, trim_array, function () {
+                            i++;
+                            if (i >= checked_checkboxes.length){
+                                window.location = "trim_spaces.html";
+                            }
+                        });
+                    } else {
+                        addContentNew(worksheet.name, insert_address, trim_array, function () {});
+                    }
 
-                        i++;
 
-                        if (i >= checked_checkboxes.length){
-
-                            window.location = "trim_spaces.html";
-
-                        }
-
-                    });
 
                 }
 
