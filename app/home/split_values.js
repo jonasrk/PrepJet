@@ -331,14 +331,14 @@ function displayFieldDelimiter(){
                             }
                         }
                         else {
-                            split_array[i] = "";
+                            split_array[i] = [""];
                         }
                     }
 
                     for (var j = 0; j < range.text.length; j++) {
                         if (split_array[j].length < max_array_length) {
                             for (var i = split_array[j].length; i < max_array_length; i++) {
-                                split_array[j].push("");
+                                split_array[j][i] = "";
                             }
                         }
                     }
@@ -461,7 +461,6 @@ function displayFieldDelimiter(){
 
             return ctx.sync().then(function() {
                     addContentNew(worksheet.name, insert_address, split_array);
-                    //window.location = "split_values.html";
             });
         }).catch(function(error) {
             console.log("Error: " + error);

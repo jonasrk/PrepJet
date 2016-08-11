@@ -245,7 +245,21 @@ function addBackupSheet(sheetName) {
         var worksheet = ctx.workbook.worksheets.add(wSheetName);
         worksheet.load('name');
         return ctx.sync().then(function() {
-            addBackupContent(worksheet.name);
+            var content_promise = new Promise(
+                        function(resolve, reject) {
+                                resolve(addBackupContent(worksheet.name));
+                        }
+                    );
+
+                    content_promise.then(
+                        function() {
+                            return true;
+                        })
+                    .catch(
+                        function(reason) {
+                            console.log('Handle rejected promise ('+reason+') here.');
+                        });
+            //addBackupContent(worksheet.name);
         });
     }).catch(function(error) {
             console.log("Error: " + error);
