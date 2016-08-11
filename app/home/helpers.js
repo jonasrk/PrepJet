@@ -239,7 +239,7 @@ function getCharFromNumber (number) {
 }
 
 
-function addBackupSheet(sheetName) {
+function addBackupSheet(sheetName, callback) {
     Excel.run(function (ctx) {
         var wSheetName = sheetName;
         var worksheet = ctx.workbook.worksheets.add(wSheetName);
@@ -255,7 +255,7 @@ function addBackupSheet(sheetName) {
     });
 }
 
-function addBackupContent(sheetName) {
+function addBackupContent(sheetName, callback) {
     Excel.run(function (ctx) {
         var values = Office.context.document.settings.get('sheet_backup');
         var end_address = getCharFromNumber(values[0].length - 1) + (values.length).toString();
@@ -276,6 +276,7 @@ function addBackupContent(sheetName) {
         }
     });
 }
+
 
 function addContentNew(sheetObject, rangeAddress, displayText) {
     Excel.run(function (ctx) {
