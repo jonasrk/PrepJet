@@ -285,7 +285,20 @@ function redirectHome() {
 
                     var column_char = getCharFromNumber(header);
                     var insert_address = column_char + 1 + ":" + column_char + range.text.length;
-                    addContentNew(worksheet.name, insert_address, trim_array);
+
+                    var i = 0;
+
+                    addContentNew(worksheet.name, insert_address, trim_array, function () {
+
+                        i++;
+
+                        if (i >= checked_checkboxes.length){
+
+                            window.location = "trim_spaces.html";
+
+                        }
+
+                    });
 
                 }
 
@@ -297,14 +310,6 @@ function redirectHome() {
                     addBackupSheet(newName, function() {
                         window.location = "trim_spaces.html";
                     });
-
-                }
-
-                else {
-
-                    ctx.sync().then(function() {
-                            window.location = "trim_spaces.html";
-                        });
 
                 }
 
