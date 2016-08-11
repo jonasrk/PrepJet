@@ -16,12 +16,13 @@
 
 
             app.initialize();
-            fillColumn();
+            //fillColumn();
+            myHandler();
 
             $('#helpCallout').hide();
             $('#trim_space').click(trimSpace);
             $('#buttonOk').click(highlightHeader);
-            $('#checkbox_all').click(checkCheckbox);
+            //$('#checkbox_all').click(checkCheckbox);
 
             //Show and hide error message if columns have same header name
             document.getElementById("buttonClose").onclick = function () {
@@ -30,6 +31,26 @@
 
             document.getElementById("refresh_icon").onclick = function () {
                 window.location = "trim_spaces.html";
+            }
+
+
+            Office.context.document.addHandlerAsync("documentSelectionChanged", myHandler, function(result){}
+            );
+
+            // Event handler function.
+            function myHandler(eventArgs){
+                Excel.run(function (ctx) {
+                    var selectedRange = ctx.workbook.getSelectedRange();
+                    selectedRange.load('address');
+                    return ctx.sync().then(function () {
+                        write(selectedRange.address);
+                    });
+                });
+            }
+
+            // Function that writes to a div with id='message' on the page.
+            function write(message){
+                document.getElementById('trimSelectInput').value = message;
             }
 
 
@@ -152,7 +173,7 @@
     }
 
 
-    function checkCheckbox() {
+    /*function checkCheckbox() {
 
         Excel.run(function (ctx) {
 
@@ -193,10 +214,10 @@
             }
         });
 
-    }
+    }*/
 
 
-    function fillColumn(){
+    /*function fillColumn(){
 
         Excel.run(function (ctx) {
 
@@ -237,7 +258,7 @@
             }
         });
 
-    }
+    }*/
 
 
     function trimSpace() {
@@ -248,38 +269,53 @@
             var range_all = worksheet.getRange();
             var range = range_all.getUsedRange();
 
+            var trimRange = document.getElementById('trimSelectInput').value;
+            var rangeTrim = worksheet.getRange(trimRange);
+            var rangeTrimUsed = rangeTrim.getUsedRange();
             //get used range in active Sheet
             range.load('text');
             worksheet.load('name');
+
+            rangeTrimUsed.load('text');
+            rangeTrimUsed.load('columnCount');
+            rangeTrimUsed.load('address');
+            rangeTrim.load('address');
 
             return ctx.sync().then(function() {
 
                 backupForUndo(range);
 
-
-
                 var header = 0;
                 var act_worksheet = ctx.workbook.worksheets.getActiveWorksheet();
 
-                var checked_checkboxes = getCheckedBoxes("column_checkbox");
+                //var checked_checkboxes = getCheckedBoxes("column_checkbox");
 
-                for (var run = 0; run < checked_checkboxes.length; run++) {
+                for (var run = 0; run < rangeTrimUsed.columnCount; run++) {
                     var trim_array = [];
-                    for (var k = 0; k < range.text[0].length; k++) {
+                    /*for (var k = 0; k < range.text[0].length; k++) {
                         if (checked_checkboxes[run].id == range.text[0][k] || checked_checkboxes[run].id == "Column " + getCharFromNumber(k)){
                             header = k;
                             break;
                         }
-                    }
+                    }*/
 
-                    for (var i = 0; i < range.text.length; i++) {
+                    for (var i = 0; i < rangeTrimUsed.text.length; i++) {
                         var trim_string = [];
-                        trim_string.push(range.text[i][header].trim());
+                        trim_string.push(rangeTrimUsed.text[i][run].trim());
                         trim_array.push(trim_string);
+                        console.log(trim_array);
                     }
 
-                    var column_char = getCharFromNumber(header);
-                    var insert_address = column_char + 1 + ":" + column_char + range.text.length;
+
+                    var column_char = getCharFromNumber(run);
+                    var tmp = rangeTrimUsed.address;
+                    var tmp2 = rangeTrim.address;
+                    var insert_address = column_char + 1 + ":" + column_char + rangeTrimUsed.text.length;
+
+                    //var insert_address = tmp.substring(tmp.indexOf("!")+1, tmp.indexOf(":")) + ":" + tmp2.substring(tmp2.indexOf("!")+1, tmp2.indexOf(":")) + rangeTrimUsed.text.length;
+                    //var insert_address = "A1:A6";
+                    console.log(insert_address);
+                    //var insert_address = column_char + 1 + ":" + column_char + range.text.length;
                     addContentNew(worksheet.name, insert_address, trim_array);
 
                 }
