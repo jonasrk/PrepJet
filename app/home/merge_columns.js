@@ -616,7 +616,7 @@ function backToOne() {
                     var newName = worksheet_adding_to.name + "(" + sheet_count + ")";
                     var backup_promise = new Promise(
                         function(resolve, reject) {
-                                addBackupSheet(newName);
+                                resolve(addBackupSheet(newName));
                         }
                     );
 

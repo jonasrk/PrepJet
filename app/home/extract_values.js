@@ -564,7 +564,7 @@ function hideAdvancedCount() {
                     var newName = worksheet.name + "(" + sheet_count + ")";
                     var backup_promise = new Promise(
                         function(resolve, reject) {
-                                addBackupSheet(newName);
+                                resolve(addBackupSheet(newName));
                         }
                     );
 
@@ -576,7 +576,6 @@ function hideAdvancedCount() {
                             document.getElementById('resultText').appendChild(txt);
 
                             document.getElementById('resultDialog').style.visibility = 'visible';
-                            //window.location = "trim_spaces.html";
                         })
                     .catch(
                         function(reason) {
@@ -590,7 +589,6 @@ function hideAdvancedCount() {
                     document.getElementById('resultText').appendChild(txt);
 
                     document.getElementById('resultDialog').style.visibility = 'visible';
-                    //window.location = "trim_spaces.html";
                 }
 
                 /*var txt = document.createElement("p");

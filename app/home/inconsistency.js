@@ -404,7 +404,7 @@
                     var newName = worksheet.name + "(" + sheet_count + ")";
                     var backup_promise = new Promise(
                         function(resolve, reject) {
-                                addBackupSheet(newName);
+                                resolve(addBackupSheet(newName));
                         }
                     );
 
