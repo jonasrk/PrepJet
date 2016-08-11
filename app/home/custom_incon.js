@@ -7,6 +7,10 @@ function displayBetween(){
     }
 }
 
+function redirectHome() {
+    window.location = "mac_start.html";
+}
+
 
 (function () {
     // 'use strict';
@@ -31,6 +35,7 @@ function displayBetween(){
             $(".dropdown_table").Dropdown();
             $('#custom_incon').click(screenIncon);
             $('#buttonOk').click(highlightHeader);
+            $('#homeButton').click(redirectHome);
 
             //Show and hide error message if columns have same header name
             document.getElementById("buttonClose").onclick = function () {

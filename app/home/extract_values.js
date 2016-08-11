@@ -8,6 +8,10 @@ function displayFieldBegin(){
     }
 }
 
+function redirectHome() {
+    window.location = "mac_start.html";
+}
+
 //show textfield for ending delimiter if custom is selected
 function displayFieldEnd(){
     if(document.getElementById('ending_options').value == "custom_e") {
@@ -78,6 +82,7 @@ function hideAdvancedCount() {
             $('#advanced_settings').click(displayAdvancedCount);
             $('#advanced_hide').click(hideAdvancedCount);
             $('#buttonOk').click(highlightHeader);
+            $('#homeButton').click(redirectHome);
 
 
             /*Office.context.document.addHandlerAsync("documentSelectionChanged", myHandler, function(result){}

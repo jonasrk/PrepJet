@@ -6,6 +6,11 @@ function backToOne() {
 }
 
 
+function redirectHome() {
+    window.location = "mac_start.html";
+}
+
+
 (function () {
     // 'use strict';
     var count_drop = 0;
@@ -41,6 +46,7 @@ function backToOne() {
             $('#bt_apply').click(applyButtonClicked);
             $('#back_step2').click(step2ButtonClicked);
             $('#buttonOk').click(highlightHeader);
+            $('#homeButton').click(redirectHome);
 
 
             //show and hide error message for columns that have same header name

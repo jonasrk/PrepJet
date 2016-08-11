@@ -1,3 +1,8 @@
+function redirectHome() {
+    window.location = "mac_start.html";
+}
+
+
 (function () {
     // 'use strict';
 
@@ -41,6 +46,7 @@
             $('#linkUndoHelp').click(undoHelp);
             $('#linkTableHeaderHelp').click(tableHeaderHelp);
             $('#linkCustomInconHelp').click(customInconHelp);
+            $('#homeButton').click(redirectHome);
 
         });
     };

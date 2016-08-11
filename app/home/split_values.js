@@ -25,6 +25,12 @@ function displayFieldDelimiter(){
     }
 }
 
+
+function redirectHome() {
+    window.location = "mac_start.html";
+}
+
+
 (function () {
     // 'use strict';
 
@@ -60,6 +66,7 @@ function displayFieldDelimiter(){
             $('#buttonOk').click(highlightHeader);
             $('#advanced_settings').click(displayAdvancedCount);
             $('#advanced_hide').click(hideAdvancedCount);
+            $('#homeButton').click(redirectHome);
 
 
             // Hides the dialog.
