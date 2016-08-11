@@ -313,26 +313,15 @@ function redirectHome() {
                     Office.context.document.settings.set('backup_sheet_count', sheet_count);
                     Office.context.document.settings.saveAsync();
                     var newName = worksheet.name + "(" + sheet_count + ")";
-                    var backup_promise = new Promise(
-                        function(resolve, reject) {
-                                resolve(addBackupSheet(newName));
-                        }
-                    );
+                    addBackupSheet(newName, function() {
+                        window.location = "harmonize.html";
+                    });
 
-                    backup_promise.then(
-                        function() {
-                            //window.location = "harmonize.html";
-                        })
-                    .catch(
-                        function(reason) {
-                            console.log('Handle rejected promise ('+reason+') here.');
-                        });
                 }
                 else {
                     //window.location = "harmonize.html";
                 }
 
-                //window.location = "harmonize.html";
             });
 
         }).catch(function(error) {

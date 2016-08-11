@@ -310,9 +310,7 @@ function redirectHome() {
                     }
                 }
 
-                console.log(charCount);
-                console.log(charIncluded);
-                console.log(charNotIncluded);
+
                 window.location = "custom_incon.html";
 
             });

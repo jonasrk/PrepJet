@@ -620,27 +620,16 @@ function redirectHome() {
                     Office.context.document.settings.set('backup_sheet_count', sheet_count);
                     Office.context.document.settings.saveAsync();
                     var newName = worksheet_adding_to.name + "(" + sheet_count + ")";
-                    var backup_promise = new Promise(
-                        function(resolve, reject) {
-                                resolve(addBackupSheet(newName));
-                        }
-                    );
+                    addBackupSheet(newName, function() {
+                        empty_count = range_adding_to.text.length - lookup_count - 1;
 
-                    backup_promise.then(
-                        function() {
-                            empty_count = range_adding_to.text.length - lookup_count - 1;
+                        var txt = document.createElement("p");
+                        txt.className = "ms-font-xs ms-embedded-dialog__content__text";
+                        txt.innerHTML = "PrepJet found " + lookup_count + " matching data records. " + empty_count + " rows did not meet the specified match criteria."
+                        document.getElementById('resultText').appendChild(txt);
 
-                            var txt = document.createElement("p");
-                            txt.className = "ms-font-xs ms-embedded-dialog__content__text";
-                            txt.innerHTML = "PrepJet found " + lookup_count + " matching data records. " + empty_count + " rows did not meet the specified match criteria."
-                            document.getElementById('resultText').appendChild(txt);
-
-                            document.getElementById('resultDialog').style.visibility = 'visible';
-                        })
-                    .catch(
-                        function(reason) {
-                            console.log('Handle rejected promise ('+reason+') here.');
-                        });
+                        document.getElementById('resultDialog').style.visibility = 'visible';
+                    });
                 }
                 else {
                     empty_count = range_adding_to.text.length - lookup_count - 1;
