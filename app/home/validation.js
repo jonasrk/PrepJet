@@ -607,7 +607,6 @@ function showEnterpriseDialog() {
 
                 document.getElementById('resultDialog').style.visibility = 'visible';
 
-                //window.location = "validation.html";
             });
 
 

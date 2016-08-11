@@ -377,31 +377,6 @@ function redirectHome() {
 
                 if(document.getElementById('duplicatesort').checked == false) {
                     colorDup(duplicates, 1);
-
-                    /*if (document.getElementById('createBackup').checked == true) {
-                    var sheet_count = Office.context.document.settings.get('backup_sheet_count') + 1;
-                    Office.context.document.settings.set('backup_sheet_count', sheet_count);
-                    Office.context.document.settings.saveAsync();
-                    var newName = worksheet.name + "(" + sheet_count + ")";
-                    addBackupSheet(newName, function() {
-                        var txt = document.createElement("p");
-                        txt.className = "ms-font-xs ms-embedded-dialog__content__text";
-                        txt.innerHTML = "PrepJet found " + duplicates.length + " duplicate rows."
-                        document.getElementById('resultText').appendChild(txt);
-
-                        document.getElementById('resultDialog').style.visibility = 'visible';
-                    });
-
-                    }
-                    else {
-                        var txt = document.createElement("p");
-                        txt.className = "ms-font-xs ms-embedded-dialog__content__text";
-                        txt.innerHTML = "PrepJet found " + duplicates.length + " duplicate rows."
-                        document.getElementById('resultText').appendChild(txt);
-
-                        document.getElementById('resultDialog').style.visibility = 'visible';
-                    }*/
-
                 }
                 else {
 
@@ -439,7 +414,7 @@ function redirectHome() {
                     var start_col = firstCol.address.substring(firstCol.address.indexOf("!") + 1, firstCol.address.indexOf(":"));
                     var end_col = lastCol.address.substring(lastCol.address.indexOf(":") + 1);
 
-                    addContentNew(worksheet.name, start_col + ":" + end_col, text);
+                    addContentNew(worksheet.name, start_col + ":" + end_col, text, function () {});
 
                     for (var row = 0; row < text.length; row++) {
                         for(var col = 0; col < range.text[0].length; col++) {
@@ -452,13 +427,6 @@ function redirectHome() {
                         }
                         sheet_row += 1;
                     }
-
-                    /*var txt = document.createElement("p");
-                    txt.className = "ms-font-xs ms-embedded-dialog__content__text";
-                    txt.innerHTML = "PrepJet found " + duplicates.length + " duplicate rows."
-                    document.getElementById('resultText').appendChild(txt);
-
-                    document.getElementById('resultDialog').style.visibility = 'visible';*/
 
                 }
 
@@ -485,10 +453,6 @@ function redirectHome() {
 
                         document.getElementById('resultDialog').style.visibility = 'visible';
                     }
-
-
-
-                //window.location = "duplicates.html";
 
             });
 

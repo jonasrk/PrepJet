@@ -598,7 +598,7 @@ function hideAdvancedCount() {
     }
 
 
-    function addExtractedValue(split_array, insert_address){
+    function addExtractedValue(extracted_array, insert_address){
 
         Excel.run(function (ctx) {
 
@@ -610,7 +610,7 @@ function hideAdvancedCount() {
             worksheet.load('name');
 
             return ctx.sync().then(function() {
-                addContentNew(worksheet.name, insert_address, split_array);
+                addContentNew(worksheet.name, insert_address, extracted_array, function () {});
             });
 
         }).catch(function(error) {

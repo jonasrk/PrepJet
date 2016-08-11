@@ -456,7 +456,7 @@ function redirectHome() {
             worksheet.load('name');
 
             return ctx.sync().then(function() {
-                    addContentNew(worksheet.name, insert_address, split_array);
+                    addContentNew(worksheet.name, insert_address, split_array, function () {});
             });
         }).catch(function(error) {
             console.log("Error: " + error);
