@@ -17,6 +17,7 @@ function redirectHome() {
             Office.context.document.settings.set('same_header_duplicates', false);
             Office.context.document.settings.set('last_clicked_function', "duplicates.html");
             if (Office.context.document.settings.get('prepjet_loaded_before') == null) {
+                Office.context.document.settings.set('backup_sheet_count', 1);
                 Office.context.document.settings.set('prepjet_loaded_before', true);
                 Office.context.document.settings.saveAsync();
                 window.location = "intro.html";
@@ -290,6 +291,8 @@ function redirectHome() {
 
             return ctx.sync().then(function() {
 
+                backupForUndo(range);
+
                 var columns_to_check = [];
 
                 for (var k = 0; k < range.text[0].length; k++) { // .text[0] is the first row of a range
@@ -375,12 +378,30 @@ function redirectHome() {
                 if(document.getElementById('duplicatesort').checked == false) {
                     colorDup(duplicates, 1);
 
-                    var txt = document.createElement("p");
-                    txt.className = "ms-font-xs ms-embedded-dialog__content__text";
-                    txt.innerHTML = "PrepJet found " + duplicates.length + " duplicate rows."
-                    document.getElementById('resultText').appendChild(txt);
+                    if (document.getElementById('createBackup').checked == true) {
+                    var sheet_count = Office.context.document.settings.get('backup_sheet_count') + 1;
+                    Office.context.document.settings.set('backup_sheet_count', sheet_count);
+                    Office.context.document.settings.saveAsync();
+                    var newName = worksheet.name + "(" + sheet_count + ")";
+                    addBackupSheet(newName, function() {
+                        var txt = document.createElement("p");
+                        txt.className = "ms-font-xs ms-embedded-dialog__content__text";
+                        txt.innerHTML = "PrepJet found " + duplicates.length + " duplicate rows."
+                        document.getElementById('resultText').appendChild(txt);
 
-                    document.getElementById('resultDialog').style.visibility = 'visible';
+                        document.getElementById('resultDialog').style.visibility = 'visible';
+                    });
+
+                    }
+                    else {
+                        var txt = document.createElement("p");
+                        txt.className = "ms-font-xs ms-embedded-dialog__content__text";
+                        txt.innerHTML = "PrepJet found " + duplicates.length + " duplicate rows."
+                        document.getElementById('resultText').appendChild(txt);
+
+                        document.getElementById('resultDialog').style.visibility = 'visible';
+                    }
+
                 }
                 else {
 
