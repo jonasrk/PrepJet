@@ -308,7 +308,7 @@
                     Office.context.document.settings.set('backup_sheet_count', sheet_count);
                     Office.context.document.settings.saveAsync();
                     var newName = worksheet.name + "(" + sheet_count + ")";
-                    addBackupSheet(newname, function () {
+                    addBackupSheet(newName, function () {
                         window.location = "harmonize.html"
                     });
                 }
