@@ -321,7 +321,7 @@ function redirectHome() {
 
                     backup_promise.then(
                         function() {
-                            window.location = "harmonize.html";
+                            //window.location = "harmonize.html";
                         })
                     .catch(
                         function(reason) {
@@ -329,7 +329,7 @@ function redirectHome() {
                         });
                 }
                 else {
-                    window.location = "harmonize.html";
+                    //window.location = "harmonize.html";
                 }
 
                 //window.location = "harmonize.html";

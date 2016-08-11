@@ -203,10 +203,3 @@ ul {
 
 .ms-fontColor-themeTertiary, .ms-fontColor-themeTertiary--hover:hover {
     color: #EA7F04; }
-
-
-.ms-Button_homeHelp {
-    border: 0px;
-    background: #666666;
-    height: 35px;
-    width: 35px; }

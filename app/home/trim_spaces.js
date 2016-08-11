@@ -310,7 +310,7 @@ function redirectHome() {
                         });
                 }
                 else {
-                    window.location = "trim_spaces.html";
+                    //window.location = "trim_spaces.html";
                 }
 
             });
