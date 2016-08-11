@@ -378,7 +378,7 @@ function redirectHome() {
                 if(document.getElementById('duplicatesort').checked == false) {
                     colorDup(duplicates, 1);
 
-                    if (document.getElementById('createBackup').checked == true) {
+                    /*if (document.getElementById('createBackup').checked == true) {
                     var sheet_count = Office.context.document.settings.get('backup_sheet_count') + 1;
                     Office.context.document.settings.set('backup_sheet_count', sheet_count);
                     Office.context.document.settings.saveAsync();
@@ -400,7 +400,7 @@ function redirectHome() {
                         document.getElementById('resultText').appendChild(txt);
 
                         document.getElementById('resultDialog').style.visibility = 'visible';
-                    }
+                    }*/
 
                 }
                 else {
@@ -453,14 +453,38 @@ function redirectHome() {
                         sheet_row += 1;
                     }
 
-                    var txt = document.createElement("p");
+                    /*var txt = document.createElement("p");
                     txt.className = "ms-font-xs ms-embedded-dialog__content__text";
                     txt.innerHTML = "PrepJet found " + duplicates.length + " duplicate rows."
                     document.getElementById('resultText').appendChild(txt);
 
-                    document.getElementById('resultDialog').style.visibility = 'visible';
+                    document.getElementById('resultDialog').style.visibility = 'visible';*/
 
                 }
+
+                if (document.getElementById('createBackup').checked == true) {
+                    var sheet_count = Office.context.document.settings.get('backup_sheet_count') + 1;
+                    Office.context.document.settings.set('backup_sheet_count', sheet_count);
+                    Office.context.document.settings.saveAsync();
+                    var newName = worksheet.name + "(" + sheet_count + ")";
+                    addBackupSheet(newName, function() {
+                        var txt = document.createElement("p");
+                        txt.className = "ms-font-xs ms-embedded-dialog__content__text";
+                        txt.innerHTML = "PrepJet found " + duplicates.length + " duplicate rows."
+                        document.getElementById('resultText').appendChild(txt);
+
+                        document.getElementById('resultDialog').style.visibility = 'visible';
+                    });
+
+                    }
+                    else {
+                        var txt = document.createElement("p");
+                        txt.className = "ms-font-xs ms-embedded-dialog__content__text";
+                        txt.innerHTML = "PrepJet found " + duplicates.length + " duplicate rows."
+                        document.getElementById('resultText').appendChild(txt);
+
+                        document.getElementById('resultDialog').style.visibility = 'visible';
+                    }
 
 
 
