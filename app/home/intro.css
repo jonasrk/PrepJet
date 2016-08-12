@@ -61,7 +61,10 @@ ul {
   background: #666666; }
 
   .ms-firstrun-pages__header {
-    padding: 5px;
+    padding-right: 5px;
+    padding-top: 5px;
+    padding-right: 5px;
+    padding-left: 0px;
     min-height: 60px;
     max-height: 250px;
     display: -webkit-box;
@@ -95,7 +98,8 @@ ul {
     -webkit-box-pack: center;
             justify-content: center;
     -webkit-box-align: center;
-            align-items: center; }
+            align-items: left;
+    padding-left: 20px;}
 
     .ms-firstrun-pages__welcome img {
       height: 50px; }
@@ -205,4 +209,8 @@ ul {
 
 .ms-Button_homelogo {
     background: #666666;
-    border: 1px solid #666666; }
+    border: 1px solid #666666;
+    padding-top: 10px;}
+
+#leftcol {
+    width: 76%; }
