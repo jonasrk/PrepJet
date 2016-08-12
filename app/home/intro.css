@@ -142,7 +142,6 @@ ul {
     -webkit-box-direction: normal;
             flex-direction: column;
     flex-wrap: nowrap;
-    height: 100%;
     -webkit-box-flex: 1;
             flex: 1 1 0;
     padding-top: 10px
@@ -150,7 +149,7 @@ ul {
     padding-left: 20px;
     padding-right: 20px;
     background: #666666;
-    overflow: scroll;
+    overflow: visible;
     top: 60px; }
 
     .ms-firstrun-pages__content--centered {

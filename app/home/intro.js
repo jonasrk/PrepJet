@@ -4,7 +4,7 @@
 
     var app = window.app || {};
     app.firstrun = {};
-    app.firstrun.stage = 1;
+    app.firstrun.stage = 0;
 
 
     $(document).ready(function () {
@@ -66,7 +66,7 @@
             $('#previous').attr('class', 'invisible');
 
             // UI changes that apply to all stage transitions
-            app.firstrun.setStageUI(1);
+            app.firstrun.setStageUI(0);
         };
 
         app.firstrun.showIntermediateStage = function (nextStage) {
