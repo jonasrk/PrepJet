@@ -98,7 +98,7 @@ ul {
             align-items: center; }
 
     .ms-firstrun-pages__welcome img {
-      height: 100px; }
+      height: 50px; }
 
   .ms-firstrun-pages__pager {
     display: -webkit-box;
@@ -202,3 +202,7 @@ ul {
 
 .ms-fontColor-themeTertiary, .ms-fontColor-themeTertiary--hover:hover {
     color: #EA7F04; }
+
+.ms-Button_homelogo {
+    background: #666666;
+    border: 1px solid #666666; }
