@@ -22,6 +22,10 @@ function redirectHome() {
             app.initialize();
             fillColumn();
 
+            $zopim(function() {
+                $zopim.livechat.window.hide();
+            });
+
             $('#helpCallout').hide();
             $('#trim_space').click(trimSpace);
             $('#buttonOk').click(highlightHeader);

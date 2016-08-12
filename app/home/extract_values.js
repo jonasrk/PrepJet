@@ -84,6 +84,10 @@ function hideAdvancedCount() {
             $('#buttonOk').click(highlightHeader);
             $('#homeButton').click(redirectHome);
 
+            $zopim(function() {
+                $zopim.livechat.window.hide();
+            });
+
 
             /*Office.context.document.addHandlerAsync("documentSelectionChanged", myHandler, function(result){}
             );

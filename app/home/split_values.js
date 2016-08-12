@@ -51,6 +51,10 @@ function redirectHome() {
             app.initialize();
             fillColumn();
 
+            $zopim(function() {
+                $zopim.livechat.window.hide();
+            });
+
 
             $('#delimiter_beginning').hide();
             $('#delimiter_count').Dropdown().hide();

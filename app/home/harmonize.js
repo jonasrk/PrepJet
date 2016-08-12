@@ -21,6 +21,9 @@ function redirectHome() {
             app.initialize();
             fillColumn();
 
+            $zopim(function() {
+                $zopim.livechat.window.hide();
+            });
 
             $(".harmonize_drop").Dropdown();
             $('#harmonize').click(harmonize);

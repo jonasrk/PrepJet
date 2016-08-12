@@ -100,6 +100,10 @@ function showEnterpriseDialog() {
             $('#buttonOk').click(highlightHeader);
             $('#homeButton').click(redirectHome);
 
+            $zopim(function() {
+                $zopim.livechat.window.hide();
+            });
+
 
             if (Office.context.document.settings.get('from_inconsistencies') == true){
                 $('#to_inconsistency').show();

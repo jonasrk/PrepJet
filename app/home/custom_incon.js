@@ -37,6 +37,10 @@ function redirectHome() {
             $('#buttonOk').click(highlightHeader);
             $('#homeButton').click(redirectHome);
 
+            $zopim(function() {
+                $zopim.livechat.window.hide();
+            });
+
             //Show and hide error message if columns have same header name
             document.getElementById("buttonClose").onclick = function () {
                 document.getElementById('showEmbeddedDialog').style.visibility = 'hidden';

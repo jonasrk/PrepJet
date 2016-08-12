@@ -34,6 +34,10 @@ function redirectHome() {
 
             app.initialize();
 
+            $zopim(function() {
+                $zopim.livechat.window.hide();
+            });
+
 
             $('#step2').hide();
             $('#step3').hide();

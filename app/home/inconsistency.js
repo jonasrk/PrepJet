@@ -21,6 +21,10 @@ function redirectHome() {
             app.initialize();
             fillColumn();
 
+            $zopim(function() {
+                $zopim.livechat.window.hide();
+            });
+
 
             $('#inconsistency').click(inconsistencies);
             $('#checkbox_all').click(checkCheckbox);

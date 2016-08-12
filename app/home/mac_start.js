@@ -7,6 +7,10 @@
 
             app.initialize();
 
+            $zopim(function() {
+                $zopim.livechat.window.hide();
+            });
+
             /*$('#splitValHome').click(home);
             $('#addColHome').click(home);
             $('#extractValHome').click(home);

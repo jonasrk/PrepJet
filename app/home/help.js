@@ -48,6 +48,10 @@ function redirectHome() {
             $('#linkCustomInconHelp').click(customInconHelp);
             $('#homeButton').click(redirectHome);
 
+            $zopim(function() {
+                $zopim.livechat.window.hide();
+            });
+
         });
     };
 
