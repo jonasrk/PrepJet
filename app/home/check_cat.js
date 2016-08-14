@@ -229,6 +229,7 @@ function redirectHome() {
             var selected_identifier = document.getElementById('column_options').value;
 
             range.load('text');
+            worksheet.load('name');
 
             return ctx.sync().then(function() {
 
@@ -254,6 +255,16 @@ function redirectHome() {
                             }
                         }
                     }
+                }
+
+                if (document.getElementById('createBackup').checked == true) {
+                    var sheet_count = Office.context.document.settings.get('backup_sheet_count') + 1;
+                    Office.context.document.settings.set('backup_sheet_count', sheet_count);
+                    Office.context.document.settings.saveAsync();
+                    var newName = worksheet.name + "(" + sheet_count + ")";
+                    addBackupSheet(newName, function() {
+                        window.location = "check_cat.html"
+                    });
                 }
 
 
@@ -343,7 +354,6 @@ function redirectHome() {
 
                 var count_categories = Object.keys(categories).length;
                 var count_data_records = range.text.length;
-                //var count_suspicious = 0;
 
                 var keysSorted = sortobj(categories);
                 fillCategories(keysSorted.suspCat, "visible", count_wrong_cats);
@@ -363,7 +373,6 @@ function redirectHome() {
                     kva.forEach(function(a) {
                         if (a[1] < 0.1 * count_data_records) {
                             suspCat[a[0]] = a[1]
-                            //count_suspicious += 1;
                             count_wrong_cats += 1;
                         }
                         else {
@@ -375,29 +384,21 @@ function redirectHome() {
                     return {suspCat: suspCat, correctCat: correctCat};
                 }
 
-                if (document.getElementById('createBackup').checked == true) {
-                    var sheet_count = Office.context.document.settings.get('backup_sheet_count') + 1;
-                    Office.context.document.settings.set('backup_sheet_count', sheet_count);
-                    Office.context.document.settings.saveAsync();
-                    var newName = worksheet.name + "(" + sheet_count + ")";
-                    addBackupSheet(newName, function() {
-                        var txt = document.createElement("p");
-                        txt.className = "ms-font-xs ms-embedded-dialog__content__text";
-                        txt.innerHTML = "PrepJet found " + count_categories + " categories of which " + count_wrong_cats + " are suspicious."
-                        document.getElementById('resultText').appendChild(txt);
+                var txt = document.createElement("p");
+                txt.className = "ms-font-xs ms-embedded-dialog__content__text";
+                txt.innerHTML = "PrepJet found " + count_categories + " categories of which " + count_wrong_cats + " are suspicious."
+                document.getElementById('resultText').appendChild(txt);
 
-                        document.getElementById('resultDialog').style.visibility = 'visible';
-                    });
+                document.getElementById('resultDialog').style.visibility = 'visible';
+
+                if (count_wrong_cats == 0) {
+                    document.getElementById("resultClose").onclick = function () {
+                        window.location = "check_cat.html"
+                    }
+                    document.getElementById("resultOk").onclick = function () {
+                        window.location = "check_cat.html"
+                    }
                 }
-                else {
-                    var txt = document.createElement("p");
-                    txt.className = "ms-font-xs ms-embedded-dialog__content__text";
-                    txt.innerHTML = "PrepJet found " + count_categories + " categories of which " + count_wrong_cats + " are suspicious."
-                    document.getElementById('resultText').appendChild(txt);
-
-                    document.getElementById('resultDialog').style.visibility = 'visible';
-                }
-
 
             });
 
