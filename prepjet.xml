@@ -396,7 +396,7 @@
         <bt:Url id="PJ.ExtractValues.Url" DefaultValue="https://localhost:8443/app/home/extract_values.html" />
         <bt:Url id="PJ.TrimSpaces.Url" DefaultValue="https://localhost:8443/app/home/trim_spaces.html" />
         <bt:Url id="PJ.validation.Url" DefaultValue="https://localhost:8443/app/home/validation.html" />
-        <bt:Url id="PJ.Harmonize.Url" DefaultValue="https://localhost:8443/app/home/harmonize.html" />
+        <bt:Url id="PJ.Harmonize.Url" DefaultValue="https://localhost:8443/app/home/check_cat.html" />
         <bt:Url id="PJ.help.Url" DefaultValue="https://localhost:8443/app/home/help.html" />
         <!--LearnMore URL currently not used -->
         <bt:Url id="PJ.GetStarted.LearnMoreUrl" DefaultValue="http://www.prepjet.de/about-1/">
