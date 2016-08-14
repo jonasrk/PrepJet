@@ -202,6 +202,9 @@ function redirectHome() {
                     tcol2.appendChild(textfield);
 
                     trow.style.visibility = trstyle;
+                    if (trstyle == "hidden") {
+                        trow.style.display = 'none';
+                    }
                 }
 
             });
@@ -278,10 +281,21 @@ function redirectHome() {
 
             return ctx.sync().then(function() {
 
-                for (var i = (count_corr_cats + count_wrong_cats); i > count_wrong_cats ; i--) {
-                    var tmp_name = "newRow" + i;
-                    document.getElementById(tmp_name).style.visibility = "visible";
+                if (document.getElementById('showAll').checked == true) {
+                    for (var i = (count_corr_cats + count_wrong_cats); i > count_wrong_cats ; i--) {
+                        var tmp_name = "newRow" + i;
+                        document.getElementById(tmp_name).style.visibility = "visible";
+                        document.getElementById(tmp_name).style.display = "table-row";
+                    }
                 }
+                else {
+                    for (var i = (count_corr_cats + count_wrong_cats); i > count_wrong_cats ; i--) {
+                        var tmp_name = "newRow" + i;
+                        document.getElementById(tmp_name).style.visibility = "hidden";
+                        document.getElementById(tmp_name).style.display = "none";
+                    }
+                }
+
 
             });
 
