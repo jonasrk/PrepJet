@@ -64,9 +64,6 @@
                 <button id="homeButton" class="ms-Button_homelogo">
                     <img class="page1" src="../../images/logo_lg.png" />
                 </button>
-                <!--div>
-                    <img class="page1" src="../../images/logo_lg.png" />
-                </div-->
             </td>
         </tr>
     </table>
@@ -107,7 +104,24 @@
                 <i class="ms-Dropdown-caretDown ms-Icon ms-Icon--caretDown"></i>
                 <select id="column_options" class="ms-Dropdown-select"></select>
             </div>
-
+            <div id="helpCallout" class="ms-Callout ms-Callout--close ms-Callout--arrowLeft">
+                <div class="ms-Callout-main">
+                    <div class="ms-Callout-header">
+                        <p class="ms-Callout-title">Help: Check Categories</p>
+                    </div>
+                    <button id="closeCallout" class="ms-Callout-close">
+                        <i class="ms-Icon ms-Icon--x"></i>
+                    </button>
+                    <div class="ms-Callout-inner">
+                        <div class="ms-Callout-content">
+                            <p class="ms-Callout-subText">PrepJet will analyze the content in your selected columns in terms of occurance frequency. Categories with a very low frequency will be displayed for further checking as they might be not correct.</p>
+                        </div>
+                        <div class="ms-Callout-actions">
+                            <a href="help.html" class="ms-Callout-link ms-Link">Learn more</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div id="resultDialog" class="ms-embedded-dialog__options" >
                 <div class="ms-Dialog ms-Dialog--close">
                     <div class="ms-Overlay js-DialogAction--close"></div>
@@ -131,14 +145,39 @@
                     </div>
                 </div>
             </div>
-            <!--split button-->
-            <button class="ms-Button" id="check_categories">Check</button>
+            <table>
+                <tr>
+                    <td>
+                        <!--split button-->
+                        <button class="ms-Button" id="check_categories">Check</button>
+                    </td>
+                    <td>
+                        <button id="help_icon" class="ms-Button_icon">
+                            <i class="ms-Icon ms-Icon--infoCircle" aria-hidden="true"></i>
+                        </button>
+                    </td>
+                </tr>
+            </table>
+
         </div>
         <div id="step2">
             <div id="explanation">
-                <label class="ms-Label">PrepJet found the following categories. The frequency is indicated in brackets. If you want to change a category, type the correct name in the text field next to it.</label>
+                <label class="ms-Label">The following categories are suspicious, because their frequency (indicated in brackets) is very low compared to the other categories.<br>
+                    If you want to change a category, type the correct name in the text field next to it.</label>
             </div>
             <table id="checkboxes_categories"></table>
+            <table class="tableupperborder">
+                <tr>
+                    <td>
+                        <div class="ms-ChoiceField">
+                            <input id="showAll" class="ms-ChoiceField-input" type="checkbox">
+                            <label for="showAll" class="ms-ChoiceField-field">
+                                <span class="ms-Label">Show all categories</span>
+                            </label>
+                        </div>
+                    </td>
+                </tr>
+            </table>
             <table class="tableupperborder">
                 <tr>
                     <td>
