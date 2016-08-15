@@ -39,17 +39,12 @@ function redirectHome() {
 
 
             /*Excel.run(function (ctx) {
-
                 var myBindings = Office.context.document.bindings;
                 var worksheetname = ctx.workbook.worksheets.getActiveWorksheet();
-
                 worksheetname.load('name')
-
                 return ctx.sync().then(function() {
-
                     Office.context.document.addHandlerAsync("documentSelectionChanged", myViewHandler, function(result){}
                     );
-
                     // Event handler function for changing the worksheet.
                     function myViewHandler(eventArgs){
                         Excel.run(function (ctx) {
@@ -62,34 +57,25 @@ function redirectHome() {
                             });
                         });
                     }
-
-
                     function bindFromPrompt() {
-
                         var myBindings = Office.context.document.bindings;
                         var name_worksheet = worksheetname.name;
                         var myAddress = name_worksheet.concat("!1:1");
-
                         myBindings.addFromNamedItemAsync(myAddress, "matrix", {id:'myBinding'}, function (asyncResult) {
                             if (asyncResult.status == Office.AsyncResultStatus.Failed) {
                                 write('Action failed. Error: ' + asyncResult.error.message);
                             } else {
                                 write('Added new binding with type: ' + asyncResult.value.type + ' and id: ' + asyncResult.value.id);
-
                                 function addHandler() {
                                     Office.select("bindings#myBinding").addHandlerAsync(
                                         Office.EventType.BindingDataChanged, dataChanged);
                                 }
-
                                 addHandler();
                                 displayAllBindings();
-
                             }
                         });
                     }
-
                 bindFromPrompt();
-
                 function displayAllBindings() {
                     Office.context.document.bindings.getAllAsync(function (asyncResult) {
                         var bindingString = '';
@@ -98,16 +84,13 @@ function redirectHome() {
                         }
                     });
                 }
-
                 function dataChanged(eventArgs) {
                     window.location = "harmonize.html";
                 }
-
                 // Function that writes to a div with id='message' on the page.
                 function write(message){
                     console.log(message);
                 }
-
                 });
             }).catch(function(error) {
                 console.log("Error: " + error);
@@ -129,24 +112,15 @@ function redirectHome() {
             var range = range_all.getUsedRange();
 
             range.load('text');
-            worksheet.load('name');
 
             return ctx.sync().then(function() {
-
-                var act_worksheet = ctx.workbook.worksheets.getActiveWorksheet();
 
                 for (var run = 0; run < range.text[0].length - 1; run++) {
                     for (var run2 = run + 1; run2 < range.text[0].length; run2++) {
                         if (range.text[0][run] == range.text[0][run2] && range.text[0][run] != "") {
                             document.getElementById('showEmbeddedDialog').style.visibility = 'hidden';
-                            getColumnChar(worksheet.name, run, function(colChar){
-                                var target_address = colChar + 1;
-                                highlightContentInWorksheet(act_worksheet, target_address, '#EA7F04');
-                            });
-                            getColumnChar(worksheet.name, run2, function(colChar2) {
-                                var target_address = colChar2 + 1;
-                                highlightContentInWorksheet(act_worksheet, target_address, '#EA7F04');
-                            });
+                            highlightContentInWorksheet(worksheet, getCharFromNumber(run) + 1, '#EA7F04');
+                            highlightContentInWorksheet(worksheet, getCharFromNumber(run2) + 1, '#EA7F04');
                         }
                     }
                 }
@@ -171,20 +145,15 @@ function redirectHome() {
             var range = range_all.getUsedRange();
 
             range.load('text');
-            worksheet.load('name');
 
             return ctx.sync().then(function() {
-
                 if (document.getElementById('checkbox_all').checked == true) {
                     for (var i = 0; i < range.text[0].length; i++) {
                         if (range.text[0][i] != "") {
                             document.getElementById(range.text[0][i]).checked = true;
                         }
                         else {
-                            getColumnChar(worksheet.name, i, function(colChar){
-                                document.getElementById("Column " + colChar).checked = true;
-                            });
-
+                            document.getElementById("Column " + getCharFromNumber(i)).checked = true;
                         }
                     }
                 }
@@ -194,9 +163,7 @@ function redirectHome() {
                             document.getElementById(range.text[0][i]).checked = false;
                         }
                         else {
-                            getColumnChar(worksheet.name, i, function(colChar){
-                                document.getElementById("Column " + colChar).checked = false;
-                            });
+                            document.getElementById("Column " + getCharFromNumber(i)).checked = false;
                         }
                     }
                 }
@@ -221,7 +188,6 @@ function redirectHome() {
             var range = range_all.getUsedRange();
 
             range.load('text');
-            worksheet.load('name');
 
             return ctx.sync().then(function() {
 
@@ -239,9 +205,8 @@ function redirectHome() {
                         addNewCheckboxToContainer (range.text[0][i], "column_checkbox" ,"checkboxes_columns");
                     }
                     else {
-                        getColumnChar(worksheet.name, i, function(colChar) {
-                            addNewCheckboxToContainer ("Column " + colChar, "column_checkbox" ,"checkboxes_columns");
-                        });
+                        var colchar = getCharFromNumber(i);
+                        addNewCheckboxToContainer ("Column " + colchar, "column_checkbox" ,"checkboxes_columns");
                     }
                 }
 
@@ -257,8 +222,6 @@ function redirectHome() {
     }
 
 
-
-
     function harmonize() {
 
         Excel.run(function (ctx) {
@@ -269,7 +232,6 @@ function redirectHome() {
 
             //get used range in active Sheet
             range.load('text');
-            range.load('address');
             worksheet.load('name');
 
             var harmo = document.getElementById('harmonize_options').value;
@@ -328,23 +290,21 @@ function redirectHome() {
 
                     }
 
-                    getColumn(worksheet.name, header, function (columns){
-                        addContentNew(worksheet.name, columns, harm_array, function () {});
+                    var insert_address = getCharFromNumber(header) + 1 + ":" + getCharFromNumber(header) + range.text.length;
+                    addContentNew(worksheet.name, insert_address, harm_array, function () {});
 
-                        var i = 0;
+                    var i = 0;
 
-                        if (document.getElementById('createBackup').checked != true) {
-                            addContentNew(worksheet.name, columns, harm_array, function () {
-                                i++;
-                                if (i >= checked_checkboxes.length){
-                                    window.location = "harmonize.html";
-                                }
-                            });
-                        } else {
-                            addContentNew(worksheet.name, columns, harm_array, function () {});
-                        }
-                    });
-
+                    if (document.getElementById('createBackup').checked != true) {
+                        addContentNew(worksheet.name, insert_address, harm_array, function () {
+                            i++;
+                            if (i >= checked_checkboxes.length){
+                                window.location = "harmonize.html";
+                            }
+                        });
+                    } else {
+                        addContentNew(worksheet.name, insert_address, harm_array, function () {});
+                    }
                 }
 
                 if (document.getElementById('createBackup').checked == true) {
