@@ -57,125 +57,6 @@ function addNewCheckboxToContainer (id, name, container) {
 }
 
 
-function addDropdown (k) {
-    var div = document.createElement("div");
-    div.id = "condition" + k;
-    document.getElementById("condition_holder").appendChild(div);
-
-    var div_drop = document.createElement("div");
-    div_drop.className = "ms-Dropdown table_simple" + k;
-    div_drop.id = "simple_dropdown" + k;
-    div.appendChild(div_drop);
-
-    var lab = document.createElement('label');
-    lab.className = "ms-Label";
-    lab.innerHTML = "Select column";
-    div_drop.appendChild(lab);
-
-    var elemi = document.createElement("i");
-    elemi.className = "ms-Dropdown-caretDown ms-Icon ms-Icon--caretDown";
-    div_drop.appendChild(elemi);
-
-    var sel = document.createElement("select");
-    sel.id = "column_simple" + k;
-    sel.className = "ms-Dropdown-select";
-    div_drop.appendChild(sel);
-}
-
-function addOperator(k) {
-    var div_drop = document.createElement("div");
-    div_drop.className = "ms-Dropdown dropdown_table" + k;
-    document.getElementById('condition' + k).appendChild(div_drop);
-
-    var lab = document.createElement('label');
-    lab.className = "ms-Label";
-    lab.innerHTML = "Select operator";
-    div_drop.appendChild(lab);
-
-    var elemi = document.createElement("i");
-    elemi.className = "ms-Dropdown-caretDown ms-Icon ms-Icon--caretDown";
-    div_drop.appendChild(elemi);
-
-    var sel = document.createElement("select");
-    sel.id = "if_operator" + k;
-    sel.className = "ms-Dropdown-select";
-    //sel.onchange = displaySimpleBetween(k);
-    div_drop.appendChild(sel);
-
-    var el1 = document.createElement("option");
-    el1.value = "equal";
-    el1.textContent = "=";
-    sel.appendChild(el1);
-
-    var el2 = document.createElement("option");
-    el2.value = "smaller";
-    el2.textContent = "<";
-    sel.appendChild(el2);
-
-    var el3 = document.createElement("option");
-    el3.value = "greater";
-    el3.textContent = ">";
-    sel.appendChild(el3);
-
-    var el4 = document.createElement("option");
-    el4.value = "inequal";
-    el4.textContent = "!=";
-    sel.appendChild(el4);
-
-    var el5 = document.createElement("option");
-    el5.value = "between";
-    el5.textContent = "between";
-    sel.appendChild(el5);
-
-    var el6 = document.createElement("option");
-    el6.value = "notbetween";
-    el6.textContent = "not between";
-    sel.appendChild(el6);
-
-    var el7 = document.createElement("option");
-    el7.value = "inlist";
-    el7.textContent = "in (list)";
-    sel.appendChild(el7);
-}
-
-
-function addTextField(k) {
-    var div_drop = document.createElement("div");
-    div_drop.className = "ms-TextField";
-    div_drop.id = "delimiter_beginning" + k;
-    document.getElementById('condition' + k).appendChild(div_drop);
-
-    var lab = document.createElement('label');
-    lab.className = "ms-Label";
-    lab.innerHTML = "Enter condition";
-    div_drop.appendChild(lab);
-
-    var input = document.createElement("input");
-    input.id = "if_condition" + k;
-    input.className = "ms-TextField-field";
-    input.type = "text";
-    div_drop.appendChild(input);
-}
-
-function addBetweenField(k) {
-    var div_drop = document.createElement("div");
-    div_drop.className = "ms-TextField";
-    div_drop.id = "between_beginning" + k;
-    document.getElementById('condition' + k).appendChild(div_drop);
-
-    var lab = document.createElement('label');
-    lab.className = "ms-Label";
-    lab.innerHTML = "And";
-    div_drop.appendChild(lab);
-
-    var input = document.createElement("input");
-    input.id = "if_between_condition" + k;
-    input.className = "ms-TextField-field";
-    input.type = "text";
-    div_drop.appendChild(input);
-}
-
-
 function getCharFromNumber (number) {
 
     if (number == 0) {
@@ -277,46 +158,46 @@ function addBackupContent(sheetName, callback) {
     });
 }
 
-
+//inserts whole column
 function addContentNew(sheetObject, rangeAddress, displayText, callback) {
     Excel.run(function (ctx) {
-    var range = ctx.workbook.worksheets.getItem(sheetObject).getRange(rangeAddress);
-    range.values = displayText;
-    range.load('text');
-    return ctx.sync().then(function() {
-        callback();
+        var range = ctx.workbook.worksheets.getItem(sheetObject).getRange(rangeAddress);
+        range.values = displayText;
+        range.load('text');
+        return ctx.sync().then(function() {
+            callback();
+        });
+    }).catch(function(error) {
+            console.log("Error: " + error);
+            if (error instanceof OfficeExtension.Error) {
+                console.log("Debug info: " + JSON.stringify(error.debugInfo));
+            }
     });
-}).catch(function(error) {
-        console.log("Error: " + error);
-        if (error instanceof OfficeExtension.Error) {
-            console.log("Debug info: " + JSON.stringify(error.debugInfo));
-        }
-});
 }
 
 
-// Helper function to add and format content in the workbook
+// Helper function to add and format content (in single cell) in the workbook
 function addContentToWorksheet(sheetObject, rangeAddress, displayText) {
     var range = sheetObject.getRange(rangeAddress);
     range.values = displayText;
     range.merge();
 }
 
-
+//color font in workbook
 function highlightContentInWorksheet(sheetObject, rangeAddress, color) {
     var range = sheetObject.getRange(rangeAddress);
     range.format.font.color = color;
     range.merge();
 }
 
-
+//color cell background
 function highlightCellInWorksheet(sheetObject, rangeAddress, color) {
     var range = sheetObject.getRange(rangeAddress);
     range.format.fill.color = color;
     range.merge();
 }
 
-
+//create a random color to highlight font
 function getRandomColor() {
     var letters = '0123456789ABCDEF'.split('');
     var color = '#';

@@ -310,7 +310,6 @@ function redirectHome() {
 
                     }
 
-                    //var insert_address = getCharFromNumber(header) + 1 + ":" + getCharFromNumber(header) + range.text.length;
                     getColumn(worksheet.name, header, function (columns){
                         addContentNew(worksheet.name, columns, harm_array, function () {});
 

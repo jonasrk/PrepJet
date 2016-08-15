@@ -283,25 +283,21 @@ function redirectHome() {
                         trim_array.push(trim_string);
                     }
 
-                    var column_char = getCharFromNumber(header);
-                    var insert_address = column_char + 1 + ":" + column_char + range.text.length;
-
-                    var i = 0;
-
-                    if (document.getElementById('createBackup').checked != true) {
-                        addContentNew(worksheet.name, insert_address, trim_array, function () {
-                            i++;
-                            if (i >= checked_checkboxes.length){
-                                window.location = "trim_spaces.html";
-                            }
-                        });
-                    } else {
-                        addContentNew(worksheet.name, insert_address, trim_array, function () {});
-                    }
-
-
-
+                    getColumn(worksheet.name, header, function (columns){
+                        var i = 0;
+                        if (document.getElementById('createBackup').checked != true) {
+                            addContentNew(worksheet.name, columns, trim_array, function () {
+                                i++;
+                                if (i >= checked_checkboxes.length){
+                                    window.location = "trim_spaces.html";
+                                }
+                            });
+                        } else {
+                            addContentNew(worksheet.name, columns, trim_array, function () {});
+                        }
+                    });
                 }
+
 
                 if (document.getElementById('createBackup').checked == true) {
                     var sheet_count = Office.context.document.settings.get('backup_sheet_count') + 1;
