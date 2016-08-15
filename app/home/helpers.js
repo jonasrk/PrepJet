@@ -341,6 +341,34 @@ function backupForUndo(this_range){
 
 }
 
+
+function getColumn(sheet, colNumber, callback){
+
+    Excel.run(function (ctx) {
+
+        var worksheet = ctx.workbook.worksheets.getItem(sheet);
+        var range_all = worksheet.getRange();
+        var range = range_all.getUsedRange().getColumn(colNumber);
+
+        range.load('text');
+        range.load('address');
+
+        return ctx.sync().then(function() {
+            var tmp_columns = range.address;
+            var column_address = tmp_columns.substring(tmp_columns.indexOf("!") + 1);
+            callback(column_address);
+        });
+
+    }).catch(function(error) {
+        console.log("Error: " + error);
+        if (error instanceof OfficeExtension.Error) {
+            console.log("Debug info: " + JSON.stringify(error.debugInfo));
+        }
+    });
+
+}
+
+
 function detectIE() {
     var ua = window.navigator.userAgent;
 

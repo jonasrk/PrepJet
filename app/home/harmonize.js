@@ -239,6 +239,8 @@ function redirectHome() {
     }
 
 
+
+
     function harmonize() {
 
         Excel.run(function (ctx) {
@@ -249,6 +251,7 @@ function redirectHome() {
 
             //get used range in active Sheet
             range.load('text');
+            range.load('address');
             worksheet.load('name');
 
             var harmo = document.getElementById('harmonize_options').value;
@@ -307,21 +310,24 @@ function redirectHome() {
 
                     }
 
-                    var insert_address = getCharFromNumber(header) + 1 + ":" + getCharFromNumber(header) + range.text.length;
-                    addContentNew(worksheet.name, insert_address, harm_array, function () {});
+                    //var insert_address = getCharFromNumber(header) + 1 + ":" + getCharFromNumber(header) + range.text.length;
+                    getColumn(worksheet.name, header, function (columns){
+                        addContentNew(worksheet.name, columns, harm_array, function () {});
 
-                    var i = 0;
+                        var i = 0;
 
-                    if (document.getElementById('createBackup').checked != true) {
-                        addContentNew(worksheet.name, insert_address, harm_array, function () {
-                            i++;
-                            if (i >= checked_checkboxes.length){
-                                window.location = "harmonize.html";
-                            }
-                        });
-                    } else {
-                        addContentNew(worksheet.name, insert_address, harm_array, function () {});
-                    }
+                        if (document.getElementById('createBackup').checked != true) {
+                            addContentNew(worksheet.name, columns, harm_array, function () {
+                                i++;
+                                if (i >= checked_checkboxes.length){
+                                    window.location = "harmonize.html";
+                                }
+                            });
+                        } else {
+                            addContentNew(worksheet.name, columns, harm_array, function () {});
+                        }
+                    });
+
                 }
 
                 if (document.getElementById('createBackup').checked == true) {
