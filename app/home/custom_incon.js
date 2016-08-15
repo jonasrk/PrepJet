@@ -140,17 +140,30 @@ function redirectHome() {
             var worksheet = ctx.workbook.worksheets.getActiveWorksheet();
             var range_all = worksheet.getRange();
             var range = range_all.getUsedRange();
+            var firstCell = range.getColumn(0);
+            var firstCol = firstCell.getEntireColumn();
+            var tmpRow = range.getRow(0);
+            var firstRow = tmpRow.getEntireRow();
 
             range.load('text');
+            firstRow.load('address');
+            firstCol.load('address');
+
 
             return ctx.sync().then(function() {
+
+                var tmp_offset = firstCol.address;
+                var col_offset = tmp_offset.substring(tmp_offset.indexOf("!") + 1, tmp_offset.indexOf(":"));
+                var tmp_row = firstRow.address;
+                var row_offset = tmp_row.substring(tmp_row.indexOf("!") + 1, tmp_row.indexOf(":"));
+                var add_col = getNumberFromChar(col_offset);
 
                 for (var run = 0; run < range.text[0].length - 1; run++) {
                     for (var run2 = run + 1; run2 < range.text[0].length; run2++) {
                         if (range.text[0][run] == range.text[0][run2] && range.text[0][run] != "") {
                             document.getElementById('showEmbeddedDialog').style.visibility = 'hidden';
-                            highlightContentInWorksheet(worksheet, getCharFromNumber(run) + 1, '#EA7F04');
-                            highlightContentInWorksheet(worksheet, getCharFromNumber(run2) + 1, '#EA7F04');
+                            highlightContentInWorksheet(worksheet, getCharFromNumber(run + add_col) + 1, '#EA7F04');
+                            highlightContentInWorksheet(worksheet, getCharFromNumber(run2 + add_col) + 1, '#EA7F04');
                         }
                     }
                 }
@@ -173,10 +186,22 @@ function redirectHome() {
             var worksheet = ctx.workbook.worksheets.getActiveWorksheet();
             var range_all = worksheet.getRange();
             var range = range_all.getUsedRange();
+            var firstCell = range.getColumn(0);
+            var firstCol = firstCell.getEntireColumn();
+            var tmpRow = range.getRow(0);
+            var firstRow = tmpRow.getEntireRow();
 
             range.load('text');
+            firstRow.load('address');
+            firstCol.load('address');
 
             return ctx.sync().then(function() {
+
+                var tmp_offset = firstCol.address;
+                var col_offset = tmp_offset.substring(tmp_offset.indexOf("!") + 1, tmp_offset.indexOf(":"));
+                var tmp_row = firstRow.address;
+                var row_offset = tmp_row.substring(tmp_row.indexOf("!") + 1, tmp_row.indexOf(":"));
+                var add_col = getNumberFromChar(col_offset);
 
                 for (var run = 0; run < range.text[0].length - 1; run++) {
                     for (var run2 = run + 1; run2 < range.text[0].length; run2++) {
@@ -194,8 +219,8 @@ function redirectHome() {
                         el.textContent = range.text[0][i];
                     }
                     else {
-                        el.value = "Column " + getCharFromNumber(i);
-                        el.textContent = "Column " + getCharFromNumber(i);
+                        el.value = "Column " + getCharFromNumber(i + add_col);
+                        el.textContent = "Column " + getCharFromNumber(i + add_col);
                     }
                     document.getElementById("column_options").appendChild(el);
                 }
@@ -220,14 +245,26 @@ function redirectHome() {
             var worksheet = ctx.workbook.worksheets.getActiveWorksheet();
             var range_all = worksheet.getRange();
             var range = range_all.getUsedRange();
+            var firstCell = range.getColumn(0);
+            var firstCol = firstCell.getEntireColumn();
+            var tmpRow = range.getRow(0);
+            var firstRow = tmpRow.getEntireRow();
 
             //get used range in active Sheet
             range.load('text');
             worksheet.load('name');
+            firstRow.load('address');
+            firstCol.load('address');
 
             return ctx.sync().then(function() {
 
                 backupForUndo(range);
+
+                var tmp_offset = firstCol.address;
+                var col_offset = tmp_offset.substring(tmp_offset.indexOf("!") + 1, tmp_offset.indexOf(":"));
+                var tmp_row = firstRow.address;
+                var row_offset = tmp_row.substring(tmp_row.indexOf("!") + 1, tmp_row.indexOf(":"));
+                var add_col = getNumberFromChar(col_offset);
 
                 var selected_identifier = document.getElementById('column_options').value;
                 var charCount = Number(document.getElementById('charCountInput').value);
@@ -239,7 +276,7 @@ function redirectHome() {
 
                 var header = 0;
                 for (var k = 0; k < range.text[0].length; k++){
-                    if (selected_identifier == range.text[0][k] || selected_identifier == "Column " + getCharFromNumber(k)){
+                    if (selected_identifier == range.text[0][k] || selected_identifier == "Column " + getCharFromNumber(k + add_col)){
                         header = k;
                     }
                 }
@@ -286,7 +323,7 @@ function redirectHome() {
                         }
                     }
                     if (check_cond == 1) {
-                        highlightContentInWorksheet(worksheet, getCharFromNumber(header) + (k + 1),'#EA7F04');
+                        highlightContentInWorksheet(worksheet, getCharFromNumber(header + add_col) + (k + 1),'#EA7F04');
                     }
 
                 }
@@ -295,7 +332,7 @@ function redirectHome() {
                     for (var k = 1; k < range.text.length; k++) {
                         var include_check = range.text[k][header].indexOf(charIncluded);
                         if (include_check < 0) {
-                            highlightContentInWorksheet(worksheet, getCharFromNumber(header) + (k + 1), '#EA7F04');
+                            highlightContentInWorksheet(worksheet, getCharFromNumber(header + add_col) + (k + 1), '#EA7F04');
                         }
                     }
                 }
@@ -305,7 +342,7 @@ function redirectHome() {
                     for (var k = 1; k < range.text.length; k++) {
                         var notInclude_check = range.text[k][header].indexOf(charNotIncluded);
                         if (notInclude_check >= 0) {
-                            highlightContentInWorksheet(worksheet, getCharFromNumber(header) + (k + 1), '#EA7F04');
+                            highlightContentInWorksheet(worksheet, getCharFromNumber(header + add_col) + (k + 1), '#EA7F04');
                         }
                     }
                 }
