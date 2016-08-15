@@ -84,33 +84,10 @@ function hideAdvancedCount() {
             $('#buttonOk').click(highlightHeader);
             $('#homeButton').click(redirectHome);
 
-
-            /*Office.context.document.addHandlerAsync("documentSelectionChanged", myHandler, function(result){}
-            );
-
-            // Event handler function.
-            function myHandler(eventArgs){
-                Excel.run(function (ctx) {
-                    var selectedRange = ctx.workbook.getSelectedRange();
-                    selectedRange.load('address');
-                    return ctx.sync().then(function () {
-                        write(selectedRange.address);
-                    });
-                });
-            }
-
-            // Function that writes to a div with id='message' on the page.
-            function write(message){
-                document.getElementById('target_column_input').value = message;
-            }*/
-
-
             //Show and hide error message if columns have same header name
             document.getElementById("buttonClose").onclick = function () {
                 document.getElementById('showEmbeddedDialog').style.visibility = 'hidden';
             }
-
-
 
             //show and hide help callout
             document.getElementById("help_icon").onclick = function () {
@@ -225,6 +202,7 @@ function hideAdvancedCount() {
             var range = range_all.getUsedRange();
 
             range.load('text');
+            worksheet.load('name');
 
             return ctx.sync().then(function() {
 
@@ -232,8 +210,14 @@ function hideAdvancedCount() {
                     for (var run2 = run + 1; run2 < range.text[0].length; run2++) {
                         if (range.text[0][run] == range.text[0][run2] && range.text[0][run] != "") {
                             document.getElementById('showEmbeddedDialog').style.visibility = 'hidden';
-                            highlightContentInWorksheet(worksheet, getCharFromNumber(run) + 1, '#EA7F04');
-                            highlightContentInWorksheet(worksheet, getCharFromNumber(run2) + 1, '#EA7F04');
+                            getColumnChar(worksheet.name, run, function(colChar){
+                                var target_address = colChar + 1;
+                                highlightContentInWorksheet(worksheet, target_address, '#EA7F04');
+                            });
+                            getColumnChar(worksheet.name, run2, function(colChar2) {
+                                var target_address = colChar2 + 1;
+                                highlightContentInWorksheet(worksheet, target_address, '#EA7F04');
+                            });
                         }
                     }
                 }
@@ -381,16 +365,11 @@ function hideAdvancedCount() {
 
             //get used range in active Sheet
             range.load('text');
-            var range_all_adding_to = worksheet.getRange();
-            var range_adding_to = range_all_adding_to.getUsedRange();
-
-            range_adding_to.load('address');
-            range_adding_to.load('text');
             worksheet.load('name');
 
             return ctx.sync().then(function() {
 
-                backupForUndo(range_adding_to);
+                backupForUndo(range);
 
                 var header = 0;
                 //get column in header from which to extract value
