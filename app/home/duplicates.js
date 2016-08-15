@@ -159,17 +159,30 @@ function redirectHome() {
             var worksheet = ctx.workbook.worksheets.getActiveWorksheet();
             var range_all = worksheet.getRange();
             var range = range_all.getUsedRange();
+            var firstCell = range.getColumn(0);
+            var firstCol = firstCell.getEntireColumn();
+            var tmpRow = range.getRow(0);
+            var firstRow = tmpRow.getEntireRow();
 
+            //get used range in active Sheet
             range.load('text');
+            firstRow.load('address');
+            firstCol.load('address');
 
             return ctx.sync().then(function() {
+
+                var tmp_offset = firstCol.address;
+                var col_offset = tmp_offset.substring(tmp_offset.indexOf("!") + 1, tmp_offset.indexOf(":"));
+                var tmp_row = firstRow.address;
+                var row_offset = tmp_row.substring(tmp_row.indexOf("!") + 1, tmp_row.indexOf(":"));
+                var add_col = getNumberFromChar(col_offset);
 
                 for (var run = 0; run < range.text[0].length - 1; run++) {
                     for (var run2 = run + 1; run2 < range.text[0].length; run2++) {
                         if (range.text[0][run] == range.text[0][run2] && range.text[0][run] != "") {
                             document.getElementById('showEmbeddedDialog').style.visibility = 'hidden';
-                            highlightContentInWorksheet(worksheet, getCharFromNumber(run) + 1, '#EA7F04');
-                            highlightContentInWorksheet(worksheet, getCharFromNumber(run2) + 1, '#EA7F04');
+                            highlightContentInWorksheet(worksheet, getCharFromNumber(run + add_col) + 1, '#EA7F04');
+                            highlightContentInWorksheet(worksheet, getCharFromNumber(run2 + add_col) + 1, '#EA7F04');
                         }
                     }
                 }
@@ -192,10 +205,23 @@ function redirectHome() {
             var worksheet = ctx.workbook.worksheets.getActiveWorksheet();
             var range_all = worksheet.getRange();
             var range = range_all.getUsedRange();
+            var firstCell = range.getColumn(0);
+            var firstCol = firstCell.getEntireColumn();
+            var tmpRow = range.getRow(0);
+            var firstRow = tmpRow.getEntireRow();
 
             range.load('address');
             range.load('text');
+            firstRow.load('address');
+            firstCol.load('address');
+
             return ctx.sync().then(function() {
+
+                var tmp_offset = firstCol.address;
+                var col_offset = tmp_offset.substring(tmp_offset.indexOf("!") + 1, tmp_offset.indexOf(":"));
+                var tmp_row = firstRow.address;
+                var row_offset = tmp_row.substring(tmp_row.indexOf("!") + 1, tmp_row.indexOf(":"));
+                var add_col = getNumberFromChar(col_offset);
 
                 for (var run = 0; run < range.text[0].length - 1; run++) {
                     for (var run2 = run + 1; run2 < range.text[0].length; run2++) {
@@ -211,7 +237,7 @@ function redirectHome() {
                         addNewCheckboxToContainer (range.text[0][i], "duplicates_column_checkbox" ,"checkboxes_duplicates");
                     }
                     else {
-                        var colchar = getCharFromNumber(i);
+                        var colchar = getCharFromNumber(i + add_col);
                         addNewCheckboxToContainer ("Column " + colchar, "duplicates_column_checkbox" ,"checkboxes_duplicates");
                     }
                 }
@@ -234,17 +260,30 @@ function redirectHome() {
             var worksheet = ctx.workbook.worksheets.getActiveWorksheet();
             var range_all = worksheet.getRange();
             var range = range_all.getUsedRange();
+            var firstCell = range.getColumn(0);
+            var firstCol = firstCell.getEntireColumn();
+            var tmpRow = range.getRow(0);
+            var firstRow = tmpRow.getEntireRow();
 
             range.load('text');
+            firstRow.load('address');
+            firstCol.load('address');
 
             return ctx.sync().then(function() {
+
+                var tmp_offset = firstCol.address;
+                var col_offset = tmp_offset.substring(tmp_offset.indexOf("!") + 1, tmp_offset.indexOf(":"));
+                var tmp_row = firstRow.address;
+                var row_offset = tmp_row.substring(tmp_row.indexOf("!") + 1, tmp_row.indexOf(":"));
+                var add_col = getNumberFromChar(col_offset);
+
                 if (document.getElementById('checkbox_all').checked == true) {
                     for (var i = 0; i < range.text[0].length; i++) {
                         if (range.text[0][i] != "") {
                             document.getElementById(range.text[0][i]).checked = true;
                         }
                         else {
-                            document.getElementById("Column " + getCharFromNumber(i)).checked = true;
+                            document.getElementById("Column " + getCharFromNumber(i + add_col)).checked = true;
                         }
                     }
                 }
@@ -254,7 +293,7 @@ function redirectHome() {
                             document.getElementById(range.text[0][i]).checked = false;
                         }
                         else {
-                            document.getElementById("Column " + getCharFromNumber(i)).checked = false;
+                            document.getElementById("Column " + getCharFromNumber(i + add_col)).checked = false;
                         }
                     }
                 }
@@ -283,21 +322,34 @@ function redirectHome() {
             var firstCol = range.getRow(1);
             var lastCol = range.getLastColumn();
 
+            var firstCell = range.getColumn(0);
+            var firstColumn = firstCell.getEntireColumn();
+            var tmpRow = range.getRow(0);
+            var firstRow = tmpRow.getEntireRow();
+
             range.load('address');
             range.load('text');
             worksheet.load('name');
             firstCol.load('address');
             lastCol.load('address');
+            firstRow.load('address');
+            firstColumn.load('address');
 
             return ctx.sync().then(function() {
 
                 backupForUndo(range);
 
+                var tmp_offset = firstColumn.address;
+                var col_offset = tmp_offset.substring(tmp_offset.indexOf("!") + 1, tmp_offset.indexOf(":"));
+                var tmp_row = firstRow.address;
+                var row_offset = tmp_row.substring(tmp_row.indexOf("!") + 1, tmp_row.indexOf(":"));
+                var add_col = getNumberFromChar(col_offset);
+
                 var columns_to_check = [];
 
                 for (var k = 0; k < range.text[0].length; k++) { // .text[0] is the first row of a range
                     for (var l = 0; l < checked_checkboxes.length; l++) { // TODO throws error if none are checked
-                        if (checked_checkboxes[l].id == range.text[0][k] || checked_checkboxes[l].id == "Column " + getCharFromNumber(k)) {
+                        if (checked_checkboxes[l].id == range.text[0][k] || checked_checkboxes[l].id == "Column " + getCharFromNumber(k + add_col)) {
                             columns_to_check.push(k);
                         }
                     }
@@ -309,7 +361,7 @@ function redirectHome() {
                     var this_row = [];
                     for (var j = 0; j < columns_to_check.length; j++) {
                         var row_number = i + 1;
-                        this_row.push([range.text[i][columns_to_check[j]], getCharFromNumber(columns_to_check[j]) + row_number, row_number]);
+                        this_row.push([range.text[i][columns_to_check[j]], getCharFromNumber(columns_to_check[j] + add_col) + row_number, row_number]);
                     }
                     strings_to_sort.push(this_row);
                 }
@@ -418,7 +470,7 @@ function redirectHome() {
 
                     for (var row = 0; row < text.length; row++) {
                         for(var col = 0; col < range.text[0].length; col++) {
-                            var columnchar = getCharFromNumber(col)
+                            var columnchar = getCharFromNumber(col + add_col)
                             addContentToWorksheet(worksheet, columnchar + sheet_row, text[row][col])
                             if (sheet_row < (row_numbers.length + 2)) {
                                 if (row > 0 && color_check[row] == color_check[row - 1])

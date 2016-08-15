@@ -117,7 +117,6 @@ function redirectHome() {
 
             //get used range in active Sheet
             range.load('text');
-            worksheet.load('name');
             firstRow.load('address');
             firstCol.load('address');
 
@@ -164,7 +163,6 @@ function redirectHome() {
 
             //get used range in active Sheet
             range.load('text');
-            worksheet.load('name');
             firstRow.load('address');
             firstCol.load('address');
 
@@ -222,7 +220,6 @@ function redirectHome() {
 
             //get used range in active Sheet
             range.load('text');
-            worksheet.load('name');
             firstRow.load('address');
             firstCol.load('address');
 
