@@ -90,22 +90,37 @@ function redirectHome() {
 
 
     function checkCheckbox() {
+
         var selected_table2 = document.getElementById('table2_options').value;
         Excel.run(function (ctx) {
 
             var worksheet = ctx.workbook.worksheets.getItem(selected_table2);
             var range_all = worksheet.getRange();
             var range = range_all.getUsedRange();
+            var firstCell = range.getColumn(0);
+            var firstCol = firstCell.getEntireColumn();
+            var tmpRow = range.getRow(0);
+            var firstRow = tmpRow.getEntireRow();
 
             range.load('text');
+            firstRow.load('address');
+            firstCol.load('address');
+
             return ctx.sync().then(function() {
+
+                var tmp_offset = firstCol.address;
+                var col_offset = tmp_offset.substring(tmp_offset.indexOf("!") + 1, tmp_offset.indexOf(":"));
+                var tmp_row = firstRow.address;
+                var row_offset = tmp_row.substring(tmp_row.indexOf("!") + 1, tmp_row.indexOf(":"));
+                var add_col = getNumberFromChar(col_offset);
+
                 if (document.getElementById('checkbox_all').checked == true) {
                     for (var i = 0; i < range.text[0].length; i++) {
                         if (range.text[0][i] != "") {
                             document.getElementById(range.text[0][i]).checked = true;
                         }
                         else {
-                            document.getElementById("Column " + getCharFromNumber(i)).checked = true;
+                            document.getElementById("Column " + getCharFromNumber(i + add_col)).checked = true;
                         }
                     }
                 }
@@ -115,7 +130,7 @@ function redirectHome() {
                             document.getElementById(range.text[0][i]).checked = false;
                         }
                         else {
-                            document.getElementById("Column " + getCharFromNumber(i)).checked = false;
+                            document.getElementById("Column " + getCharFromNumber(i + add_col)).checked = false;
                         }
                     }
                 }
@@ -135,8 +150,10 @@ function redirectHome() {
         var worksheet_names = [];
 
         Excel.run(function (ctx) {
+
             var worksheets = ctx.workbook.worksheets;
             worksheets.load('items');
+
             return ctx.sync().then(function () {
                 for (var i = 0; i < worksheets.items.length; i++) {
                     worksheets.items[i].load('name');
@@ -146,6 +163,7 @@ function redirectHome() {
                         var this_i = i;
 
                         return function () {
+
                             worksheet_names.push(worksheets.items[this_i].name);
 
                             if (worksheet_names.length == worksheets.items.length) {
@@ -191,17 +209,29 @@ function redirectHome() {
             var worksheet = ctx.workbook.worksheets.getActiveWorksheet();
             var range_all = worksheet.getRange();
             var range = range_all.getUsedRange();
+            var firstCell = range.getColumn(0);
+            var firstCol = firstCell.getEntireColumn();
+            var tmpRow = range.getRow(0);
+            var firstRow = tmpRow.getEntireRow();
 
             range.load('text');
+            firstRow.load('address');
+            firstCol.load('address');
 
             return ctx.sync().then(function() {
+
+                var tmp_offset = firstCol.address;
+                var col_offset = tmp_offset.substring(tmp_offset.indexOf("!") + 1, tmp_offset.indexOf(":"));
+                var tmp_row = firstRow.address;
+                var row_offset = tmp_row.substring(tmp_row.indexOf("!") + 1, tmp_row.indexOf(":"));
+                var add_col = getNumberFromChar(col_offset);
 
                 for (var run = 0; run < range.text[0].length - 1; run++) {
                     for (var run2 = run + 1; run2 < range.text[0].length; run2++) {
                         if (range.text[0][run] == range.text[0][run2] && range.text[0][run] != "") {
                             document.getElementById('showEmbeddedDialog').style.visibility = 'hidden';
-                            highlightContentInWorksheet(worksheet, getCharFromNumber(run) + 1, '#EA7F04');
-                            highlightContentInWorksheet(worksheet, getCharFromNumber(run2) + 1, '#EA7F04');
+                            highlightContentInWorksheet(worksheet, getCharFromNumber(run + add_col) + 1, '#EA7F04');
+                            highlightContentInWorksheet(worksheet, getCharFromNumber(run2 + add_col) + 1, '#EA7F04');
                         }
                     }
                 }
@@ -234,11 +264,23 @@ function redirectHome() {
             var worksheetname = ctx.workbook.worksheets.getItem(selected_table2);
             var range_all = worksheet.getRange();
             var range = range_all.getUsedRange();
+            var firstCell = range.getColumn(0);
+            var firstCol = firstCell.getEntireColumn();
+            var tmpRow = range.getRow(0);
+            var firstRow = tmpRow.getEntireRow();
 
+            firstRow.load('address');
+            firstCol.load('address');
             range.load('text');
             worksheetname.load('name');
 
             return ctx.sync().then(function() {
+
+                var tmp_offset = firstCol.address;
+                var col_offset = tmp_offset.substring(tmp_offset.indexOf("!") + 1, tmp_offset.indexOf(":"));
+                var tmp_row = firstRow.address;
+                var row_offset = tmp_row.substring(tmp_row.indexOf("!") + 1, tmp_row.indexOf(":"));
+                var add_col = getNumberFromChar(col_offset);
 
                 for (var run = 0; run < range.text[0].length - 1; run++) {
                     for (var run2 = run + 1; run2 < range.text[0].length; run2++) {
@@ -259,7 +301,7 @@ function redirectHome() {
                         addNewCheckboxToContainer (range.text[0][i], "reference_column_checkbox" ,"checkboxes_variables");
                     }
                     else {
-                        var colchar = getCharFromNumber(i);
+                        var colchar = getCharFromNumber(i + add_col);
                         addNewCheckboxToContainer ("Column " + colchar, "reference_column_checkbox" ,"checkboxes_variables");
                     }
                 }
@@ -347,18 +389,42 @@ function redirectHome() {
                 var worksheet_t1 = ctx.workbook.worksheets.getItem(table1);
                 var range_all_t1 = worksheet_t1.getRange();
                 var range_t1 = range_all_t1.getUsedRange();
+                var firstCell1 = range_t1.getColumn(0);
+                var firstCol1 = firstCell1.getEntireColumn();
+                var tmpRow1 = range_t1.getRow(0);
+                var firstRow1 = tmpRow1.getEntireRow();
 
                 var worksheet_t2 = ctx.workbook.worksheets.getItem(table2);
                 var range_all_t2 = worksheet_t2.getRange();
                 var range_t2 = range_all_t2.getUsedRange();
+                var firstCell2 = range_t2.getColumn(0);
+                var firstCol2 = firstCell2.getEntireColumn();
+                var tmpRow2 = range_t2.getRow(0);
+                var firstRow2 = tmpRow2.getEntireRow();
 
                 range_t1.load('address');
                 range_t1.load('text');
+                firstRow1.load('address');
+                firstCol1.load('address');
 
                 range_t2.load('address');
                 range_t2.load('text');
+                firstRow2.load('address');
+                firstCol2.load('address');
 
                 return ctx.sync().then(function() {
+
+                    var tmp_offset1 = firstCol1.address;
+                    var col_offset1 = tmp_offset1.substring(tmp_offset1.indexOf("!") + 1, tmp_offset1.indexOf(":"));
+                    var tmp_row1 = firstRow1.address;
+                    var row_offset1 = tmp_row1.substring(tmp_row1.indexOf("!") + 1, tmp_row1.indexOf(":"));
+                    var add_col1 = getNumberFromChar(col_offset1);
+
+                    var tmp_offset2 = firstCol2.address;
+                    var col_offset2 = tmp_offset2.substring(tmp_offset2.indexOf("!") + 1, tmp_offset2.indexOf(":"));
+                    var tmp_row2 = firstRow2.address;
+                    var row_offset2 = tmp_row2.substring(tmp_row2.indexOf("!") + 1, tmp_row2.indexOf(":"));
+                    var add_col2 = getNumberFromChar(col_offset2);
 
                     if (Office.context.document.settings.get('populate_new') == false) {
                         var count_tmp = count_drop + 1;
@@ -407,8 +473,8 @@ function redirectHome() {
                                     el.textContent = range_t2.text[0][i];
                                 }
                                 else {
-                                    el.value = "Column " + getCharFromNumber(i);
-                                    el.textContent = "Column " + getCharFromNumber(i);
+                                    el.value = "Column " + getCharFromNumber(i + add_col2);
+                                    el.textContent = "Column " + getCharFromNumber(i + add_col2);
                                 }
                                 sel.appendChild(el);
                             }
@@ -422,8 +488,8 @@ function redirectHome() {
                                     el.textContent = range_t1.text[0][i];
                                 }
                                 else {
-                                    el.value = "Column " + getCharFromNumber(i);
-                                    el.textContent = "Column " + getCharFromNumber(i);
+                                    el.value = "Column " + getCharFromNumber(i + add_col1);
+                                    el.textContent = "Column " + getCharFromNumber(i + add_col1);
                                 }
 
                                 sel.appendChild(el);
@@ -510,19 +576,32 @@ function redirectHome() {
         var selected_table2 = document.getElementById('table2_options').value; // TODO better reference by ID than name
 
         Excel.run(function (ctx) {
-            var worksheet = ctx.workbook.worksheets.getItem(selected_table2);
 
+            //ranges for source worksheet
+            var worksheet = ctx.workbook.worksheets.getItem(selected_table2);
             var range_all = worksheet.getRange();
             var range = range_all.getUsedRange();
+            var firstCell = range.getColumn(0);
+            var firstCol = firstCell.getEntireColumn();
+            var tmpRow = range.getRow(0);
+            var firstRow = tmpRow.getEntireRow();
 
+            firstRow.load('address');
+            firstCol.load('address');
             range.load('address');
             range.load('text');
 
+            //ranges for target working sheet
             var worksheet_adding_to = ctx.workbook.worksheets.getItem(selected_table1);
-
             var range_all_adding_to = worksheet_adding_to.getRange();
             var range_adding_to = range_all_adding_to.getUsedRange();
+            var firstCellTarget = range_adding_to.getColumn(0);
+            var firstColTarget = firstCellTarget.getEntireColumn();
+            var tmpRowTarget = range_adding_to.getRow(0);
+            var firstRowTarget = tmpRowTarget.getEntireRow();
 
+            firstRowTarget.load('address');
+            firstColTarget.load('address');
             range_adding_to.load('address');
             range_adding_to.load('text');
             worksheet_adding_to.load('name');
@@ -534,6 +613,19 @@ function redirectHome() {
 
                 backupForUndo(range_adding_to);
 
+                var tmp_offsetTarget = firstColTarget.address;
+                var col_offsetTarget = tmp_offsetTarget.substring(tmp_offsetTarget.indexOf("!") + 1, tmp_offsetTarget.indexOf(":"));
+                var tmp_rowTarget = firstRowTarget.address;
+                var row_offsetTarget = tmp_rowTarget.substring(tmp_rowTarget.indexOf("!") + 1, tmp_rowTarget.indexOf(":"));
+                var add_colTarget = getNumberFromChar(col_offsetTarget);
+
+                var tmp_offsetSource = firstCol.address;
+                var col_offsetSource = tmp_offsetSource.substring(tmp_offsetSource.indexOf("!") + 1, tmp_offsetSource.indexOf(":"));
+                var tmp_rowSource = firstRow.address;
+                var row_offsetSource = tmp_rowSource.substring(tmp_rowSource.indexOf("!") + 1, tmp_rowSource.indexOf(":"));
+                var add_colSource = getNumberFromChar(col_offsetSource);
+
+
                 var column1_ids = []; //new Array(identifier_length);
                 var column2_ids = []; //new Array(identifier_length);
 
@@ -543,7 +635,7 @@ function redirectHome() {
 
                 for (var runid1 = 0; runid1 < identifier1.length; runid1++) {
                     for (var runheader = 0; runheader < range_adding_to.text[0].length; runheader++){
-                        if (identifier1[runid1] == range_adding_to.text[0][runheader] || identifier1[runid1] == "Column " + getCharFromNumber(runheader)){
+                        if (identifier1[runid1] == range_adding_to.text[0][runheader] || identifier1[runid1] == "Column " + getCharFromNumber(runheader + add_colTarget)){
                             column1_ids[runid1] = runheader;
                         }
                     }
@@ -551,7 +643,7 @@ function redirectHome() {
 
                 for (var runid2 = 0; runid2 < identifier2.length; runid2++) {
                     for (var runheader = 0; runheader < range.text[0].length; runheader++){
-                        if (identifier2[runid2] == range.text[0][runheader] || identifier2[runid2] == "Column " + getCharFromNumber(runheader)){
+                        if (identifier2[runid2] == range.text[0][runheader] || identifier2[runid2] == "Column " + getCharFromNumber(runheader + add_colSource)){
                             column2_ids[runid2] = runheader;
                         }
                     }
@@ -572,11 +664,11 @@ function redirectHome() {
                         var case_sens = 0;
                     }
 
-                    var source_char = getCharFromNumber(k);
+                    var source_char = getCharFromNumber(k + add_colSource);
 
                     for (var l = 0; l < checked_checkboxes.length; l++){ // TODO throws error if none are checked
-                        if (checked_checkboxes[l].id == range.text[0][k] || checked_checkboxes[l].id == "Column " + getCharFromNumber(k)){
-                            var column_char = getCharFromNumber(l + range_adding_to.text[0].length);
+                        if (checked_checkboxes[l].id == range.text[0][k] || checked_checkboxes[l].id == "Column " + getCharFromNumber(k + add_colSource)){
+                            var column_char = getCharFromNumber(l + range_adding_to.text[0].length + add_colTarget);
 
                             // copy title
                             addContentToWorksheet(worksheet_adding_to, column_char + "1", "=" + selected_table2 + "!" + source_char + "1");
