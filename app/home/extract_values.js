@@ -84,10 +84,12 @@ function hideAdvancedCount() {
             $('#buttonOk').click(highlightHeader);
             $('#homeButton').click(redirectHome);
 
+
             //Show and hide error message if columns have same header name
             document.getElementById("buttonClose").onclick = function () {
                 document.getElementById('showEmbeddedDialog').style.visibility = 'hidden';
             }
+
 
             //show and hide help callout
             document.getElementById("help_icon").onclick = function () {
@@ -113,17 +115,12 @@ function hideAdvancedCount() {
 
 
             /*Excel.run(function (ctx) {
-
                 var myBindings = Office.context.document.bindings;
                 var worksheetname = ctx.workbook.worksheets.getActiveWorksheet();
-
                 worksheetname.load('name')
-
                 return ctx.sync().then(function() {
-
                     Office.context.document.addHandlerAsync("documentSelectionChanged", myViewHandler, function(result){}
                     );
-
                     // Event handler function for changing the worksheet.
                     function myViewHandler(eventArgs){
                         Excel.run(function (ctx) {
@@ -136,33 +133,25 @@ function hideAdvancedCount() {
                             });
                         });
                     }
-
                     function bindFromPrompt() {
-
                         var myBindings = Office.context.document.bindings;
                         var name_worksheet = worksheetname.name;
                         var myAddress = name_worksheet.concat("!1:1");
-
                         myBindings.addFromNamedItemAsync(myAddress, "matrix", {id:'myBinding'}, function (asyncResult) {
                             if (asyncResult.status == Office.AsyncResultStatus.Failed) {
                                 write('Action failed. Error: ' + asyncResult.error.message);
                             } else {
                                 write('Added new binding with type: ' + asyncResult.value.type + ' and id: ' + asyncResult.value.id);
-
                                 function addHandler() {
                                     Office.select("bindings#myBinding").addHandlerAsync(
                                         Office.EventType.BindingDataChanged, dataChanged);
                                 }
-
                                 addHandler();
                                 displayAllBindings();
-
                             }
                         });
                     }
-
                 bindFromPrompt();
-
                 function displayAllBindings() {
                     Office.context.document.bindings.getAllAsync(function (asyncResult) {
                         var bindingString = '';
@@ -171,16 +160,13 @@ function hideAdvancedCount() {
                         }
                     });
                 }
-
                 function dataChanged(eventArgs) {
                     window.location = "extract_values.html";
                 }
-
                 // Function that writes to a div with id='message' on the page.
                 function write(message){
                     console.log(message);
                 }
-
                 });
             }).catch(function(error) {
                 console.log("Error: " + error);
@@ -202,24 +188,15 @@ function hideAdvancedCount() {
             var range = range_all.getUsedRange();
 
             range.load('text');
-            worksheet.load('name');
 
             return ctx.sync().then(function() {
-
-                var act_worksheet = ctx.workbook.worksheets.getActiveWorksheet();
 
                 for (var run = 0; run < range.text[0].length - 1; run++) {
                     for (var run2 = run + 1; run2 < range.text[0].length; run2++) {
                         if (range.text[0][run] == range.text[0][run2] && range.text[0][run] != "") {
                             document.getElementById('showEmbeddedDialog').style.visibility = 'hidden';
-                            getColumnChar(worksheet.name, run, function(colChar){
-                                var target_address = colChar + 1;
-                                highlightContentInWorksheet(act_worksheet, target_address, '#EA7F04');
-                            });
-                            getColumnChar(worksheet.name, run2, function(colChar2) {
-                                var target_address = colChar2 + 1;
-                                highlightContentInWorksheet(act_worksheet, target_address, '#EA7F04');
-                            });
+                            highlightContentInWorksheet(worksheet, getCharFromNumber(run) + 1, '#EA7F04');
+                            highlightContentInWorksheet(worksheet, getCharFromNumber(run2) + 1, '#EA7F04');
                         }
                     }
                 }
@@ -367,11 +344,16 @@ function hideAdvancedCount() {
 
             //get used range in active Sheet
             range.load('text');
+            var range_all_adding_to = worksheet.getRange();
+            var range_adding_to = range_all_adding_to.getUsedRange();
+
+            range_adding_to.load('address');
+            range_adding_to.load('text');
             worksheet.load('name');
 
             return ctx.sync().then(function() {
 
-                backupForUndo(range);
+                backupForUndo(range_adding_to);
 
                 var header = 0;
                 //get column in header from which to extract value
@@ -533,17 +515,15 @@ function hideAdvancedCount() {
 
                 }
 
-                getColumnChar(worksheet.name, header + 1, function(colChar) {
 
-                    var rangeaddress = colChar + ":" + colChar;
-                    var range_insert = ctx.workbook.worksheets.getActiveWorksheet().getRange(rangeaddress);
-                    range_insert.insert("Right");
 
-                    var insert_address = colChar + 1 + ":" + colChar + range.text.length;
-                    addExtractedValue(extracted_array, insert_address);
+                var column_char = getCharFromNumber(header + 1);
+                var rangeaddress = column_char + ":" + column_char;
+                var range_insert = ctx.workbook.worksheets.getActiveWorksheet().getRange(rangeaddress);
+                range_insert.insert("Right");
 
-                });
-
+                var insert_address = column_char + 1 + ":" + column_char + range.text.length;
+                addExtractedValue(extracted_array, insert_address);
 
                 if (document.getElementById('createBackup').checked == true) {
                     var sheet_count = Office.context.document.settings.get('backup_sheet_count') + 1;
