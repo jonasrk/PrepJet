@@ -339,12 +339,13 @@ function redirectHome() {
 
                 }
 
+                var startCell = col_offset + row_offset;
                 if (document.getElementById('createBackup').checked == true) {
                     var sheet_count = Office.context.document.settings.get('backup_sheet_count') + 1;
                     Office.context.document.settings.set('backup_sheet_count', sheet_count);
                     Office.context.document.settings.saveAsync();
                     var newName = worksheet.name + "(" + sheet_count + ")";
-                    addBackupSheet(newName, function() {
+                    addBackupSheet(newName, startCell, add_col, function() {
                         window.location = "trim_spaces.html";
                     });
 

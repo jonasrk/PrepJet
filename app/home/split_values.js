@@ -440,13 +440,13 @@ function redirectHome() {
                 var insert_address = getCharFromNumber(header + add_col) + 1 + ":" + getCharFromNumber(header + add_col + max_array_length - 1) + range.text.length;
                 addSplitValue(split_array, insert_address);
 
-
+                var startCell = col_offset + row_offset;
                 if (document.getElementById('createBackup').checked == true) {
                     var sheet_count = Office.context.document.settings.get('backup_sheet_count') + 1;
                     Office.context.document.settings.set('backup_sheet_count', sheet_count);
                     Office.context.document.settings.saveAsync();
                     var newName = worksheet.name + "(" + sheet_count + ")";
-                    addBackupSheet(newName, function() {
+                    addBackupSheet(newName, startCell, add_col, function() {
                         var txt = document.createElement("p");
                         txt.className = "ms-font-xs ms-embedded-dialog__content__text";
                         txt.innerHTML = "PrepJet successfully splitted your data."

@@ -182,13 +182,13 @@ function getCharFromNumber (number) {
 
 }
 
-function addBackupSheet(sheetName, callback) {
+function addBackupSheet(sheetName, startCell, add_col, callback) {
     Excel.run(function (ctx) {
         var wSheetName = sheetName;
         var worksheet = ctx.workbook.worksheets.add(wSheetName);
         worksheet.load('name');
         return ctx.sync().then(function() {
-            addBackupContent(worksheet.name, callback);
+            addBackupContent(worksheet.name, startCell, add_col, callback);
         });
     }).catch(function(error) {
             console.log("Error: " + error);
@@ -198,11 +198,11 @@ function addBackupSheet(sheetName, callback) {
     });
 }
 
-function addBackupContent(sheetName, callback) {
+function addBackupContent(sheetName, startCell, add_col, callback) {
     Excel.run(function (ctx) {
         var values = Office.context.document.settings.get('sheet_backup');
-        var end_address = getCharFromNumber(values[0].length - 1) + (values.length).toString();
-        var rangeAddress = "A1:" + end_address;
+        var end_address = getCharFromNumber(values[0].length - 1 + add_col) + (values.length).toString();
+        var rangeAddress = startCell + ":" + end_address;
         var worksheet = ctx.workbook.worksheets.getItem(sheetName);
         var range = worksheet.getRange(rangeAddress);
 
@@ -281,61 +281,8 @@ function backupForUndo(this_range){
             console.log(Office.context.document.settings.get('sheet_backup'));
         }
     });
-
 }
 
-function getColumnChar(sheet, colNumber, callback){
-    Excel.run(function (ctx) {
-
-        var worksheet = ctx.workbook.worksheets.getItem(sheet);
-        var range_all = worksheet.getRange();
-        var range = range_all.getUsedRange().getColumn(colNumber);
-        var rangeCol = range.getEntireColumn();
-
-        range.load('text');
-        range.load('address');
-        rangeCol.load('address');
-
-        return ctx.sync().then(function() {
-            var tmp_columns = rangeCol.address;
-            var column_address = tmp_columns.substring(tmp_columns.indexOf("!") + 1, tmp_columns.indexOf(":"));
-            callback(column_address);
-        });
-
-    }).catch(function(error) {
-        console.log("Error: " + error);
-        if (error instanceof OfficeExtension.Error) {
-            console.log("Debug info: " + JSON.stringify(error.debugInfo));
-        }
-    });
-}
-
-
-function getColumn(sheet, colNumber, callback){
-
-    Excel.run(function (ctx) {
-
-        var worksheet = ctx.workbook.worksheets.getItem(sheet);
-        var range_all = worksheet.getRange();
-        var range = range_all.getUsedRange().getColumn(colNumber);
-
-        range.load('text');
-        range.load('address');
-
-        return ctx.sync().then(function() {
-            var tmp_columns = range.address;
-            var column_address = tmp_columns.substring(tmp_columns.indexOf("!") + 1);
-            callback(column_address);
-        });
-
-    }).catch(function(error) {
-        console.log("Error: " + error);
-        if (error instanceof OfficeExtension.Error) {
-            console.log("Debug info: " + JSON.stringify(error.debugInfo));
-        }
-    });
-
-}
 
 
 function detectIE() {

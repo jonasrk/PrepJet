@@ -706,13 +706,13 @@ function redirectHome() {
                     }
                 }
 
-
+                var startCell = col_offsetTarget + row_offsetTarget;
                 if (document.getElementById('createBackup').checked == true) {
                     var sheet_count = Office.context.document.settings.get('backup_sheet_count') + 1;
                     Office.context.document.settings.set('backup_sheet_count', sheet_count);
                     Office.context.document.settings.saveAsync();
                     var newName = worksheet_adding_to.name + "(" + sheet_count + ")";
-                    addBackupSheet(newName, function() {
+                    addBackupSheet(newName, startCell, add_colTarget, function() {
                         empty_count = range_adding_to.text.length - lookup_count - 1;
 
                         var txt = document.createElement("p");
