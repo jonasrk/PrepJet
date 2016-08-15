@@ -206,17 +206,19 @@ function hideAdvancedCount() {
 
             return ctx.sync().then(function() {
 
+                var act_worksheet = ctx.workbook.worksheets.getActiveWorksheet();
+
                 for (var run = 0; run < range.text[0].length - 1; run++) {
                     for (var run2 = run + 1; run2 < range.text[0].length; run2++) {
                         if (range.text[0][run] == range.text[0][run2] && range.text[0][run] != "") {
                             document.getElementById('showEmbeddedDialog').style.visibility = 'hidden';
                             getColumnChar(worksheet.name, run, function(colChar){
                                 var target_address = colChar + 1;
-                                highlightContentInWorksheet(worksheet, target_address, '#EA7F04');
+                                highlightContentInWorksheet(act_worksheet, target_address, '#EA7F04');
                             });
                             getColumnChar(worksheet.name, run2, function(colChar2) {
                                 var target_address = colChar2 + 1;
-                                highlightContentInWorksheet(worksheet, target_address, '#EA7F04');
+                                highlightContentInWorksheet(act_worksheet, target_address, '#EA7F04');
                             });
                         }
                     }
