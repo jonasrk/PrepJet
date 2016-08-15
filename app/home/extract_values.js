@@ -552,15 +552,17 @@ function hideAdvancedCount() {
 
                 }
 
+                getColumnChar(worksheet.name, header + 1, function(colChar) {
 
+                    var rangeaddress = colChar + ":" + colChar;
+                    var range_insert = ctx.workbook.worksheets.getActiveWorksheet().getRange(rangeaddress);
+                    range_insert.insert("Right");
 
-                var column_char = getCharFromNumber(header + 1);
-                var rangeaddress = column_char + ":" + column_char;
-                var range_insert = ctx.workbook.worksheets.getActiveWorksheet().getRange(rangeaddress);
-                range_insert.insert("Right");
+                    var insert_address = colChar + 1 + ":" + colChar + range.text.length;
+                    addExtractedValue(extracted_array, insert_address);
 
-                var insert_address = column_char + 1 + ":" + column_char + range.text.length;
-                addExtractedValue(extracted_array, insert_address);
+                });
+
 
                 if (document.getElementById('createBackup').checked == true) {
                     var sheet_count = Office.context.document.settings.get('backup_sheet_count') + 1;
