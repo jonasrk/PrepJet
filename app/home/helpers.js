@@ -57,6 +57,69 @@ function addNewCheckboxToContainer (id, name, container) {
 }
 
 
+function getNumberFromChar (number) {
+
+    if (number == "A") {
+        return 0;
+    } else if (number == "B") {
+        return 1;
+    } else if (number == "C") {
+        return 2;
+    } else if (number == "D") {
+        return 3;
+    } else if (number == "E") {
+        return 4;
+    } else if (number == "F") {
+        return 5;
+    } else if (number == "G") {
+        return 6;
+    } else if (number == "H") {
+        return 7;
+    } else if (number == "I") {
+        return 8;
+    } else if (number == "J") {
+        return 9;
+    } else if (number == "K") {
+        return 10;
+    } else if (number == "L") {
+        return 11;
+    } else if (number == "M") {
+        return 12;
+    } else if (number == "N") {
+        return 13;
+    } else if (number == "O") {
+        return 14;
+    } else if (number == "P") {
+        return 15;
+    } else if (number == "Q") {
+        return 16;
+    } else if (number == "R") {
+        return 17;
+    } else if (number == "S") {
+        return 18;
+    } else if (number == "T") {
+        return 19;
+    } else if (number == "U") {
+        return 20;
+    } else if (number == "V") {
+        return 21;
+    } else if (number == "W") {
+        return 22;
+    } else if (number == "X") {
+        return 23;
+    } else if (number == "Y") {
+        return 24;
+    } else if (number == "Z") {
+        return 25;
+    }
+    //todo if larger than Z
+    /*if (number > 25) {
+        return getCharFromNumber(Math.floor(number / 26) - 1) + getCharFromNumber(number % 26);
+    }*/
+
+}
+
+
 function getCharFromNumber (number) {
 
     if (number == 0) {
@@ -118,7 +181,6 @@ function getCharFromNumber (number) {
     }
 
 }
-
 
 function addBackupSheet(sheetName, callback) {
     Excel.run(function (ctx) {
