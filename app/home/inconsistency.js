@@ -452,6 +452,7 @@ function redirectHome() {
 
                 }
 
+                var startCell = col_offset + row_offset;
                 if (document.getElementById('createBackup').checked == true) {
                     var sheet_count = Office.context.document.settings.get('backup_sheet_count') + 1;
                     Office.context.document.settings.set('backup_sheet_count', sheet_count);
@@ -459,7 +460,7 @@ function redirectHome() {
                     var newName = worksheet.name + "(" + sheet_count + ")";
                     var backup_promise = new Promise(
                         function(resolve, reject) {
-                                resolve(addBackupSheet(newName));
+                                resolve(addBackupSheet(newName, startCell, add_col));
                         }
                     );
 
