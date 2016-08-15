@@ -94,7 +94,6 @@ function showEnterpriseDialog() {
 
             $('#and_cond').click(showEnterpriseDialog);
             $('#and_cond2').click(showEnterpriseDialog);
-            //$('#or_cond').click(showEnterpriseDialog);
             $('#apply_advanced').click(validationAndAdvanced);
             $('#to_inconsistency').click(redirectRule);
             $('#buttonOk').click(highlightHeader);
@@ -274,17 +273,29 @@ function showEnterpriseDialog() {
             var worksheet = ctx.workbook.worksheets.getActiveWorksheet();
             var range_all = worksheet.getRange();
             var range = range_all.getUsedRange();
+            var firstCell = range.getColumn(0);
+            var firstCol = firstCell.getEntireColumn();
+            var tmpRow = range.getRow(0);
+            var firstRow = tmpRow.getEntireRow();
 
             range.load('text');
+            firstRow.load('address');
+            firstCol.load('address');
 
             return ctx.sync().then(function() {
+
+                var tmp_offset = firstCol.address;
+                var col_offset = tmp_offset.substring(tmp_offset.indexOf("!") + 1, tmp_offset.indexOf(":"));
+                var tmp_row = firstRow.address;
+                var row_offset = tmp_row.substring(tmp_row.indexOf("!") + 1, tmp_row.indexOf(":"));
+                var add_col = getNumberFromChar(col_offset);
 
                 for (var run = 0; run < range.text[0].length - 1; run++) {
                     for (var run2 = run + 1; run2 < range.text[0].length; run2++) {
                         if (range.text[0][run] == range.text[0][run2] && range.text[0][run] != "") {
                             document.getElementById('showEmbeddedDialog').style.visibility = 'hidden';
-                            highlightContentInWorksheet(worksheet, getCharFromNumber(run) + 1, '#EA7F04');
-                            highlightContentInWorksheet(worksheet, getCharFromNumber(run2) + 1, '#EA7F04');
+                            highlightContentInWorksheet(worksheet, getCharFromNumber(run + add_col) + 1, '#EA7F04');
+                            highlightContentInWorksheet(worksheet, getCharFromNumber(run2 + add_col) + 1, '#EA7F04');
                         }
                     }
                 }
@@ -308,9 +319,22 @@ function showEnterpriseDialog() {
             var worksheet = ctx.workbook.worksheets.getActiveWorksheet();
             var range_all = worksheet.getRange();
             var range = range_all.getUsedRange();
+            var firstCell = range.getColumn(0);
+            var firstCol = firstCell.getEntireColumn();
+            var tmpRow = range.getRow(0);
+            var firstRow = tmpRow.getEntireRow();
+
             range.load('text');
+            firstRow.load('address');
+            firstCol.load('address');
 
             return ctx.sync().then(function() {
+
+                var tmp_offset = firstCol.address;
+                var col_offset = tmp_offset.substring(tmp_offset.indexOf("!") + 1, tmp_offset.indexOf(":"));
+                var tmp_row = firstRow.address;
+                var row_offset = tmp_row.substring(tmp_row.indexOf("!") + 1, tmp_row.indexOf(":"));
+                var add_col = getNumberFromChar(col_offset);
 
                 for (var run = 0; run < range.text[0].length - 1; run++) {
                     for (var run2 = run + 1; run2 < range.text[0].length; run2++) {
@@ -328,8 +352,8 @@ function showEnterpriseDialog() {
                             el.textContent = range.text[0][i];
                         }
                         else {
-                            el.value = "Column " + getCharFromNumber(i);
-                            el.textContent = "Column " + getCharFromNumber(i);
+                            el.value = "Column " + getCharFromNumber(i + add_col);
+                            el.textContent = "Column " + getCharFromNumber(i + add_col);
                         }
 
                     document.getElementById("column_simple1").appendChild(el);
@@ -356,9 +380,22 @@ function showEnterpriseDialog() {
             var worksheet = ctx.workbook.worksheets.getActiveWorksheet();
             var range_all = worksheet.getRange();
             var range = range_all.getUsedRange();
+            var firstCell = range.getColumn(0);
+            var firstCol = firstCell.getEntireColumn();
+            var tmpRow = range.getRow(0);
+            var firstRow = tmpRow.getEntireRow();
+
             range.load('text');
+            firstRow.load('address');
+            firstCol.load('address');
 
             return ctx.sync().then(function() {
+
+                var tmp_offset = firstCol.address;
+                var col_offset = tmp_offset.substring(tmp_offset.indexOf("!") + 1, tmp_offset.indexOf(":"));
+                var tmp_row = firstRow.address;
+                var row_offset = tmp_row.substring(tmp_row.indexOf("!") + 1, tmp_row.indexOf(":"));
+                var add_col = getNumberFromChar(col_offset);
 
                 for (var run = 0; run < range.text[0].length - 1; run++) {
                     for (var run2 = run + 1; run2 < range.text[0].length; run2++) {
@@ -376,8 +413,8 @@ function showEnterpriseDialog() {
                             el.textContent = range.text[0][i];
                         }
                         else {
-                            el.value = "Column " + getCharFromNumber(i);
-                            el.textContent = "Column " + getCharFromNumber(i);
+                            el.value = "Column " + getCharFromNumber(i + add_col);
+                            el.textContent = "Column " + getCharFromNumber(i + add_col);
                         }
 
                     document.getElementById("column2_options").appendChild(el);
@@ -407,6 +444,11 @@ function showEnterpriseDialog() {
             var worksheet = ctx.workbook.worksheets.getActiveWorksheet();
             var range_all = worksheet.getRange();
             var range = range_all.getUsedRange();
+            var firstCell = range.getColumn(0);
+            var firstCol = firstCell.getEntireColumn();
+            var tmpRow = range.getRow(0);
+            var firstRow = tmpRow.getEntireRow();
+
             var selected_identifier2 = document.getElementById('column2_options').value;
 
 
@@ -444,26 +486,34 @@ function showEnterpriseDialog() {
             }
 
             range.load('text');
+            firstRow.load('address');
+            firstCol.load('address');
 
             return ctx.sync().then(function() {
+
+                var tmp_offset = firstCol.address;
+                var col_offset = tmp_offset.substring(tmp_offset.indexOf("!") + 1, tmp_offset.indexOf(":"));
+                var tmp_row = firstRow.address;
+                var row_offset = tmp_row.substring(tmp_row.indexOf("!") + 1, tmp_row.indexOf(":"));
+                var add_col = getNumberFromChar(col_offset);
 
                 var act_worksheet = ctx.workbook.worksheets.getActiveWorksheet();
                 var selected_identifier1 = document.getElementById('column_simple1').value;
 
                 for (var k = 0; k < range.text[0].length; k++){
-                    if (selected_identifier1 == range.text[0][k] || selected_identifier1 == "Column " + getCharFromNumber(k)){
+                    if (selected_identifier1 == range.text[0][k] || selected_identifier1 == "Column " + getCharFromNumber(k + add_col)){
                         var header_if = k;
                     }
                 }
                 for (var k = 0; k < range.text[0].length; k++){
-                    if (selected_identifier2 == range.text[0][k] || selected_identifier2 == "Column " + getCharFromNumber(k)){
+                    if (selected_identifier2 == range.text[0][k] || selected_identifier2 == "Column " + getCharFromNumber(k + add_col)){
                         var header_then = k;
                     }
                 }
 
 
                 function highlightThenCond() {
-                    var address = getCharFromNumber(header_then) + sheet_row;
+                    var address = getCharFromNumber(header_then + add_col) + sheet_row;
                     if (document.getElementById('then_operator').value == "equal") {
                         if (range.text[i][header_then] != thencondition) {
                             highlightContentInWorksheet(act_worksheet, address, '#EA7F04');
