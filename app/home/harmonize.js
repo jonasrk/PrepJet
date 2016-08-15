@@ -171,15 +171,20 @@ function redirectHome() {
             var range = range_all.getUsedRange();
 
             range.load('text');
+            worksheet.load('name');
 
             return ctx.sync().then(function() {
+
                 if (document.getElementById('checkbox_all').checked == true) {
                     for (var i = 0; i < range.text[0].length; i++) {
                         if (range.text[0][i] != "") {
                             document.getElementById(range.text[0][i]).checked = true;
                         }
                         else {
-                            document.getElementById("Column " + getCharFromNumber(i)).checked = true;
+                            getColumnChar(worksheet.name, i, function(colChar){
+                                document.getElementById("Column " + colChar).checked = true;
+                            });
+
                         }
                     }
                 }
@@ -189,7 +194,9 @@ function redirectHome() {
                             document.getElementById(range.text[0][i]).checked = false;
                         }
                         else {
-                            document.getElementById("Column " + getCharFromNumber(i)).checked = false;
+                            getColumnChar(worksheet.name, i, function(colChar){
+                                document.getElementById("Column " + colChar).checked = false;
+                            });
                         }
                     }
                 }
@@ -214,6 +221,7 @@ function redirectHome() {
             var range = range_all.getUsedRange();
 
             range.load('text');
+            worksheet.load('name');
 
             return ctx.sync().then(function() {
 
@@ -231,8 +239,9 @@ function redirectHome() {
                         addNewCheckboxToContainer (range.text[0][i], "column_checkbox" ,"checkboxes_columns");
                     }
                     else {
-                        var colchar = getCharFromNumber(i);
-                        addNewCheckboxToContainer ("Column " + colchar, "column_checkbox" ,"checkboxes_columns");
+                        getColumnChar(worksheet.name, i, function(colChar) {
+                            addNewCheckboxToContainer ("Column " + colChar, "column_checkbox" ,"checkboxes_columns");
+                        });
                     }
                 }
 

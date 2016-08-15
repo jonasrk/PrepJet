@@ -184,7 +184,9 @@ function redirectHome() {
                             document.getElementById(range.text[0][i]).checked = true;
                         }
                         else {
-                            document.getElementById("Column " + getCharFromNumber(i)).checked = true;
+                            getColumnChar(worksheet.name, i, function(colChar){
+                                document.getElementById("Column " + colChar).checked = true;
+                            });
                         }
                     }
                 }
@@ -194,7 +196,9 @@ function redirectHome() {
                             document.getElementById(range.text[0][i]).checked = false;
                         }
                         else {
-                            document.getElementById("Column " + getCharFromNumber(i)).checked = false;
+                            getColumnChar(worksheet.name, i, function(colChar){
+                                document.getElementById("Column " + colChar).checked = false;
+                            });
                         }
                     }
                 }
