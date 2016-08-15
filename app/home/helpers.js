@@ -222,6 +222,32 @@ function backupForUndo(this_range){
 
 }
 
+function getColumnChar(sheet, colNumber, callback){
+    Excel.run(function (ctx) {
+
+        var worksheet = ctx.workbook.worksheets.getItem(sheet);
+        var range_all = worksheet.getRange();
+        var range = range_all.getUsedRange().getColumn(colNumber);
+        var rangeCol = range.getEntireColumn();
+
+        range.load('text');
+        range.load('address');
+        rangeCol.load('address');
+
+        return ctx.sync().then(function() {
+            var tmp_columns = rangeCol.address;
+            var column_address = tmp_columns.substring(tmp_columns.indexOf("!") + 1, tmp_columns.indexOf(":"));
+            callback(column_address);
+        });
+
+    }).catch(function(error) {
+        console.log("Error: " + error);
+        if (error instanceof OfficeExtension.Error) {
+            console.log("Debug info: " + JSON.stringify(error.debugInfo));
+        }
+    });
+}
+
 
 function getColumn(sheet, colNumber, callback){
 
