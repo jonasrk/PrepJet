@@ -1,7 +1,7 @@
 function backToOne() {
     $('#step1').show();
     $('#step2').hide();
-    Office.context.document.settings.set('back_button_pressed', true);
+    Office.context.document.settings.set('back_button_pressed', false);
     Office.context.document.settings.set('populate_new', true);
 }
 
@@ -111,7 +111,7 @@ function redirectHome() {
                 var tmp_offset = firstCol.address;
                 var col_offset = tmp_offset.substring(tmp_offset.indexOf("!") + 1, tmp_offset.indexOf(":"));
                 var tmp_row = firstRow.address;
-                var row_offset = tmp_row.substring(tmp_row.indexOf("!") + 1, tmp_row.indexOf(":"));
+                var row_offset = Number(tmp_row.substring(tmp_row.indexOf("!") + 1, tmp_row.indexOf(":")));
                 var add_col = getNumberFromChar(col_offset);
 
                 if (document.getElementById('checkbox_all').checked == true) {
@@ -223,7 +223,7 @@ function redirectHome() {
                 var tmp_offset = firstCol.address;
                 var col_offset = tmp_offset.substring(tmp_offset.indexOf("!") + 1, tmp_offset.indexOf(":"));
                 var tmp_row = firstRow.address;
-                var row_offset = tmp_row.substring(tmp_row.indexOf("!") + 1, tmp_row.indexOf(":"));
+                var row_offset = Number(tmp_row.substring(tmp_row.indexOf("!") + 1, tmp_row.indexOf(":")));
                 var add_col = getNumberFromChar(col_offset);
 
                 for (var run = 0; run < range.text[0].length - 1; run++) {
@@ -279,7 +279,7 @@ function redirectHome() {
                 var tmp_offset = firstCol.address;
                 var col_offset = tmp_offset.substring(tmp_offset.indexOf("!") + 1, tmp_offset.indexOf(":"));
                 var tmp_row = firstRow.address;
-                var row_offset = tmp_row.substring(tmp_row.indexOf("!") + 1, tmp_row.indexOf(":"));
+                var row_offset = Number(tmp_row.substring(tmp_row.indexOf("!") + 1, tmp_row.indexOf(":")));
                 var add_col = getNumberFromChar(col_offset);
 
                 for (var run = 0; run < range.text[0].length - 1; run++) {
@@ -417,13 +417,13 @@ function redirectHome() {
                     var tmp_offset1 = firstCol1.address;
                     var col_offset1 = tmp_offset1.substring(tmp_offset1.indexOf("!") + 1, tmp_offset1.indexOf(":"));
                     var tmp_row1 = firstRow1.address;
-                    var row_offset1 = tmp_row1.substring(tmp_row1.indexOf("!") + 1, tmp_row1.indexOf(":"));
+                    var row_offset1 = Number(tmp_row1.substring(tmp_row1.indexOf("!") + 1, tmp_row1.indexOf(":")));
                     var add_col1 = getNumberFromChar(col_offset1);
 
                     var tmp_offset2 = firstCol2.address;
                     var col_offset2 = tmp_offset2.substring(tmp_offset2.indexOf("!") + 1, tmp_offset2.indexOf(":"));
                     var tmp_row2 = firstRow2.address;
-                    var row_offset2 = tmp_row2.substring(tmp_row2.indexOf("!") + 1, tmp_row2.indexOf(":"));
+                    var row_offset2 = Number(tmp_row2.substring(tmp_row2.indexOf("!") + 1, tmp_row2.indexOf(":")));
                     var add_col2 = getNumberFromChar(col_offset2);
 
                     if (Office.context.document.settings.get('populate_new') == false) {
@@ -616,13 +616,13 @@ function redirectHome() {
                 var tmp_offsetTarget = firstColTarget.address;
                 var col_offsetTarget = tmp_offsetTarget.substring(tmp_offsetTarget.indexOf("!") + 1, tmp_offsetTarget.indexOf(":"));
                 var tmp_rowTarget = firstRowTarget.address;
-                var row_offsetTarget = tmp_rowTarget.substring(tmp_rowTarget.indexOf("!") + 1, tmp_rowTarget.indexOf(":"));
+                var row_offsetTarget = Number(tmp_rowTarget.substring(tmp_rowTarget.indexOf("!") + 1, tmp_rowTarget.indexOf(":")));
                 var add_colTarget = getNumberFromChar(col_offsetTarget);
 
                 var tmp_offsetSource = firstCol.address;
                 var col_offsetSource = tmp_offsetSource.substring(tmp_offsetSource.indexOf("!") + 1, tmp_offsetSource.indexOf(":"));
                 var tmp_rowSource = firstRow.address;
-                var row_offsetSource = tmp_rowSource.substring(tmp_rowSource.indexOf("!") + 1, tmp_rowSource.indexOf(":"));
+                var row_offsetSource = Number(tmp_rowSource.substring(tmp_rowSource.indexOf("!") + 1, tmp_rowSource.indexOf(":")));
                 var add_colSource = getNumberFromChar(col_offsetSource);
 
 
@@ -671,7 +671,7 @@ function redirectHome() {
                             var column_char = getCharFromNumber(l + range_adding_to.text[0].length + add_colTarget);
 
                             // copy title
-                            addContentToWorksheet(worksheet_adding_to, column_char + "1", "=" + selected_table2 + "!" + source_char + "1");
+                            addContentToWorksheet(worksheet_adding_to, column_char + row_offsetTarget, "=" + selected_table2 + "!" + source_char + row_offsetSource);
 
                             // copy rest
                             for (var i = 1; i < range_adding_to.text.length; i++) {
@@ -694,8 +694,8 @@ function redirectHome() {
 
                                     }
                                     if (check == column1_ids.length) {
-                                        var sheet_row = i + 1;
-                                        var row_ref = j + 1;
+                                        var sheet_row = row_offsetTarget + i;
+                                        var row_ref = row_offsetSource + j;
                                         addContentToWorksheet(worksheet_adding_to, column_char + sheet_row, "=" + selected_table2 + "!" + source_char + row_ref);
                                         lookup_count += 1;
                                         break;
