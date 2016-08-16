@@ -230,8 +230,8 @@ function redirectHome() {
                     for (var run2 = run + 1; run2 < range.text[0].length; run2++) {
                         if (range.text[0][run] == range.text[0][run2] && range.text[0][run] != "") {
                             document.getElementById('showEmbeddedDialog').style.visibility = 'hidden';
-                            highlightContentInWorksheet(worksheet, getCharFromNumber(run + add_col) + 1, '#EA7F04');
-                            highlightContentInWorksheet(worksheet, getCharFromNumber(run2 + add_col) + 1, '#EA7F04');
+                            highlightContentInWorksheet(worksheet, getCharFromNumber(run + add_col) + row_offset, '#EA7F04');
+                            highlightContentInWorksheet(worksheet, getCharFromNumber(run2 + add_col) + row_offset, '#EA7F04');
                         }
                     }
                 }
