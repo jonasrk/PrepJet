@@ -320,7 +320,7 @@ function redirectHome() {
                     }
 
                     var column_char = getCharFromNumber(header + add_col);
-                    var insert_address = column_char + 1 + ":" + column_char + range.text.length;
+                    var insert_address = column_char + row_offset + ":" + column_char + range.text.length + row_offset;
 
                     var i = 0;
 

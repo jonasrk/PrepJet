@@ -290,7 +290,7 @@ function redirectHome() {
                 var tmp_offset = firstCol.address;
                 var col_offset = tmp_offset.substring(tmp_offset.indexOf("!") + 1, tmp_offset.indexOf(":"));
                 var tmp_row = firstRow.address;
-                var row_offset = tmp_row.substring(tmp_row.indexOf("!") + 1, tmp_row.indexOf(":"));
+                var row_offset = Number(tmp_row.substring(tmp_row.indexOf("!") + 1, tmp_row.indexOf(":")));
                 var add_col = getNumberFromChar(col_offset);
 
                 var header = 0;
@@ -343,7 +343,7 @@ function redirectHome() {
 
                     }
 
-                    var insert_address = getCharFromNumber(header + add_col) + 1 + ":" + getCharFromNumber(header + add_col) + range.text.length;
+                    var insert_address = getCharFromNumber(header + add_col) + row_offset + ":" + getCharFromNumber(header + add_col) + (range.text.length + row_offset - 1);
                     addContentNew(worksheet.name, insert_address, harm_array, function () {});
 
                     var i = 0;
