@@ -1,5 +1,5 @@
 (function () {
-    'use strict';
+    //'use strict';
     var sorted_rows = [];
     // The initialize function must be run each time a new page is loaded
     Office.initialize = function (reason) {
