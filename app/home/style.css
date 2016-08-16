@@ -214,7 +214,6 @@ h1 {
 
 .ms-Dropdown {
     color: #333;
-    width: 135px;
     margin: 0 0 10px;
     padding: 0;
     position: relative;
@@ -223,7 +222,8 @@ h1 {
 
 #lookuptable {
     border-bottom: 0.75px solid;
-    border-color: #e2e2e2;}
+    border-color: #e2e2e2;
+    width: 50%; }
 
 #harm_drop {
     width: 100%; }
@@ -238,7 +238,7 @@ h1 {
     width: 100%; }
 
 #colright {
-    float: right; }
+    width: 50%; }
 
 #resultDialog {
     visibility: hidden; }
@@ -256,4 +256,12 @@ h1 {
     background: #666666;
     height: 50px;
     width: 60px; }
+
+#bigtable {
+    width: 100%;
+    border-bottom: 1px solid;
+    border-color: #e2e2e2; }
+
+#matchCriteria {
+    width: 100%; }
 
