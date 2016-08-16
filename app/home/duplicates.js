@@ -38,7 +38,6 @@ function redirectHome() {
                 document.getElementById('showEmbeddedDialog').style.visibility = 'hidden';
             }
 
-
             //show and hide message about PrepJet Pro when hovering over fuzzy matching
             document.getElementById('buttonCloseEnterprise').onclick = function () {
                 document.getElementById('showEnterprise').style.visibility = 'hidden';
@@ -174,15 +173,15 @@ function redirectHome() {
                 var tmp_offset = firstCol.address;
                 var col_offset = tmp_offset.substring(tmp_offset.indexOf("!") + 1, tmp_offset.indexOf(":"));
                 var tmp_row = firstRow.address;
-                var row_offset = tmp_row.substring(tmp_row.indexOf("!") + 1, tmp_row.indexOf(":"));
+                var row_offset = Number(tmp_row.substring(tmp_row.indexOf("!") + 1, tmp_row.indexOf(":")));
                 var add_col = getNumberFromChar(col_offset);
 
                 for (var run = 0; run < range.text[0].length - 1; run++) {
                     for (var run2 = run + 1; run2 < range.text[0].length; run2++) {
                         if (range.text[0][run] == range.text[0][run2] && range.text[0][run] != "") {
                             document.getElementById('showEmbeddedDialog').style.visibility = 'hidden';
-                            highlightContentInWorksheet(worksheet, getCharFromNumber(run + add_col) + 1, '#EA7F04');
-                            highlightContentInWorksheet(worksheet, getCharFromNumber(run2 + add_col) + 1, '#EA7F04');
+                            highlightContentInWorksheet(worksheet, getCharFromNumber(run + add_col) + row_offset, '#EA7F04');
+                            highlightContentInWorksheet(worksheet, getCharFromNumber(run2 + add_col) + row_offset, '#EA7F04');
                         }
                     }
                 }
@@ -220,7 +219,7 @@ function redirectHome() {
                 var tmp_offset = firstCol.address;
                 var col_offset = tmp_offset.substring(tmp_offset.indexOf("!") + 1, tmp_offset.indexOf(":"));
                 var tmp_row = firstRow.address;
-                var row_offset = tmp_row.substring(tmp_row.indexOf("!") + 1, tmp_row.indexOf(":"));
+                var row_offset = Number(tmp_row.substring(tmp_row.indexOf("!") + 1, tmp_row.indexOf(":")));
                 var add_col = getNumberFromChar(col_offset);
 
                 for (var run = 0; run < range.text[0].length - 1; run++) {
@@ -274,7 +273,7 @@ function redirectHome() {
                 var tmp_offset = firstCol.address;
                 var col_offset = tmp_offset.substring(tmp_offset.indexOf("!") + 1, tmp_offset.indexOf(":"));
                 var tmp_row = firstRow.address;
-                var row_offset = tmp_row.substring(tmp_row.indexOf("!") + 1, tmp_row.indexOf(":"));
+                var row_offset = Number(tmp_row.substring(tmp_row.indexOf("!") + 1, tmp_row.indexOf(":")));
                 var add_col = getNumberFromChar(col_offset);
 
                 if (document.getElementById('checkbox_all').checked == true) {
@@ -342,7 +341,7 @@ function redirectHome() {
                 var tmp_offset = firstColumn.address;
                 var col_offset = tmp_offset.substring(tmp_offset.indexOf("!") + 1, tmp_offset.indexOf(":"));
                 var tmp_row = firstRow.address;
-                var row_offset = tmp_row.substring(tmp_row.indexOf("!") + 1, tmp_row.indexOf(":"));
+                var row_offset = Number(tmp_row.substring(tmp_row.indexOf("!") + 1, tmp_row.indexOf(":")));
                 var add_col = getNumberFromChar(col_offset);
 
                 var columns_to_check = [];
@@ -360,7 +359,7 @@ function redirectHome() {
                 for (var i = 1; i < range.text.length; i++) {
                     var this_row = [];
                     for (var j = 0; j < columns_to_check.length; j++) {
-                        var row_number = i + 1;
+                        var row_number = i + row_offset;
                         this_row.push([range.text[i][columns_to_check[j]], getCharFromNumber(columns_to_check[j] + add_col) + row_number, row_number]);
                     }
                     strings_to_sort.push(this_row);
