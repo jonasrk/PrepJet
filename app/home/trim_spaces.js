@@ -177,8 +177,7 @@ function redirectHome() {
                 var tmp_offset = firstCol.address;
                 var col_offset = tmp_offset.substring(tmp_offset.indexOf("!") + 1, tmp_offset.indexOf(":"));
                 var tmp_row = firstRow.address;
-                var row_offset = tmp_row.substring(tmp_row.indexOf("!") + 1, tmp_row.indexOf(":"));
-
+                var row_offset = Number(tmp_row.substring(tmp_row.indexOf("!") + 1, tmp_row.indexOf(":")));
                 var add_col = getNumberFromChar(col_offset);
 
                 if (document.getElementById('checkbox_all').checked == true) {
@@ -235,8 +234,7 @@ function redirectHome() {
                 var tmp_offset = firstCol.address;
                 var col_offset = tmp_offset.substring(tmp_offset.indexOf("!") + 1, tmp_offset.indexOf(":"));
                 var tmp_row = firstRow.address;
-                var row_offset = tmp_row.substring(tmp_row.indexOf("!") + 1, tmp_row.indexOf(":"));
-
+                var row_offset = Number(tmp_row.substring(tmp_row.indexOf("!") + 1, tmp_row.indexOf(":")));
                 var add_col = getNumberFromChar(col_offset);
 
                 for (var run = 0; run < range.text[0].length - 1; run++) {
@@ -297,8 +295,7 @@ function redirectHome() {
                 var tmp_offset = firstCol.address;
                 var col_offset = tmp_offset.substring(tmp_offset.indexOf("!") + 1, tmp_offset.indexOf(":"));
                 var tmp_row = firstRow.address;
-                var row_offset = tmp_row.substring(tmp_row.indexOf("!") + 1, tmp_row.indexOf(":"));
-
+                var row_offset = Number(tmp_row.substring(tmp_row.indexOf("!") + 1, tmp_row.indexOf(":")));
                 var add_col = getNumberFromChar(col_offset);
 
 
@@ -320,7 +317,7 @@ function redirectHome() {
                     }
 
                     var column_char = getCharFromNumber(header + add_col);
-                    var insert_address = column_char + row_offset + ":" + column_char + range.text.length + row_offset;
+                    var insert_address = column_char + row_offset + ":" + column_char + (range.text.length + row_offset - 1);
 
                     var i = 0;
 
