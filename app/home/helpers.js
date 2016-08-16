@@ -112,10 +112,20 @@ function getNumberFromChar (number) {
     } else if (number == "Z") {
         return 25;
     }
-    //todo if larger than Z
-    /*if (number > 25) {
-        return getCharFromNumber(Math.floor(number / 26) - 1) + getCharFromNumber(number % 26);
-    }*/
+    else {
+        var finalCol = 25;
+        for (var i = 0; i < number.length; i++) {
+            var tmp = number.substring(i,i+1);
+            if (i == number.length - 1) {
+                finalCol = finalCol + getNumberFromChar(tmp) + 1;
+            }
+            else {
+                finalCol = finalCol + 25 * getNumberFromChar(tmp) + 1 * getNumberFromChar(tmp);
+            }
+        }
+        console.log(finalCol);
+        return finalCol;
+    }
 
 }
 
