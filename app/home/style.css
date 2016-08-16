@@ -254,6 +254,14 @@ h1 {
     height: 50px;
     width: 60px; }
 
+#homeButton:hover {
+    background-color: #666666;
+    cursor: pointer; }
+
+#refresh_icon:hover {
+    background-color: #666666;
+    cursor: pointer; }
+
 #bigtable {
     width: 100%;
     border-bottom: 1px solid;
