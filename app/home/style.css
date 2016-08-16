@@ -93,7 +93,7 @@ h1 {
     overflow-x: hidden; }
 
 .tableheader {
-    width: 85%; }
+    width: 76%; }
 
 .tableborder {
     border-top: 0.75px solid;
@@ -242,3 +242,18 @@ h1 {
 
 #resultDialog {
     visibility: hidden; }
+
+#proHeader {
+    color: #EA7F04;}
+
+.tableupperborder {
+    border-top: 0.75px solid;
+    width: 100%;
+    border-color: #e2e2e2;}
+
+.ms-Button_homelogo {
+    border: 0px;
+    background: #666666;
+    height: 50px;
+    width: 60px; }
+

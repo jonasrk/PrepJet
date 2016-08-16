@@ -25,6 +25,12 @@ function displayFieldDelimiter(){
     }
 }
 
+
+function redirectHome() {
+    window.location = "mac_start.html";
+}
+
+
 (function () {
     // 'use strict';
 
@@ -36,6 +42,7 @@ function displayFieldDelimiter(){
             Office.context.document.settings.set('more_option', false);
             Office.context.document.settings.set('last_clicked_function', "split_values.html");
             if (Office.context.document.settings.get('prepjet_loaded_before') == null) {
+                Office.context.document.settings.set('backup_sheet_count', 1);
                 Office.context.document.settings.set('prepjet_loaded_before', true);
                 Office.context.document.settings.saveAsync();
                 window.location = "intro.html";
@@ -59,6 +66,7 @@ function displayFieldDelimiter(){
             $('#buttonOk').click(highlightHeader);
             $('#advanced_settings').click(displayAdvancedCount);
             $('#advanced_hide').click(hideAdvancedCount);
+            $('#homeButton').click(redirectHome);
 
 
             // Hides the dialog.
@@ -76,6 +84,15 @@ function displayFieldDelimiter(){
             }
 
             document.getElementById("refresh_icon").onclick = function () {
+                window.location = "split_values.html";
+            }
+
+            document.getElementById("resultClose").onclick = function () {
+                document.getElementById('resultDialog').style.visibility = 'hidden';
+                window.location = "split_values.html";
+            }
+            document.getElementById("resultOk").onclick = function () {
+                document.getElementById('resultDialog').style.visibility = 'hidden';
                 window.location = "split_values.html";
             }
 
@@ -320,8 +337,20 @@ function displayFieldDelimiter(){
                                 max_array_length = array_length;
                             }
                         }
+                        else {
+                            split_array[i] = [""];
+                        }
+                    }
+
+                    for (var j = 0; j < range.text.length; j++) {
+                        if (split_array[j].length < max_array_length) {
+                            for (var i = split_array[j].length; i < max_array_length; i++) {
+                                split_array[j][i] = "";
+                            }
+                        }
                     }
                 }
+
                 else {
                     var count_direction = document.getElementById('delimiter_count_drop').value;
                     for (var i = 0; i < range.text.length; i++) {
@@ -362,7 +391,8 @@ function displayFieldDelimiter(){
                             }
                         }
                         else if (range.text[i][header].indexOf(delimiter_type) == -1) {
-                            split_array[i] = range.text[i][header];
+                            split_array[i] = [range.text[i][header]];
+                            split_array[i].push("");
                         }
                     }
                 }
@@ -370,7 +400,6 @@ function displayFieldDelimiter(){
                 //insert empty columns right to split column for splitted parts
                 for (var j = 1; j < max_array_length; j++) {
                     var column_char = getCharFromNumber(header + 1);
-                    var sheet_row = i + 1;
                     var rangeaddress = column_char + ":" + column_char;
                     var range_insert = ctx.workbook.worksheets.getActiveWorksheet().getRange(rangeaddress);
                     range_insert.insert("Right");
@@ -378,6 +407,31 @@ function displayFieldDelimiter(){
 
                 var insert_address = getCharFromNumber(header) + 1 + ":" + getCharFromNumber(header + max_array_length - 1) + range.text.length;
                 addSplitValue(split_array, insert_address);
+
+
+                if (document.getElementById('createBackup').checked == true) {
+                    var sheet_count = Office.context.document.settings.get('backup_sheet_count') + 1;
+                    Office.context.document.settings.set('backup_sheet_count', sheet_count);
+                    Office.context.document.settings.saveAsync();
+                    var newName = worksheet.name + "(" + sheet_count + ")";
+                    addBackupSheet(newName, function() {
+                        var txt = document.createElement("p");
+                        txt.className = "ms-font-xs ms-embedded-dialog__content__text";
+                        txt.innerHTML = "PrepJet successfully splitted your data."
+                        document.getElementById('resultText').appendChild(txt);
+
+                        document.getElementById('resultDialog').style.visibility = 'visible';
+                    });
+                }
+                else {
+                    var txt = document.createElement("p");
+                    txt.className = "ms-font-xs ms-embedded-dialog__content__text";
+                    txt.innerHTML = "PrepJet successfully splitted your data."
+                    document.getElementById('resultText').appendChild(txt);
+
+                    document.getElementById('resultDialog').style.visibility = 'visible';
+                }
+
 
             });
 
@@ -402,11 +456,8 @@ function displayFieldDelimiter(){
             worksheet.load('name');
 
             return ctx.sync().then(function() {
-                addContentNew(worksheet.name, insert_address, split_array);
-                window.location = "split_values.html";
-
+                    addContentNew(worksheet.name, insert_address, split_array, function () {});
             });
-
         }).catch(function(error) {
             console.log("Error: " + error);
             if (error instanceof OfficeExtension.Error) {

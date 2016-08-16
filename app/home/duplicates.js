@@ -3,6 +3,10 @@ function fuzzyPro() {
     document.getElementById('fuzzymatch').checked = false;
 }
 
+function redirectHome() {
+    window.location = "mac_start.html";
+}
+
 (function () {
     // 'use strict';
     var sorted_rows = [];
@@ -13,6 +17,7 @@ function fuzzyPro() {
             Office.context.document.settings.set('same_header_duplicates', false);
             Office.context.document.settings.set('last_clicked_function', "duplicates.html");
             if (Office.context.document.settings.get('prepjet_loaded_before') == null) {
+                Office.context.document.settings.set('backup_sheet_count', 1);
                 Office.context.document.settings.set('prepjet_loaded_before', true);
                 Office.context.document.settings.saveAsync();
                 window.location = "intro.html";
@@ -25,6 +30,7 @@ function fuzzyPro() {
             $('#bt_detect_duplicates').click(detectDuplicates);
             $('#checkbox_all').click(checkCheckbox);
             $('#buttonOk').click(highlightHeader);
+            $('#homeButton').click(redirectHome);
 
 
             //show and hide error message when columns have same header name
@@ -285,6 +291,8 @@ function fuzzyPro() {
 
             return ctx.sync().then(function() {
 
+                backupForUndo(range);
+
                 var columns_to_check = [];
 
                 for (var k = 0; k < range.text[0].length; k++) { // .text[0] is the first row of a range
@@ -406,7 +414,7 @@ function fuzzyPro() {
                     var start_col = firstCol.address.substring(firstCol.address.indexOf("!") + 1, firstCol.address.indexOf(":"));
                     var end_col = lastCol.address.substring(lastCol.address.indexOf(":") + 1);
 
-                    addContentNew(worksheet.name, start_col + ":" + end_col, text);
+                    addContentNew(worksheet.name, start_col + ":" + end_col, text, function () {});
 
                     for (var row = 0; row < text.length; row++) {
                         for(var col = 0; col < range.text[0].length; col++) {
@@ -419,16 +427,32 @@ function fuzzyPro() {
                         }
                         sheet_row += 1;
                     }
+
                 }
 
-                var txt = document.createElement("p");
-                txt.className = "ms-font-xs ms-embedded-dialog__content__text";
-                txt.innerHTML = "PrepJet found " + duplicates.length + " duplicate rows."
-                document.getElementById('resultText').appendChild(txt);
+                if (document.getElementById('createBackup').checked == true) {
+                    var sheet_count = Office.context.document.settings.get('backup_sheet_count') + 1;
+                    Office.context.document.settings.set('backup_sheet_count', sheet_count);
+                    Office.context.document.settings.saveAsync();
+                    var newName = worksheet.name + "(" + sheet_count + ")";
+                    addBackupSheet(newName, function() {
+                        var txt = document.createElement("p");
+                        txt.className = "ms-font-xs ms-embedded-dialog__content__text";
+                        txt.innerHTML = "PrepJet found " + duplicates.length + " duplicate rows."
+                        document.getElementById('resultText').appendChild(txt);
 
-                document.getElementById('resultDialog').style.visibility = 'visible';
+                        document.getElementById('resultDialog').style.visibility = 'visible';
+                    });
 
-                //window.location = "duplicates.html";
+                    }
+                    else {
+                        var txt = document.createElement("p");
+                        txt.className = "ms-font-xs ms-embedded-dialog__content__text";
+                        txt.innerHTML = "PrepJet found " + duplicates.length + " duplicate rows."
+                        document.getElementById('resultText').appendChild(txt);
+
+                        document.getElementById('resultDialog').style.visibility = 'visible';
+                    }
 
             });
 

@@ -53,9 +53,12 @@
                 </button>
             </td>
             <td>
-                <div>
+                <button id="homeButton" class="ms-Button_homelogo">
                     <img class="page1" src="../../images/logo_lg.png" />
-                </div>
+                </button>
+                <!--div>
+                    <img class="page1" src="../../images/logo_lg.png" />
+                </div-->
             </td>
         </tr>
     </table>
@@ -87,7 +90,7 @@
 <div id="content-main">
     <div class="padding">
         <div>
-            <label class="ms-Label">Select the column(s) in which to harmonize values</label>
+            <label class="ms-Label">Select the column(s) in which to harmonize entries</label>
         </div>
         <table>
             <tr>
@@ -116,6 +119,12 @@
                     <option value="firstupper">First Letter Of Each Word Upper Case</option>
                 </select>
             </div>
+        <div class="ms-ChoiceField">
+            <input id="createBackup" class="ms-ChoiceField-input" type="checkbox">
+            <label for="createBackup" class="ms-ChoiceField-field">
+                <span class="ms-Label">Create a backup sheet</span>
+            </label>
+        </div>
         <!--split button-->
         <button class="ms-Button" id="harmonize">Harmonize</button>
     </div>

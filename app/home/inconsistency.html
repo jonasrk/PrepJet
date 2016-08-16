@@ -53,9 +53,12 @@
                 </button>
             </td>
             <td>
-                <div>
+                <button id="homeButton" class="ms-Button_homelogo">
                     <img class="page1" src="../../images/logo_lg.png" />
-                </div>
+                </button>
+                <!--div>
+                    <img class="page1" src="../../images/logo_lg.png" />
+                </div-->
             </td>
         </tr>
     </table>
@@ -115,7 +118,7 @@
             <tr>
                 <td>
                     <div id="explanation">
-                        <label class="ms-Label">PrepJet will highlight those cells were the data type deviates from the most frequent data type of the column.</p>
+                        <label class="ms-Label">PrepJet will highlight those cells in which the data type deviates from the most frequent data type present in the column.</p>
                     </div>
                 </td>
                 <td>
@@ -161,9 +164,20 @@
         </table>
         <!--container for checkboxes-->
         <div id="checkboxes_columns" class="ms-ChoiceField"></div>
+        <table class="tableupperborder">
+            <tr>
+                <td>
+                    <div class="ms-ChoiceField">
+                        <input id="createBackup" class="ms-ChoiceField-input" type="checkbox">
+                        <label for="createBackup" class="ms-ChoiceField-field">
+                            <span class="ms-Label">Create a backup sheet</span>
+                        </label>
+                    </div>
+                </td>
+            </tr>
+        </table>
         <!--split button-->
         <button class="ms-Button" id="inconsistency">Screen</button>
-        <button class="ms-Button_grey" id="to_validation">Custom screening</button>
     </div>
 </div>
 <div class="placeholder"></div>

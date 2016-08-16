@@ -53,9 +53,12 @@
                 </button>
             </td>
             <td>
-                <div>
+                <button id="homeButton" class="ms-Button_homelogo">
                     <img class="page1" src="../../images/logo_lg.png" />
-                </div>
+                </button>
+                <!--div>
+                    <img class="page1" src="../../images/logo_lg.png" />
+                </div-->
             </td>
         </tr>
     </table>
@@ -118,7 +121,7 @@
             <select id="column1_options" class="ms-Dropdown-select"></select>
         </div>
         <div id="explanation">
-            <label class="ms-Label">Select delimiter to start and end extracting a text part:</p>
+            <label class="ms-Label">Select delimiters to start and end extracting a text part:</p>
         </div>
         <table id="tablesmall">
             <tr>
@@ -169,13 +172,30 @@
                 </td>
             </tr>
         </table>
-        <!--checkbox include delimiter-->
-        <div class="ms-ChoiceField">
-            <input id="demo-checkbox-unselected" class="ms-ChoiceField-input" type="checkbox">
-            <label id="checkbox" for="demo-checkbox-unselected" class="ms-ChoiceField-field">
-                <span class="ms-Label">Include delimiter in extracted text</span>
-            </label>
-        </div>
+        <table>
+            <tr>
+                <td>
+                    <div class="ms-ChoiceField">
+                        <input id="demo-checkbox-unselected" class="ms-ChoiceField-input" type="checkbox">
+                        <label id="checkbox" for="demo-checkbox-unselected" class="ms-ChoiceField-field">
+                            <span class="ms-Label">Include delimiter in extracted text</span>
+                        </label>
+                    </div>
+                </td>
+            </tr>
+        </table>
+        <table class="tableborder">
+            <tr>
+                <td>
+                    <div class="ms-ChoiceField">
+                        <input id="createBackup" class="ms-ChoiceField-input" type="checkbox">
+                        <label for="createBackup" class="ms-ChoiceField-field">
+                            <span class="ms-Label">Create a backup sheet</span>
+                        </label>
+                    </div>
+                </td>
+            </tr>
+        </table>
         <div id="helpCallout" class="ms-Callout ms-Callout--close ms-Callout--arrowLeft">
             <div class="ms-Callout-main">
                 <div class="ms-Callout-header">
@@ -186,7 +206,7 @@
                 </button>
                 <div class="ms-Callout-inner">
                     <div class="ms-Callout-content">
-                        <p class="ms-Callout-subText">Per default PrepJet starts and ends extracting at the first position of the selected delimiter. You can specify the count of the delimiter (1, 2,...) as well as the direction from which to count if you want a different behaviour. The extracted content will be inserted in a separate column.</p>
+                        <p class="ms-Callout-subText">Per default PrepJet starts extracting at the first position and ends extracting at the second position of the selected delimiter from the left. You can specify the count of the delimiter (1, 2, ...) as well as the direction from which to count if you want a different setting. The extracted content will be inserted in a separate column.</p>
                     </div>
                     <div class="ms-Callout-actions">
                         <a href="help.html" class="ms-Callout-link ms-Link">Learn more</a>
@@ -206,10 +226,10 @@
             <tr>
                 <td id="smalldrop_col">
                     <div id="del_count_start" class="ms-Dropdown del_count_dropdown_s" tabindex="1">
-                        <label class="ms-Label">Delimiter Position Start</label>
+                        <label class="ms-Label">Start delimiter position</label>
                         <i class="ms-Dropdown-caretDown ms-Icon ms-Icon--caretDown"></i>
                         <select id="delimiter_count_start" class="ms-Dropdown-select">
-                            <option value="one">1</option>
+                            <option value="one">Default</option>
                             <option value="two">2</option>
                             <option value="three">3</option>
                             <option value="four">4</option>
@@ -224,7 +244,7 @@
                 <td id="colright">
                     <!--dropdown for delimiter count-->
                     <div class="ms-Dropdown del_count_dropdown_s" tabindex="1">
-                        <label class="ms-Label">Count Direction</label>
+                        <label class="ms-Label">Count direction</label>
                         <i class="ms-Dropdown-caretDown ms-Icon ms-Icon--caretDown"></i>
                         <select id="del_count_drop_start" class="ms-Dropdown-select">
                             <option value="left">From Left</option>
@@ -236,10 +256,10 @@
             <tr>
                 <td id="smalldrop_col">
                     <div id="del_count_end" class="ms-Dropdown del_count_dropdown_e" tabindex="1">
-                        <label class="ms-Label">Delimiter Position End</label>
+                        <label class="ms-Label">End delimiter position</label>
                         <i class="ms-Dropdown-caretDown ms-Icon ms-Icon--caretDown"></i>
                         <select id="delimiter_count_end" class="ms-Dropdown-select">
-                            <option value="none">None</option>
+                            <option value="none">Default</option>
                             <option value="one">1</option>
                             <option value="two">2</option>
                             <option value="three">3</option>
@@ -255,7 +275,7 @@
                 <td id="colright">
                     <!--dropdown for delimiter count-->
                     <div class="ms-Dropdown del_count_dropdown_e" tabindex="1">
-                        <label class="ms-Label">Count Direction</label>
+                        <label class="ms-Label">Count direction</label>
                         <i class="ms-Dropdown-caretDown ms-Icon ms-Icon--caretDown"></i>
                         <select id="del_count_drop_end" class="ms-Dropdown-select">
                             <option value="left">From Left</option>

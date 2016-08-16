@@ -6,6 +6,11 @@ function backToOne() {
 }
 
 
+function redirectHome() {
+    window.location = "mac_start.html";
+}
+
+
 (function () {
     // 'use strict';
     var count_drop = 0;
@@ -18,6 +23,7 @@ function backToOne() {
             //save function to redirect to correct screen after intro
             Office.context.document.settings.set('last_clicked_function', "merge_columns.html");
             if (Office.context.document.settings.get('prepjet_loaded_before') == null) {
+                Office.context.document.settings.set('backup_sheet_count', 1);
                 Office.context.document.settings.set('prepjet_loaded_before', true);
                 Office.context.document.settings.saveAsync();
                 window.location = "intro.html";
@@ -40,6 +46,7 @@ function backToOne() {
             $('#bt_apply').click(applyButtonClicked);
             $('#back_step2').click(step2ButtonClicked);
             $('#buttonOk').click(highlightHeader);
+            $('#homeButton').click(redirectHome);
 
 
             //show and hide error message for columns that have same header name
@@ -361,7 +368,7 @@ function backToOne() {
                     }
 
                     var trow = document.createElement("tr");
-                    //trow.id = "lookuptable"
+                    trow.id = "lookuprow" + (count_drop + 1)
                     document.getElementById('matchCriteria').appendChild(trow);
 
                     for (var k = (count_drop + 1); k < count_tmp; k++) {
@@ -462,11 +469,9 @@ function backToOne() {
 
         function removeCriteria() {
             var loop_end = count_drop - 1;
-            for (var run = loop_end; run < (loop_end + 2); run++) {
-                var parent = document.getElementById("dropdowns_step3");
-                var child = document.getElementById("addedDropdown" + run);
-                parent.removeChild(child);
-            }
+            var parent = document.getElementById("matchCriteria");
+            var child = document.getElementById("lookuprow" + loop_end);
+            parent.removeChild(child);
             count_drop = count_drop - 2;
             if (count_drop < 3) {
                 $('#bt_remove').hide();
@@ -520,6 +525,7 @@ function backToOne() {
 
             range_adding_to.load('address');
             range_adding_to.load('text');
+            worksheet_adding_to.load('name');
 
             Office.context.document.settings.set('populate_new', true);
             Office.context.document.settings.set('back_button_pressed', false);
@@ -608,16 +614,33 @@ function backToOne() {
                     }
                 }
 
-                empty_count = range_adding_to.text.length - lookup_count - 1;
 
-                var txt = document.createElement("p");
-                txt.className = "ms-font-xs ms-embedded-dialog__content__text";
-                txt.innerHTML = "PrepJet found " + lookup_count + " matching data records. " + empty_count + " rows do not match with any data in your source table."
-                document.getElementById('resultText').appendChild(txt);
+                if (document.getElementById('createBackup').checked == true) {
+                    var sheet_count = Office.context.document.settings.get('backup_sheet_count') + 1;
+                    Office.context.document.settings.set('backup_sheet_count', sheet_count);
+                    Office.context.document.settings.saveAsync();
+                    var newName = worksheet_adding_to.name + "(" + sheet_count + ")";
+                    addBackupSheet(newName, function() {
+                        empty_count = range_adding_to.text.length - lookup_count - 1;
 
-                document.getElementById('resultDialog').style.visibility = 'visible';
+                        var txt = document.createElement("p");
+                        txt.className = "ms-font-xs ms-embedded-dialog__content__text";
+                        txt.innerHTML = "PrepJet found " + lookup_count + " matching data records. " + empty_count + " rows did not meet the specified match criteria."
+                        document.getElementById('resultText').appendChild(txt);
 
-                //window.location = "merge_columns.html";
+                        document.getElementById('resultDialog').style.visibility = 'visible';
+                    });
+                }
+                else {
+                    empty_count = range_adding_to.text.length - lookup_count - 1;
+
+                    var txt = document.createElement("p");
+                    txt.className = "ms-font-xs ms-embedded-dialog__content__text";
+                    txt.innerHTML = "PrepJet found " + lookup_count + " matching data records. " + empty_count + " rows did not meet the specified match criteria."
+                    document.getElementById('resultText').appendChild(txt);
+
+                    document.getElementById('resultDialog').style.visibility = 'visible';
+                }
 
             });
         }).catch(function(error) {

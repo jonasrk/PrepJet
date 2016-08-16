@@ -8,6 +8,10 @@ function displayFieldBegin(){
     }
 }
 
+function redirectHome() {
+    window.location = "mac_start.html";
+}
+
 //show textfield for ending delimiter if custom is selected
 function displayFieldEnd(){
     if(document.getElementById('ending_options').value == "custom_e") {
@@ -50,6 +54,7 @@ function hideAdvancedCount() {
             Office.context.document.settings.set('more_option', false);
             Office.context.document.settings.set('last_clicked_function', "extract_values.html");
             if (Office.context.document.settings.get('prepjet_loaded_before') == null) {
+                Office.context.document.settings.set('backup_sheet_count', 1);
                 Office.context.document.settings.set('prepjet_loaded_before', true);
                 Office.context.document.settings.saveAsync();
                 window.location = "intro.html";
@@ -77,6 +82,7 @@ function hideAdvancedCount() {
             $('#advanced_settings').click(displayAdvancedCount);
             $('#advanced_hide').click(hideAdvancedCount);
             $('#buttonOk').click(highlightHeader);
+            $('#homeButton').click(redirectHome);
 
 
             /*Office.context.document.addHandlerAsync("documentSelectionChanged", myHandler, function(result){}
@@ -380,6 +386,7 @@ function hideAdvancedCount() {
 
             range_adding_to.load('address');
             range_adding_to.load('text');
+            worksheet.load('name');
 
             return ctx.sync().then(function() {
 
@@ -545,6 +552,8 @@ function hideAdvancedCount() {
 
                 }
 
+
+
                 var column_char = getCharFromNumber(header + 1);
                 var rangeaddress = column_char + ":" + column_char;
                 var range_insert = ctx.workbook.worksheets.getActiveWorksheet().getRange(rangeaddress);
@@ -553,14 +562,30 @@ function hideAdvancedCount() {
                 var insert_address = column_char + 1 + ":" + column_char + range.text.length;
                 addExtractedValue(extracted_array, insert_address);
 
-                var txt = document.createElement("p");
-                txt.className = "ms-font-xs ms-embedded-dialog__content__text";
-                txt.innerHTML = "PrepJet extracted " + extract_count + " values. " + empty_count + " data entries did not match."
-                document.getElementById('resultText').appendChild(txt);
+                if (document.getElementById('createBackup').checked == true) {
+                    var sheet_count = Office.context.document.settings.get('backup_sheet_count') + 1;
+                    Office.context.document.settings.set('backup_sheet_count', sheet_count);
+                    Office.context.document.settings.saveAsync();
+                    var newName = worksheet.name + "(" + sheet_count + ")";
+                    addBackupSheet(newName, function() {
+                        var txt = document.createElement("p");
+                        txt.className = "ms-font-xs ms-embedded-dialog__content__text";
+                        txt.innerHTML = "PrepJet extracted " + extract_count + " values. " + empty_count + " data entries did not contain the specified delimiter or delimiter position."
+                        document.getElementById('resultText').appendChild(txt);
 
-                document.getElementById('resultDialog').style.visibility = 'visible';
+                        document.getElementById('resultDialog').style.visibility = 'visible';
+                    });
 
-                //window.location = "extract_values.html";
+                }
+                else {
+                    var txt = document.createElement("p");
+                    txt.className = "ms-font-xs ms-embedded-dialog__content__text";
+                    txt.innerHTML = "PrepJet extracted " + extract_count + " values. " + empty_count + " data entries did not contain the specified delimiter or delimiter position."
+                    document.getElementById('resultText').appendChild(txt);
+
+                    document.getElementById('resultDialog').style.visibility = 'visible';
+                }
+
             });
 
 
@@ -573,7 +598,7 @@ function hideAdvancedCount() {
     }
 
 
-    function addExtractedValue(split_array, insert_address){
+    function addExtractedValue(extracted_array, insert_address){
 
         Excel.run(function (ctx) {
 
@@ -585,7 +610,7 @@ function hideAdvancedCount() {
             worksheet.load('name');
 
             return ctx.sync().then(function() {
-                addContentNew(worksheet.name, insert_address, split_array);
+                addContentNew(worksheet.name, insert_address, extracted_array, function () {});
             });
 
         }).catch(function(error) {

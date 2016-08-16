@@ -53,9 +53,12 @@
                 </button>
             </td>
             <td>
-                <div>
+                <button id="homeButton" class="ms-Button_homelogo">
                     <img class="page1" src="../../images/logo_lg.png" />
-                </div>
+                </button>
+                <!--div>
+                    <img class="page1" src="../../images/logo_lg.png" />
+                </div-->
             </td>
         </tr>
     </table>
@@ -103,10 +106,20 @@
                 <td></td>
             </tr>
         </table>
-
-        <!--container for checkboxes-->
         <div id="checkboxes_columns" class="ms-ChoiceField">
         </div>
+        <table class="tableupperborder">
+            <tr>
+                <td>
+                    <div class="ms-ChoiceField">
+                        <input id="createBackup" class="ms-ChoiceField-input" type="checkbox">
+                        <label for="createBackup" class="ms-ChoiceField-field">
+                            <span class="ms-Label">Create a backup sheet</span>
+                        </label>
+                    </div>
+                </td>
+            </tr>
+        </table>
         <!--split button-->
         <button class="ms-Button" id="trim_space">Trim</button>
     </div>

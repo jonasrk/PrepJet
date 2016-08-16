@@ -1,9 +1,3 @@
-function redirectRule() {
-    Office.context.document.settings.set('from_inconsistencies', false);
-    window.location = "inconsistency.html";
-}
-
-
 function displayBetween(){
     if(document.getElementById('charOptions').value == "between" || document.getElementById('charOptions').value == "notbetween") {
         $('#between').show();
@@ -11,6 +5,10 @@ function displayBetween(){
     else {
         $('#between').hide();
     }
+}
+
+function redirectHome() {
+    window.location = "mac_start.html";
 }
 
 
@@ -37,7 +35,7 @@ function displayBetween(){
             $(".dropdown_table").Dropdown();
             $('#custom_incon').click(screenIncon);
             $('#buttonOk').click(highlightHeader);
-            $('#to_inconsistency').click(redirectRule);
+            $('#homeButton').click(redirectHome);
 
             //Show and hide error message if columns have same header name
             document.getElementById("buttonClose").onclick = function () {
@@ -312,9 +310,7 @@ function displayBetween(){
                     }
                 }
 
-                console.log(charCount);
-                console.log(charIncluded);
-                console.log(charNotIncluded);
+
                 window.location = "custom_incon.html";
 
             });

@@ -51,9 +51,12 @@
                 </button>
             </td>
             <td>
-                <div>
+                <button id="homeButton" class="ms-Button_homelogo">
                     <img class="page1" src="../../images/logo_lg.png" />
-                </div>
+                </button>
+                <!--div>
+                    <img class="page1" src="../../images/logo_lg.png" />
+                </div-->
             </td>
         </tr>
     </table>
@@ -139,7 +142,7 @@
                     </button>
                     <div class="ms-Callout-inner">
                         <div class="ms-Callout-content">
-                            <p class="ms-Callout-subText">"Target Sheet" is the worksheet to which your lookup data will be inserted. "Source Sheet" is the worksheet from which the data (as defined in the next step) will be grabbed.</p>
+                            <p class="ms-Callout-subText">"Target sheet" is the worksheet into which your lookup data will be inserted. "Source sheet" is the worksheet from which the data (as defined in the next step) will be pulled.</p>
                         </div>
                         <div class="ms-Callout-actions">
                             <a href="help.html" class="ms-Callout-link ms-Link">Learn more</a>
@@ -214,13 +217,30 @@
                 </div>
               </div>
             </div>
-            <!--checkbox-->
-            <div class="ms-ChoiceField">
-                <input id="case_sens" class="ms-ChoiceField-input" type="checkbox">
-                <label id="checkbox" for="case_sens" class="ms-ChoiceField-field">
-                    <span class="ms-Label">Search case sensitive ("s" and "S" are considered as different values)</span>
-                </label>
-            </div>
+            <table>
+                <tr>
+                    <td>
+                        <div class="ms-ChoiceField">
+                            <input id="case_sens" class="ms-ChoiceField-input" type="checkbox">
+                            <label id="checkbox" for="case_sens" class="ms-ChoiceField-field">
+                                <span class="ms-Label">Search case sensitive ("s" and "S" are considered as different letters)</span>
+                            </label>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+            <table class="tableborder">
+                <tr>
+                    <td>
+                        <div class="ms-ChoiceField">
+                            <input id="createBackup" class="ms-ChoiceField-input" type="checkbox">
+                            <label for="createBackup" class="ms-ChoiceField-field">
+                                <span class="ms-Label">Create a backup sheet</span>
+                            </label>
+                        </div>
+                    </td>
+                </tr>
+            </table>
             <div id="buttons">
                 <table>
                     <tr>

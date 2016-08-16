@@ -53,9 +53,12 @@
                 </button>
             </td>
             <td>
-                <div>
+                <button id="homeButton" class="ms-Button_homelogo">
                     <img class="page1" src="../../images/logo_lg.png" />
-                </div>
+                </button>
+                <!--div>
+                    <img class="page1" src="../../images/logo_lg.png" />
+                </div-->
             </td>
         </tr>
     </table>
@@ -117,7 +120,7 @@
                 <i class="ms-Icon ms-Icon--x"></i>
             </button>
             <div class="ms-Dialog-header">
-                <p class="ms-Dialog-title">Pro Function</p>
+                <p id="proHeader" class="ms-Dialog-title">Pro Function</p>
             </div>
             <div class="ms-Dialog-inner">
                 <div class="ms-Dialog-content">
@@ -154,14 +157,14 @@
             <div id="helpCallout" class="ms-Callout ms-Callout--close ms-Callout--arrowLeft">
                 <div class="ms-Callout-main">
                     <div class="ms-Callout-header">
-                        <p class="ms-Callout-title">Help: Customized Validation</p>
+                        <p class="ms-Callout-title">Help: Rule-based Validation</p>
                     </div>
                     <button id="closeCallout" class="ms-Callout-close">
                         <i class="ms-Icon ms-Icon--x"></i>
                     </button>
                     <div class="ms-Callout-inner">
                         <div class="ms-Callout-content">
-                            <p class="ms-Callout-subText">You can define rules for data in one column based on a condition data in another column must meet. Example: If country = Germany then currency = EUR. PrepJet will highlight cells where currency is different from EUR but country is equal to Germany.</p>
+                            <p class="ms-Callout-subText">You can define rules for data in one column based on a condition that data in another column must meet. Example: If country = Germany then currency = EUR. PrepJet will highlight cells where country is equal to Germany but currency is different from EUR.</p>
                         </div>
                         <div class="ms-Callout-actions">
                             <a href="help.html" class="ms-Callout-link ms-Link">Learn more</a>
@@ -260,7 +263,7 @@
                         <div class="ms-Dropdown dropdown_table" tabindex="1">
                             <i class="ms-Dropdown-caretDown ms-Icon ms-Icon--caretDown"></i>
                             <select id="then_operator" class="ms-Dropdown-select" onchange="displayBetween()">
-                                <option value="equal">equal to(=)</option>
+                                <option value="equal">equal to (=)</option>
                                 <option value="smaller">smaller than (<)</option>
                                 <option value="greater">greater than (>)</option>
                                 <option value="inequal">unequal to (!=)</option>
@@ -290,6 +293,11 @@
                             <label id="thenandplaceholder" class="ms-Label">Range end (included)</label>
                         <input id="between_and" class="ms-TextField-field" type="text" onfocus="setFocus(3)">
                     </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <button class="ms-Button_grey" id="and_cond2">Add Condition</button>
                     </td>
                 </tr>
                 <tr>
