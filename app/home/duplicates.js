@@ -432,7 +432,7 @@ function redirectHome() {
                 else {
 
                     var dup_length = duplicates.length;
-                    var sheet_row = 2;
+                    var sheet_row = row_offset + 1;
 
                     var row_numbers = [];
                     for (var run = 0; run < duplicates.length; run++) {
