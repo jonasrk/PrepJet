@@ -258,13 +258,14 @@ function redirectHome() {
 
             return ctx.sync().then(function() {
 
-                backupForUndo(range);
-
                 var tmp_offset = firstCol.address;
                 var col_offset = tmp_offset.substring(tmp_offset.indexOf("!") + 1, tmp_offset.indexOf(":"));
                 var tmp_row = firstRow.address;
                 var row_offset = Number(tmp_row.substring(tmp_row.indexOf("!") + 1, tmp_row.indexOf(":")));
                 var add_col = getNumberFromChar(col_offset);
+                var startCell = col_offset + row_offset;
+
+                backupForUndo(range, startCell, add_col, row_offset);
 
                 var selected_identifier = document.getElementById('column_options').value;
                 var charCount = Number(document.getElementById('charCountInput').value);

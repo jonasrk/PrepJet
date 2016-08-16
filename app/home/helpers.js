@@ -182,13 +182,13 @@ function getCharFromNumber (number) {
 
 }
 
-function addBackupSheet(sheetName, startCell, add_col, callback) {
+function addBackupSheet(sheetName, startCell, add_col, row_offset, callback) {
     Excel.run(function (ctx) {
         var wSheetName = sheetName;
         var worksheet = ctx.workbook.worksheets.add(wSheetName);
         worksheet.load('name');
         return ctx.sync().then(function() {
-            addBackupContent(worksheet.name, startCell, add_col, callback);
+            addBackupContent(worksheet.name, startCell, add_col, row_offset, callback);
         });
     }).catch(function(error) {
             console.log("Error: " + error);
@@ -198,10 +198,10 @@ function addBackupSheet(sheetName, startCell, add_col, callback) {
     });
 }
 
-function addBackupContent(sheetName, startCell, add_col, callback) {
+function addBackupContent(sheetName, startCell, add_col, row_offset, callback) {
     Excel.run(function (ctx) {
         var values = Office.context.document.settings.get('sheet_backup');
-        var end_address = getCharFromNumber(values[0].length - 1 + add_col) + (values.length).toString();
+        var end_address = getCharFromNumber(values[0].length - 1 + add_col) + (values.length + row_offset - 1).toString();
         var rangeAddress = startCell + ":" + end_address;
         var worksheet = ctx.workbook.worksheets.getItem(sheetName);
         var range = worksheet.getRange(rangeAddress);
@@ -270,9 +270,12 @@ function getRandomColor() {
 }
 
 
-function backupForUndo(this_range){
+function backupForUndo(this_range, startCell, add_col, row_offset){
 
     Office.context.document.settings.set('sheet_backup', this_range.text);
+    Office.context.document.settings.set('startCell', startCell);
+    Office.context.document.settings.set('addCol', add_col);
+    Office.context.document.settings.set('rowOffset', row_offset);
     Office.context.document.settings.saveAsync(function (asyncResult) {
         if (asyncResult.status == Office.AsyncResultStatus.Failed) {
             console.log('Settings save failed. Error: ' + asyncResult.error.message);

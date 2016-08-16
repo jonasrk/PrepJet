@@ -611,8 +611,6 @@ function redirectHome() {
 
             return ctx.sync().then(function() {
 
-                backupForUndo(range_adding_to);
-
                 var tmp_offsetTarget = firstColTarget.address;
                 var col_offsetTarget = tmp_offsetTarget.substring(tmp_offsetTarget.indexOf("!") + 1, tmp_offsetTarget.indexOf(":"));
                 var tmp_rowTarget = firstRowTarget.address;
@@ -625,6 +623,9 @@ function redirectHome() {
                 var row_offsetSource = Number(tmp_rowSource.substring(tmp_rowSource.indexOf("!") + 1, tmp_rowSource.indexOf(":")));
                 var add_colSource = getNumberFromChar(col_offsetSource);
 
+                var startCell = col_offsetTarget + row_offsetTarget;
+
+                backupForUndo(range_adding_to, startCell, add_colTarget, row_offsetTarget);
 
                 var column1_ids = []; //new Array(identifier_length);
                 var column2_ids = []; //new Array(identifier_length);
@@ -706,13 +707,13 @@ function redirectHome() {
                     }
                 }
 
-                var startCell = col_offsetTarget + row_offsetTarget;
+
                 if (document.getElementById('createBackup').checked == true) {
                     var sheet_count = Office.context.document.settings.get('backup_sheet_count') + 1;
                     Office.context.document.settings.set('backup_sheet_count', sheet_count);
                     Office.context.document.settings.saveAsync();
                     var newName = worksheet_adding_to.name + "(" + sheet_count + ")";
-                    addBackupSheet(newName, startCell, add_colTarget, function() {
+                    addBackupSheet(newName, startCell, add_colTarget, row_offsetTarget, function() {
                         empty_count = range_adding_to.text.length - lookup_count - 1;
 
                         var txt = document.createElement("p");

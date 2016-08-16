@@ -288,8 +288,6 @@ function redirectHome() {
 
             return ctx.sync().then(function() {
 
-                backupForUndo(range);
-
                 var header = 0;
                 var act_worksheet = ctx.workbook.worksheets.getActiveWorksheet();
                 var tmp_offset = firstCol.address;
@@ -297,7 +295,9 @@ function redirectHome() {
                 var tmp_row = firstRow.address;
                 var row_offset = Number(tmp_row.substring(tmp_row.indexOf("!") + 1, tmp_row.indexOf(":")));
                 var add_col = getNumberFromChar(col_offset);
+                var startCell = col_offset + row_offset;
 
+                backupForUndo(range, startCell, add_col, row_offset);
 
                 var checked_checkboxes = getCheckedBoxes("column_checkbox");
 
@@ -336,13 +336,12 @@ function redirectHome() {
 
                 }
 
-                var startCell = col_offset + row_offset;
                 if (document.getElementById('createBackup').checked == true) {
                     var sheet_count = Office.context.document.settings.get('backup_sheet_count') + 1;
                     Office.context.document.settings.set('backup_sheet_count', sheet_count);
                     Office.context.document.settings.saveAsync();
                     var newName = worksheet.name + "(" + sheet_count + ")";
-                    addBackupSheet(newName, startCell, add_col, function() {
+                    addBackupSheet(newName, startCell, add_col, row_offset, function() {
                         window.location = "trim_spaces.html";
                     });
 
