@@ -154,7 +154,8 @@ ul {
     padding-right: 20px;
     background: #666666;
     overflow: visible;
-    top: 60px; }
+    top: 60px;
+    height: 100%; }
 
     .ms-firstrun-pages__content--centered {
       display: -webkit-box;
