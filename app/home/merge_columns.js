@@ -1,7 +1,7 @@
 function backToOne() {
     $('#step1').show();
     $('#step2').hide();
-    Office.context.document.settings.set('back_button_pressed', true);
+    Office.context.document.settings.set('back_button_pressed', false);
     Office.context.document.settings.set('populate_new', true);
 }
 
