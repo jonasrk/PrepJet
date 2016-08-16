@@ -200,7 +200,7 @@ function hideAdvancedCount() {
                 var tmp_offset = firstCol.address;
                 var col_offset = tmp_offset.substring(tmp_offset.indexOf("!") + 1, tmp_offset.indexOf(":"));
                 var tmp_row = firstRow.address;
-                var row_offset = tmp_row.substring(tmp_row.indexOf("!") + 1, tmp_row.indexOf(":"));
+                var row_offset = Number(tmp_row.substring(tmp_row.indexOf("!") + 1, tmp_row.indexOf(":")));
                 var add_col = getNumberFromChar(col_offset);
 
                 for (var run = 0; run < range.text[0].length - 1; run++) {
@@ -245,7 +245,7 @@ function hideAdvancedCount() {
                 var tmp_offset = firstCol.address;
                 var col_offset = tmp_offset.substring(tmp_offset.indexOf("!") + 1, tmp_offset.indexOf(":"));
                 var tmp_row = firstRow.address;
-                var row_offset = tmp_row.substring(tmp_row.indexOf("!") + 1, tmp_row.indexOf(":"));
+                var row_offset = Number(tmp_row.substring(tmp_row.indexOf("!") + 1, tmp_row.indexOf(":")));
                 var add_col = getNumberFromChar(col_offset);
 
                 for (var run = 0; run < range.text[0].length - 1; run++) {
@@ -384,7 +384,7 @@ function hideAdvancedCount() {
                 var tmp_offset = firstCol.address;
                 var col_offset = tmp_offset.substring(tmp_offset.indexOf("!") + 1, tmp_offset.indexOf(":"));
                 var tmp_row = firstRow.address;
-                var row_offset = tmp_row.substring(tmp_row.indexOf("!") + 1, tmp_row.indexOf(":"));
+                var row_offset = Number(tmp_row.substring(tmp_row.indexOf("!") + 1, tmp_row.indexOf(":")));
                 var add_col = getNumberFromChar(col_offset);
 
                 //get column in header from which to extract value
@@ -554,7 +554,7 @@ function hideAdvancedCount() {
                 var range_insert = ctx.workbook.worksheets.getActiveWorksheet().getRange(rangeaddress);
                 range_insert.insert("Right");
 
-                var insert_address = column_char + 1 + ":" + column_char + range.text.length;
+                var insert_address = column_char + row_offset + ":" + column_char + (range.text.length + row_offset - 1);
                 addExtractedValue(extracted_array, insert_address);
 
                 var startCell = col_offset + row_offset;
