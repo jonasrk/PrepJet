@@ -281,7 +281,7 @@ function getRandomColor() {
 
 
 function backupForUndo(this_range, startCell, add_col, row_offset){
-
+    console.log(startCell);
     Office.context.document.settings.set('sheet_backup', this_range.text);
     Office.context.document.settings.set('startCell', startCell);
     Office.context.document.settings.set('addCol', add_col);

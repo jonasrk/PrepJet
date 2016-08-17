@@ -444,20 +444,21 @@ function redirectHome() {
                     var color_check = []
                     var data_index = 0;
                     for (var run = 0; run < row_numbers.length; run++) {
-                        data_index = row_numbers[run] - 1;
-                        text.push(range.text[data_index]);
+                        data_index = row_numbers[run];
+                        text.push(range.text[data_index - row_offset]);
                         color_check.push(duplicates[run][1]);
                     }
 
                     for (var run = 1; run < range.text.length; run ++) {
                         var check = 0;
                         for (var k = 0; k < row_numbers.length; k++) {
-                            if((run + 1) == row_numbers[k]) {
+                            if((run + row_offset) == row_numbers[k]) {
                                 check = 1;
                             }
                         }
                         if (check == 0) {
                             text.push(range.text[run]);
+                            console.log(range.text[run])
                         }
                     }
 
@@ -471,8 +472,8 @@ function redirectHome() {
                     for (var row = 0; row < text.length; row++) {
                         for(var col = 0; col < range.text[0].length; col++) {
                             var columnchar = getCharFromNumber(col + add_col)
-                            addContentToWorksheet(worksheet, columnchar + sheet_row, text[row][col])
-                            if (sheet_row < (row_numbers.length + 2)) {
+                            //addContentToWorksheet(worksheet, columnchar + sheet_row, text[row][col])
+                            if (sheet_row < (row_numbers.length + row_offset + 2)) {
                                 if (row > 0 && color_check[row] == color_check[row - 1])
                                 highlightContentInWorksheet(worksheet, columnchar + sheet_row ,color)
                             }

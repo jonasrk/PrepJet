@@ -1,4 +1,3 @@
-/* Page-specific styling */
 html {
     background: #F9F9F9; }
 
@@ -16,7 +15,7 @@ html {
 
 h1 {
     font-family: "Segoe WP Light", "Segoe UI", "Arial", sans-serif;
-    font-size: 18px;
+    font-size: 17px;
     line-height: 80%;
     font-weight: 500; }
 
@@ -131,9 +130,6 @@ h1 {
     overflow: visible;
     padding: 10px; }
 
-#delimiter_beginning1 {
-    width: 135px; }
-
 .ms-TextField-field {
     min-width: 135px; }
 
@@ -214,7 +210,6 @@ h1 {
 
 .ms-Dropdown {
     color: #333;
-    width: 135px;
     margin: 0 0 10px;
     padding: 0;
     position: relative;
@@ -223,7 +218,8 @@ h1 {
 
 #lookuptable {
     border-bottom: 0.75px solid;
-    border-color: #e2e2e2;}
+    border-color: #e2e2e2;
+    width: 50%; }
 
 #harm_drop {
     width: 100%; }
@@ -238,7 +234,7 @@ h1 {
     width: 100%; }
 
 #colright {
-    float: right; }
+    width: 50%; }
 
 #resultDialog {
     visibility: hidden; }
@@ -257,3 +253,18 @@ h1 {
     height: 50px;
     width: 60px; }
 
+#homeButton:hover {
+    background-color: #666666;
+    cursor: pointer; }
+
+#refresh_icon:hover {
+    background-color: #666666;
+    cursor: pointer; }
+
+#bigtable {
+    width: 100%;
+    border-bottom: 1px solid;
+    border-color: #e2e2e2; }
+
+#matchCriteria {
+    width: 100%; }
