@@ -332,9 +332,8 @@ function redirectHome() {
                         addContentNew(worksheet.name, insert_address, trim_array, function () {});
                     }
 
-
-
                 }
+
 
                 if (document.getElementById('createBackup').checked == true) {
                     var sheet_count = Office.context.document.settings.get('backup_sheet_count') + 1;

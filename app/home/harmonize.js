@@ -346,6 +346,7 @@ function redirectHome() {
                     }
 
                     var insert_address = getCharFromNumber(header + add_col) + row_offset + ":" + getCharFromNumber(header + add_col) + (range.text.length + row_offset - 1);
+
                     addContentNew(worksheet.name, insert_address, harm_array, function () {});
 
                     var i = 0;

@@ -472,7 +472,6 @@ function redirectHome() {
                     for (var row = 0; row < text.length; row++) {
                         for(var col = 0; col < range.text[0].length; col++) {
                             var columnchar = getCharFromNumber(col + add_col)
-                            //addContentToWorksheet(worksheet, columnchar + sheet_row, text[row][col])
                             if (sheet_row < (row_numbers.length + row_offset + 2)) {
                                 if (row > 0 && color_check[row] == color_check[row - 1])
                                 highlightContentInWorksheet(worksheet, columnchar + sheet_row ,color)
