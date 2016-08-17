@@ -133,14 +133,36 @@
             </tr>
         </table>
 
-        <div id="includeCharField" class="ms-TextField ms-TextField">
-            <label id="includeCharLabel" class="ms-Label">Type a character or character sequence that each data entry must contain (optional)</label>
-            <input id="includeChar" class="ms-TextField-field" type="text">
-        </div>
-
-        <div id="notIncludeCharField" class="ms-TextField ms-TextField">
-            <label id="notIncludeCharLabel" class="ms-Label">Type a character or character sequence that the data must NOT contain (optional)</label>
-            <input id="notIncludeChar" class="ms-TextField-field" type="text">
+        <table class="tableupperborder">
+            <tr>
+                <td>
+                    <div id="explanation">
+                        <label class="ms-Label">Optional: Type a character or character sequence that each data entry</p>
+                    </div>
+                </td>
+            </tr>
+        </table>
+        <table id="bigtable">
+            <tr>
+                <td id="smalldrop_col">
+                    <div id="includeCharField" class="ms-TextField ms-TextField">
+                        <label id="includeCharLabel" class="ms-Label">Must contain</label>
+                        <input id="includeChar" class="ms-TextField-field" type="text">
+                    </div>
+                </td>
+                <td id="colright">
+                    <div id="notIncludeCharField" class="ms-TextField ms-TextField">
+                        <label id="notIncludeCharLabel" class="ms-Label">Must not contain</label>
+                        <input id="notIncludeChar" class="ms-TextField-field" type="text">
+                    </div>
+                </td>
+            </tr>
+        </table>
+        <div class="ms-ChoiceField">
+            <input id="createBackup" class="ms-ChoiceField-input" type="checkbox">
+            <label for="createBackup" class="ms-ChoiceField-field">
+                <span class="ms-Label">Create a backup sheet</span>
+            </label>
         </div>
 
         <!--container for checkboxes-->
