@@ -266,11 +266,13 @@ function redirectHome() {
                             var tmp_upper = [];
                             for (var runtmp = 0; runtmp < tmp.length; runtmp++) {
                                 tmp_upper.push(tmp[runtmp].charAt(0).toUpperCase() + tmp[runtmp].slice(1));
+                                console.log(tmp_upper);
                             }
-                            var harm_string = [tmp_upper[0]];
+                            var harm_string = tmp_upper[0];
                             for (var runtmp = 1; runtmp < tmp_upper.length; runtmp++) {
-                                harm_string = [harm_string.concat(" ", tmp_upper[runtmp])];
+                                harm_string = harm_string.concat(" ", tmp_upper[runtmp]);
                             }
+                            harm_string = [harm_string];
                         }
                         if (harmo == "oneupper") {
                             var tmp = range.text[k][header].split(" ");
@@ -280,10 +282,11 @@ function redirectHome() {
                                 tmp_upper.push(tmp[runtmp].charAt(0) + tmp[runtmp].slice(1).toLowerCase());
                             }
 
-                            var harm_string = [tmp_upper[0]];
+                            var harm_string = tmp_upper[0];
                             for (var runtmp = 1; runtmp < tmp_upper.length; runtmp++) {
-                                harm_string = [harm_string.concat(" ", tmp_upper[runtmp])];
+                                harm_string = harm_string.concat(" ", tmp_upper[runtmp]);
                             }
+                            harm_string = [harm_string];
                         }
 
                         harm_array.push(harm_string);
@@ -291,6 +294,7 @@ function redirectHome() {
                     }
 
                     var insert_address = getCharFromNumber(header) + 1 + ":" + getCharFromNumber(header) + range.text.length;
+                    console.log(insert_address);
                     //addContentNew(worksheet.name, insert_address, harm_array, function () {});
 
                     var i = 0;
