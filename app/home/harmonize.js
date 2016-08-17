@@ -291,7 +291,7 @@ function redirectHome() {
                     }
 
                     var insert_address = getCharFromNumber(header) + 1 + ":" + getCharFromNumber(header) + range.text.length;
-                    addContentNew(worksheet.name, insert_address, harm_array, function () {});
+                    //addContentNew(worksheet.name, insert_address, harm_array, function () {});
 
                     var i = 0;
 
