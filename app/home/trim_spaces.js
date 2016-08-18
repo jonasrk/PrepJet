@@ -38,6 +38,16 @@ function redirectHome() {
             }
 
 
+            //hide result message
+            document.getElementById("resultClose").onclick = function () {
+                document.getElementById('resultDialog').style.visibility = 'hidden';
+                window.location = "trim_spaces.html";
+            }
+            document.getElementById("resultOk").onclick = function () {
+                document.getElementById('resultDialog').style.visibility = 'hidden';
+                window.location = "trim_spaces.html";
+            }
+
             /*Excel.run(function (ctx) {
              var myBindings = Office.context.document.bindings;
              var worksheetname = ctx.workbook.worksheets.getActiveWorksheet();
@@ -269,21 +279,7 @@ function redirectHome() {
 
                     var column_char = getCharFromNumber(header);
                     var insert_address = column_char + 1 + ":" + column_char + range.text.length;
-
-                    var i = 0;
-
-                    if (document.getElementById('createBackup').checked != true) {
-                        addContentNew(worksheet.name, insert_address, trim_array, function () {
-                            i++;
-                            if (i >= checked_checkboxes.length){
-                                window.location = "trim_spaces.html";
-                            }
-                        });
-                    } else {
-                        addContentNew(worksheet.name, insert_address, trim_array, function () {});
-                    }
-
-
+                    addTrimArray(trim_array, insert_address);
 
                 }
 
@@ -293,9 +289,21 @@ function redirectHome() {
                     Office.context.document.settings.saveAsync();
                     var newName = worksheet.name + "(" + sheet_count + ")";
                     addBackupSheet(newName, function() {
-                        window.location = "trim_spaces.html";
+                        var txt = document.createElement("p");
+                        txt.className = "ms-font-xs ms-embedded-dialog__content__text";
+                        txt.innerHTML = "PrepJet successfully removed all leading and trailing spaces";
+                        document.getElementById('resultText').appendChild(txt);
+
+                        document.getElementById('resultDialog').style.visibility = 'visible';
                     });
 
+                } else {
+                    var txt = document.createElement("p");
+                    txt.className = "ms-font-xs ms-embedded-dialog__content__text";
+                    txt.innerHTML = "PrepJet successfully removed all leading and trailing spaces";
+                    document.getElementById('resultText').appendChild(txt);
+
+                    document.getElementById('resultDialog').style.visibility = 'visible';
                 }
 
             });
@@ -307,5 +315,31 @@ function redirectHome() {
             }
         });
     }
+
+
+    function addTrimArray(trim_array, insert_address){
+
+        Excel.run(function (ctx) {
+
+            var worksheet = ctx.workbook.worksheets.getActiveWorksheet();
+            var range_all = worksheet.getRange();
+            var range = range_all.getUsedRange();
+
+            range.load('text');
+            worksheet.load('name');
+
+            return ctx.sync().then(function() {
+                addContentNew(worksheet.name, insert_address, trim_array, function () {});
+            });
+
+        }).catch(function(error) {
+            console.log("Error: " + error);
+            if (error instanceof OfficeExtension.Error) {
+                console.log("Debug info: " + JSON.stringify(error.debugInfo));
+            }
+        });
+
+    }
+
 
 })();
