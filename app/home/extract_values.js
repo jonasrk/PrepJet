@@ -29,6 +29,7 @@ function displayAdvancedCount() {
         $('.del_count_dropdown_e').show();
         $('#advanced_settings').hide();
         $('#advanced_hide').show();
+        $('#explanationMoreOptions').show();
         Office.context.document.settings.set('more_option_extract', true);
     }
 
@@ -39,6 +40,7 @@ function hideAdvancedCount() {
         $('.del_count_dropdown_e').hide();
         $('#advanced_settings').show();
         $('#advanced_hide').hide();
+        $('#explanationMoreOptions').hide();
         Office.context.document.settings.set('more_option', false);
 }
 
@@ -74,6 +76,7 @@ function hideAdvancedCount() {
             $('.del_count_dropdown_e').hide();
             $('#advanced_settings').show();
             $('#advanced_hide').hide();
+            $('#explanationMoreOptions').hide();
 
             $(".dropdown_table").Dropdown();
             $(".ms-TextField").TextField();
