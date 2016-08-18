@@ -16,7 +16,7 @@
 
             populateColumnDropdown();
 
-            $('#bt_detect_outliers').click(detectOutliers);
+            $('#bt_detect_outliers').click(detectOutlier);
 
         });
     };
@@ -60,7 +60,92 @@
 
     }
 
-    function detectOutliers() {
+
+    function detectOutlier() {
+
+        Excel.run(function (ctx) {
+
+            var worksheet = ctx.workbook.worksheets.getActiveWorksheet();
+            var range_all = worksheet.getRange();
+            var range = range_all.getUsedRange();
+
+            range.load('address');
+            range.load('text');
+            range.load('values');
+
+            var selected_identifier = document.getElementById('outlier_column_dropdown').value;
+
+            return ctx.sync().then(function() {
+
+                var header = 0;
+                for (var k = 0; k < range.text[0].length; k++){
+                    if (selected_identifier == range.text[0][k] || selected_identifier == "Column " + getCharFromNumber(k)){
+                        header = k;
+                    }
+                }
+
+                var data_array  = [];
+
+                for (var i = 1; i < range.text.length; i++) {
+                    var row_number = i + 1;
+                    data_array.push(range.values[i][header]);
+                }
+
+
+                // call to API
+
+                $.post( "https://localhost:8100/", { data: data_array })
+                    .done(function( borders ) {
+                        // highlight dupes
+                        console.log("Borders: " + borders + "\nStatus: " + status);
+
+                        Excel.run(function (ctx) {
+
+                            var dupe_worksheet = ctx.workbook.worksheets.getActiveWorksheet();
+                            var dupe_range_all = dupe_worksheet.getRange();
+                            var dupe_range = dupe_range_all.getUsedRange();
+
+                            dupe_range.load('address');
+                            dupe_range.load('text');
+
+                            var selected_column = document.getElementById('outlier_column_dropdown').value;
+
+                            return ctx.sync().then(function() {
+
+                                var upper_border = 40;
+                                var lower_border = borders;
+
+                                var header = 0;
+                                for (var k = 0; k < range.text[0].length; k++){
+                                    if (selected_column == range.text[0][k] || selected_column == "Column " + getCharFromNumber(k)){
+                                        header = k;
+                                    }
+                                }
+
+                                var color = "#EA7F04";
+                                for (var k = 1; k < dupe_range.text.length; k++) {
+                                    if (dupe_range.text[k][header] < lower_border || dupe_range.text[k][header] > upper_border) {
+                                        highlightCellInWorksheet(dupe_worksheet, dupe_range.text[k][header], color);
+                                    }
+                                }
+
+                            });
+                        });
+                    });
+
+
+            });
+
+        }).catch(function(error) {
+            console.log("Error: " + error);
+            if (error instanceof OfficeExtension.Error) {
+                console.log("Debug info: " + JSON.stringify(error.debugInfo));
+            }
+        });
+
+    }
+
+    /*function detectOutliers() {
 
         Excel.run(function (ctx) {
 
@@ -219,6 +304,6 @@
                 console.log("Debug info: " + JSON.stringify(error.debugInfo));
             }
         });
-    }
+    }*/
 
 })();
