@@ -37,6 +37,16 @@ function redirectHome() {
                 window.location = "harmonize.html";
             }
 
+            //hide result message
+            document.getElementById("resultClose").onclick = function () {
+                document.getElementById('resultDialog').style.visibility = 'hidden';
+                window.location = "harmonize.html";
+            }
+            document.getElementById("resultOk").onclick = function () {
+                document.getElementById('resultDialog').style.visibility = 'hidden';
+                window.location = "harmonize.html";
+            }
+
 
             /*Excel.run(function (ctx) {
                 var myBindings = Office.context.document.bindings;
@@ -294,21 +304,8 @@ function redirectHome() {
                     }
 
                     var insert_address = getCharFromNumber(header) + 1 + ":" + getCharFromNumber(header) + range.text.length;
-                    console.log(insert_address);
-                    //addContentNew(worksheet.name, insert_address, harm_array, function () {});
+                    addHarmArray(harm_array, insert_address);
 
-                    var i = 0;
-
-                    if (document.getElementById('createBackup').checked != true) {
-                        addContentNew(worksheet.name, insert_address, harm_array, function () {
-                            i++;
-                            if (i >= checked_checkboxes.length){
-                                window.location = "harmonize.html";
-                            }
-                        });
-                    } else {
-                        addContentNew(worksheet.name, insert_address, harm_array, function () {});
-                    }
                 }
 
                 if (document.getElementById('createBackup').checked == true) {
@@ -317,9 +314,20 @@ function redirectHome() {
                     Office.context.document.settings.saveAsync();
                     var newName = worksheet.name + "(" + sheet_count + ")";
                     addBackupSheet(newName, function () {
-                        window.location = "harmonize.html"
-                    });
+                        var txt = document.createElement("p");
+                        txt.className = "ms-font-xs ms-embedded-dialog__content__text";
+                        txt.innerHTML = "PrepJet successfully harmonized the values in your " + checked_checkboxes.length + " selected columns.";
+                        document.getElementById('resultText').appendChild(txt);
 
+                        document.getElementById('resultDialog').style.visibility = 'visible';
+                    });
+                } else {
+                    var txt = document.createElement("p");
+                    txt.className = "ms-font-xs ms-embedded-dialog__content__text";
+                    txt.innerHTML = "PrepJet successfully harmonized the values in your " + checked_checkboxes.length + " selected columns.";
+                    document.getElementById('resultText').appendChild(txt);
+
+                    document.getElementById('resultDialog').style.visibility = 'visible';
                 }
 
             });
@@ -330,6 +338,31 @@ function redirectHome() {
                 console.log("Debug info: " + JSON.stringify(error.debugInfo));
             }
         });
+    }
+
+
+    function addHarmArray(harm_array, insert_address){
+
+        Excel.run(function (ctx) {
+
+            var worksheet = ctx.workbook.worksheets.getActiveWorksheet();
+            var range_all = worksheet.getRange();
+            var range = range_all.getUsedRange();
+
+            range.load('text');
+            worksheet.load('name');
+
+            return ctx.sync().then(function() {
+                addContentNew(worksheet.name, insert_address, harm_array, function () {});
+            });
+
+        }).catch(function(error) {
+            console.log("Error: " + error);
+            if (error instanceof OfficeExtension.Error) {
+                console.log("Debug info: " + JSON.stringify(error.debugInfo));
+            }
+        });
+
     }
 
 

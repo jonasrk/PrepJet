@@ -291,7 +291,7 @@ function redirectHome() {
                     addBackupSheet(newName, function() {
                         var txt = document.createElement("p");
                         txt.className = "ms-font-xs ms-embedded-dialog__content__text";
-                        txt.innerHTML = "PrepJet successfully removed all leading and trailing spaces";
+                        txt.innerHTML = "PrepJet successfully removed all leading and trailing spaces in the " + checked_checkboxes.length + " columns you selected.";
                         document.getElementById('resultText').appendChild(txt);
 
                         document.getElementById('resultDialog').style.visibility = 'visible';
@@ -300,7 +300,7 @@ function redirectHome() {
                 } else {
                     var txt = document.createElement("p");
                     txt.className = "ms-font-xs ms-embedded-dialog__content__text";
-                    txt.innerHTML = "PrepJet successfully removed all leading and trailing spaces";
+                    txt.innerHTML = "PrepJet successfully removed all leading and trailing spaces in the " + checked_checkboxes.length + " columns you selected.";
                     document.getElementById('resultText').appendChild(txt);
 
                     document.getElementById('resultDialog').style.visibility = 'visible';
