@@ -308,6 +308,13 @@ function redirectHome() {
 
                 }
 
+
+                if(checked_checkboxes.length == 1) {
+                    var endString = " column you seleced."
+                } else {
+                    var endString = " columns you selected."
+                }
+
                 if (document.getElementById('createBackup').checked == true) {
                     var sheet_count = Office.context.document.settings.get('backup_sheet_count') + 1;
                     Office.context.document.settings.set('backup_sheet_count', sheet_count);
@@ -316,7 +323,7 @@ function redirectHome() {
                     addBackupSheet(newName, function () {
                         var txt = document.createElement("p");
                         txt.className = "ms-font-xs ms-embedded-dialog__content__text";
-                        txt.innerHTML = "PrepJet successfully harmonized the values in your " + checked_checkboxes.length + " selected columns.";
+                        txt.innerHTML = "PrepJet successfully harmonized the values in the " + checked_checkboxes.length + endString;
                         document.getElementById('resultText').appendChild(txt);
 
                         document.getElementById('resultDialog').style.visibility = 'visible';
@@ -324,7 +331,7 @@ function redirectHome() {
                 } else {
                     var txt = document.createElement("p");
                     txt.className = "ms-font-xs ms-embedded-dialog__content__text";
-                    txt.innerHTML = "PrepJet successfully harmonized the values in your " + checked_checkboxes.length + " selected columns.";
+                    txt.innerHTML = "PrepJet successfully harmonized the values in your " + checked_checkboxes.length + endString;
                     document.getElementById('resultText').appendChild(txt);
 
                     document.getElementById('resultDialog').style.visibility = 'visible';

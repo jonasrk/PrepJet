@@ -229,7 +229,7 @@ function getColumn(sheet, colNumber, callback){
 
         var worksheet = ctx.workbook.worksheets.getItem(sheet);
         var range_all = worksheet.getRange();
-        var range = range_all.getUsedRange().getColumn(colNumber);
+        var range = range_all.getUsedRange(true).getColumn(colNumber);
 
         range.load('text');
         range.load('address');
