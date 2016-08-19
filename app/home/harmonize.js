@@ -37,19 +37,24 @@ function redirectHome() {
                 window.location = "harmonize.html";
             }
 
+            //hide result message
+            document.getElementById("resultClose").onclick = function () {
+                document.getElementById('resultDialog').style.visibility = 'hidden';
+                window.location = "harmonize.html";
+            }
+            document.getElementById("resultOk").onclick = function () {
+                document.getElementById('resultDialog').style.visibility = 'hidden';
+                window.location = "harmonize.html";
+            }
+
 
             /*Excel.run(function (ctx) {
-
                 var myBindings = Office.context.document.bindings;
                 var worksheetname = ctx.workbook.worksheets.getActiveWorksheet();
-
                 worksheetname.load('name')
-
                 return ctx.sync().then(function() {
-
                     Office.context.document.addHandlerAsync("documentSelectionChanged", myViewHandler, function(result){}
                     );
-
                     // Event handler function for changing the worksheet.
                     function myViewHandler(eventArgs){
                         Excel.run(function (ctx) {
@@ -62,34 +67,25 @@ function redirectHome() {
                             });
                         });
                     }
-
-
                     function bindFromPrompt() {
-
                         var myBindings = Office.context.document.bindings;
                         var name_worksheet = worksheetname.name;
                         var myAddress = name_worksheet.concat("!1:1");
-
                         myBindings.addFromNamedItemAsync(myAddress, "matrix", {id:'myBinding'}, function (asyncResult) {
                             if (asyncResult.status == Office.AsyncResultStatus.Failed) {
                                 write('Action failed. Error: ' + asyncResult.error.message);
                             } else {
                                 write('Added new binding with type: ' + asyncResult.value.type + ' and id: ' + asyncResult.value.id);
-
                                 function addHandler() {
                                     Office.select("bindings#myBinding").addHandlerAsync(
                                         Office.EventType.BindingDataChanged, dataChanged);
                                 }
-
                                 addHandler();
                                 displayAllBindings();
-
                             }
                         });
                     }
-
                 bindFromPrompt();
-
                 function displayAllBindings() {
                     Office.context.document.bindings.getAllAsync(function (asyncResult) {
                         var bindingString = '';
@@ -98,16 +94,13 @@ function redirectHome() {
                         }
                     });
                 }
-
                 function dataChanged(eventArgs) {
                     window.location = "harmonize.html";
                 }
-
                 // Function that writes to a div with id='message' on the page.
                 function write(message){
                     console.log(message);
                 }
-
                 });
             }).catch(function(error) {
                 console.log("Error: " + error);
@@ -283,11 +276,13 @@ function redirectHome() {
                             var tmp_upper = [];
                             for (var runtmp = 0; runtmp < tmp.length; runtmp++) {
                                 tmp_upper.push(tmp[runtmp].charAt(0).toUpperCase() + tmp[runtmp].slice(1));
+                                console.log(tmp_upper);
                             }
-                            var harm_string = [tmp_upper[0]];
+                            var harm_string = tmp_upper[0];
                             for (var runtmp = 1; runtmp < tmp_upper.length; runtmp++) {
-                                harm_string = [harm_string.concat(" ", tmp_upper[runtmp])];
+                                harm_string = harm_string.concat(" ", tmp_upper[runtmp]);
                             }
+                            harm_string = [harm_string];
                         }
                         if (harmo == "oneupper") {
                             var tmp = range.text[k][header].split(" ");
@@ -297,10 +292,11 @@ function redirectHome() {
                                 tmp_upper.push(tmp[runtmp].charAt(0) + tmp[runtmp].slice(1).toLowerCase());
                             }
 
-                            var harm_string = [tmp_upper[0]];
+                            var harm_string = tmp_upper[0];
                             for (var runtmp = 1; runtmp < tmp_upper.length; runtmp++) {
-                                harm_string = [harm_string.concat(" ", tmp_upper[runtmp])];
+                                harm_string = harm_string.concat(" ", tmp_upper[runtmp]);
                             }
+                            harm_string = [harm_string];
                         }
 
                         harm_array.push(harm_string);
@@ -308,20 +304,8 @@ function redirectHome() {
                     }
 
                     var insert_address = getCharFromNumber(header) + 1 + ":" + getCharFromNumber(header) + range.text.length;
-                    addContentNew(worksheet.name, insert_address, harm_array, function () {});
+                    addHarmArray(harm_array, insert_address);
 
-                    var i = 0;
-
-                    if (document.getElementById('createBackup').checked != true) {
-                        addContentNew(worksheet.name, insert_address, harm_array, function () {
-                            i++;
-                            if (i >= checked_checkboxes.length){
-                                window.location = "harmonize.html";
-                            }
-                        });
-                    } else {
-                        addContentNew(worksheet.name, insert_address, harm_array, function () {});
-                    }
                 }
 
                 if (document.getElementById('createBackup').checked == true) {
@@ -330,9 +314,20 @@ function redirectHome() {
                     Office.context.document.settings.saveAsync();
                     var newName = worksheet.name + "(" + sheet_count + ")";
                     addBackupSheet(newName, function () {
-                        window.location = "harmonize.html"
-                    });
+                        var txt = document.createElement("p");
+                        txt.className = "ms-font-xs ms-embedded-dialog__content__text";
+                        txt.innerHTML = "PrepJet successfully harmonized the values in your " + checked_checkboxes.length + " selected columns.";
+                        document.getElementById('resultText').appendChild(txt);
 
+                        document.getElementById('resultDialog').style.visibility = 'visible';
+                    });
+                } else {
+                    var txt = document.createElement("p");
+                    txt.className = "ms-font-xs ms-embedded-dialog__content__text";
+                    txt.innerHTML = "PrepJet successfully harmonized the values in your " + checked_checkboxes.length + " selected columns.";
+                    document.getElementById('resultText').appendChild(txt);
+
+                    document.getElementById('resultDialog').style.visibility = 'visible';
                 }
 
             });
@@ -343,6 +338,31 @@ function redirectHome() {
                 console.log("Debug info: " + JSON.stringify(error.debugInfo));
             }
         });
+    }
+
+
+    function addHarmArray(harm_array, insert_address){
+
+        Excel.run(function (ctx) {
+
+            var worksheet = ctx.workbook.worksheets.getActiveWorksheet();
+            var range_all = worksheet.getRange();
+            var range = range_all.getUsedRange();
+
+            range.load('text');
+            worksheet.load('name');
+
+            return ctx.sync().then(function() {
+                addContentNew(worksheet.name, insert_address, harm_array, function () {});
+            });
+
+        }).catch(function(error) {
+            console.log("Error: " + error);
+            if (error instanceof OfficeExtension.Error) {
+                console.log("Debug info: " + JSON.stringify(error.debugInfo));
+            }
+        });
+
     }
 
 

@@ -42,7 +42,7 @@ function redirectHome() {
             }
 
             document.getElementById("refresh_icon").onclick = function () {
-                window.location = "inconsistencies.html";
+                window.location = "inconsistency.html";
             }
 
             //hide result message

@@ -46,7 +46,7 @@ function redirectHome() {
             $('#linkUndoHelp').click(undoHelp);
             $('#linkTableHeaderHelp').click(tableHeaderHelp);
             $('#linkCustomInconHelp').click(customInconHelp);
-            $('#homeHelp').click(redirectHome);
+            $('#homeButton').click(redirectHome);
 
         });
     };

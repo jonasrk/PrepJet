@@ -56,13 +56,12 @@
                 <button id="homeButton" class="ms-Button_homelogo">
                     <img class="page1" src="../../images/logo_lg.png" />
                 </button>
-                <!--div>
-                    <img class="page1" src="../../images/logo_lg.png" />
-                </div-->
             </td>
         </tr>
     </table>
 </div>
+
+<!--Dialog for same header name-->
 <div id="showEmbeddedDialog" class="ms-embedded-dialog__options" >
     <div class="ms-Dialog ms-Dialog--close">
         <div class="ms-Overlay js-DialogAction--close"></div>
@@ -80,6 +79,31 @@
                 <div class="ms-embedded-dialog__actioncenter">
                     <button  class="ms-Dialog-action ms-Button_grey" id="buttonOk">
                         <span class="ms-Button-label">Highlight</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Dialog for success message-->
+<div id="resultDialog" class="ms-embedded-dialog__options" >
+    <div class="ms-Dialog ms-Dialog--close">
+        <div class="ms-Overlay js-DialogAction--close"></div>
+        <div class="ms-Dialog-main">
+            <button class="ms-Dialog-button ms-Dialog-button--close js-DialogAction--close" id="resultClose">
+                <i class="ms-Icon ms-Icon--x"></i>
+            </button>
+            <div class="ms-Dialog-header">
+                <p class="ms-Dialog-title">Extraction successful</p>
+            </div>
+            <div class="ms-Dialog-inner">
+                <div id="resultText" class="ms-Dialog-content">
+                    <!--p class="ms-font-xs ms-embedded-dialog__content__text"></p-->
+                </div>
+                <div class="ms-embedded-dialog__actioncenter">
+                    <button  class="ms-Dialog-action ms-Button_grey" id="resultOk">
+                        <span class="ms-Button-label">Ok</span>
                     </button>
                 </div>
             </div>

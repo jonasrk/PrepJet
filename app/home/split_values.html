@@ -55,14 +55,12 @@
                 <button id="homeButton" class="ms-Button_homelogo">
                     <img class="page1" src="../../images/logo_lg.png" />
                 </button>
-                <!--div>
-                    <img class="page1" src="../../images/logo_lg.png" />
-                </div-->
             </td>
         </tr>
     </table>
 </div>
 
+<!--Dialog for same header name-->
 <div id="showEmbeddedDialog" class="ms-embedded-dialog__options" >
     <div class="ms-Dialog ms-Dialog--close">
         <div class="ms-Overlay js-DialogAction--close"></div>
@@ -87,56 +85,57 @@
     </div>
 </div>
 
-    <div id="content-main">
-        <div class="padding">
-            <!--dropdown for column-->
-            <div id="large_drop" class="ms-Dropdown dropdown_table_col" tabindex="1">
-                <label class="ms-Label">Select column to be splitted</label>
-                <i class="ms-Dropdown-caretDown ms-Icon ms-Icon--caretDown"></i>
-                <select id="column_options" class="ms-Dropdown-select"></select>
-            </div>
-            <!--dropdown for delimiter-->
-            <div id="large_drop" class="ms-Dropdown dropdown_table" tabindex="1">
-                <label class="ms-Label">Select delimiter</label>
-                <i class="ms-Dropdown-caretDown ms-Icon ms-Icon--caretDown"></i>
-                <select id="delimiter_options" class="ms-Dropdown-select" onchange="displayFieldDelimiter()">
-                    <option value="comma">Comma</option>
-                    <option value="semicolon">Semicolon</option>
-                    <option value="whitespace">Whitespace</option>
-                    <option value="custom_delimiter">Custom</option>
-                </select>
-            </div>
+<div id="content-main">
+    <div class="padding">
+        <!--dropdown for column-->
+        <div id="large_drop" class="ms-Dropdown dropdown_table_col" tabindex="1">
+            <label class="ms-Label">Select column to be splitted</label>
+            <i class="ms-Dropdown-caretDown ms-Icon ms-Icon--caretDown"></i>
+            <select id="column_options" class="ms-Dropdown-select"></select>
+        </div>
+        <!--dropdown for delimiter-->
+        <div id="large_drop" class="ms-Dropdown dropdown_table" tabindex="1">
+            <label class="ms-Label">Select delimiter</label>
+            <i class="ms-Dropdown-caretDown ms-Icon ms-Icon--caretDown"></i>
+            <select id="delimiter_options" class="ms-Dropdown-select" onchange="displayFieldDelimiter()">
+                <option value="comma">Comma</option>
+                <option value="semicolon">Semicolon</option>
+                <option value="whitespace">Whitespace</option>
+                <option value="custom_delimiter">Custom</option>
+            </select>
+        </div>
 
-            <div id="resultDialog" class="ms-embedded-dialog__options" >
-                <div class="ms-Dialog ms-Dialog--close">
-                    <div class="ms-Overlay js-DialogAction--close"></div>
-                    <div class="ms-Dialog-main">
-                        <button class="ms-Dialog-button ms-Dialog-button--close js-DialogAction--close" id="resultClose">
-                            <i class="ms-Icon ms-Icon--x"></i>
-                        </button>
-                        <div class="ms-Dialog-header">
-                            <p class="ms-Dialog-title">Splitted successful</p>
+        <!--Dialog for success message-->
+        <div id="resultDialog" class="ms-embedded-dialog__options" >
+            <div class="ms-Dialog ms-Dialog--close">
+                <div class="ms-Overlay js-DialogAction--close"></div>
+                <div class="ms-Dialog-main">
+                    <button class="ms-Dialog-button ms-Dialog-button--close js-DialogAction--close" id="resultClose">
+                        <i class="ms-Icon ms-Icon--x"></i>
+                    </button>
+                    <div class="ms-Dialog-header">
+                        <p class="ms-Dialog-title">Splitted successfully</p>
+                    </div>
+                    <div class="ms-Dialog-inner">
+                        <div id="resultText" class="ms-Dialog-content">
+                            <!--p class="ms-font-xs ms-embedded-dialog__content__text"></p-->
                         </div>
-                        <div class="ms-Dialog-inner">
-                            <div id="resultText" class="ms-Dialog-content">
-                                <!--p class="ms-font-xs ms-embedded-dialog__content__text"></p-->
-                            </div>
-                            <div class="ms-embedded-dialog__actioncenter">
-                                <button  class="ms-Dialog-action ms-Button_grey" id="resultOk">
-                                    <span class="ms-Button-label">Ok</span>
-                                </button>
-                            </div>
+                        <div class="ms-embedded-dialog__actioncenter">
+                            <button  class="ms-Dialog-action ms-Button_grey" id="resultOk">
+                                <span class="ms-Button-label">Ok</span>
+                            </button>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
 
-            <div id="delimiter_beginning" class="ms-TextField">
-                <label class="ms-Label">Custom delimiter</label>
-                <input id="delimiter_input" class="ms-TextField-field" type="text">
-                <span class="ms-TextField-description">Enter a delimiter at which to split the cell content</span>
-            </div>
-            <table class="tableborder">
+        <div id="delimiter_beginning" class="ms-TextField">
+            <label class="ms-Label">Custom delimiter</label>
+            <input id="delimiter_input" class="ms-TextField-field" type="text">
+            <span class="ms-TextField-description">Enter a delimiter at which to split the cell content</span>
+        </div>
+        <table class="tableborder">
             <tr>
                 <td>
                     <div class="ms-ChoiceField">
@@ -148,69 +147,69 @@
                 </td>
             </tr>
         </table>
-            <div id="helpCallout" class="ms-Callout ms-Callout--close ms-Callout--arrowLeft">
-                <div class="ms-Callout-main">
-                    <div class="ms-Callout-header">
-                        <p class="ms-Callout-title">Help: Split Cell Content</p>
+        <div id="helpCallout" class="ms-Callout ms-Callout--close ms-Callout--arrowLeft">
+            <div class="ms-Callout-main">
+                <div class="ms-Callout-header">
+                    <p class="ms-Callout-title">Help: Split Cell Content</p>
+                </div>
+                <button id="closeCallout" class="ms-Callout-close">
+                    <i class="ms-Icon ms-Icon--x"></i>
+                </button>
+                <div class="ms-Callout-inner">
+                    <div class="ms-Callout-content">
+                        <p class="ms-Callout-subText">PrepJet will per default split the cell content at each delimiter and insert the parts into separate, new columns. You can also specify a specific position (1, 2,...) of your delimiter at which to split. In both cases the original column will not be kept.</p>
                     </div>
-                    <button id="closeCallout" class="ms-Callout-close">
-                        <i class="ms-Icon ms-Icon--x"></i>
-                    </button>
-                    <div class="ms-Callout-inner">
-                        <div class="ms-Callout-content">
-                            <p class="ms-Callout-subText">PrepJet will per default split the cell content at each delimiter and insert the parts into separate, new columns. You can also specify a specific position (1, 2,...) of your delimiter at which to split. In both cases the original column will not be kept.</p>
-                        </div>
-                        <div class="ms-Callout-actions">
-                            <a href="help.html" class="ms-Callout-link ms-Link">Learn more</a>
-                        </div>
+                    <div class="ms-Callout-actions">
+                        <a href="help.html" class="ms-Callout-link ms-Link">Learn more</a>
                     </div>
                 </div>
             </div>
-            <div id="explanation">
-                <label class="ms-Label">Click more options to specify the position of the selected delimiter at which to split the cell content</p>
-            </div>
-            <button class="ms-Button_grey" id="advanced_settings">More Options</button>
-            <button class="ms-Button_grey" id="advanced_hide">Less Options</button>
-            <button id="help_icon" class="ms-Button_icon">
-                <i class="ms-Icon ms-Icon--infoCircle" aria-hidden="true"></i>
-            </button>
-            <table>
-                <tr>
-                    <td id="smalldrop_col">
-                        <div id="delimiter_count" class="ms-Dropdown del_count_dropdown" tabindex="1">
-                            <label class="ms-Label">Position of Delimiter</label>
-                            <i class="ms-Dropdown-caretDown ms-Icon ms-Icon--caretDown"></i>
-                            <select id="delimiter_count_i" class="ms-Dropdown-select">
-                                <option value="all">All</option>
-                                <option value="one">1</option>
-                                <option value="two">2</option>
-                                <option value="three">3</option>
-                                <option value="four">4</option>
-                                <option value="five">5</option>
-                                <option value="six">6</option>
-                                <option value="seven">7</option>
-                                <option value="eight">8</option>
-                                <option value="nine">9</option>
-                            </select>
-                        </div>
-                    </td>
-                    <td id="colright">
-                        <!--dropdown for delimiter count-->
-                        <div class="ms-Dropdown delimiter_count_dropdown" tabindex="1">
-                            <label class="ms-Label">Count Direction</label>
-                            <i class="ms-Dropdown-caretDown ms-Icon ms-Icon--caretDown"></i>
-                            <select id="delimiter_count_drop" class="ms-Dropdown-select">
-                                <option value="left">From Left</option>
-                                <option value="right">From Right</option>
-                            </select>
-                        </div>
-                    </td>
-                </tr>
-            </table>
-            <!--split button-->
-            <button class="ms-Button" id="split_Value">Split</button>
         </div>
+        <div id="explanation">
+            <label class="ms-Label">Click more options to specify the position of the selected delimiter at which to split the cell content</p>
+        </div>
+        <button class="ms-Button_grey" id="advanced_settings">More Options</button>
+        <button class="ms-Button_grey" id="advanced_hide">Less Options</button>
+        <button id="help_icon" class="ms-Button_icon">
+            <i class="ms-Icon ms-Icon--infoCircle" aria-hidden="true"></i>
+        </button>
+        <table id="matchCriteria">
+            <tr>
+                <td id="smalldrop_col">
+                    <div id="delimiter_count" class="ms-Dropdown del_count_dropdown" tabindex="1">
+                        <label class="ms-Label">Position of Delimiter</label>
+                        <i class="ms-Dropdown-caretDown ms-Icon ms-Icon--caretDown"></i>
+                        <select id="delimiter_count_i" class="ms-Dropdown-select">
+                            <option value="all">All</option>
+                            <option value="one">1</option>
+                            <option value="two">2</option>
+                            <option value="three">3</option>
+                            <option value="four">4</option>
+                            <option value="five">5</option>
+                            <option value="six">6</option>
+                            <option value="seven">7</option>
+                            <option value="eight">8</option>
+                            <option value="nine">9</option>
+                        </select>
+                    </div>
+                </td>
+                <td id="colright">
+                    <!--dropdown for delimiter count-->
+                    <div class="ms-Dropdown delimiter_count_dropdown" tabindex="1">
+                        <label class="ms-Label">Count Direction</label>
+                        <i class="ms-Dropdown-caretDown ms-Icon ms-Icon--caretDown"></i>
+                        <select id="delimiter_count_drop" class="ms-Dropdown-select">
+                            <option value="left">From Left</option>
+                            <option value="right">From Right</option>
+                        </select>
+                    </div>
+                </td>
+            </tr>
+        </table>
+        <!--split button-->
+        <button class="ms-Button" id="split_Value">Split</button>
     </div>
+</div>
 
 <div class="placeholder"></div>
 </body>

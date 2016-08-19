@@ -1,7 +1,7 @@
 function backToOne() {
     $('#step1').show();
     $('#step2').hide();
-    Office.context.document.settings.set('back_button_pressed', true);
+    Office.context.document.settings.set('back_button_pressed', false);
     Office.context.document.settings.set('populate_new', true);
 }
 
@@ -621,7 +621,7 @@ function redirectHome() {
                     Office.context.document.settings.saveAsync();
                     var newName = worksheet_adding_to.name + "(" + sheet_count + ")";
                     addBackupSheet(newName, function() {
-                        empty_count = range_adding_to.text.length - lookup_count - 1;
+                        empty_count = checked_checkboxes.length * range_adding_to.text.length - lookup_count - checked_checkboxes.length;
 
                         var txt = document.createElement("p");
                         txt.className = "ms-font-xs ms-embedded-dialog__content__text";
@@ -632,7 +632,7 @@ function redirectHome() {
                     });
                 }
                 else {
-                    empty_count = range_adding_to.text.length - lookup_count - 1;
+                    empty_count = checked_checkboxes.length * range_adding_to.text.length - lookup_count - checked_checkboxes.length;
 
                     var txt = document.createElement("p");
                     txt.className = "ms-font-xs ms-embedded-dialog__content__text";

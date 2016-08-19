@@ -38,7 +38,6 @@
 
 </head>
 
-<body class="ms-font-m">
 <div id="content-header">
     <table>
         <tr>
@@ -56,14 +55,12 @@
                 <button id="homeButton" class="ms-Button_homelogo">
                     <img class="page1" src="../../images/logo_lg.png" />
                 </button>
-                <!--div>
-                    <img class="page1" src="../../images/logo_lg.png" />
-                </div-->
             </td>
         </tr>
     </table>
 </div>
 
+<!--Dialog for same header names-->
 <div id="showEmbeddedDialog" class="ms-embedded-dialog__options" >
     <div class="ms-Dialog ms-Dialog--close">
         <div class="ms-Overlay js-DialogAction--close"></div>
@@ -88,6 +85,7 @@
     </div>
 </div>
 
+<!--Dialog for success message-->
 <div id="resultDialog" class="ms-embedded-dialog__options" >
     <div class="ms-Dialog ms-Dialog--close">
         <div class="ms-Overlay js-DialogAction--close"></div>
@@ -222,11 +220,14 @@
         <button id="help_icon" class="ms-Button_icon">
             <i class="ms-Icon ms-Icon--infoCircle" aria-hidden="true"></i>
         </button>
+        <div id="explanationMoreOptions">
+            <label class="ms-Label">Specify the position of your selected start and end delimiter as well as the direction from which to count the position:</p>
+        </div>
         <table id="tablesmall">
             <tr>
                 <td id="smalldrop_col">
                     <div id="del_count_start" class="ms-Dropdown del_count_dropdown_s" tabindex="1">
-                        <label class="ms-Label">Start delimiter position</label>
+                        <label class="ms-Label">Start position</label>
                         <i class="ms-Dropdown-caretDown ms-Icon ms-Icon--caretDown"></i>
                         <select id="delimiter_count_start" class="ms-Dropdown-select">
                             <option value="one">Default</option>
@@ -256,7 +257,7 @@
             <tr>
                 <td id="smalldrop_col">
                     <div id="del_count_end" class="ms-Dropdown del_count_dropdown_e" tabindex="1">
-                        <label class="ms-Label">End delimiter position</label>
+                        <label class="ms-Label">End position</label>
                         <i class="ms-Dropdown-caretDown ms-Icon ms-Icon--caretDown"></i>
                         <select id="delimiter_count_end" class="ms-Dropdown-select">
                             <option value="none">Default</option>

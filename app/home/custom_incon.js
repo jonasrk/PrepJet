@@ -227,15 +227,13 @@ function redirectHome() {
 
             return ctx.sync().then(function() {
 
-                backupForUndo(range);
-
                 var selected_identifier = document.getElementById('column_options').value;
                 var charCount = Number(document.getElementById('charCountInput').value);
                 var charIncluded = document.getElementById('includeChar').value;
                 var charNotIncluded = document.getElementById('notIncludeChar').value;
                 var charOperator = document.getElementById('charOptions').value;
 
-                //var header = 0;
+                backupForUndo(range);
 
                 var header = 0;
                 for (var k = 0; k < range.text[0].length; k++){
@@ -310,8 +308,19 @@ function redirectHome() {
                     }
                 }
 
+                if (document.getElementById('createBackup').checked == true) {
+                    var sheet_count = Office.context.document.settings.get('backup_sheet_count') + 1;
+                    Office.context.document.settings.set('backup_sheet_count', sheet_count);
+                    Office.context.document.settings.saveAsync();
+                    var newName = worksheet.name + "(" + sheet_count + ")";
+                    addBackupSheet(newName, function() {
+                    });
 
-                window.location = "custom_incon.html";
+                }
+                else {
+                    window.location = "custom_incon.html";
+                }
+
 
             });
 
