@@ -94,10 +94,11 @@
 
                 // call to API
 
-                $.post( "https://localhost:8100/", { data: data_array })
+                $.post( "https://localhost:8100/outlier", { data: data_array })
                     .done(function( borders ) {
                         // highlight dupes
                         console.log("Borders: " + borders + "\nStatus: " + status);
+                        console.log(borders['objects'][0]);
 
                         Excel.run(function (ctx) {
 
@@ -112,8 +113,8 @@
 
                             return ctx.sync().then(function() {
 
-                                var upper_border = 40;
-                                var lower_border = borders;
+                                var upper_border = borders['objects'][1];
+                                var lower_border = borders['objects'][0];
 
                                 var header = 0;
                                 for (var k = 0; k < range.text[0].length; k++){
@@ -125,7 +126,9 @@
                                 var color = "#EA7F04";
                                 for (var k = 1; k < dupe_range.text.length; k++) {
                                     if (dupe_range.text[k][header] < lower_border || dupe_range.text[k][header] > upper_border) {
-                                        highlightCellInWorksheet(dupe_worksheet, dupe_range.text[k][header], color);
+                                        var insert_address = getCharFromNumber(header) + (k + 1);
+                                        console.log(insert_address);
+                                        highlightCellInWorksheet(dupe_worksheet, insert_address, color);
                                     }
                                 }
 
