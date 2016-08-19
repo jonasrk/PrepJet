@@ -3,6 +3,7 @@ function redirectHome() {
 }
 
 (function () {
+    count_drop = 0;
     // 'use strict';
 
     // The initialize function must be run each time a new page is loaded
@@ -19,18 +20,140 @@ function redirectHome() {
             }
 
             app.initialize();
-
             populateColumnDropdown();
+
+            $('#removeVar').hide();
 
             $('#bt_detect_outliers').click(detectOutlier);
             $('#homeButton').click(redirectHome);
+            $('#buttonOk').click(highlightHeader);
+            $('#addVar').click(addDropdown);
+            $('#removeVar').click(removeCriteria);
 
+            //refresh window
             document.getElementById("refresh_icon").onclick = function () {
-                window.location = "harmonize.html";
+                window.location = "outlier.html";
+            }
+
+            //Show and hide error message if column have same header name
+            document.getElementById("buttonClose").onclick = function () {
+                document.getElementById('showEmbeddedDialog').style.visibility = 'hidden';
             }
 
         });
     };
+
+
+    function highlightHeader() {
+
+        Excel.run(function (ctx) {
+
+            var worksheet = ctx.workbook.worksheets.getActiveWorksheet();
+            var range_all = worksheet.getRange();
+            var range = range_all.getUsedRange();
+
+            range.load('text');
+
+            return ctx.sync().then(function() {
+
+                for (var run = 0; run < range.text[0].length - 1; run++) {
+                    for (var run2 = run + 1; run2 < range.text[0].length; run2++) {
+                        if (range.text[0][run] == range.text[0][run2] && range.text[0][run] != "") {
+                            document.getElementById('showEmbeddedDialog').style.visibility = 'hidden';
+                            highlightContentInWorksheet(worksheet, getCharFromNumber(run) + 1, '#EA7F04');
+                            highlightContentInWorksheet(worksheet, getCharFromNumber(run2) + 1, '#EA7F04');
+                        }
+                    }
+                }
+
+            });
+
+        }).catch(function(error) {
+            console.log("Error: " + error);
+            if (error instanceof OfficeExtension.Error) {
+                console.log("Debug info: " + JSON.stringify(error.debugInfo));
+            }
+        });
+    }
+
+    function addDropdown(){
+        $('#removeVar').show();
+        count_drop += 1;
+        populateDependendVariable();
+    }
+
+    function populateDependendVariable() {
+
+            Excel.run(function (ctx) {
+
+                var worksheet_t1 = ctx.workbook.worksheets.getActiveWorksheet();
+                var range_all_t1 = worksheet_t1.getRange();
+                var range_t1 = range_all_t1.getUsedRange();
+
+                range_t1.load('address');
+                range_t1.load('text');
+
+                return ctx.sync().then(function() {
+
+                        var div = document.createElement("div");
+                        div.className = "ms-Dropdown reference_column_checkboxes" + count_drop;
+                        div.id = "addedDropdown" + count_drop;
+
+                        var sel = document.createElement("select");
+                        sel.id = "dependendVariable" + count_drop;
+                        sel.className = "ms-Dropdown-select";
+
+                        var lab = document.createElement('label');
+                        lab.className = "ms-Label";
+                        lab.innerHTML = "Select column of dependend variable"
+                        lab.setAttribute("for", "addedDropdown" + count_drop);
+
+                        var elemi = document.createElement("i");
+                        elemi.className = "ms-Dropdown-caretDown ms-Icon ms-Icon--caretDown";
+
+                        document.getElementById('dependendVariables').appendChild(div);
+                        document.getElementById("addedDropdown" + count_drop).appendChild(lab);
+                        document.getElementById("addedDropdown" + count_drop).appendChild(elemi);
+                        document.getElementById("addedDropdown" + count_drop).appendChild(sel);
+
+                            for (var i = 0; i < range_t1.text[0].length; i++) {
+                                var el = document.createElement("option");
+                                if (range_t1.text[0][i] != "") {
+                                    el.value = range_t1.text[0][i];
+                                    el.textContent = range_t1.text[0][i];
+                                }
+                                else {
+                                    el.value = "Column " + getCharFromNumber(i);
+                                    el.textContent = "Column " + getCharFromNumber(i);
+                                }
+
+                                sel.appendChild(el);
+                            }
+
+                        document.getElementById("addedDropdown" + count_drop).appendChild(lab);
+                        $(".reference_column_checkboxes" + count_drop).Dropdown();
+                        $("span.ms-Dropdown-title:empty").text(range_t1.text[0][0]);
+                });
+
+            }).catch(function(error) {
+                console.log("Error: " + error);
+                if (error instanceof OfficeExtension.Error) {
+                    console.log("Debug info: " + JSON.stringify(error.debugInfo));
+                }
+            });
+
+    }
+
+    function removeCriteria() {
+            var loop_end = count_drop - 1;
+            var parent = document.getElementById('dependendVariables');
+            var child = document.getElementById('addedDropdown' + count_drop);
+            parent.removeChild(child);
+            count_drop = count_drop - 1;
+            if (count_drop < 1) {
+                $('#removeVar').hide();
+            }
+    }
 
 
     function populateColumnDropdown() {
@@ -44,8 +167,17 @@ function redirectHome() {
             range.load('address');
             range.load('text');
             return ctx.sync().then(function() {
-                for (var i = 0; i < range.text[0].length; i++) {
 
+                for (var run = 0; run < range.text[0].length - 1; run++) {
+                    for (var run2 = run + 1; run2 < range.text[0].length; run2++) {
+                        if (range.text[0][run] == range.text[0][run2] && range.text[0][run] != "") {
+                            document.getElementById('showEmbeddedDialog').style.visibility = 'visible';
+                            Office.context.document.settings.set('same_header_outlier', true);
+                        }
+                    }
+                }
+
+                for (var i = 0; i < range.text[0].length; i++) {
                     var el = document.createElement("option");
                     if (range.text[0][i] != "") {
                         el.value = range.text[0][i];
@@ -56,10 +188,10 @@ function redirectHome() {
                         el.textContent = "Column " + getCharFromNumber(i);
                     }
                     document.getElementById("outlier_column_dropdown").appendChild(el);
-
                 }
 
                 $(".outlier_column_dropdown_container").Dropdown();
+                $("span.ms-Dropdown-title:empty").text(range.text[0][0]);
             });
 
         }).catch(function(error) {

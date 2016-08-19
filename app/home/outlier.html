@@ -58,30 +58,82 @@
             </tr>
         </table>
     </div>
-
-<div id="content-main">
-    <div class="padding">
-    <!--Select Column Dropdown-->
-        <div class="ms-Dropdown outlier_column_dropdown_container" tabindex="0">
-            <label class="ms-Label">Select target column</label>
-            <i class="ms-Dropdown-caretDown ms-Icon ms-Icon--caretDown"></i>
-            <select id="outlier_column_dropdown" class="ms-Dropdown-select">
-            </select>
+    <!--Dialog for same header name-->
+    <div id="showEmbeddedDialog" class="ms-embedded-dialog__options" >
+        <div class="ms-Dialog ms-Dialog--close">
+            <div class="ms-Overlay js-DialogAction--close"></div>
+            <div class="ms-Dialog-main">
+                <button class="ms-Dialog-button ms-Dialog-button--close js-DialogAction--close" id="buttonClose">
+                    <i class="ms-Icon ms-Icon--x"></i>
+                </button>
+                <div class="ms-Dialog-header">
+                    <p class="ms-Dialog-title">Error</p>
+                </div>
+                <div class="ms-Dialog-inner">
+                    <div class="ms-Dialog-content">
+                        <p class="ms-font-xs ms-embedded-dialog__content__text">Each column should have a unique header. Please rename equal column headers.</p>
+                    </div>
+                    <div class="ms-embedded-dialog__actioncenter">
+                        <button  class="ms-Dialog-action ms-Button_grey" id="buttonOk">
+                            <span class="ms-Button-label">Highlight</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
         </div>
-
-        <!--Checkbox sorting-->
-        <div class="ms-ChoiceField">
-            <input id="outliersort" class="ms-ChoiceField-input" type="checkbox">
-            <label id="checkbox" for="outliersort" class="ms-ChoiceField-field">
-                <span class="ms-Label">Sort for outlier</span>
-            </label>
-        </div>
-
-        <!--Button-->
-        <button class="ms-Button" id="bt_detect_outliers">Apply</button>
     </div>
-</div>
-<div class="placeholder"></div>
+
+    <div id="content-main">
+        <div class="padding">
+            <!--Select Column Dropdown-->
+            <div class="ms-Dropdown outlier_column_dropdown_container" tabindex="0">
+                <label class="ms-Label">Select column to analyze for outlier</label>
+                <i class="ms-Dropdown-caretDown ms-Icon ms-Icon--caretDown"></i>
+                <select id="outlier_column_dropdown" class="ms-Dropdown-select">
+                </select>
+            </div>
+            <div id="dependendVariables" ></div>
+            <table>
+                <tr>
+                    <td>
+                        <!--Checkbox sorting-->
+                        <div class="ms-ChoiceField">
+                            <input id="outliersort" class="ms-ChoiceField-input" type="checkbox">
+                            <label id="checkbox" for="outliersort" class="ms-ChoiceField-field">
+                                <span class="ms-Label">Sort for outlier</span>
+                            </label>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+            <table class="tableupperborder">
+                <tr>
+                    <td>
+                        <div class="ms-ChoiceField">
+                            <input id="createBackup" class="ms-ChoiceField-input" type="checkbox">
+                            <label for="createBackup" class="ms-ChoiceField-field">
+                                <span class="ms-Label">Create a backup sheet</span>
+                            </label>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+            <table>
+                <tr>
+                    <td>
+                        <button id="addVar" class="ms-Button_grey">Add dependend variable</button>
+                    </td>
+                </tr>
+                <td>
+                    <button id="removeVar" class="ms-Button_grey">Remove dependend variable</button>
+                </td>
+            </table>
+
+            <!--Button-->
+            <button class="ms-Button" id="bt_detect_outliers">Apply</button>
+        </div>
+    </div>
+    <div class="placeholder"></div>
 </body>
 
 </html>
