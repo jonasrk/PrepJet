@@ -240,6 +240,24 @@
                     </Action>
                   </Control>
 
+                <Control xsi:type="Button" id="PJ.outlierButton">
+                    <Label resid="PJ.outlierButton.Label" />
+                    <Supertip>
+                      <Title resid="PJ.outlierButton.Label" />
+                      <Description resid="PJ.outlier.Ttp" />
+                    </Supertip>
+                    <Icon>
+                      <bt:Image size="16" resid="PJ.customIncon.Icon_sm" />
+                      <bt:Image size="32" resid="PJ.customIncon.Icon" />
+                      <bt:Image size="80" resid="PJ.customIncon.Icon_lg" />
+                    </Icon>
+                    <Action xsi:type="ShowTaskpane">
+                      <TaskpaneId>Button2Id1</TaskpaneId>
+                      <!--Provide a url resource id for the location that will be displayed on the task pane -->
+                      <SourceLocation resid="PJ.outlier.Url" />
+                    </Action>
+                  </Control>
+
                 </Group>
 
               <Group id="PJ.Tab1.Group4">
@@ -393,10 +411,11 @@
         <bt:Url id="PJ.FindDuplicates.Url" DefaultValue="https://localhost:8443/app/home/duplicates.html" />
         <bt:Url id="PJ.Inconsistency.Url" DefaultValue="https://localhost:8443/app/home/inconsistency.html" />
         <bt:Url id="PJ.CustomIncon.Url" DefaultValue="https://localhost:8443/app/home/custom_incon.html" />
+        <bt:Url id="PJ.outlier.Url" DefaultValue="https://localhost:8443/app/home/outlier.html" />
         <bt:Url id="PJ.ExtractValues.Url" DefaultValue="https://localhost:8443/app/home/extract_values.html" />
         <bt:Url id="PJ.TrimSpaces.Url" DefaultValue="https://localhost:8443/app/home/trim_spaces.html" />
         <bt:Url id="PJ.validation.Url" DefaultValue="https://localhost:8443/app/home/validation.html" />
-        <bt:Url id="PJ.Harmonize.Url" DefaultValue="https://localhost:8443/app/home/outlier.html" />
+        <bt:Url id="PJ.Harmonize.Url" DefaultValue="https://localhost:8443/app/home/harmonize.html" />
         <bt:Url id="PJ.help.Url" DefaultValue="https://localhost:8443/app/home/help.html" />
         <!--LearnMore URL currently not used -->
         <bt:Url id="PJ.GetStarted.LearnMoreUrl" DefaultValue="http://www.prepjet.de/about-1/">
@@ -408,6 +427,7 @@
         <bt:String id="PJ.FindDuplicatesButton.Label" DefaultValue="Detect Duplicates" />
         <bt:String id="PJ.InconsistencyButton.Label" DefaultValue="Detect Inconsistencies" />
         <bt:String id="PJ.CustomInconButton.Label" DefaultValue="Custom Inconsistencies" />
+        <bt:String id="PJ.outlierButton.Label" DefaultValue="Detect Outlier" />
         <bt:String id="PJ.ExtractValuesButton.Label" DefaultValue="Extract Text" />
         <bt:String id="PJ.TrimSpacesButton.Label" DefaultValue="Trim Spaces" />
         <bt:String id="PJ.ValidationRuleButton.Label" DefaultValue="Rule-based Validation" />
@@ -435,6 +455,7 @@
         <bt:String id="PJ.addColumn.Ttp" DefaultValue="Add columns from a different sheet by matching criteria" />
         <bt:String id="PJ.inconsistency.Ttp" DefaultValue="Search for inconsistent data types" />
         <bt:String id="PJ.customIncon.Ttp" DefaultValue="Define format rules for your data" />
+        <bt:String id="PJ.outlier.Ttp" DefaultValue="Detect statistical outlier in numeric values" />
         <bt:String id="PJ.duplicates.Ttp" DefaultValue="Search for duplicate entries" />
         <bt:String id="PJ.validation.Ttp" DefaultValue="Create custom rules to validate data entries" />
         <bt:String id="PJ.help.Ttp" DefaultValue="Explanation and examples on how to use PrepJet" />
