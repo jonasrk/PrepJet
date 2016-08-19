@@ -95,7 +95,7 @@ function redirectHome() {
 
             var worksheet = ctx.workbook.worksheets.getItem(selected_table2);
             var range_all = worksheet.getRange();
-            var range = range_all.getUsedRange();
+            var range = range_all.getUsedRange(true);
 
             range.load('text');
             return ctx.sync().then(function() {
@@ -190,7 +190,7 @@ function redirectHome() {
 
             var worksheet = ctx.workbook.worksheets.getActiveWorksheet();
             var range_all = worksheet.getRange();
-            var range = range_all.getUsedRange();
+            var range = range_all.getUsedRange(true);
 
             range.load('text');
 
@@ -233,7 +233,7 @@ function redirectHome() {
             var worksheet = ctx.workbook.worksheets.getItem(selected_table2);
             var worksheetname = ctx.workbook.worksheets.getItem(selected_table2);
             var range_all = worksheet.getRange();
-            var range = range_all.getUsedRange();
+            var range = range_all.getUsedRange(true);
 
             range.load('text');
             worksheetname.load('name');
@@ -346,11 +346,11 @@ function redirectHome() {
 
                 var worksheet_t1 = ctx.workbook.worksheets.getItem(table1);
                 var range_all_t1 = worksheet_t1.getRange();
-                var range_t1 = range_all_t1.getUsedRange();
+                var range_t1 = range_all_t1.getUsedRange(true);
 
                 var worksheet_t2 = ctx.workbook.worksheets.getItem(table2);
                 var range_all_t2 = worksheet_t2.getRange();
-                var range_t2 = range_all_t2.getUsedRange();
+                var range_t2 = range_all_t2.getUsedRange(true);
 
                 range_t1.load('address');
                 range_t1.load('text');
@@ -513,7 +513,7 @@ function redirectHome() {
             var worksheet = ctx.workbook.worksheets.getItem(selected_table2);
 
             var range_all = worksheet.getRange();
-            var range = range_all.getUsedRange();
+            var range = range_all.getUsedRange(true);
 
             range.load('address');
             range.load('text');
@@ -521,7 +521,7 @@ function redirectHome() {
             var worksheet_adding_to = ctx.workbook.worksheets.getItem(selected_table1);
 
             var range_all_adding_to = worksheet_adding_to.getRange();
-            var range_adding_to = range_all_adding_to.getUsedRange();
+            var range_adding_to = range_all_adding_to.getUsedRange(true);
 
             range_adding_to.load('address');
             range_adding_to.load('text');

@@ -185,7 +185,7 @@ function redirectHome() {
 
             var worksheet = ctx.workbook.worksheets.getActiveWorksheet();
             var range_all = worksheet.getRange();
-            var range = range_all.getUsedRange();
+            var range = range_all.getUsedRange(true);
 
             range.load('text');
 
@@ -218,7 +218,7 @@ function redirectHome() {
 
             var worksheet = ctx.workbook.worksheets.getActiveWorksheet();
             var range_all = worksheet.getRange();
-            var range = range_all.getUsedRange();
+            var range = range_all.getUsedRange(true);
 
             range.load('text');
 
@@ -265,7 +265,7 @@ function redirectHome() {
 
             var worksheet = ctx.workbook.worksheets.getActiveWorksheet();
             var range_all = worksheet.getRange();
-            var range = range_all.getUsedRange();
+            var range = range_all.getUsedRange(true);
             var selected_identifier = document.getElementById('column_options').value;
 
             //get delimiter where to split and translate user input into delimiter character
@@ -288,7 +288,7 @@ function redirectHome() {
             worksheet.load('name');
 
             var range_all_adding_to = worksheet.getRange();
-            var range_adding_to = range_all_adding_to.getUsedRange();
+            var range_adding_to = range_all_adding_to.getUsedRange(true);
             range_adding_to.load('address');
             range_adding_to.load('text');
 
@@ -450,7 +450,7 @@ function redirectHome() {
 
             var worksheet = ctx.workbook.worksheets.getActiveWorksheet();
             var range_all = worksheet.getRange();
-            var range = range_all.getUsedRange();
+            var range = range_all.getUsedRange(true);
 
             range.load('text');
             worksheet.load('name');

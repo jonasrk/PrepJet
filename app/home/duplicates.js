@@ -158,7 +158,7 @@ function redirectHome() {
 
             var worksheet = ctx.workbook.worksheets.getActiveWorksheet();
             var range_all = worksheet.getRange();
-            var range = range_all.getUsedRange();
+            var range = range_all.getUsedRange(true);
 
             range.load('text');
 
@@ -191,7 +191,7 @@ function redirectHome() {
 
             var worksheet = ctx.workbook.worksheets.getActiveWorksheet();
             var range_all = worksheet.getRange();
-            var range = range_all.getUsedRange();
+            var range = range_all.getUsedRange(true);
 
             range.load('address');
             range.load('text');
@@ -233,7 +233,7 @@ function redirectHome() {
 
             var worksheet = ctx.workbook.worksheets.getActiveWorksheet();
             var range_all = worksheet.getRange();
-            var range = range_all.getUsedRange();
+            var range = range_all.getUsedRange(true);
 
             range.load('text');
 
@@ -279,7 +279,7 @@ function redirectHome() {
 
             var worksheet = ctx.workbook.worksheets.getActiveWorksheet();
             var range_all = worksheet.getRange();
-            var range = range_all.getUsedRange();
+            var range = range_all.getUsedRange(true);
             var firstCol = range.getRow(1);
             var lastCol = range.getLastColumn();
 

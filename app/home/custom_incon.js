@@ -53,7 +53,7 @@ function redirectHome() {
                 var worksheetname = ctx.workbook.worksheets.getActiveWorksheet();
 
                 var headRange_all = worksheetname.getRange();
-                var headRange = headRange_all.getUsedRange();
+                var headRange = headRange_all.getUsedRange(true);
 
                 worksheetname.load('name')
                 headRange.load('text');
@@ -139,7 +139,7 @@ function redirectHome() {
 
             var worksheet = ctx.workbook.worksheets.getActiveWorksheet();
             var range_all = worksheet.getRange();
-            var range = range_all.getUsedRange();
+            var range = range_all.getUsedRange(true);
 
             range.load('text');
 
@@ -172,7 +172,7 @@ function redirectHome() {
 
             var worksheet = ctx.workbook.worksheets.getActiveWorksheet();
             var range_all = worksheet.getRange();
-            var range = range_all.getUsedRange();
+            var range = range_all.getUsedRange(true);
 
             range.load('text');
 
@@ -219,7 +219,7 @@ function redirectHome() {
 
             var worksheet = ctx.workbook.worksheets.getActiveWorksheet();
             var range_all = worksheet.getRange();
-            var range = range_all.getUsedRange();
+            var range = range_all.getUsedRange(true);
 
             //get used range in active Sheet
             range.load('text');

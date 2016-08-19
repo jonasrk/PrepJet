@@ -273,7 +273,7 @@ function showEnterpriseDialog() {
 
             var worksheet = ctx.workbook.worksheets.getActiveWorksheet();
             var range_all = worksheet.getRange();
-            var range = range_all.getUsedRange();
+            var range = range_all.getUsedRange(true);
 
             range.load('text');
 
@@ -307,7 +307,7 @@ function showEnterpriseDialog() {
 
             var worksheet = ctx.workbook.worksheets.getActiveWorksheet();
             var range_all = worksheet.getRange();
-            var range = range_all.getUsedRange();
+            var range = range_all.getUsedRange(true);
             range.load('text');
 
             return ctx.sync().then(function() {
@@ -355,7 +355,7 @@ function showEnterpriseDialog() {
 
             var worksheet = ctx.workbook.worksheets.getActiveWorksheet();
             var range_all = worksheet.getRange();
-            var range = range_all.getUsedRange();
+            var range = range_all.getUsedRange(true);
             range.load('text');
 
             return ctx.sync().then(function() {
@@ -406,7 +406,7 @@ function showEnterpriseDialog() {
 
             var worksheet = ctx.workbook.worksheets.getActiveWorksheet();
             var range_all = worksheet.getRange();
-            var range = range_all.getUsedRange();
+            var range = range_all.getUsedRange(true);
             var selected_identifier2 = document.getElementById('column2_options').value;
 
 

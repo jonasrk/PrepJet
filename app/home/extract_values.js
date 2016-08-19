@@ -225,7 +225,7 @@ function hideAdvancedCount() {
 
             var worksheet = ctx.workbook.worksheets.getActiveWorksheet();
             var range_all = worksheet.getRange();
-            var range = range_all.getUsedRange();
+            var range = range_all.getUsedRange(true);
 
             range.load('text');
 
@@ -258,7 +258,7 @@ function hideAdvancedCount() {
 
             var worksheet = ctx.workbook.worksheets.getActiveWorksheet();
             var range_all = worksheet.getRange();
-            var range = range_all.getUsedRange();
+            var range = range_all.getUsedRange(true);
 
             range.load('text');
             return ctx.sync().then(function() {
@@ -310,7 +310,7 @@ function hideAdvancedCount() {
 
             var worksheet = ctx.workbook.worksheets.getActiveWorksheet();
             var range_all = worksheet.getRange();
-            var range = range_all.getUsedRange();
+            var range = range_all.getUsedRange(true);
             var selected_identifier = document.getElementById('column1_options').value;
 
             //get character where to start extracting and translate string into delimiter
@@ -385,7 +385,7 @@ function hideAdvancedCount() {
             //get used range in active Sheet
             range.load('text');
             var range_all_adding_to = worksheet.getRange();
-            var range_adding_to = range_all_adding_to.getUsedRange();
+            var range_adding_to = range_all_adding_to.getUsedRange(true);
 
             range_adding_to.load('address');
             range_adding_to.load('text');
@@ -607,7 +607,7 @@ function hideAdvancedCount() {
 
             var worksheet = ctx.workbook.worksheets.getActiveWorksheet();
             var range_all = worksheet.getRange();
-            var range = range_all.getUsedRange();
+            var range = range_all.getUsedRange(true);
 
             range.load('text');
             worksheet.load('name');
