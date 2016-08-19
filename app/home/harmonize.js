@@ -331,7 +331,7 @@ function redirectHome() {
                 } else {
                     var txt = document.createElement("p");
                     txt.className = "ms-font-xs ms-embedded-dialog__content__text";
-                    txt.innerHTML = "PrepJet successfully harmonized the values in your " + checked_checkboxes.length + endString;
+                    txt.innerHTML = "PrepJet successfully harmonized the values the " + checked_checkboxes.length + endString;
                     document.getElementById('resultText').appendChild(txt);
 
                     document.getElementById('resultDialog').style.visibility = 'visible';
