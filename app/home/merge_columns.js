@@ -606,8 +606,7 @@ function redirectHome() {
                                         var sheet_row = i + 1;
                                         var row_ref = j + 1;
                                         var textToAdd = "=" + selected_table2 + "!" + source_char + row_ref;
-                                        addContentNew(worksheet_adding_to.name, column_char + sheet_row, textToAdd, function () {});
-                                        //addContentToWorksheet(worksheet_adding_to, column_char + sheet_row, "=" + selected_table2 + "!" + source_char + row_ref);
+                                        addContentToWorksheet(worksheet_adding_to, column_char + sheet_row, textToAdd);
                                         lookup_count += 1;
                                         break;
                                     }
