@@ -369,7 +369,6 @@ function redirectHome() {
                         for (var n = 0; n < duplicates_input[m].length; n++){
                             for (var o = 0; o < duplicates_input[m][n].length; o++) {
                                 highlightContentNew(worksheet.name, duplicates_input[m][n][o][int], color, function () {});
-                                //highlightContentInWorksheet(worksheet, duplicates_input[m][n][o][int], color);
                             }
 
                         }

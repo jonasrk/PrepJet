@@ -147,6 +147,7 @@
                         range_insert.load('address');
                         range.load('address');
                         range.load('text');
+                        worksheet.load('name');
 
                         return ctx.sync().then(function() {
 
@@ -168,7 +169,7 @@
                                     var columnchar = getCharFromNumber(runcol);
                                     addContentToWorksheet(worksheet, columnchar + sheet_row, data_vector[run][runcol]);
                                     if (runcol == outliercolumn) {
-                                        highlightContentInWorksheet(worksheet, columnchar + sheet_row, '#EA7F04');
+                                        highlightContentNew(worksheet.name, columnchar + sheet_row, '#EA7F04', function(){});
                                     }
                                 }
                                 sheet_row = sheet_row + 1;

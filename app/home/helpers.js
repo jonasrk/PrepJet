@@ -183,13 +183,7 @@ function addContentToWorksheet(sheetObject, rangeAddress, displayText) {
     range.merge();
 }
 
-//color font in workbook
-function highlightContentInWorksheet(sheetObject, rangeAddress, color) {
-    var range = sheetObject.getRange(rangeAddress);
-    range.format.font.color = color;
-    range.merge();
-}
-
+//color font
 function highlightContentNew(sheetObject, rangeAddress, color, callback) {
     Excel.run(function (ctx) {
         var range = ctx.workbook.worksheets.getItem(sheetObject).getRange(rangeAddress);
