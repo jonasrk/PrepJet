@@ -113,16 +113,17 @@
 
                         var row_vector = [];
                         var data_vector = [];
+                        var color = "#EA7F04";
                         for (var j = 1; j < range.text.length; j++){
                             var sheet_row = j + 1;
                             var address = getCharFromNumber(k) + sheet_row;
 
                             if (range.text[j][k] < thrsh_low){
-                                highlightContentInWorksheet(worksheet, address, "#EA7F04");
+                                highlightContentNew(worksheet.name, address, color, function () {});
                                 row_vector.push(sheet_row);
                                 data_vector.push(range.text[j]);
                             } else if (range.text[j][k] > thrsh_high){
-                                highlightContentInWorksheet(worksheet, address, '#EA7F04');
+                                highlightContentNew(worksheet.name, address, color, function () {});
                                 row_vector.push(sheet_row);
                                 data_vector.push(range.text[j]);
                             }
