@@ -187,16 +187,24 @@ function addContentToWorksheet(sheetObject, rangeAddress, displayText) {
 function highlightContentInWorksheet(sheetObject, rangeAddress, color) {
     var range = sheetObject.getRange(rangeAddress);
     range.format.font.color = color;
-    //range.merge();
-}
-
-//color cell background
-function highlightCellInWorksheet(sheetObject, rangeAddress, color) {
-    var range = sheetObject.getRange(rangeAddress);
-    range.format.fill.color = color;
     range.merge();
 }
 
+function highlightContentNew(sheetObject, rangeAddress, color, callback) {
+    Excel.run(function (ctx) {
+        var range = ctx.workbook.worksheets.getItem(sheetObject).getRange(rangeAddress);
+        range.format.font.color = color;
+        return ctx.sync();
+            callback();
+    }).catch(function(error) {
+            console.log("Error: " + error);
+            if (error instanceof OfficeExtension.Error) {
+                console.log("Debug info: " + JSON.stringify(error.debugInfo));
+            }
+    });
+}
+
+//color cell background
 function highlightCellNew(sheetObject, rangeAddress, color, callback) {
     Excel.run(function (ctx) {
         var range = ctx.workbook.worksheets.getItem(sheetObject).getRange(rangeAddress);
