@@ -392,7 +392,8 @@ function redirectHome() {
                                 color = getRandomColor();
                                 for (var k = 0; k < tmp_type.length; k++) {
                                     if (tmp2[i][0] == tmp_type[k][0]) {
-                                        highlightCellInWorksheet(worksheet, tmp_type[k][1], color);
+                                        //highlightCellInWorksheet(worksheet, tmp_type[k][1], color);
+                                        highlightCellNew(worksheet.name, tmp_type[k][1], function () {});
                                         incon_counter += 1;
                                     }
                                 }

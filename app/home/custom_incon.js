@@ -46,6 +46,16 @@ function redirectHome() {
                 window.location = "custom_incon.html";
             }
 
+            //hide result message
+            document.getElementById("resultClose").onclick = function () {
+                document.getElementById('resultDialog').style.visibility = 'hidden';
+                window.location = "custom_incon.html";
+            }
+            document.getElementById("resultOk").onclick = function () {
+                document.getElementById('resultDialog').style.visibility = 'hidden';
+                window.location = "custom_incon.html";
+            }
+
 
             /*Excel.run(function (ctx) {
 
@@ -242,6 +252,8 @@ function redirectHome() {
                     }
                 }
 
+                var countIncons = 0;
+
                 if (charCount != 0) {
                     for (var k = 1; k < range.text.length; k++) {
                         var string_length = range.text[k][header].length;
@@ -284,7 +296,8 @@ function redirectHome() {
                         }
                     }
                     if (check_cond == 1) {
-                        highlightContentInWorksheet(worksheet, getCharFromNumber(header) + (k + 1),'#EA7F04');
+                        countIncons += 1;
+                        highlightCellNew(worksheet.name, getCharFromNumber(header) + (k + 1), function () {});
                     }
 
                 }
@@ -293,7 +306,8 @@ function redirectHome() {
                     for (var k = 1; k < range.text.length; k++) {
                         var include_check = range.text[k][header].indexOf(charIncluded);
                         if (include_check < 0) {
-                            highlightContentInWorksheet(worksheet, getCharFromNumber(header) + (k + 1), '#EA7F04');
+                            countIncons += 1;
+                            highlightCellNew(worksheet.name, getCharFromNumber(header) + (k + 1), function () {});
                         }
                     }
                 }
@@ -303,7 +317,8 @@ function redirectHome() {
                     for (var k = 1; k < range.text.length; k++) {
                         var notInclude_check = range.text[k][header].indexOf(charNotIncluded);
                         if (notInclude_check >= 0) {
-                            highlightContentInWorksheet(worksheet, getCharFromNumber(header) + (k + 1), '#EA7F04');
+                            countIncons += 1;
+                            highlightCellNew(worksheet.name, getCharFromNumber(header) + (k + 1), function () {});
                         }
                     }
                 }
@@ -314,11 +329,20 @@ function redirectHome() {
                     Office.context.document.settings.saveAsync();
                     var newName = worksheet.name + "(" + sheet_count + ")";
                     addBackupSheet(newName, function() {
+                        var txt = document.createElement("p");
+                        txt.className = "ms-font-xs ms-embedded-dialog__content__text";
+                        txt.innerHTML = "PrepJet found " + countIncons + " inconsistencies.";
+                        document.getElementById('resultText').appendChild(txt);
+                        document.getElementById('resultDialog').style.visibility = 'visible';
                     });
 
                 }
                 else {
-                    window.location = "custom_incon.html";
+                    var txt = document.createElement("p");
+                    txt.className = "ms-font-xs ms-embedded-dialog__content__text";
+                    txt.innerHTML = "PrepJet found " + countIncons + " inconsistencies.";
+                    document.getElementById('resultText').appendChild(txt);
+                    document.getElementById('resultDialog').style.visibility = 'visible';
                 }
 
 

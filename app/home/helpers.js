@@ -187,7 +187,7 @@ function addContentToWorksheet(sheetObject, rangeAddress, displayText) {
 function highlightContentInWorksheet(sheetObject, rangeAddress, color) {
     var range = sheetObject.getRange(rangeAddress);
     range.format.font.color = color;
-    range.merge();
+    //range.merge();
 }
 
 //color cell background
@@ -195,6 +195,20 @@ function highlightCellInWorksheet(sheetObject, rangeAddress, color) {
     var range = sheetObject.getRange(rangeAddress);
     range.format.fill.color = color;
     range.merge();
+}
+
+function highlightCellNew(sheetObject, rangeAddress, callback) {
+    Excel.run(function (ctx) {
+        var range = ctx.workbook.worksheets.getItem(sheetObject).getRange(rangeAddress);
+        range.format.fill.color = "#EA7F04";
+        return ctx.sync();
+            callback();
+    }).catch(function(error) {
+            console.log("Error: " + error);
+            if (error instanceof OfficeExtension.Error) {
+                console.log("Debug info: " + JSON.stringify(error.debugInfo));
+            }
+    });
 }
 
 //create a random color to highlight font
