@@ -577,10 +577,13 @@ function redirectHome() {
 
                     for (var l = 0; l < checked_checkboxes.length; l++){ // TODO throws error if none are checked
                         if (checked_checkboxes[l].id == range.text[0][k] || checked_checkboxes[l].id == "Column " + getCharFromNumber(k)){
+                            var lookup_array = [];
                             var column_char = getCharFromNumber(l + range_adding_to.text[0].length);
 
                             // copy title
-                            addContentToWorksheet(worksheet_adding_to, column_char + "1", "=" + selected_table2 + "!" + source_char + "1");
+                            var headerText = ["=" + selected_table2 + "!" + source_char + "1"];
+                            lookup_array.push(headerText);
+                            //addContentToWorksheet(worksheet_adding_to, column_char + "1", "=" + selected_table2 + "!" + source_char + "1");
 
                             // copy rest
                             for (var i = 1; i < range_adding_to.text.length; i++) {
@@ -605,13 +608,18 @@ function redirectHome() {
                                     if (check == column1_ids.length) {
                                         var sheet_row = i + 1;
                                         var row_ref = j + 1;
-                                        var textToAdd = "=" + selected_table2 + "!" + source_char + row_ref;
-                                        addContentToWorksheet(worksheet_adding_to, column_char + sheet_row, textToAdd);
+                                        var textToAdd = ["=" + selected_table2 + "!" + source_char + row_ref];
+                                        //addContentToWorksheet(worksheet_adding_to, column_char + sheet_row, textToAdd);
+                                        lookup_array.push(textToAdd);
                                         lookup_count += 1;
                                         break;
                                     }
                                 }
                             }
+                            var insert_address = column_char + 1 + ":" + column_char + range_adding_to.text.length;
+                            console.log(insert_address);
+                            console.log(lookup_array);
+                            addContentNew(worksheet_adding_to.name, insert_address, lookup_array, function(){});
                         }
                     }
                 }
