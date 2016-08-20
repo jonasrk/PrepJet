@@ -197,10 +197,10 @@ function highlightCellInWorksheet(sheetObject, rangeAddress, color) {
     range.merge();
 }
 
-function highlightCellNew(sheetObject, rangeAddress, callback) {
+function highlightCellNew(sheetObject, rangeAddress, color, callback) {
     Excel.run(function (ctx) {
         var range = ctx.workbook.worksheets.getItem(sheetObject).getRange(rangeAddress);
-        range.format.fill.color = "#EA7F04";
+        range.format.fill.color = color;
         return ctx.sync();
             callback();
     }).catch(function(error) {

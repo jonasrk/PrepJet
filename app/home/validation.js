@@ -444,6 +444,7 @@ function showEnterpriseDialog() {
             }
 
             range.load('text');
+            worksheet.load('name');
 
             return ctx.sync().then(function() {
 
@@ -455,49 +456,51 @@ function showEnterpriseDialog() {
                         var header_if = k;
                     }
                 }
+
                 for (var k = 0; k < range.text[0].length; k++){
                     if (selected_identifier2 == range.text[0][k] || selected_identifier2 == "Column " + getCharFromNumber(k)){
                         var header_then = k;
                     }
                 }
 
+                var color = "#EA7F04";
 
                 function highlightThenCond() {
                     var address = getCharFromNumber(header_then) + sheet_row;
                     if (document.getElementById('then_operator').value == "equal") {
                         if (range.text[i][header_then] != thencondition) {
-                            highlightContentInWorksheet(act_worksheet, address, '#EA7F04');
                             vali_counter += 1;
+                            highlightCellNew(worksheet.name, address, color, function () {});
                         }
                     }
                     else if (document.getElementById('then_operator').value == "smaller") {
                          if (range.text[i][header_then] >= thencondition) {
-                            highlightContentInWorksheet(act_worksheet, address, '#EA7F04');
                             vali_counter += 1;
+                            highlightCellNew(worksheet.name, address, color, function () {});
                          }
                     }
                     else if (document.getElementById('then_operator').value == "greater") {
                         if (range.text[i][header_then] <= thencondition) {
-                            highlightContentInWorksheet(act_worksheet, address, '#EA7F04');
                             vali_counter += 1;
+                            highlightCellNew(worksheet.name, address, color, function () {});
                         }
                     }
                     else if (document.getElementById('then_operator').value == "inequal") {
                         if (range.text[i][header_then] == thencondition) {
-                            highlightContentInWorksheet(act_worksheet, address, '#EA7F04');
                             vali_counter += 1;
+                            highlightCellNew(worksheet.name, address, color, function () {});
                         }
                     }
                     else if (document.getElementById('then_operator').value == "between") {
                         if (range.text[i][header_then] < thencondition || range.text[i][header_then] > betweencondition) {
-                            highlightContentInWorksheet(act_worksheet, address, '#EA7F04');
                             vali_counter += 1;
+                            highlightCellNew(worksheet.name, address, color, function () {});
                         }
                     }
                     else if (document.getElementById('then_operator').value == "notbetween") {
                         if (range.text[i][header_then] > thencondition && range.text[i][header_then] < betweencondition) {
-                            highlightContentInWorksheet(act_worksheet, address, '#EA7F04');
                             vali_counter += 1;
+                            highlightCellNew(worksheet.name, address, color, function () {});
                         }
                     }
                     else if (document.getElementById('then_operator').value == "inlist") {
@@ -508,8 +511,8 @@ function showEnterpriseDialog() {
                             }
                         }
                         if (check_then == 0){
-                            highlightContentInWorksheet(act_worksheet, address, '#EA7F04');
                             vali_counter += 1;
+                            highlightCellNew(worksheet.name, address, color, function () {});
                         }
                     }
                 }
