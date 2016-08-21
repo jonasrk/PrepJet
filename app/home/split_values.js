@@ -185,7 +185,7 @@ function redirectHome() {
 
             var worksheet = ctx.workbook.worksheets.getActiveWorksheet();
             var range_all = worksheet.getRange();
-            var range = range_all.getUsedRange();
+            var range = range_all.getUsedRange(true);
             var firstCell = range.getColumn(0);
             var firstCol = firstCell.getEntireColumn();
             var tmpRow = range.getRow(0);
@@ -194,7 +194,7 @@ function redirectHome() {
             range.load('text');
             firstRow.load('address');
             firstCol.load('address');
-
+            worksheet.load('name');
 
             return ctx.sync().then(function() {
 
@@ -208,8 +208,8 @@ function redirectHome() {
                     for (var run2 = run + 1; run2 < range.text[0].length; run2++) {
                         if (range.text[0][run] == range.text[0][run2] && range.text[0][run] != "") {
                             document.getElementById('showEmbeddedDialog').style.visibility = 'hidden';
-                            highlightContentInWorksheet(worksheet, getCharFromNumber(run + add_col) + row_offset, '#EA7F04');
-                            highlightContentInWorksheet(worksheet, getCharFromNumber(run2 + add_col) + row_offset, '#EA7F04');
+                            highlightContentNew(worksheet.name, getCharFromNumber(run + add_col) + row_offset, '#EA7F04', function () {});
+                            highlightContentNew(worksheet.name, getCharFromNumber(run2 + add_col) + row_offset, '#EA7F04', function () {});
                         }
                     }
                 }
@@ -231,7 +231,7 @@ function redirectHome() {
 
             var worksheet = ctx.workbook.worksheets.getActiveWorksheet();
             var range_all = worksheet.getRange();
-            var range = range_all.getUsedRange();
+            var range = range_all.getUsedRange(true);
             var firstCell = range.getColumn(0);
             var firstCol = firstCell.getEntireColumn();
             var tmpRow = range.getRow(0);
@@ -290,11 +290,12 @@ function redirectHome() {
 
             var worksheet = ctx.workbook.worksheets.getActiveWorksheet();
             var range_all = worksheet.getRange();
-            var range = range_all.getUsedRange();
+            var range = range_all.getUsedRange(true);
             var firstCell = range.getColumn(0);
             var firstCol = firstCell.getEntireColumn();
             var tmpRow = range.getRow(0);
             var firstRow = tmpRow.getEntireRow();
+
             var selected_identifier = document.getElementById('column_options').value;
 
             //get delimiter where to split and translate user input into delimiter character
@@ -317,6 +318,11 @@ function redirectHome() {
             worksheet.load('name');
             firstRow.load('address');
             firstCol.load('address');
+
+            var range_all_adding_to = worksheet.getRange();
+            var range_adding_to = range_all_adding_to.getUsedRange(true);
+            range_adding_to.load('address');
+            range_adding_to.load('text');
 
             return ctx.sync().then(function() {
 
@@ -482,7 +488,7 @@ function redirectHome() {
 
             var worksheet = ctx.workbook.worksheets.getActiveWorksheet();
             var range_all = worksheet.getRange();
-            var range = range_all.getUsedRange();
+            var range = range_all.getUsedRange(true);
 
             range.load('text');
             worksheet.load('name');

@@ -96,11 +96,12 @@ function redirectHome() {
 
             var worksheet = ctx.workbook.worksheets.getItem(selected_table2);
             var range_all = worksheet.getRange();
-            var range = range_all.getUsedRange();
+            var range = range_all.getUsedRange(true);
             var firstCell = range.getColumn(0);
             var firstCol = firstCell.getEntireColumn();
             var tmpRow = range.getRow(0);
             var firstRow = tmpRow.getEntireRow();
+
 
             range.load('text');
             firstRow.load('address');
@@ -208,7 +209,7 @@ function redirectHome() {
 
             var worksheet = ctx.workbook.worksheets.getActiveWorksheet();
             var range_all = worksheet.getRange();
-            var range = range_all.getUsedRange();
+            var range = range_all.getUsedRange(true);
             var firstCell = range.getColumn(0);
             var firstCol = firstCell.getEntireColumn();
             var tmpRow = range.getRow(0);
@@ -217,6 +218,7 @@ function redirectHome() {
             range.load('text');
             firstRow.load('address');
             firstCol.load('address');
+            worksheet.load('name');
 
             return ctx.sync().then(function() {
 
@@ -230,8 +232,8 @@ function redirectHome() {
                     for (var run2 = run + 1; run2 < range.text[0].length; run2++) {
                         if (range.text[0][run] == range.text[0][run2] && range.text[0][run] != "") {
                             document.getElementById('showEmbeddedDialog').style.visibility = 'hidden';
-                            highlightContentInWorksheet(worksheet, getCharFromNumber(run + add_col) + row_offset, '#EA7F04');
-                            highlightContentInWorksheet(worksheet, getCharFromNumber(run2 + add_col) + row_offset, '#EA7F04');
+                            highlightContentNew(worksheet.name, getCharFromNumber(run + add_col) + row_offset, '#EA7F04', function () {});
+                            highlightContentNew(worksheet.name, getCharFromNumber(run2 + add_col) + row_offset, '#EA7F04', function () {});
                         }
                     }
                 }
@@ -263,7 +265,7 @@ function redirectHome() {
             var worksheet = ctx.workbook.worksheets.getItem(selected_table2);
             var worksheetname = ctx.workbook.worksheets.getItem(selected_table2);
             var range_all = worksheet.getRange();
-            var range = range_all.getUsedRange();
+            var range = range_all.getUsedRange(true);
             var firstCell = range.getColumn(0);
             var firstCol = firstCell.getEntireColumn();
             var tmpRow = range.getRow(0);
@@ -388,7 +390,7 @@ function redirectHome() {
 
                 var worksheet_t1 = ctx.workbook.worksheets.getItem(table1);
                 var range_all_t1 = worksheet_t1.getRange();
-                var range_t1 = range_all_t1.getUsedRange();
+                var range_t1 = range_all_t1.getUsedRange(true);
                 var firstCell1 = range_t1.getColumn(0);
                 var firstCol1 = firstCell1.getEntireColumn();
                 var tmpRow1 = range_t1.getRow(0);
@@ -396,7 +398,7 @@ function redirectHome() {
 
                 var worksheet_t2 = ctx.workbook.worksheets.getItem(table2);
                 var range_all_t2 = worksheet_t2.getRange();
-                var range_t2 = range_all_t2.getUsedRange();
+                var range_t2 = range_all_t2.getUsedRange(true);
                 var firstCell2 = range_t2.getColumn(0);
                 var firstCol2 = firstCell2.getEntireColumn();
                 var tmpRow2 = range_t2.getRow(0);
@@ -580,7 +582,7 @@ function redirectHome() {
             //ranges for source worksheet
             var worksheet = ctx.workbook.worksheets.getItem(selected_table2);
             var range_all = worksheet.getRange();
-            var range = range_all.getUsedRange();
+            var range = range_all.getUsedRange(true);
             var firstCell = range.getColumn(0);
             var firstCol = firstCell.getEntireColumn();
             var tmpRow = range.getRow(0);
@@ -594,7 +596,7 @@ function redirectHome() {
             //ranges for target working sheet
             var worksheet_adding_to = ctx.workbook.worksheets.getItem(selected_table1);
             var range_all_adding_to = worksheet_adding_to.getRange();
-            var range_adding_to = range_all_adding_to.getUsedRange();
+            var range_adding_to = range_all_adding_to.getUsedRange(true);
             var firstCellTarget = range_adding_to.getColumn(0);
             var firstColTarget = firstCellTarget.getEntireColumn();
             var tmpRowTarget = range_adding_to.getRow(0);
@@ -668,11 +670,13 @@ function redirectHome() {
                     var source_char = getCharFromNumber(k + add_colSource);
 
                     for (var l = 0; l < checked_checkboxes.length; l++){ // TODO throws error if none are checked
-                        if (checked_checkboxes[l].id == range.text[0][k] || checked_checkboxes[l].id == "Column " + getCharFromNumber(k + add_colSource)){
+                        if (checked_checkboxes[l].id == range.text[0][k] || checked_checkboxes[l].id == "Column " + getCharFromNumber(k)){
+                            var lookup_array = [];
                             var column_char = getCharFromNumber(l + range_adding_to.text[0].length + add_colTarget);
 
                             // copy title
-                            addContentToWorksheet(worksheet_adding_to, column_char + row_offsetTarget, "=" + selected_table2 + "!" + source_char + row_offsetSource);
+                            var headerText = ["=" + selected_table2 + "!" + source_char + row_offsetSource];
+                            lookup_array.push(headerText);
 
                             // copy rest
                             for (var i = 1; i < range_adding_to.text.length; i++) {
@@ -695,14 +699,19 @@ function redirectHome() {
 
                                     }
                                     if (check == column1_ids.length) {
-                                        var sheet_row = row_offsetTarget + i;
-                                        var row_ref = row_offsetSource + j;
-                                        addContentToWorksheet(worksheet_adding_to, column_char + sheet_row, "=" + selected_table2 + "!" + source_char + row_ref);
+                                        var sheet_row = i + row_offsetTarget;
+                                        var row_ref = row_offsetSource + 1;
+                                        var textToAdd = ["=" + selected_table2 + "!" + source_char + row_ref];
+                                        lookup_array.push(textToAdd);
                                         lookup_count += 1;
                                         break;
                                     }
                                 }
                             }
+                            var insert_address = column_char + 1 + ":" + column_char + range_adding_to.text.length;
+                            console.log(insert_address);
+                            console.log(lookup_array);
+                            addContentNew(worksheet_adding_to.name, insert_address, lookup_array, function(){});
                         }
                     }
                 }
@@ -715,23 +724,19 @@ function redirectHome() {
                     var newName = worksheet_adding_to.name + "(" + sheet_count + ")";
                     addBackupSheet(newName, startCell, add_colTarget, row_offsetTarget, function() {
                         empty_count = checked_checkboxes.length * range_adding_to.text.length - lookup_count - checked_checkboxes.length;
-
                         var txt = document.createElement("p");
                         txt.className = "ms-font-xs ms-embedded-dialog__content__text";
                         txt.innerHTML = "PrepJet found " + lookup_count + " matching data records. " + empty_count + " rows did not meet the specified match criteria."
                         document.getElementById('resultText').appendChild(txt);
-
                         document.getElementById('resultDialog').style.visibility = 'visible';
                     });
                 }
                 else {
                     empty_count = checked_checkboxes.length * range_adding_to.text.length - lookup_count - checked_checkboxes.length;
-
                     var txt = document.createElement("p");
                     txt.className = "ms-font-xs ms-embedded-dialog__content__text";
                     txt.innerHTML = "PrepJet found " + lookup_count + " matching data records. " + empty_count + " rows did not meet the specified match criteria."
                     document.getElementById('resultText').appendChild(txt);
-
                     document.getElementById('resultDialog').style.visibility = 'visible';
                 }
 

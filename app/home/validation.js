@@ -272,7 +272,7 @@ function showEnterpriseDialog() {
 
             var worksheet = ctx.workbook.worksheets.getActiveWorksheet();
             var range_all = worksheet.getRange();
-            var range = range_all.getUsedRange();
+            var range = range_all.getUsedRange(true);
             var firstCell = range.getColumn(0);
             var firstCol = firstCell.getEntireColumn();
             var tmpRow = range.getRow(0);
@@ -281,6 +281,7 @@ function showEnterpriseDialog() {
             range.load('text');
             firstRow.load('address');
             firstCol.load('address');
+            worksheet.load('name');
 
             return ctx.sync().then(function() {
 
@@ -294,8 +295,8 @@ function showEnterpriseDialog() {
                     for (var run2 = run + 1; run2 < range.text[0].length; run2++) {
                         if (range.text[0][run] == range.text[0][run2] && range.text[0][run] != "") {
                             document.getElementById('showEmbeddedDialog').style.visibility = 'hidden';
-                            highlightContentInWorksheet(worksheet, getCharFromNumber(run + add_col) + row_offset, '#EA7F04');
-                            highlightContentInWorksheet(worksheet, getCharFromNumber(run2 + add_col) + row_offset, '#EA7F04');
+                            highlightContentNew(worksheet.name, getCharFromNumber(run + add_col) + row_offset, '#EA7F04', function () {});
+                            highlightContentNew(worksheet.name, getCharFromNumber(run2 + add_col) + row_offset, '#EA7F04', function () {});
                         }
                     }
                 }
@@ -318,7 +319,7 @@ function showEnterpriseDialog() {
 
             var worksheet = ctx.workbook.worksheets.getActiveWorksheet();
             var range_all = worksheet.getRange();
-            var range = range_all.getUsedRange();
+            var range = range_all.getUsedRange(true);
             var firstCell = range.getColumn(0);
             var firstCol = firstCell.getEntireColumn();
             var tmpRow = range.getRow(0);
@@ -379,7 +380,7 @@ function showEnterpriseDialog() {
 
             var worksheet = ctx.workbook.worksheets.getActiveWorksheet();
             var range_all = worksheet.getRange();
-            var range = range_all.getUsedRange();
+            var range = range_all.getUsedRange(true);
             var firstCell = range.getColumn(0);
             var firstCol = firstCell.getEntireColumn();
             var tmpRow = range.getRow(0);
@@ -443,7 +444,7 @@ function showEnterpriseDialog() {
 
             var worksheet = ctx.workbook.worksheets.getActiveWorksheet();
             var range_all = worksheet.getRange();
-            var range = range_all.getUsedRange();
+            var range = range_all.getUsedRange(true);
             var firstCell = range.getColumn(0);
             var firstCol = firstCell.getEntireColumn();
             var tmpRow = range.getRow(0);
@@ -488,6 +489,7 @@ function showEnterpriseDialog() {
             range.load('text');
             firstRow.load('address');
             firstCol.load('address');
+            worksheet.load('name');
 
             return ctx.sync().then(function() {
 
@@ -505,49 +507,51 @@ function showEnterpriseDialog() {
                         var header_if = k;
                     }
                 }
+
                 for (var k = 0; k < range.text[0].length; k++){
                     if (selected_identifier2 == range.text[0][k] || selected_identifier2 == "Column " + getCharFromNumber(k + add_col)){
                         var header_then = k;
                     }
                 }
 
+                var color = "#EA7F04";
 
                 function highlightThenCond() {
                     var address = getCharFromNumber(header_then + add_col) + sheet_row;
                     if (document.getElementById('then_operator').value == "equal") {
                         if (range.text[i][header_then] != thencondition) {
-                            highlightContentInWorksheet(act_worksheet, address, '#EA7F04');
                             vali_counter += 1;
+                            highlightCellNew(worksheet.name, address, color, function () {});
                         }
                     }
                     else if (document.getElementById('then_operator').value == "smaller") {
                          if (range.text[i][header_then] >= thencondition) {
-                            highlightContentInWorksheet(act_worksheet, address, '#EA7F04');
                             vali_counter += 1;
+                            highlightCellNew(worksheet.name, address, color, function () {});
                          }
                     }
                     else if (document.getElementById('then_operator').value == "greater") {
                         if (range.text[i][header_then] <= thencondition) {
-                            highlightContentInWorksheet(act_worksheet, address, '#EA7F04');
                             vali_counter += 1;
+                            highlightCellNew(worksheet.name, address, color, function () {});
                         }
                     }
                     else if (document.getElementById('then_operator').value == "inequal") {
                         if (range.text[i][header_then] == thencondition) {
-                            highlightContentInWorksheet(act_worksheet, address, '#EA7F04');
                             vali_counter += 1;
+                            highlightCellNew(worksheet.name, address, color, function () {});
                         }
                     }
                     else if (document.getElementById('then_operator').value == "between") {
                         if (range.text[i][header_then] < thencondition || range.text[i][header_then] > betweencondition) {
-                            highlightContentInWorksheet(act_worksheet, address, '#EA7F04');
                             vali_counter += 1;
+                            highlightCellNew(worksheet.name, address, color, function () {});
                         }
                     }
                     else if (document.getElementById('then_operator').value == "notbetween") {
                         if (range.text[i][header_then] > thencondition && range.text[i][header_then] < betweencondition) {
-                            highlightContentInWorksheet(act_worksheet, address, '#EA7F04');
                             vali_counter += 1;
+                            highlightCellNew(worksheet.name, address, color, function () {});
                         }
                     }
                     else if (document.getElementById('then_operator').value == "inlist") {
@@ -558,8 +562,8 @@ function showEnterpriseDialog() {
                             }
                         }
                         if (check_then == 0){
-                            highlightContentInWorksheet(act_worksheet, address, '#EA7F04');
                             vali_counter += 1;
+                            highlightCellNew(worksheet.name, address, color, function () {});
                         }
                     }
                 }

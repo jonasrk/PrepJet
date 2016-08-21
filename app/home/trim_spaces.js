@@ -52,7 +52,7 @@ function redirectHome() {
              var myBindings = Office.context.document.bindings;
              var worksheetname = ctx.workbook.worksheets.getActiveWorksheet();
              var headRange_all = worksheetname.getRange();
-             var headRange = headRange_all.getUsedRange();
+             var headRange = headRange_all.getUsedRange(true);
              worksheetname.load('name')
              headRange.load('text');
              return ctx.sync().then(function() {
@@ -124,7 +124,7 @@ function redirectHome() {
 
             var worksheet = ctx.workbook.worksheets.getActiveWorksheet();
             var range_all = worksheet.getRange();
-            var range = range_all.getUsedRange();
+            var range = range_all.getUsedRange(true);
             var firstCell = range.getColumn(0);
             var firstCol = firstCell.getEntireColumn();
             var tmpRow = range.getRow(0);
@@ -134,6 +134,7 @@ function redirectHome() {
             worksheet.load('name');
             firstRow.load('address');
             firstCol.load('address');
+            worksheet.load('name');
 
             return ctx.sync().then(function() {
 
@@ -148,8 +149,8 @@ function redirectHome() {
                     for (var run2 = run + 1; run2 < range.text[0].length; run2++) {
                         if (range.text[0][run] == range.text[0][run2] && range.text[0][run] != "") {
                             document.getElementById('showEmbeddedDialog').style.visibility = 'hidden';
-                            highlightContentInWorksheet(worksheet, getCharFromNumber(run + add_col) + row_offset, '#EA7F04');
-                            highlightContentInWorksheet(worksheet, getCharFromNumber(run2 + add_col) + row_offset, '#EA7F04');
+                            highlightContentNew(worksheet.name, getCharFromNumber(run + add_col) + row_offset, '#EA7F04', function () {});
+                            highlightContentNew(worksheet.name, getCharFromNumber(run2 + add_col) + row_offset, '#EA7F04', function () {});
                         }
                     }
                 }
@@ -171,7 +172,7 @@ function redirectHome() {
 
             var worksheet = ctx.workbook.worksheets.getActiveWorksheet();
             var range_all = worksheet.getRange();
-            var range = range_all.getUsedRange();
+            var range = range_all.getUsedRange(true);
             var firstCell = range.getColumn(0);
             var firstCol = firstCell.getEntireColumn();
             var tmpRow = range.getRow(0);
@@ -228,7 +229,7 @@ function redirectHome() {
 
             var worksheet = ctx.workbook.worksheets.getActiveWorksheet();
             var range_all = worksheet.getRange();
-            var range = range_all.getUsedRange();
+            var range = range_all.getUsedRange(true);
             var firstCell = range.getColumn(0);
             var firstCol = firstCell.getEntireColumn();
             var tmpRow = range.getRow(0);
@@ -284,7 +285,7 @@ function redirectHome() {
 
             var worksheet = ctx.workbook.worksheets.getActiveWorksheet();
             var range_all = worksheet.getRange();
-            var range = range_all.getUsedRange();
+            var range = range_all.getUsedRange(true);
             var firstCell = range.getColumn(0);
             var firstCol = firstCell.getEntireColumn();
             var tmpRow = range.getRow(0);
@@ -332,6 +333,11 @@ function redirectHome() {
 
                 }
 
+                if(checked_checkboxes.length == 1) {
+                    var endString = " column you seleced."
+                } else {
+                    var endString = " columns you selected."
+                }
 
                 if (document.getElementById('createBackup').checked == true) {
                     var sheet_count = Office.context.document.settings.get('backup_sheet_count') + 1;
@@ -341,7 +347,7 @@ function redirectHome() {
                     addBackupSheet(newName, startCell, add_col, row_offset, function() {
                         var txt = document.createElement("p");
                         txt.className = "ms-font-xs ms-embedded-dialog__content__text";
-                        txt.innerHTML = "PrepJet successfully removed all leading and trailing spaces in the " + checked_checkboxes.length + " columns you selected.";
+                        txt.innerHTML = "PrepJet successfully removed all leading and trailing spaces in the " + checked_checkboxes.length + endString;
                         document.getElementById('resultText').appendChild(txt);
                         document.getElementById('resultDialog').style.visibility = 'visible';
                     });
@@ -349,7 +355,7 @@ function redirectHome() {
                 } else {
                     var txt = document.createElement("p");
                     txt.className = "ms-font-xs ms-embedded-dialog__content__text";
-                    txt.innerHTML = "PrepJet successfully removed all leading and trailing spaces in the " + checked_checkboxes.length + " columns you selected.";
+                    txt.innerHTML = "PrepJet successfully removed all leading and trailing spaces in the " + checked_checkboxes.length + endString;
                     document.getElementById('resultText').appendChild(txt);
 
                     document.getElementById('resultDialog').style.visibility = 'visible';
@@ -372,7 +378,7 @@ function redirectHome() {
 
             var worksheet = ctx.workbook.worksheets.getActiveWorksheet();
             var range_all = worksheet.getRange();
-            var range = range_all.getUsedRange();
+            var range = range_all.getUsedRange(true);
 
             range.load('text');
             worksheet.load('name');

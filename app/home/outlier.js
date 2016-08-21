@@ -113,16 +113,17 @@
 
                         var row_vector = [];
                         var data_vector = [];
+                        var color = "#EA7F04";
                         for (var j = 1; j < range.text.length; j++){
                             var sheet_row = j + 1;
                             var address = getCharFromNumber(k) + sheet_row;
 
                             if (range.text[j][k] < thrsh_low){
-                                highlightContentInWorksheet(worksheet, address, "#EA7F04");
+                                highlightContentNew(worksheet.name, address, color, function () {});
                                 row_vector.push(sheet_row);
                                 data_vector.push(range.text[j]);
                             } else if (range.text[j][k] > thrsh_high){
-                                highlightContentInWorksheet(worksheet, address, '#EA7F04');
+                                highlightContentNew(worksheet.name, address, color, function () {});
                                 row_vector.push(sheet_row);
                                 data_vector.push(range.text[j]);
                             }
@@ -146,6 +147,7 @@
                         range_insert.load('address');
                         range.load('address');
                         range.load('text');
+                        worksheet.load('name');
 
                         return ctx.sync().then(function() {
 
@@ -165,9 +167,9 @@
                             for (var run = 0; run < data_vector.length; run++) {
                                 for (var runcol = 0; runcol < data_vector[run].length; runcol++) {
                                     var columnchar = getCharFromNumber(runcol);
-                                    addContentToWorksheet(worksheet, columnchar + sheet_row, data_vector[run][runcol]);
+                                    //todo: addContentNew
                                     if (runcol == outliercolumn) {
-                                        highlightContentInWorksheet(worksheet, columnchar + sheet_row, '#EA7F04');
+                                        highlightContentNew(worksheet.name, columnchar + sheet_row, '#EA7F04', function(){});
                                     }
                                 }
                                 sheet_row = sheet_row + 1;

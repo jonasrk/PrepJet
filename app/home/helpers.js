@@ -248,25 +248,34 @@ function addContentNew(sheetObject, rangeAddress, displayText, callback) {
 }
 
 
-// Helper function to add and format content (in single cell) in the workbook
-function addContentToWorksheet(sheetObject, rangeAddress, displayText) {
-    var range = sheetObject.getRange(rangeAddress);
-    range.values = displayText;
-    range.merge();
-}
-
-//color font in workbook
-function highlightContentInWorksheet(sheetObject, rangeAddress, color) {
-    var range = sheetObject.getRange(rangeAddress);
-    range.format.font.color = color;
-    range.merge();
+//color font
+function highlightContentNew(sheetObject, rangeAddress, color, callback) {
+    Excel.run(function (ctx) {
+        var range = ctx.workbook.worksheets.getItem(sheetObject).getRange(rangeAddress);
+        range.format.font.color = color;
+        return ctx.sync();
+            callback();
+    }).catch(function(error) {
+            console.log("Error: " + error);
+            if (error instanceof OfficeExtension.Error) {
+                console.log("Debug info: " + JSON.stringify(error.debugInfo));
+            }
+    });
 }
 
 //color cell background
-function highlightCellInWorksheet(sheetObject, rangeAddress, color) {
-    var range = sheetObject.getRange(rangeAddress);
-    range.format.fill.color = color;
-    range.merge();
+function highlightCellNew(sheetObject, rangeAddress, color, callback) {
+    Excel.run(function (ctx) {
+        var range = ctx.workbook.worksheets.getItem(sheetObject).getRange(rangeAddress);
+        range.format.fill.color = color;
+        return ctx.sync();
+            callback();
+    }).catch(function(error) {
+            console.log("Error: " + error);
+            if (error instanceof OfficeExtension.Error) {
+                console.log("Debug info: " + JSON.stringify(error.debugInfo));
+            }
+    });
 }
 
 //create a random color to highlight font
@@ -295,7 +304,6 @@ function backupForUndo(this_range, startCell, add_col, row_offset){
         }
     });
 }
-
 
 
 function detectIE() {
