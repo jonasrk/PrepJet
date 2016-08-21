@@ -416,11 +416,10 @@ function redirectHome() {
                     addContentNew(worksheet.name, start_col + ":" + end_col, text, function () {});
 
                     for (var row = 0; row < text.length; row++) {
-                        for(var col = 0; col < range.text[0].length; col++) {
-                            var columnchar = getCharFromNumber(col)
-                            if (sheet_row < (row_numbers.length + 2)) {
-                                if (row > 0 && color_check[row] == color_check[row - 1])
-                                highlightContentNew(worksheet.name, columnchar + sheet_row, color, function () {});
+                        if (sheet_row < (row_numbers.length + 2)) {
+                            if (row > 0 && color_check[row] == color_check[row - 1]) {
+                                var insert_address = "A" + sheet_row + ":" +  getCharFromNumber(range.text[0].length) + sheet_row;
+                                highlightContentNew(worksheet.name, insert_address, color, function () {});
                             }
                         }
                         sheet_row += 1;
