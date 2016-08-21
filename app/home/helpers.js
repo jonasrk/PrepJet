@@ -176,13 +176,6 @@ function addContentNew(sheetObject, rangeAddress, displayText, callback) {
 }
 
 
-// Helper function to add and format content (in single cell) in the workbook
-function addContentToWorksheet(sheetObject, rangeAddress, displayText) {
-    var range = sheetObject.getRange(rangeAddress);
-    range.values = displayText;
-    range.merge();
-}
-
 //color font
 function highlightContentNew(sheetObject, rangeAddress, color, callback) {
     Excel.run(function (ctx) {

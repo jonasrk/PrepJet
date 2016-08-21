@@ -583,7 +583,6 @@ function redirectHome() {
                             // copy title
                             var headerText = ["=" + selected_table2 + "!" + source_char + "1"];
                             lookup_array.push(headerText);
-                            //addContentToWorksheet(worksheet_adding_to, column_char + "1", "=" + selected_table2 + "!" + source_char + "1");
 
                             // copy rest
                             for (var i = 1; i < range_adding_to.text.length; i++) {
@@ -609,7 +608,6 @@ function redirectHome() {
                                         var sheet_row = i + 1;
                                         var row_ref = j + 1;
                                         var textToAdd = ["=" + selected_table2 + "!" + source_char + row_ref];
-                                        //addContentToWorksheet(worksheet_adding_to, column_char + sheet_row, textToAdd);
                                         lookup_array.push(textToAdd);
                                         lookup_count += 1;
                                         break;
@@ -632,23 +630,19 @@ function redirectHome() {
                     var newName = worksheet_adding_to.name + "(" + sheet_count + ")";
                     addBackupSheet(newName, function() {
                         empty_count = checked_checkboxes.length * range_adding_to.text.length - lookup_count - checked_checkboxes.length;
-
                         var txt = document.createElement("p");
                         txt.className = "ms-font-xs ms-embedded-dialog__content__text";
                         txt.innerHTML = "PrepJet found " + lookup_count + " matching data records. " + empty_count + " rows did not meet the specified match criteria."
                         document.getElementById('resultText').appendChild(txt);
-
                         document.getElementById('resultDialog').style.visibility = 'visible';
                     });
                 }
                 else {
                     empty_count = checked_checkboxes.length * range_adding_to.text.length - lookup_count - checked_checkboxes.length;
-
                     var txt = document.createElement("p");
                     txt.className = "ms-font-xs ms-embedded-dialog__content__text";
                     txt.innerHTML = "PrepJet found " + lookup_count + " matching data records. " + empty_count + " rows did not meet the specified match criteria."
                     document.getElementById('resultText').appendChild(txt);
-
                     document.getElementById('resultDialog').style.visibility = 'visible';
                 }
 

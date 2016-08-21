@@ -167,7 +167,7 @@
                             for (var run = 0; run < data_vector.length; run++) {
                                 for (var runcol = 0; runcol < data_vector[run].length; runcol++) {
                                     var columnchar = getCharFromNumber(runcol);
-                                    addContentToWorksheet(worksheet, columnchar + sheet_row, data_vector[run][runcol]);
+                                    //todo: addContentNew
                                     if (runcol == outliercolumn) {
                                         highlightContentNew(worksheet.name, columnchar + sheet_row, '#EA7F04', function(){});
                                     }
