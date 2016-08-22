@@ -46,6 +46,16 @@ function redirectHome() {
                 window.location = "custom_incon.html";
             }
 
+            //hide result message
+            document.getElementById("resultClose").onclick = function () {
+                document.getElementById('resultDialog').style.visibility = 'hidden';
+                window.location = "custom_incon.html";
+            }
+            document.getElementById("resultOk").onclick = function () {
+                document.getElementById('resultDialog').style.visibility = 'hidden';
+                window.location = "custom_incon.html";
+            }
+
 
             /*Excel.run(function (ctx) {
 
@@ -53,7 +63,7 @@ function redirectHome() {
                 var worksheetname = ctx.workbook.worksheets.getActiveWorksheet();
 
                 var headRange_all = worksheetname.getRange();
-                var headRange = headRange_all.getUsedRange();
+                var headRange = headRange_all.getUsedRange(true);
 
                 worksheetname.load('name')
                 headRange.load('text');
@@ -139,9 +149,10 @@ function redirectHome() {
 
             var worksheet = ctx.workbook.worksheets.getActiveWorksheet();
             var range_all = worksheet.getRange();
-            var range = range_all.getUsedRange();
+            var range = range_all.getUsedRange(true);
 
             range.load('text');
+            worksheet.load('name');
 
             return ctx.sync().then(function() {
 
@@ -149,8 +160,8 @@ function redirectHome() {
                     for (var run2 = run + 1; run2 < range.text[0].length; run2++) {
                         if (range.text[0][run] == range.text[0][run2] && range.text[0][run] != "") {
                             document.getElementById('showEmbeddedDialog').style.visibility = 'hidden';
-                            highlightContentInWorksheet(worksheet, getCharFromNumber(run) + 1, '#EA7F04');
-                            highlightContentInWorksheet(worksheet, getCharFromNumber(run2) + 1, '#EA7F04');
+                            highlightContentNew(worksheet.name, getCharFromNumber(run) + 1, '#EA7F04', function () {});
+                            highlightContentNew(worksheet.name, getCharFromNumber(run2) + 1, '#EA7F04', function () {});
                         }
                     }
                 }
@@ -172,7 +183,7 @@ function redirectHome() {
 
             var worksheet = ctx.workbook.worksheets.getActiveWorksheet();
             var range_all = worksheet.getRange();
-            var range = range_all.getUsedRange();
+            var range = range_all.getUsedRange(true);
 
             range.load('text');
 
@@ -219,7 +230,7 @@ function redirectHome() {
 
             var worksheet = ctx.workbook.worksheets.getActiveWorksheet();
             var range_all = worksheet.getRange();
-            var range = range_all.getUsedRange();
+            var range = range_all.getUsedRange(true);
 
             //get used range in active Sheet
             range.load('text');
@@ -227,15 +238,13 @@ function redirectHome() {
 
             return ctx.sync().then(function() {
 
-                backupForUndo(range);
-
                 var selected_identifier = document.getElementById('column_options').value;
                 var charCount = Number(document.getElementById('charCountInput').value);
                 var charIncluded = document.getElementById('includeChar').value;
                 var charNotIncluded = document.getElementById('notIncludeChar').value;
                 var charOperator = document.getElementById('charOptions').value;
 
-                //var header = 0;
+                backupForUndo(range);
 
                 var header = 0;
                 for (var k = 0; k < range.text[0].length; k++){
@@ -243,6 +252,9 @@ function redirectHome() {
                         header = k;
                     }
                 }
+
+                var countIncons = 0;
+                var color = "#EA7F04";
 
                 if (charCount != 0) {
                     for (var k = 1; k < range.text.length; k++) {
@@ -286,7 +298,8 @@ function redirectHome() {
                         }
                     }
                     if (check_cond == 1) {
-                        highlightContentInWorksheet(worksheet, getCharFromNumber(header) + (k + 1),'#EA7F04');
+                        countIncons += 1;
+                        highlightCellNew(worksheet.name, getCharFromNumber(header) + (k + 1), color, function () {});
                     }
 
                 }
@@ -295,7 +308,8 @@ function redirectHome() {
                     for (var k = 1; k < range.text.length; k++) {
                         var include_check = range.text[k][header].indexOf(charIncluded);
                         if (include_check < 0) {
-                            highlightContentInWorksheet(worksheet, getCharFromNumber(header) + (k + 1), '#EA7F04');
+                            countIncons += 1;
+                            highlightCellNew(worksheet.name, getCharFromNumber(header) + (k + 1), color, function () {});
                         }
                     }
                 }
@@ -305,13 +319,34 @@ function redirectHome() {
                     for (var k = 1; k < range.text.length; k++) {
                         var notInclude_check = range.text[k][header].indexOf(charNotIncluded);
                         if (notInclude_check >= 0) {
-                            highlightContentInWorksheet(worksheet, getCharFromNumber(header) + (k + 1), '#EA7F04');
+                            countIncons += 1;
+                            highlightCellNew(worksheet.name, getCharFromNumber(header) + (k + 1), color, function () {});
                         }
                     }
                 }
 
+                if (document.getElementById('createBackup').checked == true) {
+                    var sheet_count = Office.context.document.settings.get('backup_sheet_count') + 1;
+                    Office.context.document.settings.set('backup_sheet_count', sheet_count);
+                    Office.context.document.settings.saveAsync();
+                    var newName = worksheet.name + "(" + sheet_count + ")";
+                    addBackupSheet(newName, function() {
+                        var txt = document.createElement("p");
+                        txt.className = "ms-font-xs ms-embedded-dialog__content__text";
+                        txt.innerHTML = "PrepJet found " + countIncons + " inconsistencies.";
+                        document.getElementById('resultText').appendChild(txt);
+                        document.getElementById('resultDialog').style.visibility = 'visible';
+                    });
 
-                window.location = "custom_incon.html";
+                }
+                else {
+                    var txt = document.createElement("p");
+                    txt.className = "ms-font-xs ms-embedded-dialog__content__text";
+                    txt.innerHTML = "PrepJet found " + countIncons + " inconsistencies.";
+                    document.getElementById('resultText').appendChild(txt);
+                    document.getElementById('resultDialog').style.visibility = 'visible';
+                }
+
 
             });
 

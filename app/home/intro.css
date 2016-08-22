@@ -8,7 +8,9 @@ html, body {
 
 body {
   position: relative;
-  font-size: 16px; }
+  font-size: 16px;
+   height: 100%;
+   background: #666666; }
 
 main {
   height: 100%;
@@ -61,7 +63,10 @@ ul {
   background: #666666; }
 
   .ms-firstrun-pages__header {
-    padding: 5px;
+    padding-right: 5px;
+    padding-top: 5px;
+    padding-right: 5px;
+    padding-left: 0px;
     min-height: 60px;
     max-height: 250px;
     display: -webkit-box;
@@ -95,10 +100,11 @@ ul {
     -webkit-box-pack: center;
             justify-content: center;
     -webkit-box-align: center;
-            align-items: center; }
+            align-items: left;
+    padding-left: 20px;}
 
     .ms-firstrun-pages__welcome img {
-      height: 100px; }
+      height: 50px; }
 
   .ms-firstrun-pages__pager {
     display: -webkit-box;
@@ -150,7 +156,8 @@ ul {
     padding-right: 20px;
     background: #666666;
     overflow: visible;
-    top: 60px; }
+    top: 60px;
+    height: 100%; }
 
     .ms-firstrun-pages__content--centered {
       display: -webkit-box;
@@ -202,3 +209,24 @@ ul {
 
 .ms-fontColor-themeTertiary, .ms-fontColor-themeTertiary--hover:hover {
     color: #EA7F04; }
+
+.ms-Button_homelogo {
+    background: #666666;
+    border: 1px solid #666666;
+    padding-top: 10px;}
+
+.ms-Button_Func {
+    border: 0px;
+    background: #666666;
+    height: 35px;
+    width: 35px;
+    padding: 0px;
+    padding-top: 5px;}
+
+#homeButton:hover {
+    background-color: #666666;
+    cursor: pointer; }
+
+#leftcol {
+    width: 73%; }
+

@@ -38,21 +38,26 @@ function redirectHome() {
             }
 
 
-            /*Excel.run(function (ctx) {
+            //hide result message
+            document.getElementById("resultClose").onclick = function () {
+                document.getElementById('resultDialog').style.visibility = 'hidden';
+                window.location = "trim_spaces.html";
+            }
+            document.getElementById("resultOk").onclick = function () {
+                document.getElementById('resultDialog').style.visibility = 'hidden';
+                window.location = "trim_spaces.html";
+            }
 
+            /*Excel.run(function (ctx) {
              var myBindings = Office.context.document.bindings;
              var worksheetname = ctx.workbook.worksheets.getActiveWorksheet();
-
              var headRange_all = worksheetname.getRange();
-             var headRange = headRange_all.getUsedRange();
-
+             var headRange = headRange_all.getUsedRange(true);
              worksheetname.load('name')
              headRange.load('text');
-
              return ctx.sync().then(function() {
              Office.context.document.addHandlerAsync("documentSelectionChanged", myViewHandler, function(result){}
              );
-
              // Event handler function for changing the worksheet.
              function myViewHandler(eventArgs){
              Excel.run(function (ctx) {
@@ -65,34 +70,26 @@ function redirectHome() {
              });
              });
              }
-
              //function to check whether header entries are changed
              function bindFromPrompt() {
-
              var myBindings = Office.context.document.bindings;
              var name_worksheet = worksheetname.name;
              var myAddress = name_worksheet.concat("!1:1");
-
              myBindings.addFromNamedItemAsync(myAddress, "matrix", {id:'myBinding'}, function (asyncResult) {
              if (asyncResult.status == Office.AsyncResultStatus.Failed) {
              write('Action failed. Error: ' + asyncResult.error.message);
              } else {
              write('Added new binding with type: ' + asyncResult.value.type + ' and id: ' + asyncResult.value.id);
-
              function addHandler() {
              Office.select("bindings#myBinding").addHandlerAsync(
              Office.EventType.BindingDataChanged, dataChanged);
              }
-
              addHandler();
              displayAllBindings();
-
              }
              });
              }
-
              bindFromPrompt();
-
              function displayAllBindings() {
              Office.context.document.bindings.getAllAsync(function (asyncResult) {
              var bindingString = '';
@@ -101,16 +98,13 @@ function redirectHome() {
              }
              });
              }
-
              function dataChanged(eventArgs) {
              window.location = "trim_spaces.html";
              }
-
              // Function that writes to a div with id='message' on the page.
              function write(message){
              console.log(message);
              }
-
              });
              }).catch(function(error) {
              console.log("Error: " + error);
@@ -130,9 +124,10 @@ function redirectHome() {
 
             var worksheet = ctx.workbook.worksheets.getActiveWorksheet();
             var range_all = worksheet.getRange();
-            var range = range_all.getUsedRange();
+            var range = range_all.getUsedRange(true);
 
             range.load('text');
+            worksheet.load('name');
 
             return ctx.sync().then(function() {
 
@@ -140,8 +135,8 @@ function redirectHome() {
                     for (var run2 = run + 1; run2 < range.text[0].length; run2++) {
                         if (range.text[0][run] == range.text[0][run2] && range.text[0][run] != "") {
                             document.getElementById('showEmbeddedDialog').style.visibility = 'hidden';
-                            highlightContentInWorksheet(worksheet, getCharFromNumber(run) + 1, '#EA7F04');
-                            highlightContentInWorksheet(worksheet, getCharFromNumber(run2) + 1, '#EA7F04');
+                            highlightContentNew(worksheet.name, getCharFromNumber(run) + 1, '#EA7F04', function () {});
+                            highlightContentNew(worksheet.name, getCharFromNumber(run2) + 1, '#EA7F04', function () {});
                         }
                     }
                 }
@@ -163,7 +158,7 @@ function redirectHome() {
 
             var worksheet = ctx.workbook.worksheets.getActiveWorksheet();
             var range_all = worksheet.getRange();
-            var range = range_all.getUsedRange();
+            var range = range_all.getUsedRange(true);
 
             range.load('text');
 
@@ -207,7 +202,7 @@ function redirectHome() {
 
             var worksheet = ctx.workbook.worksheets.getActiveWorksheet();
             var range_all = worksheet.getRange();
-            var range = range_all.getUsedRange();
+            var range = range_all.getUsedRange(true);
 
             range.load('text');
 
@@ -251,7 +246,7 @@ function redirectHome() {
 
             var worksheet = ctx.workbook.worksheets.getActiveWorksheet();
             var range_all = worksheet.getRange();
-            var range = range_all.getUsedRange();
+            var range = range_all.getUsedRange(true);
 
             //get used range in active Sheet
             range.load('text');
@@ -285,22 +280,14 @@ function redirectHome() {
 
                     var column_char = getCharFromNumber(header);
                     var insert_address = column_char + 1 + ":" + column_char + range.text.length;
+                    addTrimArray(trim_array, insert_address);
 
-                    var i = 0;
+                }
 
-                    if (document.getElementById('createBackup').checked != true) {
-                        addContentNew(worksheet.name, insert_address, trim_array, function () {
-                            i++;
-                            if (i >= checked_checkboxes.length){
-                                window.location = "trim_spaces.html";
-                            }
-                        });
-                    } else {
-                        addContentNew(worksheet.name, insert_address, trim_array, function () {});
-                    }
-
-
-
+                if(checked_checkboxes.length == 1) {
+                    var endString = " column you seleced."
+                } else {
+                    var endString = " columns you selected."
                 }
 
                 if (document.getElementById('createBackup').checked == true) {
@@ -309,9 +296,21 @@ function redirectHome() {
                     Office.context.document.settings.saveAsync();
                     var newName = worksheet.name + "(" + sheet_count + ")";
                     addBackupSheet(newName, function() {
-                        window.location = "trim_spaces.html";
+                        var txt = document.createElement("p");
+                        txt.className = "ms-font-xs ms-embedded-dialog__content__text";
+                        txt.innerHTML = "PrepJet successfully removed all leading and trailing spaces in the " + checked_checkboxes.length + endString;
+                        document.getElementById('resultText').appendChild(txt);
+
+                        document.getElementById('resultDialog').style.visibility = 'visible';
                     });
 
+                } else {
+                    var txt = document.createElement("p");
+                    txt.className = "ms-font-xs ms-embedded-dialog__content__text";
+                    txt.innerHTML = "PrepJet successfully removed all leading and trailing spaces in the " + checked_checkboxes.length + endString;
+                    document.getElementById('resultText').appendChild(txt);
+
+                    document.getElementById('resultDialog').style.visibility = 'visible';
                 }
 
             });
@@ -323,5 +322,31 @@ function redirectHome() {
             }
         });
     }
+
+
+    function addTrimArray(trim_array, insert_address){
+
+        Excel.run(function (ctx) {
+
+            var worksheet = ctx.workbook.worksheets.getActiveWorksheet();
+            var range_all = worksheet.getRange();
+            var range = range_all.getUsedRange(true);
+
+            range.load('text');
+            worksheet.load('name');
+
+            return ctx.sync().then(function() {
+                addContentNew(worksheet.name, insert_address, trim_array, function () {});
+            });
+
+        }).catch(function(error) {
+            console.log("Error: " + error);
+            if (error instanceof OfficeExtension.Error) {
+                console.log("Debug info: " + JSON.stringify(error.debugInfo));
+            }
+        });
+
+    }
+
 
 })();

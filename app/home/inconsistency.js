@@ -42,7 +42,7 @@ function redirectHome() {
             }
 
             document.getElementById("refresh_icon").onclick = function () {
-                window.location = "inconsistencies.html";
+                window.location = "inconsistency.html";
             }
 
             //hide result message
@@ -143,9 +143,10 @@ function redirectHome() {
 
             var worksheet = ctx.workbook.worksheets.getActiveWorksheet();
             var range_all = worksheet.getRange();
-            var range = range_all.getUsedRange();
+            var range = range_all.getUsedRange(true);
 
             range.load('text');
+            worksheet.load('name');
 
             return ctx.sync().then(function() {
 
@@ -153,8 +154,8 @@ function redirectHome() {
                     for (var run2 = run + 1; run2 < range.text[0].length; run2++) {
                         if (range.text[0][run] == range.text[0][run2] && range.text[0][run] != "") {
                             document.getElementById('showEmbeddedDialog').style.visibility = 'hidden';
-                            highlightContentInWorksheet(worksheet, getCharFromNumber(run) + 1, '#EA7F04');
-                            highlightContentInWorksheet(worksheet, getCharFromNumber(run2) + 1, '#EA7F04');
+                            highlightContentNew(worksheet.name, getCharFromNumber(run) + 1, '#EA7F04', function () {});
+                            highlightContentNew(worksheet.name, getCharFromNumber(run2) + 1, '#EA7F04', function () {});
                         }
                     }
                 }
@@ -176,7 +177,7 @@ function redirectHome() {
 
             var worksheet = ctx.workbook.worksheets.getActiveWorksheet();
             var range_all = worksheet.getRange();
-            var range = range_all.getUsedRange();
+            var range = range_all.getUsedRange(true);
 
             range.load('address');
             range.load('text');
@@ -220,7 +221,7 @@ function redirectHome() {
 
             var worksheet = ctx.workbook.worksheets.getActiveWorksheet();
             var range_all = worksheet.getRange();
-            var range = range_all.getUsedRange();
+            var range = range_all.getUsedRange(true);
 
             range.load('text');
 
@@ -263,7 +264,7 @@ function redirectHome() {
 
             var worksheet = ctx.workbook.worksheets.getActiveWorksheet();
             var range_all = worksheet.getRange();
-            var range = range_all.getUsedRange();
+            var range = range_all.getUsedRange(true);
 
             range.load('text');
             range.load('valueTypes'); //does not know date type
@@ -383,7 +384,7 @@ function redirectHome() {
                             if (tmp2[i][1] < type_maximum) {
                                 for (var k = 0; k < tmp_type.length; k++) {
                                     if (tmp2[i][0] == tmp_type[k][0]) {
-                                        highlightCellInWorksheet(worksheet, tmp_type[k][1], color);
+                                        highlightCellNew(worksheet.name, tmp_type[k][1], color, function () {});
                                         incon_counter += 1;
                                     }
                                 }
@@ -392,7 +393,7 @@ function redirectHome() {
                                 color = getRandomColor();
                                 for (var k = 0; k < tmp_type.length; k++) {
                                     if (tmp2[i][0] == tmp_type[k][0]) {
-                                        highlightCellInWorksheet(worksheet, tmp_type[k][1], color);
+                                        highlightCellNew(worksheet.name, tmp_type[k][1], color, function () {});
                                         incon_counter += 1;
                                     }
                                 }

@@ -55,9 +55,6 @@
                 <button id="homeButton" class="ms-Button_homelogo">
                     <img class="page1" src="../../images/logo_lg.png" />
                 </button>
-                <!--div>
-                    <img class="page1" src="../../images/logo_lg.png" />
-                </div-->
             </td>
         </tr>
     </table>
@@ -75,7 +72,6 @@
             </div>
             <div class="ms-Dialog-inner">
                 <div id="resultText" class="ms-Dialog-content">
-                    <!--p class="ms-font-xs ms-embedded-dialog__content__text"></p-->
                 </div>
                 <div class="ms-embedded-dialog__actioncenter">
                     <button  class="ms-Dialog-action ms-Button_grey" id="resultOk">
@@ -114,16 +110,16 @@
 <div id="content-main">
     <div id="step1">
         <div class="padding">
-            <table>
+            <table id="bigtable">
                 <tr>
-                    <td id="lookuptable">
+                    <td id="smalldrop_col">
                         <div class="ms-Dropdown dropdown_table" tabindex="1">
                             <label class="ms-Label">Select target sheet</label>
                             <i class="ms-Dropdown-caretDown ms-Icon ms-Icon--caretDown"></i>
                             <select id="table1_options" class="ms-Dropdown-select"></select>
                         </div>
                     </td>
-                    <td id="lookuptable">
+                    <td id="colright">
                         <div class="ms-Dropdown dropdown_table" tabindex="1">
                             <label class="ms-Label">Select source sheet</label>
                             <i class="ms-Dropdown-caretDown ms-Icon ms-Icon--caretDown"></i>
@@ -267,6 +263,7 @@
             </div>
         </div>
     </div>
+</div>
 <div class="placeholder"></div>
 
 </div>

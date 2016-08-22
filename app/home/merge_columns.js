@@ -1,7 +1,7 @@
 function backToOne() {
     $('#step1').show();
     $('#step2').hide();
-    Office.context.document.settings.set('back_button_pressed', true);
+    Office.context.document.settings.set('back_button_pressed', false);
     Office.context.document.settings.set('populate_new', true);
 }
 
@@ -95,7 +95,7 @@ function redirectHome() {
 
             var worksheet = ctx.workbook.worksheets.getItem(selected_table2);
             var range_all = worksheet.getRange();
-            var range = range_all.getUsedRange();
+            var range = range_all.getUsedRange(true);
 
             range.load('text');
             return ctx.sync().then(function() {
@@ -190,9 +190,10 @@ function redirectHome() {
 
             var worksheet = ctx.workbook.worksheets.getActiveWorksheet();
             var range_all = worksheet.getRange();
-            var range = range_all.getUsedRange();
+            var range = range_all.getUsedRange(true);
 
             range.load('text');
+            worksheet.load('name');
 
             return ctx.sync().then(function() {
 
@@ -200,8 +201,8 @@ function redirectHome() {
                     for (var run2 = run + 1; run2 < range.text[0].length; run2++) {
                         if (range.text[0][run] == range.text[0][run2] && range.text[0][run] != "") {
                             document.getElementById('showEmbeddedDialog').style.visibility = 'hidden';
-                            highlightContentInWorksheet(worksheet, getCharFromNumber(run) + 1, '#EA7F04');
-                            highlightContentInWorksheet(worksheet, getCharFromNumber(run2) + 1, '#EA7F04');
+                            highlightContentNew(worksheet.name, getCharFromNumber(run) + 1, '#EA7F04', function () {});
+                            highlightContentNew(worksheet.name, getCharFromNumber(run2) + 1, '#EA7F04', function () {});
                         }
                     }
                 }
@@ -233,7 +234,7 @@ function redirectHome() {
             var worksheet = ctx.workbook.worksheets.getItem(selected_table2);
             var worksheetname = ctx.workbook.worksheets.getItem(selected_table2);
             var range_all = worksheet.getRange();
-            var range = range_all.getUsedRange();
+            var range = range_all.getUsedRange(true);
 
             range.load('text');
             worksheetname.load('name');
@@ -346,11 +347,11 @@ function redirectHome() {
 
                 var worksheet_t1 = ctx.workbook.worksheets.getItem(table1);
                 var range_all_t1 = worksheet_t1.getRange();
-                var range_t1 = range_all_t1.getUsedRange();
+                var range_t1 = range_all_t1.getUsedRange(true);
 
                 var worksheet_t2 = ctx.workbook.worksheets.getItem(table2);
                 var range_all_t2 = worksheet_t2.getRange();
-                var range_t2 = range_all_t2.getUsedRange();
+                var range_t2 = range_all_t2.getUsedRange(true);
 
                 range_t1.load('address');
                 range_t1.load('text');
@@ -513,7 +514,7 @@ function redirectHome() {
             var worksheet = ctx.workbook.worksheets.getItem(selected_table2);
 
             var range_all = worksheet.getRange();
-            var range = range_all.getUsedRange();
+            var range = range_all.getUsedRange(true);
 
             range.load('address');
             range.load('text');
@@ -521,7 +522,7 @@ function redirectHome() {
             var worksheet_adding_to = ctx.workbook.worksheets.getItem(selected_table1);
 
             var range_all_adding_to = worksheet_adding_to.getRange();
-            var range_adding_to = range_all_adding_to.getUsedRange();
+            var range_adding_to = range_all_adding_to.getUsedRange(true);
 
             range_adding_to.load('address');
             range_adding_to.load('text');
@@ -576,10 +577,12 @@ function redirectHome() {
 
                     for (var l = 0; l < checked_checkboxes.length; l++){ // TODO throws error if none are checked
                         if (checked_checkboxes[l].id == range.text[0][k] || checked_checkboxes[l].id == "Column " + getCharFromNumber(k)){
+                            var lookup_array = [];
                             var column_char = getCharFromNumber(l + range_adding_to.text[0].length);
 
                             // copy title
-                            addContentToWorksheet(worksheet_adding_to, column_char + "1", "=" + selected_table2 + "!" + source_char + "1");
+                            var headerText = ["=" + selected_table2 + "!" + source_char + "1"];
+                            lookup_array.push(headerText);
 
                             // copy rest
                             for (var i = 1; i < range_adding_to.text.length; i++) {
@@ -604,12 +607,17 @@ function redirectHome() {
                                     if (check == column1_ids.length) {
                                         var sheet_row = i + 1;
                                         var row_ref = j + 1;
-                                        addContentToWorksheet(worksheet_adding_to, column_char + sheet_row, "=" + selected_table2 + "!" + source_char + row_ref);
+                                        var textToAdd = ["=" + selected_table2 + "!" + source_char + row_ref];
+                                        lookup_array.push(textToAdd);
                                         lookup_count += 1;
                                         break;
                                     }
                                 }
                             }
+                            var insert_address = column_char + 1 + ":" + column_char + range_adding_to.text.length;
+                            console.log(insert_address);
+                            console.log(lookup_array);
+                            addContentNew(worksheet_adding_to.name, insert_address, lookup_array, function(){});
                         }
                     }
                 }
@@ -621,24 +629,20 @@ function redirectHome() {
                     Office.context.document.settings.saveAsync();
                     var newName = worksheet_adding_to.name + "(" + sheet_count + ")";
                     addBackupSheet(newName, function() {
-                        empty_count = range_adding_to.text.length - lookup_count - 1;
-
+                        empty_count = checked_checkboxes.length * range_adding_to.text.length - lookup_count - checked_checkboxes.length;
                         var txt = document.createElement("p");
                         txt.className = "ms-font-xs ms-embedded-dialog__content__text";
                         txt.innerHTML = "PrepJet found " + lookup_count + " matching data records. " + empty_count + " rows did not meet the specified match criteria."
                         document.getElementById('resultText').appendChild(txt);
-
                         document.getElementById('resultDialog').style.visibility = 'visible';
                     });
                 }
                 else {
-                    empty_count = range_adding_to.text.length - lookup_count - 1;
-
+                    empty_count = checked_checkboxes.length * range_adding_to.text.length - lookup_count - checked_checkboxes.length;
                     var txt = document.createElement("p");
                     txt.className = "ms-font-xs ms-embedded-dialog__content__text";
                     txt.innerHTML = "PrepJet found " + lookup_count + " matching data records. " + empty_count + " rows did not meet the specified match criteria."
                     document.getElementById('resultText').appendChild(txt);
-
                     document.getElementById('resultDialog').style.visibility = 'visible';
                 }
 

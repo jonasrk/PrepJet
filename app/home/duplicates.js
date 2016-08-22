@@ -158,9 +158,10 @@ function redirectHome() {
 
             var worksheet = ctx.workbook.worksheets.getActiveWorksheet();
             var range_all = worksheet.getRange();
-            var range = range_all.getUsedRange();
+            var range = range_all.getUsedRange(true);
 
             range.load('text');
+            worksheet.load('name');
 
             return ctx.sync().then(function() {
 
@@ -168,8 +169,8 @@ function redirectHome() {
                     for (var run2 = run + 1; run2 < range.text[0].length; run2++) {
                         if (range.text[0][run] == range.text[0][run2] && range.text[0][run] != "") {
                             document.getElementById('showEmbeddedDialog').style.visibility = 'hidden';
-                            highlightContentInWorksheet(worksheet, getCharFromNumber(run) + 1, '#EA7F04');
-                            highlightContentInWorksheet(worksheet, getCharFromNumber(run2) + 1, '#EA7F04');
+                            highlightContentNew(worksheet.name, getCharFromNumber(run) + 1, '#EA7F04', function () {});
+                            highlightContentNew(worksheet.name, getCharFromNumber(run2) + 1, '#EA7F04', function () {});
                         }
                     }
                 }
@@ -191,7 +192,7 @@ function redirectHome() {
 
             var worksheet = ctx.workbook.worksheets.getActiveWorksheet();
             var range_all = worksheet.getRange();
-            var range = range_all.getUsedRange();
+            var range = range_all.getUsedRange(true);
 
             range.load('address');
             range.load('text');
@@ -233,7 +234,7 @@ function redirectHome() {
 
             var worksheet = ctx.workbook.worksheets.getActiveWorksheet();
             var range_all = worksheet.getRange();
-            var range = range_all.getUsedRange();
+            var range = range_all.getUsedRange(true);
 
             range.load('text');
 
@@ -279,7 +280,7 @@ function redirectHome() {
 
             var worksheet = ctx.workbook.worksheets.getActiveWorksheet();
             var range_all = worksheet.getRange();
-            var range = range_all.getUsedRange();
+            var range = range_all.getUsedRange(true);
             var firstCol = range.getRow(1);
             var lastCol = range.getLastColumn();
 
@@ -362,13 +363,12 @@ function redirectHome() {
                     var color = "#EA7F04";
                     for (var m = 0; m < duplicates_input.length; m++){
                         if (m > 0 && duplicates_input[m][1] != duplicates_input[m-1][1]){
-                            // generate new random color
                             color = getRandomColor();
                         }
 
                         for (var n = 0; n < duplicates_input[m].length; n++){
                             for (var o = 0; o < duplicates_input[m][n].length; o++) {
-                                highlightContentInWorksheet(worksheet, duplicates_input[m][n][o][int], color);
+                                highlightContentNew(worksheet.name, duplicates_input[m][n][o][int], color, function () {});
                             }
 
                         }
@@ -377,8 +377,7 @@ function redirectHome() {
 
                 if(document.getElementById('duplicatesort').checked == false) {
                     colorDup(duplicates, 1);
-                }
-                else {
+                } else {
 
                     var dup_length = duplicates.length;
                     var sheet_row = 2;
@@ -417,12 +416,10 @@ function redirectHome() {
                     addContentNew(worksheet.name, start_col + ":" + end_col, text, function () {});
 
                     for (var row = 0; row < text.length; row++) {
-                        for(var col = 0; col < range.text[0].length; col++) {
-                            var columnchar = getCharFromNumber(col)
-                            addContentToWorksheet(worksheet, columnchar + sheet_row, text[row][col])
-                            if (sheet_row < (row_numbers.length + 2)) {
-                                if (row > 0 && color_check[row] == color_check[row - 1])
-                                highlightContentInWorksheet(worksheet, columnchar + sheet_row ,color)
+                        if (sheet_row < (row_numbers.length + 2)) {
+                            if (row > 0 && color_check[row] == color_check[row - 1]) {
+                                var insert_address = "A" + sheet_row + ":" +  getCharFromNumber(range.text[0].length) + sheet_row;
+                                highlightContentNew(worksheet.name, insert_address, color, function () {});
                             }
                         }
                         sheet_row += 1;
