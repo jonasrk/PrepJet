@@ -700,7 +700,7 @@ function redirectHome() {
                                     }
                                     if (check == column1_ids.length) {
                                         var sheet_row = i + row_offsetTarget;
-                                        var row_ref = row_offsetSource + 1;
+                                        var row_ref = row_offsetSource + j;
                                         var textToAdd = ["=" + selected_table2 + "!" + source_char + row_ref];
                                         lookup_array.push(textToAdd);
                                         lookup_count += 1;
@@ -709,8 +709,6 @@ function redirectHome() {
                                 }
                             }
                             var insert_address = column_char + 1 + ":" + column_char + range_adding_to.text.length;
-                            console.log(insert_address);
-                            console.log(lookup_array);
                             addContentNew(worksheet_adding_to.name, insert_address, lookup_array, function(){});
                         }
                     }

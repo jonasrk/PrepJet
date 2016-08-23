@@ -325,6 +325,7 @@ function redirectHome() {
 
             var firstCell = range.getColumn(0);
             var firstColumn = firstCell.getEntireColumn();
+            var endColor = lastCol.getEntireColumn();
             var tmpRow = range.getRow(0);
             var firstRow = tmpRow.getEntireRow();
 
@@ -335,6 +336,7 @@ function redirectHome() {
             lastCol.load('address');
             firstRow.load('address');
             firstColumn.load('address');
+            endColor.load('address');
 
             return ctx.sync().then(function() {
 
@@ -469,10 +471,11 @@ function redirectHome() {
 
                     addContentNew(worksheet.name, start_col + ":" + end_col, text, function () {});
 
+                    var end_color = endColor.address.substring(endColor.address.indexOf("!") + 1, endColor.address.indexOf(":"));
                     for (var row = 0; row < text.length; row++) {
-                        if (sheet_row < (row_numbers.length + 2)) {
+                        if (sheet_row < (row_numbers.length + row_offset + 2)) {
                             if (row > 0 && color_check[row] == color_check[row - 1]) {
-                                var insert_address = start_col + sheet_row + ":" +  end_col + sheet_row;
+                                var insert_address = col_offset + sheet_row + ":" +  end_color + sheet_row;
                                 highlightContentNew(worksheet.name, insert_address, color, function () {});
                             }
                         }
