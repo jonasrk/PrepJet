@@ -10,8 +10,12 @@
 function undo() { // TODO only does text, not formulas and formatting
     Excel.run(function (ctx) {
         var values = Office.context.document.settings.get('sheet_backup');
-        var end_address = getCharFromNumber(values[0].length - 1) + (values.length).toString();
-        var rangeAddress = "A1:" + end_address;
+        var startCell = Office.context.document.settings.get('startCell');
+        var add_col = Office.context.document.settings.get('addCol');
+        var row_offset  = Office.context.document.settings.get('rowOffset');
+        var end_address = getCharFromNumber(values[0].length - 1 + add_col) + (values.length + row_offset - 1).toString();
+        var rangeAddress = startCell + ":" + end_address;
+        console.log(rangeAddress)
         var worksheet = ctx.workbook.worksheets.getActiveWorksheet();
         var range = worksheet.getRange(rangeAddress);
 
