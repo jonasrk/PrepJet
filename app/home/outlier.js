@@ -220,27 +220,35 @@ function redirectHome() {
 
             return ctx.sync().then(function() {
 
-                    var header = 0;
-                    for (var k = 0; k < range.text[0].length; k++){
-                        if (selected_identifier == range.text[0][k] || selected_identifier == "Column " + getCharFromNumber(k)){
-                            header = k;
-                        }
+                var header = 0;
+                for (var k = 0; k < range.text[0].length; k++){
+                    if (selected_identifier == range.text[0][k] || selected_identifier == "Column " + getCharFromNumber(k)){
+                        header = k;
                     }
+                }
 
                 if (count_drop > 0) {
-
-                    var independent_identifier = document.getElementById('addedDropdown' + count_drop).value;
-                    var headerIndep = 0
-                    for (var k = 0; k < range.text[0].length; k++){
-                        if (independent_identifier == range.text[0][k] || independent_identifier == "Column " + getCharFromNumber(k)){
-                            header = k;
+                    for (var i = 0; i < count_drop; i++) {
+                        var independent_identifier = document.getElementById('dependendVariable' + (i + 1)).value;
+                        console.log(independent_identifier);
+                        var headerIndep = [];
+                        for (var k = 0; k < range.text[0].length; k++){
+                            if (independent_identifier == range.text[0][k] || independent_identifier == "Column " + getCharFromNumber(k)){
+                                headerIndep.push(k);
+                            }
                         }
                     }
 
                     var independent_array = [];
                     for (var i = 1; i < range.text.length; i++) {
-                        var row_number = i + 1;
-                        independent_array.push([range.values[i][headerIndep], range.values[i][header]]);
+                        var tmp_array = [];
+                        for (var j = 0; j < headerIndep.length; j++) {
+                            var tmp_index = headerIndep[j];
+                            tmp_array.push(range.text[i][tmp_index]);
+                        }
+                        tmp_array.push(range.values[i][header]);
+                        independent_array.push(tmp_array);
+                        console.log(independent_array);
                     }
 
                     var data_set = [independent_array];
@@ -260,37 +268,40 @@ function redirectHome() {
                             dupe_range.load('text');
 
                             var selected_column = document.getElementById('outlier_column_dropdown').value;
-                            var independent_identifier = document.getElementById('addedDropdown' + count_drop).value;
 
                             return ctx.sync().then(function() {
 
-                                    var header = 0;
+                                var header = 0;
+                                for (var k = 0; k < range.text[0].length; k++){
+                                    if (selected_column == range.text[0][k] || selected_column == "Column " + getCharFromNumber(k)){
+                                        header = k;
+                                    }
+                                }
+
+                                for (var i = 0; i < count_drop; i++) {
+                                    var independent_identifier = document.getElementById('dependendVariable' + (i + 1)).value;
+                                    var headerIndep = [];
                                     for (var k = 0; k < range.text[0].length; k++){
-                                        if (selected_column == range.text[0][k] || selected_column == "Column " + getCharFromNumber(k)){
-                                            header = k;
+                                        if (independent_identifier == range.text[0][k] || independent_identifier == "Column " + getCharFromNumber(k)){
+                                            headerIndep.push(k);
                                         }
                                     }
-
-                                var headerIndep = 0;
-                                for (var k = 0; k < range.text[0].length; k++){
-                                        if (independent_identifier == range.text[0][k] || independent_identifier == "Column " + getCharFromNumber(k)){
-                                            header = k;
-                                        }
                                 }
 
                                 for (var i = 0; i < borders['objects'].length; i++) {
                                     var category = borders['objects'][i][0];
-                                    console.log(category);
                                     var upper_border = borders['objects'][i][1][1];
                                     var lower_border = borders['objects'][i][1][0];
-                                    console.log(upper_border);
 
                                     var color = "#EA7F04";
                                     for (var k = 1; k < dupe_range.text.length; k++) {
-                                        if (dupe_range.text[k][headerIndep] == category) {
-                                            if (dupe_range.text[k][header] < lower_border || dupe_range.text[k][header] > upper_border) {
-                                                var insert_address = getCharFromNumber(header) + (k + 1);
-                                                highlightCellInWorksheet(dupe_worksheet, insert_address, color);
+                                        for (var j = 0; j < headerIndep.length; j++) {
+                                            var tmp_index = headerIndep[j];
+                                            if (dupe_range.text[k][tmp_index] == category) {
+                                                if (dupe_range.text[k][header] < lower_border || dupe_range.text[k][header] > upper_border) {
+                                                    var insert_address = getCharFromNumber(header) + (k + 1);
+                                                    highlightCellInWorksheet(dupe_worksheet, insert_address, color);
+                                                }
                                             }
                                         }
                                     }
@@ -307,7 +318,6 @@ function redirectHome() {
                     var data_array  = [];
 
                     for (var i = 1; i < range.text.length; i++) {
-                        var row_number = i + 1;
                         data_array.push(range.values[i][header]);
                     }
 
