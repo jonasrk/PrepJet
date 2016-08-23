@@ -10,7 +10,11 @@
     $(document).ready(function () {
 
         function redirect_to_funct(){
-            window.location = Office.context.document.settings.get('last_clicked_function');
+            if (Office.context.document.settings.get('last_clicked_function')) {
+                window.location = Office.context.document.settings.get('last_clicked_function');
+            } else {
+                window.location = "mac_start.html";
+            }
         }
 
         app.firstrun.totalPages = $('#pageMarkers').get(0).childElementCount - 1;
