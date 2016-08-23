@@ -227,21 +227,67 @@ function redirectHome() {
                     }
                 }
 
-                var data_array  = [];
+                if (count_drop > 0) {
 
-                for (var i = 1; i < range.text.length; i++) {
-                    var row_number = i + 1;
-                    data_array.push(range.values[i][header]);
-                }
+                    var independent_identifier = document.getElementById('addedDropdown' + count_drop).value;
+                    var headerIndep = 0;
 
+                    for (var k = 0; k < range.text[0].length; k++){
+                        if (independent_identifier == range.text[0][k] || independent_identifier == "Column " + getCharFromNumber(k)){
+                            headerIndep = k;
+                        }
+                    }
 
-                // call to API
+                    var independent_array = [];
+                    for (var i = 1; i < range.text.length; i++) {
+                        var row_number = i + 1;
+                        independent_array.push([range.values[i][headerIndep], range.values[i][header]]);
+                    }
 
-                $.post( "https://localhost:8100/outlier/", { data: data_array })
+                    var data_set = [independent_array];
+
+                    $.post( "https://localhost:8100/outlierIndep/", { data: data_set })
                     .done(function( borders ) {
                         // highlight dupes
                         console.log("Borders: " + borders + "\nStatus: " + status);
-                        console.log(borders['objects'][0]);
+
+                        Excel.run(function (ctx) {
+
+                            var dupe_worksheet = ctx.workbook.worksheets.getActiveWorksheet();
+                            var dupe_range_all = dupe_worksheet.getRange();
+                            var dupe_range = dupe_range_all.getUsedRange();
+
+                            dupe_range.load('address');
+                            dupe_range.load('text');
+
+                            var selected_column = document.getElementById('outlier_column_dropdown').value;
+
+                            return ctx.sync().then(function() {
+
+                                var upper_border = borders['objects'][1];
+                                var lower_border = borders['objects'][0];
+
+                                console.log(upper_border);
+                                console.log(lower_border);
+
+
+                            });
+                        });
+                    });
+
+                } else {
+
+                    var data_array  = [];
+
+                    for (var i = 1; i < range.text.length; i++) {
+                        var row_number = i + 1;
+                        data_array.push(range.values[i][header]);
+                    }
+
+                    $.post( "https://localhost:8100/outlier/", { data: data_array })
+                    .done(function( borders ) {
+                        // highlight dupes
+                        console.log("Borders: " + borders + "\nStatus: " + status);
 
                         Excel.run(function (ctx) {
 
@@ -278,7 +324,7 @@ function redirectHome() {
                             });
                         });
                     });
-
+                }
 
             });
 
