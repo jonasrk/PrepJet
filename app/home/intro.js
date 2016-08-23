@@ -13,7 +13,7 @@
             window.location = Office.context.document.settings.get('last_clicked_function');
         }
 
-        app.firstrun.totalPages = $('#pageMarkers').get(0).childElementCount;
+        app.firstrun.totalPages = $('#pageMarkers').get(0).childElementCount - 1;
 
         // Navigates to a different stage
         app.firstrun.newStage = function () {
