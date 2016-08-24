@@ -6,13 +6,14 @@
     app.firstrun = {};
     app.firstrun.stage = 0;
 
-
     $(document).ready(function () {
 
         function redirect_to_funct(){
-            if (Office.context.document.settings.get('last_clicked_function') != null) {
-                window.location = Office.context.document.settings.get('last_clicked_function');
-            } else {
+            try {
+                if (Office.context.document.settings.get('last_clicked_function') != null) {
+                    window.location = Office.context.document.settings.get('last_clicked_function');
+                }}
+            catch (err) {
                 window.location = "mac_start.html";
             }
         }
