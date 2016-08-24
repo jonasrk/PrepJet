@@ -366,9 +366,9 @@ function redirectHome() {
 
 
                 if(checked_checkboxes.length == 1) {
-                    var endString = " column you seleced."
+                    var endString = "column you seleced."
                 } else {
-                    var endString = " columns you selected."
+                    var endString = checked_checkboxes.length + " columns you selected."
                 }
 
                 if (document.getElementById('createBackup').checked == true) {
@@ -379,7 +379,7 @@ function redirectHome() {
                     addBackupSheet(newName, startCell, add_col, row_offset, function () {
                         var txt = document.createElement("p");
                         txt.className = "ms-font-xs ms-embedded-dialog__content__text";
-                        txt.innerHTML = "PrepJet successfully harmonized the values in the " + checked_checkboxes.length + endString;
+                        txt.innerHTML = "PrepJet successfully modified the case of text in the " + endString;
                         document.getElementById('resultText').appendChild(txt);
 
                         document.getElementById('resultDialog').style.visibility = 'visible';
