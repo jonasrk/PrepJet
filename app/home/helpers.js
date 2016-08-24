@@ -57,6 +57,79 @@ function addNewCheckboxToContainer (id, name, container) {
 }
 
 
+function getNumberFromChar (number) {
+
+    if (number == "A") {
+        return 0;
+    } else if (number == "B") {
+        return 1;
+    } else if (number == "C") {
+        return 2;
+    } else if (number == "D") {
+        return 3;
+    } else if (number == "E") {
+        return 4;
+    } else if (number == "F") {
+        return 5;
+    } else if (number == "G") {
+        return 6;
+    } else if (number == "H") {
+        return 7;
+    } else if (number == "I") {
+        return 8;
+    } else if (number == "J") {
+        return 9;
+    } else if (number == "K") {
+        return 10;
+    } else if (number == "L") {
+        return 11;
+    } else if (number == "M") {
+        return 12;
+    } else if (number == "N") {
+        return 13;
+    } else if (number == "O") {
+        return 14;
+    } else if (number == "P") {
+        return 15;
+    } else if (number == "Q") {
+        return 16;
+    } else if (number == "R") {
+        return 17;
+    } else if (number == "S") {
+        return 18;
+    } else if (number == "T") {
+        return 19;
+    } else if (number == "U") {
+        return 20;
+    } else if (number == "V") {
+        return 21;
+    } else if (number == "W") {
+        return 22;
+    } else if (number == "X") {
+        return 23;
+    } else if (number == "Y") {
+        return 24;
+    } else if (number == "Z") {
+        return 25;
+    }
+    else {
+        var finalCol = 25;
+        for (var i = 0; i < number.length; i++) {
+            var tmp = number.substring(i,i+1);
+            if (i == number.length - 1) {
+                finalCol = finalCol + getNumberFromChar(tmp) + 1;
+            }
+            else {
+                finalCol = finalCol + 25 * getNumberFromChar(tmp) + 1 * getNumberFromChar(tmp);
+            }
+        }
+        console.log(finalCol);
+        return finalCol;
+    }
+
+}
+
+
 function getCharFromNumber (number) {
 
     if (number == 0) {
@@ -119,14 +192,13 @@ function getCharFromNumber (number) {
 
 }
 
-
-function addBackupSheet(sheetName, callback) {
+function addBackupSheet(sheetName, startCell, add_col, row_offset, callback) {
     Excel.run(function (ctx) {
         var wSheetName = sheetName;
         var worksheet = ctx.workbook.worksheets.add(wSheetName);
         worksheet.load('name');
         return ctx.sync().then(function() {
-            addBackupContent(worksheet.name, callback);
+            addBackupContent(worksheet.name, startCell, add_col, row_offset, callback);
         });
     }).catch(function(error) {
             console.log("Error: " + error);
@@ -136,11 +208,11 @@ function addBackupSheet(sheetName, callback) {
     });
 }
 
-function addBackupContent(sheetName, callback) {
+function addBackupContent(sheetName, startCell, add_col, row_offset, callback) {
     Excel.run(function (ctx) {
         var values = Office.context.document.settings.get('sheet_backup');
-        var end_address = getCharFromNumber(values[0].length - 1) + (values.length).toString();
-        var rangeAddress = "A1:" + end_address;
+        var end_address = getCharFromNumber(values[0].length - 1 + add_col) + (values.length + row_offset - 1).toString();
+        var rangeAddress = startCell + ":" + end_address;
         var worksheet = ctx.workbook.worksheets.getItem(sheetName);
         var range = worksheet.getRange(rangeAddress);
 
@@ -217,9 +289,12 @@ function getRandomColor() {
 }
 
 
-function backupForUndo(this_range){
-
+function backupForUndo(this_range, startCell, add_col, row_offset){
+    console.log(startCell);
     Office.context.document.settings.set('sheet_backup', this_range.text);
+    Office.context.document.settings.set('startCell', startCell);
+    Office.context.document.settings.set('addCol', add_col);
+    Office.context.document.settings.set('rowOffset', row_offset);
     Office.context.document.settings.saveAsync(function (asyncResult) {
         if (asyncResult.status == Office.AsyncResultStatus.Failed) {
             console.log('Settings save failed. Error: ' + asyncResult.error.message);
@@ -228,34 +303,6 @@ function backupForUndo(this_range){
             console.log(Office.context.document.settings.get('sheet_backup'));
         }
     });
-
-}
-
-
-function getColumn(sheet, colNumber, callback){
-
-    Excel.run(function (ctx) {
-
-        var worksheet = ctx.workbook.worksheets.getItem(sheet);
-        var range_all = worksheet.getRange();
-        var range = range_all.getUsedRange(true).getColumn(colNumber);
-
-        range.load('text');
-        range.load('address');
-
-        return ctx.sync().then(function() {
-            var tmp_columns = range.address;
-            var column_address = tmp_columns.substring(tmp_columns.indexOf("!") + 1);
-            callback(column_address);
-        });
-
-    }).catch(function(error) {
-        console.log("Error: " + error);
-        if (error instanceof OfficeExtension.Error) {
-            console.log("Debug info: " + JSON.stringify(error.debugInfo));
-        }
-    });
-
 }
 
 
