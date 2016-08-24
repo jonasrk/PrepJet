@@ -1,3 +1,15 @@
+// Obtains token URL
+string token = Request.Params["et"].ToString();
+
+// Applies base64 decoding of the token to get a decoded token.
+byte[] decodedBytes = Convert.FromBase64String(token);
+string decodedToken = Encoding.Unicode.GetString(decodedBytes);
+
+console.log("Token:");
+console.log(decodedToken);
+
+
+
 function displayAdvancedCount() {
         $('#delimiter_count').show();
         $('.delimiter_count_dropdown').show();
