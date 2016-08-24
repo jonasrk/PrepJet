@@ -349,7 +349,8 @@ function redirectHome() {
                         var include_check = range.text[k][header].indexOf(charIncluded);
                         if (include_check < 0) {
                             countIncons += 1;
-                            highlightCellNew(worksheet.name, getCharFromNumber(header + add_col) + (k + row_offset), color, function () {});
+                            highlightContentInWorksheet(worksheet, getCharFromNumber(header + add_col) + (k + row_offset), '#EA7F04');
+                            //highlightCellNew(worksheet.name, getCharFromNumber(header + add_col) + (k + row_offset), color, function () {});
 
                         }
                     }
@@ -361,7 +362,8 @@ function redirectHome() {
                         var notInclude_check = range.text[k][header].indexOf(charNotIncluded);
                         if (notInclude_check >= 0) {
                             countIncons += 1;
-                            highlightCellNew(worksheet.name, getCharFromNumber(header + add_col) + (k + row_offset), color, function () {});
+                            highlightContentInWorksheet(worksheet, getCharFromNumber(header + add_col) + (k + row_offset), '#EA7F04');
+                            //highlightCellNew(worksheet.name, getCharFromNumber(header + add_col) + (k + row_offset), color, function () {});
                         }
                     }
                 }
