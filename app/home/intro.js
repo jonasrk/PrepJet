@@ -10,9 +10,9 @@
 
         function redirect_to_funct(){
             try {
-                if (Office.context.document.settings.get('last_clicked_function') != null) {
+                //if (Office.context.document.settings.get('last_clicked_function') != null) {
                     window.location = Office.context.document.settings.get('last_clicked_function');
-                }}
+                }
             catch (err) {
                 window.location = "mac_start.html";
             }
