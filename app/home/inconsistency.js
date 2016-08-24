@@ -436,7 +436,8 @@ function redirectHome() {
                             if (tmp2[i][1] < type_maximum) {
                                 for (var k = 0; k < tmp_type.length; k++) {
                                     if (tmp2[i][0] == tmp_type[k][0]) {
-                                        highlightCellNew(worksheet.name, tmp_type[k][1], color, function () {});
+                                        highlightCellInWorksheet(worksheet, tmp_type[k][1], color);
+                                        //highlightCellNew(worksheet.name, tmp_type[k][1], color, function () {});
                                         incon_counter += 1;
                                     }
                                 }
@@ -445,7 +446,8 @@ function redirectHome() {
                                 color = getRandomColor();
                                 for (var k = 0; k < tmp_type.length; k++) {
                                     if (tmp2[i][0] == tmp_type[k][0]) {
-                                        highlightCellNew(worksheet.name, tmp_type[k][1], color, function () {});
+                                        highlightCellInWorksheet(worksheet, tmp_type[k][1], color);
+                                        //highlightCellNew(worksheet.name, tmp_type[k][1], color, function () {});
                                         incon_counter += 1;
                                     }
                                 }

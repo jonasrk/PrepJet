@@ -278,6 +278,13 @@ function highlightCellNew(sheetObject, rangeAddress, color, callback) {
     });
 }
 
+
+function highlightCellInWorksheet(sheetObject, rangeAddress, color) {
+    var range = sheetObject.getRange(rangeAddress);
+    range.format.fill.color = color;
+    range.merge();
+}
+
 //create a random color to highlight font
 function getRandomColor() {
     var letters = '0123456789ABCDEF'.split('');

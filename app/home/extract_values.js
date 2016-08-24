@@ -22,6 +22,10 @@ function displayFieldEnd(){
     }
 }
 
+
+function redirctHome() {
+}
+
 function displayAdvancedCount() {
         $('#del_count_start').show();
         $('.del_count_dropdown_s').show();
