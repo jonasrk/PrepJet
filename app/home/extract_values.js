@@ -46,28 +46,6 @@ function backToThree() {
     $('#step4').hide();
 }
 
-/*function displayAdvancedCount() {
-        $('#del_count_start').show();
-        $('.del_count_dropdown_s').show();
-        $('#del_count_end').show();
-        $('.del_count_dropdown_e').show();
-        $('#advanced_settings').hide();
-        $('#advanced_hide').show();
-        $('#explanationMoreOptions').show();
-        Office.context.document.settings.set('more_option_extract', true);
-    }
-
-function hideAdvancedCount() {
-        $('#del_count_start').hide();
-        $('.del_count_dropdown_s').hide();
-        $('#del_count_end').hide();
-        $('.del_count_dropdown_e').hide();
-        $('#advanced_settings').show();
-        $('#advanced_hide').hide();
-        $('#explanationMoreOptions').hide();
-        Office.context.document.settings.set('more_option', false);
-}*/
-
 
 (function () {
     // 'use strict';
@@ -96,18 +74,6 @@ function hideAdvancedCount() {
             $('#delimiter_beginning').hide();
             $('#delimiter_end').hide();
 
-            /*$('#delimiter_end').hide();
-            $('#delimiter_beginning').hide();
-            $('#del_count_start').hide();
-            $('.del_count_dropdown_s').Dropdown();
-            $('.del_count_dropdown_s').hide();
-            $('#del_count_end').hide();
-            $('.del_count_dropdown_e').Dropdown();
-            $('.del_count_dropdown_e').hide();
-            $('#advanced_settings').show();
-            $('#advanced_hide').hide();
-            $('#explanationMoreOptions').hide();*/
-
             $('.del_count_dropdown_s').Dropdown();
             $('.del_count_dropdown_e').Dropdown();
             $(".dropdown_table").Dropdown();
@@ -118,11 +84,10 @@ function hideAdvancedCount() {
             $('#continue3').click(step4Show);
 
             $('#back1').click(backToOne);
-            $('#back2').click(backToOne);
-            $('#back3').click(backToOne);
+            $('#back2').click(backToTwo);
+            $('#back3').click(backToThree);
+
             $('#extract_Value').click(extractValue);
-            //$('#advanced_settings').click(displayAdvancedCount);
-            //$('#advanced_hide').click(hideAdvancedCount);
             $('#buttonOk').click(highlightHeader);
             $('#homeButton').click(redirectHome);
 
@@ -132,14 +97,13 @@ function hideAdvancedCount() {
                 document.getElementById('showEmbeddedDialog').style.visibility = 'hidden';
             }
 
-
             //show and hide help callout
-            document.getElementById("help_icon").onclick = function () {
+            /*document.getElementById("help_icon").onclick = function () {
                 document.getElementById('helpCallout').style.visibility = 'visible';
             }
             document.getElementById("closeCallout").onclick = function () {
                 document.getElementById('helpCallout').style.visibility = 'hidden';
-            }
+            }*/
 
             document.getElementById("refresh_icon").onclick = function () {
                 window.location = "extract_values.html";
@@ -151,6 +115,7 @@ function hideAdvancedCount() {
                 window.location = "extract_values.html";
             }
             document.getElementById("resultOk").onclick = function () {
+                console.log("test");
                 document.getElementById('resultDialog').style.visibility = 'hidden';
                 window.location = "extract_values.html";
             }
@@ -337,10 +302,6 @@ function hideAdvancedCount() {
         $('#step2').show();
         $('#step3').hide();
         $('#step4').hide();
-        $('#page0Marker').attr('class', 'fontColor_grey');
-        $('#page1Marker').attr('class', 'fontColor_orange');
-        $('#page2Marker').attr('class', 'fontColor_grey');
-        $('#page3Marker').attr('class', 'fontColor_grey');
 
         Excel.run(function (ctx) {
 
@@ -363,11 +324,6 @@ function hideAdvancedCount() {
         $('#step3').show();
         $('#step4').hide();
 
-        $('#page0Marker').attr('class', 'fontColor_grey');
-        $('#page1Marker').attr('class', 'fontColor_grey');
-        $('#page2Marker').attr('class', 'fontColor_orange');
-        $('#page3Marker').attr('class', 'fontColor_grey');
-
         Excel.run(function (ctx) {
 
             return ctx.sync().then(function() {
@@ -389,11 +345,6 @@ function hideAdvancedCount() {
         $('#step2').hide();
         $('#step3').hide();
         $('#step4').show();
-
-        $('#page0Marker').attr('class', 'fontColor_grey');
-        $('#page1Marker').attr('class', 'fontColor_grey');
-        $('#page2Marker').attr('class', 'fontColor_grey');
-        $('#page3Marker').attr('class', 'fontColor_orange');
 
         Excel.run(function (ctx) {
 
