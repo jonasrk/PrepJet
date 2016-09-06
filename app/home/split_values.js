@@ -30,6 +30,30 @@ function redirectHome() {
     window.location = "mac_start.html";
 }
 
+function redirectExtract() {
+    window.location = "extract_values.html";
+}
+
+function backToOne() {
+    $('#step1').show();
+    $('#step2').hide();
+    $('#step3').hide();
+    $('#step4').hide();
+}
+
+function backToTwo() {
+    $('#step1').hide();
+    $('#step2').show();
+    $('#step3').hide();
+    $('#step4').hide();
+}
+
+function backToThree() {
+    $('#step1').hide();
+    $('#step2').hide();
+    $('#step3').show();
+    $('#step4').hide();
+}
 
 (function () {
     // 'use strict';
@@ -51,21 +75,31 @@ function redirectHome() {
             app.initialize();
             fillColumn();
 
+            $('#step2').hide();
+            $('#step3').hide();
+            $('#step4').hide();
 
             $('#delimiter_beginning').hide();
-            $('#delimiter_count').Dropdown().hide();
+            $('#delimiter_count').Dropdown();
             $('#checkbox_delimiter').hide();
-            $(".delimiter_count_dropdown").Dropdown().hide()
-            $(".keep_delimiter_dropdown").Dropdown().hide()
-            $('#advanced_hide').hide();
+            $(".delimiter_count_dropdown").Dropdown();
+            //$('#advanced_hide').hide();
 
             $(".dropdown_table").Dropdown();
             $(".ms-TextField").TextField();
 
+            $('#continue1').click(step3Show);
+            $('#continue2').click(step4Show);
+            $('#back1').click(backToOne);
+            $('#back2').click(backToTwo);
+            $('#back3').click(backToThree);
+
+            $('#extractButton').click(redirectExtract);
+            $('#splitButton').click(step2Show);
             $('#split_Value').click(splitValue);
             $('#buttonOk').click(highlightHeader);
-            $('#advanced_settings').click(displayAdvancedCount);
-            $('#advanced_hide').click(hideAdvancedCount);
+            //$('#advanced_settings').click(displayAdvancedCount);
+            //$('#advanced_hide').click(hideAdvancedCount);
             $('#homeButton').click(redirectHome);
 
 
@@ -76,12 +110,12 @@ function redirectHome() {
 
 
             //Show and hide error message if columns have same header name
-            document.getElementById("help_icon").onclick = function () {
+            /*document.getElementById("help_icon").onclick = function () {
                 document.getElementById('helpCallout').style.visibility = 'visible';
             }
             document.getElementById("closeCallout").onclick = function () {
                 document.getElementById('helpCallout').style.visibility = 'hidden';
-            }
+            }*/
 
             document.getElementById("refresh_icon").onclick = function () {
                 window.location = "split_values.html";
@@ -282,6 +316,71 @@ function redirectHome() {
         });
 
     }
+
+    function step2Show() {
+
+        $('#step1').hide();
+        $('#step2').show();
+        $('#step3').hide();
+        $('#step4').hide();
+
+        Excel.run(function (ctx) {
+
+            return ctx.sync().then(function() {
+
+            });
+
+        }).catch(function(error) {
+            console.log("Error: " + error);
+            if (error instanceof OfficeExtension.Error) {
+                console.log("Debug info: " + JSON.stringify(error.debugInfo));
+            }
+        });
+    }
+
+    function step3Show() {
+
+        $('#step1').hide();
+        $('#step2').hide();
+        $('#step3').show();
+        $('#step4').hide();
+
+        Excel.run(function (ctx) {
+
+            return ctx.sync().then(function() {
+
+            });
+
+        }).catch(function(error) {
+            console.log("Error: " + error);
+            if (error instanceof OfficeExtension.Error) {
+                console.log("Debug info: " + JSON.stringify(error.debugInfo));
+            }
+        });
+    }
+
+
+    function step4Show() {
+
+        $('#step1').hide();
+        $('#step2').hide();
+        $('#step3').hide();
+        $('#step4').show();
+
+        Excel.run(function (ctx) {
+
+            return ctx.sync().then(function() {
+
+            });
+
+        }).catch(function(error) {
+            console.log("Error: " + error);
+            if (error instanceof OfficeExtension.Error) {
+                console.log("Debug info: " + JSON.stringify(error.debugInfo));
+            }
+        });
+    }
+
 
     //function to split values in a column by a specified delimiter into different columns
     function splitValue() {
