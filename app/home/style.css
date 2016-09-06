@@ -269,3 +269,14 @@ h1 {
 #matchCriteria {
     width: 100%; }
 
+#darkBox {
+    background: #ffcc94;
+    text-align: center;
+    padding-top: 10px;}
+
+.fontColor_orange {
+    color: #EA7F04; }
+
+.fontColor_grey {
+    color: #e2e2e2; }
+

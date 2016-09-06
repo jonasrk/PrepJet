@@ -22,11 +22,31 @@ function displayFieldEnd(){
     }
 }
 
-
 function redirctHome() {
 }
 
-function displayAdvancedCount() {
+function backToOne() {
+    $('#step1').show();
+    $('#step2').hide();
+    $('#step3').hide();
+    $('#step4').hide();
+}
+
+function backToTwo() {
+    $('#step1').hide();
+    $('#step2').show();
+    $('#step3').hide();
+    $('#step4').hide();
+}
+
+function backToThree() {
+    $('#step1').hide();
+    $('#step2').hide();
+    $('#step3').show();
+    $('#step4').hide();
+}
+
+/*function displayAdvancedCount() {
         $('#del_count_start').show();
         $('.del_count_dropdown_s').show();
         $('#del_count_end').show();
@@ -46,7 +66,7 @@ function hideAdvancedCount() {
         $('#advanced_hide').hide();
         $('#explanationMoreOptions').hide();
         Office.context.document.settings.set('more_option', false);
-}
+}*/
 
 
 (function () {
@@ -69,8 +89,14 @@ function hideAdvancedCount() {
             app.initialize();
             fillColumn();
 
+            $('#step2').hide();
+            $('#step3').hide();
+            $('#step4').hide();
 
+            $('#delimiter_beginning').hide();
             $('#delimiter_end').hide();
+
+            /*$('#delimiter_end').hide();
             $('#delimiter_beginning').hide();
             $('#del_count_start').hide();
             $('.del_count_dropdown_s').Dropdown();
@@ -80,14 +106,23 @@ function hideAdvancedCount() {
             $('.del_count_dropdown_e').hide();
             $('#advanced_settings').show();
             $('#advanced_hide').hide();
-            $('#explanationMoreOptions').hide();
+            $('#explanationMoreOptions').hide();*/
 
+            $('.del_count_dropdown_s').Dropdown();
+            $('.del_count_dropdown_e').Dropdown();
             $(".dropdown_table").Dropdown();
             $(".ms-TextField").TextField();
 
+            $('#continue1').click(step2Show);
+            $('#continue2').click(step3Show);
+            $('#continue3').click(step4Show);
+
+            $('#back1').click(backToOne);
+            $('#back2').click(backToOne);
+            $('#back3').click(backToOne);
             $('#extract_Value').click(extractValue);
-            $('#advanced_settings').click(displayAdvancedCount);
-            $('#advanced_hide').click(hideAdvancedCount);
+            //$('#advanced_settings').click(displayAdvancedCount);
+            //$('#advanced_hide').click(hideAdvancedCount);
             $('#buttonOk').click(highlightHeader);
             $('#homeButton').click(redirectHome);
 
@@ -294,6 +329,84 @@ function hideAdvancedCount() {
             }
         });
 
+    }
+
+    function step2Show() {
+
+        $('#step1').hide();
+        $('#step2').show();
+        $('#step3').hide();
+        $('#step4').hide();
+        $('#page0Marker').attr('class', 'fontColor_grey');
+        $('#page1Marker').attr('class', 'fontColor_orange');
+        $('#page2Marker').attr('class', 'fontColor_grey');
+        $('#page3Marker').attr('class', 'fontColor_grey');
+
+        Excel.run(function (ctx) {
+
+            return ctx.sync().then(function() {
+
+            });
+
+        }).catch(function(error) {
+            console.log("Error: " + error);
+            if (error instanceof OfficeExtension.Error) {
+                console.log("Debug info: " + JSON.stringify(error.debugInfo));
+            }
+        });
+    }
+
+    function step3Show() {
+
+        $('#step1').hide();
+        $('#step2').hide();
+        $('#step3').show();
+        $('#step4').hide();
+
+        $('#page0Marker').attr('class', 'fontColor_grey');
+        $('#page1Marker').attr('class', 'fontColor_grey');
+        $('#page2Marker').attr('class', 'fontColor_orange');
+        $('#page3Marker').attr('class', 'fontColor_grey');
+
+        Excel.run(function (ctx) {
+
+            return ctx.sync().then(function() {
+
+            });
+
+        }).catch(function(error) {
+            console.log("Error: " + error);
+            if (error instanceof OfficeExtension.Error) {
+                console.log("Debug info: " + JSON.stringify(error.debugInfo));
+            }
+        });
+    }
+
+
+    function step4Show() {
+
+        $('#step1').hide();
+        $('#step2').hide();
+        $('#step3').hide();
+        $('#step4').show();
+
+        $('#page0Marker').attr('class', 'fontColor_grey');
+        $('#page1Marker').attr('class', 'fontColor_grey');
+        $('#page2Marker').attr('class', 'fontColor_grey');
+        $('#page3Marker').attr('class', 'fontColor_orange');
+
+        Excel.run(function (ctx) {
+
+            return ctx.sync().then(function() {
+
+            });
+
+        }).catch(function(error) {
+            console.log("Error: " + error);
+            if (error instanceof OfficeExtension.Error) {
+                console.log("Debug info: " + JSON.stringify(error.debugInfo));
+            }
+        });
     }
 
 
