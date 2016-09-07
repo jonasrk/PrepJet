@@ -9,6 +9,13 @@ html {
     height: 60px;
     overflow: visible; }
 
+#content-header2 {
+    background: #666666;
+    color: #fff;
+    width: 100%;
+    height: 60px;
+    overflow: visible; }
+
 .padding {
     padding: 10px;
     overflow: visible; }
@@ -281,5 +288,8 @@ h1 {
     color: #e2e2e2; }
 
 #pageMarker {
+    text-align: center; }
+
+#pictures {
     text-align: center; }
 

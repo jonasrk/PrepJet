@@ -35,6 +35,7 @@ function redirectExtract() {
 }
 
 function backToOne() {
+    $('#content-header2').hide();
     $('#step1').show();
     $('#step2').hide();
     $('#step3').hide();
@@ -42,6 +43,7 @@ function backToOne() {
 }
 
 function backToTwo() {
+    $('#content-header2').show();
     $('#step1').hide();
     $('#step2').show();
     $('#step3').hide();
@@ -49,6 +51,7 @@ function backToTwo() {
 }
 
 function backToThree() {
+    $('#content-header2').show();
     $('#step1').hide();
     $('#step2').hide();
     $('#step3').show();
@@ -75,6 +78,7 @@ function backToThree() {
             app.initialize();
             fillColumn();
 
+            $('#content-header2').hide();
             $('#step2').hide();
             $('#step3').hide();
             $('#step4').hide();
@@ -320,6 +324,7 @@ function backToThree() {
     function step2Show() {
 
         $('#step1').hide();
+        $('#content-header2').show();
         $('#step2').show();
         $('#step3').hide();
         $('#step4').hide();
@@ -340,6 +345,7 @@ function backToThree() {
 
     function step3Show() {
 
+        $('#content-header2').show();
         $('#step1').hide();
         $('#step2').hide();
         $('#step3').show();
@@ -362,6 +368,7 @@ function backToThree() {
 
     function step4Show() {
 
+        $('#content-header2').show();
         $('#step1').hide();
         $('#step2').hide();
         $('#step3').hide();

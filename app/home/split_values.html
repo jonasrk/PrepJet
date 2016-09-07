@@ -38,7 +38,80 @@
 </head>
 
 <body class="ms-font-m">
-<div id="content-header">
+<div id="step1">
+    <div id="content-header">
+        <table>
+            <tr>
+                <td class="tableheader">
+                    <div class="padding">
+                        <h1>Divide Cell Content</h1>
+                    </div>
+                </td>
+                <td>
+                    <button id="refresh_icon" class="ms-Button_headericon">
+                        <i class="ms-Icon ms-Icon--refresh" aria-hidden="true"></i>
+                    </button>
+                </td>
+                <td>
+                    <button id="homeButton" class="ms-Button_homelogo">
+                        <img class="page1" src="../../images/logo_lg.png" />
+                    </button>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <div id="content-main">
+        <div class="padding">
+            <div id="explanation">
+                <label class="ms-Label">Do you want to extract a part of a column into a separate one or split the whole content into different columns?</p>
+            </div>
+            <table id="tablesmall">
+                <tr>
+                    <td id="smalldrop_col">
+                        <button id="extractButton" class="ms-Button_Func">
+                            <img class="page1" src="../../images/extract_Icon.png" />
+                        </button>
+                    </td>
+                    <td>
+                        <div id="explanation">
+                            <label class="ms-Label">Extract Text</p>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td id="smalldrop_col">
+                        <button id="splitButton" class="ms-Button_Func">
+                            <img class="page1" src="../../images/split_Icon.png" />
+                        </button>
+                    </td>
+                    <td>
+                        <div id="explanation">
+                            <label class="ms-Label">Split Column</p>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+            <div id="pageMarker">
+                <p id="pageMarkers">
+                    <span id="page0Marker" class="fontColor_orange">
+                        <i class="ms-Icon ms-Icon--circleFilled" aria-hidden="true"></i>
+                    </span>
+                    <span id="page1Marker" class="fontColor_grey">
+                        <i class="ms-Icon ms-Icon--circleFilled" aria-hidden="true"></i>
+                    </span>
+                    <span id="page2Marker" class="fontColor_grey">
+                        <i class="ms-Icon ms-Icon--circleFilled" aria-hidden="true"></i>
+                    </span>
+                    <span id="page3Marker" class="fontColor_grey">
+                        <i class="ms-Icon ms-Icon--circleFilled" aria-hidden="true"></i>
+                    </span>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="content-header2">
     <table>
         <tr>
             <td class="tableheader">
@@ -59,7 +132,6 @@
         </tr>
     </table>
 </div>
-
 <!--Dialog for same header name-->
 <div id="showEmbeddedDialog" class="ms-embedded-dialog__options" >
     <div class="ms-Dialog ms-Dialog--close">
@@ -112,54 +184,6 @@
 
 <div id="content-main">
     <div class="padding">
-        <div id="step1">
-            <div id="explanation">
-                <label class="ms-Label">Do you want to extract a part of a column into a separate one or split the whole content into different columns?</p>
-            </div>
-            <table id="tablesmall">
-                <tr>
-                    <td id="smalldrop_col">
-                        <button id="extractButton" class="ms-Button_Func">
-                            <img class="page1" src="../../images/extract_Icon.png" />
-                        </button>
-                    </td>
-                    <td>
-                        <div id="explanation">
-                            <label class="ms-Label">Extract Text</p>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td id="smalldrop_col">
-                        <button id="splitButton" class="ms-Button_Func">
-                            <img class="page1" src="../../images/split_Icon.png" />
-                        </button>
-                    </td>
-                    <td>
-                        <div id="explanation">
-                            <label class="ms-Label">Split Column</p>
-                        </div>
-                    </td>
-                </tr>
-            </table>
-            <div id="pageMarker">
-                <p id="pageMarkers">
-                    <span id="page0Marker" class="fontColor_orange">
-                        <i class="ms-Icon ms-Icon--circleFilled" aria-hidden="true"></i>
-                    </span>
-                    <span id="page1Marker" class="fontColor_grey">
-                        <i class="ms-Icon ms-Icon--circleFilled" aria-hidden="true"></i>
-                    </span>
-                    <span id="page2Marker" class="fontColor_grey">
-                        <i class="ms-Icon ms-Icon--circleFilled" aria-hidden="true"></i>
-                    </span>
-                    <span id="page3Marker" class="fontColor_grey">
-                        <i class="ms-Icon ms-Icon--circleFilled" aria-hidden="true"></i>
-                    </span>
-                </p>
-            </div>
-        </div>
-
         <div id="step2">
             <!--dropdown for column-->
             <div id="large_drop" class="ms-Dropdown dropdown_table_col" tabindex="1">
@@ -195,6 +219,7 @@
             </div>
             <div id="darkBox">
                 <label class="ms-Label"> text part | text part | text part </p>
+                    <!--i id="delCircle" class="ms-Icon ms-Icon--circleEmpty" aria-hidden="true"></i-->
             </div>
             <!--dropdown for delimiter-->
             <div id="large_drop" class="ms-Dropdown dropdown_table" tabindex="1">
@@ -254,8 +279,21 @@
                 </div>
             </div-->
             <div id="explanation">
-                <label class="ms-Label">If you want to split the content only at a certain delimiter, specify the position here. Per default PrepJet will split the content at each delimiter.</p>
+                <label class="ms-Label">Per default PrepJet will split the content at each delimiter, butyou can specify a certain position here.</p>
             </div>
+            <table id="tablesmall">
+                <tr>
+                    <td id="pictures">
+                        <img class="page1" src="../../images/split_position_all.png" />
+                    </td>
+                    <td>
+                        <p>vs.</p>
+                    </td>
+                    <td id="pictures">
+                        <img class="page1" src="../../images/split_position_one.png" />
+                    </td>
+                </tr>
+            </table>
             <table id="matchCriteria">
                 <tr>
                     <td id="smalldrop_col">
