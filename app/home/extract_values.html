@@ -120,6 +120,18 @@
                 <i class="ms-Dropdown-caretDown ms-Icon ms-Icon--caretDown"></i>
                 <select id="column1_options" class="ms-Dropdown-select"></select>
             </div>
+            <table class="tableupperborder">
+                <tr>
+                    <td>
+                        <div class="ms-ChoiceField">
+                            <input id="createBackup" class="ms-ChoiceField-input" type="checkbox">
+                            <label for="createBackup" class="ms-ChoiceField-field">
+                                <span class="ms-Label">Create a backup sheet</span>
+                            </label>
+                        </div>
+                    </td>
+                </tr>
+            </table>
             <!--continue button-->
             <button class="ms-Button_grey" id="continue1">Continue</button>
             <div id="pageMarker">
@@ -147,15 +159,22 @@
             <div id="explanation">
                 <label class="ms-Label">Specify where to start and end extracting</p>
             </div>
-            <div id="darkBox">
+                <table id="tablesmall">
+                    <tr>
+                        <td id="pictures">
+                            <img class="page1" src="../../images/extract_Delimiter.png" />
+                        </td>
+                    </tr>
+                </table>
+            <!--div id="darkBox">
                 <label class="ms-Label">... | part to be extracted | ...</p>
-            </div>
+            </div-->
             <table id="tablesmall">
                 <tr>
                     <td id="smalldrop_col">
                         <!--dropdown fpr beginning-->
                         <div class="ms-Dropdown dropdown_table" tabindex="1">
-                            <label class="ms-Label">Beginning</label>
+                            <label class="ms-Label">Start Delimiter</label>
                             <i class="ms-Dropdown-caretDown ms-Icon ms-Icon--caretDown"></i>
                             <select id="beginning_options" class="ms-Dropdown-select" onchange="displayFieldBegin()">
                                 <option value="col_beginning">Beginning of cell</option>
@@ -169,7 +188,7 @@
                     <td id="colright">
                         <!--dropdown for ending-->
                         <div class="ms-Dropdown dropdown_table" tabindex="1">
-                            <label class="ms-Label">End</label>
+                            <label class="ms-Label">End Delimiter</label>
                             <i class="ms-Dropdown-caretDown ms-Icon ms-Icon--caretDown"></i>
                             <select id="ending_options" class="ms-Dropdown-select" onchange="displayFieldEnd()">
                                 <option value="col_end">End of cell</option>
@@ -240,9 +259,16 @@
             <div id="explanation">
                 <label class="ms-Label">Select the position of your start delimiter at which to extract the text part:</p>
             </div>
-            <div id="darkBox">
+                <table id="tablesmall">
+                    <tr>
+                        <td id="pictures">
+                            <img class="page1" src="../../images/extract_start_position.png" />
+                        </td>
+                    </tr>
+                </table>
+            <!--div id="darkBox">
                 <label class="ms-Label">... | ... | ... | part to be extracted</p>
-            </div>
+            </div-->
             <table id="tablesmall">
                 <tr>
                     <td id="smalldrop_col">
@@ -304,9 +330,16 @@
             <div id="explanation">
                 <label class="ms-Label">Select the position of your end delimiter at which to extract the text part:</p>
             </div>
-            <div id="darkBox">
+                <table id="tablesmall">
+                    <tr>
+                        <td id="pictures">
+                            <img class="page1" src="../../images/extract_end_position.png" />
+                        </td>
+                    </tr>
+                </table>
+            <!--div id="darkBox">
                 <label class="ms-Label">part to be extracted | ... |... | ... </p>
-            </div>
+            </div-->
             <table id="tablesmall">
                 <tr>
                     <td id="smalldrop_col">
@@ -336,18 +369,6 @@
                                 <option value="left">From Left</option>
                                 <option value="right">From Right</option>
                             </select>
-                        </div>
-                    </td>
-                </tr>
-            </table>
-            <table class="tableupperborder">
-                <tr>
-                    <td>
-                        <div class="ms-ChoiceField">
-                            <input id="createBackup" class="ms-ChoiceField-input" type="checkbox">
-                            <label for="createBackup" class="ms-ChoiceField-field">
-                                <span class="ms-Label">Create a backup sheet</span>
-                            </label>
                         </div>
                     </td>
                 </tr>
