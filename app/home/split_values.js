@@ -1,9 +1,10 @@
 function displayAdvancedCount() {
         $('#delimiter_count').show();
         $('.delimiter_count_dropdown').show();
-        $('#advanced_settings').hide();
-        $('#advanced_hide').show();
-        Office.context.document.settings.set('more_option', true);
+        $('#split_Value').show();
+        //$('#advanced_settings').hide();
+        //$('#advanced_hide').show();
+        //Office.context.document.settings.set('more_option', true);
 }
 
 function hideAdvancedCount() {
@@ -84,9 +85,10 @@ function backToThree() {
             $('#step4').hide();
 
             $('#delimiter_beginning').hide();
-            $('#delimiter_count').Dropdown();
+            $('#split_Value').hide();
+            $('#delimiter_count').Dropdown().hide();
             $('#checkbox_delimiter').hide();
-            $(".delimiter_count_dropdown").Dropdown();
+            $(".delimiter_count_dropdown").Dropdown().hide();
             //$('#advanced_hide').hide();
 
             $(".dropdown_table").Dropdown();
@@ -101,6 +103,8 @@ function backToThree() {
             $('#extractButton').click(redirectExtract);
             $('#splitButton').click(step2Show);
             $('#split_Value').click(splitValue);
+            $('#splitApply1').click(splitValue);
+            $('#splitApply2').click(displayAdvancedCount);
             $('#buttonOk').click(highlightHeader);
             //$('#advanced_settings').click(displayAdvancedCount);
             //$('#advanced_hide').click(hideAdvancedCount);

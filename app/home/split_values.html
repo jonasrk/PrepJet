@@ -191,6 +191,19 @@
                 <i class="ms-Dropdown-caretDown ms-Icon ms-Icon--caretDown"></i>
                 <select id="column_options" class="ms-Dropdown-select"></select>
             </div>
+            <!--Checkbox to create a backup sheet if ticked -->
+            <table class="tableupperborder">
+                <tr>
+                    <td>
+                        <div class="ms-ChoiceField">
+                            <input id="createBackup" class="ms-ChoiceField-input" type="checkbox">
+                            <label for="createBackup" class="ms-ChoiceField-field">
+                                <span class="ms-Label">Create a backup sheet</span>
+                            </label>
+                        </div>
+                    </td>
+                </tr>
+            </table>
             <!--back button-->
             <button class="ms-Button_grey" id="back1">Back</button>
             <!--continue button-->
@@ -215,15 +228,22 @@
 
         <div id="step3">
             <div id="explanation">
-                <label class="ms-Label">Select the delimiter at which to split the content of your column</p>
+                <label class="ms-Label">Select the delimiter at which to split the cell content</p>
             </div>
-            <div id="darkBox">
+            <table id="tablesmall">
+                <tr>
+                    <td id="pictures">
+                        <img class="page1" src="../../images/split_Delimiter.png" />
+                    </td>
+                </tr>
+            </table>
+            <!--div id="darkBox">
                 <label class="ms-Label"> text part | text part | text part </p>
                     <!--i id="delCircle" class="ms-Icon ms-Icon--circleEmpty" aria-hidden="true"></i-->
-            </div>
+            <!--/div-->
             <!--dropdown for delimiter-->
             <div id="large_drop" class="ms-Dropdown dropdown_table" tabindex="1">
-                <label class="ms-Label">Select delimiter</label>
+                <!--label class="ms-Label">Select delimiter</label-->
                 <i class="ms-Dropdown-caretDown ms-Icon ms-Icon--caretDown"></i>
                 <select id="delimiter_options" class="ms-Dropdown-select" onchange="displayFieldDelimiter()">
                     <option value="comma">Comma</option>
@@ -279,18 +299,22 @@
                 </div>
             </div-->
             <div id="explanation">
-                <label class="ms-Label">Per default PrepJet will split the content at each delimiter, butyou can specify a certain position here.</p>
+                <label class="ms-Label">Split at each delimiter or only at a certain delimiter position:</p>
             </div>
             <table id="tablesmall">
                 <tr>
                     <td id="pictures">
-                        <img class="page1" src="../../images/split_position_all.png" />
+                        <button id="splitApply1" class="ms-Button_Func">
+                            <img class="page1" src="../../images/split_position_all.png" />
+                        </button>
                     </td>
                     <td>
                         <p>vs.</p>
                     </td>
                     <td id="pictures">
-                        <img class="page1" src="../../images/split_position_one.png" />
+                        <button id="splitApply2" class="ms-Button_Func">
+                            <img class="page1" src="../../images/split_position_one.png" />
+                        </button>
                     </td>
                 </tr>
             </table>
@@ -323,18 +347,6 @@
                                 <option value="left">From Left</option>
                                 <option value="right">From Right</option>
                             </select>
-                        </div>
-                    </td>
-                </tr>
-            </table>
-            <table class="tableupperborder">
-                <tr>
-                    <td>
-                        <div class="ms-ChoiceField">
-                            <input id="createBackup" class="ms-ChoiceField-input" type="checkbox">
-                            <label for="createBackup" class="ms-ChoiceField-field">
-                                <span class="ms-Label">Create a backup sheet</span>
-                            </label>
                         </div>
                     </td>
                 </tr>
