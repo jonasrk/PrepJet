@@ -247,6 +247,13 @@ function addContentNew(sheetObject, rangeAddress, displayText, callback) {
     });
 }
 
+// Helper function to add single cell content in the workbook
+function addContentToWorksheet(sheetObject, rangeAddress, displayText) {
+    var range = sheetObject.getRange(rangeAddress);
+    range.values = displayText;
+    range.merge();
+}
+
 
 //color font
 function highlightContentNew(sheetObject, rangeAddress, color, callback) {
