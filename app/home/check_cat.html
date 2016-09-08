@@ -99,8 +99,15 @@
             <div id="explanation">
                 <label class="ms-Label">Select the column which to check for consistent categories</label>
             </div>
+            <table id="tablesmall">
+                <tr>
+                    <td id="pictures">
+                        <img class="page1" src="../../images/categories_icon.png" />
+                    </td>
+                </tr>
+            </table>
             <div id="large_drop" class="ms-Dropdown dropdown_table_col" tabindex="1">
-                <label class="ms-Label">Select column to be checked</label>
+                <!--label class="ms-Label">Select column to be checked</label-->
                 <i class="ms-Dropdown-caretDown ms-Icon ms-Icon--caretDown"></i>
                 <select id="column_options" class="ms-Dropdown-select"></select>
             </div>
@@ -162,9 +169,24 @@
         </div>
         <div id="step2">
             <div id="explanation">
-                <label class="ms-Label">The following categories are suspicious, because their frequency (indicated in brackets) is very low compared to the other categories.<br>
-                    If you want to change a category, type the correct name in the text field next to it.</label>
+                <label class="ms-Label">Correct suspicious categories</label>
             </div>
+            <table id="tablesmall">
+                <tr>
+                    <td id="pictures">
+                        <img class="page1" src="../../images/frequencies_chart1.png" />
+                    </td>
+                    <td id="pictures">
+                        <img class="page1" src="../../images/arrow.png" />
+                    </td>
+                    <td id="pictures">
+                        <img class="page1" src="../../images/frequencies_chart2.png" />
+                    </td>
+                </tr>
+            </table>
+            <!--div id="explanation">
+                <label class="ms-Label">Type the correct name in the text field next to the category name to change it.</label>
+            </div-->
             <table id="checkboxes_categories"></table>
             <table class="tableupperborder">
                 <tr>
