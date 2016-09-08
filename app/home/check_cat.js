@@ -290,7 +290,7 @@ function redirectHome() {
                         for (var k = 0; k < range.text.length; k++) {
                             if (range.text[k][header] == oldCatName) {
                                 var insertAddress = getCharFromNumber(header + add_col) + (k + row_offset);
-                                addContentToWorksheet(worksheet, insertAddress, newCatName)
+                                addContentToWorksheet(worksheet, insertAddress, newCatName);
                             }
                         }
                     }
@@ -301,9 +301,11 @@ function redirectHome() {
                     Office.context.document.settings.set('backup_sheet_count', sheet_count);
                     Office.context.document.settings.saveAsync();
                     var newName = worksheet.name + "(" + sheet_count + ")";
-                    addBackupSheet(newName, function() {
-                        window.location = "check_cat.html"
+                    addBackupSheet(newName, startCell, add_col, row_offset, function() {
+                        window.location = "check_cat.html";
                     });
+                } else {
+                    window.location = "check_cat.html";
                 }
 
 
