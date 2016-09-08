@@ -46,7 +46,7 @@ function redirectHome() {
             }
 
             document.getElementById("refresh_icon").onclick = function () {
-                window.location = "inconsistencies.html";
+                window.location = "inconsistency.html";
             }
 
             //hide result message
@@ -147,18 +147,31 @@ function redirectHome() {
 
             var worksheet = ctx.workbook.worksheets.getActiveWorksheet();
             var range_all = worksheet.getRange();
-            var range = range_all.getUsedRange();
+            var range = range_all.getUsedRange(true);
+            var firstCell = range.getColumn(0);
+            var firstCol = firstCell.getEntireColumn();
+            var tmpRow = range.getRow(0);
+            var firstRow = tmpRow.getEntireRow();
 
             range.load('text');
+            firstRow.load('address');
+            firstCol.load('address');
+            worksheet.load('name');
 
             return ctx.sync().then(function() {
+
+                var tmp_offset = firstCol.address;
+                var col_offset = tmp_offset.substring(tmp_offset.indexOf("!") + 1, tmp_offset.indexOf(":"));
+                var tmp_row = firstRow.address;
+                var row_offset = Number(tmp_row.substring(tmp_row.indexOf("!") + 1, tmp_row.indexOf(":")));
+                var add_col = getNumberFromChar(col_offset);
 
                 for (var run = 0; run < range.text[0].length - 1; run++) {
                     for (var run2 = run + 1; run2 < range.text[0].length; run2++) {
                         if (range.text[0][run] == range.text[0][run2] && range.text[0][run] != "") {
                             document.getElementById('showEmbeddedDialog').style.visibility = 'hidden';
-                            highlightContentInWorksheet(worksheet, getCharFromNumber(run) + 1, '#EA7F04');
-                            highlightContentInWorksheet(worksheet, getCharFromNumber(run2) + 1, '#EA7F04');
+                            highlightContentNew(worksheet.name, getCharFromNumber(run + add_col) + row_offset, '#EA7F04', function () {});
+                            highlightContentNew(worksheet.name, getCharFromNumber(run2 + add_col) + row_offset, '#EA7F04', function () {});
                         }
                     }
                 }
@@ -180,19 +193,33 @@ function redirectHome() {
 
             var worksheet = ctx.workbook.worksheets.getActiveWorksheet();
             var range_all = worksheet.getRange();
-            var range = range_all.getUsedRange();
+            var range = range_all.getUsedRange(true);
+            var firstCell = range.getColumn(0);
+            var firstCol = firstCell.getEntireColumn();
+            var tmpRow = range.getRow(0);
+            var firstRow = tmpRow.getEntireRow();
+
 
             range.load('address');
             range.load('text');
+            firstRow.load('address');
+            firstCol.load('address');
 
             return ctx.sync().then(function() {
+
+                var tmp_offset = firstCol.address;
+                var col_offset = tmp_offset.substring(tmp_offset.indexOf("!") + 1, tmp_offset.indexOf(":"));
+                var tmp_row = firstRow.address;
+                var row_offset = Number(tmp_row.substring(tmp_row.indexOf("!") + 1, tmp_row.indexOf(":")));
+                var add_col = getNumberFromChar(col_offset);
+
                 if (document.getElementById('checkbox_all').checked == true) {
                     for (var i = 0; i < range.text[0].length; i++) {
                         if (range.text[0][i] != "") {
                             document.getElementById(range.text[0][i]).checked = true;
                         }
                         else {
-                            document.getElementById("Column " + getCharFromNumber(i)).checked = true;
+                            document.getElementById("Column " + getCharFromNumber(i + add_col)).checked = true;
                         }
                     }
                 }
@@ -202,7 +229,7 @@ function redirectHome() {
                             document.getElementById(range.text[0][i]).checked = false;
                         }
                         else {
-                            document.getElementById("Column " + getCharFromNumber(i)).checked = false;
+                            document.getElementById("Column " + getCharFromNumber(i + add_col)).checked = false;
                         }
                     }
                 }
@@ -224,11 +251,23 @@ function redirectHome() {
 
             var worksheet = ctx.workbook.worksheets.getActiveWorksheet();
             var range_all = worksheet.getRange();
-            var range = range_all.getUsedRange();
+            var range = range_all.getUsedRange(true);
+            var firstCell = range.getColumn(0);
+            var firstCol = firstCell.getEntireColumn();
+            var tmpRow = range.getRow(0);
+            var firstRow = tmpRow.getEntireRow();
 
             range.load('text');
+            firstRow.load('address');
+            firstCol.load('address');
 
             return ctx.sync().then(function() {
+
+                var tmp_offset = firstCol.address;
+                var col_offset = tmp_offset.substring(tmp_offset.indexOf("!") + 1, tmp_offset.indexOf(":"));
+                var tmp_row = firstRow.address;
+                var row_offset = Number(tmp_row.substring(tmp_row.indexOf("!") + 1, tmp_row.indexOf(":")));
+                var add_col = getNumberFromChar(col_offset);
 
                 for (var run = 0; run < range.text[0].length - 1; run++) {
                     for (var run2 = run + 1; run2 < range.text[0].length; run2++) {
@@ -244,7 +283,7 @@ function redirectHome() {
                         addNewCheckboxToContainer (range.text[0][i], "column_checkbox" ,"checkboxes_columns");
                     }
                     else {
-                        var colchar = getCharFromNumber(i);
+                        var colchar = getCharFromNumber(i + add_col);
                         addNewCheckboxToContainer ("Column " + colchar, "column_checkbox" ,"checkboxes_columns");
                     }
                 }
@@ -267,17 +306,31 @@ function redirectHome() {
 
             var worksheet = ctx.workbook.worksheets.getActiveWorksheet();
             var range_all = worksheet.getRange();
-            var range = range_all.getUsedRange();
+            var range = range_all.getUsedRange(true);
+            var firstCell = range.getColumn(0);
+            var firstCol = firstCell.getEntireColumn();
+            var tmpRow = range.getRow(0);
+            var firstRow = tmpRow.getEntireRow();
+
 
             range.load('text');
             range.load('valueTypes'); //does not know date type
             range.load('values');
             range.load('numberFormat');
             worksheet.load('name');
+            firstRow.load('address');
+            firstCol.load('address');
 
             return ctx.sync().then(function() {
 
-                backupForUndo(range);
+                var tmp_offset = firstCol.address;
+                var col_offset = tmp_offset.substring(tmp_offset.indexOf("!") + 1, tmp_offset.indexOf(":"));
+                var tmp_row = firstRow.address;
+                var row_offset = Number(tmp_row.substring(tmp_row.indexOf("!") + 1, tmp_row.indexOf(":")));
+                var add_col = getNumberFromChar(col_offset);
+                var startCell = col_offset + row_offset;
+
+                backupForUndo(range, startCell, add_col, row_offset);
 
                 var header = 0;
                 var checked_checkboxes = getCheckedBoxes("column_checkbox");
@@ -288,7 +341,7 @@ function redirectHome() {
                     check[run] = 0;
                     var type_maximum = 0;
                     for (var k = 0; k < range.text[0].length; k++) {
-                        if (checked_checkboxes[run].id == range.text[0][k] || checked_checkboxes[run].id == "Column " + getCharFromNumber(k)){
+                        if (checked_checkboxes[run].id == range.text[0][k] || checked_checkboxes[run].id == "Column " + getCharFromNumber(k + add_col)){
                             header = k;
                             break;
                         }
@@ -300,7 +353,7 @@ function redirectHome() {
                     var tmpUniqueTypes = [];
                     for (var i = 1; i < range.text.length; i++) {
                         var rangeType = [];
-                        tmp_address = getCharFromNumber(header) + (i + 1);
+                        tmp_address = getCharFromNumber(header + add_col) + (i + row_offset);
                         if (range.valueTypes[i][header] == "Double") {
                             if (range.numberFormat[i][header] != "General") {
                                 rangeType.push("Date");
@@ -388,6 +441,7 @@ function redirectHome() {
                                 for (var k = 0; k < tmp_type.length; k++) {
                                     if (tmp2[i][0] == tmp_type[k][0]) {
                                         highlightCellInWorksheet(worksheet, tmp_type[k][1], color);
+                                        //highlightCellNew(worksheet.name, tmp_type[k][1], color, function () {});
                                         incon_counter += 1;
                                     }
                                 }
@@ -397,6 +451,7 @@ function redirectHome() {
                                 for (var k = 0; k < tmp_type.length; k++) {
                                     if (tmp2[i][0] == tmp_type[k][0]) {
                                         highlightCellInWorksheet(worksheet, tmp_type[k][1], color);
+                                        //highlightCellNew(worksheet.name, tmp_type[k][1], color, function () {});
                                         incon_counter += 1;
                                     }
                                 }
@@ -406,6 +461,7 @@ function redirectHome() {
 
                 }
 
+
                 if (document.getElementById('createBackup').checked == true) {
                     var sheet_count = Office.context.document.settings.get('backup_sheet_count') + 1;
                     Office.context.document.settings.set('backup_sheet_count', sheet_count);
@@ -413,7 +469,7 @@ function redirectHome() {
                     var newName = worksheet.name + "(" + sheet_count + ")";
                     var backup_promise = new Promise(
                         function(resolve, reject) {
-                                resolve(addBackupSheet(newName));
+                                resolve(addBackupSheet(newName, startCell, add_col, row_offset));
                         }
                     );
 

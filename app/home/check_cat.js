@@ -25,9 +25,9 @@ function redirectHome() {
             app.initialize();
             fillColumn();
 
-            $zopim(function() {
+            /*$zopim(function() {
                 $zopim.livechat.window.hide();
-            });
+            });*/
 
             $('#step2').hide();
             $('#changeDialog').hide();

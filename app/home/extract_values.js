@@ -22,24 +22,28 @@ function displayFieldEnd(){
     }
 }
 
-function displayAdvancedCount() {
-        $('#del_count_start').show();
-        $('.del_count_dropdown_s').show();
-        $('#del_count_end').show();
-        $('.del_count_dropdown_e').show();
-        $('#advanced_settings').hide();
-        $('#advanced_hide').show();
-        Office.context.document.settings.set('more_option_extract', true);
-    }
+function redirctHome() {
+}
 
-function hideAdvancedCount() {
-        $('#del_count_start').hide();
-        $('.del_count_dropdown_s').hide();
-        $('#del_count_end').hide();
-        $('.del_count_dropdown_e').hide();
-        $('#advanced_settings').show();
-        $('#advanced_hide').hide();
-        Office.context.document.settings.set('more_option', false);
+function backToOne() {
+    $('#step1').show();
+    $('#step2').hide();
+    $('#step3').hide();
+    $('#step4').hide();
+}
+
+function backToTwo() {
+    $('#step1').hide();
+    $('#step2').show();
+    $('#step3').hide();
+    $('#step4').hide();
+}
+
+function backToThree() {
+    $('#step1').hide();
+    $('#step2').hide();
+    $('#step3').show();
+    $('#step4').hide();
 }
 
 
@@ -63,24 +67,27 @@ function hideAdvancedCount() {
             app.initialize();
             fillColumn();
 
+            $('#step2').hide();
+            $('#step3').hide();
+            $('#step4').hide();
 
-            $('#delimiter_end').hide();
             $('#delimiter_beginning').hide();
-            $('#del_count_start').hide();
-            $('.del_count_dropdown_s').Dropdown();
-            $('.del_count_dropdown_s').hide();
-            $('#del_count_end').hide();
-            $('.del_count_dropdown_e').Dropdown();
-            $('.del_count_dropdown_e').hide();
-            $('#advanced_settings').show();
-            $('#advanced_hide').hide();
+            $('#delimiter_end').hide();
 
+            $('.del_count_dropdown_s').Dropdown();
+            $('.del_count_dropdown_e').Dropdown();
             $(".dropdown_table").Dropdown();
             $(".ms-TextField").TextField();
 
+            $('#continue1').click(step2Show);
+            $('#continue2').click(step3Show);
+            $('#continue3').click(step4Show);
+
+            $('#back1').click(backToOne);
+            $('#back2').click(backToTwo);
+            $('#back3').click(backToThree);
+
             $('#extract_Value').click(extractValue);
-            $('#advanced_settings').click(displayAdvancedCount);
-            $('#advanced_hide').click(hideAdvancedCount);
             $('#buttonOk').click(highlightHeader);
             $('#homeButton').click(redirectHome);
 
@@ -89,40 +96,18 @@ function hideAdvancedCount() {
             });
 
 
-            /*Office.context.document.addHandlerAsync("documentSelectionChanged", myHandler, function(result){}
-            );
-
-            // Event handler function.
-            function myHandler(eventArgs){
-                Excel.run(function (ctx) {
-                    var selectedRange = ctx.workbook.getSelectedRange();
-                    selectedRange.load('address');
-                    return ctx.sync().then(function () {
-                        write(selectedRange.address);
-                    });
-                });
-            }
-
-            // Function that writes to a div with id='message' on the page.
-            function write(message){
-                document.getElementById('target_column_input').value = message;
-            }*/
-
-
             //Show and hide error message if columns have same header name
             document.getElementById("buttonClose").onclick = function () {
                 document.getElementById('showEmbeddedDialog').style.visibility = 'hidden';
             }
 
-
-
             //show and hide help callout
-            document.getElementById("help_icon").onclick = function () {
+            /*document.getElementById("help_icon").onclick = function () {
                 document.getElementById('helpCallout').style.visibility = 'visible';
             }
             document.getElementById("closeCallout").onclick = function () {
                 document.getElementById('helpCallout').style.visibility = 'hidden';
-            }
+            }*/
 
             document.getElementById("refresh_icon").onclick = function () {
                 window.location = "extract_values.html";
@@ -134,23 +119,19 @@ function hideAdvancedCount() {
                 window.location = "extract_values.html";
             }
             document.getElementById("resultOk").onclick = function () {
+                console.log("test");
                 document.getElementById('resultDialog').style.visibility = 'hidden';
                 window.location = "extract_values.html";
             }
 
 
             /*Excel.run(function (ctx) {
-
                 var myBindings = Office.context.document.bindings;
                 var worksheetname = ctx.workbook.worksheets.getActiveWorksheet();
-
                 worksheetname.load('name')
-
                 return ctx.sync().then(function() {
-
                     Office.context.document.addHandlerAsync("documentSelectionChanged", myViewHandler, function(result){}
                     );
-
                     // Event handler function for changing the worksheet.
                     function myViewHandler(eventArgs){
                         Excel.run(function (ctx) {
@@ -163,33 +144,25 @@ function hideAdvancedCount() {
                             });
                         });
                     }
-
                     function bindFromPrompt() {
-
                         var myBindings = Office.context.document.bindings;
                         var name_worksheet = worksheetname.name;
                         var myAddress = name_worksheet.concat("!1:1");
-
                         myBindings.addFromNamedItemAsync(myAddress, "matrix", {id:'myBinding'}, function (asyncResult) {
                             if (asyncResult.status == Office.AsyncResultStatus.Failed) {
                                 write('Action failed. Error: ' + asyncResult.error.message);
                             } else {
                                 write('Added new binding with type: ' + asyncResult.value.type + ' and id: ' + asyncResult.value.id);
-
                                 function addHandler() {
                                     Office.select("bindings#myBinding").addHandlerAsync(
                                         Office.EventType.BindingDataChanged, dataChanged);
                                 }
-
                                 addHandler();
                                 displayAllBindings();
-
                             }
                         });
                     }
-
                 bindFromPrompt();
-
                 function displayAllBindings() {
                     Office.context.document.bindings.getAllAsync(function (asyncResult) {
                         var bindingString = '';
@@ -198,16 +171,13 @@ function hideAdvancedCount() {
                         }
                     });
                 }
-
                 function dataChanged(eventArgs) {
                     window.location = "extract_values.html";
                 }
-
                 // Function that writes to a div with id='message' on the page.
                 function write(message){
                     console.log(message);
                 }
-
                 });
             }).catch(function(error) {
                 console.log("Error: " + error);
@@ -226,18 +196,31 @@ function hideAdvancedCount() {
 
             var worksheet = ctx.workbook.worksheets.getActiveWorksheet();
             var range_all = worksheet.getRange();
-            var range = range_all.getUsedRange();
+            var range = range_all.getUsedRange(true);
+            var firstCell = range.getColumn(0);
+            var firstCol = firstCell.getEntireColumn();
+            var tmpRow = range.getRow(0);
+            var firstRow = tmpRow.getEntireRow();
 
             range.load('text');
+            firstRow.load('address');
+            firstCol.load('address');
+            worksheet.load('name');
 
             return ctx.sync().then(function() {
+
+                var tmp_offset = firstCol.address;
+                var col_offset = tmp_offset.substring(tmp_offset.indexOf("!") + 1, tmp_offset.indexOf(":"));
+                var tmp_row = firstRow.address;
+                var row_offset = Number(tmp_row.substring(tmp_row.indexOf("!") + 1, tmp_row.indexOf(":")));
+                var add_col = getNumberFromChar(col_offset);
 
                 for (var run = 0; run < range.text[0].length - 1; run++) {
                     for (var run2 = run + 1; run2 < range.text[0].length; run2++) {
                         if (range.text[0][run] == range.text[0][run2] && range.text[0][run] != "") {
                             document.getElementById('showEmbeddedDialog').style.visibility = 'hidden';
-                            highlightContentInWorksheet(worksheet, getCharFromNumber(run) + 1, '#EA7F04');
-                            highlightContentInWorksheet(worksheet, getCharFromNumber(run2) + 1, '#EA7F04');
+                            highlightContentNew(worksheet.name, getCharFromNumber(run + add_col) + row_offset, '#EA7F04', function () {});
+                            highlightContentNew(worksheet.name, getCharFromNumber(run2 + add_col) + row_offset, '#EA7F04', function () {});
                         }
                     }
                 }
@@ -259,10 +242,23 @@ function hideAdvancedCount() {
 
             var worksheet = ctx.workbook.worksheets.getActiveWorksheet();
             var range_all = worksheet.getRange();
-            var range = range_all.getUsedRange();
+            var range = range_all.getUsedRange(true);
+            var firstCell = range.getColumn(0);
+            var firstCol = firstCell.getEntireColumn();
+            var tmpRow = range.getRow(0);
+            var firstRow = tmpRow.getEntireRow();
 
             range.load('text');
+            firstRow.load('address');
+            firstCol.load('address');
+
             return ctx.sync().then(function() {
+
+                var tmp_offset = firstCol.address;
+                var col_offset = tmp_offset.substring(tmp_offset.indexOf("!") + 1, tmp_offset.indexOf(":"));
+                var tmp_row = firstRow.address;
+                var row_offset = Number(tmp_row.substring(tmp_row.indexOf("!") + 1, tmp_row.indexOf(":")));
+                var add_col = getNumberFromChar(col_offset);
 
                 for (var run = 0; run < range.text[0].length - 1; run++) {
                     for (var run2 = run + 1; run2 < range.text[0].length; run2++) {
@@ -285,8 +281,8 @@ function hideAdvancedCount() {
                         el.textContent = range.text[0][i];
                     }
                     else {
-                        el.value = "Column " + getCharFromNumber(i);
-                        el.textContent = "Column " + getCharFromNumber(i - 1);
+                        el.value = "Column " + getCharFromNumber(i + add_col);
+                        el.textContent = "Column " + getCharFromNumber(i + add_col);
                     }
                     document.getElementById("column1_options").appendChild(el);
                 }
@@ -304,6 +300,70 @@ function hideAdvancedCount() {
 
     }
 
+    function step2Show() {
+
+        $('#step1').hide();
+        $('#step2').show();
+        $('#step3').hide();
+        $('#step4').hide();
+
+        Excel.run(function (ctx) {
+
+            return ctx.sync().then(function() {
+
+            });
+
+        }).catch(function(error) {
+            console.log("Error: " + error);
+            if (error instanceof OfficeExtension.Error) {
+                console.log("Debug info: " + JSON.stringify(error.debugInfo));
+            }
+        });
+    }
+
+    function step3Show() {
+
+        $('#step1').hide();
+        $('#step2').hide();
+        $('#step3').show();
+        $('#step4').hide();
+
+        Excel.run(function (ctx) {
+
+            return ctx.sync().then(function() {
+
+            });
+
+        }).catch(function(error) {
+            console.log("Error: " + error);
+            if (error instanceof OfficeExtension.Error) {
+                console.log("Debug info: " + JSON.stringify(error.debugInfo));
+            }
+        });
+    }
+
+
+    function step4Show() {
+
+        $('#step1').hide();
+        $('#step2').hide();
+        $('#step3').hide();
+        $('#step4').show();
+
+        Excel.run(function (ctx) {
+
+            return ctx.sync().then(function() {
+
+            });
+
+        }).catch(function(error) {
+            console.log("Error: " + error);
+            if (error instanceof OfficeExtension.Error) {
+                console.log("Debug info: " + JSON.stringify(error.debugInfo));
+            }
+        });
+    }
+
 
     function extractValue() {
 
@@ -311,7 +371,12 @@ function hideAdvancedCount() {
 
             var worksheet = ctx.workbook.worksheets.getActiveWorksheet();
             var range_all = worksheet.getRange();
-            var range = range_all.getUsedRange();
+            var range = range_all.getUsedRange(true);
+            var firstCell = range.getColumn(0);
+            var firstCol = firstCell.getEntireColumn();
+            var tmpRow = range.getRow(0);
+            var firstRow = tmpRow.getEntireRow();
+
             var selected_identifier = document.getElementById('column1_options').value;
 
             //get character where to start extracting and translate string into delimiter
@@ -386,20 +451,30 @@ function hideAdvancedCount() {
             //get used range in active Sheet
             range.load('text');
             var range_all_adding_to = worksheet.getRange();
-            var range_adding_to = range_all_adding_to.getUsedRange();
+            var range_adding_to = range_all_adding_to.getUsedRange(true);
 
             range_adding_to.load('address');
             range_adding_to.load('text');
+
             worksheet.load('name');
+            firstRow.load('address');
+            firstCol.load('address');
 
             return ctx.sync().then(function() {
 
-                backupForUndo(range_adding_to);
+                var tmp_offset = firstCol.address;
+                var col_offset = tmp_offset.substring(tmp_offset.indexOf("!") + 1, tmp_offset.indexOf(":"));
+                var tmp_row = firstRow.address;
+                var row_offset = Number(tmp_row.substring(tmp_row.indexOf("!") + 1, tmp_row.indexOf(":")));
+                var add_col = getNumberFromChar(col_offset);
+                var startCell = col_offset + row_offset;
 
-                var header = 0;
+                backupForUndo(range, startCell, add_col, row_offset);
+
                 //get column in header from which to extract value
+                var header = 0;
                 for (var k = 0; k < range.text[0].length; k++){
-                    if (selected_identifier == range.text[0][k] || selected_identifier == "Column " + getCharFromNumber(k)){
+                    if (selected_identifier == range.text[0][k] || selected_identifier == "Column " + getCharFromNumber(k + add_col)){
                         header = k;
                     }
                 }
@@ -538,7 +613,7 @@ function hideAdvancedCount() {
                     }
 
                     //get position where to insert extracted value
-                    var column_char = getCharFromNumber(header + 1);
+                    var column_char = getCharFromNumber(header + add_col + 1);
 
                     //get value to extract
                     if (position2 > position1) {
@@ -558,20 +633,21 @@ function hideAdvancedCount() {
 
 
 
-                var column_char = getCharFromNumber(header + 1);
+                var column_char = getCharFromNumber(header + add_col + 1);
                 var rangeaddress = column_char + ":" + column_char;
                 var range_insert = ctx.workbook.worksheets.getActiveWorksheet().getRange(rangeaddress);
                 range_insert.insert("Right");
 
-                var insert_address = column_char + 1 + ":" + column_char + range.text.length;
+                var insert_address = column_char + row_offset + ":" + column_char + (range.text.length + row_offset - 1);
                 addExtractedValue(extracted_array, insert_address);
+
 
                 if (document.getElementById('createBackup').checked == true) {
                     var sheet_count = Office.context.document.settings.get('backup_sheet_count') + 1;
                     Office.context.document.settings.set('backup_sheet_count', sheet_count);
                     Office.context.document.settings.saveAsync();
                     var newName = worksheet.name + "(" + sheet_count + ")";
-                    addBackupSheet(newName, function() {
+                    addBackupSheet(newName, startCell, add_col, row_offset, function() {
                         var txt = document.createElement("p");
                         txt.className = "ms-font-xs ms-embedded-dialog__content__text";
                         txt.innerHTML = "PrepJet extracted " + extract_count + " values. " + empty_count + " data entries did not contain the specified delimiter or delimiter position."
@@ -608,7 +684,7 @@ function hideAdvancedCount() {
 
             var worksheet = ctx.workbook.worksheets.getActiveWorksheet();
             var range_all = worksheet.getRange();
-            var range = range_all.getUsedRange();
+            var range = range_all.getUsedRange(true);
 
             range.load('text');
             worksheet.load('name');

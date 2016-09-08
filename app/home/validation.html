@@ -181,14 +181,14 @@
                 </div>
             </div>
             <div id="condition1">
-            <table>
+            <table id="matchCriteria">
                 <tr>
-                    <td class="tableval">
+                    <td id="smalldrop_col">
                         <div id="explanation">
                             <label class="ms-Label">If the content in column</p>
                         </div>
                     </td>
-                    <td>
+                    <td id="colright">
                         <div id="simple_dropdown" class="ms-Dropdown table_simple1" tabindex="1">
                             <i class="ms-Dropdown-caretDown ms-Icon ms-Icon--caretDown"></i>
                             <select id="column_simple1" class="ms-Dropdown-select"></select>
@@ -196,7 +196,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td class="tableval">
+                    <td id="smalldrop_col">
                          <!--dropdown for operator-->
                         <div class="ms-Dropdown dropdown_table" tabindex="1">
                             <i class="ms-Dropdown-caretDown ms-Icon ms-Icon--caretDown"></i>
@@ -211,7 +211,7 @@
                             </select>
                         </div>
                     </td>
-                    <td>
+                    <td id="colright">
                         <div id="delimiter_beginning1" class="ms-TextField ms-TextField--placeholder">
                             <label id="ifplaceholder" class="ms-Label">Type condition</label>
                             <input id="if_condition1" class="ms-TextField-field" type="text" onfocus="setFocus(0)">
@@ -219,12 +219,12 @@
                     </td>
                 </tr>
                 <tr>
-                    <td>
+                    <td id="smalldrop_col">
                         <div id="explanation_and">
                             <label class="ms-Label">and</p>
                         </div>
                     </td>
-                    <td>
+                    <td id="colright">
                         <div id="between_beginning1" class="ms-TextField ms-TextField--placeholder">
                             <label id="ifandplaceholder" class="ms-Label">Range end (included)</label>
                             <input id="if_between_condition1" class="ms-TextField-field" type="text" onfocus="setFocus(1)">
@@ -245,14 +245,14 @@
             </table>
     </div>
         <div id="tmp_hide">
-            <table>
+            <table id="matchCriteria">
                 <tr>
-                    <td class="tableval">
+                    <td id="smalldrop_col">
                         <div id="explanation">
                             <label class="ms-Label">then the content in column</p>
                         </div>
                     </td>
-                    <td>
+                    <td id="colright">
                         <!--dropdown for THEN-->
                         <div id="advanced_dropdown2" class="ms-Dropdown dropdown_table_col2" tabindex="1">
                             <i class="ms-Dropdown-caretDown ms-Icon ms-Icon--caretDown"></i>
@@ -261,12 +261,12 @@
                     </td>
                 </tr>
                 <tr>
-                    <td class="tableval">
+                    <td id="smalldrop_col">
                         <div id="explanation">
                             <label class="ms-Label">has to be</p>
                         </div>
                     </td>
-                    <td>
+                    <td id="colright">
                         <!--dropdown for then operator-->
                         <div class="ms-Dropdown dropdown_table" tabindex="1">
                             <i class="ms-Dropdown-caretDown ms-Icon ms-Icon--caretDown"></i>
@@ -283,20 +283,20 @@
                     </td>
                 </tr>
                 <tr>
-                    <td class="tableval">
+                    <td id="smalldrop_col">
                         <div id="delimiter_end" class="ms-TextField ms-TextField--placeholder">
                             <label id="thenplaceholder" class="ms-Label">Type condition</label>
                             <input id="then_condition" class="ms-TextField-field" type="text" onfocus="setFocus(2)">
                         </div>
                     </td>
-                    <td>
+                    <td id="colright">
                         <div id="explanationand">
                             <label class="ms-Label">and</p>
                         </div>
                     </td>
                 </tr>
                 <tr>
-                    <td>
+                    <td id="smalldrop_col">
                         <div id="betweenand" class="ms-TextField ms-TextField--placeholder">
                             <label id="thenandplaceholder" class="ms-Label">Range end (included)</label>
                         <input id="between_and" class="ms-TextField-field" type="text" onfocus="setFocus(3)">
@@ -304,12 +304,12 @@
                     </td>
                 </tr>
                 <tr>
-                    <td>
+                    <td id="smalldrop_col">
                         <button class="ms-Button_grey" id="and_cond2">Add Condition</button>
                     </td>
                 </tr>
                 <tr>
-                    <td class="tableval">
+                    <td id="smalldrop_col">
                         <button class="ms-Button" id="apply_advanced">Validate</button>
                     </td>
                 </tr>

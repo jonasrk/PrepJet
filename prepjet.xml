@@ -7,7 +7,7 @@
 
   <!--IMPORTANT! Id must be unique for your add-in. If you clone this manifest ensure that you change this id to your own GUID ... Jonas: done -->
   <Id>dface3bd-cfc2-423a-8131-598b3ed2beaa</Id>
-  <Version>1.0.0.0</Version>
+  <Version>1.0.0.1</Version>
   <ProviderName>Pyfair Analytics</ProviderName>
   <!--Jonas: What is this?-->
   <DefaultLocale>en-US</DefaultLocale>
@@ -434,7 +434,7 @@
         <bt:String id="PJ.ExtractValuesButton.Label" DefaultValue="Extract Text" />
         <bt:String id="PJ.TrimSpacesButton.Label" DefaultValue="Trim Spaces" />
         <bt:String id="PJ.ValidationRuleButton.Label" DefaultValue="Rule-based Validation" />
-        <bt:String id="PJ.HarmonizeButton.Label" DefaultValue="Harmonize Column" />
+        <bt:String id="PJ.HarmonizeButton.Label" DefaultValue="Change Case" />
         <bt:String id="PJ.HelpButton.Label" DefaultValue="PrepJet Help" />
         <bt:String id="PJ.UndoButton.Label" DefaultValue="Undo" />
         <bt:String id="PJ.Dropdown.Label" DefaultValue="Dropdown" />

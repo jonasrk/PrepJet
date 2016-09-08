@@ -1,9 +1,10 @@
 function displayAdvancedCount() {
         $('#delimiter_count').show();
         $('.delimiter_count_dropdown').show();
-        $('#advanced_settings').hide();
-        $('#advanced_hide').show();
-        Office.context.document.settings.set('more_option', true);
+        $('#split_Value').show();
+        //$('#advanced_settings').hide();
+        //$('#advanced_hide').show();
+        //Office.context.document.settings.set('more_option', true);
 }
 
 function hideAdvancedCount() {
@@ -30,6 +31,33 @@ function redirectHome() {
     window.location = "mac_start.html";
 }
 
+function redirectExtract() {
+    window.location = "extract_values.html";
+}
+
+function backToOne() {
+    $('#content-header2').hide();
+    $('#step1').show();
+    $('#step2').hide();
+    $('#step3').hide();
+    $('#step4').hide();
+}
+
+function backToTwo() {
+    $('#content-header2').show();
+    $('#step1').hide();
+    $('#step2').show();
+    $('#step3').hide();
+    $('#step4').hide();
+}
+
+function backToThree() {
+    $('#content-header2').show();
+    $('#step1').hide();
+    $('#step2').hide();
+    $('#step3').show();
+    $('#step4').hide();
+}
 
 (function () {
     // 'use strict';
@@ -55,21 +83,36 @@ function redirectHome() {
                 $zopim.livechat.window.hide();
             });
 
+            $('#content-header2').hide();
+            $('#step2').hide();
+            $('#step3').hide();
+            $('#step4').hide();
+
 
             $('#delimiter_beginning').hide();
+            $('#split_Value').hide();
             $('#delimiter_count').Dropdown().hide();
             $('#checkbox_delimiter').hide();
-            $(".delimiter_count_dropdown").Dropdown().hide()
-            $(".keep_delimiter_dropdown").Dropdown().hide()
-            $('#advanced_hide').hide();
+            $(".delimiter_count_dropdown").Dropdown().hide();
+            //$('#advanced_hide').hide();
 
             $(".dropdown_table").Dropdown();
             $(".ms-TextField").TextField();
 
+            $('#continue1').click(step3Show);
+            $('#continue2').click(step4Show);
+            $('#back1').click(backToOne);
+            $('#back2').click(backToTwo);
+            $('#back3').click(backToThree);
+
+            $('#extractButton').click(redirectExtract);
+            $('#splitButton').click(step2Show);
             $('#split_Value').click(splitValue);
+            $('#splitApply1').click(splitValue);
+            $('#splitApply2').click(displayAdvancedCount);
             $('#buttonOk').click(highlightHeader);
-            $('#advanced_settings').click(displayAdvancedCount);
-            $('#advanced_hide').click(hideAdvancedCount);
+            //$('#advanced_settings').click(displayAdvancedCount);
+            //$('#advanced_hide').click(hideAdvancedCount);
             $('#homeButton').click(redirectHome);
 
 
@@ -80,12 +123,12 @@ function redirectHome() {
 
 
             //Show and hide error message if columns have same header name
-            document.getElementById("help_icon").onclick = function () {
+            /*document.getElementById("help_icon").onclick = function () {
                 document.getElementById('helpCallout').style.visibility = 'visible';
             }
             document.getElementById("closeCallout").onclick = function () {
                 document.getElementById('helpCallout').style.visibility = 'hidden';
-            }
+            }*/
 
             document.getElementById("refresh_icon").onclick = function () {
                 window.location = "split_values.html";
@@ -189,18 +232,31 @@ function redirectHome() {
 
             var worksheet = ctx.workbook.worksheets.getActiveWorksheet();
             var range_all = worksheet.getRange();
-            var range = range_all.getUsedRange();
+            var range = range_all.getUsedRange(true);
+            var firstCell = range.getColumn(0);
+            var firstCol = firstCell.getEntireColumn();
+            var tmpRow = range.getRow(0);
+            var firstRow = tmpRow.getEntireRow();
 
             range.load('text');
+            firstRow.load('address');
+            firstCol.load('address');
+            worksheet.load('name');
 
             return ctx.sync().then(function() {
+
+                var tmp_offset = firstCol.address;
+                var col_offset = tmp_offset.substring(tmp_offset.indexOf("!") + 1, tmp_offset.indexOf(":"));
+                var tmp_row = firstRow.address;
+                var row_offset = Number(tmp_row.substring(tmp_row.indexOf("!") + 1, tmp_row.indexOf(":")));
+                var add_col = getNumberFromChar(col_offset);
 
                 for (var run = 0; run < range.text[0].length - 1; run++) {
                     for (var run2 = run + 1; run2 < range.text[0].length; run2++) {
                         if (range.text[0][run] == range.text[0][run2] && range.text[0][run] != "") {
                             document.getElementById('showEmbeddedDialog').style.visibility = 'hidden';
-                            highlightContentInWorksheet(worksheet, getCharFromNumber(run) + 1, '#EA7F04');
-                            highlightContentInWorksheet(worksheet, getCharFromNumber(run2) + 1, '#EA7F04');
+                            highlightContentNew(worksheet.name, getCharFromNumber(run + add_col) + row_offset, '#EA7F04', function () {});
+                            highlightContentNew(worksheet.name, getCharFromNumber(run2 + add_col) + row_offset, '#EA7F04', function () {});
                         }
                     }
                 }
@@ -222,11 +278,23 @@ function redirectHome() {
 
             var worksheet = ctx.workbook.worksheets.getActiveWorksheet();
             var range_all = worksheet.getRange();
-            var range = range_all.getUsedRange();
+            var range = range_all.getUsedRange(true);
+            var firstCell = range.getColumn(0);
+            var firstCol = firstCell.getEntireColumn();
+            var tmpRow = range.getRow(0);
+            var firstRow = tmpRow.getEntireRow();
 
             range.load('text');
+            firstRow.load('address');
+            firstCol.load('address');
 
             return ctx.sync().then(function() {
+
+                var tmp_offset = firstCol.address;
+                var col_offset = tmp_offset.substring(tmp_offset.indexOf("!") + 1, tmp_offset.indexOf(":"));
+                var tmp_row = firstRow.address;
+                var row_offset = Number(tmp_row.substring(tmp_row.indexOf("!") + 1, tmp_row.indexOf(":")));
+                var add_col = getNumberFromChar(col_offset);
 
                 for (var run = 0; run < range.text[0].length - 1; run++) {
                     for (var run2 = run + 1; run2 < range.text[0].length; run2++) {
@@ -244,8 +312,8 @@ function redirectHome() {
                         el.textContent = range.text[0][i];
                     }
                     else {
-                        el.value = "Column " + getCharFromNumber(i);
-                        el.textContent = "Column " + getCharFromNumber(i);
+                        el.value = "Column " + getCharFromNumber(i + add_col);
+                        el.textContent = "Column " + getCharFromNumber(i + add_col);
                     }
                     document.getElementById("column_options").appendChild(el);
                 }
@@ -262,6 +330,74 @@ function redirectHome() {
 
     }
 
+    function step2Show() {
+
+        $('#step1').hide();
+        $('#content-header2').show();
+        $('#step2').show();
+        $('#step3').hide();
+        $('#step4').hide();
+
+        Excel.run(function (ctx) {
+
+            return ctx.sync().then(function() {
+
+            });
+
+        }).catch(function(error) {
+            console.log("Error: " + error);
+            if (error instanceof OfficeExtension.Error) {
+                console.log("Debug info: " + JSON.stringify(error.debugInfo));
+            }
+        });
+    }
+
+    function step3Show() {
+
+        $('#content-header2').show();
+        $('#step1').hide();
+        $('#step2').hide();
+        $('#step3').show();
+        $('#step4').hide();
+
+        Excel.run(function (ctx) {
+
+            return ctx.sync().then(function() {
+
+            });
+
+        }).catch(function(error) {
+            console.log("Error: " + error);
+            if (error instanceof OfficeExtension.Error) {
+                console.log("Debug info: " + JSON.stringify(error.debugInfo));
+            }
+        });
+    }
+
+
+    function step4Show() {
+
+        $('#content-header2').show();
+        $('#step1').hide();
+        $('#step2').hide();
+        $('#step3').hide();
+        $('#step4').show();
+
+        Excel.run(function (ctx) {
+
+            return ctx.sync().then(function() {
+
+            });
+
+        }).catch(function(error) {
+            console.log("Error: " + error);
+            if (error instanceof OfficeExtension.Error) {
+                console.log("Debug info: " + JSON.stringify(error.debugInfo));
+            }
+        });
+    }
+
+
     //function to split values in a column by a specified delimiter into different columns
     function splitValue() {
 
@@ -269,7 +405,12 @@ function redirectHome() {
 
             var worksheet = ctx.workbook.worksheets.getActiveWorksheet();
             var range_all = worksheet.getRange();
-            var range = range_all.getUsedRange();
+            var range = range_all.getUsedRange(true);
+            var firstCell = range.getColumn(0);
+            var firstCol = firstCell.getEntireColumn();
+            var tmpRow = range.getRow(0);
+            var firstRow = tmpRow.getEntireRow();
+
             var selected_identifier = document.getElementById('column_options').value;
 
             //get delimiter where to split and translate user input into delimiter character
@@ -290,15 +431,24 @@ function redirectHome() {
 
             range.load('text');
             worksheet.load('name');
+            firstRow.load('address');
+            firstCol.load('address');
 
             var range_all_adding_to = worksheet.getRange();
-            var range_adding_to = range_all_adding_to.getUsedRange();
+            var range_adding_to = range_all_adding_to.getUsedRange(true);
             range_adding_to.load('address');
             range_adding_to.load('text');
 
             return ctx.sync().then(function() {
 
-                backupForUndo(range_adding_to);
+                var tmp_offset = firstCol.address;
+                var col_offset = tmp_offset.substring(tmp_offset.indexOf("!") + 1, tmp_offset.indexOf(":"));
+                var tmp_row = firstRow.address;
+                var row_offset = Number(tmp_row.substring(tmp_row.indexOf("!") + 1, tmp_row.indexOf(":")));
+                var add_col = getNumberFromChar(col_offset);
+                var startCell = col_offset + row_offset;
+
+                backupForUndo(range, startCell, add_col, row_offset);
 
                 function getCountDelimiter () {
                     var count_delimiter = 0;
@@ -320,7 +470,7 @@ function redirectHome() {
                 //get column number which to split
                 var header = 0;
                 for (var k = 0; k < range.text[0].length; k++){
-                    if (selected_identifier == range.text[0][k] || selected_identifier == "Column " + getCharFromNumber(k)){
+                    if (selected_identifier == range.text[0][k] || selected_identifier == "Column " + getCharFromNumber(k + add_col)){
                         header = k;
                     }
                 }
@@ -403,22 +553,21 @@ function redirectHome() {
 
                 //insert empty columns right to split column for splitted parts
                 for (var j = 1; j < max_array_length; j++) {
-                    var column_char = getCharFromNumber(header + 1);
+                    var column_char = getCharFromNumber(header + add_col + 1);
                     var rangeaddress = column_char + ":" + column_char;
                     var range_insert = ctx.workbook.worksheets.getActiveWorksheet().getRange(rangeaddress);
                     range_insert.insert("Right");
                 }
 
-                var insert_address = getCharFromNumber(header) + 1 + ":" + getCharFromNumber(header + max_array_length - 1) + range.text.length;
+                var insert_address = getCharFromNumber(header + add_col) + row_offset + ":" + getCharFromNumber(header + add_col + max_array_length - 1) + (range.text.length + row_offset - 1);
                 addSplitValue(split_array, insert_address);
-
 
                 if (document.getElementById('createBackup').checked == true) {
                     var sheet_count = Office.context.document.settings.get('backup_sheet_count') + 1;
                     Office.context.document.settings.set('backup_sheet_count', sheet_count);
                     Office.context.document.settings.saveAsync();
                     var newName = worksheet.name + "(" + sheet_count + ")";
-                    addBackupSheet(newName, function() {
+                    addBackupSheet(newName, startCell, add_col, row_offset, function() {
                         var txt = document.createElement("p");
                         txt.className = "ms-font-xs ms-embedded-dialog__content__text";
                         txt.innerHTML = "PrepJet successfully splitted your data."
@@ -454,7 +603,7 @@ function redirectHome() {
 
             var worksheet = ctx.workbook.worksheets.getActiveWorksheet();
             var range_all = worksheet.getRange();
-            var range = range_all.getUsedRange();
+            var range = range_all.getUsedRange(true);
 
             range.load('text');
             worksheet.load('name');

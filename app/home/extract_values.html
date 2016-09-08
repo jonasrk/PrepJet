@@ -64,14 +64,12 @@
                 <button id="homeButton" class="ms-Button_homelogo">
                     <img class="page1" src="../../images/logo_lg.png" />
                 </button>
-                <!--div>
-                    <img class="page1" src="../../images/logo_lg.png" />
-                </div-->
             </td>
         </tr>
     </table>
 </div>
 
+<!--Dialog for same header names-->
 <div id="showEmbeddedDialog" class="ms-embedded-dialog__options" >
     <div class="ms-Dialog ms-Dialog--close">
         <div class="ms-Overlay js-DialogAction--close"></div>
@@ -96,6 +94,7 @@
     </div>
 </div>
 
+<!--Dialog for success message-->
 <div id="resultDialog" class="ms-embedded-dialog__options" >
     <div class="ms-Dialog ms-Dialog--close">
         <div class="ms-Overlay js-DialogAction--close"></div>
@@ -122,89 +121,293 @@
 
 <div id="content-main">
     <div class="padding">
-        <!--dropdown for column-->
-        <div id="large_drop" class="ms-Dropdown dropdown_table_col" tabindex="1">
-            <label class="ms-Label">Select column from which to extract text</label>
-            <i class="ms-Dropdown-caretDown ms-Icon ms-Icon--caretDown"></i>
-            <select id="column1_options" class="ms-Dropdown-select"></select>
+        <div id="step1">
+           <!--dropdown for column-->
+            <div id="large_drop" class="ms-Dropdown dropdown_table_col" tabindex="1">
+                <label class="ms-Label">Select column from which to extract text</label>
+                <i class="ms-Dropdown-caretDown ms-Icon ms-Icon--caretDown"></i>
+                <select id="column1_options" class="ms-Dropdown-select"></select>
+            </div>
+            <table class="tableupperborder">
+                <tr>
+                    <td>
+                        <div class="ms-ChoiceField">
+                            <input id="createBackup" class="ms-ChoiceField-input" type="checkbox">
+                            <label for="createBackup" class="ms-ChoiceField-field">
+                                <span class="ms-Label">Create a backup sheet</span>
+                            </label>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+            <!--continue button-->
+            <button class="ms-Button_grey" id="continue1">Continue</button>
+            <div id="pageMarker">
+                <p id="pageMarkers">
+                    <span id="page0Marker" class="fontColor_grey">
+                        <i class="ms-Icon ms-Icon--circleFilled" aria-hidden="true"></i>
+                    </span>
+                    <span id="page1Marker" class="fontColor_orange">
+                        <i class="ms-Icon ms-Icon--circleFilled" aria-hidden="true"></i>
+                    </span>
+                    <span id="page2Marker" class="fontColor_grey">
+                        <i class="ms-Icon ms-Icon--circleFilled" aria-hidden="true"></i>
+                    </span>
+                    <span id="page3Marker" class="fontColor_grey">
+                        <i class="ms-Icon ms-Icon--circleFilled" aria-hidden="true"></i>
+                    </span>
+                    <span id="page4Marker" class="fontColor_grey">
+                        <i class="ms-Icon ms-Icon--circleFilled" aria-hidden="true"></i>
+                    </span>
+                </p>
+            </div>
         </div>
-        <div id="explanation">
-            <label class="ms-Label">Select delimiters to start and end extracting a text part:</p>
+
+        <div id="step2">
+            <div id="explanation">
+                <label class="ms-Label">Specify where to start and end extracting</p>
+            </div>
+                <table id="tablesmall">
+                    <tr>
+                        <td id="pictures">
+                            <img class="page1" src="../../images/extract_Delimiter.png" />
+                        </td>
+                    </tr>
+                </table>
+            <!--div id="darkBox">
+                <label class="ms-Label">... | part to be extracted | ...</p>
+            </div-->
+            <table id="tablesmall">
+                <tr>
+                    <td id="smalldrop_col">
+                        <!--dropdown fpr beginning-->
+                        <div class="ms-Dropdown dropdown_table" tabindex="1">
+                            <label class="ms-Label">Start Delimiter</label>
+                            <i class="ms-Dropdown-caretDown ms-Icon ms-Icon--caretDown"></i>
+                            <select id="beginning_options" class="ms-Dropdown-select" onchange="displayFieldBegin()">
+                                <option value="col_beginning">Beginning of cell</option>
+                                <option value="whitespace_b">Whitespace</option>
+                                <option value="semicolon_b">Semicolon</option>
+                                <option value="comma_b">Comma</option>
+                                <option value="custom_b">Custom</option>
+                            </select>
+                        </div>
+                    </td>
+                    <td id="colright">
+                        <!--dropdown for ending-->
+                        <div class="ms-Dropdown dropdown_table" tabindex="1">
+                            <label class="ms-Label">End Delimiter</label>
+                            <i class="ms-Dropdown-caretDown ms-Icon ms-Icon--caretDown"></i>
+                            <select id="ending_options" class="ms-Dropdown-select" onchange="displayFieldEnd()">
+                                <option value="col_end">End of cell</option>
+                                <option value="whitespace_e">Whitespace</option>
+                                <option value="semicolon_e">Semicolon</option>
+                                <option value="comma_e">Comma</option>
+                                <option value="custom_e">Custom</option>
+                            </select>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td id="smalldrop_col">
+                        <!--evtl. text field for custom ending-->
+                        <div id="delimiter_beginning" class="ms-TextField">
+                            <label class="ms-Label">Custom delimiter - Start</label>
+                            <input id="delimiter_input_b" class="ms-TextField-field" type="text">
+                            <span class="ms-TextField-description">Enter a delimiter at which to start extracting text</span>
+                        </div>
+                    </td>
+                    <td id="colright">
+                        <div id="delimiter_end" class="ms-TextField">
+                            <label class="ms-Label">Custom delimiter - End</label>
+                            <input id="delimiter_input_e" class="ms-TextField-field" type="text">
+                            <span class="ms-TextField-description">Enter a delimiter at which to end extracting text</span>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+            <table>
+                <tr>
+                    <td>
+                        <div class="ms-ChoiceField">
+                            <input id="demo-checkbox-unselected" class="ms-ChoiceField-input" type="checkbox">
+                            <label id="checkbox" for="demo-checkbox-unselected" class="ms-ChoiceField-field">
+                                <span class="ms-Label">Include delimiter in extracted text</span>
+                            </label>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+            <!--back button-->
+            <button class="ms-Button_grey" id="back1">Back</button>
+            <!--continue button-->
+            <button class="ms-Button_grey" id="continue2">Continue</button>
+            <div id="pageMarker">
+                <p id="pageMarkers">
+                    <span id="page0Marker" class="fontColor_grey">
+                        <i class="ms-Icon ms-Icon--circleFilled" aria-hidden="true"></i>
+                    </span>
+                    <span id="page1Marker" class="fontColor_grey">
+                        <i class="ms-Icon ms-Icon--circleFilled" aria-hidden="true"></i>
+                    </span>
+                    <span id="page2Marker" class="fontColor_orange">
+                        <i class="ms-Icon ms-Icon--circleFilled" aria-hidden="true"></i>
+                    </span>
+                    <span id="page3Marker" class="fontColor_grey">
+                        <i class="ms-Icon ms-Icon--circleFilled" aria-hidden="true"></i>
+                    </span>
+                    <span id="page4Marker" class="fontColor_grey">
+                        <i class="ms-Icon ms-Icon--circleFilled" aria-hidden="true"></i>
+                    </span>
+                </p>
+            </div>
         </div>
-        <table id="tablesmall">
-            <tr>
-                <td id="smalldrop_col">
-                    <!--dropdown fpr beginning-->
-                    <div class="ms-Dropdown dropdown_table" tabindex="1">
-                        <label class="ms-Label">Beginning</label>
-                        <i class="ms-Dropdown-caretDown ms-Icon ms-Icon--caretDown"></i>
-                        <select id="beginning_options" class="ms-Dropdown-select" onchange="displayFieldBegin()">
-                            <option value="col_beginning">Beginning of cell</option>
-                            <option value="whitespace_b">Whitespace</option>
-                            <option value="semicolon_b">Semicolon</option>
-                            <option value="comma_b">Comma</option>
-                            <option value="custom_b">Custom</option>
-                        </select>
-                    </div>
-                </td>
-                <td id="colright">
-                    <!--dropdown for ending-->
-                    <div class="ms-Dropdown dropdown_table" tabindex="1">
-                        <label class="ms-Label">End</label>
-                        <i class="ms-Dropdown-caretDown ms-Icon ms-Icon--caretDown"></i>
-                        <select id="ending_options" class="ms-Dropdown-select" onchange="displayFieldEnd()">
-                            <option value="col_end">End of cell</option>
-                            <option value="whitespace_e">Whitespace</option>
-                            <option value="semicolon_e">Semicolon</option>
-                            <option value="comma_e">Comma</option>
-                            <option value="custom_e">Custom</option>
-                        </select>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td id="smalldrop_col">
-                    <!--evtl. text field for custom ending-->
-                    <div id="delimiter_beginning" class="ms-TextField">
-                        <label class="ms-Label">Custom delimiter - Start</label>
-                        <input id="delimiter_input_b" class="ms-TextField-field" type="text">
-                        <span class="ms-TextField-description">Enter a delimiter at which to start extracting text</span>
-                    </div>
-                </td>
-                <td id="colright">
-                    <div id="delimiter_end" class="ms-TextField">
-                        <label class="ms-Label">Custom delimiter - End</label>
-                        <input id="delimiter_input_e" class="ms-TextField-field" type="text">
-                        <span class="ms-TextField-description">Enter a delimiter at which to end extracting text</span>
-                    </div>
-                </td>
-            </tr>
-        </table>
-        <table>
-            <tr>
-                <td>
-                    <div class="ms-ChoiceField">
-                        <input id="demo-checkbox-unselected" class="ms-ChoiceField-input" type="checkbox">
-                        <label id="checkbox" for="demo-checkbox-unselected" class="ms-ChoiceField-field">
-                            <span class="ms-Label">Include delimiter in extracted text</span>
-                        </label>
-                    </div>
-                </td>
-            </tr>
-        </table>
-        <table class="tableborder">
-            <tr>
-                <td>
-                    <div class="ms-ChoiceField">
-                        <input id="createBackup" class="ms-ChoiceField-input" type="checkbox">
-                        <label for="createBackup" class="ms-ChoiceField-field">
-                            <span class="ms-Label">Create a backup sheet</span>
-                        </label>
-                    </div>
-                </td>
-            </tr>
-        </table>
-        <div id="helpCallout" class="ms-Callout ms-Callout--close ms-Callout--arrowLeft">
+
+        <div id="step3">
+            <div id="explanation">
+                <label class="ms-Label">Select the position of your start delimiter at which to extract the text part:</p>
+            </div>
+                <table id="tablesmall">
+                    <tr>
+                        <td id="pictures">
+                            <img class="page1" src="../../images/extract_start_position.png" />
+                        </td>
+                    </tr>
+                </table>
+            <!--div id="darkBox">
+                <label class="ms-Label">... | ... | ... | part to be extracted</p>
+            </div-->
+            <table id="tablesmall">
+                <tr>
+                    <td id="smalldrop_col">
+                        <div id="del_count_start" class="ms-Dropdown del_count_dropdown_s" tabindex="1">
+                            <label class="ms-Label">Start position</label>
+                            <i class="ms-Dropdown-caretDown ms-Icon ms-Icon--caretDown"></i>
+                            <select id="delimiter_count_start" class="ms-Dropdown-select">
+                                <option value="one">Default (First)</option>
+                                <option value="two">Second</option>
+                                <option value="three">Third</option>
+                                <option value="four">Fourth</option>
+                                <option value="five">Fifth</option>
+                                <option value="six">Sixth</option>
+                                <option value="seven">Seventh</option>
+                                <option value="eight">Eighth</option>
+                                <option value="nine">Ninth</option>
+                            </select>
+                        </div>
+                    </td>
+                    <td id="colright">
+                        <!--dropdown for delimiter count-->
+                        <div class="ms-Dropdown del_count_dropdown_s" tabindex="1">
+                            <label class="ms-Label">Count direction</label>
+                            <i class="ms-Dropdown-caretDown ms-Icon ms-Icon--caretDown"></i>
+                            <select id="del_count_drop_start" class="ms-Dropdown-select">
+                                <option value="left">From Left</option>
+                                <option value="right">From Right</option>
+                            </select>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+            <!--back button-->
+            <button class="ms-Button_grey" id="back2">Back</button>
+            <!--continue button-->
+            <button class="ms-Button_grey" id="continue3">Continue</button>
+            <div id="pageMarker">
+                <p id="pageMarkers">
+                    <span id="page0Marker" class="fontColor_grey">
+                        <i class="ms-Icon ms-Icon--circleFilled" aria-hidden="true"></i>
+                    </span>
+                    <span id="page1Marker" class="fontColor_grey">
+                        <i class="ms-Icon ms-Icon--circleFilled" aria-hidden="true"></i>
+                    </span>
+                    <span id="page2Marker" class="fontColor_grey">
+                        <i class="ms-Icon ms-Icon--circleFilled" aria-hidden="true"></i>
+                    </span>
+                    <span id="page3Marker" class="fontColor_orange">
+                        <i class="ms-Icon ms-Icon--circleFilled" aria-hidden="true"></i>
+                    </span>
+                    <span id="page4Marker" class="fontColor_grey">
+                        <i class="ms-Icon ms-Icon--circleFilled" aria-hidden="true"></i>
+                    </span>
+                </p>
+            </div>
+        </div>
+
+        <div id="step4">
+            <div id="explanation">
+                <label class="ms-Label">Select the position of your end delimiter at which to extract the text part:</p>
+            </div>
+                <table id="tablesmall">
+                    <tr>
+                        <td id="pictures">
+                            <img class="page1" src="../../images/extract_end_position.png" />
+                        </td>
+                    </tr>
+                </table>
+            <!--div id="darkBox">
+                <label class="ms-Label">part to be extracted | ... |... | ... </p>
+            </div-->
+            <table id="tablesmall">
+                <tr>
+                    <td id="smalldrop_col">
+                        <div id="del_count_end" class="ms-Dropdown del_count_dropdown_e" tabindex="1">
+                            <label class="ms-Label">End position</label>
+                            <i class="ms-Dropdown-caretDown ms-Icon ms-Icon--caretDown"></i>
+                            <select id="delimiter_count_end" class="ms-Dropdown-select">
+                                <option value="none">Default</option>
+                                <option value="one">First</option>
+                                <option value="two">Second</option>
+                                <option value="three">Third</option>
+                                <option value="four">Fourth</option>
+                                <option value="five">Fifth</option>
+                                <option value="six">Sixth</option>
+                                <option value="seven">Seventh</option>
+                                <option value="eight">Eighth</option>
+                                <option value="nine">Ninth</option>
+                            </select>
+                        </div>
+                    </td>
+                    <td id="colright">
+                        <!--dropdown for delimiter count-->
+                        <div class="ms-Dropdown del_count_dropdown_e" tabindex="1">
+                            <label class="ms-Label">Count direction</label>
+                            <i class="ms-Dropdown-caretDown ms-Icon ms-Icon--caretDown"></i>
+                            <select id="del_count_drop_end" class="ms-Dropdown-select">
+                                <option value="left">From Left</option>
+                                <option value="right">From Right</option>
+                            </select>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+            <!--back button-->
+            <button class="ms-Button_grey" id="back3">Back</button>
+            <!--extract button-->
+            <button class="ms-Button" id="extract_Value">Extract</button>
+            <div id="pageMarker">
+                <p id="pageMarkers">
+                    <span id="page0Marker" class="fontColor_grey">
+                        <i class="ms-Icon ms-Icon--circleFilled" aria-hidden="true"></i>
+                    </span>
+                    <span id="page1Marker" class="fontColor_grey">
+                        <i class="ms-Icon ms-Icon--circleFilled" aria-hidden="true"></i>
+                    </span>
+                    <span id="page2Marker" class="fontColor_grey">
+                        <i class="ms-Icon ms-Icon--circleFilled" aria-hidden="true"></i>
+                    </span>
+                    <span id="page3Marker" class="fontColor_grey">
+                        <i class="ms-Icon ms-Icon--circleFilled" aria-hidden="true"></i>
+                    </span>
+                    <span id="page4Marker" class="fontColor_orange">
+                        <i class="ms-Icon ms-Icon--circleFilled" aria-hidden="true"></i>
+                    </span>
+                </p>
+            </div>
+        </div>
+
+
+        <!--div id="helpCallout" class="ms-Callout ms-Callout--close ms-Callout--arrowLeft">
             <div class="ms-Callout-main">
                 <div class="ms-Callout-header">
                     <p class="ms-Callout-title">Help: Extract Values</p>
@@ -222,79 +425,12 @@
                 </div>
             </div>
         </div>
-        <div id="explanation">
-            <label class="ms-Label">Click More Options to specify the position of the selected delimiter to start and end extracting</p>
-        </div>
-        <button class="ms-Button_grey" id="advanced_settings">More Options</button>
-        <button class="ms-Button_grey" id="advanced_hide">Less Options</button>
         <button id="help_icon" class="ms-Button_icon">
             <i class="ms-Icon ms-Icon--infoCircle" aria-hidden="true"></i>
         </button>
-        <table id="tablesmall">
-            <tr>
-                <td id="smalldrop_col">
-                    <div id="del_count_start" class="ms-Dropdown del_count_dropdown_s" tabindex="1">
-                        <label class="ms-Label">Start del. position</label>
-                        <i class="ms-Dropdown-caretDown ms-Icon ms-Icon--caretDown"></i>
-                        <select id="delimiter_count_start" class="ms-Dropdown-select">
-                            <option value="one">Default</option>
-                            <option value="two">2</option>
-                            <option value="three">3</option>
-                            <option value="four">4</option>
-                            <option value="five">5</option>
-                            <option value="six">6</option>
-                            <option value="seven">7</option>
-                            <option value="eight">8</option>
-                            <option value="nine">9</option>
-                        </select>
-                    </div>
-                </td>
-                <td id="colright">
-                    <!--dropdown for delimiter count-->
-                    <div class="ms-Dropdown del_count_dropdown_s" tabindex="1">
-                        <label class="ms-Label">Count direction</label>
-                        <i class="ms-Dropdown-caretDown ms-Icon ms-Icon--caretDown"></i>
-                        <select id="del_count_drop_start" class="ms-Dropdown-select">
-                            <option value="left">From Left</option>
-                            <option value="right">From Right</option>
-                        </select>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td id="smalldrop_col">
-                    <div id="del_count_end" class="ms-Dropdown del_count_dropdown_e" tabindex="1">
-                        <label class="ms-Label">End del. position</label>
-                        <i class="ms-Dropdown-caretDown ms-Icon ms-Icon--caretDown"></i>
-                        <select id="delimiter_count_end" class="ms-Dropdown-select">
-                            <option value="none">Default</option>
-                            <option value="one">1</option>
-                            <option value="two">2</option>
-                            <option value="three">3</option>
-                            <option value="four">4</option>
-                            <option value="five">5</option>
-                            <option value="six">6</option>
-                            <option value="seven">7</option>
-                            <option value="eight">8</option>
-                            <option value="nine">9</option>
-                        </select>
-                    </div>
-                </td>
-                <td id="colright">
-                    <!--dropdown for delimiter count-->
-                    <div class="ms-Dropdown del_count_dropdown_e" tabindex="1">
-                        <label class="ms-Label">Count direction</label>
-                        <i class="ms-Dropdown-caretDown ms-Icon ms-Icon--caretDown"></i>
-                        <select id="del_count_drop_end" class="ms-Dropdown-select">
-                            <option value="left">From Left</option>
-                            <option value="right">From Right</option>
-                        </select>
-                    </div>
-                </td>
-            </tr>
-        </table>
-        <!--split button-->
-        <button class="ms-Button" id="extract_Value">Extract</button>
+        <div id="explanationMoreOptions">
+            <label class="ms-Label">Specify the position of your selected start and end delimiter as well as the direction from which to count the position:</p>
+        </div-->
     </div>
 </div>
 <div class="placeholder"></div>

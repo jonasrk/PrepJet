@@ -29,7 +29,7 @@
 
     <link href="intro.css" rel="stylesheet" type="text/css"/>
     <script src="helpers.js"></script>
-    <script src="help.js"></script>
+    <script src="mac_start.js"></script>
 
     <!--PrepJet Fabric Components Imports-->
     <script src="../../bower_components/office-ui-fabric/src/components/TextField/Jquery.TextField.js"></script>
@@ -60,87 +60,107 @@
                 <p class="ms-fontWeight-light">PrepJet offers several functions to speed up and simplify working with data in Excel. Click on a function below to start preparing your data sets.</p><br>
                 <p class="ms-fontWeight-light">By clicking on the PrepJet Logo you will get back to the Home Screen.</p>
             </div>
-            <div>
+            <div class="ms-firstrun-pages__content">
                 <p class="ms-fontWeight-light">
                     <table>
                         <tr>
                             <td>
-                                <img class="page1" src="../../images/trimspaces.png" />
+                                <button id="trimButton" class="ms-Button_Func">
+                                    <img class="page1" src="../../images/trimspaces.png" />
+                                </button>
                             </td>
                             <td>
-                                <a href="https://localhost:8443/app/home/trim_spaces.html" class="ms-Link_White">Trim Spaces</a><br>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <img class="page1" src="../../images/harmonize.png" />
-                            </td>
-                            <td>
-                                <a href="https://localhost:8443/app/home/harmonize.html" class="ms-Link_White">Harmonize Column</a><br>
+                                <a href="trim_spaces.html" class="ms-Link_White">Trim Spaces</a><br>
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                <img class="page1" src="../../images/extractvalues.png" />
+                                <button id="harmonizeButton" class="ms-Button_Func">
+                                    <img class="page1" src="../../images/harmonize.png" />
+                                </button>
                             </td>
                             <td>
-                                <a href="https://localhost:8443/app/home/extract_values.html" class="ms-Link_White">Extract Text</a><br>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <img class="page1" src="../../images/splitvalues.png" />
-                            </td>
-                            <td>
-                                <a href="https://localhost:8443/app/home/split_values.html" class="ms-Link_White">Split Cell Content</a><br>
+                                <a href="harmonize.html" class="ms-Link_White">Change Case</a><br>
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                <img class="page1" src="../../images/addcolumn.png" />
+                                <button id="extractButton" class="ms-Button_Func">
+                                    <img class="page1" src="../../images/extractvalues.png" />
+                                </button>
                             </td>
                             <td>
-                                <a href="https://localhost:8443/app/home/merge_columns.html" class="ms-Link_White">Lookup Data</a><br>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <img class="page1" src="../../images/detectoutlier.png" />
-                            </td>
-                            <td>
-                                <a href="https://localhost:8443/app/home/inconsistency.html" class="ms-Link_White">Detect Inconsistencies</a><br>
+                                <a href="extract_values.html" class="ms-Link_White">Extract Text</a><br>
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                <img class="page1" src="../../images/customIncon.png" />
+                                <button id="splitButton" class="ms-Button_Func">
+                                    <img class="page1" src="../../images/splitvalues.png" />
+                                </button>
                             </td>
                             <td>
-                                <a href="https://localhost:8443/app/home/custom_incon.html" class="ms-Link_White">Custom Inconsistencies</a><br>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <img class="page1" src="../../images/removeduplicates.png" />
-                            </td>
-                            <td>
-                                <a href="https://localhost:8443/app/home/duplicates.html" class="ms-Link_White">Detect Duplicates</a><br>
+                                <a href="split_values.html" class="ms-Link_White">Split Cell Content</a><br>
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                <img class="page1" src="../../images/validationrule.png" />
+                                <button id="lookupButton" class="ms-Button_Func">
+                                    <img class="page1" src="../../images/addcolumn.png" />
+                                </button>
                             </td>
                             <td>
-                                <a href="https://localhost:8443/app/home/validation.html" class="ms-Link_White">Rule-based Validation</a><br>
+                                <a href="merge_columns.html" class="ms-Link_White">Lookup Data</a><br>
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                <img class="page1" src="../../images/help.png" />
+                                <button id="inconButton" class="ms-Button_Func">
+                                    <img class="page1" src="../../images/detectoutlier.png" />
+                                </button>
                             </td>
                             <td>
-                                <a href="https://localhost:8443/app/home/help.html" class="ms-Link_White">Help</a><br>
+                                <a href="inconsistency.html" class="ms-Link_White">Detect Inconsistencies</a><br>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <button id="customInconButton" class="ms-Button_Func">
+                                    <img class="page1" src="../../images/customIncon.png" />
+                                </button>
+                            </td>
+                            <td>
+                                <a href="custom_incon.html" class="ms-Link_White">Custom Inconsistencies</a><br>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <button id="duplicatesButton" class="ms-Button_Func">
+                                    <img class="page1" src="../../images/removeduplicates.png" />
+                                </button>
+                            </td>
+                            <td>
+                                <a href="duplicates.html" class="ms-Link_White">Detect Duplicates</a><br>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <button id="validationButton" class="ms-Button_Func">
+                                    <img class="page1" src="../../images/validationrule.png" />
+                                </button>
+                            </td>
+                            <td>
+                                <a href="validation.html" class="ms-Link_White">Rule-based Validation</a><br>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <button id="helpButton" class="ms-Button_Func">
+                                    <img class="page1" src="../../images/help.png" />
+                                </button>
+                            </td>
+                            <td>
+                                <a href="help.html" class="ms-Link_White">Help</a><br>
                             </td>
                         </tr>
                     </table>

@@ -6,14 +6,19 @@
     app.firstrun = {};
     app.firstrun.stage = 0;
 
-
     $(document).ready(function () {
 
         function redirect_to_funct(){
-            window.location = Office.context.document.settings.get('last_clicked_function');
+            try {
+                //if (Office.context.document.settings.get('last_clicked_function') != null) {
+                    window.location = Office.context.document.settings.get('last_clicked_function');
+                }
+            catch (err) {
+                window.location = "mac_start.html";
+            }
         }
 
-        app.firstrun.totalPages = $('#pageMarkers').get(0).childElementCount;
+        app.firstrun.totalPages = $('#pageMarkers').get(0).childElementCount - 1;
 
         // Navigates to a different stage
         app.firstrun.newStage = function () {

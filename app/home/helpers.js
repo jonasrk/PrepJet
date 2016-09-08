@@ -57,122 +57,76 @@ function addNewCheckboxToContainer (id, name, container) {
 }
 
 
-function addDropdown (k) {
-    var div = document.createElement("div");
-    div.id = "condition" + k;
-    document.getElementById("condition_holder").appendChild(div);
+function getNumberFromChar (number) {
 
-    var div_drop = document.createElement("div");
-    div_drop.className = "ms-Dropdown table_simple" + k;
-    div_drop.id = "simple_dropdown" + k;
-    div.appendChild(div_drop);
+    if (number == "A") {
+        return 0;
+    } else if (number == "B") {
+        return 1;
+    } else if (number == "C") {
+        return 2;
+    } else if (number == "D") {
+        return 3;
+    } else if (number == "E") {
+        return 4;
+    } else if (number == "F") {
+        return 5;
+    } else if (number == "G") {
+        return 6;
+    } else if (number == "H") {
+        return 7;
+    } else if (number == "I") {
+        return 8;
+    } else if (number == "J") {
+        return 9;
+    } else if (number == "K") {
+        return 10;
+    } else if (number == "L") {
+        return 11;
+    } else if (number == "M") {
+        return 12;
+    } else if (number == "N") {
+        return 13;
+    } else if (number == "O") {
+        return 14;
+    } else if (number == "P") {
+        return 15;
+    } else if (number == "Q") {
+        return 16;
+    } else if (number == "R") {
+        return 17;
+    } else if (number == "S") {
+        return 18;
+    } else if (number == "T") {
+        return 19;
+    } else if (number == "U") {
+        return 20;
+    } else if (number == "V") {
+        return 21;
+    } else if (number == "W") {
+        return 22;
+    } else if (number == "X") {
+        return 23;
+    } else if (number == "Y") {
+        return 24;
+    } else if (number == "Z") {
+        return 25;
+    }
+    else {
+        var finalCol = 25;
+        for (var i = 0; i < number.length; i++) {
+            var tmp = number.substring(i,i+1);
+            if (i == number.length - 1) {
+                finalCol = finalCol + getNumberFromChar(tmp) + 1;
+            }
+            else {
+                finalCol = finalCol + 25 * getNumberFromChar(tmp) + 1 * getNumberFromChar(tmp);
+            }
+        }
+        console.log(finalCol);
+        return finalCol;
+    }
 
-    var lab = document.createElement('label');
-    lab.className = "ms-Label";
-    lab.innerHTML = "Select column";
-    div_drop.appendChild(lab);
-
-    var elemi = document.createElement("i");
-    elemi.className = "ms-Dropdown-caretDown ms-Icon ms-Icon--caretDown";
-    div_drop.appendChild(elemi);
-
-    var sel = document.createElement("select");
-    sel.id = "column_simple" + k;
-    sel.className = "ms-Dropdown-select";
-    div_drop.appendChild(sel);
-}
-
-function addOperator(k) {
-    var div_drop = document.createElement("div");
-    div_drop.className = "ms-Dropdown dropdown_table" + k;
-    document.getElementById('condition' + k).appendChild(div_drop);
-
-    var lab = document.createElement('label');
-    lab.className = "ms-Label";
-    lab.innerHTML = "Select operator";
-    div_drop.appendChild(lab);
-
-    var elemi = document.createElement("i");
-    elemi.className = "ms-Dropdown-caretDown ms-Icon ms-Icon--caretDown";
-    div_drop.appendChild(elemi);
-
-    var sel = document.createElement("select");
-    sel.id = "if_operator" + k;
-    sel.className = "ms-Dropdown-select";
-    //sel.onchange = displaySimpleBetween(k);
-    div_drop.appendChild(sel);
-
-    var el1 = document.createElement("option");
-    el1.value = "equal";
-    el1.textContent = "=";
-    sel.appendChild(el1);
-
-    var el2 = document.createElement("option");
-    el2.value = "smaller";
-    el2.textContent = "<";
-    sel.appendChild(el2);
-
-    var el3 = document.createElement("option");
-    el3.value = "greater";
-    el3.textContent = ">";
-    sel.appendChild(el3);
-
-    var el4 = document.createElement("option");
-    el4.value = "inequal";
-    el4.textContent = "!=";
-    sel.appendChild(el4);
-
-    var el5 = document.createElement("option");
-    el5.value = "between";
-    el5.textContent = "between";
-    sel.appendChild(el5);
-
-    var el6 = document.createElement("option");
-    el6.value = "notbetween";
-    el6.textContent = "not between";
-    sel.appendChild(el6);
-
-    var el7 = document.createElement("option");
-    el7.value = "inlist";
-    el7.textContent = "in (list)";
-    sel.appendChild(el7);
-}
-
-
-function addTextField(k) {
-    var div_drop = document.createElement("div");
-    div_drop.className = "ms-TextField";
-    div_drop.id = "delimiter_beginning" + k;
-    document.getElementById('condition' + k).appendChild(div_drop);
-
-    var lab = document.createElement('label');
-    lab.className = "ms-Label";
-    lab.innerHTML = "Enter condition";
-    div_drop.appendChild(lab);
-
-    var input = document.createElement("input");
-    input.id = "if_condition" + k;
-    input.className = "ms-TextField-field";
-    input.type = "text";
-    div_drop.appendChild(input);
-}
-
-function addBetweenField(k) {
-    var div_drop = document.createElement("div");
-    div_drop.className = "ms-TextField";
-    div_drop.id = "between_beginning" + k;
-    document.getElementById('condition' + k).appendChild(div_drop);
-
-    var lab = document.createElement('label');
-    lab.className = "ms-Label";
-    lab.innerHTML = "And";
-    div_drop.appendChild(lab);
-
-    var input = document.createElement("input");
-    input.id = "if_between_condition" + k;
-    input.className = "ms-TextField-field";
-    input.type = "text";
-    div_drop.appendChild(input);
 }
 
 
@@ -238,14 +192,13 @@ function getCharFromNumber (number) {
 
 }
 
-
-function addBackupSheet(sheetName, callback) {
+function addBackupSheet(sheetName, startCell, add_col, row_offset, callback) {
     Excel.run(function (ctx) {
         var wSheetName = sheetName;
         var worksheet = ctx.workbook.worksheets.add(wSheetName);
         worksheet.load('name');
         return ctx.sync().then(function() {
-            addBackupContent(worksheet.name, callback);
+            addBackupContent(worksheet.name, startCell, add_col, row_offset, callback);
         });
     }).catch(function(error) {
             console.log("Error: " + error);
@@ -255,11 +208,11 @@ function addBackupSheet(sheetName, callback) {
     });
 }
 
-function addBackupContent(sheetName, callback) {
+function addBackupContent(sheetName, startCell, add_col, row_offset, callback) {
     Excel.run(function (ctx) {
         var values = Office.context.document.settings.get('sheet_backup');
-        var end_address = getCharFromNumber(values[0].length - 1) + (values.length).toString();
-        var rangeAddress = "A1:" + end_address;
+        var end_address = getCharFromNumber(values[0].length - 1 + add_col) + (values.length + row_offset - 1).toString();
+        var rangeAddress = startCell + ":" + end_address;
         var worksheet = ctx.workbook.worksheets.getItem(sheetName);
         var range = worksheet.getRange(rangeAddress);
 
@@ -277,36 +230,52 @@ function addBackupContent(sheetName, callback) {
     });
 }
 
-
+//inserts whole column
 function addContentNew(sheetObject, rangeAddress, displayText, callback) {
     Excel.run(function (ctx) {
-    var range = ctx.workbook.worksheets.getItem(sheetObject).getRange(rangeAddress);
-    range.values = displayText;
-    range.load('text');
-    return ctx.sync().then(function() {
-        callback();
+        var range = ctx.workbook.worksheets.getItem(sheetObject).getRange(rangeAddress);
+        range.values = displayText;
+        range.load('text');
+        return ctx.sync().then(function() {
+            callback();
+        });
+    }).catch(function(error) {
+            console.log("Error: " + error);
+            if (error instanceof OfficeExtension.Error) {
+                console.log("Debug info: " + JSON.stringify(error.debugInfo));
+            }
     });
-}).catch(function(error) {
-        console.log("Error: " + error);
-        if (error instanceof OfficeExtension.Error) {
-            console.log("Debug info: " + JSON.stringify(error.debugInfo));
-        }
-});
 }
 
 
-// Helper function to add and format content in the workbook
-function addContentToWorksheet(sheetObject, rangeAddress, displayText) {
-    var range = sheetObject.getRange(rangeAddress);
-    range.values = displayText;
-    range.merge();
+//color font
+function highlightContentNew(sheetObject, rangeAddress, color, callback) {
+    Excel.run(function (ctx) {
+        var range = ctx.workbook.worksheets.getItem(sheetObject).getRange(rangeAddress);
+        range.format.font.color = color;
+        return ctx.sync();
+            callback();
+    }).catch(function(error) {
+            console.log("Error: " + error);
+            if (error instanceof OfficeExtension.Error) {
+                console.log("Debug info: " + JSON.stringify(error.debugInfo));
+            }
+    });
 }
 
-
-function highlightContentInWorksheet(sheetObject, rangeAddress, color) {
-    var range = sheetObject.getRange(rangeAddress);
-    range.format.font.color = color;
-    range.merge();
+//color cell background
+function highlightCellNew(sheetObject, rangeAddress, color, callback) {
+    Excel.run(function (ctx) {
+        var range = ctx.workbook.worksheets.getItem(sheetObject).getRange(rangeAddress);
+        range.format.fill.color = color;
+        return ctx.sync();
+            callback();
+    }).catch(function(error) {
+            console.log("Error: " + error);
+            if (error instanceof OfficeExtension.Error) {
+                console.log("Debug info: " + JSON.stringify(error.debugInfo));
+            }
+    });
 }
 
 
@@ -316,7 +285,7 @@ function highlightCellInWorksheet(sheetObject, rangeAddress, color) {
     range.merge();
 }
 
-
+//create a random color to highlight font
 function getRandomColor() {
     var letters = '0123456789ABCDEF'.split('');
     var color = '#';
@@ -327,9 +296,12 @@ function getRandomColor() {
 }
 
 
-function backupForUndo(this_range){
-
+function backupForUndo(this_range, startCell, add_col, row_offset){
+    console.log(startCell);
     Office.context.document.settings.set('sheet_backup', this_range.text);
+    Office.context.document.settings.set('startCell', startCell);
+    Office.context.document.settings.set('addCol', add_col);
+    Office.context.document.settings.set('rowOffset', row_offset);
     Office.context.document.settings.saveAsync(function (asyncResult) {
         if (asyncResult.status == Office.AsyncResultStatus.Failed) {
             console.log('Settings save failed. Error: ' + asyncResult.error.message);
@@ -338,8 +310,8 @@ function backupForUndo(this_range){
             console.log(Office.context.document.settings.get('sheet_backup'));
         }
     });
-
 }
+
 
 function detectIE() {
     var ua = window.navigator.userAgent;
