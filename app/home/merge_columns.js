@@ -68,9 +68,15 @@ function redirectHome() {
             document.getElementById("help_iconFirst").onclick = function () {
                 document.getElementById('helpCalloutFirst').style.visibility = 'visible';
             }
+            document.getElementById("help_iconAgg").onclick = function () {
+                document.getElementById('helpCalloutAgg').style.visibility = 'visible';
+            }
 
             document.getElementById("closeCalloutFirst").onclick = function () {
                 document.getElementById('helpCalloutFirst').style.visibility = 'hidden';
+            }
+            document.getElementById("closeCalloutAgg").onclick = function () {
+                document.getElementById('helpCalloutAgg').style.visibility = 'hidden';
             }
 
             document.getElementById("refresh_icon").onclick = function () {
