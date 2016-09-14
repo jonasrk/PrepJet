@@ -756,7 +756,7 @@ function redirectHome() {
                                         }
                                         if (aggregation == "avg") {
                                             if (singleMatchCount == 0) {
-                                                var textToAdd = ["=MITTELWERT(" + selected_table2 + "!" + source_char + row_ref];
+                                                var textToAdd = ["=AVERAGE(" + selected_table2 + "!" + source_char + row_ref];
                                             } else {
                                                 textToAdd = [textToAdd + "," + selected_table2 + "!" + source_char + row_ref];
                                             }
