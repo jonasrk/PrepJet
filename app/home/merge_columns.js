@@ -746,17 +746,33 @@ function redirectHome() {
                                             check_match = 1;
                                             break;
                                         }
-                                        if (aggregation == "sum") {
+                                        /*if (aggregation == "sum") {
                                             if (singleMatchCount == 0) {
                                                 var textToAdd = ["=" + selected_table2 + "!" + source_char + row_ref];
                                             } else {
                                                 textToAdd = [textToAdd + "+" + selected_table2 + "!" + source_char + row_ref];
                                             }
                                             check_match = 1;
+                                        }*/
+                                        if (aggregation == "sum") {
+                                            if (singleMatchCount == 0) {
+                                                var textToAdd = ["=SUM(" + selected_table2 + "!" + source_char + row_ref];
+                                            } else {
+                                                textToAdd = [textToAdd + "," + selected_table2 + "!" + source_char + row_ref];
+                                            }
+                                            check_match = 1;
                                         }
                                         if (aggregation == "avg") {
                                             if (singleMatchCount == 0) {
                                                 var textToAdd = ["=AVERAGE(" + selected_table2 + "!" + source_char + row_ref];
+                                            } else {
+                                                textToAdd = [textToAdd + "," + selected_table2 + "!" + source_char + row_ref];
+                                            }
+                                            check_match = 1;
+                                        }
+                                        if (aggregation == "product") {
+                                            if (singleMatchCount == 0) {
+                                                var textToAdd = ["=PRODUCT(" + selected_table2 + "!" + source_char + row_ref];
                                             } else {
                                                 textToAdd = [textToAdd + "," + selected_table2 + "!" + source_char + row_ref];
                                             }
@@ -770,7 +786,7 @@ function redirectHome() {
                                     lookup_array.push([""]);
                                 }
                                 if (singleMatchCount != 0 && aggregation != "noagg") {
-                                    if (aggregation == "avg") {textToAdd = [textToAdd + ")"];}
+                                    textToAdd = [textToAdd + ")"];
                                     lookup_array.push(textToAdd);
                                     lookup_count += 1;
                                 }
