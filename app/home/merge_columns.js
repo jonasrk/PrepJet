@@ -656,6 +656,8 @@ function redirectHome() {
 
                 backupForUndo(range_adding_to, startCell, add_colTarget, row_offsetTarget);
 
+                var aggregation = document.getElementById('aggregation_options').value;
+
                 var column1_ids = []; //new Array(identifier_length);
                 var column2_ids = []; //new Array(identifier_length);
 
@@ -707,6 +709,7 @@ function redirectHome() {
 
                             // copy rest
                             for (var i = 1; i < range_adding_to.text.length; i++) {
+                                var singleMatchCount = 0;
                                 for (var j = 1; j < range.text.length; j++) {
                                     var check = 0;
                                     for (var runid = 0; runid < column1_ids.length; runid ++) {
@@ -729,18 +732,35 @@ function redirectHome() {
                                     if (check == column1_ids.length) {
                                         var sheet_row = i + row_offsetTarget;
                                         var row_ref = row_offsetSource + j;
-                                        var textToAdd = ["=" + selected_table2 + "!" + source_char + row_ref];
-                                        lookup_array.push(textToAdd);
-                                        lookup_count += 1;
-                                        check_match = 1;
-                                        break;
+                                        //var textToAdd = ["=" + selected_table2 + "!" + source_char + row_ref];
+                                        if (aggregation == "noagg") {
+                                            var textToAdd = ["=" + selected_table2 + "!" + source_char + row_ref];
+                                            lookup_array.push(textToAdd);
+                                            lookup_count += 1;
+                                            check_match = 1;
+                                            break;
+                                        }
+                                        if (aggregation == "sum") {
+                                            if (singleMatchCount == 0) {
+                                                var textToAdd = ["=" + selected_table2 + "!" + source_char + row_ref];
+                                            } else {
+                                                textToAdd = [textToAdd + "+" + selected_table2 + "!" + source_char + row_ref];
+                                            }
+                                            check_match = 1;
+                                        }
+                                        singleMatchCount += 1;
                                     }
                                 }
-                                if (check_match == 0) {
+                                console.log(textToAdd);
+                                console.log(check_match);
+                                if (check_match == 0 && singleMatchCount == 0) {
                                     lookup_array.push([""]);
                                 }
+                                if (singleMatchCount != 0 && aggregation != "noagg") {
+                                    lookup_array.push(textToAdd);
+                                    lookup_count += 1;
+                                }
                             }
-                            console.log(lookup_array);
                             var insert_address = column_char + 1 + ":" + column_char + range_adding_to.text.length;
                             addContentNew(worksheet_adding_to.name, insert_address, lookup_array, function(){});
                         }
