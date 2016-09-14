@@ -165,7 +165,6 @@
     <div id="step2">
         <div class="padding">
             <label class="ms-Label"> Select columns to be added to target sheet</label>
-            <br />
             <table>
                 <tr>
                     <td id="allColumns">
@@ -185,8 +184,27 @@
         </div>
     </div>
 
-
     <div id="step3">
+        <div class="padding">
+            <div id="explanation">
+                <label class="ms-Label">Aggregate lookup results (if applicable)</p>
+            </div>
+            <!-- dropdow for aggregation-->
+            <div id="large_drop" class="ms-Dropdown dropdown_table" tabindex="1">
+                <!--label class="ms-Label">Select delimiter</label-->
+                <i class="ms-Dropdown-caretDown ms-Icon ms-Icon--caretDown"></i>
+                <select id="delimiter_options" class="ms-Dropdown-select" onchange="displayFieldDelimiter()">
+                    <option value="comma">No Aggregation</option>
+                    <option value="semicolon">Sum</option>
+                    <option value="whitespace">Average</option>
+                </select>
+            </div>
+            <button class="ms-Button_grey" id="back_step2">Back</button>
+            <button class="ms-Button_grey" id="bt_step4">Continue</button>
+        </div>
+    </div>
+
+    <div id="step4">
         <div class="padding">
             <div id="explanation">
                 <label class="ms-Label">Select reference columns</p>
@@ -254,7 +272,7 @@
                     </tr>
                     <tr>
                         <td>
-                            <button class="ms-Button_grey" id="back_step2">Back</button>
+                            <button class="ms-Button_grey" id="back_step3">Back</button>
                             <button class="ms-Button" id="bt_apply">Apply</button>
                         </td>
                     </tr>

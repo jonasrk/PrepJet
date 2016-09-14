@@ -37,14 +37,17 @@ function redirectHome() {
 
             $('#step2').hide();
             $('#step3').hide();
+            $('#step4').hide();
 
             populateDropdowns();
 
             $('#bt_step2').click(step2ButtonClicked);
-            $('#bt_step3').click(step3ButtonClicked);
+            $('#bt_step4').click(step4ButtonClicked);
+            $('#bt_step3').click(step3Show); //todo: add function
             $('#back_step1').click(backToOne);
             $('#bt_apply').click(applyButtonClicked);
             $('#back_step2').click(step2ButtonClicked);
+            $('#back_step3').click(step3Show); //todo: add function
             $('#buttonOk').click(highlightHeader);
             $('#homeButton').click(redirectHome);
 
@@ -143,7 +146,6 @@ function redirectHome() {
                 console.log("Debug info: " + JSON.stringify(error.debugInfo));
             }
         });
-
     }
 
     function populateDropdowns() {
@@ -255,6 +257,7 @@ function redirectHome() {
         $('#step1').hide();
         $('#step2').show();
         $('#step3').hide();
+        $('#step4').hide();
 
 
         var selected_table2 = document.getElementById('table2_options').value; // TODO better reference by ID than name
@@ -365,10 +368,34 @@ function redirectHome() {
         });
     }
 
-    function step3ButtonClicked() {
+
+    function step3Show() {
+
         $('#step1').hide();
         $('#step2').hide();
         $('#step3').show();
+        $('#step4').hide();
+
+        Excel.run(function (ctx) {
+
+            return ctx.sync().then(function() {
+
+            });
+
+        }).catch(function(error) {
+            console.log("Error: " + error);
+            if (error instanceof OfficeExtension.Error) {
+                console.log("Debug info: " + JSON.stringify(error.debugInfo));
+            }
+        });
+    }
+
+
+    function step4ButtonClicked() {
+        $('#step1').hide();
+        $('#step2').hide();
+        $('#step3').hide();
+        $('#step4').show();
         $('#bt_remove').hide();
 
 
