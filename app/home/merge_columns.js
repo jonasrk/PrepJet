@@ -775,7 +775,7 @@ function redirectHome() {
                                     lookup_count += 1;
                                 }
                             }
-                            var insert_address = column_char + 1 + ":" + column_char + range_adding_to.text.length;
+                            var insert_address = column_char + row_offsetTarget + ":" + column_char + (range_adding_to.text.length + row_offsetTarget - 1);
                             addContentNew(worksheet_adding_to.name, insert_address, lookup_array, function(){});
                         }
                     }
