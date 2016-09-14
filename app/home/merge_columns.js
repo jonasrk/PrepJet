@@ -386,6 +386,76 @@ function redirectHome() {
 
             return ctx.sync().then(function() {
 
+                var checked_checkboxes = getCheckedBoxes("reference_column_checkbox");
+                for (var i = 0; i < checked_checkboxes.length; i++) {
+                    createTableRow(i + 1, checked_checkboxes[i].id);
+                }
+
+                function createTableRow(id, checkboxName) {
+
+                    var trow = document.createElement("tr");
+                    trow.id = "newRow" + id;
+                    var tcol1 = document.createElement("td");
+                    tcol1.id = "smalldrop_col";
+                    var tcol2 = document.createElement("td");
+                    trow.appendChild(tcol1);
+                    trow.appendChild(tcol2);
+                    document.getElementById('columnsToAdd').appendChild(trow);
+
+                    var label = document.createElement("label");
+                    label.id = "newLabel" + id;
+                    label.innerHTML = checkboxName;
+
+                    tcol1.appendChild(label);
+
+                    var div = document.createElement("div");
+                    div.className = "ms-Dropdown dropdown_table";
+                    div.id = "agg_drop" + id;
+
+                    var elemi = document.createElement("i");
+                    elemi.className = "ms-Dropdown-caretDown ms-Icon ms-Icon--caretDown";
+                    div.appendChild(elemi);
+
+                    var select = document.createElement("select");
+                    select.id = "aggregation_options" + id;
+                    select.className = "ms-Dropdown-select";
+                    div.appendChild(select);
+
+                    var option1 = document.createElement("option");
+                    option1.value = "noagg";
+                    option1.innerHTML = "No Aggregation";
+                    select.appendChild(option1);
+
+                    var option2 = document.createElement("option");
+                    option2.value = "sum";
+                    option2.innerHTML = "Sum";
+                    select.appendChild(option2);
+
+                    var option3 = document.createElement("option");
+                    option3.value = "product";
+                    option3.innerHTML = "Product";
+                    select.appendChild(option3);
+
+                    var option4 = document.createElement("option");
+                    option4.value = "avg";
+                    option4.innerHTML = "Average";
+                    select.appendChild(option4);
+
+                    var option5 = document.createElement("option");
+                    option5.value = "avg";
+                    option5.innerHTML = "Median";
+                    select.appendChild(option5);
+
+                    var option6 = document.createElement("option");
+                    option6.value = "count";
+                    option6.innerHTML = "Count";
+                    select.appendChild(option6);
+
+                    tcol2.appendChild(div);
+                    $('#agg_drop' + id).Dropdown();
+
+                }
+
             });
 
         }).catch(function(error) {
