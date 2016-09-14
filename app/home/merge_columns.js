@@ -786,6 +786,14 @@ function redirectHome() {
                                             }
                                             check_match = 1;
                                         }
+                                        if (aggregation == "median") {
+                                            if (singleMatchCount == 0) {
+                                                var textToAdd = ["=MEDIAN(" + selected_table2 + "!" + source_char + row_ref];
+                                            } else {
+                                                textToAdd = [textToAdd + "," + selected_table2 + "!" + source_char + row_ref];
+                                            }
+                                            check_match = 1;
+                                        }
                                         singleMatchCount += 1;
                                     }
                                 }
