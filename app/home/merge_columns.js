@@ -758,7 +758,7 @@ function redirectHome() {
                                             if (singleMatchCount == 0) {
                                                 var textToAdd = ["=MITTELWERT(" + selected_table2 + "!" + source_char + row_ref];
                                             } else {
-                                                textToAdd = [textToAdd + ";" + selected_table2 + "!" + source_char + row_ref];
+                                                textToAdd = [textToAdd + "," + selected_table2 + "!" + source_char + row_ref];
                                             }
                                             check_match = 1;
                                         }
@@ -776,7 +776,6 @@ function redirectHome() {
                                 }
                             }
                             var insert_address = column_char + 1 + ":" + column_char + range_adding_to.text.length;
-                            console.log(insert_address);
                             addContentNew(worksheet_adding_to.name, insert_address, lookup_array, function(){});
                         }
                     }
