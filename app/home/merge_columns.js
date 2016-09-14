@@ -698,16 +698,22 @@ function redirectHome() {
                                         }
 
                                     }
+                                    var check_match = 0;
                                     if (check == column1_ids.length) {
                                         var sheet_row = i + row_offsetTarget;
                                         var row_ref = row_offsetSource + j;
                                         var textToAdd = ["=" + selected_table2 + "!" + source_char + row_ref];
                                         lookup_array.push(textToAdd);
                                         lookup_count += 1;
+                                        check_match = 1;
                                         break;
                                     }
                                 }
+                                if (check_match == 0) {
+                                    lookup_array.push([""]);
+                                }
                             }
+                            console.log(lookup_array);
                             var insert_address = column_char + 1 + ":" + column_char + range_adding_to.text.length;
                             addContentNew(worksheet_adding_to.name, insert_address, lookup_array, function(){});
                         }
