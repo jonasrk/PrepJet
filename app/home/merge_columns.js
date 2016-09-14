@@ -754,20 +754,29 @@ function redirectHome() {
                                             }
                                             check_match = 1;
                                         }
+                                        if (aggregation == "avg") {
+                                            if (singleMatchCount == 0) {
+                                                var textToAdd = ["=MITTELWERT(" + selected_table2 + "!" + source_char + row_ref];
+                                            } else {
+                                                textToAdd = [textToAdd + ";" + selected_table2 + "!" + source_char + row_ref];
+                                            }
+                                            check_match = 1;
+                                        }
                                         singleMatchCount += 1;
                                     }
                                 }
-                                console.log(textToAdd);
-                                console.log(check_match);
+
                                 if (check_match == 0 && singleMatchCount == 0) {
                                     lookup_array.push([""]);
                                 }
                                 if (singleMatchCount != 0 && aggregation != "noagg") {
+                                    if (aggregation == "avg") {textToAdd = [textToAdd + ")"];}
                                     lookup_array.push(textToAdd);
                                     lookup_count += 1;
                                 }
                             }
                             var insert_address = column_char + 1 + ":" + column_char + range_adding_to.text.length;
+                            console.log(insert_address);
                             addContentNew(worksheet_adding_to.name, insert_address, lookup_array, function(){});
                         }
                     }
