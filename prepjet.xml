@@ -130,7 +130,7 @@
                   <bt:Image size="80" resid="PJ.addcolumn.Icon_lg" />
                 </Icon>
 
-                <Control xsi:type="Button" id="PJ.ExtractValuesButton">
+                <!--Control xsi:type="Button" id="PJ.ExtractValuesButton">
                   <Label resid="PJ.ExtractValuesButton.Label" />
                   <Supertip>
                     <Title resid="PJ.ExtractValuesButton.Label" />
@@ -142,11 +142,11 @@
                     <bt:Image size="80" resid="PJ.extractvalues.Icon_lg" />
                   </Icon>
                   <Action xsi:type="ShowTaskpane">
-                    <TaskpaneId>Button2Id1</TaskpaneId>
+                    <TaskpaneId>Button2Id1</TaskpaneId-->
                     <!--Provide a url resource id for the location that will be displayed on the task pane -->
-                    <SourceLocation resid="PJ.ExtractValues.Url" />
+                    <!--SourceLocation resid="PJ.ExtractValues.Url" />
                   </Action>
-                </Control>
+                </Control-->
 
                 <Control xsi:type="Button" id="PJ.SplitValuesButton">
                   <Label resid="PJ.SplitValuesButton.Label" />
@@ -356,7 +356,7 @@
         <bt:Image id="PJ.customIncon.Icon" DefaultValue="https://localhost:8443/images/customIncon.png" />
         <bt:Image id="PJ.removeduplicates.Icon" DefaultValue="https://localhost:8443/images/removeduplicates.png" />
         <bt:Image id="PJ.splitvalues.Icon" DefaultValue="https://localhost:8443/images/splitvalues.png" />
-        <bt:Image id="PJ.extractvalues.Icon" DefaultValue="https://localhost:8443/images/extractvalues.png" />
+        <!--bt:Image id="PJ.extractvalues.Icon" DefaultValue="https://localhost:8443/images/extractvalues.png" /-->
         <bt:Image id="PJ.trimspaces.Icon" DefaultValue="https://localhost:8443/images/trimspaces.png" />
         <bt:Image id="PJ.validationrule.Icon" DefaultValue="https://localhost:8443/images/validationrule.png" />
         <bt:Image id="PJ.harmonize.Icon" DefaultValue="https://localhost:8443/images/harmonize.png" />
@@ -367,7 +367,7 @@
         <bt:Image id="PJ.customIncon.Icon_sm" DefaultValue="https://localhost:8443/images/customIncon_sm.png" />
         <bt:Image id="PJ.removeduplicates.Icon_sm" DefaultValue="https://localhost:8443/images/removeduplicates_sm.png" />
         <bt:Image id="PJ.splitvalues.Icon_sm" DefaultValue="https://localhost:8443/images/splitvalues_sm.png" />
-        <bt:Image id="PJ.extractvalues.Icon_sm" DefaultValue="https://localhost:8443/images/extractvalues_sm.png" />
+        <!--bt:Image id="PJ.extractvalues.Icon_sm" DefaultValue="https://localhost:8443/images/extractvalues_sm.png" /-->
         <bt:Image id="PJ.trimspaces.Icon_sm" DefaultValue="https://localhost:8443/images/trimspaces_sm.png" />
         <bt:Image id="PJ.validationrule.Icon_sm" DefaultValue="https://localhost:8443/images/validationrule_sm.png" />
         <bt:Image id="PJ.harmonize.Icon_sm" DefaultValue="https://localhost:8443/images/harmonize_sm.png" />
@@ -378,7 +378,7 @@
         <bt:Image id="PJ.customIncon.Icon_lg" DefaultValue="https://localhost:8443/images/customIncon_lg.png" />
         <bt:Image id="PJ.removeduplicates.Icon_lg" DefaultValue="https://localhost:8443/images/removeduplicates_lg.png" />
         <bt:Image id="PJ.splitvalues.Icon_lg" DefaultValue="https://localhost:8443/images/splitvalues_lg.png" />
-        <bt:Image id="PJ.extractvalues.Icon_lg" DefaultValue="https://localhost:8443/images/extractvalues_lg.png" />
+        <!--bt:Image id="PJ.extractvalues.Icon_lg" DefaultValue="https://localhost:8443/images/extractvalues_lg.png" /-->
         <bt:Image id="PJ.trimspaces.Icon_lg" DefaultValue="https://localhost:8443/images/trimspaces_lg.png" />
         <bt:Image id="PJ.validationrule.Icon_lg" DefaultValue="https://localhost:8443/images/validationrule_lg.png" />
         <bt:Image id="PJ.harmonize.Icon_lg" DefaultValue="https://localhost:8443/images/harmonize_lg.png" />
@@ -393,7 +393,7 @@
         <bt:Url id="PJ.FindDuplicates.Url" DefaultValue="https://localhost:8443/app/home/duplicates.html" />
         <bt:Url id="PJ.Inconsistency.Url" DefaultValue="https://localhost:8443/app/home/inconsistency.html" />
         <bt:Url id="PJ.CustomIncon.Url" DefaultValue="https://localhost:8443/app/home/custom_incon.html" />
-        <bt:Url id="PJ.ExtractValues.Url" DefaultValue="https://localhost:8443/app/home/extract_values.html" />
+        <!--bt:Url id="PJ.ExtractValues.Url" DefaultValue="https://localhost:8443/app/home/extract_values.html" /-->
         <bt:Url id="PJ.TrimSpaces.Url" DefaultValue="https://localhost:8443/app/home/trim_spaces.html" />
         <bt:Url id="PJ.validation.Url" DefaultValue="https://localhost:8443/app/home/validation.html" />
         <bt:Url id="PJ.Harmonize.Url" DefaultValue="https://localhost:8443/app/home/harmonize.html" />
@@ -404,11 +404,11 @@
       </bt:Urls>
       <bt:ShortStrings>
         <bt:String id="PJ.addcolumnButton.Label" DefaultValue="Lookup Data" />
-        <bt:String id="PJ.SplitValuesButton.Label" DefaultValue="Split Cell Content" />
+        <bt:String id="PJ.SplitValuesButton.Label" DefaultValue="Divide Cell Content" />
         <bt:String id="PJ.FindDuplicatesButton.Label" DefaultValue="Detect Duplicates" />
         <bt:String id="PJ.InconsistencyButton.Label" DefaultValue="Detect Inconsistencies" />
         <bt:String id="PJ.CustomInconButton.Label" DefaultValue="Custom Inconsistencies" />
-        <bt:String id="PJ.ExtractValuesButton.Label" DefaultValue="Extract Text" />
+        <!--bt:String id="PJ.ExtractValuesButton.Label" DefaultValue="Extract Text" /-->
         <bt:String id="PJ.TrimSpacesButton.Label" DefaultValue="Trim Spaces" />
         <bt:String id="PJ.ValidationRuleButton.Label" DefaultValue="Rule-based Validation" />
         <bt:String id="PJ.HarmonizeButton.Label" DefaultValue="Change Case" />
@@ -430,7 +430,7 @@
       <bt:LongStrings>
         <bt:String id="PJ.trimSpaces.Ttp" DefaultValue="Remove leading and trailing spaces" />
         <bt:String id="PJ.harmonize.Ttp" DefaultValue="Harmonize capitalization of characters" />
-        <bt:String id="PJ.extractValues.Ttp" DefaultValue="Extract a part of a cell" />
+        <!--bt:String id="PJ.extractValues.Ttp" DefaultValue="Extract a part of a cell" /-->
         <bt:String id="PJ.splitValues.Ttp" DefaultValue="Split column by a delimiter" />
         <bt:String id="PJ.addColumn.Ttp" DefaultValue="Add columns from a different sheet by matching criteria" />
         <bt:String id="PJ.inconsistency.Ttp" DefaultValue="Search for inconsistent data types" />

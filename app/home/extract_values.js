@@ -22,7 +22,8 @@ function displayFieldEnd(){
     }
 }
 
-function redirctHome() {
+function backToStart() {
+    window.location = "split_values.html";
 }
 
 function backToOne() {
@@ -83,6 +84,7 @@ function backToThree() {
             $('#continue2').click(step3Show);
             $('#continue3').click(step4Show);
 
+            $('#back0').click(backToStart);
             $('#back1').click(backToOne);
             $('#back2').click(backToTwo);
             $('#back3').click(backToThree);
