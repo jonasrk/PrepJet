@@ -386,6 +386,11 @@ function redirectHome() {
 
             return ctx.sync().then(function() {
 
+                var parentdiv = document.getElementById('columnsToAdd');
+                while (parentdiv.firstChild) {
+                    parentdiv.removeChild(parentdiv.firstChild);
+                }
+
                 var checked_checkboxes = getCheckedBoxes("reference_column_checkbox");
                 for (var i = 0; i < checked_checkboxes.length; i++) {
                     createTableRow(i + 1, checked_checkboxes[i].id);
@@ -732,8 +737,6 @@ function redirectHome() {
 
                 backupForUndo(range_adding_to, startCell, add_colTarget, row_offsetTarget);
 
-                var aggregation = document.getElementById('aggregation_options').value;
-
                 var column1_ids = []; //new Array(identifier_length);
                 var column2_ids = []; //new Array(identifier_length);
 
@@ -778,6 +781,7 @@ function redirectHome() {
                         if (checked_checkboxes[l].id == range.text[0][k] || checked_checkboxes[l].id == "Column " + getCharFromNumber(k)){
                             var lookup_array = [];
                             var column_char = getCharFromNumber(l + range_adding_to.text[0].length + add_colTarget);
+                            var aggregation = document.getElementById('aggregation_options' + (l + 1)).value;
 
                             // copy title
                             var headerText = ["=" + selected_table2 + "!" + source_char + row_offsetSource];
@@ -816,14 +820,6 @@ function redirectHome() {
                                             check_match = 1;
                                             break;
                                         }
-                                        /*if (aggregation == "sum") {
-                                            if (singleMatchCount == 0) {
-                                                var textToAdd = ["=" + selected_table2 + "!" + source_char + row_ref];
-                                            } else {
-                                                textToAdd = [textToAdd + "+" + selected_table2 + "!" + source_char + row_ref];
-                                            }
-                                            check_match = 1;
-                                        }*/
                                         if (aggregation == "sum") {
                                             if (singleMatchCount == 0) {
                                                 var textToAdd = ["=SUM(" + selected_table2 + "!" + source_char + row_ref];
