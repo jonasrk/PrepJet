@@ -42,12 +42,9 @@ function redirectHelp() {
     // 'use strict';
 
     // The initialize function must be run each time a new page is loaded
-    Office.initialize = function (reason) {
-        jQuery(document).ready(function () {
 
-            app.initialize();
-            console.log("test");
-            $('#trimButton').click(redirectTrim);
+    Office.initialize = function (reason) {
+        $('#trimButton').click(redirectTrim);
             $('#harmonizeButton').click(redirectHarm);
             $('#extractButton').click(redirectExtract);
             $('#splitButton').click(redirectSplit);
@@ -57,8 +54,6 @@ function redirectHelp() {
             $('#duplicatesButton').click(redirectDuplicates);
             $('#validationButton').click(redirectValidation);
             $('#helpButton').click(redirectHelp);
-
-        });
     };
 
 })();
