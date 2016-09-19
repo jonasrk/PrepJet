@@ -554,7 +554,7 @@ function backToThree() {
                     range_insert.insert("Right");
                 }
 
-                var insert_address = getCharFromNumber(header + add_col) + row_offset + ":" + getCharFromNumber(header + add_col + max_array_length - 1) + (range.text.length + row_offset - 1);
+                var insert_address = getCharFromNumber(header + add_col) + row_offset + ":" + getCharFromNumber(header + add_col + max_array_length - 1) + (range_adding_to.text.length + row_offset - 1);
                 addSplitValue(split_array, insert_address);
 
                 if (document.getElementById('createBackup').checked == true) {
