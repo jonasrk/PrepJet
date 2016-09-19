@@ -555,8 +555,6 @@ function backToThree() {
                 }
 
                 var insert_address = getCharFromNumber(header + add_col) + row_offset + ":" + getCharFromNumber(header + add_col + max_array_length - 1) + (range.text.length + row_offset - 1);
-                console.log(insert_address);
-                console.log(split_array.length);
                 addSplitValue(split_array, insert_address);
 
                 if (document.getElementById('createBackup').checked == true) {
