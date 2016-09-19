@@ -9,6 +9,13 @@ function redirectHome() {
     Office.initialize = function (reason) {
         jQuery(document).ready(function () {
 
+        function sleepFor( sleepDuration ){
+    var now = new Date().getTime();
+    while(new Date().getTime() < now + sleepDuration){ /* do nothing */ }
+}
+
+sleepFor(10000);
+
             Office.context.document.settings.set('same_header_trim', false);
             Office.context.document.settings.set('last_clicked_function', "trim_spaces.html");
             if (Office.context.document.settings.get('prepjet_loaded_before') == null) {

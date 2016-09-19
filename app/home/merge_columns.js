@@ -37,17 +37,14 @@ function redirectHome() {
 
             $('#step2').hide();
             $('#step3').hide();
-            $('#step4').hide();
 
             populateDropdowns();
 
             $('#bt_step2').click(step2ButtonClicked);
-            $('#bt_step4').click(step4ButtonClicked);
-            $('#bt_step3').click(step3Show); //todo: add function
+            $('#bt_step3').click(step3ButtonClicked);
             $('#back_step1').click(backToOne);
             $('#bt_apply').click(applyButtonClicked);
             $('#back_step2').click(step2ButtonClicked);
-            $('#back_step3').click(step3Show); //todo: add function
             $('#buttonOk').click(highlightHeader);
             $('#homeButton').click(redirectHome);
 
@@ -68,15 +65,9 @@ function redirectHome() {
             document.getElementById("help_iconFirst").onclick = function () {
                 document.getElementById('helpCalloutFirst').style.visibility = 'visible';
             }
-            document.getElementById("help_iconAgg").onclick = function () {
-                document.getElementById('helpCalloutAgg').style.visibility = 'visible';
-            }
 
             document.getElementById("closeCalloutFirst").onclick = function () {
                 document.getElementById('helpCalloutFirst').style.visibility = 'hidden';
-            }
-            document.getElementById("closeCalloutAgg").onclick = function () {
-                document.getElementById('helpCalloutAgg').style.visibility = 'hidden';
             }
 
             document.getElementById("refresh_icon").onclick = function () {
@@ -152,6 +143,7 @@ function redirectHome() {
                 console.log("Debug info: " + JSON.stringify(error.debugInfo));
             }
         });
+
     }
 
     function populateDropdowns() {
@@ -263,7 +255,6 @@ function redirectHome() {
         $('#step1').hide();
         $('#step2').show();
         $('#step3').hide();
-        $('#step4').hide();
 
 
         var selected_table2 = document.getElementById('table2_options').value; // TODO better reference by ID than name
@@ -374,9 +365,7 @@ function redirectHome() {
         });
     }
 
-
-    function step3Show() {
-
+    function step3ButtonClicked() {
         $('#step1').hide();
         $('#step2').hide();
         $('#step3').show();
@@ -789,7 +778,6 @@ function redirectHome() {
 
                             // copy rest
                             for (var i = 1; i < range_adding_to.text.length; i++) {
-                                var singleMatchCount = 0;
                                 for (var j = 1; j < range.text.length; j++) {
                                     var check = 0;
                                     for (var runid = 0; runid < column1_ids.length; runid ++) {
@@ -863,14 +851,8 @@ function redirectHome() {
                                         singleMatchCount += 1;
                                     }
                                 }
-
-                                if (check_match == 0 && singleMatchCount == 0) {
+                                if (check_match == 0) {
                                     lookup_array.push([""]);
-                                }
-                                if (singleMatchCount != 0 && aggregation != "noagg") {
-                                    textToAdd = [textToAdd + ")"];
-                                    lookup_array.push(textToAdd);
-                                    lookup_count += 1;
                                 }
                             }
                             var insert_address = column_char + row_offsetTarget + ":" + column_char + (range_adding_to.text.length + row_offsetTarget - 1);
