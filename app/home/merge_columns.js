@@ -37,14 +37,17 @@ function redirectHome() {
 
             $('#step2').hide();
             $('#step3').hide();
+            $('#step4').hide();
 
             populateDropdowns();
 
             $('#bt_step2').click(step2ButtonClicked);
-            $('#bt_step3').click(step3ButtonClicked);
+            $('#bt_step4').click(step4ButtonClicked);
+            $('#bt_step3').click(step3Show); //todo: add function
             $('#back_step1').click(backToOne);
             $('#bt_apply').click(applyButtonClicked);
             $('#back_step2').click(step2ButtonClicked);
+            $('#back_step3').click(step3Show); //todo: add function
             $('#buttonOk').click(highlightHeader);
             $('#homeButton').click(redirectHome);
 
@@ -65,9 +68,15 @@ function redirectHome() {
             document.getElementById("help_iconFirst").onclick = function () {
                 document.getElementById('helpCalloutFirst').style.visibility = 'visible';
             }
+            document.getElementById("help_iconAgg").onclick = function () {
+                document.getElementById('helpCalloutAgg').style.visibility = 'visible';
+            }
 
             document.getElementById("closeCalloutFirst").onclick = function () {
                 document.getElementById('helpCalloutFirst').style.visibility = 'hidden';
+            }
+            document.getElementById("closeCalloutAgg").onclick = function () {
+                document.getElementById('helpCalloutAgg').style.visibility = 'hidden';
             }
 
             document.getElementById("refresh_icon").onclick = function () {
@@ -143,7 +152,6 @@ function redirectHome() {
                 console.log("Debug info: " + JSON.stringify(error.debugInfo));
             }
         });
-
     }
 
     function populateDropdowns() {
@@ -255,6 +263,7 @@ function redirectHome() {
         $('#step1').hide();
         $('#step2').show();
         $('#step3').hide();
+        $('#step4').hide();
 
 
         var selected_table2 = document.getElementById('table2_options').value; // TODO better reference by ID than name
@@ -365,10 +374,109 @@ function redirectHome() {
         });
     }
 
-    function step3ButtonClicked() {
+
+    function step3Show() {
+
         $('#step1').hide();
         $('#step2').hide();
         $('#step3').show();
+        $('#step4').hide();
+
+        Excel.run(function (ctx) {
+
+            return ctx.sync().then(function() {
+
+                var parentdiv = document.getElementById('columnsToAdd');
+                while (parentdiv.firstChild) {
+                    parentdiv.removeChild(parentdiv.firstChild);
+                }
+
+                var checked_checkboxes = getCheckedBoxes("reference_column_checkbox");
+                for (var i = 0; i < checked_checkboxes.length; i++) {
+                    createTableRow(i + 1, checked_checkboxes[i].id);
+                }
+
+                function createTableRow(id, checkboxName) {
+
+                    var trow = document.createElement("tr");
+                    trow.id = "newRow" + id;
+                    var tcol1 = document.createElement("td");
+                    tcol1.id = "smalldrop_col";
+                    var tcol2 = document.createElement("td");
+                    trow.appendChild(tcol1);
+                    trow.appendChild(tcol2);
+                    document.getElementById('columnsToAdd').appendChild(trow);
+
+                    var label = document.createElement("label");
+                    label.id = "newLabel" + id;
+                    label.innerHTML = checkboxName;
+
+                    tcol1.appendChild(label);
+
+                    var div = document.createElement("div");
+                    div.className = "ms-Dropdown dropdown_table";
+                    div.id = "agg_drop" + id;
+
+                    var elemi = document.createElement("i");
+                    elemi.className = "ms-Dropdown-caretDown ms-Icon ms-Icon--caretDown";
+                    div.appendChild(elemi);
+
+                    var select = document.createElement("select");
+                    select.id = "aggregation_options" + id;
+                    select.className = "ms-Dropdown-select";
+                    div.appendChild(select);
+
+                    var option1 = document.createElement("option");
+                    option1.value = "noagg";
+                    option1.innerHTML = "No Aggregation";
+                    select.appendChild(option1);
+
+                    var option2 = document.createElement("option");
+                    option2.value = "sum";
+                    option2.innerHTML = "Sum";
+                    select.appendChild(option2);
+
+                    var option3 = document.createElement("option");
+                    option3.value = "product";
+                    option3.innerHTML = "Product";
+                    select.appendChild(option3);
+
+                    var option4 = document.createElement("option");
+                    option4.value = "avg";
+                    option4.innerHTML = "Average";
+                    select.appendChild(option4);
+
+                    var option5 = document.createElement("option");
+                    option5.value = "avg";
+                    option5.innerHTML = "Median";
+                    select.appendChild(option5);
+
+                    var option6 = document.createElement("option");
+                    option6.value = "count";
+                    option6.innerHTML = "Count";
+                    select.appendChild(option6);
+
+                    tcol2.appendChild(div);
+                    $('#agg_drop' + id).Dropdown();
+
+                }
+
+            });
+
+        }).catch(function(error) {
+            console.log("Error: " + error);
+            if (error instanceof OfficeExtension.Error) {
+                console.log("Debug info: " + JSON.stringify(error.debugInfo));
+            }
+        });
+    }
+
+
+    function step4ButtonClicked() {
+        $('#step1').hide();
+        $('#step2').hide();
+        $('#step3').hide();
+        $('#step4').show();
         $('#bt_remove').hide();
 
 
@@ -673,6 +781,7 @@ function redirectHome() {
                         if (checked_checkboxes[l].id == range.text[0][k] || checked_checkboxes[l].id == "Column " + getCharFromNumber(k)){
                             var lookup_array = [];
                             var column_char = getCharFromNumber(l + range_adding_to.text[0].length + add_colTarget);
+                            var aggregation = document.getElementById('aggregation_options' + (l + 1)).value;
 
                             // copy title
                             var headerText = ["=" + selected_table2 + "!" + source_char + row_offsetSource];
@@ -680,6 +789,7 @@ function redirectHome() {
 
                             // copy rest
                             for (var i = 1; i < range_adding_to.text.length; i++) {
+                                var singleMatchCount = 0;
                                 for (var j = 1; j < range.text.length; j++) {
                                     var check = 0;
                                     for (var runid = 0; runid < column1_ids.length; runid ++) {
@@ -702,15 +812,65 @@ function redirectHome() {
                                     if (check == column1_ids.length) {
                                         var sheet_row = i + row_offsetTarget;
                                         var row_ref = row_offsetSource + j;
-                                        var textToAdd = ["=" + selected_table2 + "!" + source_char + row_ref];
-                                        lookup_array.push(textToAdd);
-                                        lookup_count += 1;
-                                        check_match = 1;
-                                        break;
+                                        //var textToAdd = ["=" + selected_table2 + "!" + source_char + row_ref];
+                                        if (aggregation == "noagg") {
+                                            var textToAdd = ["=" + selected_table2 + "!" + source_char + row_ref];
+                                            lookup_array.push(textToAdd);
+                                            lookup_count += 1;
+                                            check_match = 1;
+                                            break;
+                                        }
+                                        if (aggregation == "sum") {
+                                            if (singleMatchCount == 0) {
+                                                var textToAdd = ["=SUM(" + selected_table2 + "!" + source_char + row_ref];
+                                            } else {
+                                                textToAdd = [textToAdd + "," + selected_table2 + "!" + source_char + row_ref];
+                                            }
+                                            check_match = 1;
+                                        }
+                                        if (aggregation == "avg") {
+                                            if (singleMatchCount == 0) {
+                                                var textToAdd = ["=AVERAGE(" + selected_table2 + "!" + source_char + row_ref];
+                                            } else {
+                                                textToAdd = [textToAdd + "," + selected_table2 + "!" + source_char + row_ref];
+                                            }
+                                            check_match = 1;
+                                        }
+                                        if (aggregation == "product") {
+                                            if (singleMatchCount == 0) {
+                                                var textToAdd = ["=PRODUCT(" + selected_table2 + "!" + source_char + row_ref];
+                                            } else {
+                                                textToAdd = [textToAdd + "," + selected_table2 + "!" + source_char + row_ref];
+                                            }
+                                            check_match = 1;
+                                        }
+                                        if (aggregation == "count") {
+                                            if (singleMatchCount == 0) {
+                                                var textToAdd = ["=COUNT(" + selected_table2 + "!" + source_char + row_ref];
+                                            } else {
+                                                textToAdd = [textToAdd + "," + selected_table2 + "!" + source_char + row_ref];
+                                            }
+                                            check_match = 1;
+                                        }
+                                        if (aggregation == "median") {
+                                            if (singleMatchCount == 0) {
+                                                var textToAdd = ["=MEDIAN(" + selected_table2 + "!" + source_char + row_ref];
+                                            } else {
+                                                textToAdd = [textToAdd + "," + selected_table2 + "!" + source_char + row_ref];
+                                            }
+                                            check_match = 1;
+                                        }
+                                        singleMatchCount += 1;
                                     }
                                 }
-                                if (check_match == 0) {
+
+                                if (check_match == 0 && singleMatchCount == 0) {
                                     lookup_array.push([""]);
+                                }
+                                if (singleMatchCount != 0 && aggregation != "noagg") {
+                                    textToAdd = [textToAdd + ")"];
+                                    lookup_array.push(textToAdd);
+                                    lookup_count += 1;
                                 }
                             }
                             var insert_address = column_char + row_offsetTarget + ":" + column_char + (range_adding_to.text.length + row_offsetTarget - 1);
