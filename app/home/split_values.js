@@ -109,6 +109,7 @@ function backToThree() {
             //$('#advanced_settings').click(displayAdvancedCount);
             //$('#advanced_hide').click(hideAdvancedCount);
             $('#homeButton').click(redirectHome);
+            $('#homeButton2').click(redirectHome);
 
 
             // Hides the dialog.
