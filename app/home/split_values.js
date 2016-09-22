@@ -86,7 +86,6 @@ function backToThree() {
             $('#delimiter_count').Dropdown().hide();
             $('#checkbox_delimiter').hide();
             $(".delimiter_count_dropdown").Dropdown().hide();
-            //$('#advanced_hide').hide();
 
             $(".dropdown_table").Dropdown();
             $(".ms-TextField").TextField();
@@ -103,8 +102,6 @@ function backToThree() {
             $('#splitApply1').click(splitValue);
             $('#splitApply2').click(displayAdvancedCount);
             $('#buttonOk').click(highlightHeader);
-            //$('#advanced_settings').click(displayAdvancedCount);
-            //$('#advanced_hide').click(hideAdvancedCount);
             $('#homeButton').click(redirectHome);
             $('#homeButton2').click(redirectHome);
 
