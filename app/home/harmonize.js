@@ -23,11 +23,11 @@ function redirectHome() {
             //hide result message
             document.getElementById("resultClose").onclick = function () {
                 document.getElementById('resultDialog').style.visibility = 'hidden';
-                window.location = "mac_start.html";
+                window.location = "harmonize.html";
             }
             document.getElementById("resultOk").onclick = function () {
                 document.getElementById('resultDialog').style.visibility = 'hidden';
-                window.location = "mac_start.html";
+                window.location = "harmonize.html";
             }
 
         });
