@@ -9,7 +9,7 @@ function redirectHome() {
     Office.initialize = function (reason) {
         jQuery(document).ready(function () {
 
-            //app.initialize();
+            app.initialize();
             jQuery('#trim_space').click(trimSpaces);
             jQuery('#homeButton').click(redirectHome);
 
