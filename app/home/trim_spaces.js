@@ -8,10 +8,13 @@ function redirectHome() {
     // The initialize function must be run each time a new page is loaded
     Office.initialize = function (reason) {
         jQuery(document).ready(function () {
-            console.log("first");
+
             app.initialize();
             jQuery('#trim_space').click(trimSpaces);
             jQuery('#homeButton').click(redirectHome);
+            document.getElementById('#test').onclick = function () {
+                console.log("print test");
+            }
 
             document.getElementById("resultClose").onclick = function () {
                 document.getElementById('resultDialog').style.visibility = 'hidden';
