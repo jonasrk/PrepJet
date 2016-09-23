@@ -19,21 +19,8 @@ function redirectHome() {
     Office.initialize = function (reason) {
         jQuery(document).ready(function () {
 
-            Office.context.document.settings.set('same_header_addcolumn', false);
-            //save function to redirect to correct screen after intro
-            Office.context.document.settings.set('last_clicked_function', "merge_columns.html");
-            if (Office.context.document.settings.get('prepjet_loaded_before') == null) {
-                Office.context.document.settings.set('backup_sheet_count', 1);
-                Office.context.document.settings.set('prepjet_loaded_before', true);
-                Office.context.document.settings.saveAsync();
-                window.location = "intro.html";
-            }
-
 
             Office.context.document.settings.set('back_button_pressed', false);
-
-            app.initialize();
-
 
             $('#step2').hide();
             $('#step3').hide();
@@ -157,13 +144,18 @@ function redirectHome() {
     function populateDropdowns() {
 
         var worksheet_names = [];
+        function (result) {
 
-        Excel.run(function (ctx) {
+            return function() {
+
+            }
+        }
+
+        /*function () {
 
             var worksheets = ctx.workbook.worksheets;
             worksheets.load('items');
 
-            return ctx.sync().then(function () {
                 for (var i = 0; i < worksheets.items.length; i++) {
                     worksheets.items[i].load('name');
                     // worksheets.items[i].load('index'); TODO use index for something or do not load it
@@ -196,17 +188,11 @@ function redirectHome() {
                             }
                         }
 
-                    }(i));
+                    });
                 }
 
-            });
+            };*/
 
-        }).catch(function (error) {
-            console.log("Error: " + error);
-            if (error instanceof OfficeExtension.Error) {
-                console.log("Debug info: " + JSON.stringify(error.debugInfo));
-            }
-        });
     }
 
 

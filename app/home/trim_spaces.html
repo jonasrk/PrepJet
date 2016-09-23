@@ -61,31 +61,6 @@
     </table>
 </div>
 
-<!--Dialog for same header name-->
-<div id="showEmbeddedDialog" class="ms-embedded-dialog__options" >
-    <div class="ms-Dialog ms-Dialog--close">
-        <div class="ms-Overlay js-DialogAction--close"></div>
-        <div class="ms-Dialog-main">
-            <button class="ms-Dialog-button ms-Dialog-button--close js-DialogAction--close" id="buttonClose">
-                <i class="ms-Icon ms-Icon--x"></i>
-            </button>
-            <div class="ms-Dialog-header">
-                <p class="ms-Dialog-title">Error</p>
-            </div>
-            <div class="ms-Dialog-inner">
-                <div class="ms-Dialog-content">
-                    <p class="ms-font-xs ms-embedded-dialog__content__text">Each column should have a unique header. Please rename equal column headers.</p>
-                </div>
-                <div class="ms-embedded-dialog__actioncenter">
-                    <button  class="ms-Dialog-action ms-Button_grey" id="buttonOk">
-                        <span class="ms-Button-label">Highlight</span>
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
 <!--Dialog for success message-->
 <div id="resultDialog" class="ms-embedded-dialog__options" >
     <div class="ms-Dialog ms-Dialog--close">
@@ -113,37 +88,10 @@
 
 <div id="content-main">
     <div class="padding">
-        <div>
-            <label class="ms-Label">Select the column(s) from which to remove leading and trailing spaces (spaces in between words will not be removed)</label>
+        <div id="explanation">
+            <label class="ms-Label">PrepJet will remove all leading and trailing spaces in the selected range.</p>
         </div>
-        <table>
-            <tr>
-                <td id="allColumns">
-                    <div id="checkbox_select_all" class="ms-ChoiceField">
-                        <input id="checkbox_all" class="ms-ChoiceField-input" type="checkbox">
-                        <label id="checkbox_label" for="checkbox_all" class="ms-ChoiceField-field">
-                            <span class="ms-Label">All columns</span>
-                        </label>
-                    </div>
-                </td>
-                <td></td>
-            </tr>
-        </table>
-        <div id="checkboxes_columns" class="ms-ChoiceField">
-        </div>
-        <table class="tableupperborder">
-            <tr>
-                <td>
-                    <div class="ms-ChoiceField">
-                        <input id="createBackup" class="ms-ChoiceField-input" type="checkbox">
-                        <label for="createBackup" class="ms-ChoiceField-field">
-                            <span class="ms-Label">Create a backup sheet</span>
-                        </label>
-                    </div>
-                </td>
-            </tr>
-        </table>
-        <!--split button-->
+        <!--trim button-->
         <button class="ms-Button" id="trim_space">Trim</button>
     </div>
 </div>
