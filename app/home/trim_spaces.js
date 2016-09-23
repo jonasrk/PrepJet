@@ -9,14 +9,76 @@ function redirectHome() {
     Office.initialize = function (reason) {
         jQuery(document).ready(function () {
 
-            jQuery('#test').click(printTest);
+            app.initialize();
+            jQuery('#trim_space').click(trimSpaces);
+            jQuery('#homeButton').click(redirectHome);
+            document.getElementById('#test').onclick = function () {
+                console.log("print test");
+            }
 
+            document.getElementById("resultClose").onclick = function () {
+                document.getElementById('resultDialog').style.visibility = 'hidden';
+                window.location = "harmonize.html";
+            }
+            document.getElementById("resultOk").onclick = function () {
+                document.getElementById('resultDialog').style.visibility = 'hidden';
+                window.location = "harmonize.html";
+            }
 
         });
     };
 
-    function printTest() {
-        console.log("testtest");
+    // Reads data from current document selection and displays a notification
+    function trimSpaces(){
+            console.log("second");
+           getSelectedData(function(result){
+
+                if (result != null) {
+                    var countTrim = 0;
+                    var trim_array = result.map(function (item) {
+                        return item.map(function (item) {
+                            if (item) {
+                                console.log("third");
+                                var newitem = item.trim();
+                                if (item != newitem) {
+                                    countTrim++;
+                                }
+                                return newitem;
+                            }
+                        });
+                    });
+                }
+                Office.context.document.setSelectedDataAsync(trim_array, { valueFormat: Office.ValueFormat.Formatted }, function(result){
+                        console.log("set async");
+                        if (result.status == "succeeded") {
+                            var txt = document.createElement("p");
+                            txt.className = "ms-font-xs ms-embedded-dialog__content__text";
+                            txt.innerHTML = "PrepJet trimed " + countTrim + " spaces in the selected range."
+                            document.getElementById('resultText').appendChild(txt);
+                            document.getElementById('resultDialog').style.visibility = 'visible';
+                        } else {
+                            console.log("An error occured. Please select a range and try again.");
+                        }
+                    });
+            }
+        );
+
     }
+
+    function getSelectedData(callback) {
+        console.log("get function");
+        Office.context.document.getSelectedDataAsync(Office.CoercionType.Matrix, { valueFormat: Office.ValueFormat.Formatted },
+        function (result) {
+            if (result.status == "succeeded") {
+                callback(result.value);
+            }
+            else {
+                console.log("error");
+            }
+        });
+    }
+
+
+
 
 })();
