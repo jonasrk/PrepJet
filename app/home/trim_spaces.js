@@ -3,13 +3,13 @@ function redirectHome() {
 }
 
 (function () {
-    // 'use strict';
-    var trim_array = [];
+    'use strict';
+    //var trim_array = [];
     // The initialize function must be run each time a new page is loaded
     Office.initialize = function (reason) {
         jQuery(document).ready(function () {
             console.log("first");
-            //app.initialize();
+            app.initialize();
             jQuery('#trim_space').click(trimSpaces);
             jQuery('#homeButton').click(redirectHome);
 
