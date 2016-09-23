@@ -117,6 +117,4 @@ function redirectHome() {
     }
 
 
-
-
 })();
