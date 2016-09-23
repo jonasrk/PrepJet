@@ -9,14 +9,14 @@ function redirectHome() {
     Office.initialize = function (reason) {
         jQuery(document).ready(function () {
 
-            document.getElementById('#test').onclick = function () {
-                console.log("print test");
-            }
+            jQuery('#test').click(printTest);
 
 
         });
     };
 
-
+    function printTest() {
+        console.log("testtest");
+    }
 
 })();
