@@ -240,11 +240,11 @@
                     </Action>
                   </Control>
 
-                <Control xsi:type="Button" id="PJ.CheckCatButton">
+                <Control xsi:type="Button" id="PJ.CustomInconButton">
                     <Label resid="PJ.CheckCatButton.Label" />
                     <Supertip>
                       <Title resid="PJ.CheckCatButton.Label" />
-                      <Description resid="PJ.ChechCat.Ttp" />
+                      <Description resid="PJ.CheckCat.Ttp" />
                     </Supertip>
                     <Icon>
                       <bt:Image size="16" resid="PJ.customIncon.Icon_sm" />
@@ -427,9 +427,9 @@
         <bt:String id="PJ.FindDuplicatesButton.Label" DefaultValue="Detect Duplicates" />
         <bt:String id="PJ.InconsistencyButton.Label" DefaultValue="Detect Inconsistencies" />
         <bt:String id="PJ.CustomInconButton.Label" DefaultValue="Custom Inconsistencies" />
+        <bt:String id="PJ.CheckCatButton.Label" DefaultValue="Check Cat" />
         <!--bt:String id="PJ.ExtractValuesButton.Label" DefaultValue="Extract Text" /-->
         <bt:String id="PJ.TrimSpacesButton.Label" DefaultValue="Trim Spaces" />
-        <bt:String id="PJ.CheckCatButton.Label" DefaultValue="Check Categories" />
         <bt:String id="PJ.ValidationRuleButton.Label" DefaultValue="Rule-based Validation" />
         <bt:String id="PJ.HarmonizeButton.Label" DefaultValue="Change Case" />
         <bt:String id="PJ.HelpButton.Label" DefaultValue="PrepJet Help" />
@@ -455,10 +455,10 @@
         <bt:String id="PJ.addColumn.Ttp" DefaultValue="Add columns from a different sheet by matching criteria" />
         <bt:String id="PJ.inconsistency.Ttp" DefaultValue="Search for inconsistent data types" />
         <bt:String id="PJ.customIncon.Ttp" DefaultValue="Define format rules for your data" />
+        <bt:String id="PJ.CheckCat.Ttp" DefaultValue="Search data for inconsistent categories" />
         <bt:String id="PJ.duplicates.Ttp" DefaultValue="Search for duplicate entries" />
         <bt:String id="PJ.validation.Ttp" DefaultValue="Create custom rules to validate data entries" />
         <bt:String id="PJ.help.Ttp" DefaultValue="Explanation and examples on how to use PrepJet" />
-        <bt:String id="PJ.CHeckCat.Ttp" DefaultValue="Search Data for wrong categories" />
         <bt:String id="PJ.undo.Ttp" DefaultValue="Undo your last action" />
         <bt:String id="PJ.Dropdown.Tooltip" DefaultValue="Click to Show Options on this Menu" />
         <bt:String id="PJ.Item1.Tooltip" DefaultValue="Click to Show Taskpane1" />
