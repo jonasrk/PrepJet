@@ -16,6 +16,7 @@
         Office.context.document.getSelectedDataAsync(Office.CoercionType.Text,
             function(result){
                 console.log("test");
+
                 var txt = document.createElement("label");
                 txt.innerHTML = "testtestetst";
                 document.getElementById('explanation').appendChild(txt);
@@ -25,14 +26,17 @@
         );
     }
 
-    function replaceCheckedValues(){
 
-        Office.context.document.getSelectedDataAsync(Office.CoercionType.Text,
-            function(result){
-
+    function getSelectedData(callback) {
+        Office.context.document.getSelectedDataAsync(Office.CoercionType.Matrix, { valueFormat: Office.ValueFormat.Formatted },
+        function (result) {
+            if (result.status == "succeeded") {
+                callback(result.value);
             }
-        );
-
+            else {
+                console.log("error");
+            }
+        });
     }
 
 })();
