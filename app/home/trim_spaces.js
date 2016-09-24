@@ -13,7 +13,7 @@ function redirectHome() {
             jQuery('#trim_space').click(trimSpaces);
             jQuery('#homeButton').click(redirectHome);
 
-            document.getElementById('#test').onclick = function () {
+            document.getElementById('test').onclick = function () {
                 var txt = document.createElement("label");
                 txt.innerHTML = "testtestetst";
                 document.getElementById('explanation').appendChild(txt);
