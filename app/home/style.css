@@ -98,9 +98,6 @@ h1 {
     box-shadow: none;
     overflow-x: hidden; }
 
-.tableheader {
-    width: 76%; }
-
 .tableborder {
     border-top: 0.75px solid;
     border-bottom: 0.75px solid;
