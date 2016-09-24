@@ -33,10 +33,22 @@
                         });
                     }
 
+                    Office.context.document.setSelectedDataAsync(trim_array, { valueFormat: Office.ValueFormat.Formatted }, function(result){
+                        if (result.status == "succeeded") {
+                            var txt = document.createElement("label");
+                            txt.innerHTML = "success";
+                            document.getElementById('explanation').appendChild(txt);
+                        } else {
+                            var txt = document.createElement("label");
+                            txt.innerHTML = "not succeeded";
+                            document.getElementById('explanation').appendChild(txt);
+                            console.log("An error occured. Please select a range and try again.");
+                        }
+                    });
+
                     var txt = document.createElement("label");
                     txt.innerHTML = "testtestetst";
                     document.getElementById('explanation').appendChild(txt);
-                    console.log("print test");
 
                 });
         });
