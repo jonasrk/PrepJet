@@ -38,9 +38,8 @@
                     document.getElementById('explanation').appendChild(txt);
                     console.log("print test");
 
-                }
-            );
-        }
+                });
+        });
     }
 
 
