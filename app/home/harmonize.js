@@ -68,7 +68,8 @@ function redirectHome() {
             tmp = tmp.toLowerCase();
             var tmp_upper = [];
             for (var runtmp = 0; runtmp < tmp.length; runtmp++) {
-                tmp_upper.push(tmp[runtmp].charAt(0).toUpperCase() + tmp[runtmp].slice(1));
+                //tmp_upper.push(tmp[runtmp].charAt(0).toUpperCase() + tmp[runtmp].slice(1));
+                tmp_upper.push(tmp);
             }
             var harm_string = tmp_upper[0];
         }
