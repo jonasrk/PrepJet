@@ -12,7 +12,11 @@ function redirectHome() {
             app.initialize();
             jQuery('#trim_space').click(trimSpaces);
             jQuery('#homeButton').click(redirectHome);
+
             document.getElementById('#test').onclick = function () {
+                var txt = document.createElement("label");
+                txt.innerHTML = "testtestetst";
+                document.getElementById('explanation').appendChild(txt);
                 console.log("print test");
             }
 
