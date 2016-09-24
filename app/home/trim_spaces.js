@@ -6,14 +6,9 @@
         jQuery(document).ready(function(){
             app.initialize();
 
-            //jQuery('#get-data-from-selection').click(getDataFromSelection);
+            jQuery('#test').click(getDataFromSelection);
             //jQuery('#replace-checked-values').click(replaceCheckedValues);
 
-            document.getElementById('test').onclick = function () {
-                var txt = document.createElement("label");
-                txt.innerHTML = "testtestetst";
-                document.getElementById('explanation').appendChild(txt);
-                console.log("print test");
             }
         });
     };
@@ -23,7 +18,10 @@
         Office.context.document.getSelectedDataAsync(Office.CoercionType.Text,
             function(result){
 
-                console.log(result);
+                var txt = document.createElement("label");
+                txt.innerHTML = "testtestetst";
+                document.getElementById('explanation').appendChild(txt);
+                console.log("print test");
 
             }
         );
