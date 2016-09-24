@@ -17,7 +17,7 @@ function resultClose() {
 
             app.initialize();
 
-            $(".harmonize_drop").selectmenu();
+            jQuery(".harmonize_drop").Dropdown();
             jQuery('#harmonize').click(harmonize);
             //jQuery('#homeButton').click(redirectHome);
 
