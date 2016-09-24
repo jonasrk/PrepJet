@@ -8,6 +8,10 @@ function resultClose() {
     window.location = "harmonize.html";
 }
 
+function redirectHome() {
+    window.location = "mac_start.html";
+}
+
 (function () {
     // 'use strict';
 
@@ -18,9 +22,9 @@ function resultClose() {
             app.initialize();
 
             $('.harmonize_drop').Dropdown();
+            
             jQuery('#harmonize').click(harmonize);
-            //jQuery('#homeButton').click(redirectHome);
-
+            jQuery('#homeButton').click(redirectHome);
             jQuery('#resultOk').click(resultOK);
             jQuery('#resultOk').click(resultClose);
 
