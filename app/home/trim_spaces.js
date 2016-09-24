@@ -1,3 +1,13 @@
+function resultOK() {
+    document.getElementById('resultDialog').style.visibility = 'hidden';
+    window.location = "harmonize.html";
+}
+
+function resultClose() {
+    document.getElementById('resultDialog').style.visibility = 'hidden';
+    window.location = "harmonize.html";
+}
+
 (function(){
     'use strict';
 
@@ -6,8 +16,12 @@
         jQuery(document).ready(function(){
             app.initialize();
 
-            jQuery('#test').click(getDataFromSelection);
-            //jQuery('#replace-checked-values').click(replaceCheckedValues);
+            jQuery('#trim_space').click(getDataFromSelection);
+
+            jQuery('#resultOk').click(resultOK);
+            jQuery('#resultOk').click(resultClose);
+
+
         });
     };
 
@@ -34,6 +48,11 @@
 
                     Office.context.document.setSelectedDataAsync(trim_array, { valueFormat: Office.ValueFormat.Formatted }, function(result){
                         if (result.status == "succeeded") {
+                            var txt = document.createElement("p");
+                            txt.className = "ms-font-xs ms-embedded-dialog__content__text";
+                            txt.innerHTML = "PrepJet trimed " + countTrim + " spaces in the selected range."
+                            document.getElementById('resultText').appendChild(txt);
+                            document.getElementById('resultDialog').style.visibility = 'visible';
                         } else {
                             console.log("An error occured. Please select a range and try again.");
                         }
