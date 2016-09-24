@@ -33,18 +33,43 @@
     </div>
 </div>
 
+<!--Dialog for success message-->
+<div id="resultDialog" class="ms-embedded-dialog__options" >
+    <div class="ms-Dialog ms-Dialog--close">
+        <div class="ms-Overlay js-DialogAction--close"></div>
+        <div class="ms-Dialog-main">
+            <button class="ms-Dialog-button ms-Dialog-button--close js-DialogAction--close" id="resultClose">
+                <i class="ms-Icon ms-Icon--x"></i>
+            </button>
+            <div class="ms-Dialog-header">
+                <p class="ms-Dialog-title">Successful trimmed</p>
+            </div>
+            <div class="ms-Dialog-inner">
+                <div id="resultText" class="ms-Dialog-content">
+                    <!--p class="ms-font-xs ms-embedded-dialog__content__text"></p-->
+                </div>
+                <div class="ms-embedded-dialog__actioncenter">
+                    <button  class="ms-Dialog-action ms-Button_grey" id="resultOk">
+                        <span class="ms-Button-label">Ok</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div id="content-main">
     <div class="padding">
         <div id="explanation">
-            <label>First you should remove leading and trailing spaces, because they can lead to errors when further analysing your data.</label>
+            <label class="ms-Label">First you should remove leading and trailing spaces, because they can lead to errors when further analysing your data.</label>
         </div>
         <br>
         <div id="explanation">
-            <label>PrepJet will remove all leading and trailing spaces in the selected range.</label>
+            <label class="ms-Label">PrepJet will remove all leading and trailing spaces in the selected range.</label>
         </div>
         <!--trim button-->
-        <button id="trim_space">Trim</button>
-        <button id="test">Test</button>
+        <button class="ms-Button" id="trim_space">Trim</button>
+        <button class="ms-Button" id="test">Test</button>
     </div>
 </div>
 </body>
