@@ -22,7 +22,7 @@ function redirectHome() {
             app.initialize();
 
             $('.harmonize_drop').Dropdown();
-            
+
             jQuery('#harmonize').click(harmonize);
             jQuery('#homeButton').click(redirectHome);
             jQuery('#resultOk').click(resultOK);
