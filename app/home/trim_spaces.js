@@ -15,15 +15,32 @@
     function getDataFromSelection(){
         Office.context.document.getSelectedDataAsync(Office.CoercionType.Text,
             function(result){
-                console.log("test");
+                getSelectedData(function(result){
 
-                var txt = document.createElement("label");
-                txt.innerHTML = "testtestetst";
-                document.getElementById('explanation').appendChild(txt);
-                console.log("print test");
+                    if (result != null) {
+                        var countTrim = 0;
+                        var trim_array = result.map(function (item) {
+                            return item.map(function (item) {
+                                if (item) {
+                                    console.log("third");
+                                    var newitem = item.trim();
+                                    if (item != newitem) {
+                                        countTrim++;
+                                    }
+                                    return newitem;
+                                }
+                            });
+                        });
+                    }
 
-            }
-        );
+                    var txt = document.createElement("label");
+                    txt.innerHTML = "testtestetst";
+                    document.getElementById('explanation').appendChild(txt);
+                    console.log("print test");
+
+                }
+            );
+        }
     }
 
 
