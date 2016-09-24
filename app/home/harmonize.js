@@ -15,7 +15,7 @@ function resultClose() {
     Office.initialize = function (reason) {
         jQuery(document).ready(function () {
 
-            //app.initialize();
+            app.initialize();
 
             jQuery(".harmonize_drop").Dropdown();
             jQuery('#harmonize').click(harmonize);
