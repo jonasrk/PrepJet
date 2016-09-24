@@ -1,64 +1,36 @@
 <!DOCTYPE html>
-<html>
-<head>
+<html><head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title></title>
-
-    <script src="https://z8d.de:1337/vorlon.js"></script>
-
-
-
-    <!--<script src="//ajax.aspnetcdn.com/ajax/jQuery/jquery-1.9.1.min.js"></script>-->
-    <link href="../../content/Office.css" rel="stylesheet" type="text/css"/>
-    <link href="../../bower_components/microsoft_office_js/content/officethemes.css" rel="stylesheet" type="text/css"/>
-    <!--<link href="//appsforoffice.microsoft.com/fabric/1.0/fabric.min.css" rel="stylesheet">-->
-    <!--<link href="//appsforoffice.microsoft.com/fabric/1.0/fabric.components.min.css" rel="stylesheet">-->
-    <script src="../../office.js"></script>
+    <script src="//ajax.aspnetcdn.com/ajax/jQuery/jquery-1.9.1.min.js"></script>
+    <link href="../../content/Office.css" rel="stylesheet" type="text/css" />
+    <link href="../../bower_components/microsoft.office.js/content/officethemes.css" rel="stylesheet" type="text/css" />
+    <link href="//appsforoffice.microsoft.com/fabric/1.0/fabric.min.css" rel="stylesheet">
+    <link href="//appsforoffice.microsoft.com/fabric/1.0/fabric.components.min.css" rel="stylesheet">
+    <script src="//appsforoffice.microsoft.com/lib/1/hosted/office.js"></script>
 
     <!-- To enable offline debugging using a local reference to jQuery.js Office.js, use: -->
-    <!--<script src="../../bower_components/microsoft_office_js/scripts/Office/1/office.js"></script>-->
-    <script src="../../bower_components/jquery/jquery.min.js"></script>
-    <link href="../../content/fabric.min.css" rel="stylesheet">
-    <link href="../../content/fabric.components.min.css" rel="stylesheet">
-    <!--<script src="../../scripts/jquery.fabric.min.js"></script>-->
+    <!-- <script src="../../bower_components/jquery/jquery.min.js"></script>  -->
+    <!-- <script src="../../bower_components/microsoft.office.js/scripts/Office/1/office.js"></script>  -->
+    <script src="../../content/fabric.min.css"></script>
+    <script src="../../content/fabric.components.min.css"></script>
+    <script src="../../scripts/jquery.fabric.min.js"></script>
     <script src="../../scripts/MicrosoftAjax.js"></script>
 
-    <link href="../app.css" rel="stylesheet" type="text/css"/>
+    <link href="../app.css" rel="stylesheet" type="text/css" />
     <script src="../app.js"></script>
 
-    <link href="style.css" rel="stylesheet" type="text/css"/>
+    <link href="style.css" rel="stylesheet" type="text/css" />
     <script src="helpers.js"></script>
     <script src="harmonize.js"></script>
-
-    <!--PrepJet Fabric Components Imports-->
-    <script src="../../bower_components/office-ui-fabric/src/components/TextField/Jquery.TextField.js"></script>
-    <script src="../../bower_components/office-ui-fabric/src/components/Dropdown/Jquery.Dropdown.js"></script>
-
-
 </head>
 
-<body class="ms-font-m">
+<body>
 <div id="content-header">
-    <table>
-        <tr>
-            <td class="tableheader">
-                <div class="padding">
-                    <h1>Change Case</h1>
-                </div>
-            </td>
-            <td>
-                <button id="refresh_icon" class="ms-Button_headericon">
-                    <i class="ms-Icon ms-Icon--refresh" aria-hidden="true"></i>
-                </button>
-            </td>
-            <td>
-                <button id="homeButton" class="ms-Button_homelogo">
-                    <img class="page1" src="../../images/logo_lg.png" />
-                </button>
-            </td>
-        </tr>
-    </table>
+    <div class="padding">
+        <h1>Change Case</h1>
+    </div>
 </div>
 
 <!--Dialog for success message-->
@@ -70,7 +42,7 @@
                 <i class="ms-Icon ms-Icon--x"></i>
             </button>
             <div class="ms-Dialog-header">
-                <p class="ms-Dialog-title">Case successful changed</p>
+                <p class="ms-Dialog-title">Cases successful changed</p>
             </div>
             <div class="ms-Dialog-inner">
                 <div id="resultText" class="ms-Dialog-content">
@@ -95,21 +67,10 @@
         <div id="explanation">
             <label class="ms-Label">PrepJet will change the cases of all words in your selected range according to the option below.</label>
         </div>
-        <div id="harm_drop" class="ms-Dropdown harmonize_drop" tabindex="1">
-                <label class="ms-Label">Select type of change</label>
-                <i class="ms-Dropdown-caretDown ms-Icon ms-Icon--caretDown"></i>
-                <select id="harmonize_options" class="ms-Dropdown-select">
-                    <option value="allupper">ALL LETTERS UPPER CASE</option>
-                    <option value="alllower">all letters lower case</option>
-                    <option value="oneupper">First letter of first word upper case</option>
-                    <option value="firstupper">First Letter Of Each Word Upper Case</option>
-                </select>
-            </div>
-        <!--Action button-->
+        <!--trim button-->
         <button class="ms-Button" id="harmonize">Change Case</button>
     </div>
 </div>
-<div class="placeholder"></div>
 </body>
 
 </html>

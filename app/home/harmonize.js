@@ -1,5 +1,11 @@
-function redirectHome() {
-    window.location = "mac_start.html";
+function resultOK() {
+    document.getElementById('resultDialog').style.visibility = 'hidden';
+    window.location = "harmonize.html";
+}
+
+function resultClose() {
+    document.getElementById('resultDialog').style.visibility = 'hidden';
+    window.location = "harmonize.html";
 }
 
 (function () {
@@ -13,22 +19,11 @@ function redirectHome() {
 
             jQuery(".harmonize_drop").Dropdown();
             jQuery('#harmonize').click(harmonize);
-            jQuery('#homeButton').click(redirectHome);
+            //jQuery('#homeButton').click(redirectHome);
 
+            jQuery('#resultOk').click(resultOK);
+            jQuery('#resultOk').click(resultClose);
 
-            document.getElementById("refresh_icon").onclick = function () {
-                window.location = "harmonize.html";
-            }
-
-            //hide result message
-            document.getElementById("resultClose").onclick = function () {
-                document.getElementById('resultDialog').style.visibility = 'hidden';
-                window.location = "harmonize.html";
-            }
-            document.getElementById("resultOk").onclick = function () {
-                document.getElementById('resultDialog').style.visibility = 'hidden';
-                window.location = "harmonize.html";
-            }
 
         });
     };
