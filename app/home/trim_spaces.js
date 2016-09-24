@@ -8,8 +8,6 @@
 
             jQuery('#test').click(getDataFromSelection);
             //jQuery('#replace-checked-values').click(replaceCheckedValues);
-
-            }
         });
     };
 
@@ -17,7 +15,7 @@
     function getDataFromSelection(){
         Office.context.document.getSelectedDataAsync(Office.CoercionType.Text,
             function(result){
-
+                console.log("test");
                 var txt = document.createElement("label");
                 txt.innerHTML = "testtestetst";
                 document.getElementById('explanation').appendChild(txt);
