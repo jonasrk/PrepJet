@@ -64,7 +64,7 @@ function redirectHome() {
                 harm_string = harm_string.concat(" ", tmp_upper[runtmp]);
             }
             harm_string = [harm_string];*/
-            var tmp = item.toLowerCase();
+            var tmp = item.toLowerCase().split(" ");
             var harm_string = tmp;
         }
         if (harmo == "oneupper") {
