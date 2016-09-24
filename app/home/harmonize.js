@@ -65,7 +65,12 @@ function redirectHome() {
             }
             harm_string = [harm_string];*/
             var tmp = item.split(" ");
-            var harm_string = tmp[0];
+            tmp = tmp.toLowerCase();
+            var tmp_upper = [];
+            for (var runtmp = 0; runtmp < tmp.length; runtmp++) {
+                tmp_upper.push(tmp[runtmp].charAt(0).toUpperCase() + tmp[runtmp].slice(1));
+            }
+            var harm_string = tmp_upper[0];
         }
         if (harmo == "oneupper") {
             var tmp = item.split(" ");
