@@ -67,7 +67,19 @@
         <div id="explanation">
             <label class="ms-Label">PrepJet will change the cases of all words in your selected range according to the option below.</label>
         </div>
-        <!--trim button-->
+
+        <div id="harm_drop" class="ms-Dropdown harmonize_drop" tabindex="1">
+                <label class="ms-Label">Select type of change</label>
+                <i class="ms-Dropdown-caretDown ms-Icon ms-Icon--caretDown"></i>
+                <select id="harmonize_options" class="ms-Dropdown-select">
+                    <option value="allupper">ALL LETTERS UPPER CASE</option>
+                    <option value="alllower">all letters lower case</option>
+                    <option value="oneupper">First letter of first word upper case</option>
+                    <option value="firstupper">First Letter Of Each Word Upper Case</option>
+                </select>
+            </div>
+
+        <!--Action button-->
         <button class="ms-Button" id="harmonize">Change Case</button>
     </div>
 </div>
