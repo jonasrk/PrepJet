@@ -54,8 +54,7 @@ function redirectHome() {
             var harm_string = item.toLowerCase();
         }
         if (harmo == "firstupper") {
-            var harm_string = item.split(" ");
-            /*var tmp = item.toLowerCase().split(" ");
+            var tmp = item.toLowerCase();
             var tmp_upper = [];
             for (var runtmp = 0; runtmp < tmp.length; runtmp++) {
                 tmp_upper.push(tmp[runtmp].charAt(0).toUpperCase() + tmp[runtmp].slice(1));
@@ -64,7 +63,7 @@ function redirectHome() {
             for (var runtmp = 1; runtmp < tmp_upper.length; runtmp++) {
                 harm_string = harm_string.concat(" ", tmp_upper[runtmp]);
             }
-            harm_string = [harm_string];*/
+            harm_string = [harm_string];
         }
         if (harmo == "oneupper") {
             var tmp = item.split(" ");
