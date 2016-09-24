@@ -53,15 +53,15 @@ function redirectHome() {
         if (harmo == "alllower") {
             var harm_string = item.toLowerCase();
         }
-        if (harmo == "firstupper") { //todo when leading space first real letter not transformed
+        if (harmo == "firstupper") {
             var tmp = item.toLowerCase().split(" ");
-            var tmp_upper = [];
+            /*var tmp_upper = [];
             for (var runtmp = 0; runtmp < tmp.length; runtmp++) {
                 tmp_upper.push(tmp[runtmp].charAt(0).toUpperCase() + tmp[runtmp].slice(1));
-            }
-            var harm_string = tmp_upper[0];
-            for (var runtmp = 1; runtmp < tmp_upper.length; runtmp++) {
-                harm_string = harm_string.concat(" ", tmp_upper[runtmp]);
+            }*/
+            var harm_string = tmp[0];
+            for (var runtmp = 1; runtmp < tmp.length; runtmp++) {
+                harm_string = harm_string.concat(" ", tmp[runtmp]);
             }
             harm_string = [harm_string];
         }
