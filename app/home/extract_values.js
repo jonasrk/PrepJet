@@ -414,7 +414,6 @@ function backToThree() {
 
 
             //if advanced settings are selected, get values for delimiter count
-            if (Office.context.document.settings.get('more_option_extract') == true) {
                 var count_delimiter_start = 0;
                 if (document.getElementById('delimiter_count_start').value == "one") { count_delimiter_start = 1; }
                 else if (document.getElementById('delimiter_count_start').value == "two") { count_delimiter_start = 2; }
@@ -441,10 +440,7 @@ function backToThree() {
                 else if(document.getElementById('delimiter_count_end').value == "none") { count_delimiter_end = 0; }
 
                 var count_direction_end = document.getElementById('del_count_drop_end').value;
-            }
-            else {
-                var count_delimiter_end = 0;
-            }
+
 
             //get used range in active Sheet
             range.load('text');

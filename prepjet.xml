@@ -404,7 +404,7 @@
       </bt:Urls>
       <bt:ShortStrings>
         <bt:String id="PJ.addcolumnButton.Label" DefaultValue="Lookup Data" />
-        <bt:String id="PJ.SplitValuesButton.Label" DefaultValue="Divide Cell Content" />
+        <bt:String id="PJ.SplitValuesButton.Label" DefaultValue="Separate Cell Content" />
         <bt:String id="PJ.FindDuplicatesButton.Label" DefaultValue="Detect Duplicates" />
         <bt:String id="PJ.InconsistencyButton.Label" DefaultValue="Detect Inconsistencies" />
         <bt:String id="PJ.CustomInconButton.Label" DefaultValue="Custom Inconsistencies" />

@@ -4,7 +4,6 @@ function displayAdvancedCount() {
         $('#split_Value').show();
         //$('#advanced_settings').hide();
         //$('#advanced_hide').show();
-        //Office.context.document.settings.set('more_option', true);
 }
 
 function hideAdvancedCount() {
@@ -12,7 +11,6 @@ function hideAdvancedCount() {
         $('.delimiter_count_dropdown').hide();
         $('#advanced_settings').show();
         $('#advanced_hide').hide();
-        Office.context.document.settings.set('more_option', false);
 }
 
 
@@ -67,7 +65,6 @@ function backToThree() {
         jQuery(document).ready(function () {
 
             Office.context.document.settings.set('same_header_split', false);
-            Office.context.document.settings.set('more_option', false);
             Office.context.document.settings.set('last_clicked_function', "split_values.html");
             if (Office.context.document.settings.get('prepjet_loaded_before') == null) {
                 Office.context.document.settings.set('backup_sheet_count', 1);
@@ -89,7 +86,6 @@ function backToThree() {
             $('#delimiter_count').Dropdown().hide();
             $('#checkbox_delimiter').hide();
             $(".delimiter_count_dropdown").Dropdown().hide();
-            //$('#advanced_hide').hide();
 
             $(".dropdown_table").Dropdown();
             $(".ms-TextField").TextField();
@@ -106,9 +102,8 @@ function backToThree() {
             $('#splitApply1').click(splitValue);
             $('#splitApply2').click(displayAdvancedCount);
             $('#buttonOk').click(highlightHeader);
-            //$('#advanced_settings').click(displayAdvancedCount);
-            //$('#advanced_hide').click(hideAdvancedCount);
             $('#homeButton').click(redirectHome);
+            $('#homeButton2').click(redirectHome);
 
 
             // Hides the dialog.
@@ -423,7 +418,6 @@ function backToThree() {
                 delimiter_type = ";";
             }
 
-
             range.load('text');
             worksheet.load('name');
             firstRow.load('address');
@@ -457,7 +451,7 @@ function backToThree() {
                     else if(document.getElementById('delimiter_count_i').value == "eight") { count_delimiter = 8; }
                     else if(document.getElementById('delimiter_count_i').value == "nine") { count_delimiter = 9; }
                     else if(document.getElementById('delimiter_count_i').value == "all") {
-                        Office.context.document.settings.set('more_option', false);
+                        count_delimiter = 0;
                     }
                     return count_delimiter;
                 }
@@ -471,13 +465,13 @@ function backToThree() {
                 }
 
                 //define variables for array to hold splitted values and length measures
-                //var act_worksheet = ctx.workbook.worksheets.getActiveWorksheet();
                 var array_length = 0;
                 var max_array_length = 0;
                 var split_array = new Array(range.text.length);
 
                 //loop through whole column, create an array with splitted values and get maximum length
-                if (Office.context.document.settings.get('more_option') == false) {
+                var count_delimiter = getCountDelimiter();
+                if (count_delimiter == 0) {
                     for (var i = 0; i < range.text.length; i++) {
                         if (range.text[i][header] != "") {
                             split_array[i] = range.text[i][header].split(delimiter_type);
@@ -503,7 +497,6 @@ function backToThree() {
                 else {
                     var count_direction = document.getElementById('delimiter_count_drop').value;
                     for (var i = 0; i < range.text.length; i++) {
-                        var count_delimiter = getCountDelimiter();
                         if (range.text[i][header] != "" && range.text[i][header].indexOf(delimiter_type) != -1) {
                             split_array[i] = range.text[i][header].split(delimiter_type);
                             array_length = split_array[i].length;

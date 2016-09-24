@@ -1,5 +1,5 @@
 html {
-    background: #F9F9F9; }
+    background: #FFFFFF; }
 
 
 #content-header {
@@ -27,7 +27,7 @@ h1 {
     font-weight: 500; }
 
 #content-main {
-    background: #F9F9F9;
+    background: #FFFFFF;
     top: 60px; }
 
 .ms-Button {
@@ -54,6 +54,17 @@ h1 {
     height: 32px;
     min-width: 40px;
     padding: 4px 10px 6px; }
+
+.ms-Button_white {
+    color: #FFFFFF;
+    font-family: 'Segoe UI Regular WestEuropean','Segoe UI','Segoe WP',Tahoma,Arial,sans-serif;
+    font-size: 12px;
+    font-weight: 400;
+    background-color: #FFFFFF;
+    border: 1px solid #FFFFFF;
+    height: 25px;
+    min-width: 20px;
+    padding: 2px 4px 2px; }
 
 .ms-Button_small {
     color: #333;
@@ -124,7 +135,7 @@ h1 {
 .placeholder {
     height: 60px;
     overflow: visible;
-    background: #F9F9F9; }
+    background: #FFFFFF; }
 
 #showEmbeddedDialog {
     visibility: hidden;}
@@ -145,7 +156,7 @@ h1 {
 
 .ms-Button_icon {
     border: 0px;
-    background: #F9F9F9; }
+    background: #FFFFFF; }
 
 .ms-Button_headericon {
     border: 0px;
@@ -227,8 +238,6 @@ h1 {
     overflow-x: hidden; }
 
 #lookuptable {
-    border-bottom: 0.75px solid;
-    border-color: #e2e2e2;
     width: 50%; }
 
 #harm_drop {
@@ -298,4 +307,7 @@ h1 {
 
 #columnsToAdd {
     width: 100%; }
+
+#tableright {
+    text-align: right; }
 
