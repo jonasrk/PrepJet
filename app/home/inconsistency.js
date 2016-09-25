@@ -46,11 +46,11 @@ function redirectHome() {
                         var type_array = result.map(function (item) {
                             return item.map(function (item) {
                                 if (item) {
-                                    var datatype = getDataType(item);
+                                    var newitem = getDataType(item);
                                     if (item != newitem) {
                                         countIncon++;
                                     }
-                                    return datatype;
+                                    return newitem;
                                 }
                             });
                         });
@@ -60,7 +60,7 @@ function redirectHome() {
                         if (result.status == "succeeded") {
                             var txt = document.createElement("p");
                             txt.className = "ms-font-xs ms-embedded-dialog__content__text";
-                            txt.innerHTML = "PrepJet found " + countIncon + " data entries with inconsistent data type."
+                            txt.innerHTML = "PrepJet found " + countIncon + " data entries with inconsitent data type."
                             document.getElementById('resultText').appendChild(txt);
                             document.getElementById('resultDialog').style.visibility = 'visible';
                         } else {
