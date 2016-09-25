@@ -27,14 +27,6 @@ function redirectHome() {
             jQuery('#homeButton').click(redirectHome);
             jQuery('#inconsistency').click(checkIncon);
 
-            //show and hide help callout
-            document.getElementById("help_icon").onclick = function () {
-                document.getElementById('helpCallout').style.visibility = 'visible';
-            }
-            document.getElementById("closeCallout").onclick = function () {
-                document.getElementById('helpCallout').style.visibility = 'hidden';
-            }
-
         });
     };
 
@@ -51,6 +43,10 @@ function redirectHome() {
         });
     }
 
+    function getDataType(item) {
+        return typeof item;
+    }
+
 
     function checkIncon() {
         Office.context.document.getSelectedDataAsync(Office.CoercionType.Text,
@@ -62,11 +58,11 @@ function redirectHome() {
                         var trim_array = result.map(function (item) {
                             return item.map(function (item) {
                                 if (item) {
-                                    var newitem = item.trim();
-                                    if (item != newitem) {
+                                    var itemType = getDataType(item);
+                                    /*if (item != newitem) {
                                         countIncon++;
-                                    }
-                                    return newitem;
+                                    }*/
+                                    return itemType;
                                 }
                             });
                         });

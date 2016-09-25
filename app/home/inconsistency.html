@@ -83,51 +83,9 @@
 
 <div id="content-main">
     <div class="padding">
-        <table>
-            <tr>
-                <td>
-                    <div id="explanation">
-                        <label class="ms-Label">PrepJet will highlight those cells in your selected range, of which the data type deviates from the most frequent data type present in the respective column.</p>
-                    </div>
-                </td>
-                <td>
-                    <button id="help_icon" class="ms-Button_icon">
-                        <i class="ms-Icon ms-Icon--infoCircle" aria-hidden="true"></i>
-                    </button>
-                </td>
-            </tr>
-        </table>
-        <div id="helpCallout" class="ms-Callout ms-Callout--close ms-Callout--arrowLeft">
-            <div class="ms-Callout-main">
-                <div class="ms-Callout-header">
-                    <p class="ms-Callout-title">Help: Detect Inconsistencies</p>
-                </div>
-                <button id="closeCallout" class="ms-Callout-close">
-                    <i class="ms-Icon ms-Icon--x"></i>
-                </button>
-                <div class="ms-Callout-inner">
-                    <div class="ms-Callout-content">
-                        <p class="ms-Callout-subText">PrepJet will also highlight empty cells. If the majority of cells in a column is empty PrepJet will ignore the empty cells and screen all populated cells for inconsistent data types.</p>
-                    </div>
-                    <div class="ms-Callout-actions">
-                        <a href="help.html" class="ms-Callout-link ms-Link">Learn more</a>
-                    </div>
-                </div>
-            </div>
+        <div id="explanation">
+            <label class="ms-Label">PrepJet will highlight those cells in your selected range, of which the data type deviates from the most frequent data type present in the respective column.</p>
         </div>
-        <table>
-            <tr>
-                <td id="allColumns">
-                    <div id="checkbox_select_all" class="ms-ChoiceField">
-                        <input id="checkbox_all" class="ms-ChoiceField-input" type="checkbox">
-                        <label id="checkbox_label" for="checkbox_all" class="ms-ChoiceField-field">
-                            <span class="ms-Label">All columns</span>
-                        </label>
-                    </div>
-                </td>
-                <td></td>
-            </tr>
-        </table>
         <!--Action button-->
         <button class="ms-Button_grey" id="inconsistency">Screen</button>
     </div>
