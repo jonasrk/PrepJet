@@ -116,7 +116,8 @@ h1 {
     position: fixed;
     top: 60px;
     overflow-y: scroll;
-    overflow-x: hidden; }
+    overflow-x: hidden;
+    z-index: 105; }
 
 .placeholder {
     height: 60px;

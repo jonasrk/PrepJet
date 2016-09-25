@@ -7,8 +7,6 @@
 
     <!--<script src="https://z8d.de:1337/vorlon.js"></script>-->
 
-
-
     <!--<script src="//ajax.aspnetcdn.com/ajax/jQuery/jquery-1.9.1.min.js"></script>-->
     <link href="../../content/Office.css" rel="stylesheet" type="text/css"/>
     <link href="../../bower_components/microsoft_office_js/content/officethemes.css" rel="stylesheet" type="text/css"/>
@@ -48,13 +46,8 @@
                 </div>
             </td>
             <td>
-                <button id="refresh_icon" class="ms-Button_headericon">
-                    <i class="ms-Icon ms-Icon--refresh" aria-hidden="true"></i>
-                </button>
-            </td>
-            <td>
                 <button id="homeButton" class="ms-Button_homelogo">
-                    <img class="page1" src="../../images/logo_lg.png" />
+                    <img class="page1" src="../../images/Home.png" />
                 </button>
                 <!--div>
                     <img class="page1" src="../../images/logo_lg.png" />
@@ -62,30 +55,6 @@
             </td>
         </tr>
     </table>
-</div>
-
-<div id="showEmbeddedDialog" class="ms-embedded-dialog__options" >
-    <div class="ms-Dialog ms-Dialog--close">
-        <div class="ms-Overlay js-DialogAction--close"></div>
-        <div class="ms-Dialog-main">
-            <button class="ms-Dialog-button ms-Dialog-button--close js-DialogAction--close" id="buttonClose">
-                <i class="ms-Icon ms-Icon--x"></i>
-            </button>
-            <div class="ms-Dialog-header">
-                <p class="ms-Dialog-title">Error</p>
-            </div>
-            <div class="ms-Dialog-inner">
-                <div class="ms-Dialog-content">
-                    <p class="ms-font-xs ms-embedded-dialog__content__text">Each column should have a unique header. Please rename equal column headers.</p>
-                </div>
-                <div class="ms-embedded-dialog__actioncenter">
-                    <button  class="ms-Dialog-action ms-Button_grey" id="buttonOk">
-                        <span class="ms-Button-label">Highlight</span>
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
 </div>
 
 <div id="resultDialog" class="ms-embedded-dialog__options" >
@@ -118,7 +87,7 @@
             <tr>
                 <td>
                     <div id="explanation">
-                        <label class="ms-Label">PrepJet will highlight those cells in which the data type deviates from the most frequent data type present in the column.</p>
+                        <label class="ms-Label">PrepJet will highlight those cells in your selected range, of which the data type deviates from the most frequent data type present in the respective column.</p>
                     </div>
                 </td>
                 <td>
@@ -146,9 +115,6 @@
                 </div>
             </div>
         </div>
-        <div>
-            <label class="ms-Label">Select the column(s) to be screened for inconsistencies</label>
-        </div>
         <table>
             <tr>
                 <td id="allColumns">
@@ -162,22 +128,8 @@
                 <td></td>
             </tr>
         </table>
-        <!--container for checkboxes-->
-        <div id="checkboxes_columns" class="ms-ChoiceField"></div>
-        <table class="tableupperborder">
-            <tr>
-                <td>
-                    <div class="ms-ChoiceField">
-                        <input id="createBackup" class="ms-ChoiceField-input" type="checkbox">
-                        <label for="createBackup" class="ms-ChoiceField-field">
-                            <span class="ms-Label">Create a backup sheet</span>
-                        </label>
-                    </div>
-                </td>
-            </tr>
-        </table>
-        <!--split button-->
-        <button class="ms-Button" id="inconsistency">Screen</button>
+        <!--Action button-->
+        <button class="ms-Button_grey" id="inconsistency">Screen</button>
     </div>
 </div>
 <div class="placeholder"></div>
