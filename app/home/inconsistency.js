@@ -46,11 +46,11 @@ function redirectHome() {
                         var trim_array = result.map(function (item) {
                             return item.map(function (item) {
                                 if (item) {
-                                    var newitem = getDataType(item);
-                                    if (item != newitem) {
+                                    var dataType = getDataType(item);
+                                    if (item != dataType) {
                                         countIncon++;
                                     }
-                                    return newitem;
+                                    return dataType;
                                 }
                             });
                         });
