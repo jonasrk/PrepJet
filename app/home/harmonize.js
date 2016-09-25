@@ -26,7 +26,7 @@ function redirectHome() {
             jQuery('#harmonize').click(harmonize);
             jQuery('#homeButton').click(redirectHome);
             jQuery('#resultOk').click(resultOK);
-            jQuery('#resultOk').click(resultClose);
+            jQuery('#resultClose').click(resultClose);
 
 
         });

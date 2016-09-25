@@ -9,6 +9,20 @@ html {
     height: 60px;
     overflow: visible; }
 
+#content-header_trans {
+    background: #fbab3e;
+    color: #fff;
+    width: 100%;
+    height: 60px;
+    overflow: visible; }
+
+#content-header_incons {
+    background: #5f75a2;
+    color: #fff;
+    width: 100%;
+    height: 60px;
+    overflow: visible; }
+
 #content-header2 {
     background: #666666;
     color: #fff;
@@ -255,9 +269,15 @@ h1 {
     width: 100%;
     border-color: #e2e2e2;}
 
-.ms-Button_homelogo {
+.ms-Button_hometrans {
     border: 0px;
     background: #fbab3e;
+    height: 50px;
+    width: 60px; }
+
+.ms-Button_homeincon {
+    border: 0px;
+    background: #5f75a2;
     height: 50px;
     width: 60px; }
 

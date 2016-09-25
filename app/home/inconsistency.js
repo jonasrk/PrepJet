@@ -7,12 +7,13 @@ function resultClose() {
     window.location = "harmonize.html";
 }
 
-function redirectHome() {
-    window.location = "mac_start.html";
+function resultOK() {
+    document.getElementById('resultDialog').style.visibility = 'hidden';
+    window.location = "harmonize.html";
 }
 
 (function () {
-    // 'use strict';
+    'use strict';
 
     // The initialize function must be run each time a new page is loaded
     Office.initialize = function (reason) {
@@ -20,10 +21,8 @@ function redirectHome() {
 
             app.initialize();
 
-            $('#inconsistency').click(inconsistencies);
-
             jQuery('#resultOk').click(resultOK);
-            jQuery('#resultOk').click(resultClose);
+            jQuery('#resultClose').click(resultClose);
             jQuery('#homeButton').click(redirectHome);
             jQuery('#inconsistency').click(checkIncon);
 
@@ -44,7 +43,8 @@ function redirectHome() {
     }
 
     function getDataType(item) {
-        return typeof item;
+        var datatype = typeof item;
+        return datatype;
     }
 
 
@@ -86,7 +86,7 @@ function redirectHome() {
 
 
 
-    function inconsistencies() {
+    /*function inconsistencies() {
 
         Excel.run(function (ctx) {
 
@@ -261,7 +261,7 @@ function redirectHome() {
             });
 
         });
-    }
+    }*/
 
 
 })();
