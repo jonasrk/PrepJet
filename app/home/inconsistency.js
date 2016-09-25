@@ -43,7 +43,7 @@ function resultOK() {
     }
 
     function getDataType(item) {
-        var datatype = "string"//typeof item;
+        var datatype = "string";//typeof item;
         return datatype;
     }
 
