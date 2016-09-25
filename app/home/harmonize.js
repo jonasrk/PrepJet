@@ -63,7 +63,7 @@ function redirectHome() {
             for (var runtmp = 1; runtmp < tmp_upper.length; runtmp++) {
                 harm_string = harm_string.concat(" ", tmp_upper[runtmp]);
             }
-            harm_string = [harm_string];
+            //harm_string = [harm_string];
         }
         if (harmo == "oneupper") {
             var tmp = item.split(" ");
