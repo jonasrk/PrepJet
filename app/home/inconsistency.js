@@ -4,12 +4,12 @@ function redirectHome() {
 
 function resultClose() {
     document.getElementById('resultDialog').style.visibility = 'hidden';
-    window.location = "harmonize.html";
+    window.location = "mac_start.html";
 }
 
 function resultOK() {
     document.getElementById('resultDialog').style.visibility = 'hidden';
-    window.location = "harmonize.html";
+    window.location = "mac_start.html";
 }
 
 (function () {
@@ -43,7 +43,7 @@ function resultOK() {
     }
 
     function getDataType(item) {
-        var datatype = typeof item;
+        var datatype = "string"//typeof item;
         return datatype;
     }
 
@@ -55,7 +55,7 @@ function resultOK() {
 
                     if (result != null) {
                         var countIncon = 0;
-                        var trim_array = result.map(function (item) {
+                        var type_array = result.map(function (item) {
                             return item.map(function (item) {
                                 if (item) {
                                     var itemType = getDataType(item);
@@ -68,7 +68,7 @@ function resultOK() {
                         });
                     }
 
-                    Office.context.document.setSelectedDataAsync(trim_array, { valueFormat: Office.ValueFormat.Formatted }, function(result){
+                    Office.context.document.setSelectedDataAsync(type_array, { valueFormat: Office.ValueFormat.Formatted }, function(result){
                         if (result.status == "succeeded") {
                             var txt = document.createElement("p");
                             txt.className = "ms-font-xs ms-embedded-dialog__content__text";
