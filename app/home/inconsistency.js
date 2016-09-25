@@ -1,11 +1,11 @@
 function resultOK() {
     document.getElementById('resultDialog').style.visibility = 'hidden';
-    window.location = "harmonize.html";
+    window.location = "mac_start.html";
 }
 
 function resultClose() {
     document.getElementById('resultDialog').style.visibility = 'hidden';
-    window.location = "harmonize.html";
+    window.location = "mac_start.html";
 }
 
 function redirectHome() {
@@ -30,6 +30,11 @@ function redirectHome() {
         });
     };
 
+    function getDataType(item) {
+        var datatype = "string";
+        return datatype;
+    }
+
     // Reads data from current document selection and displays a notification
     function getDataFromSelection(){
         Office.context.document.getSelectedDataAsync(Office.CoercionType.Text,
@@ -37,13 +42,13 @@ function redirectHome() {
                 getSelectedData(function(result){
 
                     if (result != null) {
-                        var countTrim = 0;
+                        var countIncon = 0;
                         var trim_array = result.map(function (item) {
                             return item.map(function (item) {
                                 if (item) {
-                                    var newitem = item.trim();
+                                    var newitem = getDataType(item);
                                     if (item != newitem) {
-                                        countTrim++;
+                                        countIncon++;
                                     }
                                     return newitem;
                                 }
@@ -55,7 +60,7 @@ function redirectHome() {
                         if (result.status == "succeeded") {
                             var txt = document.createElement("p");
                             txt.className = "ms-font-xs ms-embedded-dialog__content__text";
-                            txt.innerHTML = "PrepJet trimed " + countTrim + " spaces in the selected range."
+                            txt.innerHTML = "PrepJet found " + countIncon + " data entries with inconsistent data type."
                             document.getElementById('resultText').appendChild(txt);
                             document.getElementById('resultDialog').style.visibility = 'visible';
                         } else {
