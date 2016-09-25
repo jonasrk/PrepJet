@@ -43,7 +43,7 @@ function redirectHome() {
 
                     if (result != null) {
                         var countIncon = 0;
-                        var type_array = result.map(function (item) {
+                        var trim_array = result.map(function (item) {
                             return item.map(function (item) {
                                 if (item) {
                                     var newitem = getDataType(item);
@@ -56,7 +56,7 @@ function redirectHome() {
                         });
                     }
 
-                    Office.context.document.setSelectedDataAsync(type_array, { valueFormat: Office.ValueFormat.Formatted }, function(result){
+                    Office.context.document.setSelectedDataAsync(trim_array, { valueFormat: Office.ValueFormat.Formatted }, function(result){
                         if (result.status == "succeeded") {
                             var txt = document.createElement("p");
                             txt.className = "ms-font-xs ms-embedded-dialog__content__text";
