@@ -2,8 +2,11 @@ function redirectHome() {
     window.location = "mac_start.html";
 }
 
+
 (function () {
     // 'use strict';
+    var fixCount = 1;
+    var typeCount = 1;
 
     // The initialize function must be run each time a new page is loaded
     Office.initialize = function (reason) {
@@ -20,14 +23,16 @@ function redirectHome() {
 
 
             app.initialize();
-            //fillColumn();
 
             $('#step2').hide();
+            $('#bt_remove').hide();
+            $('#bt2_remove').hide();
 
             $('#helpCallout').hide();
             $('#check_template').click(compareTemplate);
             $('#homeButton').click(redirectHome);
             $('#continue1').click(showStep2);
+
 
 
             document.getElementById("refresh_icon").onclick = function () {
@@ -45,13 +50,38 @@ function redirectHome() {
                 window.location = "temp_feature.html";
             }
 
+            Office.context.document.addHandlerAsync("documentSelectionChanged", myHandler, function(result){}
+            );
+            // Event handler function.
+            function myHandler(eventArgs){
+                Excel.run(function (ctx) {
+                    var selectedRange = ctx.workbook.getSelectedRange();
+                    selectedRange.load('address');
+                    return ctx.sync().then(function () {
+                            writeif(selectedRange.address);
+                    });
+                });
+            }
+            // Function that writes to a div with id='message' on the page.
+            function writeif(message){
+                document.getElementById('fixedContentInput1').value = message;
+            }
+
         });
     };
+
+
 
 
     function showStep2() {
         $('#step2').show();
         $('#step1').hide();
+
+        function addField() {
+            typeCount += 1;
+            addTextField(typeCount);
+            $('#bt2_remove').show();
+        }
 
         function addTextField(id) {
 
@@ -71,6 +101,19 @@ function redirectHome() {
 
             document.getElementById("contentDiv").appendChild(div);
         }
+
+        function removeField() {
+            typeCount -= 1;
+            var parent = document.getElementById('typeDiv');
+            parent.removeChild(parent.firstChild);
+            if (typeCount <= 1) {
+                $('#bt2_remove').hide();
+            }
+        }
+
+        $("#bt2_more").unbind('click');
+        $('#bt2_more').click(addField);
+        $('#bt2_remove').click(removeField);
     }
 
 
