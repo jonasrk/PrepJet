@@ -427,7 +427,7 @@
         <bt:String id="PJ.FindDuplicatesButton.Label" DefaultValue="Detect Duplicates" />
         <bt:String id="PJ.InconsistencyButton.Label" DefaultValue="Detect Inconsistencies" />
         <bt:String id="PJ.CustomInconButton.Label" DefaultValue="Custom Inconsistencies" />
-        <bt:String id="PJ.CheckCatButton.Label" DefaultValue="Check Cat" />
+        <bt:String id="PJ.CheckCatButton.Label" DefaultValue="Check Categories" />
         <!--bt:String id="PJ.ExtractValuesButton.Label" DefaultValue="Extract Text" /-->
         <bt:String id="PJ.TrimSpacesButton.Label" DefaultValue="Trim Spaces" />
         <bt:String id="PJ.ValidationRuleButton.Label" DefaultValue="Rule-based Validation" />
