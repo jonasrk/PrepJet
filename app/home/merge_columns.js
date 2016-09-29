@@ -11,6 +11,16 @@ function redirectHome() {
 }
 
 
+function resultOK() {
+    document.getElementById('resultDialog').style.visibility = 'hidden';
+    window.location = "merge_columns.html";
+}
+
+function resultClose() {
+    document.getElementById('resultDialog').style.visibility = 'hidden';
+    window.location = "merge_columns.html";
+}
+
 (function () {
     // 'use strict';
     var count_drop = 0;
@@ -46,6 +56,8 @@ function redirectHome() {
             $('#bt_apply').click(applyButtonClicked);
             $('#back_step2').click(step2ButtonClicked);
             $('#buttonOk').click(highlightHeader);
+            $('#resultOk').click(resultOK);
+            $('#resultClose').click(resultClose);
             $('#homeButton').click(redirectHome);
 
 
@@ -75,14 +87,14 @@ function redirectHome() {
             }
 
             //hide result message
-            document.getElementById("resultClose").onclick = function () {
+            /*document.getElementById("resultClose").onclick = function () {
                 document.getElementById('resultDialog').style.visibility = 'hidden';
                 window.location = "merge_columns.html";
             }
             document.getElementById("resultOk").onclick = function () {
                 document.getElementById('resultDialog').style.visibility = 'hidden';
                 window.location = "merge_columns.html";
-            }
+            }*/
 
 
         });
