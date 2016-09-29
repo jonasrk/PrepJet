@@ -14,7 +14,7 @@ function redirectHome() {
 
             Office.context.document.settings.set('same_header_split', false);
             Office.context.document.settings.set('more_option', false);
-            Office.context.document.settings.set('last_clicked_function', "split_values.html");
+            Office.context.document.settings.set('last_clicked_function', "check_cat.html");
             if (Office.context.document.settings.get('prepjet_loaded_before') == null) {
                 Office.context.document.settings.set('backup_sheet_count', 1);
                 Office.context.document.settings.set('prepjet_loaded_before', true);
