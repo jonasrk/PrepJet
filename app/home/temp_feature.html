@@ -92,9 +92,11 @@
             <div>
                 <label class="ms-Label">Select the areas with fixed cell content:</label>
             </div>
-            <div id="fixedContent1" class="ms-TextField ms-TextField--placeholder">
-                <label id="fixedlabel" class="ms-Label">Select Range</label>
-                <input id="fixedContentInput" class="ms-TextField-field" type="text" onfocus="setFocus(0)">
+            <div id="contentDiv">
+             <div id="fixedContent1" class="ms-TextField ms-TextField--placeholder">
+                <label id="fixedlabel1" class="ms-Label">Select Range</label>
+                <input id="fixedContentInput1" class="ms-TextField-field" type="text" onfocus="setFocus(0)">
+            </div>
             </div>
             <table id="tablesmall">
                 <tr>
@@ -125,11 +127,23 @@
             <div>
                 <label class="ms-Label">Select the areas for which to compare the data type.</label>
             </div>
-            <div id="fixedContent1" class="ms-TextField ms-TextField--placeholder">
-                <label id="fixedlabel" class="ms-Label">Select Range</label>
-                <input id="fixedContentInput" class="ms-TextField-field" type="text" onfocus="setFocus(0)">
+            <div id="fixedType1" class="ms-TextField ms-TextField--placeholder">
+                <label id="fixedTypeLabel1" class="ms-Label">Select Range</label>
+                <input id="fixedTypeInput1" class="ms-TextField-field" type="text" onfocus="setFocus(0)">
             </div>
-            <table class="tableupperborder">
+            <table id="tablesmall">
+                <tr>
+                    <td id="tableright">
+                        <button id="bt2_remove" class="ms-Button_white">
+                            <img class="page1" src="../../images/Minus.png" />
+                        </button>
+                        <button id="bt2_more" class="ms-Button_white">
+                            <img class="page1" src="../../images/Plus.png" />
+                        </button>
+                    </td>
+                </tr>
+            </table>
+            <table>
                 <tr>
                     <td>
                         <div class="ms-ChoiceField">

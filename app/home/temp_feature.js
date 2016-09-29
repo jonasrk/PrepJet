@@ -27,13 +27,8 @@ function redirectHome() {
             $('#helpCallout').hide();
             $('#check_template').click(compareTemplate);
             $('#homeButton').click(redirectHome);
-            $('#continue1').click(redirectHome);
+            $('#continue1').click(showStep2);
 
-
-            document.getElementById("continue1").onclick = function () {
-                $('#step2').show();
-                $('#step1').hide();
-            }
 
             document.getElementById("refresh_icon").onclick = function () {
                 window.location = "temp_feature.html";
@@ -53,6 +48,30 @@ function redirectHome() {
         });
     };
 
+
+    function showStep2() {
+        $('#step2').show();
+        $('#step1').hide();
+
+        function addTextField(id) {
+
+            var div = document.createElement("div");
+            div.className = "ms-TextField ms-TextField--placeholder";
+            div.id = "fixedContent" + id;
+
+            var label = document.createElement("label");
+            label.innerHTML = "Select Range";
+
+            var input = document.createElement("input");
+            input.id = "fixedContentInput" + id;
+            input.className = "ms-TextField-field";
+
+            div.appendChild(label);
+            div.appendChild(input);
+
+            document.getElementById("contentDiv").appendChild(div);
+        }
+    }
 
 
     function fillColumn(){
