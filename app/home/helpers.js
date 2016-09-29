@@ -230,6 +230,13 @@ function addBackupContent(sheetName, startCell, add_col, row_offset, callback) {
     });
 }
 
+// Helper function to add and format content (in single cell) in the workbook
+function addContentToWorksheet(sheetObject, rangeAddress, displayText) {
+    var range = sheetObject.getRange(rangeAddress);
+    range.values = displayText;
+    range.merge();
+}
+
 //inserts whole column
 function addContentNew(sheetObject, rangeAddress, displayText, callback) {
     Excel.run(function (ctx) {
