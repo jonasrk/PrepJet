@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+
+    <!--script src="https://z8d.de:1337/vorlon.js"></script>
+
+
+
+    <!--<script src="//ajax.aspnetcdn.com/ajax/jQuery/jquery-1.9.1.min.js"></script>-->
+    <link href="../../content/Office.css" rel="stylesheet" type="text/css"/>
+    <link href="../../bower_components/microsoft_office_js/content/officethemes.css" rel="stylesheet" type="text/css"/>
+    <!--<link href="//appsforoffice.microsoft.com/fabric/1.0/fabric.min.css" rel="stylesheet">-->
+    <!--<link href="//appsforoffice.microsoft.com/fabric/1.0/fabric.components.min.css" rel="stylesheet">-->
+    <script src="//appsforoffice.microsoft.com/lib/1/hosted/office.js"></script>
+
+    <!-- To enable offline debugging using a local reference to jQuery.js Office.js, use: -->
+    <!--<script src="../../bower_components/microsoft_office_js/scripts/Office/1/office.js"></script>-->
+    <script src="../../bower_components/jquery/jquery.min.js"></script>
+    <link href="../../content/fabric.min.css" rel="stylesheet">
+    <link href="../../content/fabric.components.min.css" rel="stylesheet">
+    <!--<script src="../../scripts/jquery.fabric.min.js"></script>-->
+    <script src="../../scripts/MicrosoftAjax.js"></script>
+
+    <link href="../app.css" rel="stylesheet" type="text/css"/>
+    <script src="../app.js"></script>
+
+    <link href="style.css" rel="stylesheet" type="text/css"/>
+    <script src="helpers.js"></script>
+    <script src="temp_feature.js"></script>
+
+    <!--PrepJet Fabric Components Imports-->
+    <script src="../../bower_components/office-ui-fabric/src/components/TextField/Jquery.TextField.js"></script>
+    <script src="../../bower_components/office-ui-fabric/src/components/Dropdown/Jquery.Dropdown.js"></script>
+
+
+</head>
+
+<body class="ms-font-m">
+<div id="content-header">
+    <table>
+        <tr>
+            <td class="tableheader">
+                <div class="padding">
+                    <h1>Compare Template</h1>
+                </div>
+            </td>
+            <td>
+                <button id="refresh_icon" class="ms-Button_headericon">
+                    <i class="ms-Icon ms-Icon--refresh" aria-hidden="true"></i>
+                </button>
+            </td>
+            <td>
+                <button id="homeButton" class="ms-Button_homelogo">
+                    <img class="page1" src="../../images/logo_lg.png" />
+                </button>
+            </td>
+        </tr>
+    </table>
+</div>
+
+<!--Dialog for same header name-->
+<div id="showEmbeddedDialog" class="ms-embedded-dialog__options" >
+    <div class="ms-Dialog ms-Dialog--close">
+        <div class="ms-Overlay js-DialogAction--close"></div>
+        <div class="ms-Dialog-main">
+            <button class="ms-Dialog-button ms-Dialog-button--close js-DialogAction--close" id="buttonClose">
+                <i class="ms-Icon ms-Icon--x"></i>
+            </button>
+            <div class="ms-Dialog-header">
+                <p class="ms-Dialog-title">Error</p>
+            </div>
+            <div class="ms-Dialog-inner">
+                <div class="ms-Dialog-content">
+                    <p class="ms-font-xs ms-embedded-dialog__content__text">Each column should have a unique header. Please rename equal column headers.</p>
+                </div>
+                <div class="ms-embedded-dialog__actioncenter">
+                    <button  class="ms-Dialog-action ms-Button_grey" id="buttonOk">
+                        <span class="ms-Button-label">Highlight</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Dialog for success message-->
+<div id="resultDialog" class="ms-embedded-dialog__options" >
+    <div class="ms-Dialog ms-Dialog--close">
+        <div class="ms-Overlay js-DialogAction--close"></div>
+        <div class="ms-Dialog-main">
+            <button class="ms-Dialog-button ms-Dialog-button--close js-DialogAction--close" id="resultClose">
+                <i class="ms-Icon ms-Icon--x"></i>
+            </button>
+            <div class="ms-Dialog-header">
+                <p class="ms-Dialog-title">Successful trimmed</p>
+            </div>
+            <div class="ms-Dialog-inner">
+                <div id="resultText" class="ms-Dialog-content">
+                    <!--p class="ms-font-xs ms-embedded-dialog__content__text"></p-->
+                </div>
+                <div class="ms-embedded-dialog__actioncenter">
+                    <button  class="ms-Dialog-action ms-Button_grey" id="resultOk">
+                        <span class="ms-Button-label">Ok</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="content-main">
+    <div class="padding">
+        <div>
+            <label class="ms-Label">Select the column(s) from which to remove leading and trailing spaces (spaces in between words will not be removed)</label>
+        </div>
+        <table>
+            <tr>
+                <td id="allColumns">
+                    <div id="checkbox_select_all" class="ms-ChoiceField">
+                        <input id="checkbox_all" class="ms-ChoiceField-input" type="checkbox">
+                        <label id="checkbox_label" for="checkbox_all" class="ms-ChoiceField-field">
+                            <span class="ms-Label">All columns</span>
+                        </label>
+                    </div>
+                </td>
+                <td></td>
+            </tr>
+        </table>
+        <div id="checkboxes_columns" class="ms-ChoiceField">
+        </div>
+        <table class="tableupperborder">
+            <tr>
+                <td>
+                    <div class="ms-ChoiceField">
+                        <input id="createBackup" class="ms-ChoiceField-input" type="checkbox">
+                        <label for="createBackup" class="ms-ChoiceField-field">
+                            <span class="ms-Label">Create a backup sheet</span>
+                        </label>
+                    </div>
+                </td>
+            </tr>
+        </table>
+        <!--split button-->
+        <button class="ms-Button" id="trim_space">Check</button>
+    </div>
+</div>
+<div class="placeholder"></div>
+</body>
+
+</html>
