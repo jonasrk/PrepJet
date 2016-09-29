@@ -19,6 +19,7 @@ function redirectHome() {
             $('#detectOutlier').hide();
             $('#validationRule').hide();
             $('#harmonize').hide();
+            $('#CheckCat').hide();
             $('#undoHelp').hide();
             $('#tableHeaderHelp').hide();
             $('#customIncon').hide();
@@ -31,6 +32,7 @@ function redirectHome() {
             $('#detOutHome').click(home);
             $('#valRuleHome').click(home);
             $('#harmonizeHome').click(home);
+            $('#checkCatHome').click(home);
             $('#undoHelpHome').click(home);
             $('#tableHeaderHome').click(home);
             $('#customIncon').click(home);
@@ -43,6 +45,7 @@ function redirectHome() {
             $('#linkDetectOutlier').click(detectOutlier);
             $('#linkValidationRule').click(validationRule);
             $('#linkharmonize').click(harmonizeColumn);
+            $('#linkCheckCat').click(checkCat);
             $('#linkUndoHelp').click(undoHelp);
             $('#linkTableHeaderHelp').click(tableHeaderHelp);
             $('#linkCustomInconHelp').click(customInconHelp);
@@ -63,6 +66,7 @@ function redirectHome() {
         $('#detectOutlier').hide();
         $('#validationRule').hide();
         $('#harmonize').hide();
+        $('#CheckCat').hide();
         $('#undoHelp').hide();
         $('#tableHeaderHelp').hide();
         $('#customIncon').hide();
@@ -96,6 +100,7 @@ function redirectHome() {
         $('#undoHelp').hide();
         $('#tableHeaderHelp').hide();
         $('#customIncon').hide();
+        $('#CheckCat').hide();
 
         Excel.run(function (ctx) {
 
@@ -126,6 +131,7 @@ function redirectHome() {
         $('#undoHelp').hide();
         $('#tableHeaderHelp').hide();
         $('#customIncon').hide();
+        $('#CheckCat').hide();
 
         Excel.run(function (ctx) {
 
@@ -157,6 +163,7 @@ function redirectHome() {
         $('#undoHelp').hide();
         $('#tableHeaderHelp').hide();
         $('#customIncon').hide();
+        $('#CheckCat').hide();
 
         Excel.run(function (ctx) {
 
@@ -189,6 +196,7 @@ function redirectHome() {
         $('#undoHelp').hide();
         $('#tableHeaderHelp').hide();
         $('#customIncon').hide();
+        $('#CheckCat').hide();
 
         Excel.run(function (ctx) {
 
@@ -221,6 +229,7 @@ function redirectHome() {
         $('#undoHelp').hide();
         $('#tableHeaderHelp').hide();
         $('#customIncon').hide();
+        $('#CheckCat').hide();
 
         Excel.run(function (ctx) {
 
@@ -253,6 +262,7 @@ function redirectHome() {
         $('#undoHelp').hide();
         $('#tableHeaderHelp').hide();
         $('#customIncon').hide();
+        $('#CheckCat').hide();
 
         Excel.run(function (ctx) {
 
@@ -285,6 +295,7 @@ function redirectHome() {
         $('#undoHelp').hide();
         $('#tableHeaderHelp').hide();
         $('#customIncon').hide();
+        $('#CheckCat').hide();
 
         Excel.run(function (ctx) {
 
@@ -315,6 +326,7 @@ function redirectHome() {
         $('#undoHelp').hide();
         $('#tableHeaderHelp').hide();
         $('#customIncon').hide();
+        $('#CheckCat').hide();
 
         Excel.run(function (ctx) {
 
@@ -345,6 +357,7 @@ function redirectHome() {
         $('#undoHelp').show();
         $('#tableHeaderHelp').hide();
         $('#customIncon').hide();
+        $('#CheckCat').hide();
 
         Excel.run(function (ctx) {
 
@@ -376,6 +389,7 @@ function redirectHome() {
         $('#undoHelp').hide();
         $('#tableHeaderHelp').show();
         $('#customIncon').hide();
+        $('#CheckCat').hide();
 
         Excel.run(function (ctx) {
 
@@ -406,6 +420,38 @@ function redirectHome() {
         $('#undoHelp').hide();
         $('#tableHeaderHelp').hide();
         $('#customIncon').show();
+        $('#CheckCat').hide();
+
+        Excel.run(function (ctx) {
+
+            return ctx.sync().then(function() {
+
+            });
+
+        }).catch(function(error) {
+            console.log("Error: " + error);
+            if (error instanceof OfficeExtension.Error) {
+                console.log("Debug info: " + JSON.stringify(error.debugInfo));
+            }
+        });
+    }
+
+
+    function checkCat() {
+
+        $('#firstpage').hide();
+        $('#addColumn').hide();
+        $('#splitValues').hide();
+        $('#extractValues').hide();
+        $('#trimSpaces').hide();
+        $('#detectDuplicates').hide();
+        $('#detectOutlier').hide();
+        $('#validationRule').hide();
+        $('#harmonize').hide();
+        $('#undoHelp').hide();
+        $('#tableHeaderHelp').hide();
+        $('#customIncon').hide();
+        $('#CheckCat').show();
 
         Excel.run(function (ctx) {
 
