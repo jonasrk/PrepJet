@@ -17,6 +17,7 @@ function setFocus(activeID) {
         jQuery(document).ready(function () {
 
             Office.context.document.settings.set('same_header_trim', false);
+            Office.context.document.settings.set('on_second_page', false);
             Office.context.document.settings.set('last_clicked_function', "temp_feature.html");
             if (Office.context.document.settings.get('prepjet_loaded_before') == null) {
                 Office.context.document.settings.set('backup_sheet_count', 1);
@@ -63,15 +64,20 @@ function setFocus(activeID) {
                     var selectedRange = ctx.workbook.getSelectedRange();
                     selectedRange.load('address');
                     return ctx.sync().then(function () {
-                        //if (activeSelection == 0) {
-                            writeif(selectedRange.address, activeSelection);
-                        //}
+                        if (Office.context.document.settings.get('on_second_page') == false) {
+                            writeContent(selectedRange.address, activeSelection);
+                        } else {
+                            writeType(selectedRange.address, activeSelection);
+                        }
                     });
                 });
             }
             // Function that writes to a div with id='message' on the page.
-            function writeif(message, selection){
+            function writeContent(message, selection){
                 document.getElementById('fixedContentInput' + selection).value = message;
+            }
+            function writeType(message, selection){
+                document.getElementById('fixedTypeInput' + selection).value = message;
             }
 
         });
@@ -114,8 +120,11 @@ function setFocus(activeID) {
 
 
     function showStep2() {
+
         $('#step2').show();
         $('#step1').hide();
+
+        Office.context.document.settings.set('on_second_page', true);
 
         function addField() {
             typeCount += 1;
@@ -135,6 +144,7 @@ function setFocus(activeID) {
             var input = document.createElement("input");
             input.id = "fixedTypeInput" + id;
             input.className = "ms-TextField-field";
+            input.addEventListener = ('onfocus', setFocus(typeCount));
 
             div.appendChild(label);
             div.appendChild(input);
@@ -156,6 +166,7 @@ function setFocus(activeID) {
         $('#bt2_more').click(addField);
         $('#bt2_remove').click(removeTypeField);
     }
+
 
 
     function fillColumn(){
