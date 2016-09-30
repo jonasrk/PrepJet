@@ -91,7 +91,7 @@ function setFocus(activeID) {
         var input = document.createElement("input");
         input.id = "fixedContentInput" + fixCount;
         input.className = "ms-TextField-field";
-        input.onfocus = "setFocus(" + fixCount + ")"
+        input.addEventListener = ('onfocus', setFocus(fixCount));
 
         div.appendChild(label);
         div.appendChild(input);
