@@ -2,6 +2,10 @@ function redirectHome() {
     window.location = "mac_start.html";
 }
 
+var activeSelection = 1;
+function setFocus(activeID) {
+    activeSelection = activeID;
+}
 
 (function () {
     // 'use strict';
@@ -32,7 +36,8 @@ function redirectHome() {
             $('#check_template').click(compareTemplate);
             $('#homeButton').click(redirectHome);
             $('#continue1').click(showStep2);
-
+            $('#bt_more').click(addContentTextField);
+            $('#bt_remove').click(removeContentField);
 
 
             document.getElementById("refresh_icon").onclick = function () {
@@ -58,18 +63,53 @@ function redirectHome() {
                     var selectedRange = ctx.workbook.getSelectedRange();
                     selectedRange.load('address');
                     return ctx.sync().then(function () {
-                            writeif(selectedRange.address);
+                        //if (activeSelection == 0) {
+                            writeif(selectedRange.address, activeSelection);
+                        //}
                     });
                 });
             }
             // Function that writes to a div with id='message' on the page.
-            function writeif(message){
-                document.getElementById('fixedContentInput1').value = message;
+            function writeif(message, selection){
+                document.getElementById('fixedContentInput' + selection).value = message;
             }
 
         });
     };
 
+    function addContentTextField() {
+
+        fixCount += 1;
+
+        var div = document.createElement("div");
+        div.className = "ms-TextField ms-TextField--placeholder";
+        div.id = "fixedContent" + fixCount;
+
+        var label = document.createElement("label");
+        label.innerHTML = "Select " + fixCount + ". Range:";
+
+        var input = document.createElement("input");
+        input.id = "fixedContentInput" + fixCount;
+        input.className = "ms-TextField-field";
+        input.onfocus = "setFocus(" + fixCount + ")"
+
+        div.appendChild(label);
+        div.appendChild(input);
+
+        document.getElementById("contentDiv").appendChild(div);
+        $('#bt_remove').show();
+
+    }
+
+    function removeContentField() {
+        var parent = document.getElementById('contentDiv');
+        var child = document.getElementById('fixedContent' + fixCount);
+        parent.removeChild(child);
+        fixCount -= 1;
+        if (fixCount < 2) {
+            $('#bt_remove').hide();
+        }
+    }
 
 
 
@@ -87,25 +127,26 @@ function redirectHome() {
 
             var div = document.createElement("div");
             div.className = "ms-TextField ms-TextField--placeholder";
-            div.id = "fixedContent" + id;
+            div.id = "fixedType" + id;
 
             var label = document.createElement("label");
-            label.innerHTML = "Select Range";
+            label.innerHTML = "Select " + typeCount + ". Range";
 
             var input = document.createElement("input");
-            input.id = "fixedContentInput" + id;
+            input.id = "fixedTypeInput" + id;
             input.className = "ms-TextField-field";
 
             div.appendChild(label);
             div.appendChild(input);
 
-            document.getElementById("contentDiv").appendChild(div);
+            document.getElementById("typeDiv").appendChild(div);
         }
 
-        function removeField() {
-            typeCount -= 1;
+        function removeTypeField() {
             var parent = document.getElementById('typeDiv');
-            parent.removeChild(parent.firstChild);
+            var child = document.getElementById('fixedType' + typeCount)
+            parent.removeChild(child);
+            typeCount -= 1;
             if (typeCount <= 1) {
                 $('#bt2_remove').hide();
             }
@@ -113,7 +154,7 @@ function redirectHome() {
 
         $("#bt2_more").unbind('click');
         $('#bt2_more').click(addField);
-        $('#bt2_remove').click(removeField);
+        $('#bt2_remove').click(removeTypeField);
     }
 
 
