@@ -225,34 +225,21 @@ function setFocus(activeID) {
 
                 backupForUndo(range, startCell, add_col, row_offset);
 
-                var checked_checkboxes = getCheckedBoxes("column_checkbox");
-
-                for (var run = 0; run < checked_checkboxes.length; run++) {
-                    var trim_array = [];
-                    for (var k = 0; k < range.text[0].length; k++) {
-                        if (checked_checkboxes[run].id == range.text[0][k] || checked_checkboxes[run].id == "Column " + getCharFromNumber(k + add_col)){
-                            header = k;
-                            break;
-                        }
-                    }
-
-                    for (var i = 0; i < range.text.length; i++) {
-                        var trim_string = [];
-                        trim_string.push(range.text[i][header].trim());
-                        trim_array.push(trim_string);
-                    }
-
-                    var column_char = getCharFromNumber(header + add_col);
-                    var insert_address = column_char + row_offset + ":" + column_char + (range.text.length + row_offset - 1);
-                    addTrimArray(trim_array, insert_address);
-
+                var fixedAddresses = [];
+                for (var i = 0; i < fixCount; i++) {
+                    var tmpAddress = document.getElementById('fixedContentInput' + (i + 1)).value;
+                    tmpAddress = tmpAddress.substring(tmpAddress.indexOf("!") + 1);
+                    fixedAddresses.push(tmpAddress);
                 }
 
-                if(checked_checkboxes.length == 1) {
-                    var endString = " column you seleced."
-                } else {
-                    var endString = " columns you selected."
+                var typeAddresses = [];
+                for (var i = 0; i < typeCount; i++) {
+                    var tmpAddress = document.getElementById('fixedTypeInput' + (i + 1)).value;
+                    tmpAddress = tmpAddress.substring(tmpAddress.indexOf("!") + 1);
+                    typeAddresses.push(tmpAddress);
                 }
+
+                console.log(typeAddresses);
 
                 if (document.getElementById('createBackup').checked == true) {
                     var sheet_count = Office.context.document.settings.get('backup_sheet_count') + 1;
@@ -262,7 +249,7 @@ function setFocus(activeID) {
                     addBackupSheet(newName, startCell, add_col, row_offset, function() {
                         var txt = document.createElement("p");
                         txt.className = "ms-font-xs ms-embedded-dialog__content__text";
-                        txt.innerHTML = "PrepJet successfully removed all leading and trailing spaces in the " + checked_checkboxes.length + endString;
+                        //txt.innerHTML = "PrepJet successfully removed all leading and trailing spaces in the " + checked_checkboxes.length + endString;
                         document.getElementById('resultText').appendChild(txt);
                         document.getElementById('resultDialog').style.visibility = 'visible';
                     });
@@ -270,7 +257,7 @@ function setFocus(activeID) {
                 } else {
                     var txt = document.createElement("p");
                     txt.className = "ms-font-xs ms-embedded-dialog__content__text";
-                    txt.innerHTML = "PrepJet successfully removed all leading and trailing spaces in the " + checked_checkboxes.length + endString;
+                    //txt.innerHTML = "PrepJet successfully removed all leading and trailing spaces in the " + checked_checkboxes.length + endString;
                     document.getElementById('resultText').appendChild(txt);
 
                     document.getElementById('resultDialog').style.visibility = 'visible';
@@ -284,31 +271,6 @@ function setFocus(activeID) {
                 console.log("Debug info: " + JSON.stringify(error.debugInfo));
             }
         });
-    }
-
-
-    function addTrimArray(trim_array, insert_address){
-
-        Excel.run(function (ctx) {
-
-            var worksheet = ctx.workbook.worksheets.getActiveWorksheet();
-            var range_all = worksheet.getRange();
-            var range = range_all.getUsedRange(true);
-
-            range.load('text');
-            worksheet.load('name');
-
-            return ctx.sync().then(function() {
-                addContentNew(worksheet.name, insert_address, trim_array, function () {});
-            });
-
-        }).catch(function(error) {
-            console.log("Error: " + error);
-            if (error instanceof OfficeExtension.Error) {
-                console.log("Debug info: " + JSON.stringify(error.debugInfo));
-            }
-        });
-
     }
 
 
