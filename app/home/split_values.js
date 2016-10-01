@@ -123,6 +123,9 @@ function backToThree() {
             document.getElementById("refresh_icon").onclick = function () {
                 window.location = "split_values.html";
             }
+            document.getElementById("refresh_icon2").onclick = function () {
+                window.location = "split_values.html";
+            }
 
             document.getElementById("resultClose").onclick = function () {
                 document.getElementById('resultDialog').style.visibility = 'hidden';
@@ -132,84 +135,6 @@ function backToThree() {
                 document.getElementById('resultDialog').style.visibility = 'hidden';
                 window.location = "split_values.html";
             }
-
-
-            /*Excel.run(function (ctx) {
-
-                //var myBindings = Office.context.document.bindings;
-                var worksheetname = ctx.workbook.worksheets.getActiveWorksheet();
-
-                worksheetname.load('name')
-
-                return ctx.sync().then(function() {
-
-                    Office.context.document.addHandlerAsync("documentSelectionChanged", myViewHandler, function(result){}
-                    );
-
-                    // Event handler function for changing the worksheet.
-                    function myViewHandler(eventArgs){
-                        Excel.run(function (ctx) {
-                            var selectedSheet = ctx.workbook.worksheets.getActiveWorksheet();
-                            selectedSheet.load('name');
-                            return ctx.sync().then(function () {
-                                if (selectedSheet.name != worksheetname.name) {
-                                    window.location = "split_values.html"
-                                }
-                            });
-                        });
-                    }
-
-                    function bindFromPrompt() {
-
-                        var myBindings = Office.context.document.bindings;
-                        var name_worksheet = worksheetname.name;
-                        var myAddress = name_worksheet.concat("!1:1");
-
-                        myBindings.addFromNamedItemAsync(myAddress, "matrix", {id:'myBinding'}, function (asyncResult) {
-                            if (asyncResult.status == Office.AsyncResultStatus.Failed) {
-                                write('Action failed. Error: ' + asyncResult.error.message);
-                            } else {
-                                write('Added new binding with type: ' + asyncResult.value.type + ' and id: ' + asyncResult.value.id);
-
-                                function addHandler() {
-                                    Office.select("bindings#myBinding").addHandlerAsync(
-                                        Office.EventType.BindingDataChanged, dataChanged);
-                                }
-
-                                addHandler();
-                                displayAllBindings();
-
-                            }
-                        });
-                    }
-
-                bindFromPrompt();
-
-                function displayAllBindings() {
-                    Office.context.document.bindings.getAllAsync(function (asyncResult) {
-                        var bindingString = '';
-                        for (var i in asyncResult.value) {
-                            bindingString += asyncResult.value[i].id + '\n';
-                        }
-                    });
-                }
-
-                function dataChanged(eventArgs) {
-                    window.location = "split_values.html";
-                }
-
-                // Function that writes to a div with id='message' on the page.
-                function write(message){
-                    console.log(message);
-                }
-
-                });
-            }).catch(function(error) {
-                console.log("Error: " + error);
-                if (error instanceof OfficeExtension.Error) {
-                    console.log("Debug info: " + JSON.stringify(error.debugInfo));
-                }
-            });*/
 
         });
     };
@@ -450,9 +375,7 @@ function backToThree() {
                     else if(document.getElementById('delimiter_count_i').value == "seven") { count_delimiter = 7; }
                     else if(document.getElementById('delimiter_count_i').value == "eight") { count_delimiter = 8; }
                     else if(document.getElementById('delimiter_count_i').value == "nine") { count_delimiter = 9; }
-                    else if(document.getElementById('delimiter_count_i').value == "all") {
-                        count_delimiter = 0;
-                    }
+                    else if(document.getElementById('delimiter_count_i').value == "all") { count_delimiter = 0; }
                     return count_delimiter;
                 }
 
@@ -497,6 +420,7 @@ function backToThree() {
                 else {
                     var count_direction = document.getElementById('delimiter_count_drop').value;
                     for (var i = 0; i < range.text.length; i++) {
+                        count_delimiter = getCountDelimiter();
                         if (range.text[i][header] != "" && range.text[i][header].indexOf(delimiter_type) != -1) {
                             split_array[i] = range.text[i][header].split(delimiter_type);
                             array_length = split_array[i].length;
