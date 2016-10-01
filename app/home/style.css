@@ -311,3 +311,14 @@ h1 {
 #tableright {
     text-align: right; }
 
+.ms-Button_white {
+    color: #FFFFFF;
+    font-family: 'Segoe UI Regular WestEuropean','Segoe UI','Segoe WP',Tahoma,Arial,sans-serif;
+    font-size: 12px;
+    font-weight: 400;
+    background-color: #FFFFFF;
+    border: 1px solid #FFFFFF;
+    height: 25px;
+    min-width: 20px;
+    padding: 2px 4px 2px; }
+
