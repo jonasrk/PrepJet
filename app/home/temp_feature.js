@@ -11,6 +11,7 @@ function setFocus(activeID) {
     // 'use strict';
     var fixCount = 1;
     var typeCount = 1;
+    var worksheet_names = [];
 
     // The initialize function must be run each time a new page is loaded
     Office.initialize = function (reason) {
@@ -239,29 +240,61 @@ function setFocus(activeID) {
                     typeAddresses.push(tmpAddress);
                 }
 
-                console.log(typeAddresses);
 
-                if (document.getElementById('createBackup').checked == true) {
-                    var sheet_count = Office.context.document.settings.get('backup_sheet_count') + 1;
-                    Office.context.document.settings.set('backup_sheet_count', sheet_count);
-                    Office.context.document.settings.saveAsync();
-                    var newName = worksheet.name + "(" + sheet_count + ")";
-                    addBackupSheet(newName, startCell, add_col, row_offset, function() {
-                        var txt = document.createElement("p");
-                        txt.className = "ms-font-xs ms-embedded-dialog__content__text";
-                        //txt.innerHTML = "PrepJet successfully removed all leading and trailing spaces in the " + checked_checkboxes.length + endString;
-                        document.getElementById('resultText').appendChild(txt);
-                        document.getElementById('resultDialog').style.visibility = 'visible';
+                //function getWorksheets() {
+
+                    Excel.run(function (ctx) {
+
+                        var worksheets = ctx.workbook.worksheets;
+                        worksheets.load('items');
+
+                        return ctx.sync().then(function () {
+
+                            for (var i = 0; i < worksheets.items.length; i++) {
+                                worksheets.items[i].load('name');
+                                ctx.sync().then(function (i) {
+                                    var this_i = i;
+                                    return function () {
+                                        worksheet_names.push(worksheets.items[this_i].name);
+                                        console.log(worksheet_names);
+                                    }
+
+                                }(i));
+                            }
+                            console.log(worksheet_names);
+
+                            if (document.getElementById('createBackup').checked == true) {
+                            var sheet_count = Office.context.document.settings.get('backup_sheet_count') + 1;
+                            Office.context.document.settings.set('backup_sheet_count', sheet_count);
+                            Office.context.document.settings.saveAsync();
+                            var newName = worksheet.name + "(" + sheet_count + ")";
+                            addBackupSheet(newName, startCell, add_col, row_offset, function() {
+                                var txt = document.createElement("p");
+                                txt.className = "ms-font-xs ms-embedded-dialog__content__text";
+                                //txt.innerHTML = "PrepJet successfully removed all leading and trailing spaces in the " + checked_checkboxes.length + endString;
+                                document.getElementById('resultText').appendChild(txt);
+                                document.getElementById('resultDialog').style.visibility = 'visible';
+                            });
+
+                        } else {
+                            var txt = document.createElement("p");
+                            txt.className = "ms-font-xs ms-embedded-dialog__content__text";
+                            //txt.innerHTML = "PrepJet successfully removed all leading and trailing spaces in the " + checked_checkboxes.length + endString;
+                            document.getElementById('resultText').appendChild(txt);
+
+                            document.getElementById('resultDialog').style.visibility = 'visible';
+                        }
+
+                        });
+
+                    }).catch(function (error) {
+                        console.log("Error: " + error);
+                        if (error instanceof OfficeExtension.Error) {
+                            console.log("Debug info: " + JSON.stringify(error.debugInfo));
+                        }
                     });
+                //}
 
-                } else {
-                    var txt = document.createElement("p");
-                    txt.className = "ms-font-xs ms-embedded-dialog__content__text";
-                    //txt.innerHTML = "PrepJet successfully removed all leading and trailing spaces in the " + checked_checkboxes.length + endString;
-                    document.getElementById('resultText').appendChild(txt);
-
-                    document.getElementById('resultDialog').style.visibility = 'visible';
-                }
 
             });
 
