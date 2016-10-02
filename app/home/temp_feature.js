@@ -332,6 +332,22 @@ function setFocus(activeID) {
                 var add_col = getNumberFromChar(col_offset);
                 var startCell = col_offset + row_offset;
 
+                var firstFixedCellLetter = [];
+                var firstFixedCellNumber = [];
+                for (var i = 0; i < fixedAddresses.length; i++) {
+                    var tmp = getIndexOfFirstNumber(fixedAddresses[i]);
+                    firstFixedCellLetter.push(fixedAddresses[i].substring(0,tmp));
+                    firstFixedCellNumber.push(Number(fixedAddresses[i].substring(tmp, fixedAddresses[i].indexOf(":"))));
+                }
+
+                var firstTypeCellLetter = [];
+                var firstTypeCellNumber = [];
+                for (var i = 0; i < typeAddresses.length; i++) {
+                    var tmp = getIndexOfFirstNumber(typeAddresses[i]);
+                    firstTypeCellLetter.push(typeAddresses[i].substring(0,tmp));
+                    firstTypeCellNumber.push(Number(typeAddresses[i].substring(tmp, typeAddresses[i].indexOf(":"))));
+                }
+
                 backupForUndo(range, startCell, add_col, row_offset);
 
                 var checked_worksheets = getCheckedBoxes("column_checkbox");

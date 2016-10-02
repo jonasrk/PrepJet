@@ -192,6 +192,22 @@ function getCharFromNumber (number) {
 
 }
 
+//returns the index of the first number in the given input char
+function getIndexOfFirstNumber(addressChar) {
+    for (var i = 0; i < addressChar.length; i++) {
+        if (addressChar.substring(i,i+1) == 1) { return i; }
+        else if (addressChar.substring(i,i+1) == 2) { return i; }
+        else if (addressChar.substring(i,i+1) == 3) { return i; }
+        else if (addressChar.substring(i,i+1) == 4) { return i; }
+        else if (addressChar.substring(i,i+1) == 5) { return i; }
+        else if (addressChar.substring(i,i+1) == 6) { return i; }
+        else if (addressChar.substring(i,i+1) == 7) { return i; }
+        else if (addressChar.substring(i,i+1) == 8) { return i; }
+        else if (addressChar.substring(i,i+1) == 9) { return i; }
+    }
+}
+
+
 function addBackupSheet(sheetName, startCell, add_col, row_offset, callback) {
     Excel.run(function (ctx) {
         var wSheetName = sheetName;
