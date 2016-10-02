@@ -310,16 +310,21 @@ function setFocus(activeID) {
             var firstCol = firstCell.getEntireColumn();
             var tmpRow = range.getRow(0);
             var firstRow = tmpRow.getEntireRow();
-            var fixedAddressRange = worksheet.getRange(fixedAddresses[0]);
-            var typeAddressRange = worksheet.getRange(typeAddresses[0]);
 
             //get used range in active Sheet
             range.load('text');
             worksheet.load('name');
             firstRow.load('address');
             firstCol.load('address');
-            fixedAddressRange.load('text');
+
+            //for (var i = 0; i < fixedAddresses.length; i++) {
+                var fixedAddressRange = worksheet.getRange(fixedAddresses[0]);
+                fixedAddressRange.load('text');
+            //}
+            //for (var i = 0; i < typeAddresses.length; i++) {
+            var typeAddressRange = worksheet.getRange(typeAddresses[0]);
             typeAddressRange.load('text');
+            //}
 
             return ctx.sync().then(function() {
 
@@ -352,17 +357,19 @@ function setFocus(activeID) {
 
                 var checked_worksheets = getCheckedBoxes("column_checkbox");
                 for (var i = 0; i < checked_worksheets.length; i++) {
-                    checkSheets(checked_worksheets[i].id, fixedAddressRange.text);
+                    checkSheets(checked_worksheets[i].id, fixedAddressRange.text, firstFixedCellLetter, firstFixedCellNumber);
                 }
 
-                function checkSheets(sheetName, fixedText) {
+                function checkSheets(sheetName, fixedText, firstFixedCellLetter, firstFixedCellNumber) {
 
                     Excel.run(function (ctx) {
 
+                        var worksheet = ctx.workbook.worksheets.getItem(sheetName);
                         var rangeAddress = fixedAddresses[0];
-                        var range = ctx.workbook.worksheets.getItem(sheetName).getRange(rangeAddress);
+                        var range = worksheet.getRange(rangeAddress);
 
                         range.load('text');
+                        worksheet.load('name');
 
                         return ctx.sync().then(function() {
 
@@ -370,7 +377,9 @@ function setFocus(activeID) {
                             for (var j = 0; j < fixedText.length; j++) {
                                 for (var k = 0; k < fixedText[j].length; k++) {
                                     if (fixedText[j][k] != range.text[j][k]) {
-                                        console.log(range.text[j][k]);
+                                        var tmpRow = firstFixedCellNumber[0] + j;
+                                        var tmpCol = getCharFromNumber(getNumberFromChar(firstFixedCellLetter[0]) + k);
+                                        highlightCellInWorksheet(worksheet, tmpCol + tmpRow, color);
                                     }
                                 }
                             }
