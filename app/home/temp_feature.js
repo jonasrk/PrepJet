@@ -317,14 +317,16 @@ function setFocus(activeID) {
             firstRow.load('address');
             firstCol.load('address');
 
-            //for (var i = 0; i < fixedAddresses.length; i++) {
-                var fixedAddressRange = worksheet.getRange(fixedAddresses[0]);
-                fixedAddressRange.load('text');
-            //}
-            //for (var i = 0; i < typeAddresses.length; i++) {
-            var typeAddressRange = worksheet.getRange(typeAddresses[0]);
-            typeAddressRange.load('text');
-            //}
+            var fixedAddressRange = [];
+            for (var i = 0; i < fixedAddresses.length; i++) {
+                fixedAddressRange.push(worksheet.getRange(fixedAddresses[i]));
+                fixedAddressRange[i].load('text');
+            }
+            var typeAddressRange = [];
+            for (var i = 0; i < typeAddresses.length; i++) {
+                typeAddressRange.push(worksheet.getRange(typeAddresses[i]));
+                typeAddressRange[i].load('text');
+            }
 
             return ctx.sync().then(function() {
 
@@ -357,7 +359,9 @@ function setFocus(activeID) {
 
                 var checked_worksheets = getCheckedBoxes("column_checkbox");
                 for (var i = 0; i < checked_worksheets.length; i++) {
-                    checkSheets(checked_worksheets[i].id, fixedAddressRange.text, firstFixedCellLetter, firstFixedCellNumber);
+                    for (var j = 0; j < fixedAddressRange.length; j++) {
+                        checkSheets(checked_worksheets[i].id, fixedAddressRange[j].text, firstFixedCellLetter, firstFixedCellNumber);
+                    }
                 }
 
                 function checkSheets(sheetName, fixedText, firstFixedCellLetter, firstFixedCellNumber) {
@@ -379,6 +383,7 @@ function setFocus(activeID) {
                                     if (fixedText[j][k] != range.text[j][k]) {
                                         var tmpRow = firstFixedCellNumber[0] + j;
                                         var tmpCol = getCharFromNumber(getNumberFromChar(firstFixedCellLetter[0]) + k);
+                                        console.log(tmpCol + tmpRow);
                                         highlightCellInWorksheet(worksheet, tmpCol + tmpRow, color);
                                     }
                                 }
