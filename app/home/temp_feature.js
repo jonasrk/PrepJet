@@ -181,6 +181,10 @@ function setFocus(activeID) {
         $('#step1').hide();
         $('#step3').show();
 
+        for (var i = 0; i < worksheet_names.length; i++) {
+            addNewCheckboxToContainer (worksheet_names[i], "column_checkbox" ,"checkboxes_columns");
+        }
+
     }
 
 
@@ -277,13 +281,9 @@ function setFocus(activeID) {
 
                             worksheet_names.push(worksheets.items[this_i].name);
 
-
                         }
                     }(i));
 
-                    for (var i = 0; i < worksheet_names.length; i++) {
-                                addNewCheckboxToContainer (worksheet_names[i], "column_checkbox" ,"checkboxes_columns");
-                            }
                 }
 
             });
