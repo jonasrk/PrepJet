@@ -27,7 +27,6 @@ function setFocus(activeID) {
                 window.location = "intro.html";
             }
 
-
             app.initialize();
             populateDropdowns();
 
@@ -175,6 +174,7 @@ function setFocus(activeID) {
     }
 
 
+    //show html page to select worksheets to compare to template
     function showStep3(){
 
         $('#step2').hide();
@@ -196,23 +196,11 @@ function setFocus(activeID) {
             var worksheet = ctx.workbook.worksheets.getActiveWorksheet();
             var range_all = worksheet.getRange();
             var range = range_all.getUsedRange(true);
-            /*var firstCell = range.getColumn(0);
-            var firstCol = firstCell.getEntireColumn();
-            var tmpRow = range.getRow(0);
-            var firstRow = tmpRow.getEntireRow();*/
 
             range.load('text');
             worksheet.load('name');
-            //firstRow.load('address');
-            //firstCol.load('address');
 
             return ctx.sync().then(function() {
-
-                /*var tmp_offset = firstCol.address;
-                var col_offset = tmp_offset.substring(tmp_offset.indexOf("!") + 1, tmp_offset.indexOf(":"));
-                var tmp_row = firstRow.address;
-                var row_offset = Number(tmp_row.substring(tmp_row.indexOf("!") + 1, tmp_row.indexOf(":")));
-                var add_col = getNumberFromChar(col_offset);*/
 
                 if (document.getElementById('checkbox_all').checked == true) {
                     for (var i = 0; i < worksheet_names.length; i++) {
@@ -260,9 +248,9 @@ function setFocus(activeID) {
 
     }
 
-    function populateDropdowns() {
 
-        //var worksheet_names = [];
+    //get all worksheet names and save to worksheet_names
+    function populateDropdowns() {
 
         Excel.run(function (ctx) {
 
@@ -278,9 +266,7 @@ function setFocus(activeID) {
                         var this_i = i;
 
                         return function () {
-
                             worksheet_names.push(worksheets.items[this_i].name);
-
                         }
                     }(i));
 
@@ -297,7 +283,23 @@ function setFocus(activeID) {
     }
 
 
+    //compare template to all checked sheets
     function compareTemplate() {
+
+        var fixedAddresses = [];
+        for (var i = 0; i < fixCount; i++) {
+            var tmpAddress = document.getElementById('fixedContentInput' + (i + 1)).value;
+            tmpAddress = tmpAddress.substring(tmpAddress.indexOf("!") + 1);
+            fixedAddresses.push(tmpAddress);
+        }
+
+        var typeAddresses = [];
+        for (var i = 0; i < typeCount; i++) {
+            var tmpAddress = document.getElementById('fixedTypeInput' + (i + 1)).value;
+            tmpAddress = tmpAddress.substring(tmpAddress.indexOf("!") + 1);
+            typeAddresses.push(tmpAddress);
+        }
+
 
         Excel.run(function (ctx) {
 
@@ -308,12 +310,16 @@ function setFocus(activeID) {
             var firstCol = firstCell.getEntireColumn();
             var tmpRow = range.getRow(0);
             var firstRow = tmpRow.getEntireRow();
+            var fixedAddressRange = worksheet.getRange(fixedAddresses[0]);
+            var typeAddressRange = worksheet.getRange(typeAddresses[0]);
 
             //get used range in active Sheet
             range.load('text');
             worksheet.load('name');
             firstRow.load('address');
             firstCol.load('address');
+            fixedAddressRange.load('text');
+            typeAddressRange.load('text');
 
             return ctx.sync().then(function() {
 
@@ -328,22 +334,40 @@ function setFocus(activeID) {
 
                 backupForUndo(range, startCell, add_col, row_offset);
 
-                var fixedAddresses = [];
-                for (var i = 0; i < fixCount; i++) {
-                    var tmpAddress = document.getElementById('fixedContentInput' + (i + 1)).value;
-                    tmpAddress = tmpAddress.substring(tmpAddress.indexOf("!") + 1);
-                    fixedAddresses.push(tmpAddress);
+                var checked_worksheets = getCheckedBoxes("column_checkbox");
+                for (var i = 0; i < checked_worksheets.length; i++) {
+                    checkSheets(checked_worksheets[i].id, fixedAddressRange.text);
                 }
 
-                var typeAddresses = [];
-                for (var i = 0; i < typeCount; i++) {
-                    var tmpAddress = document.getElementById('fixedTypeInput' + (i + 1)).value;
-                    tmpAddress = tmpAddress.substring(tmpAddress.indexOf("!") + 1);
-                    typeAddresses.push(tmpAddress);
+                function checkSheets(sheetName, fixedText) {
+
+                    Excel.run(function (ctx) {
+
+                        var rangeAddress = fixedAddresses[0];
+                        var range = ctx.workbook.worksheets.getItem(sheetName).getRange(rangeAddress);
+
+                        range.load('text');
+
+                        return ctx.sync().then(function() {
+
+                            var color = "#EA7F04";
+                            for (var j = 0; j < fixedText.length; j++) {
+                                for (var k = 0; k < fixedText[j].length; k++) {
+                                    if (fixedText[j][k] != range.text[j][k]) {
+                                        console.log(range.text[j][k]);
+                                    }
+                                }
+                            }
+                        });
+                    }).catch(function(error) {
+                            console.log("Error: " + error);
+                            if (error instanceof OfficeExtension.Error) {
+                                console.log("Debug info: " + JSON.stringify(error.debugInfo));
+                            }
+                    });
                 }
 
-
-                if (document.getElementById('createBackup').checked == true) {
+                /*if (document.getElementById('createBackup').checked == true) {
                             var sheet_count = Office.context.document.settings.get('backup_sheet_count') + 1;
                             Office.context.document.settings.set('backup_sheet_count', sheet_count);
                             Office.context.document.settings.saveAsync();
@@ -363,7 +387,7 @@ function setFocus(activeID) {
                             document.getElementById('resultText').appendChild(txt);
 
                             document.getElementById('resultDialog').style.visibility = 'visible';
-                        }
+                        }*/
 
             });
 
