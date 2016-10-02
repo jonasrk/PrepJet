@@ -6,6 +6,10 @@ function redirectHarm() {
     window.location = "harmonize.html";
 }
 
+function redirectTemplate() {
+    window.location = "temp_feature.html";
+}
+
 function redirectExtract() {
     window.location = "extract_values.html";
 }
@@ -49,6 +53,7 @@ function redirectHelp() {
 
             $('#trimButton').click(redirectTrim);
             $('#harmonizeButton').click(redirectHarm);
+            $('#tempFeatureButton').click(redirectTemplate);
             $('#extractButton').click(redirectExtract);
             $('#splitButton').click(redirectSplit);
             $('#lookupButton').click(redirectLookup);
