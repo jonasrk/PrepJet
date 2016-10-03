@@ -364,7 +364,7 @@ function setFocus(activeID) {
                         checkFixedContent(checked_worksheets[i].id, fixedAddresses[j], fixedAddressRange[j].text, firstFixedCellLetter[j], firstFixedCellNumber[j], function(result){console.log(result);});
                     }
                     for (var j = 0; j < typeAddressRange.length; j++) {
-                        checkType(checked_worksheets[i].id, typeAddresses[j], typeAddressRange[j].valueTypes, firstTypeCellLetter[j], firstTypeCellNumber[j], function(result){console.log(result);})
+                        checkType(checked_worksheets[i].id, typeAddresses[j], typeAddressRange[j].valueTypes, typeAddressRange[j].numberFormat, firstTypeCellLetter[j], firstTypeCellNumber[j], function(result){console.log(result);})
                     }
                 }
 
@@ -382,16 +382,19 @@ function setFocus(activeID) {
                         return ctx.sync().then(function() {
 
                             var color = "#EA7F04";
+                            var countErrors = 0;
                             for (var j = 0; j < fixedText.length; j++) {
                                 for (var k = 0; k < fixedText[j].length; k++) {
                                     if (fixedText[j][k] != range.text[j][k]) {
                                         var tmpRow = firstFixedCellNumber + j;
                                         var tmpCol = getCharFromNumber(getNumberFromChar(firstFixedCellLetter) + k);
                                         highlightCellInWorksheet(worksheet, tmpCol + tmpRow, color);
-                                        callback(tmpCol+tmpRow);
+                                        countErrors += 1;
                                     }
+
                                 }
                             }
+                            callback(countErrors);
                         });
                     }).catch(function(error) {
                             console.log("Error: " + error);
@@ -401,7 +404,7 @@ function setFocus(activeID) {
                     });
                 }
 
-                function checkType(sheetName, typeAddresses, textTypes, firstTypeCellLetter, firstTypeCellNumber, callback) {
+                function checkType(sheetName, typeAddresses, textTypes, textFormats, firstTypeCellLetter, firstTypeCellNumber, callback) {
 
                     Excel.run(function (ctx) {
 
@@ -416,16 +419,26 @@ function setFocus(activeID) {
                         return ctx.sync().then(function() {
 
                             var color = "#EA7F04";
+                            var countErrors = 0;
                             for (var j = 0; j < textTypes.length; j++) {
                                 for (var k = 0; k < textTypes[j].length; k++) {
                                     if (textTypes[j][k] != range.valueTypes[j][k]) {
                                         var tmpRow = firstTypeCellNumber + j;
                                         var tmpCol = getCharFromNumber(getNumberFromChar(firstTypeCellLetter) + k);
                                         highlightCellInWorksheet(worksheet, tmpCol + tmpRow, color);
-                                        callback(tmpCol+tmpRow);
+                                        countErrors += 1;
+                                    }
+                                    if (textTypes[j][k] == "Double" && range.valueTypes[j][k] == "Double") {
+                                        if (textFormats[j][k] != range.numberFormat[j][k]) {
+                                            var tmpRow = firstTypeCellNumber + j;
+                                            var tmpCol = getCharFromNumber(getNumberFromChar(firstTypeCellLetter) + k);
+                                            highlightCellInWorksheet(worksheet, tmpCol + tmpRow, color);
+                                            countErrors += 1;
+                                        }
                                     }
                                 }
                             }
+                            callback(countErrors);
                         });
                     }).catch(function(error) {
                             console.log("Error: " + error);
