@@ -247,9 +247,9 @@
                       <Description resid="PJ.CheckCat.Ttp" />
                     </Supertip>
                     <Icon>
-                      <bt:Image size="16" resid="PJ.customIncon.Icon_sm" />
-                      <bt:Image size="32" resid="PJ.customIncon.Icon" />
-                      <bt:Image size="80" resid="PJ.customIncon.Icon_lg" />
+                      <bt:Image size="16" resid="PJ.checkCat.Icon_sm" />
+                      <bt:Image size="32" resid="PJ.checkCat.Icon" />
+                      <bt:Image size="80" resid="PJ.checkCat.Icon_lg" />
                     </Icon>
                     <Action xsi:type="ShowTaskpane">
                       <TaskpaneId>Button2Id1</TaskpaneId>
@@ -378,6 +378,7 @@
         <bt:Image id="PJ.validationrule.Icon" DefaultValue="https://localhost:8443/images/validationrule.png" />
         <bt:Image id="PJ.harmonize.Icon" DefaultValue="https://localhost:8443/images/harmonize.png" />
         <bt:Image id="PJ.template.Icon" DefaultValue="https://localhost:8443/images/template.png" />
+        <bt:Image id="PJ.checkCat.Icon" DefaultValue="https://localhost:8443/images/standardize.png" />
         <bt:Image id="PJ.help.Icon" DefaultValue="https://localhost:8443/images/help.png" />
         <bt:Image id="PJ.undo.Icon" DefaultValue="https://localhost:8443/images/undo.png" />
         <bt:Image id="PJ.addcolumn.Icon_sm" DefaultValue="https://localhost:8443/images/addcolumn_sm.png" />
@@ -389,6 +390,7 @@
         <bt:Image id="PJ.validationrule.Icon_sm" DefaultValue="https://localhost:8443/images/validationrule_sm.png" />
         <bt:Image id="PJ.harmonize.Icon_sm" DefaultValue="https://localhost:8443/images/harmonize_sm.png" />
         <bt:Image id="PJ.template.Icon_sm" DefaultValue="https://localhost:8443/images/template_sm.png" />
+        <bt:Image id="PJ.checkCat.Icon_sm" DefaultValue="https://localhost:8443/images/standardize_sm.png" />
         <bt:Image id="PJ.help.Icon_sm" DefaultValue="https://localhost:8443/images/help_sm.png" />
         <bt:Image id="PJ.undo.Icon_sm" DefaultValue="https://localhost:8443/images/undo_sm.png" />
         <bt:Image id="PJ.addcolumn.Icon_lg" DefaultValue="https://localhost:8443/images/addcolumn_lg.png" />
@@ -400,6 +402,7 @@
         <bt:Image id="PJ.validationrule.Icon_lg" DefaultValue="https://localhost:8443/images/validationrule_lg.png" />
         <bt:Image id="PJ.harmonize.Icon_lg" DefaultValue="https://localhost:8443/images/harmonize_lg.png" />
         <bt:Image id="PJ.template.Icon_lg" DefaultValue="https://localhost:8443/images/template_lg.png" />
+        <bt:Image id="PJ.checkCat.Icon_lg" DefaultValue="https://localhost:8443/images/standardize_lg.png" />
         <bt:Image id="PJ.help.Icon_lg" DefaultValue="https://localhost:8443/images/help_lg.png" />
         <bt:Image id="PJ.undo.Icon_lg" DefaultValue="https://localhost:8443/images/undo_lg.png" />
 
