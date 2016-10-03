@@ -372,15 +372,15 @@ function showStep1() {
 
                 var checked_worksheets = getCheckedBoxes("column_checkbox");
                 for (var i = 0; i < checked_worksheets.length; i++) {
+                    var unprotect = document.getElementById('unprotect').checked;
+                    if (unprotect == true) {
+                        changeProtection(checked_worksheets[i].id, function(result){console.log(result);})
+                    }
                     for (var j = 0; j < fixedAddressRange.length; j++) {
                         checkFixedContent(checked_worksheets[i].id, fixedAddresses[j], fixedAddressRange[j].text, firstFixedCellLetter[j], firstFixedCellNumber[j], function(result){console.log(result);});
                     }
                     for (var j = 0; j < typeAddressRange.length; j++) {
                         checkType(checked_worksheets[i].id, typeAddresses[j], typeAddressRange[j].valueTypes, typeAddressRange[j].numberFormat, firstTypeCellLetter[j], firstTypeCellNumber[j], function(result){console.log(result);})
-                    }
-                    var unprotect = document.getElementById('unprotect').checked;
-                    if (unprotect == true) {
-                        changeProtection(checked_worksheets[i].id, function(result){console.log(result);})
                     }
                 }
 
@@ -471,11 +471,9 @@ function showStep1() {
 
                         var worksheet = ctx.workbook.worksheets.getItem(sheetName);
                         worksheet.protection.unprotect()
-                        worksheet.protection.load();
 
                         return ctx.sync().then(function() {
-
-                            callback(worksheet.protection.protected);
+                            callback("unprotected");
                         });
                     }).catch(function(error) {
                             console.log("Error: " + error);
