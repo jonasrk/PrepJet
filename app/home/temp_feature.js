@@ -7,6 +7,12 @@ function setFocus(activeID) {
     activeSelection = activeID;
 }
 
+function showStep1() {
+    $('#step2').hide();
+    $('#step1').show();
+    $('#step3').hide();
+}
+
 (function () {
     // 'use strict';
     var fixCount = 1;
@@ -42,7 +48,8 @@ function setFocus(activeID) {
             $('#continue2').click(showStep3);
             $('#bt_more').click(addContentTextField);
             $('#bt_remove').click(removeContentField);
-            $('#back1').click(showStep2);
+            $('#back2').click(showStep2);
+            $('#back1').click(showStep1);
             $('#checkbox_all').click(checkCheckbox);
 
 
@@ -429,6 +436,8 @@ function setFocus(activeID) {
                                         countErrors += 1;
                                     }
                                     if (textTypes[j][k] == "Double" && range.valueTypes[j][k] == "Double") {
+                                        console.log(range.numberFormat[j][k]);
+                                        console.log(range.valueTypes[j][k]);
                                         if (textFormats[j][k] != range.numberFormat[j][k]) {
                                             var tmpRow = firstTypeCellNumber + j;
                                             var tmpCol = getCharFromNumber(getNumberFromChar(firstTypeCellLetter) + k);
@@ -448,7 +457,7 @@ function setFocus(activeID) {
                     });
                 }
 
-                /*if (document.getElementById('createBackup').checked == true) {
+                if (document.getElementById('createBackup').checked == true) {
                             var sheet_count = Office.context.document.settings.get('backup_sheet_count') + 1;
                             Office.context.document.settings.set('backup_sheet_count', sheet_count);
                             Office.context.document.settings.saveAsync();
@@ -468,7 +477,7 @@ function setFocus(activeID) {
                             document.getElementById('resultText').appendChild(txt);
 
                             document.getElementById('resultDialog').style.visibility = 'visible';
-                        }*/
+                        }
 
             });
 

@@ -63,8 +63,8 @@ h1 {
     background-color: #FFFFFF;
     border: 1px solid #FFFFFF;
     height: 25px;
-    min-width: 20px;
-    padding: 2px 4px 2px; }
+    min-width: 15px;
+    padding: 2px 1px 2px; }
 
 .ms-Button_small {
     color: #333;
