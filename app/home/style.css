@@ -229,6 +229,10 @@ h1 {
     border-bottom: 0.75px solid;
     border-color: #e2e2e2; }
 
+#allWorksheets {
+    border-bottom: 0.75px solid;
+    border-color: #e2e2e2; }
+
 .ms-Dropdown {
     color: #333;
     margin: 0 0 10px;

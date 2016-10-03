@@ -356,20 +356,20 @@ function setFocus(activeID) {
                 }
 
                 backupForUndo(range, startCell, add_col, row_offset);
-
+                console.log(firstFixedCellLetter);
                 var checked_worksheets = getCheckedBoxes("column_checkbox");
                 for (var i = 0; i < checked_worksheets.length; i++) {
                     for (var j = 0; j < fixedAddressRange.length; j++) {
-                        checkSheets(checked_worksheets[i].id, fixedAddressRange[j].text, firstFixedCellLetter, firstFixedCellNumber);
+                        checkSheets(checked_worksheets[i].id, fixedAddresses[j], fixedAddressRange[j].text, firstFixedCellLetter[j], firstFixedCellNumber[j], function(result){console.log(result);});
                     }
                 }
 
-                function checkSheets(sheetName, fixedText, firstFixedCellLetter, firstFixedCellNumber) {
+                function checkSheets(sheetName, fixedAddresses, fixedText, firstFixedCellLetter, firstFixedCellNumber, callback) {
 
                     Excel.run(function (ctx) {
 
                         var worksheet = ctx.workbook.worksheets.getItem(sheetName);
-                        var rangeAddress = fixedAddresses[0];
+                        var rangeAddress = fixedAddresses;
                         var range = worksheet.getRange(rangeAddress);
 
                         range.load('text');
@@ -381,10 +381,10 @@ function setFocus(activeID) {
                             for (var j = 0; j < fixedText.length; j++) {
                                 for (var k = 0; k < fixedText[j].length; k++) {
                                     if (fixedText[j][k] != range.text[j][k]) {
-                                        var tmpRow = firstFixedCellNumber[0] + j;
-                                        var tmpCol = getCharFromNumber(getNumberFromChar(firstFixedCellLetter[0]) + k);
-                                        console.log(tmpCol + tmpRow);
+                                        var tmpRow = firstFixedCellNumber + j;
+                                        var tmpCol = getCharFromNumber(getNumberFromChar(firstFixedCellLetter) + k);
                                         highlightCellInWorksheet(worksheet, tmpCol + tmpRow, color);
+                                        callback(tmpCol+tmpRow);
                                     }
                                 }
                             }
