@@ -121,12 +121,12 @@
                   <Label resid="PJ.TemplateButton.Label" />
                   <Supertip>
                     <Title resid="PJ.TemplateButton.Label" />
-                      <Description resid="PJ.harmonize.Ttp" />
+                      <Description resid="PJ.template.Ttp" />
                   </Supertip>
                   <Icon>
-                    <bt:Image size="16" resid="PJ.harmonize.Icon_sm" />
-                    <bt:Image size="32" resid="PJ.harmonize.Icon" />
-                    <bt:Image size="80" resid="PJ.harmonize.Icon_lg" />
+                    <bt:Image size="16" resid="PJ.template.Icon_sm" />
+                    <bt:Image size="32" resid="PJ.template.Icon" />
+                    <bt:Image size="80" resid="PJ.template.Icon_lg" />
                   </Icon>
                   <Action xsi:type="ShowTaskpane">
                     <TaskpaneId>Button2Id1</TaskpaneId>
@@ -377,6 +377,7 @@
         <bt:Image id="PJ.trimspaces.Icon" DefaultValue="https://localhost:8443/images/trimspaces.png" />
         <bt:Image id="PJ.validationrule.Icon" DefaultValue="https://localhost:8443/images/validationrule.png" />
         <bt:Image id="PJ.harmonize.Icon" DefaultValue="https://localhost:8443/images/harmonize.png" />
+        <bt:Image id="PJ.template.Icon" DefaultValue="https://localhost:8443/images/template.png" />
         <bt:Image id="PJ.help.Icon" DefaultValue="https://localhost:8443/images/help.png" />
         <bt:Image id="PJ.undo.Icon" DefaultValue="https://localhost:8443/images/undo.png" />
         <bt:Image id="PJ.addcolumn.Icon_sm" DefaultValue="https://localhost:8443/images/addcolumn_sm.png" />
@@ -387,6 +388,7 @@
         <bt:Image id="PJ.trimspaces.Icon_sm" DefaultValue="https://localhost:8443/images/trimspaces_sm.png" />
         <bt:Image id="PJ.validationrule.Icon_sm" DefaultValue="https://localhost:8443/images/validationrule_sm.png" />
         <bt:Image id="PJ.harmonize.Icon_sm" DefaultValue="https://localhost:8443/images/harmonize_sm.png" />
+        <bt:Image id="PJ.template.Icon_sm" DefaultValue="https://localhost:8443/images/template_sm.png" />
         <bt:Image id="PJ.help.Icon_sm" DefaultValue="https://localhost:8443/images/help_sm.png" />
         <bt:Image id="PJ.undo.Icon_sm" DefaultValue="https://localhost:8443/images/undo_sm.png" />
         <bt:Image id="PJ.addcolumn.Icon_lg" DefaultValue="https://localhost:8443/images/addcolumn_lg.png" />
@@ -397,6 +399,7 @@
         <bt:Image id="PJ.trimspaces.Icon_lg" DefaultValue="https://localhost:8443/images/trimspaces_lg.png" />
         <bt:Image id="PJ.validationrule.Icon_lg" DefaultValue="https://localhost:8443/images/validationrule_lg.png" />
         <bt:Image id="PJ.harmonize.Icon_lg" DefaultValue="https://localhost:8443/images/harmonize_lg.png" />
+        <bt:Image id="PJ.template.Icon_lg" DefaultValue="https://localhost:8443/images/template_lg.png" />
         <bt:Image id="PJ.help.Icon_lg" DefaultValue="https://localhost:8443/images/help_lg.png" />
         <bt:Image id="PJ.undo.Icon_lg" DefaultValue="https://localhost:8443/images/undo_lg.png" />
 
@@ -447,6 +450,7 @@
       <bt:LongStrings>
         <bt:String id="PJ.trimSpaces.Ttp" DefaultValue="Remove leading and trailing spaces" />
         <bt:String id="PJ.harmonize.Ttp" DefaultValue="Harmonize capitalization of characters" />
+        <bt:String id="PJ.template.Ttp" DefaultValue="Define a template and compare other sheets to it" />
         <bt:String id="PJ.splitValues.Ttp" DefaultValue="Split column by a delimiter" />
         <bt:String id="PJ.addColumn.Ttp" DefaultValue="Add columns from a different sheet by matching criteria" />
         <bt:String id="PJ.inconsistency.Ttp" DefaultValue="Search for inconsistent data types" />
