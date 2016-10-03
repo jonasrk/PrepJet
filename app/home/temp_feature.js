@@ -25,6 +25,7 @@ function showStep1() {
 
             Office.context.document.settings.set('same_header_trim', false);
             Office.context.document.settings.set('on_second_page', false);
+            Office.context.document.settings.set('on_third_page', false);
             Office.context.document.settings.set('last_clicked_function', "temp_feature.html");
             if (Office.context.document.settings.get('prepjet_loaded_before') == null) {
                 Office.context.document.settings.set('backup_sheet_count', 1);
@@ -188,9 +189,13 @@ function showStep1() {
         $('#step1').hide();
         $('#step3').show();
 
-        for (var i = 0; i < worksheet_names.length; i++) {
-            addNewCheckboxToContainer (worksheet_names[i], "column_checkbox" ,"checkboxes_columns");
+        if (Office.context.document.settings.get('on_third_page') == false) {
+            for (var i = 0; i < worksheet_names.length; i++) {
+                addNewCheckboxToContainer (worksheet_names[i], "column_checkbox" ,"checkboxes_columns");
+            }
         }
+
+        Office.context.document.settings.set('on_third_page', true);
 
     }
 
@@ -373,6 +378,10 @@ function showStep1() {
                     for (var j = 0; j < typeAddressRange.length; j++) {
                         checkType(checked_worksheets[i].id, typeAddresses[j], typeAddressRange[j].valueTypes, typeAddressRange[j].numberFormat, firstTypeCellLetter[j], firstTypeCellNumber[j], function(result){console.log(result);})
                     }
+                    var unprotect = document.getElementById('unprotect').checked;
+                    if (unprotect == true) {
+                        changeProtection(checked_worksheets[i].id, function(result){console.log(result);})
+                    }
                 }
 
                 function checkFixedContent(sheetName, fixedAddresses, fixedText, firstFixedCellLetter, firstFixedCellNumber, callback) {
@@ -448,6 +457,25 @@ function showStep1() {
                                 }
                             }
                             callback(countErrors);
+                        });
+                    }).catch(function(error) {
+                            console.log("Error: " + error);
+                            if (error instanceof OfficeExtension.Error) {
+                                console.log("Debug info: " + JSON.stringify(error.debugInfo));
+                            }
+                    });
+                }
+
+
+                function changeProtection(sheetName, callback) {
+
+                    Excel.run(function (ctx) {
+
+                        var worksheet = ctx.workbook.worksheets.getItem(sheetName);
+                        worksheet.protection.unprotect();
+
+                        return ctx.sync().then(function() {
+                            callback("unprotected");
                         });
                     }).catch(function(error) {
                             console.log("Error: " + error);
