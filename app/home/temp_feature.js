@@ -325,7 +325,8 @@ function setFocus(activeID) {
             var typeAddressRange = [];
             for (var i = 0; i < typeAddresses.length; i++) {
                 typeAddressRange.push(worksheet.getRange(typeAddresses[i]));
-                typeAddressRange[i].load('text');
+                typeAddressRange[i].load('valueTypes');
+                typeAddressRange[i].load('numberFormat');
             }
 
             return ctx.sync().then(function() {
@@ -356,15 +357,18 @@ function setFocus(activeID) {
                 }
 
                 backupForUndo(range, startCell, add_col, row_offset);
-                console.log(firstFixedCellLetter);
+
                 var checked_worksheets = getCheckedBoxes("column_checkbox");
                 for (var i = 0; i < checked_worksheets.length; i++) {
                     for (var j = 0; j < fixedAddressRange.length; j++) {
-                        checkSheets(checked_worksheets[i].id, fixedAddresses[j], fixedAddressRange[j].text, firstFixedCellLetter[j], firstFixedCellNumber[j], function(result){console.log(result);});
+                        checkFixedContent(checked_worksheets[i].id, fixedAddresses[j], fixedAddressRange[j].text, firstFixedCellLetter[j], firstFixedCellNumber[j], function(result){console.log(result);});
+                    }
+                    for (var j = 0; j < typeAddressRange.length; j++) {
+                        checkType(checked_worksheets[i].id, typeAddresses[j], typeAddressRange[j].valueTypes, firstTypeCellLetter[j], firstTypeCellNumber[j], function(result){console.log(result);})
                     }
                 }
 
-                function checkSheets(sheetName, fixedAddresses, fixedText, firstFixedCellLetter, firstFixedCellNumber, callback) {
+                function checkFixedContent(sheetName, fixedAddresses, fixedText, firstFixedCellLetter, firstFixedCellNumber, callback) {
 
                     Excel.run(function (ctx) {
 
@@ -383,6 +387,40 @@ function setFocus(activeID) {
                                     if (fixedText[j][k] != range.text[j][k]) {
                                         var tmpRow = firstFixedCellNumber + j;
                                         var tmpCol = getCharFromNumber(getNumberFromChar(firstFixedCellLetter) + k);
+                                        highlightCellInWorksheet(worksheet, tmpCol + tmpRow, color);
+                                        callback(tmpCol+tmpRow);
+                                    }
+                                }
+                            }
+                        });
+                    }).catch(function(error) {
+                            console.log("Error: " + error);
+                            if (error instanceof OfficeExtension.Error) {
+                                console.log("Debug info: " + JSON.stringify(error.debugInfo));
+                            }
+                    });
+                }
+
+                function checkType(sheetName, typeAddresses, textTypes, firstTypeCellLetter, firstTypeCellNumber, callback) {
+
+                    Excel.run(function (ctx) {
+
+                        var worksheet = ctx.workbook.worksheets.getItem(sheetName);
+                        var rangeAddress = typeAddresses;
+                        var range = worksheet.getRange(rangeAddress);
+
+                        range.load('valueTypes');
+                        range.load('numberFormat');
+                        worksheet.load('name');
+
+                        return ctx.sync().then(function() {
+
+                            var color = "#EA7F04";
+                            for (var j = 0; j < textTypes.length; j++) {
+                                for (var k = 0; k < textTypes[j].length; k++) {
+                                    if (textTypes[j][k] != range.valueTypes[j][k]) {
+                                        var tmpRow = firstTypeCellNumber + j;
+                                        var tmpCol = getCharFromNumber(getNumberFromChar(firstTypeCellLetter) + k);
                                         highlightCellInWorksheet(worksheet, tmpCol + tmpRow, color);
                                         callback(tmpCol+tmpRow);
                                     }
