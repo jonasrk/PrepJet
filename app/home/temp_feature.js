@@ -445,8 +445,6 @@ function showStep1() {
                                         countErrors += 1;
                                     }
                                     if (textTypes[j][k] == "Double" && range.valueTypes[j][k] == "Double") {
-                                        console.log(range.numberFormat[j][k]);
-                                        console.log(range.valueTypes[j][k]);
                                         if (textFormats[j][k] != range.numberFormat[j][k]) {
                                             var tmpRow = firstTypeCellNumber + j;
                                             var tmpCol = getCharFromNumber(getNumberFromChar(firstTypeCellLetter) + k);
@@ -472,10 +470,12 @@ function showStep1() {
                     Excel.run(function (ctx) {
 
                         var worksheet = ctx.workbook.worksheets.getItem(sheetName);
-                        worksheet.protection.unprotect();
+                        worksheet.protection.unprotect()
+                        worksheet.protection.load();
 
                         return ctx.sync().then(function() {
-                            callback("unprotected");
+
+                            callback(worksheet.protection.protected);
                         });
                     }).catch(function(error) {
                             console.log("Error: " + error);
