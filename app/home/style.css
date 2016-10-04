@@ -16,13 +16,6 @@ html {
     height: 60px;
     overflow: visible; }
 
-#content-header_incons {
-    background: #5f75a2;
-    color: #fff;
-    width: 100%;
-    height: 60px;
-    overflow: visible; }
-
 .padding {
     padding: 10px;
     overflow: visible; }
@@ -113,9 +106,7 @@ h1 {
     display: block;
     position: fixed;
     top: 60px;
-    overflow-y: scroll;
-    overflow-x: hidden;
-    z-index: 105; }
+    overflow-x: hidden; }
 
 .placeholder {
     height: 60px;
@@ -202,14 +193,6 @@ h1 {
     font-size: 11px;
     color: #666;
     padding: 7px 0 7px 10px; }
-
-.ms-Dropdown {
-    color: #333;
-    margin: 0 0 10px;
-    padding: 0;
-    position: relative;
-    outline: 0;
-    overflow-x: hidden; }
 
 #resultDialog {
     visibility: hidden; }
