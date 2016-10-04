@@ -23,13 +23,6 @@ html {
     height: 60px;
     overflow: visible; }
 
-#content-header2 {
-    background: #666666;
-    color: #fff;
-    width: 100%;
-    height: 60px;
-    overflow: visible; }
-
 .padding {
     padding: 10px;
     overflow: visible; }
@@ -112,15 +105,6 @@ h1 {
     box-shadow: none;
     overflow-x: hidden; }
 
-.tableborder {
-    border-top: 0.75px solid;
-    border-bottom: 0.75px solid;
-    width: 100%;
-    border-color: #e2e2e2; }
-
-.tablecol1 {
-    width: 82%; }
-
 .ms-Dialog-header {
     box-sizing: border-box;
     padding: 12px 20px 5px; }
@@ -148,12 +132,6 @@ h1 {
     background: #e0e0e0;
     overflow: visible;
     padding: 10px; }
-
-.ms-TextField-field {
-    min-width: 135px; }
-
-.tableval {
-    width: 53%; }
 
 .ms-Button_icon {
     border: 0px;
@@ -225,11 +203,6 @@ h1 {
     color: #666;
     padding: 7px 0 7px 10px; }
 
-#allColumns {
-    width: 60%;
-    border-bottom: 0.75px solid;
-    border-color: #e2e2e2; }
-
 .ms-Dropdown {
     color: #333;
     margin: 0 0 10px;
@@ -238,36 +211,11 @@ h1 {
     outline: 0;
     overflow-x: hidden; }
 
-#lookuptable {
-    border-bottom: 0.75px solid;
-    border-color: #e2e2e2;
-    width: 50%; }
-
-#harm_drop {
-    width: 100%; }
-
-#large_drop {
-    width: 100%; }
-
-#smalldrop_col {
-    width: 50%; }
-
-#tablesmall {
-    width: 100%; }
-
-#colright {
-    width: 50%; }
-
 #resultDialog {
     visibility: hidden; }
 
 #proHeader {
     color: #EA7F04;}
-
-.tableupperborder {
-    border-top: 0.75px solid;
-    width: 100%;
-    border-color: #e2e2e2;}
 
 .ms-Button_hometrans {
     border: 0px;
@@ -289,14 +237,6 @@ h1 {
     background-color: #666666;
     cursor: pointer; }
 
-#bigtable {
-    width: 100%;
-    border-bottom: 1px solid;
-    border-color: #e2e2e2; }
-
-#matchCriteria {
-    width: 100%; }
-
 #darkBox {
     background: #ffcc94;
     text-align: center;
@@ -313,7 +253,4 @@ h1 {
 
 #pictures {
     text-align: center; }
-
-#columnsToAdd {
-    width: 100%; }
 
