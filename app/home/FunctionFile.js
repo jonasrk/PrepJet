@@ -7,7 +7,7 @@ function redirectHome() {
     Office.initialize = function (reason) {
         undo();
 
-        $('#homeButton').click(redirectHome);
+        jQuery('#homeButton').click(redirectHome);
 
         //If you need to initialize something you can do so here.
     };
