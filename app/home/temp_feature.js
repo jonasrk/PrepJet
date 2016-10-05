@@ -53,6 +53,8 @@ function showStep1() {
             $('#back1').click(showStep1);
             $('#checkbox_all').click(checkCheckbox);
 
+            $('#typeDrop1').Dropdown();
+
 
             document.getElementById("refresh_icon").onclick = function () {
                 window.location = "temp_feature.html";
@@ -131,7 +133,7 @@ function showStep1() {
     }
 
 
-
+    //display second page where user can define ranges that must adhere to the indicated data type
     function showStep2() {
 
         $('#step2').show();
@@ -146,29 +148,91 @@ function showStep1() {
             $('#bt2_remove').show();
         }
 
+        //create text field to enter sections to check for data type compatibility
         function addTextField(id) {
+
+            var trow = document.createElement("tr");
+            document.getElementById("typeDiv").appendChild(trow);
+
+            var tcol1 = document.createElement("td");
+            tcol1.id = "smalldrop_col";
+            trow.appendChild(tcol1);
+
+            var tcol2 = document.createElement("td");
+            tcol2.id = "colright";
+            trow.appendChild(tcol2);
 
             var div = document.createElement("div");
             div.className = "ms-TextField ms-TextField--placeholder";
             div.id = "fixedType" + id;
-
-            var label = document.createElement("label");
-            label.innerHTML = "Select " + typeCount + ". Range";
 
             var input = document.createElement("input");
             input.id = "fixedTypeInput" + id;
             input.className = "ms-TextField-field";
             input.addEventListener = ('onfocus', setFocus(typeCount));
 
-            div.appendChild(label);
             div.appendChild(input);
 
-            document.getElementById("typeDiv").appendChild(div);
+            createTypeDropdown(tcol2, id);
+
+            tcol1.appendChild(div);
         }
 
+        //Create dropdown with data type options
+        function createTypeDropdown(col, id) {
+
+            var div = document.createElement("div");
+            div.id = "typeDrop" + id;
+            div.className = "ms-Dropdown dropdown_table";
+
+            var elemi = document.createElement("i");
+            elemi.className = "ms-Dropdown-caretDown ms-Icon ms-Icon--caretDown";
+            div.appendChild(elemi);
+
+            var select = document.createElement("select");
+            select.id = "fixedInputSelect" + id;
+            select.className = "ms-Dropdown-select";
+            div.appendChild(select);
+
+            var option1 = document.createElement("option");
+            option1.value = "integerInput";
+            option1.innerHTML = "Integer";
+            select.appendChild(option1);
+
+            var option2 = document.createElement("option");
+            option2.value = "doubleInput";
+            option2.innerHTML = "Double";
+            select.appendChild(option2);
+
+            var option3 = document.createElement("option");
+            option3.value = "dateInput";
+            option3.innerHTML = "Date";
+            select.appendChild(option3);
+
+            var option4 = document.createElement("option");
+            option4.value = "textInput";
+            option4.innerHTML = "Text";
+            select.appendChild(option4);
+
+            var option5 = document.createElement("option");
+            option5.value = "boolInput";
+            option5.innerHTML = "Boolean";
+            select.appendChild(option5);
+
+            var option6 = document.createElement("option");
+            option6.value = "emptyInput";
+            option6.innerHTML = "Empty";
+            select.appendChild(option6);
+
+            col.appendChild(div);
+
+            $('#typeDrop' + id).Dropdown();
+        }
+
+        //remove text field and dropdown for range and type of data
         function removeTypeField() {
             var parent = document.getElementById('typeDiv');
-            var child = document.getElementById('fixedType' + typeCount)
+            var child = document.getElementById('typeRow' + typeCount)
             parent.removeChild(child);
             typeCount -= 1;
             if (typeCount <= 1) {
@@ -224,31 +288,6 @@ function showStep1() {
                         document.getElementById(worksheet_names[i]).checked = false;
                     }
                 }
-            });
-
-        }).catch(function(error) {
-            console.log("Error: " + error);
-            if (error instanceof OfficeExtension.Error) {
-                console.log("Debug info: " + JSON.stringify(error.debugInfo));
-            }
-        });
-
-    }
-
-
-    function fillColumn(){
-
-        Excel.run(function (ctx) {
-
-            var worksheet = ctx.workbook.worksheets.getActiveWorksheet();
-            var range_all = worksheet.getRange();
-            var range = range_all.getUsedRange(true);
-
-            range.load('text');
-            worksheet.load('name');
-
-            return ctx.sync().then(function() {
-
             });
 
         }).catch(function(error) {
@@ -337,8 +376,7 @@ function showStep1() {
             var typeAddressRange = [];
             for (var i = 0; i < typeAddresses.length; i++) {
                 typeAddressRange.push(worksheet.getRange(typeAddresses[i]));
-                typeAddressRange[i].load('valueTypes');
-                typeAddressRange[i].load('numberFormat');
+                typeAddressRange[i].load('text');
             }
 
             return ctx.sync().then(function() {
@@ -379,8 +417,29 @@ function showStep1() {
                     for (var j = 0; j < fixedAddressRange.length; j++) {
                         checkFixedContent(checked_worksheets[i].id, fixedAddresses[j], fixedAddressRange[j].text, firstFixedCellLetter[j], firstFixedCellNumber[j], function(result){console.log(result);});
                     }
-                    for (var j = 0; j < typeAddressRange.length; j++) {
-                        checkType(checked_worksheets[i].id, typeAddresses[j], typeAddressRange[j].valueTypes, typeAddressRange[j].numberFormat, firstTypeCellLetter[j], firstTypeCellNumber[j], function(result){console.log(result);})
+                    for (var j = 0; j < typeAddresses.length; j++) {
+                        var dataType = transformToDataType(document.getElementById('fixedInputSelect' + (j + 1)).value);
+                        var rowCount = typeAddressRange[j].text.length;
+                        console.log(rowCount);
+                        var colCount = typeAddressRange[j].text[0].length;
+                        console.log(colCount);
+                        checkType(checked_worksheets[i].id, typeAddresses[j], rowCount, colCount, dataType, firstTypeCellLetter[j], firstTypeCellNumber[j], function(result){console.log(result);})
+                    }
+                }
+
+                function transformToDataType(selectValue) {
+                    if(selectValue == "integerInput") {
+                        return "Integer";
+                    } else if (selectValue == "doubleInput") {
+                        return "Double";
+                    } else if (selectValue == "dateInput") {
+                        return "Date";
+                    } else if (selectValue == "textInput") {
+                        return "String";
+                    } else if (selectValue == "boolInput") {
+                        return "Boolean";
+                    } else if (selectValue == "emptyInput") {
+                        return "Empty";
                     }
                 }
 
@@ -420,7 +479,7 @@ function showStep1() {
                     });
                 }
 
-                function checkType(sheetName, typeAddresses, textTypes, textFormats, firstTypeCellLetter, firstTypeCellNumber, callback) {
+                function checkType(sheetName, typeAddresses, rowCount, colCount, textTypes, firstTypeCellLetter, firstTypeCellNumber, callback) {
 
                     Excel.run(function (ctx) {
 
@@ -430,27 +489,44 @@ function showStep1() {
 
                         range.load('valueTypes');
                         range.load('numberFormat');
+                        range.load('values');
                         worksheet.load('name');
 
                         return ctx.sync().then(function() {
 
                             var color = "#EA7F04";
                             var countErrors = 0;
-                            for (var j = 0; j < textTypes.length; j++) {
-                                for (var k = 0; k < textTypes[j].length; k++) {
-                                    if (textTypes[j][k] != range.valueTypes[j][k]) {
-                                        var tmpRow = firstTypeCellNumber + j;
-                                        var tmpCol = getCharFromNumber(getNumberFromChar(firstTypeCellLetter) + k);
-                                        highlightCellInWorksheet(worksheet, tmpCol + tmpRow, color);
-                                        countErrors += 1;
-                                    }
-                                    if (textTypes[j][k] == "Double" && range.valueTypes[j][k] == "Double") {
-                                        if (textFormats[j][k] != range.numberFormat[j][k]) {
+                            for (var j = 0; j < rowCount; j++) {
+                                for (var k = 0; k < colCount; k++) {
+                                    if (textTypes == "Integer") {
+                                        if (range.valueTypes[j][k] != "Double" && range.valueTypes[j][k] != "Integer") {
+                                            var tmpRow = firstTypeCellNumber + j;
+                                            var tmpCol = getCharFromNumber(getNumberFromChar(firstTypeCellLetter) + k);
+                                            highlightCellInWorksheet(worksheet, tmpCol + tmpRow, color);
+                                            countErrors += 1;
+                                        } else if (range.valueTypes[j][k] == "Double" && range.values[j][k] % Math.floor(range.values[j][k]) != 0) {
                                             var tmpRow = firstTypeCellNumber + j;
                                             var tmpCol = getCharFromNumber(getNumberFromChar(firstTypeCellLetter) + k);
                                             highlightCellInWorksheet(worksheet, tmpCol + tmpRow, color);
                                             countErrors += 1;
                                         }
+                                    } else if (textTypes == "Date") {
+                                        if (range.valueTypes[j][k] == "Double" && range.numberFormat[j][k] == "General") {
+                                            var tmpRow = firstTypeCellNumber + j;
+                                            var tmpCol = getCharFromNumber(getNumberFromChar(firstTypeCellLetter) + k);
+                                            highlightCellInWorksheet(worksheet, tmpCol + tmpRow, color);
+                                            countErrors += 1;
+                                        } else if (range.valueTypes[j][k] != "Double") {
+                                            var tmpRow = firstTypeCellNumber + j;
+                                            var tmpCol = getCharFromNumber(getNumberFromChar(firstTypeCellLetter) + k);
+                                            highlightCellInWorksheet(worksheet, tmpCol + tmpRow, color);
+                                            countErrors += 1;
+                                        }
+                                    } else if (textTypes != range.valueTypes[j][k]) {
+                                        var tmpRow = firstTypeCellNumber + j;
+                                        var tmpCol = getCharFromNumber(getNumberFromChar(firstTypeCellLetter) + k);
+                                        highlightCellInWorksheet(worksheet, tmpCol + tmpRow, color);
+                                        countErrors += 1;
                                     }
                                 }
                             }

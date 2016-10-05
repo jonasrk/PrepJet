@@ -139,11 +139,28 @@
             <div>
                 <label class="ms-Label">Select the areas for which to compare the data type.</label>
             </div>
-            <div id="typeDiv">
-                <div id="fixedType1" class="ms-TextField ms-TextField">
-                    <input id="fixedTypeInput1" class="ms-TextField-field" type="text" onfocus="setFocus(1)">
-                </div>
-            </div>
+                <table id="typeDiv">
+                    <tr id="typeRow1">
+                        <td id="smalldrop_col">
+                            <div id="fixedType1" class="ms-TextField ms-TextField">
+                                <input id="fixedTypeInput1" class="ms-TextField-field" type="text" onfocus="setFocus(1)">
+                            </div>
+                        </td>
+                        <td id="colright">
+                            <div id="typeDrop1" class="ms-Dropdown dropdown_table" tabindex="1">
+                            <i class="ms-Dropdown-caretDown ms-Icon ms-Icon--caretDown"></i>
+                            <select id="fixedInputSelect1" class="ms-Dropdown-select">
+                                <option value="integerInput">Integer</option>
+                                <option value="doubleInput">Double</option>
+                                <option value="dateInput">Date</option>
+                                <option value="textInput">Text</option>
+                                <option value="boolInput">Boolean</option>
+                                <option value="emptyInput">Empty</option>
+                            </select>
+                        </div>
+                        </td>
+                    </tr>
+                </table>
             <table id="tablesmall">
                 <tr>
                     <td id="tableright">
