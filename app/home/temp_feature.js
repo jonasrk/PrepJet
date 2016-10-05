@@ -372,10 +372,10 @@ function showStep1() {
 
                 var checked_worksheets = getCheckedBoxes("column_checkbox");
                 for (var i = 0; i < checked_worksheets.length; i++) {
-                    var unprotect = document.getElementById('unprotect').checked;
+                    /*var unprotect = document.getElementById('unprotect').checked;
                     if (unprotect == true) {
                         changeProtection(checked_worksheets[i].id, function(result){console.log(result);})
-                    }
+                    }*/
                     for (var j = 0; j < fixedAddressRange.length; j++) {
                         checkFixedContent(checked_worksheets[i].id, fixedAddresses[j], fixedAddressRange[j].text, firstFixedCellLetter[j], firstFixedCellNumber[j], function(result){console.log(result);});
                     }
@@ -429,6 +429,7 @@ function showStep1() {
                         var range = worksheet.getRange(rangeAddress);
 
                         range.load('valueTypes');
+                        range.load('text');
                         range.load('numberFormat');
                         worksheet.load('name');
 
@@ -438,6 +439,19 @@ function showStep1() {
                             var countErrors = 0;
                             for (var j = 0; j < textTypes.length; j++) {
                                 for (var k = 0; k < textTypes[j].length; k++) {
+                                    if (textTypes[j][k] == "Integer" && range.valueTypes[j][k] == "Double") {
+                                        if (textFormats[j][k] == range.numberFormat[j][k]) {
+                                            var tmpRow = firstTypeCellNumber + j;
+                                            var tmpCol = getCharFromNumber(getNumberFromChar(firstTypeCellLetter) + k);
+                                            var tmp = parseInt(range.text[j][k]);
+                                            addContentToWorksheet(worksheet, tmpCol + tmpRow, tmp);
+                                        } else {
+                                            var tmpRow = firstTypeCellNumber + j;
+                                            var tmpCol = getCharFromNumber(getNumberFromChar(firstTypeCellLetter) + k);
+                                            highlightCellInWorksheet(worksheet, tmpCol + tmpRow, color);
+                                            countErrors += 1;
+                                        }
+                                    }
                                     if (textTypes[j][k] != range.valueTypes[j][k]) {
                                         var tmpRow = firstTypeCellNumber + j;
                                         var tmpCol = getCharFromNumber(getNumberFromChar(firstTypeCellLetter) + k);
@@ -465,7 +479,7 @@ function showStep1() {
                 }
 
 
-                function changeProtection(sheetName, callback) {
+                /*function changeProtection(sheetName, callback) {
 
                     Excel.run(function (ctx) {
 
@@ -481,7 +495,7 @@ function showStep1() {
                                 console.log("Debug info: " + JSON.stringify(error.debugInfo));
                             }
                     });
-                }
+                }*/
 
                 if (document.getElementById('createBackup').checked == true) {
                             var sheet_count = Office.context.document.settings.get('backup_sheet_count') + 1;
