@@ -109,20 +109,16 @@
                     </td>
                 </tr>
             </table>
-            <table>
+            <table id="columnsToAdd">
                 <tr>
-                    <td>
-                        <!--button id="bt_remove" class="ms-Button_white">
-                            <img class="page1" src="../../images/Arrow_left.png" />
-                        </button-->
+                    <td id="arrows">
                         <button id="continue1" class="ms-Button_white">
                             <img class="page1" src="../../images/Arrow_right.png" />
                         </button>
                     </td>
-                </tr>
-            </table>
-            <div id="pageMarker">
-                <p id="pageMarkers">
+                    <td>
+                        <div id="pageMarker">
+                            <p id="pageMarkers">
                     <span id="page0Marker" class="fontColor_orange">
                         <i class="ms-Icon ms-Icon--circleFilled" aria-hidden="true"></i>
                     </span>
@@ -132,22 +128,25 @@
                     <span id="page2Marker" class="fontColor_grey">
                         <i class="ms-Icon ms-Icon--circleFilled" aria-hidden="true"></i>
                     </span>
-                </p>
-            </div>
+                            </p>
+                        </div>
+                    </td>
+                </tr>
+            </table>
         </div>
         <div id="step2">
             <div>
                 <label class="ms-Label">Select the areas for which to compare the data type.</label>
             </div>
-                <table id="typeDiv">
-                    <tr id="typeRow1">
-                        <td id="smalldrop_col">
-                            <div id="fixedType1" class="ms-TextField ms-TextField">
-                                <input id="fixedTypeInput1" class="ms-TextField-field" type="text" onfocus="setFocus(1)">
-                            </div>
-                        </td>
-                        <td id="colright">
-                            <div id="typeDrop1" class="ms-Dropdown dropdown_table" tabindex="1">
+            <table id="typeDiv">
+                <tr id="typeRow1">
+                    <td id="smalldrop_col">
+                        <div id="fixedType1" class="ms-TextField ms-TextField">
+                            <input id="fixedTypeInput1" class="ms-TextField-field" type="text" onfocus="setFocus(1)">
+                        </div>
+                    </td>
+                    <td id="colright">
+                        <div id="typeDrop1" class="ms-Dropdown dropdown_table" tabindex="1">
                             <i class="ms-Dropdown-caretDown ms-Icon ms-Icon--caretDown"></i>
                             <select id="fixedInputSelect1" class="ms-Dropdown-select">
                                 <option value="integerInput">Integer</option>
@@ -158,9 +157,9 @@
                                 <option value="emptyInput">Empty</option>
                             </select>
                         </div>
-                        </td>
-                    </tr>
-                </table>
+                    </td>
+                </tr>
+            </table>
             <table id="tablesmall">
                 <tr>
                     <td id="tableright">
@@ -195,9 +194,9 @@
                     </td>
                 </tr>
             </table>
-            <table>
+            <table id="columnsToAdd">
                 <tr>
-                    <td>
+                    <td id="arrows">
                         <button id="back1" class="ms-Button_white">
                             <img class="page1" src="../../images/Arrow_left.png" />
                         </button>
@@ -205,10 +204,9 @@
                             <img class="page1" src="../../images/Arrow_right.png" />
                         </button>
                     </td>
-                </tr>
-            </table>
-            <div id="pageMarker">
-                <p id="pageMarkers">
+                    <td>
+                        <div id="pageMarker">
+                            <p id="pageMarkers">
                     <span id="page0Marker" class="fontColor_grey">
                         <i class="ms-Icon ms-Icon--circleFilled" aria-hidden="true"></i>
                     </span>
@@ -218,35 +216,43 @@
                     <span id="page2Marker" class="fontColor_grey">
                         <i class="ms-Icon ms-Icon--circleFilled" aria-hidden="true"></i>
                     </span>
-                </p>
-            </div>
+                            </p>
+                        </div>
+                    </td>
+                </tr>
+            </table>
         </div>
         <div id="step3">
             <div>
                 <label class="ms-Label">Select the worksheets to compare to the template.</label>
             </div>
             <table>
-            <tr>
-                <td id="allWorksheets">
-                    <div id="checkbox_select_all" class="ms-ChoiceField">
-                        <input id="checkbox_all" class="ms-ChoiceField-input" type="checkbox">
-                        <label id="checkbox_label" for="checkbox_all" class="ms-ChoiceField-field">
-                            <span class="ms-Label">All Worksheets</span>
-                        </label>
-                    </div>
-                </td>
-                <td></td>
-            </tr>
-        </table>
-        <div id="checkboxes_columns" class="ms-ChoiceField">
-        </div>
-            <button id="back2" class="ms-Button_white">
-                <img class="page1" src="../../images/Arrow_left.png" />
-            </button>
+                <tr>
+                    <td id="allWorksheets">
+                        <div id="checkbox_select_all" class="ms-ChoiceField">
+                            <input id="checkbox_all" class="ms-ChoiceField-input" type="checkbox">
+                            <label id="checkbox_label" for="checkbox_all" class="ms-ChoiceField-field">
+                                <span class="ms-Label">All Worksheets</span>
+                            </label>
+                        </div>
+                    </td>
+                    <td></td>
+                </tr>
+            </table>
+            <div id="checkboxes_columns" class="ms-ChoiceField">
+            </div>
             <!--split button-->
             <button class="ms-Button" id="check_template">Compare</button>
-            <div id="pageMarker">
-                <p id="pageMarkers">
+            <table id="columnsToAdd">
+                <tr>
+                    <td id="arrows">
+                        <button id="back2" class="ms-Button_white">
+                            <img class="page1" src="../../images/Arrow_left.png" />
+                        </button>
+                    </td>
+                    <td>
+                        <div id="pageMarker">
+                            <p id="pageMarkers">
                     <span id="page0Marker" class="fontColor_grey">
                         <i class="ms-Icon ms-Icon--circleFilled" aria-hidden="true"></i>
                     </span>
@@ -256,8 +262,11 @@
                     <span id="page2Marker" class="fontColor_orange">
                         <i class="ms-Icon ms-Icon--circleFilled" aria-hidden="true"></i>
                     </span>
-                </p>
-            </div>
+                            </p>
+                        </div>
+                    </td>
+                </tr>
+            </table>
         </div>
     </div>
 </div>
