@@ -46,7 +46,6 @@ function redirectHelp() {
         jQuery(document).ready(function () {
 
             app.initialize();
-            console.log("test");
             $('#trimButton').click(redirectTrim);
             $('#harmonizeButton').click(redirectHarm);
             $('#extractButton').click(redirectExtract);

@@ -1,6 +1,7 @@
 // The initialize function must be run each time a new page is loaded
 (function () {
     Office.initialize = function (reason) {
+        undo();
         //If you need to initialize something you can do so here.
     };
 
@@ -15,7 +16,7 @@ function undo() { // TODO only does text, not formulas and formatting
         var row_offset  = Office.context.document.settings.get('rowOffset');
         var end_address = getCharFromNumber(values[0].length - 1 + add_col) + (values.length + row_offset - 1).toString();
         var rangeAddress = startCell + ":" + end_address;
-        console.log(rangeAddress)
+        //console.log(rangeAddress)
         var worksheet = ctx.workbook.worksheets.getActiveWorksheet();
         var range = worksheet.getRange(rangeAddress);
 
@@ -27,6 +28,7 @@ function undo() { // TODO only does text, not formulas and formatting
         range.load('text');
         return ctx.sync().then(function() {
             // console.log(range.text);
+            window.location = "mac_start.html";
         });
     }).catch(function(error) {
         console.log("Error: " + error);
