@@ -451,7 +451,7 @@ function showStep1() {
                                             highlightCellInWorksheet(worksheet, tmpCol + tmpRow, color);
                                             countErrors += 1;
                                         }
-                                    } else if (textTypes[j][k] != range.valueTypes[j][k]) {
+                                    } else if (textTypes[j][k] != range.valueTypes[j][k] && (textTypes[j][k] == "Integer" || range.valueTypes[j][k] == "Double")) {
                                         var tmpRow = firstTypeCellNumber + j;
                                         var tmpCol = getCharFromNumber(getNumberFromChar(firstTypeCellLetter) + k);
                                         highlightCellInWorksheet(worksheet, tmpCol + tmpRow, color);
