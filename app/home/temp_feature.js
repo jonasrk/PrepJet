@@ -429,7 +429,6 @@ function showStep1() {
                         var range = worksheet.getRange(rangeAddress);
 
                         range.load('valueTypes');
-                        range.load('text');
                         range.load('numberFormat');
                         worksheet.load('name');
 
@@ -439,24 +438,13 @@ function showStep1() {
                             var countErrors = 0;
                             for (var j = 0; j < textTypes.length; j++) {
                                 for (var k = 0; k < textTypes[j].length; k++) {
-                                    if (textTypes[j][k] == "Integer" && range.valueTypes[j][k] == "Double") {
-                                        if (textFormats[j][k] == range.numberFormat[j][k]) {
-                                            var tmpRow = firstTypeCellNumber + j;
-                                            var tmpCol = getCharFromNumber(getNumberFromChar(firstTypeCellLetter) + k);
-                                            var tmp = parseInt(range.text[j][k]);
-                                            addContentToWorksheet(worksheet, tmpCol + tmpRow, tmp);
-                                        } else {
-                                            var tmpRow = firstTypeCellNumber + j;
-                                            var tmpCol = getCharFromNumber(getNumberFromChar(firstTypeCellLetter) + k);
-                                            highlightCellInWorksheet(worksheet, tmpCol + tmpRow, color);
-                                            countErrors += 1;
-                                        }
-                                    } else if (textTypes[j][k] != range.valueTypes[j][k] && (textTypes[j][k] != "Integer" || range.valueTypes[j][k] != "Double")) {
+                                    if (textTypes[j][k] != range.valueTypes[j][k]) {
                                         var tmpRow = firstTypeCellNumber + j;
                                         var tmpCol = getCharFromNumber(getNumberFromChar(firstTypeCellLetter) + k);
                                         highlightCellInWorksheet(worksheet, tmpCol + tmpRow, color);
                                         countErrors += 1;
-                                    } else if (textTypes[j][k] == "Double" && range.valueTypes[j][k] == "Double") {
+                                    }
+                                    if (textTypes[j][k] == "Double" && range.valueTypes[j][k] == "Double") {
                                         if (textFormats[j][k] != range.numberFormat[j][k]) {
                                             var tmpRow = firstTypeCellNumber + j;
                                             var tmpCol = getCharFromNumber(getNumberFromChar(firstTypeCellLetter) + k);
