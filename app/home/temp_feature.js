@@ -451,14 +451,12 @@ function showStep1() {
                                             highlightCellInWorksheet(worksheet, tmpCol + tmpRow, color);
                                             countErrors += 1;
                                         }
-                                    }
-                                    if (textTypes[j][k] != range.valueTypes[j][k]) {
+                                    } else if (textTypes[j][k] != range.valueTypes[j][k]) {
                                         var tmpRow = firstTypeCellNumber + j;
                                         var tmpCol = getCharFromNumber(getNumberFromChar(firstTypeCellLetter) + k);
                                         highlightCellInWorksheet(worksheet, tmpCol + tmpRow, color);
                                         countErrors += 1;
-                                    }
-                                    if (textTypes[j][k] == "Double" && range.valueTypes[j][k] == "Double") {
+                                    } else if (textTypes[j][k] == "Double" && range.valueTypes[j][k] == "Double") {
                                         if (textFormats[j][k] != range.numberFormat[j][k]) {
                                             var tmpRow = firstTypeCellNumber + j;
                                             var tmpCol = getCharFromNumber(getNumberFromChar(firstTypeCellLetter) + k);
