@@ -28,7 +28,7 @@ function undo() { // TODO only does text, not formulas and formatting
         range.load('text');
         return ctx.sync().then(function() {
             // console.log(range.text);
-            window.location = "mac_start.html";
+            //window.location = "mac_start.html";
         });
     }).catch(function(error) {
         console.log("Error: " + error);
