@@ -409,21 +409,56 @@ function showStep1() {
                 backupForUndo(range, startCell, add_col, row_offset);
 
                 var checked_worksheets = getCheckedBoxes("column_checkbox");
+                var numberCalls = 0;
+                var totalErrorCount = 0;
                 for (var i = 0; i < checked_worksheets.length; i++) {
                     /*var unprotect = document.getElementById('unprotect').checked;
                     if (unprotect == true) {
                         changeProtection(checked_worksheets[i].id, function(result){console.log(result);})
                     }*/
+                    var callFunction = function (whatFunc, result) {
+                        numberCalls += 1;
+                        console.log(numberCalls);
+                        if (whatFunc == "checkFixedContent") {
+                            totalErrorCount += result;
+                            //console.log(result);
+                        } else {
+                            totalErrorCount += result;
+                            //console.log(result);
+                        }
+                        if (numberCalls == checked_worksheets.length * (fixedAddressRange.length + typeAddresses.length)) {
+                            if (document.getElementById('createBackup').checked == true) {
+                                var sheet_count = Office.context.document.settings.get('backup_sheet_count') + 1;
+                                Office.context.document.settings.set('backup_sheet_count', sheet_count);
+                                Office.context.document.settings.saveAsync();
+                                var newName = worksheet.name + "(" + sheet_count + ")";
+                                addBackupSheet(newName, startCell, add_col, row_offset, function() {
+                                    var txt = document.createElement("p");
+                                    txt.className = "ms-font-xs ms-embedded-dialog__content__text";
+                                    txt.innerHTML = "PrepJet found " + totalErrorCount + " errors in all compared sheets";
+                                    document.getElementById('resultText').appendChild(txt);
+                                    document.getElementById('resultDialog').style.visibility = 'visible';
+                                });
+
+                            } else {
+                                var txt = document.createElement("p");
+                                txt.className = "ms-font-xs ms-embedded-dialog__content__text";
+                                txt.innerHTML = "PrepJet found " + totalErrorCount + " errors in all compared sheets";
+                                document.getElementById('resultText').appendChild(txt);
+
+                                document.getElementById('resultDialog').style.visibility = 'visible';
+                            }
+                        }
+                    };
+
                     for (var j = 0; j < fixedAddressRange.length; j++) {
-                        checkFixedContent(checked_worksheets[i].id, fixedAddresses[j], fixedAddressRange[j].text, firstFixedCellLetter[j], firstFixedCellNumber[j], function(result){console.log(result);});
+                        checkFixedContent(checked_worksheets[i].id, fixedAddresses[j], fixedAddressRange[j].text, firstFixedCellLetter[j], firstFixedCellNumber[j], callFunction);
                     }
                     for (var j = 0; j < typeAddresses.length; j++) {
                         var dataType = transformToDataType(document.getElementById('fixedInputSelect' + (j + 1)).value);
                         var rowCount = typeAddressRange[j].text.length;
-                        console.log(rowCount);
                         var colCount = typeAddressRange[j].text[0].length;
-                        console.log(colCount);
-                        checkType(checked_worksheets[i].id, typeAddresses[j], rowCount, colCount, dataType, firstTypeCellLetter[j], firstTypeCellNumber[j], function(result){console.log(result);})
+                        checkType(checked_worksheets[i].id, typeAddresses[j], rowCount, colCount, dataType, firstTypeCellLetter[j], firstTypeCellNumber[j], callFunction)
                     }
                 }
 
@@ -469,7 +504,7 @@ function showStep1() {
 
                                 }
                             }
-                            callback(countErrors);
+                            callback("checkFixedContent", countErrors);
                         });
                     }).catch(function(error) {
                             console.log("Error: " + error);
@@ -530,7 +565,7 @@ function showStep1() {
                                     }
                                 }
                             }
-                            callback(countErrors);
+                            callback("typeCheck", countErrors);
                         });
                     }).catch(function(error) {
                             console.log("Error: " + error);
