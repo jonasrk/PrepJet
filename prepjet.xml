@@ -6,8 +6,8 @@
   <!-- BeginBasicSettings: Add-in metadata, used for all versions of Office unless override provided -->
 
   <!--IMPORTANT! Id must be unique for your add-in. If you clone this manifest ensure that you change this id to your own GUID ... Jonas: done -->
-  <Id>dface3bd-cfc2-423a-8131-598b3ed2beaa</Id>
-  <Version>1.0.0.0</Version>
+  <Id>26a45b5a-1b9e-4297-88f1-3eb6bc20c17c</Id>
+  <Version>1.0.0.1</Version>
   <ProviderName>Pyfair Analytics</ProviderName>
   <!--Jonas: What is this?-->
   <DefaultLocale>en-US</DefaultLocale>
@@ -20,11 +20,7 @@
   <!--BeginTaskpaneMode integration. Office 2013 and any client that doesn't understand commands will use this section.
     This section will also be used if there are no VersionOverrides -->
   <Hosts>
-    <Host Name="Document"/>
     <Host Name="Workbook"/>
-    <Host Name="Presentation"/>
-    <Host Name="Notebook"/>
-    <Host Name="Project"/>
   </Hosts>
   <DefaultSettings>
     <SourceLocation DefaultValue="https://localhost:8443/app/home/mac_start.html" />
