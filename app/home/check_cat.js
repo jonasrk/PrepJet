@@ -436,7 +436,7 @@ function redirectHome() {
 
                 var txt = document.createElement("p");
                 txt.className = "ms-font-xs ms-embedded-dialog__content__text";
-                txt.innerHTML = "PrepJet found " + count_categories + " categories of which " + count_wrong_cats + " are infrequent."
+                txt.innerHTML = "PrepJet found " + count_categories + ". " + count_wrong_cats + " of this categories occur infrequent."
                 document.getElementById('resultText').appendChild(txt);
 
                 document.getElementById('resultDialog').style.visibility = 'visible';
