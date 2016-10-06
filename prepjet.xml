@@ -7,7 +7,7 @@
 
   <!--IMPORTANT! Id must be unique for your add-in. If you clone this manifest ensure that you change this id to your own GUID ... Jonas: done -->
   <Id>dface3bd-cfc2-423a-8131-598b3ed2beaa</Id>
-  <Version>1.0.0.1</Version>
+  <Version>1.0.0.2</Version>
   <ProviderName>Pyfair Analytics</ProviderName>
   <!--Jonas: What is this?-->
   <DefaultLocale>en-US</DefaultLocale>
