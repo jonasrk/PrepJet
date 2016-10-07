@@ -258,6 +258,9 @@ h1 {
 #resultDialog {
     visibility: hidden; }
 
+#resultDialogChange {
+    visibility: hidden; }
+
 #proHeader {
     color: #EA7F04;}
 

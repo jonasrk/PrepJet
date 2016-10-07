@@ -67,6 +67,15 @@ function redirectHome() {
                 document.getElementById('step2').style.display = 'block';
             }
 
+            document.getElementById("resultClose2").onclick = function () {
+                document.getElementById('resultDialogChange').style.visibility = 'hidden';
+                window.location = "check_cat.html";
+            }
+            document.getElementById("resultOk2").onclick = function () {
+                document.getElementById('resultDialog').style.visibility = 'hidden';
+                window.location = "check_cat.html";
+            }
+
         });
     };
 
@@ -275,6 +284,7 @@ function redirectHome() {
                     }
                 }
 
+                var countCorrection = 0;
                 for (var i = count_wrong_cats; i > 0; i--) {
                     var tmp_name = "newCat" + i;
                     var tmp_label = "newLabel" + i;
@@ -287,6 +297,7 @@ function redirectHome() {
                             if (range.text[k][header] == oldCatName) {
                                 var insertAddress = getCharFromNumber(header + add_col) + (k + row_offset);
                                 addContentToWorksheet(worksheet, insertAddress, newCatName);
+                                countCorrection += 1;
                             }
                         }
                     }
@@ -298,10 +309,20 @@ function redirectHome() {
                     Office.context.document.settings.saveAsync();
                     var newName = worksheet.name + "(" + sheet_count + ")";
                     addBackupSheet(newName, startCell, add_col, row_offset, function() {
-                        window.location = "check_cat.html";
+                        var txt = document.createElement("p");
+                        txt.className = "ms-font-xs ms-embedded-dialog__content__text";
+                        txt.innerHTML = "PrepJet corrected " + countCorrection + " data entries.";
+                        document.getElementById('resultText2').appendChild(txt);
+                        document.getElementById('resultDialogChange').style.visibility = 'visible';
                     });
+
                 } else {
-                    window.location = "check_cat.html";
+                    var txt = document.createElement("p");
+                    txt.className = "ms-font-xs ms-embedded-dialog__content__text";
+                    txt.innerHTML = "PrepJet corrected " + countCorrection + " data entries.";
+                    document.getElementById('resultText2').appendChild(txt);
+
+                    document.getElementById('resultDialogChange').style.visibility = 'visible';
                 }
 
 
@@ -436,7 +457,7 @@ function redirectHome() {
 
                 var txt = document.createElement("p");
                 txt.className = "ms-font-xs ms-embedded-dialog__content__text";
-                txt.innerHTML = "PrepJet found " + count_categories + ". " + count_wrong_cats + " of this categories occur infrequently."
+                txt.innerHTML = "PrepJet found " + count_categories + " categories. " + count_wrong_cats + " of this categories occur infrequently."
                 document.getElementById('resultText').appendChild(txt);
 
                 document.getElementById('resultDialog').style.visibility = 'visible';

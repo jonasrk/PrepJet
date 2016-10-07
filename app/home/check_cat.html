@@ -87,6 +87,7 @@
 <div id="content-main">
     <div class="padding">
         <div id="step1">
+
             <div id="helpCallout" class="ms-Callout ms-Callout--close ms-Callout--arrowLeft">
                 <div class="ms-Callout-main">
                     <div class="ms-Callout-header">
@@ -105,6 +106,7 @@
                     </div>
                 </div>
             </div>
+
             <div id="explanation">
                 <label class="ms-Label">Select the column which to check for consistent categories</label>
             </div>
@@ -120,6 +122,7 @@
                 <i class="ms-Dropdown-caretDown ms-Icon ms-Icon--caretDown"></i>
                 <select id="column_options" class="ms-Dropdown-select"></select>
             </div>
+
             <div id="resultDialog" class="ms-embedded-dialog__options" >
                 <div class="ms-Dialog ms-Dialog--close">
                     <div class="ms-Overlay js-DialogAction--close"></div>
@@ -143,6 +146,7 @@
                     </div>
                 </div>
             </div>
+
             <table>
                 <tr>
                     <td>
@@ -178,6 +182,31 @@
             <!--div id="explanation">
                 <label class="ms-Label">Type the correct name in the text field next to the category name to change it.</label>
             </div-->
+
+            <div id="resultDialogChange" class="ms-embedded-dialog__options" >
+                <div class="ms-Dialog ms-Dialog--close">
+                    <div class="ms-Overlay js-DialogAction--close"></div>
+                    <div class="ms-Dialog-main">
+                        <button class="ms-Dialog-button ms-Dialog-button--close js-DialogAction--close" id="resultClose2">
+                            <i class="ms-Icon ms-Icon--x"></i>
+                        </button>
+                        <div class="ms-Dialog-header">
+                            <p class="ms-Dialog-title">Categories changed successful</p>
+                        </div>
+                        <div class="ms-Dialog-inner">
+                            <div id="resultText2" class="ms-Dialog-content">
+                                <!--p class="ms-font-xs ms-embedded-dialog__content__text"></p-->
+                            </div>
+                            <div class="ms-embedded-dialog__actioncenter">
+                                <button  class="ms-Dialog-action ms-Button_grey" id="resultOk2">
+                                    <span class="ms-Button-label">Ok</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <table id="checkboxes_categories"></table>
             <table class="tableupperborder">
                 <tr>
