@@ -34,7 +34,13 @@ function undo() { // TODO only does text, not formulas and formatting
         range.load('text');
         return ctx.sync().then(function() {
             // console.log(range.text);
-            //window.location = "mac_start.html";
+            Excel.run(function (ctx2) {
+                return ctx2.sync().then(function() {
+                    console.log('foo');
+                    window.location = "mac_start.html";
+                })
+            })
+
         });
     }).catch(function(error) {
         console.log("Error: " + error);
