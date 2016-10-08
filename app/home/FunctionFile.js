@@ -22,7 +22,6 @@ function undo() { // TODO only does text, not formulas and formatting
         var row_offset  = Office.context.document.settings.get('rowOffset');
         var end_address = getCharFromNumber(values[0].length - 1 + add_col) + (values.length + row_offset - 1).toString();
         var rangeAddress = startCell + ":" + end_address;
-        //console.log(rangeAddress)
         var worksheet = ctx.workbook.worksheets.getActiveWorksheet();
         var range = worksheet.getRange(rangeAddress);
 
@@ -33,10 +32,8 @@ function undo() { // TODO only does text, not formulas and formatting
         range.values = values;
         range.load('text');
         return ctx.sync().then(function() {
-            // console.log(range.text);
             Excel.run(function (ctx2) {
                 return ctx2.sync().then(function() {
-                    console.log('foo');
                     window.location = "mac_start.html";
                 })
             })
