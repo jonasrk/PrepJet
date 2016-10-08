@@ -83,12 +83,14 @@ h1 {
 
 .ms-ChoiceField .ms-Label {
     font-size: 12px;
-    padding: 0 0 0 26px; }
+    padding: 0 0 0 26px;
+    z-index: 200; }
 
 .ms-ChoiceField {
     color: #fff;
     font-family: 'Segoe UI Regular WestEuropean','Segoe UI','Segoe WP',Tahoma,Arial,sans-serif;
-    padding-bottom: 10px; }
+    padding-bottom: 10px;
+    z-index: 200; }
 
 .ms-TextField {
     color: #333;
