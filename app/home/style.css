@@ -18,7 +18,9 @@ html {
 
 .padding {
     padding: 10px;
-    overflow: visible; }
+    overflow: visible;
+    z-index: 200;
+    position: relative; }
 
 h1 {
     font-family: "Segoe WP Light", "Segoe UI", "Arial", sans-serif;
