@@ -18,9 +18,7 @@ html {
 
 .padding {
     padding: 10px;
-    overflow: visible;
-    z-index: 200;
-    position: relative; }
+    overflow: visible; }
 
 h1 {
     font-family: "Segoe WP Light", "Segoe UI", "Arial", sans-serif;
@@ -30,7 +28,8 @@ h1 {
 
 #content-main {
     background: #FFFFFF;
-    top: 60px; }
+    top: 60px;
+    z-index: 200; }
 
 .ms-Button {
     color: #fff;
