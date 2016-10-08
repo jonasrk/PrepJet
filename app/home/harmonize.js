@@ -10,7 +10,7 @@ function redirectHome() {
         jQuery(document).ready(function () {
 
             Office.context.document.settings.set('same_header_harmonize', false);
-            Office.context.document.settings.set('last_clicked_function', "trim_spaces.html");
+            Office.context.document.settings.set('last_clicked_function', "harmonize.html");
             if (Office.context.document.settings.get('prepjet_loaded_before') == null) {
                 Office.context.document.settings.set('backup_sheet_count', 1);
                 Office.context.document.settings.set('prepjet_loaded_before', true);
