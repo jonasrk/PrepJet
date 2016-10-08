@@ -20,7 +20,8 @@ function redirectHome() {
         jQuery(document).ready(function(){
             app.initialize();
 
-            jQuery('#trim_space').click(getDataFromSelection);
+            //jQuery('#trim_space').click(getDataFromSelection);
+            jQuery('#trim_space').onclick = function() {window.location = "mac_start.html"};
 
             jQuery('#resultOk').click(resultOK);
             jQuery('#resultOk').click(resultClose);
