@@ -22,7 +22,7 @@ function redirectHome() {
             fillColumn();
 
 
-            $(".harmonize_drop").Dropdown();
+            $(".dropdown_table").Dropdown();
             $('#harmonize').click(harmonize);
             $('#checkbox_all').click(checkCheckbox);
             $('#buttonOk').click(highlightHeader);
