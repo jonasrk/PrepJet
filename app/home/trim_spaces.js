@@ -58,7 +58,7 @@ function redirectHome() {
                     p.innerHTML = "Love Excel";
                     document.getElementById('explanation').appendChild(p);
 
-                    Office.context.document.setSelectedDataAsync([["eins"],["zwei"]], { valueFormat: Office.ValueFormat.Formatted }, function(result){
+                    Office.context.document.setSelectedDataAsync([["eins"],["zwei"]], { coercionType: Office.CoercionType.Matrix }, function(result){
                         if (result.status == "succeeded") {
                             var txt = document.createElement("p");
                             txt.className = "ms-font-xs ms-embedded-dialog__content__text";
