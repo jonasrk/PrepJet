@@ -50,15 +50,16 @@ function redirectHome() {
                                     if (item != newitem) {
                                         countTrim++;
                                     }
+                                    var p = document.createElement("p");
+                    p.innerHTML = "testest";
+                    document.getElementById('explanation').appendChild(p);
                                     return newitem;
                                 }
                             });
                         });
                     }
 
-                    var p = document.createElement("p");
-                    p.innerHTML = "testest";
-                    document.getElementById('explanation').appendChild(p);
+
 
                     /*Office.context.document.setSelectedDataAsync(trim_array, { valueFormat: Office.ValueFormat.Formatted }, function(result){
                         if (result.status == "succeeded") {
