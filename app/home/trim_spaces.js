@@ -59,7 +59,7 @@ function redirectHome() {
                     document.getElementById('explanation').appendChild(p);
                     console.log(trim_array);
 
-                    Office.context.document.setSelectedDataAsync(trim_array, {coercionType: Office.CoercionType.Matrix}, function(result){
+                    Office.context.document.setSelectedDataAsync([["eins"],["zwei"]], {coercionType: Office.CoercionType.Matrix}, function(result){
                         if (result.status == "succeeded") {
                             var txt = document.createElement("p");
                             txt.className = "ms-font-xs ms-embedded-dialog__content__text";
