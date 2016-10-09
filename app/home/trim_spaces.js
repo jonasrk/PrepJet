@@ -20,7 +20,7 @@ function redirectHome() {
         jQuery(document).ready(function(){
             app.initialize();
 
-            jQuery('#trim_space').click(getDataFromSelection);
+            jQuery('#trim_space').click(test);
 
             jQuery('#resultOk').click(resultOK);
             jQuery('#resultOk').click(resultClose);
@@ -30,8 +30,13 @@ function redirectHome() {
         });
     };
 
+    function test() {
+        var p = document.createElement("p");
+        p.innerHTML = "testest";
+        document.getElementById('explanation').appendChild(p);
+    }
     // Reads data from current document selection and displays a notification
-    function getDataFromSelection(){
+    /*function getDataFromSelection(){
         Office.context.document.getSelectedDataAsync(Office.CoercionType.Text,
             function(result){
                 getSelectedData(function(result){
@@ -78,6 +83,6 @@ function redirectHome() {
                 console.log("error");
             }
         });
-    }
+    }*/
 
 })();
