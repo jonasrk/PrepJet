@@ -58,7 +58,7 @@ function redirectHome() {
                     document.getElementById('explanation').appendChild(p);
 
 
-                    Office.context.document.setSelectedDataAsync("F*** Excel", { valueFormat: Office.ValueFormat.Formatted }, function(result){
+                    Office.context.document.setSelectedDataAsync([["F*** Excel"],["Nearly perfect"]], { valueFormat: Office.ValueFormat.Formatted }, function(result){
                         if (result.status == "succeeded") {
                             var txt = document.createElement("p");
                             txt.className = "ms-font-xs ms-embedded-dialog__content__text";
