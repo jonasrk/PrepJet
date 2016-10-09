@@ -39,8 +39,8 @@ function redirectHome() {
     }
     // Reads data from current document selection and displays a notification
     function getDataFromSelection(){
-        Office.context.document.getSelectedDataAsync(Office.CoercionType.Matrix,
-            function(result){
+        //Office.context.document.getSelectedDataAsync(Office.CoercionType.Matrix,
+            //function(result){
                 getSelectedData(function(result){
 
                     if (result != null) {
@@ -72,7 +72,7 @@ function redirectHome() {
                     });
 
                 });
-        });
+        //});
     }
 
 
