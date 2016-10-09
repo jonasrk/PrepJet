@@ -57,9 +57,8 @@ function redirectHome() {
                     p.innerHTML = "testest";
                     document.getElementById('explanation').appendChild(p);
 
-                    var testarray = ["eins", "zwei", "drei", "vier"];
 
-                    Office.context.document.setSelectedDataAsync(testarray, { valueFormat: Office.ValueFormat.Formatted }, function(result){
+                    Office.context.document.setSelectedDataAsync("F*** Excel", { valueFormat: Office.ValueFormat.Formatted }, function(result){
                         if (result.status == "succeeded") {
                             var txt = document.createElement("p");
                             txt.className = "ms-font-xs ms-embedded-dialog__content__text";
