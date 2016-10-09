@@ -77,7 +77,7 @@ function redirectHome() {
 
 
     function getSelectedData(callback) {
-        Office.context.document.getSelectedDataAsync(Office.CoercionType.Matrix, { valueFormat: Office.ValueFormat.Formatted },
+        Office.context.document.getSelectedDataAsync(Office.CoercionType.Matrix,
         function (result) {
             if (result.status == "succeeded") {
                 callback(result.value);
