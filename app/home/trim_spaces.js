@@ -20,7 +20,8 @@ function redirectHome() {
         jQuery(document).ready(function(){
             app.initialize();
 
-            jQuery('#trim_space').click(getDataFromSelection);
+            //jQuery('#trim_space').click(getDataFromSelection);
+            jQuery('#trim_space').click(testWriting);
 
             jQuery('#resultOk').click(resultOK);
             jQuery('#resultOk').click(resultClose);
@@ -30,9 +31,13 @@ function redirectHome() {
         });
     };
 
-
+    function testWriting() {
+        Office.context.document.setSelectedDataAsync("Halloween", function(result) {
+            console.log(result);
+        });
+    }
     // Reads data from current document selection and displays a notification
-    function getDataFromSelection(){
+    /*function getDataFromSelection(){
         Office.context.document.getSelectedDataAsync(Office.CoercionType.Matrix,
             function(result){
                 getSelectedData(function(result){
@@ -54,11 +59,7 @@ function redirectHome() {
                         console.log(trim_array);
                     }
 
-                    var p = document.createElement("p");
-                    p.innerHTML = "Love Excel";
-                    document.getElementById('explanation').appendChild(p);
-
-                    Office.context.document.setSelectedDataAsync([["eins"],["zwei"]], { coercionType: Office.CoercionType.Matrix }, function(result){
+                    Office.context.document.setSelectedDataAsync(trim_array, { valueFormat: Office.ValueFormat.Formatted }, function(result){
                         if (result.status == "succeeded") {
                             var txt = document.createElement("p");
                             txt.className = "ms-font-xs ms-embedded-dialog__content__text";
@@ -85,6 +86,6 @@ function redirectHome() {
                 console.log("error");
             }
         });
-    }
+    }*/
 
 })();
