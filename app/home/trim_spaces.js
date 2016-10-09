@@ -34,7 +34,7 @@ function redirectHome() {
     function testWriting() {
         var test = [["eins"], ["zwei"]];
         var test2 = ["eins", "zwei"];
-        Office.context.document.setSelectedDataAsync("Halloween", { valueFormat: Office.ValueFormat.Formatted }, function(result) {
+        Office.context.document.setSelectedDataAsync(test, { coercionType: Office.CoercionType.Matrix }, function(result) {
             console.log(result);
         });
     }
