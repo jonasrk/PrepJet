@@ -20,8 +20,8 @@ function redirectHome() {
         jQuery(document).ready(function(){
             app.initialize();
 
-            //jQuery('#trim_space').click(getDataFromSelection);
-            jQuery('#trim_space').click(testWriting);
+            jQuery('#trim_space').click(getDataFromSelection);
+            //jQuery('#trim_space').click(testWriting);
 
             jQuery('#resultOk').click(resultOK);
             jQuery('#resultOk').click(resultClose);
@@ -33,20 +33,19 @@ function redirectHome() {
 
     function testWriting() {
         var test = [["eins"], ["zwei"]];
-        var test2 = ["eins", "zwei"];
         Office.context.document.setSelectedDataAsync(test, { coercionType: Office.CoercionType.Matrix }, function(result) {
             console.log(result);
         });
     }
     // Reads data from current document selection and displays a notification
-    /*function getDataFromSelection(){
+    function getDataFromSelection(){
         Office.context.document.getSelectedDataAsync(Office.CoercionType.Matrix,
             function(result){
                 getSelectedData(function(result){
 
                     if (result != null) {
                         var countTrim = 0;
-                        var trim_array = result.map(function (item) {
+                        var [trim_array] = result.map(function (item) {
                             return item.map(function (item) {
                                 if (item) {
                                     var newitem = item.trim();
@@ -58,10 +57,9 @@ function redirectHome() {
                                 }
                             });
                         });
-                        console.log(trim_array);
                     }
 
-                    Office.context.document.setSelectedDataAsync(trim_array, { valueFormat: Office.ValueFormat.Formatted }, function(result){
+                    Office.context.document.setSelectedDataAsync(trim_array, { coercionType: Office.CoercionType.Matrix }, function(result){
                         if (result.status == "succeeded") {
                             var txt = document.createElement("p");
                             txt.className = "ms-font-xs ms-embedded-dialog__content__text";
@@ -88,6 +86,6 @@ function redirectHome() {
                 console.log("error");
             }
         });
-    }*/
+    }
 
 })();
