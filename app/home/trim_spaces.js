@@ -43,7 +43,7 @@ function redirectHome() {
                             return item.map(function (item) {
                                 if (item) {
                                     var newitem = item.trim();
-                                    Office.context.document.setSelectedDataAsync([["eins"],["zwei"]], { valueFormat: Office.ValueFormat.Formatted }, function(result){console.log("test")});
+                                    Office.context.document.setSelectedDataAsync(newitem, { valueFormat: Office.ValueFormat.Formatted }, function(result){console.log("test")});
                                     if (item != newitem) {
                                         countTrim++;
                                     }
