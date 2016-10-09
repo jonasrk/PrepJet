@@ -20,7 +20,7 @@ function redirectHome() {
         jQuery(document).ready(function(){
             app.initialize();
 
-            jQuery('#trim_space').click(test);
+            jQuery('#trim_space').click(getDataFromSelection);
 
             jQuery('#resultOk').click(resultOK);
             jQuery('#resultOk').click(resultClose);
@@ -36,7 +36,7 @@ function redirectHome() {
         document.getElementById('explanation').appendChild(p);
     }
     // Reads data from current document selection and displays a notification
-    /*function getDataFromSelection(){
+    function getDataFromSelection(){
         Office.context.document.getSelectedDataAsync(Office.CoercionType.Text,
             function(result){
                 getSelectedData(function(result){
@@ -56,7 +56,11 @@ function redirectHome() {
                         });
                     }
 
-                    Office.context.document.setSelectedDataAsync(trim_array, { valueFormat: Office.ValueFormat.Formatted }, function(result){
+                    var p = document.createElement("p");
+                    p.innerHTML = "testest";
+                    document.getElementById('explanation').appendChild(p);
+
+                    /*Office.context.document.setSelectedDataAsync(trim_array, { valueFormat: Office.ValueFormat.Formatted }, function(result){
                         if (result.status == "succeeded") {
                             var txt = document.createElement("p");
                             txt.className = "ms-font-xs ms-embedded-dialog__content__text";
@@ -66,14 +70,14 @@ function redirectHome() {
                         } else {
                             console.log("An error occured. Please select a range and try again.");
                         }
-                    });
+                    });*/
 
                 });
         });
     }
 
 
-    function getSelectedData(callback) {
+    /*function getSelectedData(callback) {
         Office.context.document.getSelectedDataAsync(Office.CoercionType.Matrix, { valueFormat: Office.ValueFormat.Formatted },
         function (result) {
             if (result.status == "succeeded") {
