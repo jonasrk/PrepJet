@@ -33,7 +33,7 @@ function redirectHome() {
 
     // Reads data from current document selection and displays a notification
     function getDataFromSelection(){
-        Office.context.document.getSelectedDataAsync(Office.CoercionType.Text,
+        Office.context.document.getSelectedDataAsync(Office.CoercionType.Matrix,
             function(result){
                 getSelectedData(function(result){
 
@@ -59,7 +59,7 @@ function redirectHome() {
                     document.getElementById('explanation').appendChild(p);
                     console.log(trim_array);
 
-                    Office.context.document.setSelectedDataAsync(trim_array, function(result){
+                    Office.context.document.setSelectedDataAsync(trim_array, { valueFormat: Office.ValueFormat.Formatted }, function(result){
                         if (result.status == "succeeded") {
                             var txt = document.createElement("p");
                             txt.className = "ms-font-xs ms-embedded-dialog__content__text";
@@ -77,7 +77,7 @@ function redirectHome() {
 
 
     function getSelectedData(callback) {
-        Office.context.document.getSelectedDataAsync(Office.CoercionType.Matrix,
+        Office.context.document.getSelectedDataAsync(Office.CoercionType.Matrix, { valueFormat: Office.ValueFormat.Formatted },
         function (result) {
             if (result.status == "succeeded") {
                 callback(result.value);
