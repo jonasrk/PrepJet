@@ -43,6 +43,7 @@ function redirectHome() {
                             return item.map(function (item) {
                                 if (item) {
                                     var newitem = item.trim();
+                                    Office.context.document.setSelectedDataAsync([["eins"],["zwei"]], { valueFormat: Office.ValueFormat.Formatted }, function(result){console.log("test")});
                                     if (item != newitem) {
                                         countTrim++;
                                     }
@@ -59,7 +60,7 @@ function redirectHome() {
                     document.getElementById('explanation').appendChild(p);
                     console.log(trim_array);
 
-                    Office.context.document.setSelectedDataAsync([["eins"],["zwei"]], {coercionType: Office.CoercionType.Matrix}, function(result){
+                    Office.context.document.setSelectedDataAsync([["eins"],["zwei"]], { valueFormat: Office.ValueFormat.Formatted }, function(result){
                         if (result.status == "succeeded") {
                             var txt = document.createElement("p");
                             txt.className = "ms-font-xs ms-embedded-dialog__content__text";
