@@ -77,7 +77,7 @@ function redirectHome() {
     }
 
 
-    /*function getSelectedData(callback) {
+    function getSelectedData(callback) {
         Office.context.document.getSelectedDataAsync(Office.CoercionType.Matrix, { valueFormat: Office.ValueFormat.Formatted },
         function (result) {
             if (result.status == "succeeded") {
@@ -87,6 +87,6 @@ function redirectHome() {
                 console.log("error");
             }
         });
-    }*/
+    }
 
 })();
