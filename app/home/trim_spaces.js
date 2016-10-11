@@ -34,13 +34,14 @@ function redirectHome() {
     function testWriting() {
         var test = [["eins"], ["zwei"]];
         Office.context.document.setSelectedDataAsync(test, { coercionType: Office.CoercionType.Matrix }, function(result) {
+            console.log(test);
             console.log(result);
         });
     }
     // Reads data from current document selection and displays a notification
     function getDataFromSelection(){
-        Office.context.document.getSelectedDataAsync(Office.CoercionType.Matrix,
-            function(result){
+        //Office.context.document.getSelectedDataAsync(Office.CoercionType.Matrix,
+            //function(result){
                 getSelectedData(function(result){
 
                     if (result != null) {
@@ -48,7 +49,7 @@ function redirectHome() {
                         var trim_array = result.map(function (item) {
                             return item.map(function (item) {
                                 if (item) {
-                                    var newitem = [item.trim()];
+                                    var newitem = item.trim();
                                     if (item != newitem) {
                                         countTrim++;
                                     }
@@ -61,18 +62,20 @@ function redirectHome() {
 
                     Office.context.document.setSelectedDataAsync(trim_array, { coercionType: Office.CoercionType.Matrix }, function(result){
                         if (result.status == "succeeded") {
+                            console.log(trim_array);
                             var txt = document.createElement("p");
                             txt.className = "ms-font-xs ms-embedded-dialog__content__text";
                             txt.innerHTML = "PrepJet trimed " + countTrim + " spaces in the selected range."
                             document.getElementById('resultText').appendChild(txt);
                             document.getElementById('resultDialog').style.visibility = 'visible';
                         } else {
+                            console.log(trim_array);
                             console.log("An error occured. Please select a range and try again.");
                         }
                     });
 
                 });
-        });
+        //});
     }
 
 
