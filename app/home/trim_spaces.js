@@ -59,7 +59,7 @@ function redirectHome() {
                         });
                     }
 
-                    Office.context.document.setSelectedDataAsync(trim_array, { valueFormat: Office.ValueFormat.Formatted }, function(result){
+                    Office.context.document.setSelectedDataAsync(trim_array, { coercionType: Office.CoercionType.Matrix }, function(result){
                         if (result.status == "succeeded") {
                             var txt = document.createElement("p");
                             txt.className = "ms-font-xs ms-embedded-dialog__content__text";
