@@ -45,7 +45,7 @@ function redirectHome() {
 
                     if (result != null) {
                         var countTrim = 0;
-                        var [trim_array] = result.map(function (item) {
+                        var trim_array = result.map(function (item) {
                             return item.map(function (item) {
                                 if (item) {
                                     var newitem = item.trim();
