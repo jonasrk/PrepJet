@@ -113,6 +113,16 @@
 
 <div id="content-main">
     <div class="padding">
+        <div id="harm_drop" class="ms-Dropdown dropdown_table" tabindex="1">
+            <label class="ms-Label">Select type of change</label>
+            <i class="ms-Dropdown-caretDown ms-Icon ms-Icon--caretDown"></i>
+            <select id="harmonize_options" class="ms-Dropdown-select">
+                <option value="allupper">ALL LETTERS UPPER CASE</option>
+                <option value="alllower">all letters lower case</option>
+                <option value="oneupper">First letter of first word upper case</option>
+                <option value="firstupper">First Letter Of Each Word Upper Case</option>
+            </select>
+        </div>
         <div>
             <label class="ms-Label">Select the column(s) in which to change the cases</label>
         </div>
@@ -132,17 +142,6 @@
         <!--container for checkboxes-->
         <div id="checkboxes_columns" class="ms-ChoiceField">
         </div>
-
-        <div id="harm_drop" class="ms-Dropdown dropdown_table" tabindex="1">
-                <label class="ms-Label">Select type of change</label>
-                <i class="ms-Dropdown-caretDown ms-Icon ms-Icon--caretDown"></i>
-                <select id="harmonize_options" class="ms-Dropdown-select">
-                    <option value="allupper">ALL LETTERS UPPER CASE</option>
-                    <option value="alllower">all letters lower case</option>
-                    <option value="oneupper">First letter of first word upper case</option>
-                    <option value="firstupper">First Letter Of Each Word Upper Case</option>
-                </select>
-            </div>
         <div class="ms-ChoiceField">
             <input id="createBackup" class="ms-ChoiceField-input" type="checkbox">
             <label for="createBackup" class="ms-ChoiceField-field">
