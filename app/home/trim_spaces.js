@@ -60,16 +60,14 @@ function redirectHome() {
                         });
                     }
 
-                    Office.context.document.setSelectedDataAsync([["eins"], ["zwei"]], { coercionType: Office.CoercionType.Matrix }, function(result){
+                    Office.context.document.setSelectedDataAsync(trim_array, { coercionType: Office.CoercionType.Matrix, valueFormat: Office.ValueFormat.Formatted }, function(result){
                         if (result.status == "succeeded") {
-                            console.log(trim_array);
                             var txt = document.createElement("p");
                             txt.className = "ms-font-xs ms-embedded-dialog__content__text";
                             txt.innerHTML = "PrepJet trimed " + countTrim + " spaces in the selected range."
                             document.getElementById('resultText').appendChild(txt);
                             document.getElementById('resultDialog').style.visibility = 'visible';
                         } else {
-                            console.log(trim_array);
                             console.log("An error occured. Please select a range and try again.");
                         }
                     });
