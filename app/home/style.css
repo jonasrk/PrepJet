@@ -323,5 +323,11 @@ h1 {
     border: 1px solid #FFFFFF;
     height: 25px;
     min-width: 20px;
-    padding: 2px 4px 2px; }
+    padding: 0px 1px 0px; }
+
+#columnsToAdd {
+    width: 100%; }
+
+#arrows {
+    width: 30%; }
 

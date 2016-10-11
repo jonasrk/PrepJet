@@ -21,12 +21,16 @@ function redirectHome() {
             app.initialize();
             fillColumn();
 
+            $('#step2').hide();
+
 
             $(".dropdown_table").Dropdown();
             $('#harmonize').click(harmonize);
             $('#checkbox_all').click(checkCheckbox);
             $('#buttonOk').click(highlightHeader);
             $('#homeButton').click(redirectHome);
+            $('#continue1').click(showStep2);
+            $('#back1').click(backTo1);
 
             //Show and hide error message if column have same header name
             document.getElementById("buttonClose").onclick = function () {
@@ -112,6 +116,15 @@ function redirectHome() {
         });
     };
 
+    function showStep2(){
+        $('#step1').hide();
+        $('#step2').show();
+    }
+
+    function backTo1() {
+        $('#step2').hide();
+        $('#step1').show();
+    }
 
     function highlightHeader() {
 

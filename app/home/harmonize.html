@@ -113,43 +113,92 @@
 
 <div id="content-main">
     <div class="padding">
-        <div id="harm_drop" class="ms-Dropdown dropdown_table" tabindex="1">
-            <label class="ms-Label">Select type of change</label>
-            <i class="ms-Dropdown-caretDown ms-Icon ms-Icon--caretDown"></i>
-            <select id="harmonize_options" class="ms-Dropdown-select">
-                <option value="allupper">ALL LETTERS UPPER CASE</option>
-                <option value="alllower">all letters lower case</option>
-                <option value="oneupper">First letter of first word upper case</option>
-                <option value="firstupper">First Letter Of Each Word Upper Case</option>
-            </select>
+        <div id="step1">
+            <div>
+                <label class="ms-Label">Select the column(s) in which to change the cases</label>
+            </div>
+            <table>
+                <tr>
+                    <td id="allColumns">
+                        <div id="checkbox_select_all" class="ms-ChoiceField">
+                            <input id="checkbox_all" class="ms-ChoiceField-input" type="checkbox">
+                            <label id="checkbox_label" for="checkbox_all" class="ms-ChoiceField-field">
+                                <span class="ms-Label">All columns</span>
+                            </label>
+                        </div>
+                    </td>
+                    <td></td>
+                </tr>
+            </table>
+            <!--container for checkboxes-->
+            <div id="checkboxes_columns" class="ms-ChoiceField">
+            </div>
+            <br>
+            <table id="columnsToAdd">
+                <tr>
+                    <td id="arrows">
+                        <button id="continue1" class="ms-Button_white">
+                            <img class="page1" src="../../images/Arrow_right.png" />
+                        </button>
+                    </td>
+                    <td>
+                        <div id="pageMarker">
+                            <p id="pageMarkers">
+                    <span id="page0Marker" class="fontColor_orange">
+                        <i class="ms-Icon ms-Icon--circleFilled" aria-hidden="true"></i>
+                    </span>
+                    <span id="page1Marker" class="fontColor_grey">
+                        <i class="ms-Icon ms-Icon--circleFilled" aria-hidden="true"></i>
+                    </span>
+                            </p>
+                        </div>
+                    </td>
+                </tr>
+            </table>
         </div>
-        <div>
-            <label class="ms-Label">Select the column(s) in which to change the cases</label>
+        <div id="step2">
+            <div id="harm_drop" class="ms-Dropdown dropdown_table" tabindex="1">
+                <label class="ms-Label">Select type of change</label>
+                <i class="ms-Dropdown-caretDown ms-Icon ms-Icon--caretDown"></i>
+                <select id="harmonize_options" class="ms-Dropdown-select">
+                    <option value="allupper">ALL LETTERS UPPER CASE</option>
+                    <option value="alllower">all letters lower case</option>
+                    <option value="oneupper">First letter of first word upper case</option>
+                    <option value="firstupper">First Letter Of Each Word Upper Case</option>
+                </select>
+            </div>
+            <div class="ms-ChoiceField">
+                <input id="createBackup" class="ms-ChoiceField-input" type="checkbox">
+                <label for="createBackup" class="ms-ChoiceField-field">
+                    <span class="ms-Label">Create a backup sheet</span>
+                </label>
+            </div>
+            <!--split button-->
+            <button class="ms-Button" id="harmonize">Change Case</button>
+            <br>
+            <table id="columnsToAdd">
+                <tr>
+                    <td id="arrows">
+                        <button id="back1" class="ms-Button_white">
+                            <img class="page1" src="../../images/Arrow_left.png" />
+                        </button>
+                    </td>
+                    <td>
+                        <div id="pageMarker">
+                            <p id="pageMarkers">
+                    <span id="page0Marker" class="fontColor_grey">
+                        <i class="ms-Icon ms-Icon--circleFilled" aria-hidden="true"></i>
+                    </span>
+                    <span id="page1Marker" class="fontColor_orange">
+                        <i class="ms-Icon ms-Icon--circleFilled" aria-hidden="true"></i>
+                    </span>
+                            </p>
+                        </div>
+                    </td>
+                </tr>
+            </table>
         </div>
-        <table>
-            <tr>
-                <td id="allColumns">
-                    <div id="checkbox_select_all" class="ms-ChoiceField">
-                        <input id="checkbox_all" class="ms-ChoiceField-input" type="checkbox">
-                        <label id="checkbox_label" for="checkbox_all" class="ms-ChoiceField-field">
-                            <span class="ms-Label">All columns</span>
-                        </label>
-                    </div>
-                </td>
-                <td></td>
-            </tr>
-        </table>
-        <!--container for checkboxes-->
-        <div id="checkboxes_columns" class="ms-ChoiceField">
-        </div>
-        <div class="ms-ChoiceField">
-            <input id="createBackup" class="ms-ChoiceField-input" type="checkbox">
-            <label for="createBackup" class="ms-ChoiceField-field">
-                <span class="ms-Label">Create a backup sheet</span>
-            </label>
-        </div>
-        <!--split button-->
-        <button class="ms-Button" id="harmonize">Change Case</button>
+
     </div>
 </div>
 <div class="placeholder"></div>
