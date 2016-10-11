@@ -18,7 +18,8 @@ html {
 
 .padding {
     padding: 10px;
-    overflow: visible; }
+    overflow: visible;
+    z-index: 2;}
 
 h1 {
     font-family: "Segoe WP Light", "Segoe UI", "Arial", sans-serif;
@@ -28,7 +29,8 @@ h1 {
 
 #content-main {
     background: #FFFFFF;
-    top: 60px; }
+    top: 60px;
+    z-index: 1;}
 
 .ms-Button {
     color: #fff;
@@ -88,7 +90,7 @@ h1 {
     color: #fff;
     font-family: 'Segoe UI Regular WestEuropean','Segoe UI','Segoe WP',Tahoma,Arial,sans-serif;
     padding-bottom: 10px;
-    z-index = 50; }
+    z-index: 5; }
 
 .ms-TextField {
     color: #333;
@@ -132,7 +134,7 @@ h1 {
     top: 60px;
     overflow-y: scroll;
     overflow-x: hidden;
-    z-index: 100; }
+    z-index: 105; }
 
 .placeholder {
     height: 60px;
