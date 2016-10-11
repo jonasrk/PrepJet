@@ -60,7 +60,7 @@ function redirectHome() {
                         });
                     }
 
-                    Office.context.document.setSelectedDataAsync(trim_array, { coercionType: Office.CoercionType.Matrix }, function(result){
+                    Office.context.document.setSelectedDataAsync([["eins"], ["zwei"]], { coercionType: Office.CoercionType.Matrix }, function(result){
                         if (result.status == "succeeded") {
                             console.log(trim_array);
                             var txt = document.createElement("p");
