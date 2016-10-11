@@ -87,7 +87,8 @@ h1 {
 .ms-ChoiceField {
     color: #fff;
     font-family: 'Segoe UI Regular WestEuropean','Segoe UI','Segoe WP',Tahoma,Arial,sans-serif;
-    padding-bottom: 10px; }
+    padding-bottom: 10px;
+    z-index = 50; }
 
 .ms-TextField {
     color: #333;
@@ -130,7 +131,8 @@ h1 {
     position: fixed;
     top: 60px;
     overflow-y: scroll;
-    overflow-x: hidden; }
+    overflow-x: hidden;
+    z-index: 100; }
 
 .placeholder {
     height: 60px;
