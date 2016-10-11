@@ -20,8 +20,8 @@ function redirectHome() {
         jQuery(document).ready(function(){
             app.initialize();
 
-            //jQuery('#trim_space').click(getDataFromSelection);
-            jQuery('#trim_space').click(testWriting);
+            jQuery('#trim_space').click(getDataFromSelection);
+            //jQuery('#trim_space').click(testWriting);
 
             jQuery('#resultOk').click(resultOK);
             jQuery('#resultOk').click(resultClose);
@@ -45,7 +45,7 @@ function redirectHome() {
 
                     if (result != null) {
                         var countTrim = 0;
-                        var trim_array = result.map(function (item) {
+                        var trim_array = [result.map(function (item) {
                             return item.map(function (item) {
                                 if (item) {
                                     var newitem = item.trim();
@@ -56,7 +56,7 @@ function redirectHome() {
                                     return newitem;
                                 }
                             });
-                        });
+                        })];
                     }
 
                     Office.context.document.setSelectedDataAsync("test", { valueFormat: Office.ValueFormat.Formatted }, function(result){
