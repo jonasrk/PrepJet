@@ -21,7 +21,9 @@
     <script src="../../bower_components/jquery/jquery.min.js"></script>
     <link href="../../content/fabric.min.css" rel="stylesheet">
     <link href="../../content/fabric.components.min.css" rel="stylesheet">
-    <!--<script src="../../scripts/jquery.fabric.min.js"></script>-->
+
+    <!--script src="../../scripts/jquery.fabric.min.js"></script-->
+
     <script src="../../scripts/MicrosoftAjax.js"></script>
 
     <link href="../app.css" rel="stylesheet" type="text/css"/>
@@ -34,7 +36,6 @@
     <!--PrepJet Fabric Components Imports-->
     <script src="../../bower_components/office-ui-fabric/src/components/TextField/Jquery.TextField.js"></script>
     <script src="../../bower_components/office-ui-fabric/src/components/Dropdown/Jquery.Dropdown.js"></script>
-
 
 </head>
 
@@ -157,7 +158,35 @@
             </table>
         </div>
         <div id="step2">
-            <div id="harm_drop" class="ms-Dropdown dropdown_table" tabindex="1">
+            <div>
+                <label class="ms-Label">Select type of change:</label>
+            </div>
+            <div id="harm_drop1" class="ms-ChoiceField">
+                <input id="allU" class="ms-ChoiceField-input" type="radio" name="radiogroup"value="allupper">
+                <label id="checkbox_label1" for="allU" class="ms-ChoiceField-field">
+                    <span class="ms-Label">ALL LETTERS UPPER CASE</span>
+                </label>
+            </div>
+            <div id="harm_drop2" class="ms-ChoiceField">
+                <input id="allL" class="ms-ChoiceField-input" type="radio" name="radiogroup" value="alllower">
+                <label id="checkbox_label2" for="allL" class="ms-ChoiceField-field">
+                    <span class="ms-Label">all letters lower case</span>
+                </label>
+            </div>
+            <div id="harm_drop3" class="ms-ChoiceField">
+                <input id="oneU" class="ms-ChoiceField-input" type="radio" name="radiogroup" value="oneupper">
+                <label id="checkbox_label3" for="oneU" class="ms-ChoiceField-field">
+                    <span class="ms-Label">First letter of first word upper case</span>
+                </label>
+            </div>
+            <div id="harm_drop4" class="ms-ChoiceField">
+                <input id="firstupper" class="ms-ChoiceField-input" type="radio" name="radiogroup" value="firstupper">
+                <label id="checkbox_label4" for="firstupper" class="ms-ChoiceField-field">
+                    <span class="ms-Label">First Letter Of Each Word Upper Case</span>
+                </label>
+            </div>
+
+            <!--div id="harm_drop" class="ms-Dropdown dropdown_table" tabindex="1">
                 <label class="ms-Label">Select type of change</label>
                 <i class="ms-Dropdown-caretDown ms-Icon ms-Icon--caretDown"></i>
                 <select id="harmonize_options" class="ms-Dropdown-select">
@@ -166,16 +195,22 @@
                     <option value="oneupper">First letter of first word upper case</option>
                     <option value="firstupper">First Letter Of Each Word Upper Case</option>
                 </select>
-            </div>
-            <div class="ms-ChoiceField">
-                <input id="createBackup" class="ms-ChoiceField-input" type="checkbox">
-                <label for="createBackup" class="ms-ChoiceField-field">
-                    <span class="ms-Label">Create a backup sheet</span>
-                </label>
-            </div>
+            </div-->
+
+            <table class="tableupperborder">
+                <tr>
+                    <td>
+                        <div class="ms-ChoiceField">
+                            <input id="createBackup" class="ms-ChoiceField-input" type="checkbox">
+                            <label for="createBackup" class="ms-ChoiceField-field">
+                                <span class="ms-Label">Create a backup sheet</span>
+                            </label>
+                        </div>
+                    </td>
+                </tr>
+            </table>
             <!--split button-->
             <button class="ms-Button" id="harmonize">Change Case</button>
-            <br>
             <table id="columnsToAdd">
                 <tr>
                     <td id="arrows">

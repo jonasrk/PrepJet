@@ -24,7 +24,7 @@ function redirectHome() {
             $('#step2').hide();
 
 
-            $(".dropdown_table").Dropdown();
+            //$(".dropdown_table").Dropdown();
             $('#harmonize').click(harmonize);
             $('#checkbox_all').click(checkCheckbox);
             $('#buttonOk').click(highlightHeader);
@@ -305,10 +305,24 @@ function redirectHome() {
             firstRow.load('address');
             firstCol.load('address');
 
-            var harmo = document.getElementById('harmonize_options').value;
+            //var harmo = document.getElementById('harmonize_options').value;
 
             return ctx.sync().then(function() {
 
+                function harmOptions() {
+                    if (document.getElementById('allU').checked == true) {
+                        return "allupper";
+                    } else if(document.getElementById('allL').checked == true) {
+                        return "alllower";
+                    } else if(document.getElementById('oneU').checked == true) {
+                        return "oneupper";
+                    } else if(document.getElementById('firstU').checked == true) {
+                        return "firstupper";
+                    }
+                }
+
+                var harmo = harmOptions();
+                console.log(harmo);
 
                 var tmp_offset = firstCol.address;
                 var col_offset = tmp_offset.substring(tmp_offset.indexOf("!") + 1, tmp_offset.indexOf(":"));
