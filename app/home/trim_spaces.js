@@ -45,10 +45,10 @@ function redirectHome() {
 
                     if (result != null) {
                         var countTrim = 0;
-                        var trim_array = [result.map(function (item) {
+                        var trim_array = result.map(function (item) {
                             return item.map(function (item) {
                                 if (item) {
-                                    var newitem = item.trim();
+                                    var newitem = [item.trim()];
                                     if (item != newitem) {
                                         countTrim++;
                                     }
@@ -56,7 +56,7 @@ function redirectHome() {
                                     return newitem;
                                 }
                             });
-                        })];
+                        });
                     }
 
                     Office.context.document.setSelectedDataAsync(trim_array, { valueFormat: Office.ValueFormat.Formatted }, function(result){
