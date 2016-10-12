@@ -52,6 +52,11 @@ ul {
   line-height: 25px;
   cursor: pointer;}
 
+.ms-Link_orange {
+  color: #EA7F04;
+  line-height: 25px;
+  cursor: pointer;}
+
 .ms-firstrun-pages {
   display: -webkit-box;
   display: flex;
