@@ -406,7 +406,7 @@ function redirectHome() {
                     addBackupSheet(newName, startCell, add_col, row_offset, function () {
                         var txt = document.createElement("p");
                         txt.className = "ms-font-xs ms-embedded-dialog__content__text";
-                        txt.innerHTML = "PrepJet successfully modified the case of text in the " + endString;
+                        txt.innerHTML = "PrepJet successfully modified the cases of the text in the " + endString;
                         document.getElementById('resultText').appendChild(txt);
 
                         document.getElementById('resultDialog').style.visibility = 'visible';
@@ -414,7 +414,7 @@ function redirectHome() {
                 } else {
                     var txt = document.createElement("p");
                     txt.className = "ms-font-xs ms-embedded-dialog__content__text";
-                    txt.innerHTML = "PrepJet successfully harmonized the values the " + checked_checkboxes.length + endString;
+                    txt.innerHTML = "PrepJet successfully modified the cases of the text in the " + endString;
                     document.getElementById('resultText').appendChild(txt);
 
                     document.getElementById('resultDialog').style.visibility = 'visible';
