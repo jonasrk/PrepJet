@@ -335,6 +335,17 @@ function backupForUndo(this_range, startCell, add_col, row_offset){
     });
 }
 
+function saveForTemplate(fixedAddresses, typeAddresses) {
+    Office.context.document.settings.set('fixed_addresses', fixedAddresses);
+    Office.context.document.settings.set('type_addresses', typeAddresses);
+    Office.context.document.settings.saveAsync(function (asyncResult) {
+        if (asyncResult.status == Office.AsyncResultStatus.Failed) {
+            console.log('Settings save failed. Error: ' + asyncResult.error.message);
+        } else {
+            console.log('Settings saved.');
+        }
+    });
+}
 
 function detectIE() {
     var ua = window.navigator.userAgent;

@@ -88,6 +88,10 @@
 
 <div id="content-main">
     <div class="padding">
+        <div id="step0">
+            <button class="ms-Button" id="take_saved">Use Template</button>
+            <button class="ms-Button" id="create_new">Create New</button>
+        </div>
         <div id="step1">
             <div>
                 <label class="ms-Label">Select the areas with fixed cell content:</label>
@@ -241,6 +245,18 @@
             </table>
             <div id="checkboxes_columns" class="ms-ChoiceField">
             </div>
+            <table>
+                <tr>
+                    <td>
+                        <div class="ms-ChoiceField">
+                            <input id="saveSettings" class="ms-ChoiceField-input" type="checkbox">
+                            <label for="saveSettings" class="ms-ChoiceField-field">
+                                <span class="ms-Label">Save template settings</span>
+                            </label>
+                        </div>
+                    </td>
+                </tr>
+            </table>
             <!--split button-->
             <button class="ms-Button" id="check_template">Compare</button>
             <table id="columnsToAdd">

@@ -11,6 +11,7 @@ function showStep1() {
     $('#step2').hide();
     $('#step1').show();
     $('#step3').hide();
+    $('#step0').hide();
 }
 
 (function () {
@@ -37,6 +38,7 @@ function showStep1() {
             app.initialize();
             populateDropdowns();
 
+            $('#step1').hide();
             $('#step2').hide();
             $('#step3').hide();
             $('#bt_remove').hide();
@@ -44,6 +46,8 @@ function showStep1() {
             $('#helpCallout').hide();
 
             $('#check_template').click(compareTemplate);
+            $('#create_new').click(showStep1);
+            $('#take_saved').click(showStep3);
             $('#homeButton').click(redirectHome);
             $('#continue1').click(showStep2);
             $('#continue2').click(showStep3);
@@ -137,6 +141,7 @@ function showStep1() {
     function showStep2() {
 
         $('#step2').show();
+        $('#step0').hide();
         $('#step1').hide();
         $('#step3').hide();
 
@@ -249,6 +254,7 @@ function showStep1() {
     //show html page to select worksheets to compare to template
     function showStep3(){
 
+        $('#step0').hide();
         $('#step2').hide();
         $('#step1').hide();
         $('#step3').show();
@@ -338,19 +344,26 @@ function showStep1() {
     function compareTemplate() {
 
         var fixedAddresses = [];
-        for (var i = 0; i < fixCount; i++) {
-            var tmpAddress = document.getElementById('fixedContentInput' + (i + 1)).value;
-            tmpAddress = tmpAddress.substring(tmpAddress.indexOf("!") + 1);
-            fixedAddresses.push(tmpAddress);
+        if (Office.context.document.settings.get('fixed_addresses') != null) {
+            fixedAddresses = Office.context.document.settings.get('fixed_addresses');
+        } else {
+            for (var i = 0; i < fixCount; i++) {
+                var tmpAddress = document.getElementById('fixedContentInput' + (i + 1)).value;
+                tmpAddress = tmpAddress.substring(tmpAddress.indexOf("!") + 1);
+                fixedAddresses.push(tmpAddress);
+            }
         }
 
         var typeAddresses = [];
-        for (var i = 0; i < typeCount; i++) {
-            var tmpAddress = document.getElementById('fixedTypeInput' + (i + 1)).value;
-            tmpAddress = tmpAddress.substring(tmpAddress.indexOf("!") + 1);
-            typeAddresses.push(tmpAddress);
+        if (Office.context.document.settings.get('type_addresses') != null) {
+            typeAddresses = Office.context.document.settings.get('type_addresses');
+        } else {
+            for (var i = 0; i < typeCount; i++) {
+                var tmpAddress = document.getElementById('fixedTypeInput' + (i + 1)).value;
+                tmpAddress = tmpAddress.substring(tmpAddress.indexOf("!") + 1);
+                typeAddresses.push(tmpAddress);
+            }
         }
-
 
         Excel.run(function (ctx) {
 
@@ -409,8 +422,17 @@ function showStep1() {
                 backupForUndo(range, startCell, add_col, row_offset);
 
                 var checked_worksheets = getCheckedBoxes("column_checkbox");
+
                 var numberCalls = 0;
                 var totalErrorCount = 0;
+
+                if (document.getElementById('saveSettings').checked == true) {
+                    saveForTemplate(fixedAddresses, typeAddresses);
+                }
+
+                console.log(fixedAddresses);
+                console.log(typeAddresses);
+
                 for (var i = 0; i < checked_worksheets.length; i++) {
                     /*var unprotect = document.getElementById('unprotect').checked;
                     if (unprotect == true) {
@@ -418,13 +440,10 @@ function showStep1() {
                     }*/
                     var callFunction = function (whatFunc, result) {
                         numberCalls += 1;
-                        console.log(numberCalls);
                         if (whatFunc == "checkFixedContent") {
                             totalErrorCount += result;
-                            //console.log(result);
                         } else {
                             totalErrorCount += result;
-                            //console.log(result);
                         }
                         if (numberCalls == checked_worksheets.length * (fixedAddressRange.length + typeAddresses.length)) {
                             if (document.getElementById('createBackup').checked == true) {
