@@ -38,6 +38,10 @@ function redirectHelp() {
     window.location = "help.html";
 }
 
+function redirectUndo() {
+    window.location = "FunctionFile.html";
+}
+
 (function () {
     // 'use strict';
 
@@ -56,6 +60,7 @@ function redirectHelp() {
             $('#duplicatesButton').click(redirectDuplicates);
             $('#validationButton').click(redirectValidation);
             $('#helpButton').click(redirectHelp);
+            $('#undoButton').click(redirectUndo);
 
         });
     };
