@@ -576,7 +576,8 @@ function showInitial() {
                 }
 
                 if (document.getElementById('saveSettings').checked == true) {
-                    saveForTemplate(fixedAddresses, typeAddresses, dataType, sheetNameArray);
+                    //saveForTemplate(fixedAddresses, typeAddresses, dataType, sheetNameArray);
+                    saveForTemplate(fixedAddresses, typeAddresses, dataType);
                 }
 
                 for (var i = 0; i < checked_worksheets.length; i++) {
