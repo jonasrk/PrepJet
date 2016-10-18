@@ -736,6 +736,8 @@ function showInitial() {
                                             countErrors += 1;
                                         }
                                     } else if (textTypes == "Date") {
+                                        console.log(range.valueTypes[j][k]);
+                                        console.log(range.numberFormat[j][k]);
                                         if (range.valueTypes[j][k] == "Double" && range.numberFormat[j][k] == "General") {
                                             var tmpRow = firstTypeCellNumber + j;
                                             var tmpCol = getCharFromNumber(getNumberFromChar(firstTypeCellLetter) + k);
