@@ -29,6 +29,7 @@ function showInitial() {
     // 'use strict';
     var fixCount = 1;
     var typeCount = 1;
+    var nameCount = 1;
     var worksheet_names = [];
 
     // The initialize function must be run each time a new page is loaded
@@ -57,6 +58,7 @@ function showInitial() {
             $('#stepUse').hide();
             $('#bt_remove').hide();
             $('#bt2_remove').hide();
+            $('#bt3_remove').hide();
             $('#helpCallout').hide();
 
             $('#check_template').click(compareTemplate);
@@ -178,6 +180,7 @@ function showInitial() {
         function addTextField(id) {
 
             var trow = document.createElement("tr");
+            trow.id = "typeRow" + id;
             document.getElementById("typeDiv").appendChild(trow);
 
             var tcol1 = document.createElement("td");
@@ -198,9 +201,7 @@ function showInitial() {
             input.addEventListener = ('onfocus', setFocus(typeCount));
 
             div.appendChild(input);
-
             createTypeDropdown(tcol2, id);
-
             tcol1.appendChild(div);
         }
 
@@ -272,6 +273,7 @@ function showInitial() {
     }
 
 
+
     //show html page to select worksheets to compare to template
     function showStep3(){
 
@@ -322,6 +324,48 @@ function showInitial() {
         $('#step3').hide();
         $('#step4').show();
         $('#stepUse').hide();
+
+        function addNameField() {
+            nameCount += 1;
+            addNameTextField(nameCount);
+            $('#bt3_remove').show();
+        }
+
+        function addNameTextField(id) {
+
+            var trow = document.createElement("tr");
+            trow.id = "sheetRow" + id;
+            document.getElementById("sheetNames").appendChild(trow);
+
+            var tcol1 = document.createElement("td");
+            trow.appendChild(tcol1);
+
+            var div = document.createElement("div");
+            div.className = "ms-TextField ms-TextField";
+            div.id = "sheetName" + id;
+
+            var input = document.createElement("input");
+            input.id = "sheetNameInput" + id;
+            input.className = "ms-TextField-field";
+
+            div.appendChild(input);
+            tcol1.appendChild(div);
+        }
+
+        //remove text field and dropdown for range and type of data
+        function removeNameField() {
+            var parent = document.getElementById('sheetNames');
+            var child = document.getElementById('sheetRow' + nameCount)
+            parent.removeChild(child);
+            nameCount -= 1;
+            if (nameCount <= 1) {
+                $('#bt3_remove').hide();
+            }
+        }
+
+        $("#bt3_more").unbind('click');
+        $('#bt3_more').click(addNameField);
+        $('#bt3_remove').click(removeNameField);
 
     }
 
