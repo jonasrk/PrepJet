@@ -36,6 +36,7 @@ function showInitial() {
             Office.context.document.settings.set('same_header_trim', false);
             Office.context.document.settings.set('on_second_page', false);
             Office.context.document.settings.set('on_third_page', false);
+            Office.context.document.settings.set('use_existing_template', false);
             Office.context.document.settings.set('last_clicked_function', "temp_feature.html");
             if (Office.context.document.settings.get('prepjet_loaded_before') == null) {
                 Office.context.document.settings.set('backup_sheet_count', 1);
@@ -299,6 +300,7 @@ function showInitial() {
         }
 
         Office.context.document.settings.set('on_third_page', true);
+        Office.context.document.settings.set('use_existing_template', true);
 
     }
 
@@ -378,7 +380,7 @@ function showInitial() {
     function compareTemplate() {
 
         var fixedAddresses = [];
-        if (Office.context.document.settings.get('fixed_addresses') != null) {
+        if (Office.context.document.settings.get('use_existing_template') == true) {
             fixedAddresses = Office.context.document.settings.get('fixed_addresses');
         } else {
             for (var i = 0; i < fixCount; i++) {
@@ -389,7 +391,7 @@ function showInitial() {
         }
 
         var typeAddresses = [];
-        if (Office.context.document.settings.get('type_addresses') != null) {
+        if (Office.context.document.settings.get('use_existing_template') == true) {
             typeAddresses = Office.context.document.settings.get('type_addresses');
         } else {
             for (var i = 0; i < typeCount; i++) {
@@ -461,7 +463,7 @@ function showInitial() {
                 var totalErrorCount = 0;
 
                 var dataType = [];
-                if (Office.context.document.settings.get('data_types') != null) {
+                if (Office.context.document.settings.get('use_existing_template') == true) {
                     dataType = Office.context.document.settings.get('data_types');
                 } else {
                     for (var i = 0; i < typeAddresses.length; i++) {
