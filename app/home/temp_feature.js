@@ -69,6 +69,7 @@ function showInitial() {
             $('#back1').click(showStep1);
             $('#backUsed').click(showInitial);
             $('#checkbox_all').click(checkCheckbox);
+            $('#checkbox_all2').click(checkCheckboxUsed);
 
             $('#typeDrop1').Dropdown();
 
@@ -305,7 +306,7 @@ function showInitial() {
     }
 
 
-    // checks all available checkboxes
+    // checks all available checkboxes when creating a new template
     function checkCheckbox() {
 
         Excel.run(function (ctx) {
@@ -318,18 +319,47 @@ function showInitial() {
             worksheet.load('name');
 
             return ctx.sync().then(function() {
-
                 if (document.getElementById('checkbox_all').checked == true) {
                     for (var i = 0; i < worksheet_names.length; i++) {
                         document.getElementById(worksheet_names[i]).checked = true;
                     }
-                }
-                else {
+                } else {
                     for (var i = 0; i < worksheet_names.length; i++) {
                         document.getElementById(worksheet_names[i]).checked = false;
                     }
                 }
+            });
 
+        }).catch(function(error) {
+            console.log("Error: " + error);
+            if (error instanceof OfficeExtension.Error) {
+                console.log("Debug info: " + JSON.stringify(error.debugInfo));
+            }
+        });
+    }
+
+    //when using existing template
+    function checkCheckboxUsed() {
+
+        Excel.run(function (ctx) {
+
+            var worksheet = ctx.workbook.worksheets.getActiveWorksheet();
+            var range_all = worksheet.getRange();
+            var range = range_all.getUsedRange(true);
+
+            range.load('text');
+            worksheet.load('name');
+
+            return ctx.sync().then(function() {
+                if (document.getElementById('checkbox_all2').checked == true) {
+                    for (var i = 0; i < worksheet_names.length; i++) {
+                        document.getElementById(worksheet_names[i]).checked = true;
+                    }
+                } else {
+                    for (var i = 0; i < worksheet_names.length; i++) {
+                        document.getElementById(worksheet_names[i]).checked = false;
+                    }
+                }
             });
 
         }).catch(function(error) {
