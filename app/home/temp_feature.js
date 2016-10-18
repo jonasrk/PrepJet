@@ -495,6 +495,16 @@ function showInitial() {
             }
         }
 
+        var sheetNameArray = [];
+        if (Office.context.document.settings.get('use_existing_template') == true) {
+            sheetNameArray = Office.context.document.settings.get('sheet_names');
+        } else {
+            for (var i = 0; i < nameCount; i++) {
+                var tmpName = document.getElementById('sheetNameInput' + (i + 1)).value;
+                sheetNameArray.push(tmpName);
+            }
+        }
+
         Excel.run(function (ctx) {
 
             var worksheet = ctx.workbook.worksheets.getActiveWorksheet();
@@ -566,17 +576,15 @@ function showInitial() {
                 }
 
                 if (document.getElementById('saveSettings').checked == true) {
-                    saveForTemplate(fixedAddresses, typeAddresses, dataType);
+                    saveForTemplate(fixedAddresses, typeAddresses, dataType, sheetNameArray);
                 }
 
                 for (var i = 0; i < checked_worksheets.length; i++) {
-                    /*var unprotect = document.getElementById('unprotect').checked;
-                    if (unprotect == true) {
-                        changeProtection(checked_worksheets[i].id, function(result){console.log(result);})
-                    }*/
                     var callFunction = function (whatFunc, result) {
                         numberCalls += 1;
                         if (whatFunc == "checkFixedContent") {
+                            totalErrorCount += result;
+                        } else if (whatFunc == "typeCheck") {
                             totalErrorCount += result;
                         } else {
                             totalErrorCount += result;
@@ -610,10 +618,12 @@ function showInitial() {
                         checkFixedContent(checked_worksheets[i].id, fixedAddresses[j], fixedAddressRange[j].text, firstFixedCellLetter[j], firstFixedCellNumber[j], callFunction);
                     }
                     for (var j = 0; j < typeAddresses.length; j++) {
-                        //var dataType = transformToDataType(document.getElementById('fixedInputSelect' + (j + 1)).value);
                         var rowCount = typeAddressRange[j].text.length;
                         var colCount = typeAddressRange[j].text[0].length;
                         checkType(checked_worksheets[i].id, typeAddresses[j], rowCount, colCount, dataType[j], firstTypeCellLetter[j], firstTypeCellNumber[j], callFunction)
+                    }
+                    for (var j = 0; j < sheetNameArray; j++) {
+                        checkSheetNames(sheetNameArray[j], callFunction);
                     }
                 }
 
@@ -632,6 +642,25 @@ function showInitial() {
                         return "Empty";
                     }
                 }
+
+
+                function checkSheetNames(sheetName, callback) {
+
+                    Excel.run(function (ctx) {
+
+                        return ctx.sync().then(function() {
+                            var countErrors = 0;
+                            callback("checkSheetNames", countErrors);
+                        });
+                    }).catch(function(error) {
+                            console.log("Error: " + error);
+                            if (error instanceof OfficeExtension.Error) {
+                                console.log("Debug info: " + JSON.stringify(error.debugInfo));
+                            }
+                    });
+                }
+
+
 
                 function checkFixedContent(sheetName, fixedAddresses, fixedText, firstFixedCellLetter, firstFixedCellNumber, callback) {
 
