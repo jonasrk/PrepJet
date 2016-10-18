@@ -12,6 +12,15 @@ function showStep1() {
     $('#step1').show();
     $('#step3').hide();
     $('#step0').hide();
+    $('#stepUse').hide();
+}
+
+function showInitial() {
+    $('#step2').hide();
+    $('#step1').hide();
+    $('#step3').hide();
+    $('#step0').show();
+    $('#stepUse').hide();
 }
 
 (function () {
@@ -41,13 +50,15 @@ function showStep1() {
             $('#step1').hide();
             $('#step2').hide();
             $('#step3').hide();
+            $('#stepUse').hide();
             $('#bt_remove').hide();
             $('#bt2_remove').hide();
             $('#helpCallout').hide();
 
             $('#check_template').click(compareTemplate);
             $('#create_new').click(showStep1);
-            $('#take_saved').click(showStep3);
+            $('#take_saved').click(showStepUse);
+            $('#use_template').click(compareTemplate);
             $('#homeButton').click(redirectHome);
             $('#continue1').click(showStep2);
             $('#continue2').click(showStep3);
@@ -55,6 +66,7 @@ function showStep1() {
             $('#bt_remove').click(removeContentField);
             $('#back2').click(showStep2);
             $('#back1').click(showStep1);
+            $('#backUsed').click(showInitial);
             $('#checkbox_all').click(checkCheckbox);
 
             $('#typeDrop1').Dropdown();
@@ -144,6 +156,7 @@ function showStep1() {
         $('#step0').hide();
         $('#step1').hide();
         $('#step3').hide();
+        $('#stepUse').hide();
 
         Office.context.document.settings.set('on_second_page', true);
 
@@ -258,10 +271,30 @@ function showStep1() {
         $('#step2').hide();
         $('#step1').hide();
         $('#step3').show();
+        $('#stepUse').hide();
 
         if (Office.context.document.settings.get('on_third_page') == false) {
             for (var i = 0; i < worksheet_names.length; i++) {
                 addNewCheckboxToContainer (worksheet_names[i], "column_checkbox" ,"checkboxes_columns");
+            }
+        }
+
+        Office.context.document.settings.set('on_third_page', true);
+
+    }
+
+
+    function showStepUse(){
+
+        $('#step0').hide();
+        $('#step2').hide();
+        $('#step1').hide();
+        $('#step3').hide();
+        $('#stepUse').show();
+
+        if (Office.context.document.settings.get('on_third_page') == false) {
+            for (var i = 0; i < worksheet_names.length; i++) {
+                addNewCheckboxToContainer (worksheet_names[i], "column_checkbox" ,"checkboxes_columns2");
             }
         }
 
@@ -294,6 +327,7 @@ function showStep1() {
                         document.getElementById(worksheet_names[i]).checked = false;
                     }
                 }
+
             });
 
         }).catch(function(error) {
@@ -426,12 +460,18 @@ function showStep1() {
                 var numberCalls = 0;
                 var totalErrorCount = 0;
 
-                if (document.getElementById('saveSettings').checked == true) {
-                    saveForTemplate(fixedAddresses, typeAddresses);
+                var dataType = [];
+                if (Office.context.document.settings.get('data_types') != null) {
+                    dataType = Office.context.document.settings.get('data_types');
+                } else {
+                    for (var i = 0; i < typeAddresses.length; i++) {
+                        dataType.push(transformToDataType(document.getElementById('fixedInputSelect' + (i + 1)).value));
+                    }
                 }
 
-                console.log(fixedAddresses);
-                console.log(typeAddresses);
+                if (document.getElementById('saveSettings').checked == true) {
+                    saveForTemplate(fixedAddresses, typeAddresses, dataType);
+                }
 
                 for (var i = 0; i < checked_worksheets.length; i++) {
                     /*var unprotect = document.getElementById('unprotect').checked;
@@ -474,10 +514,10 @@ function showStep1() {
                         checkFixedContent(checked_worksheets[i].id, fixedAddresses[j], fixedAddressRange[j].text, firstFixedCellLetter[j], firstFixedCellNumber[j], callFunction);
                     }
                     for (var j = 0; j < typeAddresses.length; j++) {
-                        var dataType = transformToDataType(document.getElementById('fixedInputSelect' + (j + 1)).value);
+                        //var dataType = transformToDataType(document.getElementById('fixedInputSelect' + (j + 1)).value);
                         var rowCount = typeAddressRange[j].text.length;
                         var colCount = typeAddressRange[j].text[0].length;
-                        checkType(checked_worksheets[i].id, typeAddresses[j], rowCount, colCount, dataType, firstTypeCellLetter[j], firstTypeCellNumber[j], callFunction)
+                        checkType(checked_worksheets[i].id, typeAddresses[j], rowCount, colCount, dataType[j], firstTypeCellLetter[j], firstTypeCellNumber[j], callFunction)
                     }
                 }
 

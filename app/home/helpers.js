@@ -335,9 +335,10 @@ function backupForUndo(this_range, startCell, add_col, row_offset){
     });
 }
 
-function saveForTemplate(fixedAddresses, typeAddresses) {
+function saveForTemplate(fixedAddresses, typeAddresses, dataType) {
     Office.context.document.settings.set('fixed_addresses', fixedAddresses);
     Office.context.document.settings.set('type_addresses', typeAddresses);
+    Office.context.document.settings.set('data_types', dataType);
     Office.context.document.settings.saveAsync(function (asyncResult) {
         if (asyncResult.status == Office.AsyncResultStatus.Failed) {
             console.log('Settings save failed. Error: ' + asyncResult.error.message);
