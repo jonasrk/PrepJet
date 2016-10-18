@@ -548,7 +548,11 @@ function showInitial() {
                 for (var i = 0; i < fixedAddresses.length; i++) {
                     var tmp = getIndexOfFirstNumber(fixedAddresses[i]);
                     firstFixedCellLetter.push(fixedAddresses[i].substring(0,tmp));
-                    firstFixedCellNumber.push(Number(fixedAddresses[i].substring(tmp, fixedAddresses[i].indexOf(":"))));
+                    if (fixedAddresses[i].indexOf(":") == -1) {
+                        firstFixedCellNumber.push(Number(fixedAddresses[i].substring(tmp)));
+                    } else {
+                        firstFixedCellNumber.push(Number(fixedAddresses[i].substring(tmp, fixedAddresses[i].indexOf(":"))));
+                    }
                 }
 
                 var firstTypeCellLetter = [];
@@ -556,7 +560,11 @@ function showInitial() {
                 for (var i = 0; i < typeAddresses.length; i++) {
                     var tmp = getIndexOfFirstNumber(typeAddresses[i]);
                     firstTypeCellLetter.push(typeAddresses[i].substring(0,tmp));
-                    firstTypeCellNumber.push(Number(typeAddresses[i].substring(tmp, typeAddresses[i].indexOf(":"))));
+                    if (typeAddresses[i].indexOf(":") == -1) {
+                        firstTypeCellNumber.push(Number(typeAddresses[i].substring(tmp)));
+                    } else {
+                        firstTypeCellNumber.push(Number(typeAddresses[i].substring(tmp, typeAddresses[i].indexOf(":"))));
+                    }
                 }
 
                 backupForUndo(range, startCell, add_col, row_offset);
@@ -681,8 +689,10 @@ function showInitial() {
                             for (var j = 0; j < fixedText.length; j++) {
                                 for (var k = 0; k < fixedText[j].length; k++) {
                                     if (fixedText[j][k] != range.text[j][k]) {
+                                        console.log(range.text[j][k]);
                                         var tmpRow = firstFixedCellNumber + j;
                                         var tmpCol = getCharFromNumber(getNumberFromChar(firstFixedCellLetter) + k);
+                                        console.log(tmpCol + tmpRow);
                                         highlightCellInWorksheet(worksheet, tmpCol + tmpRow, color);
                                         countErrors += 1;
                                     }
@@ -736,8 +746,6 @@ function showInitial() {
                                             countErrors += 1;
                                         }
                                     } else if (textTypes == "Date") {
-                                        console.log(range.valueTypes[j][k]);
-                                        console.log(range.numberFormat[j][k]);
                                         if (range.valueTypes[j][k] == "Double" && range.numberFormat[j][k] == "General") {
                                             var tmpRow = firstTypeCellNumber + j;
                                             var tmpCol = getCharFromNumber(getNumberFromChar(firstTypeCellLetter) + k);
