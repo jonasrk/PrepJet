@@ -729,6 +729,11 @@ function showInitial() {
                                             var tmpCol = getCharFromNumber(getNumberFromChar(firstTypeCellLetter) + k);
                                             highlightCellInWorksheet(worksheet, tmpCol + tmpRow, color);
                                             countErrors += 1;
+                                        } else if (range.valueTypes[j][k] == "Double" && range.numberFormat[j][k] != "General") {
+                                            var tmpRow = firstTypeCellNumber + j;
+                                            var tmpCol = getCharFromNumber(getNumberFromChar(firstTypeCellLetter) + k);
+                                            highlightCellInWorksheet(worksheet, tmpCol + tmpRow, color);
+                                            countErrors += 1;
                                         }
                                     } else if (textTypes == "Date") {
                                         if (range.valueTypes[j][k] == "Double" && range.numberFormat[j][k] == "General") {
@@ -737,6 +742,13 @@ function showInitial() {
                                             highlightCellInWorksheet(worksheet, tmpCol + tmpRow, color);
                                             countErrors += 1;
                                         } else if (range.valueTypes[j][k] != "Double") {
+                                            var tmpRow = firstTypeCellNumber + j;
+                                            var tmpCol = getCharFromNumber(getNumberFromChar(firstTypeCellLetter) + k);
+                                            highlightCellInWorksheet(worksheet, tmpCol + tmpRow, color);
+                                            countErrors += 1;
+                                        }
+                                    } else if (textTypes == "Double" && range.valueTypes[j][k] == "Double") {
+                                        if(range.numberFormat[j][k] != "General") {
                                             var tmpRow = firstTypeCellNumber + j;
                                             var tmpCol = getCharFromNumber(getNumberFromChar(firstTypeCellLetter) + k);
                                             highlightCellInWorksheet(worksheet, tmpCol + tmpRow, color);
