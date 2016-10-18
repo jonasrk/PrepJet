@@ -495,7 +495,7 @@ function showInitial() {
             }
         }
 
-        var sheetNameArray = [];
+        /*var sheetNameArray = [];
         if (Office.context.document.settings.get('use_existing_template') == true) {
             sheetNameArray = Office.context.document.settings.get('sheet_names');
         } else {
@@ -503,7 +503,7 @@ function showInitial() {
                 var tmpName = document.getElementById('sheetNameInput' + (i + 1)).value;
                 sheetNameArray.push(tmpName);
             }
-        }
+        }*/
 
         Excel.run(function (ctx) {
 
@@ -586,8 +586,8 @@ function showInitial() {
                             totalErrorCount += result;
                         } else if (whatFunc == "typeCheck") {
                             totalErrorCount += result;
-                        } else {
-                            totalErrorCount += result;
+                        //} else {
+                        //    totalErrorCount += result;
                         }
                         if (numberCalls == checked_worksheets.length * (fixedAddressRange.length + typeAddresses.length)) {
                             if (document.getElementById('createBackup').checked == true) {
@@ -622,9 +622,9 @@ function showInitial() {
                         var colCount = typeAddressRange[j].text[0].length;
                         checkType(checked_worksheets[i].id, typeAddresses[j], rowCount, colCount, dataType[j], firstTypeCellLetter[j], firstTypeCellNumber[j], callFunction)
                     }
-                    for (var j = 0; j < sheetNameArray; j++) {
+                    /*for (var j = 0; j < sheetNameArray; j++) {
                         checkSheetNames(sheetNameArray[j], callFunction);
-                    }
+                    }*/
                 }
 
                 function transformToDataType(selectValue) {
@@ -644,7 +644,7 @@ function showInitial() {
                 }
 
 
-                function checkSheetNames(sheetName, callback) {
+                /*function checkSheetNames(sheetName, callback) {
 
                     Excel.run(function (ctx) {
 
@@ -658,7 +658,7 @@ function showInitial() {
                                 console.log("Debug info: " + JSON.stringify(error.debugInfo));
                             }
                     });
-                }
+                }*/
 
 
 
