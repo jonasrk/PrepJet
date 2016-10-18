@@ -20,8 +20,8 @@ function redirectHome() {
         jQuery(document).ready(function(){
             app.initialize();
 
-            jQuery('#trim_space').click(getDataFromSelection);
-            //jQuery('#trim_space').click(testWriting);
+            //jQuery('#trim_space').click(getDataFromSelection);
+            jQuery('#trim_space').click(testWriting);
 
             jQuery('#resultOk').click(resultOK);
             jQuery('#resultOk').click(resultClose);
