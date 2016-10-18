@@ -11,6 +11,7 @@ function showStep1() {
     $('#step2').hide();
     $('#step1').show();
     $('#step3').hide();
+    $('#step4').hide();
     $('#step0').hide();
     $('#stepUse').hide();
 }
@@ -19,6 +20,7 @@ function showInitial() {
     $('#step2').hide();
     $('#step1').hide();
     $('#step3').hide();
+    $('#step4').hide();
     $('#step0').show();
     $('#stepUse').hide();
 }
@@ -51,6 +53,7 @@ function showInitial() {
             $('#step1').hide();
             $('#step2').hide();
             $('#step3').hide();
+            $('#step4').hide();
             $('#stepUse').hide();
             $('#bt_remove').hide();
             $('#bt2_remove').hide();
@@ -63,8 +66,10 @@ function showInitial() {
             $('#homeButton').click(redirectHome);
             $('#continue1').click(showStep2);
             $('#continue2').click(showStep3);
+            $('#continue3').click(showStep4);
             $('#bt_more').click(addContentTextField);
             $('#bt_remove').click(removeContentField);
+            $('#back3').click(showStep3);
             $('#back2').click(showStep2);
             $('#back1').click(showStep1);
             $('#backUsed').click(showInitial);
@@ -158,6 +163,7 @@ function showInitial() {
         $('#step0').hide();
         $('#step1').hide();
         $('#step3').hide();
+        $('#step4').hide();
         $('#stepUse').hide();
 
         Office.context.document.settings.set('on_second_page', true);
@@ -273,6 +279,7 @@ function showInitial() {
         $('#step2').hide();
         $('#step1').hide();
         $('#step3').show();
+        $('#step4').hide();
         $('#stepUse').hide();
 
         if (Office.context.document.settings.get('on_third_page') == false) {
@@ -292,6 +299,7 @@ function showInitial() {
         $('#step2').hide();
         $('#step1').hide();
         $('#step3').hide();
+        $('#step4').hide();
         $('#stepUse').show();
 
         if (Office.context.document.settings.get('on_third_page') == false) {
@@ -302,6 +310,18 @@ function showInitial() {
 
         Office.context.document.settings.set('on_third_page', true);
         Office.context.document.settings.set('use_existing_template', true);
+
+    }
+
+
+    function showStep4() {
+
+        $('#step0').hide();
+        $('#step2').hide();
+        $('#step1').hide();
+        $('#step3').hide();
+        $('#step4').show();
+        $('#stepUse').hide();
 
     }
 
@@ -665,47 +685,6 @@ function showInitial() {
                             }
                     });
                 }
-
-
-                /*function changeProtection(sheetName, callback) {
-
-                    Excel.run(function (ctx) {
-
-                        var worksheet = ctx.workbook.worksheets.getItem(sheetName);
-                        worksheet.protection.unprotect()
-
-                        return ctx.sync().then(function() {
-                            callback("unprotected");
-                        });
-                    }).catch(function(error) {
-                            console.log("Error: " + error);
-                            if (error instanceof OfficeExtension.Error) {
-                                console.log("Debug info: " + JSON.stringify(error.debugInfo));
-                            }
-                    });
-                }*/
-
-                if (document.getElementById('createBackup').checked == true) {
-                            var sheet_count = Office.context.document.settings.get('backup_sheet_count') + 1;
-                            Office.context.document.settings.set('backup_sheet_count', sheet_count);
-                            Office.context.document.settings.saveAsync();
-                            var newName = worksheet.name + "(" + sheet_count + ")";
-                            addBackupSheet(newName, startCell, add_col, row_offset, function() {
-                                var txt = document.createElement("p");
-                                txt.className = "ms-font-xs ms-embedded-dialog__content__text";
-                                //txt.innerHTML = "PrepJet successfully removed all leading and trailing spaces in the " + checked_checkboxes.length + endString;
-                                document.getElementById('resultText').appendChild(txt);
-                                document.getElementById('resultDialog').style.visibility = 'visible';
-                            });
-
-                        } else {
-                            var txt = document.createElement("p");
-                            txt.className = "ms-font-xs ms-embedded-dialog__content__text";
-                            //txt.innerHTML = "PrepJet successfully removed all leading and trailing spaces in the " + checked_checkboxes.length + endString;
-                            document.getElementById('resultText').appendChild(txt);
-
-                            document.getElementById('resultDialog').style.visibility = 'visible';
-                        }
 
             });
 

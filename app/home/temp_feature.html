@@ -92,6 +92,7 @@
             <button class="ms-Button" id="take_saved">Use Template</button>
             <button class="ms-Button" id="create_new">Create New</button>
         </div>
+
         <div id="step1">
             <div>
                 <label class="ms-Label">Select the areas with fixed cell content:</label>
@@ -130,6 +131,9 @@
                         <i class="ms-Icon ms-Icon--circleFilled" aria-hidden="true"></i>
                     </span>
                     <span id="page2Marker" class="fontColor_grey">
+                        <i class="ms-Icon ms-Icon--circleFilled" aria-hidden="true"></i>
+                    </span>
+                    <span id="page3Marker" class="fontColor_grey">
                         <i class="ms-Icon ms-Icon--circleFilled" aria-hidden="true"></i>
                     </span>
                             </p>
@@ -177,16 +181,6 @@
                 </tr>
             </table>
             <table>
-                <!--tr>
-                    <td>
-                        <div class="ms-ChoiceField">
-                            <input id="unprotect" class="ms-ChoiceField-input" type="checkbox">
-                            <label for="unprotect" class="ms-ChoiceField-field">
-                                <span class="ms-Label">Unprotect all sheets</span>
-                            </label>
-                        </div>
-                    </td>
-                </tr-->
                 <tr>
                     <td>
                         <div class="ms-ChoiceField">
@@ -220,6 +214,9 @@
                     <span id="page2Marker" class="fontColor_grey">
                         <i class="ms-Icon ms-Icon--circleFilled" aria-hidden="true"></i>
                     </span>
+                    <span id="page3Marker" class="fontColor_grey">
+                        <i class="ms-Icon ms-Icon--circleFilled" aria-hidden="true"></i>
+                    </span>
                             </p>
                         </div>
                     </td>
@@ -245,6 +242,58 @@
             </table>
             <div id="checkboxes_columns" class="ms-ChoiceField">
             </div>
+            <!--split button-->
+            <table id="columnsToAdd">
+                <tr>
+                    <td id="arrows">
+                        <button id="back2" class="ms-Button_white">
+                            <img class="page1" src="../../images/Arrow_left.png" />
+                        </button>
+                        <button id="continue3" class="ms-Button_white">
+                            <img class="page1" src="../../images/Arrow_right.png" />
+                        </button>
+                    </td>
+                    <td>
+                        <div id="pageMarker">
+                            <p id="pageMarkers">
+                    <span id="page0Marker" class="fontColor_grey">
+                        <i class="ms-Icon ms-Icon--circleFilled" aria-hidden="true"></i>
+                    </span>
+                    <span id="page1Marker" class="fontColor_grey">
+                        <i class="ms-Icon ms-Icon--circleFilled" aria-hidden="true"></i>
+                    </span>
+                    <span id="page2Marker" class="fontColor_orange">
+                        <i class="ms-Icon ms-Icon--circleFilled" aria-hidden="true"></i>
+                    </span>
+                    <span id="page3Marker" class="fontColor_grey">
+                        <i class="ms-Icon ms-Icon--circleFilled" aria-hidden="true"></i>
+                    </span>
+                            </p>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <div id="step4">
+            <div>
+                <label class="ms-Label">Please type the name of your worksheet. Put each name in a separate field.</label>
+            </div>
+            <div id="sheetName1" class="ms-TextField ms-TextField">
+                <input id="sheetNameInput1" class="ms-TextField-field" type="text">
+            </div>
+            <table id="tablesmall">
+                <tr>
+                    <td id="tableright">
+                        <button id="bt3_remove" class="ms-Button_white">
+                            <img class="page1" src="../../images/Minus.png" />
+                        </button>
+                        <button id="bt3_more" class="ms-Button_white">
+                            <img class="page1" src="../../images/Plus.png" />
+                        </button>
+                    </td>
+                </tr>
+            </table>
             <table>
                 <tr>
                     <td>
@@ -262,7 +311,7 @@
             <table id="columnsToAdd">
                 <tr>
                     <td id="arrows">
-                        <button id="back2" class="ms-Button_white">
+                        <button id="back3" class="ms-Button_white">
                             <img class="page1" src="../../images/Arrow_left.png" />
                         </button>
                     </td>
@@ -275,7 +324,10 @@
                     <span id="page1Marker" class="fontColor_grey">
                         <i class="ms-Icon ms-Icon--circleFilled" aria-hidden="true"></i>
                     </span>
-                    <span id="page2Marker" class="fontColor_orange">
+                    <span id="page2Marker" class="fontColor_grey">
+                        <i class="ms-Icon ms-Icon--circleFilled" aria-hidden="true"></i>
+                    </span>
+                    <span id="page3Marker" class="fontColor_orange">
                         <i class="ms-Icon ms-Icon--circleFilled" aria-hidden="true"></i>
                     </span>
                             </p>
@@ -312,18 +364,6 @@
                         <button id="backUsed" class="ms-Button_white">
                             <img class="page1" src="../../images/Arrow_left.png" />
                         </button>
-                    </td>
-                    <td>
-                        <div id="pageMarker">
-                            <p id="pageMarkers">
-                    <span id="page0Marker" class="fontColor_grey">
-                        <i class="ms-Icon ms-Icon--circleFilled" aria-hidden="true"></i>
-                    </span>
-                    <span id="page1Marker" class="fontColor_orange">
-                        <i class="ms-Icon ms-Icon--circleFilled" aria-hidden="true"></i>
-                    </span>
-                            </p>
-                        </div>
                     </td>
                 </tr>
             </table>
