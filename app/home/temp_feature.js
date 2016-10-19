@@ -684,6 +684,7 @@ function showInitial() {
 
                         return ctx.sync().then(function() {
 
+                            console.log(range.merge());
                             var color = "#EA7F04";
                             var countErrors = 0;
                             for (var j = 0; j < fixedText.length; j++) {
@@ -692,7 +693,6 @@ function showInitial() {
                                         console.log(range.text[j][k]);
                                         var tmpRow = firstFixedCellNumber + j;
                                         var tmpCol = getCharFromNumber(getNumberFromChar(firstFixedCellLetter) + k);
-                                        console.log(tmpCol + tmpRow);
                                         highlightCellInWorksheet(worksheet, tmpCol + tmpRow, color);
                                         countErrors += 1;
                                     }
